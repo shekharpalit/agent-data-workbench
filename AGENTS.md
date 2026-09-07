@@ -6,9 +6,10 @@ Use source code and tests as the authority. Documentation lives in `openwiki/`; 
 
 - Use Python 3.14.7 and `uv sync --locked`. Keep stable dependencies and commit lockfile changes.
 - Keep domain logic in the Python SDK. Use FastAPI and typed Pydantic contracts for HTTP routes, and SQLAlchemy mapped models, sessions, and query expressions for database access. Do not add handwritten SQL or regex route dispatch.
+- Delegate investigation planning, code execution, context and resume to native Codex or Claude Code sessions. Keep dataset operations, evidence, outcomes and artifacts in the shared Python workspace; expose it through the official MCP SDK and CLI. Do not reintroduce a custom model-call loop or default corpus/call caps.
 - Use React and TypeScript for the UI. Preserve JSON types, evidence lineage, and shared search/filter semantics.
 - Write tests in Given / When / Then format. Compare complete result objects: `assert actual == expected` in Python and `expect(actual).toStrictEqual(expected)` in TypeScript. JavaScript `{} === {}` compares identity, not object contents.
-- Keep tests synthetic and independent of provider credentials. Run the narrow checks relevant to each change. Backend checks: `uv run pytest -q`, `uv run ruff check src tests`, and `uv run ruff format --check src tests`. Frontend checks: `npm ci --prefix ui`, `npm --prefix ui run build`, `npm --prefix ui test`, and `npm --prefix ui run format:check`.
+- Keep tests synthetic and independent of provider credentials. Run the narrow checks relevant to each change. Backend checks: `uv run pytest -q`, `uv run ruff check src tests`, and `uv run ruff format --check src tests`. Use a supported Node release (`ui/package.json` engines; Node 24.15+ is supported). Frontend checks: `npm ci --prefix ui`, `npm --prefix ui run build`, `npm --prefix ui test`, and `npm --prefix ui run format:check`.
 - Commit rebuilt `src/agent_data_workbench/web` assets when UI source changes. Verify `uv build` when packaging changes.
 - Generate internal artifact IDs with UUIDs and validate them through the shared UUID type. Preserve external trace IDs verbatim.
 - Preserve canonical trace data, import rollback, accepted-task audit gates, source-group separation, invalid outcomes, and final-split exposure bookkeeping.

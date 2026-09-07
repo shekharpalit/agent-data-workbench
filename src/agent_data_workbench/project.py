@@ -98,8 +98,6 @@ class Project:
     def add_knowledge(self, title: str, content: str, source: str) -> dict:
         if not title.strip() or not content.strip() or not source.strip():
             raise ValueError("Knowledge needs a title, content, and source")
-        if len(content) > 100_000:
-            raise ValueError("Knowledge entry exceeds 100,000 characters")
         entry = {
             "id": new_id(),
             "title": title,
@@ -122,8 +120,8 @@ class Project:
             entry = read_json(path)
             old = digest(entry)
             if content is not None:
-                if not content.strip() or len(content) > 100_000:
-                    raise ValueError("Knowledge content must be nonempty and at most 100,000 chars")
+                if not content.strip():
+                    raise ValueError("Knowledge content must be nonempty")
                 entry["content"] = content
             entry.update(status=status, revision=entry["revision"] + 1)
             entry["reviews"].append(
@@ -151,7 +149,7 @@ class Project:
         return {
             group
             for suite in self.artifacts("suites")
-            if not consumed or suite.get("final_exposure")
+            if not consumed or suite.get("final_exposure") or suite.get("research_exposure")
             for task in suite["tasks"]
             if task["split"] == "final"
             for group in task["trace_groups"]
@@ -165,6 +163,6 @@ def environment_identity() -> dict:
     return {
         "python": sys.version.split()[0],
         "platform": platform.platform(),
-        "package": "0.3.0",
+        "package": "0.4.0",
         "pid": os.getpid(),
     }

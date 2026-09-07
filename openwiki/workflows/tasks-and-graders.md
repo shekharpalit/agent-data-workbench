@@ -4,14 +4,18 @@ title: Tasks and grader review
 description: Convert investigated evidence or explicit specifications into draft tasks, validate grader behavior, and preserve the review history required for experiments.
 tags: [tasks, graders, review, replay, evidence]
 sources:
+  - id: openwiki-source-2dbe8753da4267ce652f414e
+    resource: repo://src/agent_data_workbench/research/workspace.py
   - id: openwiki-source-b486bbac4ad50f2085fcbadb
     resource: repo://src/agent_data_workbench/tasks.py
+  - id: openwiki-source-3589dc1fc29ba0bfe0e2a50c
+    resource: repo://tests/test_research.py
   - id: openwiki-source-9dba1709c16fd704c45276e9
     resource: repo://tests/test_workbench_data.py
-generated: { by: "codex", at: "2026-09-07T19:39:22.177Z" }
+generated: { by: "codex", at: "2026-09-07T20:56:39.229Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T19:39:22.177Z
+    at: 2026-09-07T20:56:39.229Z
 ---
 
 # Tasks and grader review
@@ -22,11 +26,14 @@ A task describes what the target sees, which behavior matters, and how its resul
 
 | Route | Use it when | Command |
 | --- | --- | --- |
+| Native publication | The research agent has grounded task candidates in its snapshot. | MCP `publish_tasks` or Python `ResearchWorkspace.publish_tasks` |
 | Design | A completed investigation has useful findings and reviewed context. | `task design PROJECT INVESTIGATION_ID --backend codex` |
 | Import | You have authored a complete TaskSpec JSON. | `task import PROJECT ./task.json` |
 | Replay | A chat trace contains the decision boundary you want to test. | `task replay PROJECT TRACE_ID CUTOFF` |
 
-Prefix commands with `uv run agent-data-workbench`. Design accepts `--backend claude` and optional `--model MODEL`. It rejects incomplete investigations or changed reviewed context, limits a response to five uniquely identified tasks, and checks that referenced findings and traces belong to the investigation. Generated tasks remain draft.
+Native publication has no fixed task-count cap. It checks unique task IDs, source trace membership and any finding references, binds the captured context hash, and creates drafts. It can use any trace in the investigation snapshot and works alongside draft findings. Accepted-task checks still require current reviewed context before a task enters a suite.
+
+Prefix commands with `uv run agent-data-workbench`. The separate one-shot Design command accepts `--backend claude` and optional `--model MODEL`. It rejects incomplete investigations or changed reviewed context, limits a response to five uniquely identified tasks, and checks that referenced findings and traces belong to the investigation. Generated tasks remain draft.
 
 Replay copies only `messages[:cutoff]`, with an exclusive cutoff before an existing later message. It does not copy the later conversation or unrelated trace fields. The result deliberately contains missing-context reminders and an underspecified criterion; replace those before auditing and reviewing it.
 

@@ -67,11 +67,22 @@ def make_suite(project: Project, name: str, task_ids: list[str], seed: int = 0) 
         for entry in old_suite["tasks"]:
             for group in entry["trace_groups"]:
                 old_roles.setdefault(group, set()).add(entry["split"])
-    exposed = {
-        t
-        for investigation in project.artifacts("investigations")
-        for t in investigation["visited_ids"]
-    }
+    # A native agent can read snapshot files directly, outside observable MCP reads.
+    # Record availability conservatively instead of claiming those inputs were unseen.
+    from .research.artifacts import investigation_directory
+    from .research.dataset import Dataset
+
+    exposed = set()
+    for investigation in project.artifacts("investigations"):
+        path = investigation_directory(project, investigation["id"]) / "dataset.sqlite3"
+        if path.exists():
+            dataset = Dataset(path)
+            after = None
+            while rows := dataset.rows(after=after):
+                exposed.update(r["trace_id"] for r in rows)
+                after = rows[-1]["trace_id"]
+        else:
+            exposed.update(investigation["visited_ids"])
     for key, task in tasks.items():
         for trace_id in task.trace_ids:
             roles = old_roles.get(store.metadata(trace_id)["group_id"], set())
@@ -100,9 +111,11 @@ def make_suite(project: Project, name: str, task_ids: list[str], seed: int = 0) 
         "final_exposure": None,
         "split_method": "Seeded behavioral strata, connected thread groups; approx 60/20/20",
         "holdout_scope": "Execution holdout reserved after suite creation. Prior investigation "
-        "exposure is recorded; already analyzed examples are not unseen data.",
+        "or snapshot availability is recorded; available examples are not claimed as unseen data.",
     }
-    suite["sha256"] = digest({k: v for k, v in suite.items() if k != "final_exposure"})
+    suite["sha256"] = digest(
+        {k: v for k, v in suite.items() if k not in {"final_exposure", "research_exposure"}}
+    )
     with project.lock():
         path = project.path("suites", suite["id"])
         save(path, suite)
@@ -206,7 +219,13 @@ def run_experiment(
     with project.lock():
         suite_path = project.path("suites", suite_id)
         suite = read_json(suite_path)
-        expected = digest({k: v for k, v in suite.items() if k not in {"sha256", "final_exposure"}})
+        expected = digest(
+            {
+                k: v
+                for k, v in suite.items()
+                if k not in {"sha256", "final_exposure", "research_exposure"}
+            }
+        )
         if suite["sha256"] != expected:
             raise ValueError("Suite manifest changed; create a new version")
         if split == "final" and suite["final_exposure"]:
@@ -217,7 +236,7 @@ def run_experiment(
         if split == "final" and any(
             set(t["trace_groups"]) & project.final_groups(consumed=True) for t in selected
         ):
-            raise ValueError("Final source groups were already exposed in another suite")
+            raise ValueError("Final source groups were already exposed in research or evaluation")
         clusters = {t["id"]: t.get("cluster_id", t["id"]) for t in selected}
         tasks = {}
         for entry in selected:

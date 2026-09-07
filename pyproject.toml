@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "agent-data-workbench"
-version = "0.3.0"
+version = "0.4.0"
 description = "A local workbench for researching agent traces and running reviewed improvement experiments."
 readme = "README.md"
 requires-python = ">=3.14"
@@ -15,6 +15,7 @@ dependencies = [
     "fastapi>=0.141.1,<1",
     "uvicorn>=0.52.4,<1",
     "sqlalchemy>=2.0.52,<3",
+    "mcp>=2.2.0,<3",
 ]
 
 [project.scripts]

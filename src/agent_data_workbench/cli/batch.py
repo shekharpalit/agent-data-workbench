@@ -41,8 +41,6 @@ def output_path(out: Path | None) -> Path:
 def context_text(paths: list[Path]) -> str:
     pieces = []
     for path in paths:
-        if path.stat().st_size > 2 * 1024 * 1024:
-            raise ValueError(f"Context file exceeds 2 MiB: {path.name}")
         pieces.append(f"Context file: {path.name}\n" + path.read_text(encoding="utf-8"))
     return "\n\n".join(pieces)
 
@@ -56,8 +54,8 @@ def prepare(
         list[Path], typer.Option(help="Explicit context text file; repeatable.")
     ] = [],
     question: str = DEFAULT_QUESTION,
-    limit: Annotated[int, typer.Option(min=1)] = 100,
-    max_input_chars: Annotated[int, typer.Option(min=1000)] = 120_000,
+    limit: Annotated[int | None, typer.Option(min=1)] = None,
+    max_input_chars: Annotated[int | None, typer.Option(min=1)] = None,
 ):
     """Prepare a snapshot and prompt without calling a model."""
     destination = prepare_run(
@@ -82,8 +80,8 @@ def analyze(
         list[Path], typer.Option(help="Explicit context text file; repeatable.")
     ] = [],
     question: str = DEFAULT_QUESTION,
-    limit: Annotated[int, typer.Option(min=1)] = 100,
-    max_input_chars: Annotated[int, typer.Option(min=1000)] = 120_000,
+    limit: Annotated[int | None, typer.Option(min=1)] = None,
+    max_input_chars: Annotated[int | None, typer.Option(min=1)] = None,
     timeout: Annotated[int, typer.Option(min=1)] = 300,
     model: str | None = None,
 ):

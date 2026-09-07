@@ -23,12 +23,12 @@ app = typer.Typer(no_args_is_help=True)
 def schema(kind: str = "task"):
     """Print a JSON Schema for an import or extension contract."""
     from ..benchmark import GoldCase, HumanAssessment
-    from ..research import ResearchStep
+    from ..research import ResearchResult
 
     contracts = {
         "task": TaskSpec,
         "runner": RunnerConfig,
-        "research": ResearchStep,
+        "research": ResearchResult,
         "gold-case": GoldCase,
         "human-assessment": HumanAssessment,
     }

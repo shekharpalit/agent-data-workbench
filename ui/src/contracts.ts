@@ -129,6 +129,46 @@ export interface Proposal {
   evaluation_plan: string;
   edits: { path: string; before: string; after: string }[];
 }
+export interface Coverage {
+  total: number;
+  retrieved: number;
+  completed: number;
+  failed: number;
+  pending: number;
+}
+export interface Journal {
+  items: {
+    id: string;
+    at: string;
+    kind: string;
+    note: string;
+    details: Json;
+  }[];
+  total: number;
+  next_offset: number | null;
+}
+export interface OutcomePage {
+  records: {
+    trace_id: string;
+    status: string;
+    output: Json;
+    error: string | null;
+    method: string | null;
+  }[];
+  next_cursor: string | null;
+}
+export interface ResearchArtifact {
+  id: string;
+  title: string;
+  kind: string;
+  filename: string;
+  bytes: number;
+  chart: {
+    title: string;
+    description: string;
+    values: { label: string; value: number }[];
+  } | null;
+}
 export interface Investigation {
   id: string;
   created_at: string;
@@ -136,12 +176,24 @@ export interface Investigation {
   status: string;
   error: string | null;
   source: { total: number };
-  visited_ids: string[];
-  steps: {
-    at: string;
-    decision: { action: string; note: string };
-    observation: Json;
+  protocol_version?: string;
+  mode?: "research" | "complete";
+  active: boolean;
+  session?: {
+    backend: Backend;
+    model: string | null;
+    id: string | null;
+  } | null;
+  attempts?: {
+    id: string;
+    status: string;
+    started_at: string;
+    finished_at?: string;
   }[];
+  coverage: Coverage;
+  published_coverage?: Coverage;
+  journal: Journal;
+  attachments?: ResearchArtifact[];
   result: null | {
     analysis: { summary: string; findings: Finding[]; limitations: string[] };
     signals: {

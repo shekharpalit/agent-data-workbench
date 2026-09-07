@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:e749e018b57b3fc115ba073382e4e1c6c5ab70a1ad107adb52e1b2f6cbfaf0e6",
+  "pageVersion": "sha256:cee55a7290899073890018199b9494cbb13170061726c03ca6f92284740b7196",
   "claims": [
     {
       "id": "claim_76321b67958a482697bbe4cb279feef1",
-      "statement": "Task design requires completed research and unchanged reviewed context, checks investigation finding and trace lineage, limits output to five unique tasks, and persists them as drafts.",
+      "statement": "The one-shot task-design command requires completed research and unchanged reviewed context, checks investigation finding and trace lineage, limits output to five unique tasks, and persists them as drafts.",
       "evidence": [
         {
           "resource": "repo://src/agent_data_workbench/tasks.py#L309-L358",
           "version": "repo-lines-v1:sha256:b69ca2bc33da99f5a0d7a0617e1d97a9f65603d4e7ea7c4412d520d01a2fe5b0:eyJzZWxlY3RlZExpbmVDb3VudCI6NTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI3ZjZlZDc3ZTE4YTZkYjI3MjdkZWFjZjg3YjM4ZTEwODczZjhiNWRlZTlkZTEyMDIyYmFmYWU4Njc1NDlkODEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk5YjhiOTYxNzI5NTIzZTYyZjY4NzI5ZjQ3NTRmNDRjYmI4ZDQ4NWIxYWNhNWNhZDFkNDlmMzZhNjJhOWQwMDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc4MTdlODJjODViOWUzZTU1ZDhjNmE1MzU2ODc5NGFhNWI5OWRjNzM2MjMwNTk1ODU3ZDVhMmZjNWU5NTZiMDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNhMjM3YWFkOWNhZDQyNzg4NmI3M2Q3NjViYWE2ZWJlN2E3YTgzYzk1MDY4ZjYwOTM3Y2YxYzcyZWQ1YzJlYTkifQ"
         },
         {
-          "resource": "repo://tests/test_workbench_data.py#L484-L502",
-          "version": "repo-lines-v1:sha256:fac93a35271497fcd6af604fc0b327c32a0a49728f8d6d502cad0e034d7f9ad4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM5Mjg4ZmM0YmM1Mjk4NWEyY2E1N2UxMDMxOWRjZjI1ZjZkOTBjNmUxNTkyNjIwMGNhNDYxZjU4YzA5Y2UzMTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxZTMwNGQyYjZiMjUwZDEzYTMyN2JhMzZlOWY5NGY1MzA4NTdhODllNDYyZmE2NjBkNjZmMDBhZWJjMTU5NTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdlZjQ2M2YwZmI0NGQ4YWI0NzYxMzc4MjkyMzMxMTI3YTgyYmQzYzk2ZGQ0MWFhNjc0ZGFjODdkN2Y0MGRiZjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNhMDkzMDMyNDk3YzI3OTc5OTU4NTYwZGY0YmJhNzhmZGY5Y2M5N2IxOTM1ZTljODRmZWE2NDBkMTdkNDNiOGQifQ"
+          "resource": "repo://tests/test_workbench_data.py#L506-L521",
+          "version": "repo-lines-v1:sha256:1a0402ae301191eb4df33f839bdb048269607a08960901da4a036f73c0b6f138:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM5Mjg4ZmM0YmM1Mjk4NWEyY2E1N2UxMDMxOWRjZjI1ZjZkOTBjNmUxNTkyNjIwMGNhNDYxZjU4YzA5Y2UzMTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdlZjQ2M2YwZmI0NGQ4YWI0NzYxMzc4MjkyMzMxMTI3YTgyYmQzYzk2ZGQ0MWFhNjc0ZGFjODdkN2Y0MGRiZjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYyZmQ3ZGY3OWM2YTdhZTYyNDkxN2U3NmEzMzgxMzdjYTllY2M2MGJjMjg5N2M1ODI2ZDY4MTA0OTdlNWU1OGUifQ"
         }
       ]
     },
@@ -81,10 +81,24 @@
           "version": "repo-lines-v1:sha256:41ac82b4aa2e0653ae71634c673ac6182206a6f883580ab0ddf718796599cbc6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY3NjlkMzhkODc3ZGZhNzQ0OTg3MmU0ODA0ZmE3MjEyMmM0NTlkOTAxZWJhOTZhM2I0OGE0M2U4OWE5NDk0Y2MiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFjODJkOTcyMmQyZjJlY2VmZjY2YzM0MGM4OGRlNDIwNTdiYjgyNGYyMTA5YTgwMGNiZWU5NjczZDYyZGMzNzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRiNTMwZWRlNGYzZTg4MmQ2ZTg1ZTllNmE3N2JiYTI5NTk5OTk3MWU2NTk5NGU0ZTA0MWJjMDAzYjE1NzhkMmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE3MDUxMDYwNDNjYjM0MmZkYzk4NWQ4NjE0Zjg3NjA3NmUzMmM4YjJhNDkxNWNlZDQyODhiYTg0YzgyN2U0MjIifQ"
         }
       ]
+    },
+    {
+      "id": "claim_4ce14797d27e4eb0a1a396971775e87a",
+      "statement": "Native workspace task publication has no fixed count cap, validates unique IDs and snapshot trace/finding references, binds the captured context hash and saves draft tasks.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/research/workspace.py#L181-L198",
+          "version": "repo-lines-v1:sha256:26c0f602606306cc84ecf4d8385df5ca0d6a111b6275e8bb8a7a93699dbff9e8:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjUwZjk5NzJkNmE5ZGM0NDM2MDJjYWM2NWZkYzllZDViMjc3MDYwODJkMDQ4NDBiYjM5MjdmODdkNDUzYWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE2MmIwOGE0YTU3OGMwYjkyMjc1ZGMxZGJlODA1NGU1ZjU1ZDJhMDVlM2ExYTA2MzZkZGI2OWNkZTA3MjE2MGMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUwODUzNTZhMDA0Y2ZjYmUzOTllMGZmMmFlZTc1NTc1ODY3MjY1OTM1ZWMyMjI3ZmNkNjZjYTc0MDA5ZjY2ZWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJiOGVjMjQ0NTY3YmQ4ZWM5YjgyOWNhODg2ZTkwYTMyYzNmNzEzZDRhOTViYzg0M2ZlMmYyZDUzODZhMjBkN2YifQ"
+        },
+        {
+          "resource": "repo://tests/test_research.py#L142-L175",
+          "version": "repo-lines-v1:sha256:72f182ffa7d20ce83e3dad24f4425a6bb026f1aba6b7cc1b3f93ede14c1f5018:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc0MzZmOGMyZWQ1MWE1YjRmMzYxYTA4M2I1M2U4ZTRlNGFmMmU5ODQ4M2Y2OTNjNWY0OGYyMjFhODg3ODI0MWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2ZTEwNTViZTAyYmQ3MDYzMmY4YTY2Y2M4MzYwYzYxMzgzMjA2OTBiYzEwODNmMzg0MTQ1MjNhNWEyMjBjNGQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcwZWNkMTVjMThlOWU1ZDYyZDI5MTAzZDM2Y2ZkNmI0OTI5YzFiNDhjMDgyZTllMjdhOTMyODZiZjYxZGQzOTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjllNDAyZTVjNmM4MWViNTI2OGIwYWFlMTkyNjYxZWY1MWI2YTY3OTU1NDk3ZWJkMDkyMDQ3ZWNiZWIwZTUxYWMifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-07T19:39:22.177Z"
+    "at": "2026-09-07T20:56:39.229Z"
   }
 }

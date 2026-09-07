@@ -16,8 +16,6 @@ app = typer.Typer(no_args_is_help=True)
 @errors
 def knowledge_add(project: Path, file: Path, title: str):
     """Snapshot an explicit policy, source file, tool contract or success definition."""
-    if file.stat().st_size > 100_000:
-        raise ValueError("Context file exceeds 100,000 bytes")
     emit(
         Project(project).add_knowledge(title, file.read_text(encoding="utf-8"), str(file.resolve()))
     )

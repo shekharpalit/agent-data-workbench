@@ -13,3 +13,5 @@ for group in (project, research, experiments, exports, benchmark, batch):
     app.add_typer(group.app)
 app.add_typer(knowledge.app, name="knowledge", help="Review versioned project knowledge.")
 app.add_typer(tasks.app, name="task", help="Design, audit and review tasks.")
+
+app.add_typer(research.operations, name="research", help="Use a persistent research workspace.")

@@ -8,12 +8,10 @@ from typing import Any
 
 from .models import Assertion, ReviewedCase, _reject_constant, pointer_value
 from .persistence import atomic_text
-from .traces import MAX_FILE_BYTES, read_json
+from .traces import read_json
 
 
 def read_lines(path: Path) -> list[Any]:
-    if path.stat().st_size > MAX_FILE_BYTES:
-        raise ValueError("JSONL file exceeds 50 MiB")
     values = []
     for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
         if line.strip():

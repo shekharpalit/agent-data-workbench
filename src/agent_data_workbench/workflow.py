@@ -24,7 +24,7 @@ def analyze_traces(
     *,
     question: str = DEFAULT_QUESTION,
     context: str = "",
-    max_input_chars: int = 120_000,
+    max_input_chars: int | None = None,
 ) -> Analysis:
     if not traces:
         raise ValueError("At least one trace is required")
@@ -37,8 +37,8 @@ def analyze_traces(
     return result
 
 
-def check_size(prompt: str, limit: int) -> None:
-    if len(prompt) > limit:
+def check_size(prompt: str, limit: int | None) -> None:
+    if limit is not None and len(prompt) > limit:
         raise ValueError(
             f"Prepared input has {len(prompt):,} characters, exceeding {limit:,}. "
             "Use fewer traces/context or explicitly increase --max-input-chars. Nothing was sent."
@@ -56,10 +56,10 @@ def prepare_run(
     *,
     question: str = DEFAULT_QUESTION,
     context: str = "",
-    limit: int = 100,
-    max_input_chars: int = 120_000,
+    limit: int | None = None,
+    max_input_chars: int | None = None,
 ) -> Path:
-    if not traces or limit < 1:
+    if not traces or limit is not None and limit < 1:
         raise ValueError("At least one trace and a positive limit are required")
     if len({trace.trace_id for trace in traces}) != len(traces):
         raise ValueError("Duplicate trace IDs")
@@ -71,7 +71,11 @@ def prepare_run(
         "created_at": datetime.now(UTC).isoformat(),
         "total_traces": len(traces),
         "selected_traces": len(selected),
-        "selection": "first N records in export order; no claim of representativeness",
+        "selection": (
+            "all supplied records"
+            if len(selected) == len(traces)
+            else "first N records in export order; no claim of representativeness"
+        ),
         "source_sha256": fingerprint(traces),
         "selected_sha256": fingerprint(selected),
         "question": question,

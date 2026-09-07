@@ -6,6 +6,8 @@ tags: [batch, evaluation, benchmark, analyzer]
 sources:
   - id: openwiki-source-a17b46c83fec9ddee5bdd6a4
     resource: repo://src/agent_data_workbench/benchmark.py
+  - id: openwiki-source-33a2f16f1f5cbf7625be5826
+    resource: repo://src/agent_data_workbench/cli/batch.py
   - id: openwiki-source-cb831ca27b1153da653ff8dc
     resource: repo://src/agent_data_workbench/evaluation.py
   - id: openwiki-source-a25d1495b814c3304c94e096
@@ -14,10 +16,10 @@ sources:
     resource: repo://src/agent_data_workbench/prompt.py
   - id: openwiki-source-c90a57f259e123cf538cdd9c
     resource: repo://src/agent_data_workbench/workflow.py
-generated: { by: "codex", at: "2026-09-07T19:39:22.177Z" }
+generated: { by: "codex", at: "2026-09-07T20:56:39.229Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T19:39:22.177Z
+    at: 2026-09-07T20:56:39.229Z
 ---
 
 # Batch evaluation and analyzer checks
@@ -27,10 +29,10 @@ Batch mode is useful for a small exported dataset and a reviewable report. Its c
 ## Prepare and analyze a batch
 
 ```sh
-uv run agent-data-workbench prepare traces.jsonl --out runs/batch --limit 100
+uv run agent-data-workbench prepare traces.jsonl --out runs/batch
 ```
 
-Preparation makes no model call. It writes `request.json`, `schema.json`, `prompt.txt`, and `traces.md` into a new or empty directory. Selection takes the first N records in export order, not a representative sample. The default prompt limit is 120,000 characters. The request records fingerprints for the source, selected snapshot, and prepared configuration.
+Preparation makes no model call. It writes `request.json`, `schema.json`, `prompt.txt`, and `traces.md` into a new or empty directory. All supplied records are included by default, with no default prompt-character cap. If you explicitly supply `--limit N`, selection takes the first N records in export order, not a representative sample. `--max-input-chars` is an optional developer-selected limit. The request records fingerprints for the source, selected snapshot, and prepared configuration.
 
 Inspect the prompt and schema. To import a separately generated structured response:
 
@@ -38,13 +40,13 @@ Inspect the prompt and schema. To import a separately generated structured respo
 uv run agent-data-workbench finish runs/batch analysis-response.json
 ```
 
-Alternatively, prepare and call a native analyzer in one operation:
+Alternatively, prepare and call a CLI analyzer in one operation:
 
 ```sh
 uv run agent-data-workbench analyze traces.jsonl --backend codex --out runs/batch-model
 ```
 
-Use `--backend claude` for Claude Code, `--model` for an explicit supported model, and repeat `--context path.md` for explicit context files. This analysis command sends selected context through the provider CLI. Completion checks the request fingerprint and evidence references, then writes `analysis.json`, `run.json`, `cases.jsonl`, and `report.md`. An already-completed run cannot be overwritten; prepare a new one.
+Use `--backend claude` for Claude Code, `--model` for an explicit supported model, and repeat `--context path.md` for explicit context files. This analysis command sends selected context as a single prompt through the provider CLI; its default timeout remains 300 seconds and can be changed with `--timeout`. It materializes the batch in memory, and provider context limits still apply. For large datasets or ongoing exploration, use the [native research workspace](investigations.md), which gives the agent disk-backed inputs and resumable tools. Completion checks the request fingerprint and evidence references, then writes `analysis.json`, `run.json`, `cases.jsonl`, and `report.md`. An already-completed run cannot be overwritten; prepare a new one.
 
 ## Review cases and compare supplied outputs
 

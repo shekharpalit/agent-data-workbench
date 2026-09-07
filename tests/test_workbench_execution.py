@@ -530,3 +530,34 @@ def test_ui_analytics_endpoints_share_filters_and_enforce_access_controls(server
         "invalid_filter": 400,
         "wrong_origin": 403,
     }
+
+
+def test_native_snapshot_exposure_is_recorded_without_changing_suite_definition(project):
+    # Given
+    from agent_data_workbench.research import start_investigation
+
+    manifest = suite(project)
+    # When
+    excluded = start_investigation(project, "Optimization data", exclude_final=True)
+    before = project.final_groups(consumed=True)
+    included = start_investigation(project, "All supplied data")
+    saved = read_json(project.path("suites", manifest["id"]))
+    optimization = run_experiment(project, manifest["id"], FixedRunner(), FixedRunner())
+    # Then
+    assert {
+        "excluded_total": excluded["source"]["total"],
+        "before": before,
+        "included_total": included["source"]["total"],
+        "source": [e["investigation_id"] for e in saved["research_exposure"]],
+        "suite_hash": saved["sha256"],
+        "optimization": optimization["status"],
+    } == {
+        "excluded_total": 7,
+        "before": set(),
+        "included_total": 9,
+        "source": [included["id"]],
+        "suite_hash": manifest["sha256"],
+        "optimization": "complete",
+    }
+    with pytest.raises(ValueError, match="exposed"):
+        run_experiment(project, manifest["id"], FixedRunner(), FixedRunner(), split="final")

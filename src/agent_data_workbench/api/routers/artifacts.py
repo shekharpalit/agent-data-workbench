@@ -6,6 +6,7 @@ from fastapi import APIRouter, Query
 
 from ...explore import lineage
 from ...identifiers import UUIDString
+from ...research.artifacts import investigation_view
 from ...traces import read_json
 from ..dependencies import ProjectDependency
 from ..schemas import (
@@ -17,7 +18,11 @@ router = APIRouter()
 
 @router.get("/artifacts")
 def artifacts(project: ProjectDependency, kind: ArtifactKind):
-    return project.artifacts(kind)
+    return (
+        [investigation_view(project, i["id"]) for i in project.artifacts(kind)]
+        if kind == "investigations"
+        else project.artifacts(kind)
+    )
 
 
 @router.get("/artifact")
@@ -26,7 +31,11 @@ def artifact(
     kind: ArtifactKind,
     id: UUIDString,
 ):
-    return read_json(project.path(kind, id))
+    return (
+        investigation_view(project, id)
+        if kind == "investigations"
+        else read_json(project.path(kind, id))
+    )
 
 
 @router.get("/graph")

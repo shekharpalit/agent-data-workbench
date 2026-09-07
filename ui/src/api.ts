@@ -6,6 +6,8 @@ import type {
   ClusterResult,
   Distribution,
   Job,
+  Journal,
+  OutcomePage,
   Knowledge,
   LineageGraph,
   Overview,
@@ -98,10 +100,36 @@ export class ApiClient {
   investigate = (request: {
     question?: string;
     resume?: string;
-    backend: Backend;
-    model: string;
-    steps: number;
+    backend?: Backend;
+    model?: string;
+    mode?: "research" | "complete";
+    exclude_final?: boolean;
   }) => this.request<{ job_id: string }>("/api/investigate", request);
+  pauseResearch = (id: string) =>
+    this.request("/api/investigation/pause", { id });
+  researchJournal = (id: string, offset: number, signal?: AbortSignal) =>
+    this.request<Journal>(
+      `/api/investigation/journal?id=${encodeURIComponent(id)}&offset=${offset}`,
+      undefined,
+      signal,
+    );
+  researchOutcomes = (id: string, after: string | null, signal?: AbortSignal) =>
+    this.request<OutcomePage>(
+      `/api/investigation/outcomes?id=${encodeURIComponent(id)}${after === null ? "" : `&after=${encodeURIComponent(after)}`}`,
+      undefined,
+      signal,
+    );
+  async researchFile(id: string, artifact: string): Promise<Blob> {
+    const response = await this.transport(
+      `/api/investigation/file?id=${encodeURIComponent(id)}&artifact=${encodeURIComponent(artifact)}`,
+      {
+        headers: { Authorization: `Bearer ${this.token()}` },
+      },
+    );
+    if (!response.ok)
+      throw new Error("Could not download this research artifact");
+    return response.blob();
+  }
   designTasks = (investigation: string, backend: Backend, model: string) =>
     this.request<{ job_id: string }>("/api/task/design", {
       investigation,

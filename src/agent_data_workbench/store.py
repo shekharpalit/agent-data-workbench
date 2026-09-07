@@ -28,7 +28,7 @@ class JsonSource:
         self.path = path
 
     def read(self) -> Iterable[Trace]:
-        # Stream JSONL exports; bound individual records, not the entire corpus.
+        # Stream JSONL exports without imposing a corpus or record size limit.
         if self.path.suffix.lower() not in {".jsonl", ".ndjson"}:
             yield from load_traces(self.path)
             return
@@ -36,8 +36,6 @@ class JsonSource:
 
         with self.path.open(encoding="utf-8") as stream:
             for number, line in enumerate(stream, 1):
-                if len(line) > 2_000_000:
-                    raise ValueError(f"Trace on line {number} exceeds 2 million characters")
                 if not line.strip():
                     continue
                 try:

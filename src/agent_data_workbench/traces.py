@@ -10,12 +10,8 @@ from typing import Any
 from .identifiers import stable_id
 from .models import Trace, _reject_constant, json_text
 
-MAX_FILE_BYTES = 50 * 1024 * 1024
-
 
 def read_json(path: Path) -> Any:
-    if path.stat().st_size > MAX_FILE_BYTES:
-        raise ValueError(f"File exceeds the alpha's 50 MiB limit: {path.name}")
     return json.loads(path.read_text(encoding="utf-8"), parse_constant=_reject_constant)
 
 
@@ -40,8 +36,6 @@ def normalize(records: list[Any]) -> list[Trace]:
 
 
 def load_traces(path: Path) -> list[Trace]:
-    if path.stat().st_size > MAX_FILE_BYTES:
-        raise ValueError("Trace export exceeds 50 MiB; export a smaller batch")
     if path.suffix.lower() in {".jsonl", ".ndjson"}:
         records = []
         with path.open(encoding="utf-8") as stream:

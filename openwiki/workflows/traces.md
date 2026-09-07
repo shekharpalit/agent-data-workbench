@@ -16,12 +16,12 @@ sources:
     resource: repo://src/agent_data_workbench/traces.py
   - id: openwiki-source-66a8a10b0365fc2079585762
     resource: repo://tests/test_explore.py
-  - id: openwiki-source-9c58a0b0672b6bdbd523d5ee
-    resource: repo://tests/test_identifiers.py
-generated: { by: "codex", at: "2026-09-07T19:39:22.177Z" }
+  - id: openwiki-source-3589dc1fc29ba0bfe0e2a50c
+    resource: repo://tests/test_research.py
+generated: { by: "codex", at: "2026-09-07T20:56:39.229Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T19:39:22.177Z
+    at: 2026-09-07T20:56:39.229Z
 ---
 
 # Import and explore traces
@@ -44,7 +44,7 @@ A JSONL file contains one nonempty object per line. For example:
 {"trace_id":"run-001","thread_id":"conversation-001","agent_type":"support","input":"Complete the request","tool":{"status":"declined"},"output":{"status":"completed"},"latency_ms":420}
 ```
 
-JSON files may hold a single record, an array, or an object with a `traces` array. JSONL and NDJSON ingestion streams records with a two-million-character line limit; ordinary JSON loading has a 50 MiB file limit. Invalid data rolls back the ingest transaction.
+JSON files may hold a single record, an array, or an object with a `traces` array. JSONL and NDJSON ingestion streams one record at a time without a fixed file-size or record-size ceiling. Ordinary JSON loading materializes its input in memory. Available memory and disk remain practical constraints. Invalid data rolls back the ingest transaction.
 
 Normalization uses `trace_id`, falling back to `id`, or generates a deterministic UUIDv5 from canonical JSON when neither is supplied. Supplied IDs are preserved verbatim, including provider-specific identifiers. The original object becomes `Trace.data`. Thus the sample's tool status is at `/tool/status`, not `/data/tool/status`. Supply stable IDs to make later evidence easier to inspect.
 
@@ -114,7 +114,9 @@ The lineage graph connects trace evidence to findings, tasks, and experiments us
 
 The graph reports truncation and supports a 10–300-node limit. Task nodes link identities; experiment artifacts preserve the exact evaluated specification snapshots. Use the graph to navigate evidence, and the saved experiment to inspect what actually ran. Edges represent recorded relationships, not inferred causality. Edge IDs are deterministic UUIDv5 values; node keys include their kind and source or artifact identity so different kinds remain distinct.
 
-Final-set exclusions depend on the caller: model-directed investigations use a store excluding reserved final groups, while the ordinary CLI query uses the full project store. A local exploration tool is not a hidden-data access boundary.
+Native investigations capture the full project store by default. Pass `--exclude-final` when creating an investigation to leave reserved final groups out of that snapshot. Ordinary CLI queries still use the full project store. Exposure is recorded for research; these local tools are not a hidden-data access boundary.
+
+The limits above describe the convenience search, clustering and graph views. They do not limit the native research corpus. `ResearchWorkspace.dataset.records()` iterates the full snapshot and native scripts can implement analyses beyond the built-in lexical clustering. Its aggregate API paginates distinct values instead of discarding all values beyond the top 50.
 
 ## Verification and next steps
 

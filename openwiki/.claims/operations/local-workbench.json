@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:7a8a38d2426b94c4a6ce4cc88aa9a1cb5a72c871c08cdeba050f5a6fc6625033",
+  "pageVersion": "sha256:125a76cb9b672b6aba9cb4383041cb93757ee144858dced8e355a006cad290a5",
   "claims": [
     {
       "id": "claim_25574e40cfb048b39464c4e95bba596d",
@@ -40,7 +40,7 @@
       "evidence": [
         {
           "resource": "repo://src/agent_data_workbench/api/application.py#L17-L45",
-          "version": "repo-lines-v1:sha256:680414bdd64ea47e5e8329b669702e714254ef32b2d4db3e0cc4d3b76e7703b3:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwN2I0OWI3OTcyZDI0NTc0MzJkODRmNjZjOThjODhmMzJlODM3NDEwOGFmOTdkYjg3YjdlZDRiOTllZGE0NmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwZDQ1NTYzNzQ0OGRmMjMzNTQ0YjZkNzAwNzQxNTNmZGQ0Mjc1OTg4ODI4M2MxMzEyZGZlM2M1YmJjNjJkMjMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUxMzVhMDk0ZGJiYWMyOTNhNDc0YzgzZjcyOWNlNmI0NTQxNzdjYmY0YmYyM2VkMmJlYzBmMWQxMjEzYTU2ODUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAzYmM2NTJlM2I0YTIxZTdjNWVkZTgyZTkwZTUzYWZiNmViZjU4NWQ2YTY1MWY2MjQ1YTc1MTU0NWMyNzViZDIifQ"
+          "version": "repo-lines-v1:sha256:f8e1c44967c818e71b6cec12031ce62a34aa8611e7a5dd09b22bbc938ff95f53:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwN2I0OWI3OTcyZDI0NTc0MzJkODRmNjZjOThjODhmMzJlODM3NDEwOGFmOTdkYjg3YjdlZDRiOTllZGE0NmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwZDQ1NTYzNzQ0OGRmMjMzNTQ0YjZkNzAwNzQxNTNmZGQ0Mjc1OTg4ODI4M2MxMzEyZGZlM2M1YmJjNjJkMjMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUxMzVhMDk0ZGJiYWMyOTNhNDc0YzgzZjcyOWNlNmI0NTQxNzdjYmY0YmYyM2VkMmJlYzBmMWQxMjEzYTU2ODUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAzYmM2NTJlM2I0YTIxZTdjNWVkZTgyZTkwZTUzYWZiNmViZjU4NWQ2YTY1MWY2MjQ1YTc1MTU0NWMyNzViZDIifQ"
         },
         {
           "resource": "repo://src/agent_data_workbench/api/errors.py#L10-L17",
@@ -53,8 +53,8 @@
       "statement": "Investigation and task-design routes use the background queue; an investigation is created only after job capacity is reserved, and task audit through the API uses no configured semantic judge.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/api/routers/investigations.py#L15-L27",
-          "version": "repo-lines-v1:sha256:cf5227ffd6644deb00fb28fce1a910f74c4a16e779b77d6805ec88a3df4d61d4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2MzJkNjMxZTc3ZTY2NTZjNGVkMTkxNmU3ZGU0NzcyYjQ4M2U0MTBkMzg2N2ZhOTBhNTBkMDdmYTAwN2I2MzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk0MDcxODhlMWVjNGQ0ZWNlNmJlM2RkNWUxMTBkZDEyMmUyYTJkYzU4YjlmODM5ZDllZDgwOTk0ZWIyM2E1ZmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA0OGY4ZTBmZjEyYWE3ZTAyNmIyYWJlZjllMzJmZmU2MmZlNTE4OThkMDlhNjRlODZmNzk5NDNiOTZhY2QyMmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://src/agent_data_workbench/api/routers/investigations.py#L23-L44",
+          "version": "repo-lines-v1:sha256:5c00c11ac9092ba7d30640224a286cca61cb57e079bcacad3a508600acad2a59:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2MzJkNjMxZTc3ZTY2NTZjNGVkMTkxNmU3ZGU0NzcyYjQ4M2U0MTBkMzg2N2ZhOTBhNTBkMDdmYTAwN2I2MzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk0MDcxODhlMWVjNGQ0ZWNlNmJlM2RkNWUxMTBkZDEyMmUyYTJkYzU4YjlmODM5ZDllZDgwOTk0ZWIyM2E1ZmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA0OGY4ZTBmZjEyYWE3ZTAyNmIyYWJlZjllMzJmZmU2MmZlNTE4OThkMDlhNjRlODZmNzk5NDNiOTZhY2QyMmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgwZmJkNDBkMTcwODU1NDIwODNlOTA5NjQ0NTk4ZjZiM2Y0MjI3NDhiN2EzNjFiZDIyNGNjYTVhMDQ1NTRhOTkifQ"
         },
         {
           "resource": "repo://src/agent_data_workbench/api/routers/tasks.py#L28-L41",
@@ -89,10 +89,28 @@
           "version": "repo-lines-v1:sha256:9f5df6739c2bb6829db5c235b35ee80d8d0f404cb8268ea84266e91961fcc9e5:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZmY2RhNjI4ZjY1ZThkMTExNzA2OWYyZWJkMTljNDc5NTEwYTZhMWRlMGI5ZDY3ZjViYzFhOTY0NmJmNTdlYmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmYmQwMDkzMTRiYzI3MDg0MTY3MzRhMDJhZTVmZjM5YTFlNDhhMDUwYmU5MWY0M2IyZmFhOTIwMDJjNjJiZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxYjc4NTMwOWU5ODc5Nzc3MzRlMmQyNWFlNDEyNzAwMGVmNTcxOGU1ZDQzZWNjNjA2Yzg5YTBkYjgxZjAwMTkifQ"
         }
       ]
+    },
+    {
+      "id": "claim_066464bed15a4279a95cc9ecde0df3f6",
+      "statement": "The native research UI offers research or complete mode, explicit final-data exclusion, saved-session resume, coverage, paginated outcomes and journals, inline bar charts and authenticated file downloads.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/api/routers/investigations.py#L47-L81",
+          "version": "repo-lines-v1:sha256:12d0a2e71bd3ac00793980320f14bf2912fcb5e432c272db05622cc64a6830ac:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxMWEyNzhjNjYwZTM0NjY3OWIzNmEwNzU3Zjg3NGY0NjI5ZTgzZmVkOTg3ODU1NTIxMTE5MDZkNWZhMjAzZjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI3MGVkZDdhMzQ0NmFhMDZkNzk5MTk3NGMxOWNiNGI1NmNlN2QwNjkwOTYwNzc4OWMyZmE5MzA3NjdmNjA5ZTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU0OTA1ZjZkYjVkOWYzNWQwZTg3Y2Q3NTQ5NTEwMGU3OTY5NGJmNzdiMDkzYzM3NjMwOGMyNzY1NTEzMjczZDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://ui/src/views/ResearchControls.tsx#L24-L112",
+          "version": "repo-lines-v1:sha256:4312f3907b89e287ad83cda21387acb72020477e437b7cdbe8c9237590ba3009:eyJzZWxlY3RlZExpbmVDb3VudCI6ODksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhkMDZhNDQ3NjM5Zjk4ZmU5NWI4ZTNiNGQwMDVlZWRkMTE4ZDI3MDc0YmZhMjExOWQ2ZDdkMmM4MDAyNzczYmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRhYjIzMmVlMzczMTY1NGJkYTI4ZWNkMjFmM2ExN2YxNDIxM2I4ZjVmZmUwNDA2MTk1ZDNkNmJhYTk0NDJiMTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://ui/src/views/ResearchOutputs.tsx",
+          "version": "repo-file-v1:sha256:8c71e35afad81737369fb22bf861e52a4b1fc7f19c37d4d2e4fbf12038924726"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-07T19:39:22.177Z"
+    "at": "2026-09-07T20:56:39.229Z"
   }
 }

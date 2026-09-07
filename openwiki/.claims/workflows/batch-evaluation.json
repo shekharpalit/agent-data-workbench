@@ -1,14 +1,18 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:12c8c8664197c70f252d049ccc46b8c5d6880f9d486d13534b909c8b3c4ec4ec",
+  "pageVersion": "sha256:7fbfc9522acb92e4c408b83013f8fd48c38b5703033482fe24b003994605514c",
   "claims": [
     {
       "id": "claim_bf28a65284e642f49a2ea26a2cc81ff0",
-      "statement": "Batch preparation selects the first N exported records, enforces a prompt-size bound, records snapshot/request fingerprints, and writes inspectable prompt, schema, request, and trace artifacts.",
+      "statement": "Batch preparation includes all supplied records by default, applies record or prompt-size limits only when requested, records snapshot/request fingerprints, and writes inspectable prompt, schema, request and trace artifacts.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/workflow.py#L52-L100",
-          "version": "repo-lines-v1:sha256:2acdacb8f89ff2338e36350766ffd47b59fd79cf58db907c96afb7f0cefe2f53:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIxMzJiOGQ1NTE4YTBkMjRlMGIzZjAwMzUwYzQ4NzcwN2FlMmNjYzQwZDc1Yzg1ZjQ1YTU2MDVlMmZlNGQ1NDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM0YmQyM2M2ZjU0ZGQzZDkxMWMyYWI3MGE4ZWQ0ZTUxMmMyMWJlODVhMTJlMWFlNzJjYTVlMmFmNDgxMjQwNmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdmODQxNjY5ZWY4ZDMyYWE2YTcwY2Y4ZDYwYjU4M2Y4ZmUwMmJmNjQxZmQ3YmYyOTQxZWYwZjA5ZWQ5NDMxYTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc4OWNhYjViZTM2NDZkYzcwNTZhY2M4MDE5ZTUzNDY5ZGVkMzY0YzI4NmU2ZTFmNjJhNWQ5YWNjYzljMzE0OTkifQ"
+          "resource": "repo://src/agent_data_workbench/cli/batch.py#L48-L68",
+          "version": "repo-lines-v1:sha256:f594bebe59bafc4d6a8d1cb47818abd337fde1682ba87cedeef1ab58b7461d50:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ0NDhiZGVjZGIwZmVhZDY4M2YwY2I4NjVkNmM5YThiZDcyYTMxNzZhYThjOWY5YWM2ZWU5ZWU3ODhkYjY1NTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM5NmNlM2QyYmFmNWZhMTA3MDE1MmQxMzhlYzkzOGM2OTQ1YmY2ZWZlMzk2Y2VlYWMyYWNlMDg2Yjk3OWRlNTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUyMGIxM2IwYTFjY2Q4NWVlZmI4Mjc0NTQyOTljMjc1NTQ2NGYzZTc2YTYxY2FiYmYyYmNjYjFjNmM5OGEyYTEifQ"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/workflow.py#L40-L105",
+          "version": "repo-lines-v1:sha256:50746d63096424e8746d05ea81958f7044a0189149aa7327d29a35525aa93f8f:eyJzZWxlY3RlZExpbmVDb3VudCI6NjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA4ZjQ5ODZiMzM3ZGQ5ZGYyMTgxNDU3N2EyMzhiMTVmNDFmNjM1NTQ5M2FhZGI5YzNjMzUwZWMyMDc0Mjc3ZWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM0YmQyM2M2ZjU0ZGQzZDkxMWMyYWI3MGE4ZWQ0ZTUxMmMyMWJlODVhMTJlMWFlNzJjYTVlMmFmNDgxMjQwNmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ3MjIzMTA2ZmQ4NzQyYjcwZWEyMzNmOWRjMzU5ZjRiMDJiYmIwNjliNzI4M2VlZjc2MjQ5OTUxNmJkN2I5YzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc4OWNhYjViZTM2NDZkYzcwNTZhY2M4MDE5ZTUzNDY5ZGVkMzY0YzI4NmU2ZTFmNjJhNWQ5YWNjYzljMzE0OTkifQ"
         }
       ]
     },
@@ -77,6 +81,6 @@
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-07T19:39:22.177Z"
+    "at": "2026-09-07T20:56:39.229Z"
   }
 }

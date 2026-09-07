@@ -279,12 +279,12 @@ def test_investigation_jobs_remain_nonblocking_and_reject_concurrent_artifacts(
     calls = []
     monkeypatch.setattr(
         investigations,
-        "CliAnalyzer",
+        "NativeSession",
         lambda backend, model, timeout: {"backend": backend, "model": model, "timeout": timeout},
     )
 
-    def investigate(project, key, analyzer, max_steps):
-        calls.append({"analyzer": analyzer, "max_steps": max_steps})
+    def investigate(project, key, analyzer):
+        calls.append({"analyzer": analyzer})
         entered.set()
         assert release.wait(3)
         return {"status": "complete"}
@@ -293,7 +293,12 @@ def test_investigation_jobs_remain_nonblocking_and_reject_concurrent_artifacts(
     # When
     started = client.post(
         "/api/investigate",
-        json={"question": "Find outcomes", "backend": "claude", "model": "fixture", "steps": 2},
+        json={
+            "question": "Find outcomes",
+            "backend": "claude",
+            "model": "fixture",
+            "mode": "complete",
+        },
     )
     try:
         assert entered.wait(2)
@@ -318,8 +323,7 @@ def test_investigation_jobs_remain_nonblocking_and_reject_concurrent_artifacts(
             "investigations_created": 1,
             "calls": [
                 {
-                    "analyzer": {"backend": "claude", "model": "fixture", "timeout": 120},
-                    "max_steps": 2,
+                    "analyzer": {"backend": "claude", "model": "fixture", "timeout": None},
                 }
             ],
         }
@@ -369,4 +373,80 @@ def test_failed_background_job_returns_a_recoverable_error_without_provider_text
         "status": "error",
         "result": None,
         "error": "Operation failed. Check the saved artifact and CLI; resume explicitly.",
+    }
+
+
+def test_native_research_api_serves_coverage_pages_and_authenticated_artifacts(client, project):
+    # Given
+    from agent_data_workbench.project import save
+    from agent_data_workbench.research import ResearchWorkspace, start_investigation
+
+    value = start_investigation(project, "Inspect progress", mode="complete")
+    workspace = ResearchWorkspace(project, value["id"])
+    workspace.dataset.record("r0", output={"observed": True}, method="Read record")
+    workspace.dataset.record("r1", error="Unresolved input", method="Read record")
+    save(workspace.directory / "counts.json", {"completed": 1})
+    artifact = workspace.attach("counts.json", "Counts", "data")
+    query = {"id": workspace.id}
+    # When
+    detail = client.get("/api/artifact", params=query | {"kind": "investigations"}).json()
+    page = client.get("/api/investigation/outcomes", params=query | {"page_size": 2}).json()
+    following = client.get(
+        "/api/investigation/outcomes",
+        params=query | {"after": page["next_cursor"], "page_size": 1000},
+    ).json()
+    journal = client.get("/api/investigation/journal", params=query | {"page_size": 1}).json()
+    download = client.get("/api/investigation/file", params=query | {"artifact": artifact["id"]})
+    denied = client.get(
+        "/api/investigation/file",
+        params=query | {"artifact": artifact["id"]},
+        headers={"Authorization": ""},
+    )
+    # Then
+    assert {
+        "coverage": detail["coverage"],
+        "page": page,
+        "following": [r["trace_id"] for r in following["records"]],
+        "next": following["next_cursor"],
+        "journal": {
+            "count": len(journal["items"]),
+            "next": journal["next_offset"],
+            "total": journal["total"],
+        },
+        "download": {
+            "status": download.status_code,
+            "body": download.json(),
+            "disposition": download.headers["content-disposition"],
+        },
+        "denied": denied.status_code,
+    } == {
+        "coverage": {"total": 9, "retrieved": 2, "completed": 1, "failed": 1, "pending": 7},
+        "page": {
+            "records": [
+                {
+                    "trace_id": "r0",
+                    "status": "completed",
+                    "output": {"observed": True},
+                    "error": None,
+                    "method": "Read record",
+                },
+                {
+                    "trace_id": "r1",
+                    "status": "failed",
+                    "output": None,
+                    "error": "Unresolved input",
+                    "method": "Read record",
+                },
+            ],
+            "next_cursor": "r1",
+        },
+        "following": [f"r{i}" for i in range(2, 9)],
+        "next": None,
+        "journal": {"count": 1, "next": 1, "total": 2},
+        "download": {
+            "status": 200,
+            "body": {"completed": 1},
+            "disposition": 'attachment; filename="counts.json"',
+        },
+        "denied": 401,
     }

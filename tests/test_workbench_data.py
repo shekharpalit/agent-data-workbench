@@ -7,7 +7,7 @@ from agent_data_workbench.models import Analysis, Assertion, Finding, Trace
 from agent_data_workbench.project import Project, save
 from agent_data_workbench.research import (
     ResearchResult,
-    execute_tool,
+    ResearchWorkspace,
     export_proposal,
     investigate,
     load_investigation,
@@ -163,13 +163,19 @@ class Scripted:
         return value
 
 
-def step(action, args=None, result=None):
-    return {
-        "note": "Fixture decision",
-        "action": action,
-        "arguments_json": json.dumps(args or {}),
-        "result": result,
-    }
+class NativeFixture:
+    name = "codex"
+    model = None
+    timeout = None
+
+    def __init__(self, action):
+        self.action = action
+        self.calls = []
+
+    def run(self, workspace, *, session_id, attempt, prompt, on_event):
+        self.calls.append({"session_id": session_id, "prompt": prompt})
+        on_event({"type": "thread.started", "thread_id": uid("native-session")})
+        self.action(workspace)
 
 
 def result(quote="actual result", trace_id="r0"):
@@ -256,85 +262,91 @@ def test_balanced_sampling_and_exact_drilldown(project):
     }
 
 
-def test_reserved_groups_cannot_be_inspected_or_aggregated(project):
+def test_all_inputs_are_available_and_final_exclusion_is_explicit(project):
     # Given
     save(
         project.path("suites", uid("reserved")),
-        {"tasks": [{"split": "final", "trace_groups": ["g0"]}], "final_exposure": None},
+        {
+            "id": uid("reserved"),
+            "tasks": [{"split": "final", "trace_groups": ["g0"]}],
+            "final_exposure": None,
+        },
     )
     # When
-    store = research_store(project)
+    default = start_investigation(project, "All data")
+    excluded = start_investigation(project, "Keep final reserved", exclude_final=True)
+    store = research_store(project, exclude_final=True)
     # Then
     assert {
-        "total": store.inventory()["total"],
-        "ids": store.select()["ids"],
-        "numeric_count": store.aggregate("/value")["numeric_count"],
-    } == {"total": 8, "ids": [f"r{i}" for i in range(1, 9)], "numeric_count": 8}
+        "all": default["source"]["total"],
+        "excluded": excluded["source"]["total"],
+        "consumed": project.final_groups(consumed=True),
+        "filtered_ids": store.select()["ids"],
+        "available": ResearchWorkspace(project, default["id"]).read("r0", pointer="/value"),
+    } == {
+        "all": 9,
+        "excluded": 8,
+        "consumed": {"g0"},
+        "filtered_ids": [f"r{i}" for i in range(1, 9)],
+        "available": {
+            "trace_id": "r0",
+            "pointer": "/value",
+            "content": "0",
+            "offset": 0,
+            "total_chars": 1,
+            "next_offset": None,
+        },
+    }
     with pytest.raises(ValueError, match="Unknown"):
-        execute_tool(store, "inspect", {"trace_id": "r0"})
+        ResearchWorkspace(project, excluded["id"]).read("r0")
 
 
-def test_investigation_resumes_and_preserves_seed_and_exact_evidence(project):
+def test_native_session_resumes_without_rebuilding_a_step_loop(project):
     # Given
     i = start_investigation(project, "Find evidence", seed=42)
+    first_agent = NativeFixture(lambda w: w.checkpoint("Saved useful progress"))
     # When
-    first = investigate(project, i["id"], Scripted(step("sample", {"limit": 9})), max_steps=1)
-    # Then
-    assert {"status": first["status"], "seed": first["steps"][0]["observation"]["seed"]} == {
-        "status": "paused",
-        "seed": 42,
-    }
-    # When: the investigation resumes with a fresh analyzer invocation.
-    model = Scripted(step("finish", result=result()))
-    final = investigate(project, i["id"], model, max_steps=1)
+    first = investigate(project, i["id"], first_agent)
+    next_agent = NativeFixture(lambda w: w.publish(result()))
+    final = investigate(project, i["id"], next_agent)
     # Then
     assert {
+        "first_status": first["status"],
+        "seed": final["seed"],
         "status": final["status"],
         "snapshot_count": len(final["evidence_snapshot"]),
-        "resumed_with_notes": "Fixture decision" in model.prompts[0],
-    } == {"status": "complete", "snapshot_count": 9, "resumed_with_notes": True}
-
-
-@pytest.mark.parametrize("bad", [result("fabricated"), result(trace_id="unvisited")])
-def test_fabricated_or_unvisited_evidence_never_finishes(project, bad):
-    # Given
-    i = start_investigation(project, "Find evidence")
-    model = Scripted(step("inspect", {"trace_id": "r0"}), step("finish", result=bad))
-    # When / Then
-    with pytest.raises(ValueError):
-        investigate(project, i["id"], model, max_steps=2)
-    # When
-    saved = load_investigation(project, i["id"])
-    # Then
-    assert {"status": saved["status"], "result": saved["result"], "steps": len(saved["steps"])} == {
-        "status": "paused",
-        "result": None,
-        "steps": 1,
+        "sessions": [c["session_id"] for a in [first_agent, next_agent] for c in a.calls],
+        "journal_rebuilt": "Saved useful progress" in next_agent.calls[0]["prompt"],
+        "attempts": [a["status"] for a in final["attempts"]],
+    } == {
+        "first_status": "paused",
+        "seed": 42,
+        "status": "complete",
+        "snapshot_count": 1,
+        "sessions": [None, uid("native-session")],
+        "journal_rebuilt": False,
+        "attempts": ["finished", "finished"],
     }
 
 
-def test_tool_errors_are_saved_and_do_not_abort_research(project):
+@pytest.mark.parametrize("bad", [result("fabricated"), result(trace_id="unknown")])
+def test_fabricated_or_unknown_evidence_never_finishes(project, bad):
     # Given
     i = start_investigation(project, "Find evidence")
-    model = Scripted(
-        step("inspect", {"trace_id": "r0", "shell": "NO"}),
-        step("inspect", {"trace_id": "r0"}),
-        step("finish", result=result()),
-    )
-    # When
-    value = investigate(project, i["id"], model, max_steps=3)
-    # Then
-    assert {
-        "status": value["status"],
-        "tool_error_saved": "error" in value["steps"][0]["observation"],
-    } == {
-        "status": "complete",
-        "tool_error_saved": True,
+    model = NativeFixture(lambda w: w.publish(bad))
+    # When / Then
+    with pytest.raises(ValueError):
+        investigate(project, i["id"], model)
+    saved = load_investigation(project, i["id"])
+    assert {"status": saved["status"], "result": saved["result"], "session": saved["session"]} == {
+        "status": "paused",
+        "result": None,
+        "session": {"id": uid("native-session"), "backend": "codex", "model": None},
     }
 
 
 @pytest.mark.parametrize("change", ["corpus", "knowledge"])
-def test_changed_input_blocks_resume(project, change):
+def test_changed_project_keeps_snapshot_and_resume_usable(project, change):
     # Given
     i = start_investigation(project, "Find evidence")
     if change == "corpus":
@@ -342,28 +354,38 @@ def test_changed_input_blocks_resume(project, change):
     else:
         k = project.add_knowledge("Contract", "New contract", "test")
         project.review_knowledge(k["id"], "accepted", "Reviewed")
-    # When / Then
-    with pytest.raises(ValueError, match="changed"):
-        investigate(project, i["id"], Scripted(), max_steps=1)
+    # When
+    saved = investigate(project, i["id"], NativeFixture(lambda w: w.publish(result())))
+    # Then
+    assert {"status": saved["status"], "source": saved["source"], "context": saved["context"]} == {
+        "status": "complete",
+        "source": i["source"],
+        "context": i["context"],
+    }
 
 
-def test_provider_failure_preserves_prior_steps(project):
+def test_provider_failure_preserves_session_and_progress(project):
     # Given
     i = start_investigation(project, "Find evidence")
-    model = Scripted(step("inspect", {"trace_id": "r0"}), RuntimeError("private provider text"))
+
+    def interrupt(workspace):
+        workspace.checkpoint("Useful intermediate conclusion")
+        raise RuntimeError("private provider text")
+
     # When / Then
     with pytest.raises(RuntimeError):
-        investigate(project, i["id"], model, max_steps=2)
-    # When
+        investigate(project, i["id"], NativeFixture(interrupt))
     saved = load_investigation(project, i["id"])
-    # Then
+    notes = ResearchWorkspace(project, i["id"]).dataset.events()["items"]
     assert {
         "status": saved["status"],
-        "steps": len(saved["steps"]),
+        "session": saved["session"]["id"],
+        "notes": [e["note"] for e in notes if e["kind"] == "checkpoint"],
         "private_error_exposed": "private provider text" in saved["error"],
     } == {
         "status": "paused",
-        "steps": 1,
+        "session": uid("native-session"),
+        "notes": ["Useful intermediate conclusion"],
         "private_error_exposed": False,
     }
 
@@ -484,12 +506,7 @@ def test_semantic_judge_must_provide_verifiable_evidence(project, evidence):
 def test_task_design_stays_draft_and_checks_lineage(project):
     # Given
     i = start_investigation(project, "Find evidence")
-    investigate(
-        project,
-        i["id"],
-        Scripted(step("inspect", {"trace_id": "r0"}), step("finish", result=result())),
-        max_steps=2,
-    )
+    ResearchWorkspace(project, i["id"]).publish(result())
     task = spec(project)
     # When
     design_tasks(project, i["id"], Scripted({"tasks": [task.model_dump()], "limitations": []}))
@@ -536,12 +553,7 @@ def test_proposal_export_checks_source_and_never_applies_it(project, tmp_path):
             "edits": [{"path": "prompt.txt", "before": "old", "after": "new"}],
         }
     ]
-    investigate(
-        project,
-        i["id"],
-        Scripted(step("inspect", {"trace_id": "r0"}), step("finish", result=value)),
-        max_steps=2,
-    )
+    ResearchWorkspace(project, i["id"]).publish(value)
     source = tmp_path / "source"
     source.mkdir()
     (source / "prompt.txt").write_text("old")

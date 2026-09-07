@@ -5,7 +5,7 @@ description: How the CLI, Python SDK, FastAPI service, React workbench, and loca
 tags: [architecture, sdk, persistence, provenance]
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T19:39:22.177Z
+    at: 2026-09-07T20:56:39.229Z
 sources:
   - id: openwiki-source-896da76531d8a33d2c9e76b8
     resource: repo://src/agent_data_workbench/api/application.py
@@ -27,13 +27,23 @@ sources:
     resource: repo://src/agent_data_workbench/project.py
   - id: openwiki-source-df79e35713d914a8f9a3aa91
     resource: repo://src/agent_data_workbench/reports.py
+  - id: openwiki-source-c792213eed7e8f73d739e358
+    resource: repo://src/agent_data_workbench/research/artifacts.py
+  - id: openwiki-source-19e7dd6c7eb0091ce3762537
+    resource: repo://src/agent_data_workbench/research/dataset.py
+  - id: openwiki-source-1c842561c46278adab40a06d
+    resource: repo://src/agent_data_workbench/research/mcp.py
+  - id: openwiki-source-e5f659ea5e57c342ab8bc379
+    resource: repo://src/agent_data_workbench/research/sessions.py
+  - id: openwiki-source-2dbe8753da4267ce652f414e
+    resource: repo://src/agent_data_workbench/research/workspace.py
   - id: openwiki-source-069858a5e395202064ced424
     resource: repo://src/agent_data_workbench/store.py
   - id: openwiki-source-c90a57f259e123cf538cdd9c
     resource: repo://src/agent_data_workbench/workflow.py
   - id: openwiki-source-09d2a8f36f3ecb7ab9487ab2
     resource: repo://tests/test_store.py
-generated: { by: "codex", at: "2026-09-07T19:39:22.177Z" }
+generated: { by: "codex", at: "2026-09-07T20:56:39.229Z" }
 ---
 
 # System architecture
@@ -49,7 +59,11 @@ flowchart TD
   SDK --> Store
   Store --> SQLite[Local SQLite traces]
   SDK --> Artifacts[Versioned JSON and reports]
-  SDK --> Analyzer[Codex or Claude analyzer]
+  SDK --> Session[Native Codex or Claude Code session]
+  Session --> Tools[MCP and Python workspace tools]
+  Tools --> Snapshot[Investigation SQLite snapshot and outcomes]
+  Tools --> Artifacts
+  Session --> Files[Analysis scripts and charts]
   SDK --> Runner[Configured target runner]
 ```
 
@@ -58,7 +72,7 @@ flowchart TD
 | Component | Responsibility | Main entry points |
 | --- | --- | --- |
 | CLI | Import, research, task review, experiments, and export commands | `cli/__init__.py`, `cli/project.py`, and domain command modules |
-| SDK | Domain contracts and the improvement workflow | `__init__.py`, `research.py`, `tasks.py`, `experiments.py` |
+| SDK | Domain contracts and the improvement workflow | `__init__.py`, `research/`, `tasks.py`, `experiments.py` |
 | Storage | Canonical trace records and query primitives | `store.py`, `database.py` |
 | FastAPI | Typed operations, session boundaries, static assets, background jobs | `api/application.py`, `api/routers/`, `api/schemas.py`, `api/dependencies.py`, `api/middleware.py`, `jobs.py` |
 | UI | Trace search, clusters, lineage, reviews, and experiment inspection | `ui/src/App.tsx`, `ui/src/views/` |
@@ -78,6 +92,14 @@ Internal artifact IDs are canonical UUID strings validated with Python UUID/Pyda
 
 Structured artifacts are written through `persistence.atomic_text`; Markdown escaping is shared through `reports.md`. Mutating workflows use a nonblocking POSIX project lock; a concurrent mutation returns a busy error. The HTTP job queue separately permits one background model job at a time. These mechanisms serve a local process-and-files workflow, not a distributed job system.
 
+## Native research workspace
+
+`research/sessions.py` launches one native Codex or Claude Code session per invocation. The native agent owns planning, tools, code execution, context management, and session continuation. The workbench supplies `ResearchWorkspace`, exposed through Python, the CLI, and the official MCP SDK. It does not drive another model-call loop. Existing `Analyzer` integrations remain available for batch analysis, task design and semantic judging.
+
+Each investigation captures all selected inputs into its own SQLAlchemy-backed `dataset.sqlite3`, alongside frozen context, workspace instructions, scripts and outputs. New imports or knowledge changes do not invalidate this snapshot. All imported records are included by default; excluding reserved final groups is explicit and exposure is recorded conservatively.
+
+Research mode lets the agent explore adaptively. Complete mode requires a saved successful outcome for every record before final publication. Iterators read pages without limiting total coverage; processing checkpoints each outcome and resumes pending or failed records. Coverage records work performed through the SDK, not proof of semantic review or model quality. Native session IDs, attempt logs and journal entries preserve progress; process termination releases the separate session lock. Project locks are held for short artifact mutations, not throughout the native session.
+
 ## How evidence becomes an experiment
 
 Import preserves source records. An [investigation](../workflows/investigations.md) researches them and cites exact evidence. [Tasks](../workflows/tasks-and-graders.md) separate target-visible input from grading criteria and require review after a grader audit. A suite freezes accepted task specifications and source-group assignments. [Experiments](../workflows/experiments-and-training.md) execute two target variants and preserve trial output, required artifacts, invalid runs, and regressions. Training export selects reviewed outcomes from optimization experiments.
@@ -86,6 +108,6 @@ These records provide provenance and detect accidental drift. They do not isolat
 
 ## Extension seams
 
-Implement `TraceSource.read()` to import another export format, `Analyzer.analyze(prompt, schema)` for another analysis backend, or `TargetRunner.identity()` and `run(visible_input, trial_dir, seed)` for another execution harness. Keep real environment reset and authoritative state capture inside the runner integration. Direct service connectors, Harbor integration, distributed execution, and training-job execution are not bundled.
+Implement `TraceSource.read()` to import another export format, `Analyzer.analyze(prompt, schema)` for another batch/judge backend, or `TargetRunner.identity()` and `run(visible_input, trial_dir, seed)` for another execution harness. Native research can also use the shared `ResearchWorkspace` directly from an existing coding-agent session or a custom `NativeSession` adapter. Keep real environment reset and authoritative state capture inside the runner integration. Direct service connectors, Harbor integration, distributed execution, and training-job execution are not bundled.
 
 Next: [import and explore traces](../workflows/traces.md), [run the local workbench](../operations/local-workbench.md), or [development](../development/contributing.md).

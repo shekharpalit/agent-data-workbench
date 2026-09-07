@@ -17,7 +17,7 @@ from .routers import artifacts, investigations, jobs, knowledge, overview, tasks
 def create_app(project: Project, *, origin: str, token: str) -> FastAPI:
     app = FastAPI(
         title="Agent Data Workbench Local API",
-        version="0.3.0",
+        version="0.4.0",
         docs_url=None,
         redoc_url=None,
         openapi_url=None,

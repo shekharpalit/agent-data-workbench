@@ -25,7 +25,7 @@ def overview(
                 "id": i["id"],
                 "question": i["question"],
                 "status": i["status"],
-                "steps": len(i["steps"]),
+                "sessions": len(i.get("attempts", [])),
             }
             for i in project.artifacts("investigations")
         ],

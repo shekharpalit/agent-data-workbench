@@ -12,14 +12,18 @@ sources:
     resource: repo://src/agent_data_workbench/experiments.py
   - id: openwiki-source-17fefd32a0fa5ffbd20a3c46
     resource: repo://src/agent_data_workbench/exports.py
+  - id: openwiki-source-b5025a250cbf9f845fc9224a
+    resource: repo://src/agent_data_workbench/project.py
+  - id: openwiki-source-c792213eed7e8f73d739e358
+    resource: repo://src/agent_data_workbench/research/artifacts.py
   - id: openwiki-source-362b588ee7b1871bafaf5b44
     resource: repo://src/agent_data_workbench/runners.py
   - id: openwiki-source-af0e5443d83442c11181e6ce
     resource: repo://tests/test_workbench_execution.py
-generated: { by: "codex", at: "2026-09-07T19:39:22.177Z" }
+generated: { by: "codex", at: "2026-09-07T20:56:39.229Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T19:39:22.177Z
+    at: 2026-09-07T21:10:14.760Z
 ---
 
 # Experiments and training exports
@@ -39,7 +43,7 @@ uv run agent-data-workbench suite runs/my-agent "Accuracy / current" \
 
 The suite groups tasks that share source groups, including transitive relationships. It requires at least three independent connected groups and allocates optimization, validation, and final roles using a seeded, behavior-stratified ordering. The repeating assignment targets a 60/20/20 distribution; small suites need not match that ratio exactly.
 
-The manifest freezes task hashes, group membership, split roles, and source inventory. Existing group assignments cannot change in a later suite. Every manifest receives a new UUID independent of its name. Names can repeat; use the returned `id` for execution. Obtain fresh source groups when existing assignments conflict. Previously investigated traces are marked; allocating them to a final split does not make them unseen.
+The manifest freezes task hashes, group membership, split roles, and source inventory. Existing group assignments cannot change in a later suite. Every manifest receives a new UUID independent of its name. Names can repeat; use the returned `id` for execution. Obtain fresh source groups when existing assignments conflict. Traces present in any native investigation snapshot are conservatively marked as previously investigated, even if no MCP read was recorded: native agents can read the snapshot directly. Legacy investigations use their recorded visited IDs. Allocating these examples to a final split does not make them unseen.
 
 ## Configure the targets
 
@@ -101,6 +105,8 @@ The uncertainty estimate resamples independent source groups, preserving correla
 ## Preserve the final set
 
 Run `--split final` only when the chosen configuration is ready for its final measurement. Final exposure is consumed **before the first execution**, including runs that later fail or are interrupted. Consumed final source groups cannot be reused through another suite. This prevents silently treating a retry as fresh held-out evidence; it does not erase knowledge already acquired from those examples.
+
+Native research includes all supplied data by default. Starting an investigation after suite creation records `research_exposure` for suites containing final data. To keep reserved final groups out of a new research snapshot, pass `--exclude-final` or use the UI checkbox. Research exposure prevents a later final run from treating those groups as fresh held-out evidence, while optimization execution remains available. Exposure metadata is excluded from the suite definition hash, so recording exposure does not invalidate the suite itself.
 
 ## Export curated outcomes
 

@@ -1,92 +1,19 @@
-import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../api";
-import type { Backend, Route } from "../contracts";
+import type { Route } from "../contracts";
 import {
   ActionButton,
   Badge,
   Card,
   Details,
-  Field,
   JsonView,
-  ProviderFields,
   ResourceState,
   Table,
 } from "../components/shared";
 
-function ResearchControls({
-  resume,
-  investigation,
-}: {
-  resume?: string;
-  investigation?: string;
-}) {
-  const [backend, setBackend] = useState<Backend>("codex");
-  const [model, setModel] = useState("");
-  const [question, setQuestion] = useState(
-    "Which failures and successful recoveries should we learn from?",
-  );
-  const [steps, setSteps] = useState("6");
-  return (
-    <Card
-      title={
-        investigation
-          ? "Turn findings into draft tasks"
-          : resume
-            ? "Continue this investigation"
-            : "Ask a research question"
-      }
-    >
-      {!resume && !investigation && (
-        <Field
-          label="What do you want to understand?"
-          multiline
-          value={question}
-          onChange={setQuestion}
-        />
-      )}
-      <ProviderFields
-        backend={backend}
-        model={model}
-        onBackend={setBackend}
-        onModel={setModel}
-      />
-      {!investigation && (
-        <Field
-          label="Maximum model calls (1–12)"
-          type="number"
-          min={1}
-          max={12}
-          value={steps}
-          onChange={setSteps}
-        />
-      )}
-      <p className="muted">
-        Selected traces and reviewed context go through your chosen CLI. Its
-        account limits apply. Generated tasks start as drafts.
-      </p>
-      <ActionButton
-        action={() =>
-          investigation
-            ? api.designTasks(investigation, backend, model)
-            : api.investigate({
-                question,
-                ...(resume ? { resume } : {}),
-                backend,
-                model,
-                steps: Number(steps),
-              })
-        }
-      >
-        {investigation
-          ? "Design tasks"
-          : resume
-            ? "Resume investigation"
-            : "Investigate"}
-      </ActionButton>
-    </Card>
-  );
-}
+import { ResearchControls } from "./ResearchControls";
+import { ResearchFiles, ResearchProgress } from "./ResearchOutputs";
+
 export function InvestigationsView({
   navigate,
 }: {
@@ -95,6 +22,7 @@ export function InvestigationsView({
   const request = useQuery({
     queryKey: ["artifacts", "investigations"],
     queryFn: ({ signal }) => api.artifacts("investigations", signal),
+    refetchInterval: 2000,
   });
   return (
     <>
@@ -110,8 +38,9 @@ export function InvestigationsView({
                   <Badge value={item.status} />
                 </div>
                 <p className="muted">
-                  {item.steps.length} completed steps ·{" "}
-                  {item.visited_ids.length} trace IDs visited
+                  {item.mode === "complete" ? "Complete pass" : "Research"} ·{" "}
+                  {item.coverage.completed} / {item.coverage.total} records
+                  processed · {item.coverage.failed} failed
                 </p>
                 <button
                   className="ghost"
@@ -125,8 +54,8 @@ export function InvestigationsView({
             ))}
           {!request.data.length && (
             <p className="muted">
-              Start with a question. The investigator can search, sample,
-              inspect and aggregate traces.
+              Start with a question. Your native agent can explore the dataset,
+              process records, and publish evidence and outputs.
             </p>
           )}
         </Card>
@@ -146,6 +75,10 @@ export function InvestigationDetail({
   const request = useQuery({
     queryKey: ["investigation", id],
     queryFn: ({ signal }) => api.artifact("investigations", id, signal),
+    refetchInterval: (query) =>
+      query.state.data?.status !== "complete" || query.state.data?.active
+        ? 2000
+        : false,
   });
   if (!request.data) return <ResourceState error={request.error} />;
   const item = request.data,
@@ -161,10 +94,45 @@ export function InvestigationDetail({
       <Card title={item.question}>
         <Badge value={item.status} />
         <p className="muted">
-          {item.visited_ids.length} / {item.source.total} eligible trace IDs
-          visited. A preview is not a complete trace review.
+          {item.coverage.completed.toLocaleString()} /{" "}
+          {item.coverage.total.toLocaleString()} records processed ·{" "}
+          {item.coverage.failed} failed · {item.coverage.pending} pending
         </p>
+        <p className="muted">
+          {item.coverage.retrieved} records returned through SDK reads or
+          processing. Direct file reads are not counted; retrieval does not
+          establish semantic review.
+        </p>
+        {item.session && (
+          <Details
+            title={`${item.session.backend} · ${(item.attempts || []).length} session attempts`}
+          >
+            <JsonView
+              value={{ session: item.session, attempts: item.attempts }}
+            />
+          </Details>
+        )}
+        {item.active && (
+          <ActionButton
+            className="secondary"
+            action={() => api.pauseResearch(id)}
+          >
+            Pause session
+          </ActionButton>
+        )}
       </Card>
+      {item.error && <p className="scope-note">{item.error}</p>}
+      {item.status !== "complete" &&
+        !item.active &&
+        (item.protocol_version === "0.4" ? (
+          <ResearchControls resume={item} />
+        ) : (
+          <p className="scope-note">
+            This investigation uses the earlier protocol. Start a new
+            investigation to use native sessions.
+          </p>
+        ))}
+      <ResearchFiles item={item} />
       {result ? (
         <>
           <Card title="Research findings">
@@ -233,25 +201,14 @@ export function InvestigationDetail({
           </Card>
           <ResearchControls investigation={id} />
         </>
+      ) : null}
+      {item.protocol_version === "0.4" ? (
+        <ResearchProgress key={id} item={item} />
       ) : (
-        <>
-          <p className="scope-note">
-            {item.error ||
-              "Completed work is saved. Continue with an explicit call budget."}
-          </p>
-          <ResearchControls resume={id} />
-        </>
+        <Card title="Investigation journal">
+          <JsonView value={item.journal} />
+        </Card>
       )}
-      <Card title="Investigation journal">
-        {item.steps.map((step, i) => (
-          <Details
-            key={i}
-            title={`${i + 1}. ${step.decision.action} — ${step.decision.note}`}
-          >
-            <JsonView value={step.observation} />
-          </Details>
-        ))}
-      </Card>
     </>
   );
 }

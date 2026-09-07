@@ -46,7 +46,7 @@ class TaskEditRequest(ArtifactRequest):
 
 class KnowledgeRequest(Contract):
     title: str = Field(min_length=1, max_length=1000)
-    content: str = Field(min_length=1, max_length=100000)
+    content: str = Field(min_length=1)
     source: str = Field(min_length=1, max_length=10000)
 
 
@@ -55,16 +55,18 @@ class AnalyzerRequest(Contract):
     model: str | None = Field(default=None, max_length=200)
 
 
-class InvestigationRequest(AnalyzerRequest):
-    question: str | None = Field(default=None, max_length=10000)
+class InvestigationRequest(Contract):
+    backend: Literal["codex", "claude"] | None = None
+    model: str | None = None
+    question: str | None = None
     resume: UUIDString | None = None
-    steps: int = Field(default=6, ge=1, le=12, strict=True)
+    mode: Literal["research", "complete"] = "research"
+    exclude_final: bool = False
+    timeout: float | None = Field(default=None, gt=0, allow_inf_nan=False)
 
     @model_validator(mode="after")
     def valid(self):
-        if not (self.resume and self.resume.strip()) and not (
-            self.question and self.question.strip()
-        ):
+        if not self.resume and not (self.question and self.question.strip()):
             raise ValueError("Supply a question or an investigation to resume")
         return self
 

@@ -3,9 +3,6 @@ type: development
 title: Development and verification
 description: Set up Python and TypeScript development, preserve the shared contracts, and verify changes with behavioral tests and reproducible builds.
 tags: [development, testing, packaging]
-verified:
-  - by: openwiki/0.5.0
-    at: 2026-09-07T19:39:22.177Z
 sources:
   - id: openwiki-source-868b3402493aef58bb5db066
     resource: repo://.python-version
@@ -21,17 +18,20 @@ sources:
     resource: repo://tests/test_cli.py
   - id: openwiki-source-9c58a0b0672b6bdbd523d5ee
     resource: repo://tests/test_identifiers.py
-  - id: openwiki-source-09d2a8f36f3ecb7ab9487ab2
-    resource: repo://tests/test_store.py
+  - id: openwiki-source-3589dc1fc29ba0bfe0e2a50c
+    resource: repo://tests/test_research.py
   - id: openwiki-source-af0e5443d83442c11181e6ce
     resource: repo://tests/test_workbench_execution.py
   - id: openwiki-source-436f4179fe22abf615d2f7d0
     resource: repo://ui/package.json
-  - id: openwiki-source-e77b7b0b1f74ca6b888c0fb8
-    resource: repo://ui/tests/state.test.ts
+  - id: openwiki-source-6c2199ef844fc5690d6362d0
+    resource: repo://ui/tests/research.test.tsx
   - id: openwiki-source-a741d432f952c0dbfb4fb35d
     resource: repo://ui/vite.config.ts
-generated: { by: "codex", at: "2026-09-07T19:39:22.177Z" }
+generated: { by: "codex", at: "2026-09-07T20:56:39.229Z" }
+verified:
+  - by: openwiki/0.5.0
+    at: 2026-09-07T20:56:39.229Z
 ---
 
 # Development and verification
@@ -54,7 +54,7 @@ The lockfile records the tested versions. `pyproject.toml` declares minimum vers
 
 ## Work on the UI
 
-Use a current Node.js LTS release satisfying the UI dependency engine requirements, with npm on PATH. The UI manifest declares Node 22.12+; individual development dependencies can impose stricter patch requirements, so heed npm's engine checks.
+Use Node 22.22.2+, Node 24.15+, or Node 26+ in the major versions allowed by `ui/package.json`, with npm on PATH. The declared ranges exclude Node 23 and 25. A supported Node 24 LTS installation is suitable for development.
 
 ```sh
 npm ci --prefix ui
@@ -78,16 +78,21 @@ For example, trace-store tests check that an ID conflict rolls back the whole ne
 | HTTP behavior | `tests/test_api.py`, `tests/test_identifiers.py`, `ui/tests/api.test.ts` |
 | UUIDs and project compatibility | `tests/test_identifiers.py` |
 | CLI workflow integration | `tests/test_cli.py` |
-| Research and task review | `tests/test_workbench_data.py`, `tests/test_backends.py` |
+| Native research, coverage and MCP | `tests/test_research.py`, `ui/tests/research.test.tsx` |
+| Evidence, task review and batch backends | `tests/test_workbench_data.py`, `tests/test_backends.py` |
 | Runner execution and exports | `tests/test_workbench_execution.py` |
 | Batch analysis | `tests/test_workflow.py`, `tests/test_evaluation.py`, `tests/test_cli.py` |
 | Packaging | `uv build`, install the wheel in an isolated environment, exercise bundled resources |
 
 Runtime demo commands and canned agent data have been removed. Explicit synthetic fixtures live under `tests/fixtures/` and are loaded only by tests. The CLI integration test initializes a project, imports traces and tasks, requires audits before acceptance, creates a named suite with a UUID, executes command adapters, and exports reviewed outcomes. UUID tests verify canonicalization, unchanged external trace IDs, typed API rejection, and refusal to rewrite an older project.
 
+Native research tests execute local subprocesses emitting Codex-shaped events and a real official MCP client/server exchange. They verify session persistence before cancellation or failure, complete-pass retries, a 257-record corpus crossing page boundaries, full large-record reads, artifact integrity, and CLI publication without a model. These tests do not exercise live provider inference or prove analysis quality.
+
 Keep tests synthetic and independent of provider credentials. An explicitly requested live analyzer check is separate from the ordinary test suite. Record what was run and any limitation; passing fixtures do not establish production agent improvement.
 
 ## Preserve ownership and invariants
+
+Keep native investigation orchestration separate from data processing: Codex/Claude own planning and session context; `ResearchWorkspace` owns datasets, outcomes, evidence and artifacts. Do not add a second model-call loop or default corpus/call ceilings.
 
 Use FastAPI routes with typed Pydantic contracts. Keep domain operations in the SDK and SQLAlchemy access in the storage layer. Preserve import rollback, canonical trace content, review invalidation, source-group assignment, and invalid-versus-failed outcomes. Keep UI JSON types and lineage consistent with backend behavior.
 

@@ -10,16 +10,20 @@ sources:
     resource: repo://pyproject.toml
   - id: openwiki-source-2ee7fba2bd1c703c70f5f285
     resource: repo://src/agent_data_workbench/cli/project.py
+  - id: openwiki-source-25b71218f03a1e216debf67e
+    resource: repo://src/agent_data_workbench/cli/research.py
   - id: openwiki-source-b5025a250cbf9f845fc9224a
     resource: repo://src/agent_data_workbench/project.py
+  - id: openwiki-source-2dbe8753da4267ce652f414e
+    resource: repo://src/agent_data_workbench/research/workspace.py
   - id: openwiki-source-013c413ca45af5e0569b46e0
     resource: repo://src/agent_data_workbench/server.py
   - id: openwiki-source-9c58a0b0672b6bdbd523d5ee
     resource: repo://tests/test_identifiers.py
-generated: { by: "codex", at: "2026-09-07T19:39:22.177Z" }
+generated: { by: "codex", at: "2026-09-07T20:56:39.229Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T19:39:22.177Z
+    at: 2026-09-07T20:56:39.229Z
 ---
 
 # Quickstart
@@ -58,9 +62,28 @@ The UI starts on loopback using an available port and a per-session access token
 
 Version 0.3 uses UUIDs for internal artifacts and keeps external trace IDs unchanged. Older project formats are rejected without rewriting their files. Create a new project directory and reimport the original traces; prior derived artifacts remain in the old directory. Suite names are friendly labels, and execution uses the suite UUID returned at creation.
 
-Start with the smallest corpus that can answer a useful question. Preserve source groups such as conversation IDs so related tasks stay together in later splits. Add reviewed policies and tool contracts before asking an analyzer to judge behavior that depends on them.
+Import the corpus needed for your question; native research makes the full snapshot available. Preserve source groups such as conversation IDs so related tasks stay together in later splits. Add reviewed policies and tool contracts before asking an analyzer to judge behavior that depends on them.
 
-Model-directed investigation uses an installed, authenticated Codex or Claude CLI. It is optional for ingestion and local exploration. Provider access and account limits still apply when you choose to run it.
+## Run native research
+
+Use an installed, authenticated Codex or Claude Code CLI. Ingestion and local exploration need no model. To start a persistent native investigation:
+
+```sh
+uv run agent-data-workbench investigate runs/my-agent --backend codex \
+  --question "Which recurring failures should we improve?"
+```
+
+Use `--backend claude` for Claude Code. Add `--mode complete` to require an outcome for every input; the default `research` mode explores adaptively. The agent can query the snapshot, run analysis scripts and publish findings, charts, reports and draft tasks. No default model-call count or total trace limit is imposed by native research. Provider context and account limits still apply.
+
+If interrupted, resume using the printed investigation UUID:
+
+```sh
+uv run agent-data-workbench investigate runs/my-agent --resume INVESTIGATION_ID
+```
+
+To use your current coding-agent session instead of launching another process, run `research create runs/my-agent "Your question"`. It prints a workspace and MCP command without making a provider call. [The research guide](workflows/investigations.md) explains tools, progress, complete processing and publication.
+
+Version 0.3 projects remain compatible. Native investigations use protocol 0.4; old completed investigations are readable, while paused legacy investigations need a new native investigation.
 
 ## Choose the next workflow
 
