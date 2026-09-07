@@ -1,22 +1,22 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:4f321b5b4f85b154f3aab280ae4b16a5df14af03b633cf2b35e0ea33830b2f35",
+  "pageVersion": "sha256:0595addea93c66a85d6c817030403c5c2363464870e798f6ba5d65b7acd92662",
   "claims": [
     {
       "id": "claim_823274351dbc48b9a25071ef1a7bf612",
-      "statement": "File ingestion preserves record bodies and supplied IDs, generates deterministic UUIDv5 IDs when needed, streams JSONL without a fixed line or file cap, and rolls back conflicting import batches.",
+      "statement": "Records-layout ingestion preserves record bodies and supplied IDs, generates UUIDv5 IDs when needed and streams JSONL records; both layouts feed all selected files into one rollback-capable import transaction.",
       "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/ingestion.py#L162-L212",
+          "version": "repo-lines-v1:sha256:2cf6687d25874459cc8684c053965a2ef986d8e4786a6b5a6a1b00c51ac0e44b:eyJzZWxlY3RlZExpbmVDb3VudCI6NTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyMTkxNGJhNGI3ZTgxM2M2NTk3NmI2OTM1M2FlYzdiM2U0ZmNmZTJkZjdjNDA4MjkzMjMzZDU0YjRhNzUzODIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhNDU5Mzg1MGJhZmMxMDBlYjkzNDU1ZDc0ZDNiMDYwNGNiZjgxOGQxOWZiN2YxNjg5ZGU5ZWUzYzlhYThjYmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhjYzRhN2QxY2M3OTZhYmEzZTQ2NzIzMzI3ZjUxN2U5ZjgxMTk4MmQyNTBmMDcwMjk4NmU0YjU3NjRhZDk1ODkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
         {
           "resource": "repo://src/agent_data_workbench/store.py#L26-L116",
           "version": "repo-lines-v1:sha256:02cd72e3f3e494678b48993f40fa50dd03e05ee7d1c7662a5b953fa1b0cab468:eyJzZWxlY3RlZExpbmVDb3VudCI6OTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE1NjhiYzcxZWRmNTg4MGJmZjNlNzk4MTM2Yjk1NjhlZDVlZWMxZWYzMDE5MzlhNDM2YjlhYThjMWU4ZDdlYTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRiOTE4YmU2ODAyODM0NTNiOTNlYTUzYmI3NDk4N2ZkNTE4ZGQxZTc4YmM2NGNhODI4YWY3NTFhZGM5YmY5NGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFkYzViODllODcyMjZlNTRkOTc0MWRhYjRkMDc3MmYwZWI4ZGE1NDM3MWJiYWFiMzZkMWQ0MzNhNjExNDI3YTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgwMjg2NjhjZDFlM2M0ODNjMjc2OTJhYTRlMWQ0MDc2NWFkMzU2YzdlMGRiMjk3OWIxMWQ1NTE1NjU5MTFjYTEifQ"
         },
         {
-          "resource": "repo://src/agent_data_workbench/traces.py#L14-L54",
-          "version": "repo-lines-v1:sha256:7806f3773eabcc393c13d8f727505e6565f388c27ce1592823f8083817a1fee1:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg4OWI3OWRlNDUyODFkYTlmMjhiMTFkMjRkN2RjZDZmNDQyYTIyMTdkZmMzNDNkYWEyNjQ5OTA4MTUxYmEyMTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhmOWFkNTAyOWFlMzM4YTJkMzVmZTAxMjIxNTRlYjMyNzQ5NTE1NjQ5MjQzNTZmYTlmYmFhZTJhYmI1NDQxYmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM5OTc2YTQxZTUyZTcyOWMwMDEwYTk4NjQ3YThkOTE3YzIyOTUxZDVmOGNjYzYyZTllMDk5ZmQxZjIxZmMwY2IiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM5ODdmNmM2NmFjMjE4NDRiYTc2MTZlYTZhZDVhZmU4YzY0NzMzNGI2NzFlOTU5ODkxOWM1MjY1N2IyMmE2NjcifQ"
-        },
-        {
-          "resource": "repo://tests/test_research.py#L123-L139",
-          "version": "repo-lines-v1:sha256:38ce09719d7981778775a0831df1736d9c9219035612bfcf7adb5ce859bcdb50:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRiYmY5NzU5YjFlMjkxZTZmMWQ5OTg0MmU2OGQyODQwODczYzg1YzZmOWQ2ZDViNTMyZmYwYWEzMzdhZTViZTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhiOTQzZjZkYTU4M2QwOWMyMjMxOGEwY2M3NjAwMzNmZjRiYmM4YzMxZjk0MjIwZmEzNGJmYzE3ZjM5NzAwYjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmYmQwMDkzMTRiYzI3MDg0MTY3MzRhMDJhZTVmZjM5YTFlNDhhMDUwYmU5MWY0M2IyZmFhOTIwMDJjNjJiZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVmNDZlMTA5OWExNjY2MDU4NzBlZjMxMzE3YzdjYTliNjVkMzkzOTQxODY1MGFkYzNhMTE4M2U1NzNlOWExMTYifQ"
+          "resource": "repo://src/agent_data_workbench/traces.py#L18-L55",
+          "version": "repo-lines-v1:sha256:8a4403f71361dea0d3ab7141100e76dd6498504de2813c3fdeb37cba23ae0931:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJmY2RiMjFlYjA5MTc3ODg0NGY5OTEzMWEyNDhmODRkM2FmNTNlNzlkOTNlNDM4YThiMWE4YzBmMzcxNWE4OTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjIxNGQ3ZDU4Y2M4OGE2YWQ2NzMyM2Q3YmJkNjBlM2Q5MzQ5MDgxZTNhYWM0MzFiYTZiYmY2Mzg3MTA0MzRhMGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFkNzc0NjNhZDYzZTkyYTQ5Y2QxZjAxYzRmNTA1OTA3OTJkYTE4ZWViMzk0MjhjNGYyZTkxZjg3ODM1OGI2NTQifQ"
         }
       ]
     },
@@ -103,10 +103,50 @@
           "version": "repo-lines-v1:sha256:d0c6685181b7cb601d3bad75c08a9444dc8865eedbbd3abf04a284f24d101035:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTFkYjljYjExZWRhN2VhY2Q1ODg3NjA5MzY5MWNlZTNmMjE5N2IzZDYyYmYxZTA5ZDNkY2I1YTExZDMyNGJmNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTJmODg4ZTA3MzM0NjFhMDE3ZWVhZTE3ZWJlZjk1ZWU2NTQ1NzU3M2UyYWMxZjllMzJiYmI5YmZkMmQ4OTQyOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDg0N2IzODcxNjI4YzJiOTkyM2QwOGUwNzk4NzQ0ZTNlMjRhNjMxNjA5MTgyMDJhM2Q0MTlkMzk4NTVmZjI5ZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
         }
       ]
+    },
+    {
+      "id": "claim_24105b36136845748c474f29f998346b",
+      "statement": "Run layout stores each file as one trace containing ordered original event objects and a logical source path, using an unambiguous native trace/session ID or a UUIDv5 of source path and events, and promoting consistent thread/type metadata.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/ingestion.py#L91-L159",
+          "version": "repo-lines-v1:sha256:71dd3dcf17641b0e52eaff92dfe1164e2ccbf3e2bebe033256ab44ec3c748735:eyJzZWxlY3RlZExpbmVDb3VudCI6NjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNjNGJiNzBhNDg3YTkxYmU5ZWQ5OTM2ODAyZTdmZTQ2YzFmN2Y3Y2M1MzkxZDk5ZWFjNjExNGMwMjM4NzQwNzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU1NGIyM2QyYjJiZGFlNjEyZTY2NmFjYjNmY2EzYzI3NTA1ZTk3ZWMyNjFhN2JmNmRlYzg3YzA0YTMxZGJlMTYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3a858b9e352b46048b7da940b5174ef6",
+      "statement": "Discovery accepts multiple files, recursive directories and globs, deduplicates physical inputs, and derives stable relative paths from input anchors or an explicit source root.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/ingestion.py#L27-L89",
+          "version": "repo-lines-v1:sha256:d427187dff50cdba9b00cca456c9075b11ba93e614eb56fd947951950655bdc5:eyJzZWxlY3RlZExpbmVDb3VudCI6NjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIyYTlkMDE4YTJkMTJkZTQ4MmI0ZTAxODU5MmU1ZGY3YjhkMmRmODdhYWZkN2JmZTNiZDg1Mzc5MWVlYjMxYTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNiNGU0NmNhYmEwNTcwZDcwNWVhNTVlMjZiMzJmYTYxNjRiNzg1MTRiMmMzOTUxNzQxZGQ1MWYzY2VkMzBkOWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI2NmQyMzJjOWNjNmM4MTgwMzA3YTQ5YjVmNzA5ZjkzYmM0NTI3ZTNhMDFkN2NkMjU1NmExMjYwYmJkMjBkNzgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1fbaf9387eb84fae8df1548c61b06d29",
+      "statement": "The ingest CLI defaults to runs layout, supports explicit records layout and source roots, and reports file count and layout with the transactional inventory result.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/cli/project.py#L61-L110",
+          "version": "repo-lines-v1:sha256:62e30d6e42b4d8887533bde8926b0c29da31b5d8447df4632494c5f4034cfb9e:eyJzZWxlY3RlZExpbmVDb3VudCI6NTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhNzliMzNlZGExYzhkOTk0MDExMWJlOTI1YmJkYjJlNWI3YmY0ZDg3OWEwODRmYTU3NTNlZjAwMjdkYzUzZWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2Y2M4MDZmZmQ0MGE2NWY0ZTRiNWUxZTI5ZTMzYmFhNjNkNzIzMmYyM2JhOTBlM2MzZmVmYWRjNDczYWY0ZjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMwNDYzYmNlZWFmNDczOTNkZmE4NzcxODVlOWU1YTg3NzI0MjU1ZWE0YjhiMjE0ZjNlMGMwMDk1Y2NmOWM4MTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNlYmVjNzZjNWRkNDE4MGMwZTFkY2E1N2U4ZjE4NDg3ZjJjODkxODc2M2E5YjlkOTY5MWU0NmI2YTlhMTY2Y2UifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a3af2b05c86e428481cca59418327b27",
+      "statement": "Multiple run files can occupy one research snapshot with preserved event order and a distinct recorded outcome for each run.",
+      "evidence": [
+        {
+          "resource": "repo://tests/test_ingestion_research.py#L9-L46",
+          "version": "repo-lines-v1:sha256:29fc47fd1ee98eb1b045db224e11ba5ffd0add04261a65aef24f84616fdda0e3:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIyNWNlMDQxY2VlMDA0ODA5NjQ1MjgyMzI3YzI5NjkyMjliZTU5NzdkYmIyYjQxYmU5OWFmY2NiZjc5NWRiZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI1YmUzOGM1YjMwOTdjNWFlZDJmY2YxYWYwNGZlMTI5OGZmYTc4YzAxMTllZmI2Y2E1Njc0NmU2OTU5NmM3MjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-07T20:56:39.229Z"
+    "at": "2026-09-07T23:37:40.020Z"
   }
 }

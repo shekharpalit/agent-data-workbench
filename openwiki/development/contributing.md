@@ -24,6 +24,14 @@ sources:
     resource: repo://tests/test_identifiers.py
   - id: openwiki-source-0bb6c35cfc5dfdfa5db20794
     resource: repo://tests/test_improvement_loop.py
+  - id: openwiki-source-fcbbab569cc1bc99a318594e
+    resource: repo://tests/test_ingest_cli.py
+  - id: openwiki-source-a555aca025bbf0b594dfc0bb
+    resource: repo://tests/test_ingest_transport.py
+  - id: openwiki-source-7e7b3478097a461915e85751
+    resource: repo://tests/test_ingestion_research.py
+  - id: openwiki-source-bde9a53225e597c9b2eaf2e1
+    resource: repo://tests/test_ingestion.py
   - id: openwiki-source-3e6ae5cbfb3aa3af0850499a
     resource: repo://tests/test_manual_research_api.py
   - id: openwiki-source-3589dc1fc29ba0bfe0e2a50c
@@ -42,10 +50,10 @@ sources:
     resource: repo://ui/tests/research.test.tsx
   - id: openwiki-source-a741d432f952c0dbfb4fb35d
     resource: repo://ui/vite.config.ts
-generated: { by: "codex", at: "2026-09-07T23:10:49.194Z" }
+generated: { by: "codex", at: "2026-09-07T23:37:40.020Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T23:10:49.194Z
+    at: 2026-09-07T23:37:40.020Z
 ---
 
 # Development and verification
@@ -135,3 +143,9 @@ Use `test_environment_sessions.py` for reset drift, partial transcripts, cancell
 `test_harbor_export.py` verifies real template bundling, visible-input separation, source exposure, pinned manifests and synthetic CLI transport. It does not run a Harbor container or a provider model. `test_conversation_exports.py` uses real persistent local sessions to verify complete observed trajectories, exclusion of hidden truth and identical preferences, and legacy one-shot compatibility. `ui/tests/workflow.test.tsx` verifies human review and exact evidence identities, including hiding grader answers before a first label. See [eval engineering](../workflows/eval-engineering.md) for adapter contracts.
 
 `tests/test_runtime.py` covers idempotent initialization, refusal to adopt unrelated directories, normalized browser origins, bearer/Host/Origin enforcement under container binding, inherited reload tokens, and real SIGINT/SIGTERM listener shutdown. `test_environment_sessions.py` also verifies that a target mutating its pinned source during shutdown becomes invalid while its already observed interaction remains saved.
+
+## Verify multi-file run ingestion
+
+The ingest CLI now defaults to one file per run; use `--layout records` for prior row-per-line exports. `tests/test_ingestion.py` checks recursive discovery, globs, ordered events, native/generated identities, stable source roots, aliases, both layouts and rollback across file boundaries. `tests/test_ingest_cli.py` exercises the same behavior through variadic paths and binary archive stdin. `tests/test_ingest_transport.py` verifies archive names, cleanup, hardlink deduplication and rejection before a partial import.
+
+`tests/test_ingestion_research.py` imports two event-stream files into one investigation, preserves each run's chronological data, and records separate comparison outcomes across dataset pages. This proves that an investigation can work across multiple complete traces; it does not measure model quality or establish large-corpus throughput. See [trace import](../workflows/traces.md) for the data contract.

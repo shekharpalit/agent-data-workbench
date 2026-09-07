@@ -10,52 +10,100 @@ sources:
     resource: repo://src/agent_data_workbench/explore.py
   - id: openwiki-source-4c04fd9d10dcc0e748ac55cc
     resource: repo://src/agent_data_workbench/identifiers.py
+  - id: openwiki-source-73ad8573b871e625469a2194
+    resource: repo://src/agent_data_workbench/ingestion.py
   - id: openwiki-source-069858a5e395202064ced424
     resource: repo://src/agent_data_workbench/store.py
   - id: openwiki-source-b9538130baf947854165db93
     resource: repo://src/agent_data_workbench/traces.py
   - id: openwiki-source-66a8a10b0365fc2079585762
     resource: repo://tests/test_explore.py
-  - id: openwiki-source-3589dc1fc29ba0bfe0e2a50c
-    resource: repo://tests/test_research.py
-generated: { by: "codex", at: "2026-09-07T20:56:39.229Z" }
+  - id: openwiki-source-7e7b3478097a461915e85751
+    resource: repo://tests/test_ingestion_research.py
+generated: { by: "codex", at: "2026-09-07T23:37:40.020Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T20:56:39.229Z
+    at: 2026-09-07T23:37:40.020Z
 ---
 
 # Import and explore traces
 
-The workbench accepts exported execution records as JSON objects. It preserves each record's structure so evidence can point to the original fields. Ingestion, search, aggregation, clustering, and lineage do not require a model call.
+The default ingestion unit is an agent run file. A JSONL file holds that run's ordered events; several files become several traces in the same project. One investigation can inspect and compare the full collection. Ingestion and local exploration require no model call.
 
-## Create a project and import records
+## Import multiple run files
 
-Choose a new or empty directory:
+Create a project, then choose a directory, explicit files, or a quoted glob:
 
 ```sh
-uv run agent-data-workbench init runs/my-agent "My agent" \
-  "Improve reliable task completion" --criterion "Preserve actual tool outcomes"
-uv run agent-data-workbench ingest runs/my-agent ./traces.jsonl
+uv run agent-data-workbench init runs/my-agent "My agent" "Improve reliable task completion"
+uv run agent-data-workbench ingest runs/my-agent ./traces
+uv run agent-data-workbench ingest runs/my-agent ./run-a.jsonl ./run-b.jsonl
+uv run agent-data-workbench ingest runs/my-agent './traces/**/*.jsonl'
 ```
 
-A JSONL file contains one nonempty object per line. For example:
+The three ingest forms are alternative selections. Directories recurse through JSON, JSONL and NDJSON files. Discovery orders files deterministically, deduplicates overlapping selections and physical aliases, and rejects unmatched selections. In Docker, use `make ingest DIR=./traces`; [container operation](../operations/containers.md) explains file selection and temporary archive transport.
+
+For example, one run file can contain:
+
+```jsonl
+{"session_id":"run-001","type":"user","message":"Refund my order"}
+{"session_id":"run-001","type":"tool","status":"declined"}
+{"session_id":"run-001","type":"assistant","message":"Your refund was processed"}
+```
+
+The stored trace has ID `run-001` and data shaped as:
 
 ```json
-{"trace_id":"run-001","thread_id":"conversation-001","agent_type":"support","input":"Complete the request","tool":{"status":"declined"},"output":{"status":"completed"},"latency_ms":420}
+{
+  "events": [
+    {"session_id":"run-001","type":"user","message":"Refund my order"},
+    {"session_id":"run-001","type":"tool","status":"declined"},
+    {"session_id":"run-001","type":"assistant","message":"Your refund was processed"}
+  ],
+  "source": {"path":"run-001.jsonl"}
+}
 ```
 
-JSON files may hold a single record, an array, or an object with a `traces` array. JSONL and NDJSON ingestion streams one record at a time without a fixed file-size or record-size ceiling. Ordinary JSON loading materializes its input in memory. Available memory and disk remain practical constraints. Invalid data rolls back the ingest transaction.
+Events retain their original objects, order and JSON types. Repeated event IDs remain inside the run. Evidence cites `/events/1/status` for the tool status, and `/source/path` identifies the logical file. The wrapper does not rename or flatten provider event fields. A JSON array becomes the run's event list; a JSON object is preserved as one event, including any nested messages or events it already contains. Empty runs and nonobject events are rejected with the source filename and location when available.
 
-Normalization uses `trace_id`, falling back to `id`, or generates a deterministic UUIDv5 from canonical JSON when neither is supplied. Supplied IDs are preserved verbatim, including provider-specific identifiers. The original object becomes `Trace.data`. Thus the sample's tool status is at `/tool/status`, not `/data/tool/status`. Supply stable IDs to make later evidence easier to inspect.
+A consistent nonempty string `trace_id` across the events supplies the run ID; otherwise a consistent `session_id` does. Missing fields do not conflict with a value elsewhere in the file. If neither field is unambiguous, a deterministic UUIDv5 is generated from the logical file path and event content. An event's generic `id` is not treated as the whole run's identity. Consistent scalar `thread_id` and `agent_type` values are copied to the envelope for the default grouping and stratum pointers.
 
-The SQLAlchemy store uses `traces.sqlite3` inside the project. Importing the same ID and content again is idempotent. A conflicting body for an existing ID rejects the batch, including new records earlier in that transaction. Trace data is not automatically redacted; prepare the export before ingestion when fields must be removed.
+## Keep source roots stable
+
+A directory selection uses that directory as its logical root. A single file uses its parent; a quoted glob uses its directory prefix before the first wildcard. Multiple inputs use the common ancestor of those roots. Names below the root become `source.path`, independent of the current working directory and temporary Docker extraction location.
+
+For incremental selections from one larger collection, keep an explicit root:
+
+```sh
+uv run agent-data-workbench ingest runs/my-agent ./traces/nested/run-001.jsonl --source-root ./traces
+uv run agent-data-workbench ingest runs/my-agent ./traces --source-root ./traces
+```
+
+The Make equivalent is `SOURCE_ROOT=./traces`. Keep logical roots and filenames stable across reimports. A changed path changes a generated identity; if a native run ID stays the same, changed provenance is different stored content and is rejected as a conflict.
+
+## Batch consistency and capacity
+
+All selected files feed one SQLAlchemy transaction in `traces.sqlite3`. A malformed later file or conflicting run ID rolls back new records from every file in the batch. Reimporting the same ID and data is idempotent. Output reports selected file count, layout, added/unchanged traces and total inventory.
+
+There is no fixed file-count, event-count or corpus cap. Run mode reads files sequentially and materializes the current run's events in memory; inventory metadata also grows with the stored run count. Very large individual runs still need corresponding RAM. Docker ingestion additionally stages a host archive and extracted container files. Large-corpus throughput is not established by the synthetic tests. Prepare exports before ingestion when fields need redaction.
+
+## Import existing record-per-line exports
+
+Use the explicit records layout when each line already represents a complete trace:
+
+```sh
+uv run agent-data-workbench ingest runs/my-agent ./exports --layout records
+make ingest DIR=./exports LAYOUT=records
+```
+
+In this layout, JSONL/NDJSON streams one nonempty object per trace. Ordinary JSON supports a single object, an array, or a `traces` array and is loaded into memory. Each original object becomes `Trace.data`; normalization preserves supplied `trace_id` or `id` and otherwise generates a UUIDv5 from canonical JSON. A source field such as `/tool/status` retains that pointer. The existing `JsonSource` SDK remains a record-export adapter. Existing stored rows are not rewritten when the CLI default changes.
 
 ## Preserve group and stratum meaning
 
 By default, `/thread_id` supplies the source group and `/agent_type` supplies the stratum. Override both when your exporter uses different fields:
 
 ```sh
-uv run agent-data-workbench ingest runs/my-agent ./traces.jsonl \
+uv run agent-data-workbench ingest runs/my-agent ./traces.jsonl --layout records \
   --group-pointer /session/id --stratum-pointer /agent/name
 ```
 
@@ -63,7 +111,17 @@ Labels must be strings or integers. Missing or unsuitable group values fall back
 
 ## Use the SDK for custom sources
 
-The source boundary is `TraceSource.read() -> Iterable[Trace]`. A custom exporter adapter can yield normalized records directly:
+Use `FilesSource` for multiple run files through the same SDK transaction:
+
+```python
+from pathlib import Path
+from agent_data_workbench import FilesSource, Project, TraceStore
+
+project = Project(Path("runs/my-agent"))
+result = TraceStore(project).ingest(FilesSource(["./traces"], layout="runs"))
+```
+
+Pass `root=Path("./traces")` for a stable logical root across partial selections, or `layout="records"` for row exports. `SourceFile` carries a physical input and explicit logical path for transport adapters. The source boundary remains `TraceSource.read() -> Iterable[Trace]`. A custom exporter adapter can yield normalized records directly:
 
 ```python
 from pathlib import Path
@@ -82,14 +140,14 @@ store = TraceStore(Project(Path("runs/my-agent")))
 result = store.ingest(MySource())
 ```
 
-This is an adapter seam, not automatic instrumentation of every agent framework. Connect your existing export or logging pipeline to it. The shipped file adapter is `JsonSource`.
+This is an adapter seam, not automatic instrumentation of every agent framework. Connect your existing export or logging pipeline to it. The file adapters are `FilesSource` for selected runs/exports and `JsonSource` for a single record export.
 
 ## Search, sample, and measure
 
 ```sh
 uv run agent-data-workbench query runs/my-agent --text declined --limit 20
 uv run agent-data-workbench query runs/my-agent --sample --seed 7 --limit 20
-uv run agent-data-workbench query runs/my-agent --aggregate /tool/status
+uv run agent-data-workbench query runs/my-agent --aggregate /events/1/status
 ```
 
 CLI search uses case-insensitive substring matching and stable ID ordering. Sampling shuffles within strata using the seed, then takes turns across strata. It deliberately favors coverage across categories and should not be used as a prevalence estimate.
@@ -102,7 +160,7 @@ Search pages and distribution charts use the same matching-corpus function. Pagi
 
 ## Explore lexical clusters
 
-Clustering uses TF-IDF cosine similarity and connected components over a chosen text field. It examines up to 200 matching traces in ID order, independently of the search page's current sort or offset. The default field is `/input`.
+Clustering uses TF-IDF cosine similarity and connected components over a chosen text field. It examines up to 200 matching traces in ID order, independently of the search page's current sort or offset. The default field is `/input`; choose `/events` or a specific event field for run-file imports.
 
 A shared 20,000-character text budget applies per selected field value, including nested strings. Results identify omitted records, text truncation, and corpus truncation. Cluster terms and labels are derived from word weights. Cluster IDs are deterministic UUIDv5 values derived from membership.
 
@@ -120,6 +178,6 @@ The limits above describe the convenience search, clustering and graph views. Th
 
 ## Verification and next steps
 
-`tests/test_workbench_data.py` covers transactional ingestion, balanced sampling, and excluded groups. `tests/test_explore.py` covers combined filters, stable sorting, corpus-consistent distributions, explicit cluster bounds, and focused lineage.
+`tests/test_ingestion.py`, `test_ingest_cli.py` and `test_ingest_transport.py` cover multiple selections, identity, layouts, file boundaries and rollback. `test_ingestion_research.py` verifies two ordered run files in one complete-mode research snapshot. `tests/test_workbench_data.py` covers transactional ingestion, balanced sampling, and excluded groups. `tests/test_explore.py` covers combined filters, stable sorting, corpus-consistent distributions, explicit cluster bounds, and focused lineage.
 
 Next: [investigate the evidence](investigations.md) or [open the local workbench](../operations/local-workbench.md).

@@ -22,6 +22,8 @@ sources:
     resource: repo://src/agent_data_workbench/api/routers/workflow.py
   - id: openwiki-source-4105c547b3781d406b01e383
     resource: repo://src/agent_data_workbench/api/schemas.py
+  - id: openwiki-source-73ad8573b871e625469a2194
+    resource: repo://src/agent_data_workbench/ingestion.py
   - id: openwiki-source-12d025c9e4830dcc4dd30757
     resource: repo://src/agent_data_workbench/jobs.py
   - id: openwiki-source-cda43c2246a0f3e6a5e89dce
@@ -30,6 +32,8 @@ sources:
     resource: repo://src/agent_data_workbench/server.py
   - id: openwiki-source-9c58a0b0672b6bdbd523d5ee
     resource: repo://tests/test_identifiers.py
+  - id: openwiki-source-7e7b3478097a461915e85751
+    resource: repo://tests/test_ingestion_research.py
   - id: openwiki-source-6d94b2e299387b69a79c432d
     resource: repo://ui/src/App.tsx
   - id: openwiki-source-5bdf087920ed404535bafa26
@@ -44,15 +48,15 @@ sources:
     resource: repo://ui/src/views/ResearchSnapshot.tsx
   - id: openwiki-source-826d1e88c728d7cfae868e97
     resource: repo://ui/tests/workflow.test.tsx
-generated: { by: "codex", at: "2026-09-07T23:10:49.194Z" }
+generated: { by: "codex", at: "2026-09-07T23:37:40.020Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T23:10:49.194Z
+    at: 2026-09-07T23:37:40.020Z
 ---
 
 # Run the local workbench
 
-From a repository checkout, `make init` and `make dev` run the workbench through Docker. Use `make ingest FILE=./traces.jsonl` to load a local export and open the backend's printed URL. `make up` runs the packaged app in the background; `make down` stops containers and preserves project data. See [Docker and Make workflow](containers.md) for setup and configuration.
+From a repository checkout, `make init` and `make dev` run the workbench through Docker. Use `make ingest DIR=./traces` to load a directory of agent-run files and open the backend's printed URL. Each JSONL file is one trace by default, with its events kept in order. `make up` runs the packaged app in the background; `make down` stops containers and preserves project data. See [Docker and Make workflow](containers.md) for setup and configuration.
 
 For a native Python process and existing host agent CLI authentication:
 
@@ -109,7 +113,7 @@ Both research paths share the detail view, which shows successful, failed and pe
 
 Task audits in the UI are deterministic. A semantic rubric needs an explicitly configured judge through the [task CLI](../workflows/tasks-and-graders.md). Suite creation and training export use the [experiment CLI or SDK](../workflows/experiments-and-training.md). The Improvements view can launch paired comparisons from an existing suite and local runner configuration paths; it offers an explicit semantic judge when needed.
 
-Import trace files with the native CLI or `make ingest FILE=...`; refresh the UI after ingestion. There is no browser upload endpoint. Exploration and inspection are local operations; starting native research is an explicit provider action that gives the chosen coding agent access to the investigation snapshot and context. Native account and model constraints still apply.
+Import multiple trace files with the native CLI or `make ingest DIR=...`; refresh the UI after ingestion. For row exports use `--layout records` or `LAYOUT=records`. Run-file evidence points inside `/events`, for example `/events/1/status`, and `/source/path` identifies the imported file. A new investigation captures all imported runs together; an existing investigation retains its frozen snapshot. There is no browser upload endpoint. Exploration and inspection are local operations; starting native research is an explicit provider action that gives the chosen coding agent access to the investigation snapshot and context. Native account and model constraints still apply.
 
 ## Troubleshooting and development
 

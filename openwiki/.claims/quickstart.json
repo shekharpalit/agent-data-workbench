@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:18aaffc82a1e552f0be7854e706d951bd89a41666250ac44710c5f652044ea5b",
+  "pageVersion": "sha256:a08489086c82e79b99d9283d08db7396fc2a05adbc27e6613ac7adf070748c4a",
   "claims": [
     {
       "id": "claim_b88dee80e2334471a6a24e3675d10bd3",
@@ -18,11 +18,11 @@
     },
     {
       "id": "claim_8926764be0704348a56c15b354f872d3",
-      "statement": "The CLI supports creating a project, ingesting exported traces, and querying the local corpus without calling a model.",
+      "statement": "The CLI supports creating a project, ingesting multiple selected run files or record exports, and querying the local corpus without calling a model.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/cli/project.py#L40-L89",
-          "version": "repo-lines-v1:sha256:329a56e00651ee1fbd0010c1dc63e705ce6b8a56e6d5cf60a1b582a842c003ce:eyJzZWxlY3RlZExpbmVDb3VudCI6NTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJhZGEwZjQ4NWEzOTk2YTJhZDFhY2Y1ZDViNzM0NDlhNzI1OTJhMWIzYjhhNmY1OWMyYzYwM2YxMDU3NmQwYjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ5ZGQ3ZWQzZGFkNGQ0ODRkZTkzYzdmMDdhMDFjYjA4NWM4YzY5OTRjNjNmNTA2YzliN2NkZmNiZDU2N2I3NjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY5YzFhNDNiODJmYjNlZGZlMGNjYTQ0YzQyM2MwYzcxYmIxOWY1NzRiMjUwMmIwZjY4NTQyOTQxMWVkM2Y3NGUifQ"
+          "resource": "repo://src/agent_data_workbench/cli/project.py",
+          "version": "repo-file-v1:sha256:314a27dce8018199000baa9e52107319e762182b8282864dc8898c51d5637071"
         }
       ]
     },
@@ -102,11 +102,11 @@
     },
     {
       "id": "claim_a7604dbffebf4c50b7133544dc4d4c25",
-      "statement": "The repository supports Docker-first make init/dev setup with a persistent project, joint backend and UI startup, a trace-file import target, packaged background startup and configurable loopback port.",
+      "statement": "The repository supports Docker-first make init/dev setup with persistent data, joint backend/UI startup, recursive directory or single-file ingestion, packaged background startup and a configurable loopback port.",
       "evidence": [
         {
-          "resource": "repo://Makefile#L23-L60",
-          "version": "repo-lines-v1:sha256:fcf9b8d9f8e9fc183096c4ac26c9cba2ebea6774ee9a0395d14c886f09750acd:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlkYTcxNTBhNDY4MDRkMWMxNzkzMDEyN2ZiZjg4NTkzMzdlOTYwOGY0YjE5ZTUyZTBjMDE0NWQ0YWU2NjBjYjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE0ZTEwMTEwYzlhYTQ1ZDM5MDI4ZGYzNDFhNTM5YWQxMjI3MjljOTUyMTcyZGVkOTBiMjQwYTMyNTM2NDFmYTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIwYjI0OTUyYWJlZjhjMGJmN2ZiYTNhZWQyZDA3MDg3NDEzOGJmM2ZkZTE0ZDQ3ZDQ2ODFlMjI4MzQzMTgzMWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://Makefile#L23-L78",
+          "version": "repo-lines-v1:sha256:b9152886899ea6200f882286f58dc49af49565da1210a93746face8d13f67232:eyJzZWxlY3RlZExpbmVDb3VudCI6NTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUxZjMzNzg2MDA0NTZlNTMyOTQyZDg2YTU1ZWQzMDJjYWY2YzQ2ZDUyMjBiMWM0OTg2NjJiMjRkYmQyMjczYjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY3YWIwYzlhZjc4NGJiNDRiNjIwNWYxM2Q1NTc2M2E2OWEwOGIzNjRjNDRiMzhjZjZkNjZkOWM3OTYwNjllZDYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
           "resource": "repo://compose.yaml#L26-L57",
@@ -131,10 +131,24 @@
           "version": "repo-lines-v1:sha256:2a6d7cf896d76c5aeb897adf775deb7be8757bd9930e227d5ca63b0f9c309b4a:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1YjNhYjZmYmEzMThhMjk5NmYwODUzZTMwOGY4MmYyMDFkNzAwMjFhNWVhMGVhOTBlZGE1YWQyMDM4Y2ZjYjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiNWM4MjYzMmZjODJkNGIyYzM0MGY0MjU1OGJhM2RmYTMxYzc2NTVkZjZmY2MxNjhiNGZkY2U1N2ZhYzYwNDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIzZGYyYWNmMDZlOGMzZjAzYzcxMzVjNmU4YWM1YTljYTU0MzJhYmUwNmE3NGFjYTBmZGQ5YTUzYTAwOGY5ODciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFkNDk3YjljZDM0NDJmZjA1OGNkZmUxZTIyMjUzMjkxZGE0MjNiOGUzN2Y5NmZlZWRiN2ViOWYwMTgyYTVmMTUifQ"
         }
       ]
+    },
+    {
+      "id": "claim_bcba4d91be7f4694aac44c9ab399bfdd",
+      "statement": "A run-file import preserves each file as one ordered trace, and a new investigation can compare multiple complete runs within one snapshot.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/ingestion.py#L139-L168",
+          "version": "repo-lines-v1:sha256:133409f0d2b755c38909c38e8784ba92d255d89c53fef21ffa6e21785ce15c95:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBhNGZlZmU1M2VhMTBjOGQ1MTIxMDBkODc1NjcyMTRjZTAxMzViOGM5ZTUxY2ZiOWUyMmU3Y2JlNzRlNTA4ZjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg5N2UwZWQ3OGYyMmYwZjg2YTYwYTUxMDQzMTA5N2ViYzcwYmM5M2JjOGNhODcyZTkxN2JlZmYwMmE2NmE1YWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZmNzhkZjQxZTAzYmUxY2VhN2NiZDdkZDhlMDdhOWFkNjE1NjJjMGQ4ZGFmOGIyMWVkMjEwZGUwZjg1MDg0ZTgifQ"
+        },
+        {
+          "resource": "repo://tests/test_ingestion_research.py#L9-L46",
+          "version": "repo-lines-v1:sha256:29fc47fd1ee98eb1b045db224e11ba5ffd0add04261a65aef24f84616fdda0e3:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIyNWNlMDQxY2VlMDA0ODA5NjQ1MjgyMzI3YzI5NjkyMjliZTU5NzdkYmIyYjQxYmU5OWFmY2NiZjc5NWRiZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI1YmUzOGM1YjMwOTdjNWFlZDJmY2YxYWYwNGZlMTI5OGZmYTc4YzAxMTllZmI2Y2E1Njc0NmU2OTU5NmM3MjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-07T23:10:49.194Z"
+    "at": "2026-09-07T23:37:40.020Z"
   }
 }

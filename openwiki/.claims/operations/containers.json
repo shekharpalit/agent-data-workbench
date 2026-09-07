@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:705029c43dd01d657fcaf736a65aafefe9e9f1163a2ad2089a98101e4e086d8d",
+  "pageVersion": "sha256:d35e5fd0983e94a8b5b2e63c40e06be4515ac886e167e57eb27155751e5411bc",
   "claims": [
     {
       "id": "claim_0214ec89ef294dfaaad35ee54cb09813",
@@ -36,15 +36,19 @@
     },
     {
       "id": "claim_c71981d1e87a4d58863e4d06bbabb91f",
-      "statement": "make ingest streams a selected JSON or JSONL export into a temporary container file and imports it through the existing CLI into the persistent project.",
+      "statement": "make ingest selects a single file or recursive directory, stages a complete host tar archive, and imports all materialized container files through one CLI transaction with temporary-file cleanup.",
       "evidence": [
         {
-          "resource": "repo://Makefile#L57-L60",
-          "version": "repo-lines-v1:sha256:7ed309f324edca78a75f3480712298b1d355af29b7043fba7c05a03df09924e5:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTJmNzk5OWFhYjM0MjQ1YjVmOTVlYTIzODEzMGUyM2RhMGQ2MDU2MjA3YTFjMTE3YzBkNTExMDFmODNkYzBmNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTRlMTAxMTBjOWFhNDVkMzkwMjhkZjM0MWE1MzlhZDEyMjcyOWM5NTIxNzJkZWQ5MGIyNDBhMzI1MzY0MWZhNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTgzODI3ZDc2MDE4MWRiOTEwNzlmZWY2YzY3Y2ZlZDI4MTdjMmU4ZTZhMTZjY2U5MjRiZmRiYTFjOWE5MzRjYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+          "resource": "repo://Makefile#L58-L78",
+          "version": "repo-lines-v1:sha256:6b1a3df6acf648f729328964e09d42b5f4c8a436475851cd3b2b6d68a7ccaa9c:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEyZjc5OTlhYWIzNDI0NWI1Zjk1ZWEyMzgxMzBlMjNkYTBkNjA1NjIwN2ExYzExN2MwZDUxMTAxZjgzZGMwZjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUxZjMzNzg2MDA0NTZlNTMyOTQyZDg2YTU1ZWQzMDJjYWY2YzQ2ZDUyMjBiMWM0OTg2NjJiMjRkYmQyMjczYjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU4MzgyN2Q3NjAxODFkYjkxMDc5ZmVmNmM2N2NmZWQyODE3YzJlOGU2YTE2Y2NlOTI0YmZkYmExYzlhOTM0Y2IiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
-          "resource": "repo://src/agent_data_workbench/traces.py#L38-L55",
-          "version": "repo-lines-v1:sha256:e70d811dea6c0b7e83b28b83674f47b0a63715b5e1bdeaecd43e471818916c1d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMyMmY3NjQ2NGFkMjA5MTRhZDI0NGQ4OGQyNThiOWQ4ZjBhYTU1M2RkNWZjYjU2ZjZjMTU5YTFiOTUwOTJlYzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY4NTcxODM3YTRhZjVmNjljYTZjYWRkNjk5YTRiYzAxYjhkZjMzMDllNTQ0MTA4YTM5ZDFmNzgzZTc2YjU3YTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFkNzc0NjNhZDYzZTkyYTQ5Y2QxZjAxYzRmNTA1OTA3OTJkYTE4ZWViMzk0MjhjNGYyZTkxZjg3ODM1OGI2NTQifQ"
+          "resource": "repo://src/agent_data_workbench/cli/project.py#L98-L110",
+          "version": "repo-lines-v1:sha256:f5634da717ff91d698d22e7765a126b45ff05fa3fae3f803769dc1003057c7ca:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkyZGNkNDM3ZDNlZGUyZmYxYjhiY2YxY2Q5Y2Q4MDAxYzA4MDI4NDEyMDViYzRhNTIyY2E2ODdmMDY0YjM0ZTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2Y2M4MDZmZmQ0MGE2NWY0ZTRiNWUxZTI5ZTMzYmFhNjNkNzIzMmYyM2JhOTBlM2MzZmVmYWRjNDczYWY0ZjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVmMWU2OTMwODdjNTIwOWQ0MmE4YmE4MTNhNDc3N2UwYzc2Y2E4NTRhNDM1OWRlNTgwZDFmN2UyZTYwY2NmNWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNlYmVjNzZjNWRkNDE4MGMwZTFkY2E1N2U4ZjE4NDg3ZjJjODkxODc2M2E5YjlkOTY5MWU0NmI2YTlhMTY2Y2UifQ"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/ingest_transport.py#L14-L71",
+          "version": "repo-lines-v1:sha256:46fb6448b22da4d2459d785427ee7605efcb689e7527341f4ff6866324b5dd69:eyJzZWxlY3RlZExpbmVDb3VudCI6NTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5MDlhNTNhNjE4ZDAyOGUxZDMwMDBjMGE3YWJjZWVjYmU1ZmIzN2Y0ZTUxMWVmZTQ2NjQzZmFkNmU2Njg3MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE4ZTA2YzJiNDMxNWViNDNhZTIzZmZkNzA5YmExM2JhZWE0NGU4MjU1ZGMwOTM4NWQzY2Y2NmM5NjY4OGE1ZjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
     },
@@ -145,10 +149,38 @@
           "version": "repo-file-v1:sha256:ec94ef2e2606ee8ebb8d336c44c9574388aaa05a3c48ab4f4c3a406f4091d6c1"
         }
       ]
+    },
+    {
+      "id": "claim_59f91302670e449f9a817e616a7a2669",
+      "statement": "Docker ingestion defaults to one ordered run per file and offers LAYOUT=records for row exports; its source-root option preserves logical paths for subset imports.",
+      "evidence": [
+        {
+          "resource": "repo://Makefile#L3-L6",
+          "version": "repo-lines-v1:sha256:2901ad04e817585246ffb146bb28a8ed20fc768690a674849d25e747a7f56465:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzY5NmQyZDlhNTRkMzRkNTVjNzE1NTA3MjExY2E2MzI2ZjkzN2IyYmNmZjRhNWM4MmEzOWI1MDQwZGE5ZTNkNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDczNGM1NjE0Y2Q4MDI0NmE5MWZiYjVhY2M4MGEzYWU2Yzk5MTE2OGQzNDFiOWRkMThkMTQyMzBlMDI3ODVjYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjIsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiY2UyYjc5NzcyMzMxYzQ5NTlkNzM3ZGU3N2E2NzBkMTE2YWMzOTZmMjVmNDhhMDcxMDMwYWM1N2M5MDRjYmZjZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmU3YTQ0N2FmMjhjZTMzYWI1OGQ0Mjk0Njc3ZDgxZTY3MTBlYzFmMzA2NTg3MTIxZThiNDY0OTdjNzg5ZGY4OSJ9"
+        },
+        {
+          "resource": "repo://Makefile#L58-L78",
+          "version": "repo-lines-v1:sha256:6b1a3df6acf648f729328964e09d42b5f4c8a436475851cd3b2b6d68a7ccaa9c:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEyZjc5OTlhYWIzNDI0NWI1Zjk1ZWEyMzgxMzBlMjNkYTBkNjA1NjIwN2ExYzExN2MwZDUxMTAxZjgzZGMwZjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUxZjMzNzg2MDA0NTZlNTMyOTQyZDg2YTU1ZWQzMDJjYWY2YzQ2ZDUyMjBiMWM0OTg2NjJiMjRkYmQyMjczYjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU4MzgyN2Q3NjAxODFkYjkxMDc5ZmVmNmM2N2NmZWQyODE3YzJlOGU2YTE2Y2NlOTI0YmZkYmExYzlhOTM0Y2IiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/ingestion.py#L137-L168",
+          "version": "repo-lines-v1:sha256:ea6d9aaf9d973761d4d5ed63d774f5c154819a917fbed9f85a71198a68a3c8ae:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIzZjM2YzEzYjdkNzAyMDAyMTQ0MjRhY2ZkNzRlMzZjNjFkOTk5ZjA4N2EyMTkwYTQwOTFlZWMyNzY5ODg4Y2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBhNGZlZmU1M2VhMTBjOGQ1MTIxMDBkODc1NjcyMTRjZTAxMzViOGM5ZTUxY2ZiOWUyMmU3Y2JlNzRlNTA4ZjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdjYzIzMGYwZmNlYjZkZWY0YjlhOGQ2Y2VkNTc2ZDJjMTQ1ZDdmNTNmNzdhMGY0MmNhZTMwNmVhYjE2NjRjOGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZmNzhkZjQxZTAzYmUxY2VhN2NiZDdkZDhlMDdhOWFkNjE1NjJjMGQ4ZGFmOGIyMWVkMjEwZGUwZjg1MDg0ZTgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_52e239a317df4aef89386358fb52eb6d",
+      "statement": "The archive transport preserves relative file names and deduplicates internal hardlink aliases before yielding input sources.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/ingest_transport.py#L20-L71",
+          "version": "repo-lines-v1:sha256:91da91d1b23223c5d1145d548bb0f3bcf34557bf91d3ec9743173d5381a3f330:eyJzZWxlY3RlZExpbmVDb3VudCI6NTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE1OTM3MzkwMTQ2ZDYzNWYwNWY2ZGU4OTdjZThlNzcxODIzNjg4M2I2NGY4MjAwZGQ3Yjg0YzdkNTNhMzE2NTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5MDlhNTNhNjE4ZDAyOGUxZDMwMDBjMGE3YWJjZWVjYmU1ZmIzN2Y0ZTUxMWVmZTQ2NjQzZmFkNmU2Njg3MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI3ZWNlN2E4ZWE4OGFkM2VjNjJmMDUwMTNmMjRlMGJiMTY4ZWJhMjQwZjZkYzRjMWZhMTAxYzEzMjkyZWNmZTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-07T23:10:49.194Z"
+    "at": "2026-09-07T23:37:40.020Z"
   }
 }

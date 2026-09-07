@@ -3,9 +3,6 @@ type: operations
 title: Docker and Make workflow
 description: Set up, develop, import data and run the packaged workbench with Docker while preserving local project data.
 tags: [docker, make, development, operations, persistence]
-verified:
-  - by: openwiki/0.5.0
-    at: 2026-09-07T23:10:49.194Z
 sources:
   - id: openwiki-source-715dace563ef484b6e8bd1e2
     resource: repo://.dockerignore
@@ -19,13 +16,20 @@ sources:
     resource: repo://src/agent_data_workbench/api/dependencies.py
   - id: openwiki-source-1848987f753961721cee2571
     resource: repo://src/agent_data_workbench/api/middleware.py
+  - id: openwiki-source-2ee7fba2bd1c703c70f5f285
+    resource: repo://src/agent_data_workbench/cli/project.py
+  - id: openwiki-source-2105ec13910fc5b1b0e193d1
+    resource: repo://src/agent_data_workbench/ingest_transport.py
+  - id: openwiki-source-73ad8573b871e625469a2194
+    resource: repo://src/agent_data_workbench/ingestion.py
   - id: openwiki-source-cda43c2246a0f3e6a5e89dce
     resource: repo://src/agent_data_workbench/runtime.py
-  - id: openwiki-source-b9538130baf947854165db93
-    resource: repo://src/agent_data_workbench/traces.py
   - id: openwiki-source-a741d432f952c0dbfb4fb35d
     resource: repo://ui/vite.config.ts
-generated: { by: "codex", at: "2026-09-07T23:10:49.194Z" }
+generated: { by: "codex", at: "2026-09-07T23:37:40.020Z" }
+verified:
+  - by: openwiki/0.5.0
+    at: 2026-09-07T23:37:40.020Z
 ---
 
 # Docker and Make workflow
@@ -52,10 +56,26 @@ The UI healthcheck verifies its index and referenced script/style files before C
 In another terminal:
 
 ```sh
-make ingest FILE=./traces.jsonl
+make ingest DIR=./traces
 ```
 
-JSON, JSONL and NDJSON exports are supported. Quote paths containing spaces. The target streams the selected file through standard input into a temporary container file and invokes the normal ingestion command against the persistent project. It does not require a browser upload endpoint. Source records and import conflicts follow the usual [trace import](../workflows/traces.md) rules.
+`DIR` recursively selects JSON, JSONL and NDJSON files. Each file becomes one run by default, with original events preserved in order under `/events`. All imported runs can enter the same investigation. Use `FILE=./run.jsonl` for one file, and quote paths containing spaces. Existing exports containing one complete trace per line use `LAYOUT=records`:
+
+```sh
+make ingest DIR=./exports LAYOUT=records
+```
+
+The whole selection is one database transaction: an invalid event or conflicting trace ID rolls back every file in that batch. The result reports file count, layout, added/unchanged traces and the total stored population. See [trace import](../workflows/traces.md) for native multiple-path/glob commands, event evidence pointers and ID rules.
+
+Logical source paths are relative to the supplied directory or a single file's parent. To reimport a subset using the same root as an earlier directory import:
+
+```sh
+make ingest FILE="./traces/nested/run 1.jsonl" SOURCE_ROOT=./traces
+```
+
+The native equivalent is `--source-root ./traces`. Keep this root and filenames stable across imports: they are recorded in run provenance and participate in generated identities. Changing a source name can create a different generated run or conflict with an existing native run ID.
+
+Make stages a complete tar archive on the host, then streams it to the container. The importer materializes its regular files before starting the database transaction, preserving relative names and deduplicating internal hardlink aliases. Temporary host and container files are removed on completion or failure. Plan for temporary disk space for the archive and extracted inputs in addition to project storage; a run file's parsed events are held in memory one file at a time. There is no fixed file-count or event-count cap, and no browser upload endpoint is needed.
 
 ## Lifecycle commands
 

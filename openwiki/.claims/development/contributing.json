@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:3efb319cab7f96a189bb8a0767df766b613532ecdc4df18fcabc913bb2e4cca6",
+  "pageVersion": "sha256:5f526ac4cb628408a6b14aa675276932332116d600e5a82aa71a1d9411f31c8f",
   "claims": [
     {
       "id": "claim_80e3a5075dd34ed7b7f0393a15e92a9a",
@@ -78,7 +78,7 @@
         },
         {
           "resource": "repo://tests/test_cli.py#L171-L275",
-          "version": "repo-lines-v1:sha256:c65bddc6beeb9b3102cb30d2d8be035c76e9ee4a42a6c9115e4b537dfa6d98f0:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA1LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI5ODM0ZjVkZDdjMjU2YzFhMjRhYjNiOTZhZmZhZjJlOGIyNzIzOGYyNjE4YzIwMmJlYTM1MjQ5NDhmOTcwZDBkIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0ODkzZjQwZTM3ODFlYjg5NmM4MmQwNDZhMDgwNjdhMTFlMzVjZGYyZjFkZmFmMjZmZWE5MGI4ZGI2Njc2NDEzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIzYzM4NTNlYjgyMThhNTc3NzkwNGJjZmVjMDRjMTkzZjI3NmFhYWQ4ODQ0YzFkODNkMWEwNjc5MTFjMjZjODE5IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+          "version": "repo-lines-v1:sha256:69e28654f213e2fdbe6c093f457edb1e2a9d69e31db3ef1aa3e20e2f6a102a7a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA4LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI5ODM0ZjVkZDdjMjU2YzFhMjRhYjNiOTZhZmZhZjJlOGIyNzIzOGYyNjE4YzIwMmJlYTM1MjQ5NDhmOTcwZDBkIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0ODkzZjQwZTM3ODFlYjg5NmM4MmQwNDZhMDgwNjdhMTFlMzVjZGYyZjFkZmFmMjZmZWE5MGI4ZGI2Njc2NDEzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIzYzM4NTNlYjgyMThhNTc3NzkwNGJjZmVjMDRjMTkzZjI3NmFhYWQ4ODQ0YzFkODNkMWEwNjc5MTFjMjZjODE5IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
         },
         {
           "resource": "repo://tests/test_identifiers.py#L18-L113",
@@ -179,10 +179,42 @@
           "version": "repo-lines-v1:sha256:28c35c4d132eedeae8ddc0508f031d7846d02594893c13bbe8e844a581fd454f:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQzY2ZjYjAxY2QwNWIyMzEyNTQzZjNhZWZiNjZhMGQ0NzQ3ZGVmZTZhYjVjMjc2MmU5ZDJlMDliYmIzZDUxYzkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdhMzRlNWFlMGYzZTJlYjhlOWEwMDY3YjhkNGY5ODYyYTBhYmExNmRiY2EzMzUzYjAyODlmMDE3OTgxZTg3ZTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE3YzAzMDQ3MDAwZWJhOTQ2MWZjNDExNTQ2YjAwM2ZlMTZiNjdiZTYxZjBkMmMxNWM3ZDRlNDI4ZTMxZmNjNmQifQ"
         }
       ]
+    },
+    {
+      "id": "claim_4720af25edd04e3686b250554f20835d",
+      "statement": "Multi-file ingestion tests cover ordered per-file runs, both layouts, native/archive identity agreement and all-file rollback, with CLI archive transport and cleanup checks.",
+      "evidence": [
+        {
+          "resource": "repo://tests/test_ingest_cli.py#L256-L295",
+          "version": "repo-lines-v1:sha256:1b4f1f32dd5942b694dc5951fc03d8de0171107d340fc7162003849918707b7d:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhmNDQ2YTQyYzc5MmVhMWMwZDc3Yzc5NDRiNmI3NzNkZjIzNzY0ZmRiOWU3MTkzNDExZDNlNjEzMDE0OWYxNjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJhZGU1NGE4ZGVjNTdkZTNhMzU2ZjliOTk3YmZhODkxZGQ5ZDZkZTM5ZTFmZWFmYzczMjJlMTNmMzE2ZGRjYjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZhNTkzOGIyYTZkODY3M2EwMWJiZmJhMGJhNzMzMWFjMDU0M2QyMmM3ODQxNjc1NmM2NWNiNjlmOWI5NGVjN2YifQ"
+        },
+        {
+          "resource": "repo://tests/test_ingest_transport.py#L21-L101",
+          "version": "repo-lines-v1:sha256:b73821e3bebc90f7d7849eff197502374f7bfa65fd3e91ec28894d1dc7686de5:eyJzZWxlY3RlZExpbmVDb3VudCI6ODEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIxZTc1YjVjMDA4MGY0Y2NlYjQ2YjkxYTg3ZjM0Mzk3Y2FjNThjODU5ZmFhZTI2N2Y1ZjUwNTIzYTljM2FiMzQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ3ZDhjMjFkMDIwZjFlNjM2MmNmMjk0NDM5MTE5M2Y0YjQ3ODQ0YTM5OTQwZGU2NjlmMjAwYTUyMzliZGU0ZTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmZjNmNjBiMzYwNzIxZThhYWI5MDNhN2QwMzdkMzYwYTJiODA2MjdhYjBkNjcwZjA2ZDMwMDMyYzI2MDBiNGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/test_ingestion.py#L20-L114",
+          "version": "repo-lines-v1:sha256:2da02a84ad46797e8facd8edfb59b9ae50de8e006d6ab78429b8c0aba559cb17:eyJzZWxlY3RlZExpbmVDb3VudCI6OTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQwNTA5YTUyNzE1YzMzOWMyNzFlMDI5MDJiOWRiOTlkNDYyZmY0MGRlY2Y4ODg2NjI5OTNhYWMwNTM5ZWRiN2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc5MjNmYTY5MmJjYmNhY2ZjMGVkOTIyYWU4OTQ5ZGI1ZmFiYjkwZGZlNzdhMjJkYzI0YTkzZjBmYTM0MDllYTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRiZmU5YTE3ODljMDgxYzM0OWE1YTA4ZGJhMTVmNjUyZWRmYzQ5NjFlNDk0NDY5ZjY1ZDlhYmIwMzU3NTAwMTkifQ"
+        },
+        {
+          "resource": "repo://tests/test_ingestion.py#L255-L307",
+          "version": "repo-lines-v1:sha256:e28ba105ea75bd0062dfd0cefb14f980bb55fdb83bf972b7f069575ed28fb1d9:eyJzZWxlY3RlZExpbmVDb3VudCI6NTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhkYWMwZmJmZDU0OThmN2QxM2I5NWE1MzM5YzE5MmFiODRiMjUyYjM1Yjg4NTQ2MGFjNDhmODA3ZWM1ZjU2ZWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmYmQwMDkzMTRiYzI3MDg0MTY3MzRhMDJhZTVmZjM5YTFlNDhhMDUwYmU5MWY0M2IyZmFhOTIwMDJjNjJiZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJjMzVkYThmZmYxMTBjOWFkZWY4OGZhNGJmMjY5MTRiNDkxNWIzMGIyZTkyNjY1OGFiMDVhZjhhYzIxNDdjOTAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f21a0cb219324e67b0bfe4d359be5a7d",
+      "statement": "A synthetic integration test imports two run files into one research snapshot and preserves all ordered events while recording distinct outcomes for each run.",
+      "evidence": [
+        {
+          "resource": "repo://tests/test_ingestion_research.py#L9-L46",
+          "version": "repo-lines-v1:sha256:29fc47fd1ee98eb1b045db224e11ba5ffd0add04261a65aef24f84616fdda0e3:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIyNWNlMDQxY2VlMDA0ODA5NjQ1MjgyMzI3YzI5NjkyMjliZTU5NzdkYmIyYjQxYmU5OWFmY2NiZjc5NWRiZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI1YmUzOGM1YjMwOTdjNWFlZDJmY2YxYWYwNGZlMTI5OGZmYTc4YzAxMTllZmI2Y2E1Njc0NmU2OTU5NmM3MjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-07T23:10:49.194Z"
+    "at": "2026-09-07T23:37:40.020Z"
   }
 }

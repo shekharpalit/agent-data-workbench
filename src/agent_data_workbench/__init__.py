@@ -14,6 +14,7 @@ from .environments import EnvironmentConfig
 from .experiments import make_suite, run_experiment
 from .harbor import HarborExportConfig, export_harbor, run_harbor_export
 from .improvements import create_improvement, decide_improvement
+from .ingestion import FilesSource, SourceFile, discover_files
 from .models import Analysis, Trace
 from .project import Project
 from .research import NativeSession, ResearchWorkspace, investigate, start_investigation
@@ -26,6 +27,9 @@ from .worlds import WorldReference, WorldSpec, create_world, review_world
 
 __version__ = "0.5.0"
 __all__ = [
+    "FilesSource",
+    "SourceFile",
+    "discover_files",
     "AttemptLabel",
     "adjudicate_attempt",
     "calibration_summary",

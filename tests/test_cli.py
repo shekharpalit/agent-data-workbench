@@ -198,7 +198,10 @@ def test_modular_project_cli_imports_reviews_executes_and_exports(tmp_path, samp
     # When
     exits = [
         runner.invoke(app, ["init", str(directory), "Test agent", "Reliable outcomes"]).exit_code,
-        runner.invoke(app, ["ingest", str(directory), str(sample_data / "traces.jsonl")]).exit_code,
+        runner.invoke(
+            app,
+            ["ingest", str(directory), str(sample_data / "traces.jsonl"), "--layout", "records"],
+        ).exit_code,
     ]
     project = Project(directory)
     ids = []

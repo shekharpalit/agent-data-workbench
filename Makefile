@@ -2,7 +2,8 @@
 
 COMPOSE ?= docker compose
 PORT ?= 8765
-export PORT FILE
+LAYOUT ?= runs
+export PORT FILE DIR LAYOUT SOURCE_ROOT
 
 .PHONY: help check-docker init dev up down logs shell test build ingest
 
@@ -13,7 +14,7 @@ help:
 	  'make up     Build and start the packaged app in the background' \
 	  'make down   Stop containers; keep project data and dependency volumes' \
 	  'make logs   Follow application logs (including the private UI URL)' \
-	  'make ingest FILE=traces.jsonl  Import a local JSON/JSONL export' \
+	  'make ingest DIR=./traces  Import JSON/JSONL run files recursively' \
 	  'make shell  Open a development container with the project mounted' \
 	  'make test   Run Python and TypeScript checks inside Docker' \
 	  'make build  Build development and packaged application images' \
@@ -55,6 +56,23 @@ build: check-docker
 	$(COMPOSE) --profile production build backend app
 
 ingest: init
-	@test -n "$$FILE" || { printf '%s\n' 'Usage: make ingest FILE=path/to/traces.jsonl' >&2; exit 2; }
-	@case "$$FILE" in *.jsonl|*.ndjson|*.JSONL|*.NDJSON) suffix=jsonl ;; *) suffix=json ;; esac; \
-	$(COMPOSE) run --rm -T --no-deps -e "TRACE_SUFFIX=$$suffix" backend sh -c 'file="/tmp/import.$${TRACE_SUFFIX}"; cat > "$$file" && agent-data-workbench ingest "$$WORKBENCH_PROJECT" "$$file"' < "$$FILE"
+	@set -eu; \
+	if [ -n "$${DIR:-}" ] && [ -n "$${FILE:-}" ]; then printf '%s\n' 'Supply DIR or FILE, not both' >&2; exit 2; fi; \
+	input=$${DIR:-$${FILE:-}}; \
+	if [ -z "$$input" ]; then printf '%s\n' 'Usage: make ingest DIR=./traces [LAYOUT=runs|records]' >&2; exit 2; fi; \
+	work=$$(mktemp -d "$${TMPDIR:-/tmp}/workbench-import.XXXXXXXX"); \
+	trap 'rm -rf "$$work"' 0; \
+	trap 'exit 130' INT; trap 'exit 143' TERM; \
+	if [ -d "$$input" ]; then resolved=$$(cd "$$input" && pwd); base=$$resolved; \
+	else base=$$(cd "$$(dirname "$$input")" && pwd); resolved="$$base/$$(basename "$$input")"; fi; \
+	if [ -n "$${SOURCE_ROOT:-}" ]; then base=$$(cd "$$SOURCE_ROOT" && pwd); fi; \
+	prefix=$${base%/}/; \
+	case "$$resolved" in "$$base") relative=. ;; "$$prefix"*) relative=$${resolved#"$$prefix"} ;; \
+	  *) printf '%s\n' 'Input must be inside SOURCE_ROOT' >&2; exit 2 ;; esac; \
+	if [ -d "$$input" ]; then \
+	  (cd "$$base" && find "./$$relative" -type f \( -iname '*.json' -o -iname '*.jsonl' -o -iname '*.ndjson' \) -print0) > "$$work/files"; \
+	  COPYFILE_DISABLE=1 tar -C "$$base" -cf "$$work/traces.tar" --null -T "$$work/files"; \
+	else \
+	  COPYFILE_DISABLE=1 tar -C "$$base" -cf "$$work/traces.tar" -- "$$relative"; \
+	fi; \
+	$(COMPOSE) run --rm -T --no-deps backend agent-data-workbench ingest /data/project --archive-stdin --layout "$$LAYOUT" < "$$work/traces.tar"

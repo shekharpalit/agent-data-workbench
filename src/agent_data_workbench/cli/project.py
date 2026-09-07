@@ -2,20 +2,28 @@
 
 from __future__ import annotations
 
+import sys
+from enum import StrEnum
 from pathlib import Path
 from typing import Annotated
 
 import typer
 
+from ..ingestion import FilesSource
 from ..project import Project
 from ..runners import RunnerConfig
-from ..store import JsonSource, TraceStore
+from ..store import TraceStore
 from ..tasks import (
     TaskSpec,
 )
 from .common import emit, errors
 
 app = typer.Typer(no_args_is_help=True)
+
+
+class IngestLayout(StrEnum):
+    runs = "runs"
+    records = "records"
 
 
 @app.command("schema")
@@ -54,16 +62,52 @@ def init_project(
 @errors
 def ingest(
     project: Path,
-    traces: Path,
+    traces: Annotated[
+        list[str] | None,
+        typer.Argument(help="Files, directories, or quoted glob patterns to import."),
+    ] = None,
+    layout: Annotated[
+        IngestLayout,
+        typer.Option(
+            help="runs: each file is one ordered trace; records: each JSONL line is a trace."
+        ),
+    ] = IngestLayout.runs,
     group_pointer: str = "/thread_id",
     stratum_pointer: str = "/agent_type",
+    source_root: Annotated[
+        Path | None,
+        typer.Option(
+            help="Name imported files relative to this directory across separate batches."
+        ),
+    ] = None,
+    archive_stdin: Annotated[
+        bool,
+        typer.Option(help="Read a tar stream of trace files from stdin (used by make ingest)."),
+    ] = False,
 ):
-    """Index JSON/JSONL; identical IDs are idempotent, conflicting content is rejected."""
-    emit(
-        TraceStore(Project(project)).ingest(
-            JsonSource(traces), group_pointer=group_pointer, stratum_pointer=stratum_pointer
+    """Import multiple JSON/JSONL files together; a failed batch rolls back all its records."""
+    if archive_stdin and traces:
+        raise ValueError("Use trace paths or --archive-stdin, not both")
+    if not archive_stdin and not traces:
+        raise ValueError("Provide one or more trace paths, directories, or glob patterns")
+    if archive_stdin and source_root is not None:
+        raise ValueError(
+            "--source-root cannot be used with --archive-stdin; archives already name files"
         )
-    )
+
+    store = TraceStore(Project(project))
+
+    def import_source(source: FilesSource):
+        result = store.ingest(source, group_pointer=group_pointer, stratum_pointer=stratum_pointer)
+        emit({"files": len(source.files), "layout": layout.value, **result})
+
+    if archive_stdin:
+        from ..ingest_transport import archive_files
+
+        with archive_files(sys.stdin.buffer) as files:
+            import_source(FilesSource(files, layout=layout.value))
+    else:
+        import_source(FilesSource(traces, layout=layout.value, root=source_root))
 
 
 @app.command("query")

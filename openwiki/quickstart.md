@@ -24,6 +24,8 @@ sources:
     resource: repo://src/agent_data_workbench/cli/research.py
   - id: openwiki-source-758da06aa8f472c43add8d88
     resource: repo://src/agent_data_workbench/cli/workflow.py
+  - id: openwiki-source-73ad8573b871e625469a2194
+    resource: repo://src/agent_data_workbench/ingestion.py
   - id: openwiki-source-b5025a250cbf9f845fc9224a
     resource: repo://src/agent_data_workbench/project.py
   - id: openwiki-source-2dbe8753da4267ce652f414e
@@ -34,14 +36,16 @@ sources:
     resource: repo://src/agent_data_workbench/server.py
   - id: openwiki-source-9c58a0b0672b6bdbd523d5ee
     resource: repo://tests/test_identifiers.py
+  - id: openwiki-source-7e7b3478097a461915e85751
+    resource: repo://tests/test_ingestion_research.py
   - id: openwiki-source-2d1b137901c9e38ec418fdad
     resource: repo://ui/src/views/ManualResearchEditor.tsx
   - id: openwiki-source-a6ff0ad9c45aedc12177eaec
     resource: repo://ui/src/views/ResearchControls.tsx
-generated: { by: "codex", at: "2026-09-07T23:10:49.194Z" }
+generated: { by: "codex", at: "2026-09-07T23:37:40.020Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T23:10:49.194Z
+    at: 2026-09-07T23:37:40.020Z
 ---
 
 # Quickstart
@@ -64,10 +68,10 @@ Docker installs the locked Python and TypeScript dependencies and initializes an
 Import your own export from another terminal:
 
 ```sh
-make ingest FILE=./traces.jsonl
+make ingest DIR=./traces
 ```
 
-Refresh the UI after import. JSON and JSONL exports use the normal trace importer. `make up` runs the packaged app in the background; `make down` stops containers while keeping their data. Change the host port with `make dev PORT=9000`. On Windows, use WSL2 with Docker integration. See [Docker and Make workflow](operations/containers.md) for volumes, checks, rebuilding and configuration.
+The directory is scanned recursively. Each JSONL file becomes one agent trace with its events preserved in order, and a new investigation can compare all imported runs together. Refresh the UI after import. For exports containing one complete trace per line, use `make ingest DIR=./exports LAYOUT=records`. `make up` runs the packaged app in the background; `make down` stops containers while keeping their data. Change the host port with `make dev PORT=9000`. On Windows, use WSL2 with Docker integration. See [Docker and Make workflow](operations/containers.md) for volumes, checks, rebuilding and configuration.
 
 Manual research works in the stock container. Native agent investigations additionally need the selected Codex or Claude Code CLI installed and authenticated in the backend's environment. To use an existing host CLI login, follow the native setup below.
 
@@ -90,12 +94,12 @@ Create a new project with a concrete objective, import your export, and open the
 ```sh
 uv run agent-data-workbench init runs/my-agent "My agent" \
   "Improve reliable task completion"
-uv run agent-data-workbench ingest runs/my-agent ./traces.jsonl
+uv run agent-data-workbench ingest runs/my-agent ./traces
 uv run agent-data-workbench query runs/my-agent --limit 20
 uv run agent-data-workbench ui runs/my-agent --open-browser
 ```
 
-The project starts empty. The runtime contains no demo commands, fake agent, or canned corpus. JSON/JSONL records come from your own exports; see [trace import](workflows/traces.md) for the record format. Synthetic fixtures remain confined to tests.
+The project starts empty. You can also pass several files (`ingest runs/my-agent ./run-a.jsonl ./run-b.jsonl`) or a quoted glob. Use `--layout records` for the older record-per-line export format. Use `--source-root` when changing file selections within one collection; [trace import](workflows/traces.md) explains stable identities and `/events/N` evidence pointers. An invalid file rolls back the entire selected batch. The runtime contains no demo commands, fake agent, or canned corpus. JSON/JSONL records come from your own exports; see [trace import](workflows/traces.md) for the record format. Synthetic fixtures remain confined to tests.
 
 The UI starts on loopback using an available port and a per-session access token. Follow the printed URL and stop the server with Ctrl-C when finished. Search traces and field distributions first; investigations, tasks, and experiments appear as you create them. Read [local operation](operations/local-workbench.md) for details.
 
