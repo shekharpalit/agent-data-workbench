@@ -1,0 +1,95 @@
+name: agent-data-workbench
+
+x-workbench-environment: &workbench-environment
+  WORKBENCH_PROJECT: /data/project
+  WORKBENCH_HOST: 0.0.0.0
+  WORKBENCH_PORT: "8765"
+  WORKBENCH_ORIGIN: http://127.0.0.1:${PORT:-8765}
+
+x-workbench-health: &workbench-health
+  test:
+    - CMD
+    - python
+    - -c
+    - >-
+      import urllib.request, urllib.parse;
+      from agent_data_workbench.runtime import RuntimeSettings;
+      origin = RuntimeSettings.from_env().origin;
+      request = urllib.request.Request("http://127.0.0.1:8765/", headers={"Host": urllib.parse.urlsplit(origin).netloc});
+      urllib.request.urlopen(request, timeout=3).read()
+  interval: 5s
+  timeout: 4s
+  retries: 12
+  start_period: 10s
+
+services:
+  backend:
+    image: agent-data-workbench:dev
+    build:
+      context: .
+      target: development
+    init: true
+    environment: *workbench-environment
+    ports:
+      - "127.0.0.1:${PORT:-8765}:8765"
+    volumes:
+      - ./src:/app/src:ro
+      - ./tests:/app/tests:ro
+      - project-data:/data
+      - web-assets:/app/src/agent_data_workbench/web:ro
+    healthcheck: *workbench-health
+    depends_on:
+      ui:
+        condition: service_healthy
+    command: ["python", "-m", "agent_data_workbench.runtime", "--reload"]
+
+  ui:
+    image: agent-data-workbench:dev
+    build:
+      context: .
+      target: development
+    init: true
+    working_dir: /app/ui
+    volumes:
+      - ./ui:/app/ui
+      - ui-dependencies:/app/ui/node_modules
+      - web-assets:/app/src/agent_data_workbench/web
+    command: ["sh", "-c", "npm ci && exec npm run dev"]
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - --input-type=module
+        - -e
+        - >-
+          import {readFileSync, accessSync} from "node:fs";
+          import {join} from "node:path";
+          import {JSDOM} from "jsdom";
+          const root = "/app/src/agent_data_workbench/web";
+          const document = new JSDOM(readFileSync(join(root, "index.html"), "utf8")).window.document;
+          const files = [...document.querySelectorAll('script[src], link[rel="stylesheet"][href]')];
+          if (!files.some(element => element.tagName === "SCRIPT")) throw new Error("Waiting for UI build");
+          for (const element of files) accessSync(join(root, new URL(element.getAttribute("src") || element.getAttribute("href"), "http://workbench").pathname));
+      interval: 5s
+      timeout: 4s
+      retries: 12
+      start_period: 10s
+
+  app:
+    profiles: [production]
+    image: agent-data-workbench:local
+    build:
+      context: .
+      target: runtime
+    init: true
+    environment: *workbench-environment
+    ports:
+      - "127.0.0.1:${PORT:-8765}:8765"
+    volumes:
+      - project-data:/data
+    healthcheck: *workbench-health
+
+volumes:
+  project-data:
+  web-assets:
+  ui-dependencies:

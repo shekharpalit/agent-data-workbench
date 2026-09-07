@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:705029c43dd01d657fcaf736a65aafefe9e9f1163a2ad2089a98101e4e086d8d",
+  "claims": [
+    {
+      "id": "claim_0214ec89ef294dfaaad35ee54cb09813",
+      "statement": "make init builds locked development dependencies and creates a missing project while preserving a valid existing project.",
+      "evidence": [
+        {
+          "resource": "repo://Makefile#L23-L29",
+          "version": "repo-lines-v1:sha256:0f1131d72ee93a8c9b48de1d241204a2b8fd46fd09d858b42a19ba1323d62a8a:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOWRhNzE1MGE0NjgwNGQxYzE3OTMwMTI3ZmJmODg1OTMzN2U5NjA4ZjRiMTllNTJlMGMwMTQ1ZDRhZTY2MGNiNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTYzMjUwODFlMzc3MmQ1NzFiMzMyYjk2YWI3MzI1ODRjM2Y3OGI0ODRhMmY4YzJiMzY5YTY1ZDUzZjNmMWRhZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjBiMjQ5NTJhYmVmOGMwYmY3ZmJhM2FlZDJkMDcwODc0MTM4YmYzZmRlMTRkNDdkNDY4MWUyMjgzNDMxODMxYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjhmNDFlNWUwYzE4OTI5ZGZkNGQ5YmYxOTUyNGViODU4MjYyOThmZjYzYjcwN2E3NWFlNDk4YWY2Y2I4MDVlMSJ9"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/runtime.py#L58-L87",
+          "version": "repo-lines-v1:sha256:2a6d7cf896d76c5aeb897adf775deb7be8757bd9930e227d5ca63b0f9c309b4a:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1YjNhYjZmYmEzMThhMjk5NmYwODUzZTMwOGY4MmYyMDFkNzAwMjFhNWVhMGVhOTBlZGE1YWQyMDM4Y2ZjYjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiNWM4MjYzMmZjODJkNGIyYzM0MGY0MjU1OGJhM2RmYTMxYzc2NTVkZjZmY2MxNjhiNGZkY2U1N2ZhYzYwNDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIzZGYyYWNmMDZlOGMzZjAzYzcxMzVjNmU4YWM1YTljYTU0MzJhYmUwNmE3NGFjYTBmZGQ5YTUzYTAwOGY5ODciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFkNDk3YjljZDM0NDJmZjA1OGNkZmUxZTIyMjUzMjkxZGE0MjNiOGUzN2Y5NmZlZWRiN2ViOWYwMTgyYTVmMTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_47e8bdbc5bbf4a9d909b7e041b3d1d8e",
+      "statement": "make dev starts the UI watcher and reloading backend together; Compose waits for readable UI assets, and the development watcher retains old assets while ignoring its generated output and dependencies.",
+      "evidence": [
+        {
+          "resource": "repo://Makefile#L31-L34",
+          "version": "repo-lines-v1:sha256:61e2148f76bc100dbbaeee002835a24da455820d1eeabcd7d27322f00190de11:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWVhYThlNzhhZGRiZDkxMGU2MmI4OWU5ZDE5MDFkNjBhMGUzMGFjZmM0YmQ3NjFmZThkZjNiMzY1YjAyOGM3MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjMyODdiYzAyZDYwMmUzNGMxZjNhOWE0OTc4MDcyNjdlYzA3NDgwY2M1YmE5OGExMWIwYjI1M2EyOTUyYWM3YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTM5YjkzMDRiMmQ1MmU0OGRlOGNmYzM2NjAxYzU5N2VmNDZkODFkNzk2YTZlYTQyOWU4NDg2NjYyMjRiYmE3ZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzA2N2E0MjJlYTliNmJiMDVmZmIwOWYxN2I3N2FlM2QxNjIzOWUzZDY5MjVjZDY3M2IzMjhmZGVkNDllNTA2MCJ9"
+        },
+        {
+          "resource": "repo://compose.yaml#L40-L76",
+          "version": "repo-lines-v1:sha256:805b59be74a007f1c9a89bca859365bc23cbe005b24c0686676ffff65d447125:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEwOTUxNWU5YjQzZTMxNTZmYTUxMjcxMzI1ZTExMjI4ZGMxY2YzMjFhNGY2NDIxZDcxNzJlODk2MTkyY2I0Y2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZiM2VmNmE0ZWEwZTU2MzdjMjNkZGJmMWU0YzdhMTUyYTYyNGZjOTQwNjIxZGU5YjEwOGJkNDNjODc4ZjU1N2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQwMTAwYTk1OTkwNTJiZmEzZmU2ZjA3YjA1YWZjYTU4ZWRiOTFiNTRkMmFmMDZmYzFlMjhlYjY1ZWFmYWEyN2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZiNDVjNzIyNzk2NmE4YzliNThiNzU4NDBhNDAxZGViM2QyMzQyYzg3OTc0ZjQ1M2M1YjE1MmY4NTk5NTczMDYifQ"
+        },
+        {
+          "resource": "repo://ui/vite.config.ts#L4-L23",
+          "version": "repo-lines-v1:sha256:0e7718d29e90c698bc6f172b845471200e92639981282f87c598511a7794ecfe:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU3MjZmYmM5ZTNlZGNlYzUwZWRmZmI4MjQ3NDBjNTk0ZjcyNjZhOWNmODViMjgxMzZiMTU5ZTM2NTM5ZDlmYzYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMwZTA5MzFjZWVjZTljOGExNDlhMzY2ZDRkYTMwNmNmMDIxMmRlYzU3N2VkMjYyNmMzMTU5MjFlMWUzNzFiMzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c71981d1e87a4d58863e4d06bbabb91f",
+      "statement": "make ingest streams a selected JSON or JSONL export into a temporary container file and imports it through the existing CLI into the persistent project.",
+      "evidence": [
+        {
+          "resource": "repo://Makefile#L57-L60",
+          "version": "repo-lines-v1:sha256:7ed309f324edca78a75f3480712298b1d355af29b7043fba7c05a03df09924e5:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTJmNzk5OWFhYjM0MjQ1YjVmOTVlYTIzODEzMGUyM2RhMGQ2MDU2MjA3YTFjMTE3YzBkNTExMDFmODNkYzBmNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTRlMTAxMTBjOWFhNDVkMzkwMjhkZjM0MWE1MzlhZDEyMjcyOWM5NTIxNzJkZWQ5MGIyNDBhMzI1MzY0MWZhNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTgzODI3ZDc2MDE4MWRiOTEwNzlmZWY2YzY3Y2ZlZDI4MTdjMmU4ZTZhMTZjY2U5MjRiZmRiYTFjOWE5MzRjYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/traces.py#L38-L55",
+          "version": "repo-lines-v1:sha256:e70d811dea6c0b7e83b28b83674f47b0a63715b5e1bdeaecd43e471818916c1d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMyMmY3NjQ2NGFkMjA5MTRhZDI0NGQ4OGQyNThiOWQ4ZjBhYTU1M2RkNWZjYjU2ZjZjMTU5YTFiOTUwOTJlYzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY4NTcxODM3YTRhZjVmNjljYTZjYWRkNjk5YTRiYzAxYjhkZjMzMDllNTQ0MTA4YTM5ZDFmNzgzZTc2YjU3YTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFkNzc0NjNhZDYzZTkyYTQ5Y2QxZjAxYzRmNTA1OTA3OTJkYTE4ZWViMzk0MjhjNGYyZTkxZjg3ODM1OGI2NTQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_65dcf0ced9444f4bbadda553c8a35917",
+      "statement": "The Makefile supports packaged background startup, log following, shell access, containerized checks and image builds; down removes containers without requesting volume deletion.",
+      "evidence": [
+        {
+          "resource": "repo://Makefile#L36-L55",
+          "version": "repo-lines-v1:sha256:7b0372eb1eea4d3af4b0204b238688b678f8c7fc279348f8a049f76dfbcb3b2b:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY3MGM0ZjYzODY3ZTkzOTk5OTQ3MDY0ZDM1YjdlYTY3NjM4YzZkODgxNjE0OGJiNzUyZTQyNjdhNjNiYjc3OTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJmMDljYjUzYTVkM2FkNjIzOWU1MGUxMWEzNGVhYTcwODFkOWUxZjBlY2I5ZjhkZjFjZDAyOGM0MDg1MjBmZjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY5NmU1YjhkNmI5N2QyNDA3NzkyY2JmZmEwMGVmNDRjYzIwNWMyMmFkNDlmYjY4ODkwODUwY2MxZDY3MjBjOTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRlZTc5ZjllNTRlMDEyYTkyMWJiMDJiMGIwZTljY2FiNmE2NzZkMDhkNmU4ODk5Y2UxNjZjODc1ZmJlZjE1MjIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ef2b03d534014db48fe5c03712005af5",
+      "statement": "Development and packaged services share project-data at /data; development separately mounts source, compiled assets and isolated UI dependencies, while the host port is loopback-only and configurable.",
+      "evidence": [
+        {
+          "resource": "repo://compose.yaml#L1-L7",
+          "version": "repo-lines-v1:sha256:8e30fad324442fa833ba337d4de74a069c774882e83931f74d25ecd5ef1bfe70:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjM3ZDU3ZDc1ZjI1ZjQxMzYyNmJjMmJiZWM3NzUwNDE2MDIwNWZhZTk0NWZjOTUwM2Y0MGZlN2QxZjI3OWY3YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDI5NzI5MWFkODQ3NjEzYjQ2MzkwYjQ5ODdhNTk0MmFiODUyM2Y0OWE3NmJjOTE2Y2U5YjNiMjgzZTAxNDMwYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjgwYjI1YTU5NmQwZDQ5NWY0MzExYWE3NzBiNWI1ZjJmMDc2ODUyMmM2NmZlZDU4NTE0YzRlNjIxOTFiYzI1YyJ9"
+        },
+        {
+          "resource": "repo://compose.yaml#L26-L57",
+          "version": "repo-lines-v1:sha256:d1e88b8f8a370cdbc216d4c4cac54484abf4272f402539e4809b80f11ceec133:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk2YzgyZWI0NzlhN2VlMWRjMmU4Y2QxMjZjZjA4NTg5ODc2ZjM4ZGFkYWI1NjVhYzMwZjQ0YmQ3OGY2YzMyYjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwYWRmYWU2NGZhYmFhODNjMzBjZGE1Y2JkYjE4NTdjYWU4NDY1NzU1MTJmMTg5ZGRkMDVkMWQ5NmY1MjA4NTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM2MTU5MTJlZDhiZTUwNzIzMzEwNDVlNjlmNDVmOWMyNDVlMzNlMmM5Njg5ZjZiYWJmZTdlZDA4ZjNhNjQxZTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBhYTRhNGNmOTZiNzIzN2E2OWJkNDFkOTZkN2QwNmI4MTY0Yzc4ZWYxYTUyMzYwYWZlYTMxMTVhMmU1NGVkMDIifQ"
+        },
+        {
+          "resource": "repo://compose.yaml#L78-L95",
+          "version": "repo-lines-v1:sha256:da1262bbc30df587ee4212c6feca8c9e1eaf0fee83e27cd0637e2b9059683628:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE4ZTFlMDIwM2VlMGIyNTU1MWRhMzdiMWFiYzUwNDU5MjMyYTkwNDhmNjJjM2JhODY1MTczNGNhODExZmUzYjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjljNzQzM2Q3YzkwNzQ4YjIzNjZhZmI0MDM3NTA0YjExYmFhYThlZDg5YjI1ODcyMWIxZGY1ZWM3M2QyMTc2ZWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY5NDZlODE3YzBiODNlZDZhOTc4NmMxM2ZlZjk2M2EyZWVjNmFmOTQ0NzQ1ZjllODhjZWQ0MTBhZGZkNDE0ZmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0204019f39c744a4b37a214cbc4ae4f6",
+      "statement": "The Dockerfile pins Python, Node and uv, builds bundled UI assets, installs a production wheel and runs both final targets as the non-root workbench user.",
+      "evidence": [
+        {
+          "resource": "repo://Dockerfile#L1-L14",
+          "version": "repo-lines-v1:sha256:7bf195cfe8bda26d4e0ad993cacc2067821750b1cfd71a9f122bec4c3a08370b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlYjQ4YmQ3NThhMDRiMjU4MGM2MDIxYTg2ZGZiY2UyMTFmMDE1YTFkZDVjYzRmMzljMTNiNmVjZmUxNTcyOTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkzZWFhMWFmMDA3NDQwZmQ1MmYwYjk1MmU2N2UyMjNjN2ZjOWU1NjQ0OGMyN2JlOTMwMDMwYjZlMTM0MmFiNmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBiYmIwOWYyODlhYzA4MTdiOThiZDMwZTdmMzQzMzNmZTAwMTNjMzRmMmYxNjZlZDRjYTk0ZGI5MTBhODRlNzcifQ"
+        },
+        {
+          "resource": "repo://Dockerfile#L28-L64",
+          "version": "repo-lines-v1:sha256:ae7f5ccae0a3c313325e361740ba063193aac25da2d8f2a8cce84cf05c3a6bf7:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJjZGE1ZjVhZGUwYzY5M2M5MzJkNWI3YTI1ZWUwNDc1ZjgyYzNlYzJiYTMxYjlmZDJkZGJhOGM5ZTQ2MmQxZTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYwOTNjY2I4NWQ0NGM2NzY0NmZhNzMyZjcwOGU0MWQzMTUyOWU3ODM0OTE0OGY4M2ZhNWM2YTY4MzZkM2JjYmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM3YjdkYjU4NWY1Mzc0M2I5M2M0YzlkMTBmMTg2OGM5NTg1Y2NiZDFkNTJlNzM5ZWQ3NGY2ZTBmN2ExZGUwMGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a9a9f72134864e42b3eb342ceb446c99",
+      "statement": "The Docker build context allowlists application inputs and excludes host dependencies, private runs, Git metadata and login directories.",
+      "evidence": [
+        {
+          "resource": "repo://.dockerignore",
+          "version": "repo-file-v1:sha256:a8f5ac25c8c332fcffbcd5c0b3680540abb8ecfe70feb93e7c8c1236c66af0e2"
+        }
+      ]
+    },
+    {
+      "id": "claim_be73d1ce2339423db66b57d1985da100",
+      "statement": "Runtime settings separate project path, bind address, port and public origin, and initialize metadata only when creating a project; reload inherits the same bearer token.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/runtime.py#L31-L70",
+          "version": "repo-lines-v1:sha256:de6faac9589a7eb30c96bc297e1d3dce9770626f178feac4e7cf639eed26699c:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyMGI0NTNmNWUwYzkyZDVmNmMyNTFhNWVhMTk2MGQ3MmYzYmQwNzk1NmFlODU3ZGEyMGUzMWE4OGM1NTk2OWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM3MjdlMmJiOWIxN2UxYjVjMmVhMzlkNTM2NjBkOGRhNGI2NDhiYmQ2MDdkYjk0M2ZmY2ZhNDk1MDZkZDZiZjYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYxMGJiMjFmZWQ4YzhiNGY5ZTJiNmFkYWQ3NmZiNmVhYTU1YWE3OGUzNzAxOWQ3MjhlYjZhYTdjMTNlNGViYzQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZjODU1ZjcxMWFlNjUzYmRjYzM2N2U3YmU3NzhjZTc0MzE2MjFmYTliNjU1MDc1ZmM0ZjQzMTUyYzYwMGVhNjMifQ"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/runtime.py#L89-L107",
+          "version": "repo-lines-v1:sha256:fd77b76a883364899130234b7bf8f3da1597001e3262c85e080474b92581dd04:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkxYTU2NWVlZDc1NmMzYjE5MWIyZGM0MzZlZDMzNzMwMThkODczOTE0NGYzOTY4NmFiYjcyY2YyNDE2NThkZDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5MDlhNTNhNjE4ZDAyOGUxZDMwMDBjMGE3YWJjZWVjYmU1ZmIzN2Y0ZTUxMWVmZTQ2NjQzZmFkNmU2Njg3MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjMxN2MwZDgwNmUzYzM2NDMxNDI3ZWQyMTJiNjc3MzJiMDZhNzYyMDY0MWYxMmViNmVhMmRjMmQyODUzNTM5MDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZkZWE4NmM2ODU5ZTVhODQzNjc4NGU5MmVjMGQ3MmI4ZjkzOWIwOTczODIyZjEwN2FmZDNhOGYxZjQ5NWVkNDUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a357a6b5f0b84d1d88bab74bfb639872",
+      "statement": "Compose healthchecks use the same normalized origin as the runtime while backend requests retain bearer, exact Host and same-origin protections.",
+      "evidence": [
+        {
+          "resource": "repo://compose.yaml#L9-L23",
+          "version": "repo-lines-v1:sha256:0395c3150bb0011099be2ea115b7bc7757caaa32227d0597672641f52149db0e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM3NTY3Y2NmMDRhYWFhMDU2NzgzM2IwZGQyZDEyYmNhYWU5NDQ1MTE5ODU1NDIxZGZmMGJlMDI1YjQ1OWYxODciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE5NmY5YzJkOWIwYTM5ZDY2OTJlYmFmZjZkZjVjM2EyY2M3Mzk5NmE2Yzk5YzcwZTFkNDA0MmVhOGJkYWIwNWYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVhMTg5MGM1OTY0NGE3NTAyMjZhNDYyM2U0ZmExYjI1OTkyN2JlYzRiZWJhNTE3NGFmZWU2ZjZmZGJlNjdiN2MiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE4NzAwNGViY2RjMjMxZWE4NmZlM2E3Nzg1OTJjMTA3MjA4YzdkNmUwNTI5YWI5NTdhNjk5NGYzY2RmOTUzNTYifQ"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/api/dependencies.py#L12-L22",
+          "version": "repo-lines-v1:sha256:e5a8dec9bff2c6c98420ecaef425f08e95b2eb2ead5998f6aaba703edcaf783f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA3Y2Q0ODQyZmEyZTgwNzE1NDJkMzZlYTQ5NWRlNjMxNWJkYTJmMDI3MzM5NjkzZGVmNTE2NDYwNDA4ZjQ0OGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI0NTU1ZGRhOTBjZmJlMTg3NWVlMzk2NTZlOWNiMTg5YzAzMTI2Y2ZkOGU3MjdiOTNiYjU4NGIzYTI2Y2RhMmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVlNzBkMWE4NmRmNzMwMDUxN2EyZmNiZmU5YThlYjcwMzdhNGY0YzYzZmVlODEyOWIyNTcyMjA5NWI3MDMxNTkifQ"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/api/middleware.py#L23-L63",
+          "version": "repo-lines-v1:sha256:02bd2c450cce8f790fefd564511f329a3b60c5a2d4c9463dfc1eaa97ed59fda2:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwMDE5NzlmNzdjNGVmOWVkODk5ZDhmZjQxNWNiNTU2MjIyYjNmOWEzNjkzOTJmOTNiM2I4MWNjYzQyYWZiNDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ4NTM1OTM5Zjc1NTZmYWRlOGQ4OGYyOGZlM2ZmM2Q2ZDlhYzZhNDUyZTlkNjgwMWRhZWJkNzcxMjMxMWFlNDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNmYjk3YzYzN2ZmODM4N2Y1MmZlNDM3NjlkNGY4Y2NlY2VlMzU4N2UwYWVmNWEyMDg1ZDdhOWExY2Q4NDgyNzEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_76d62dc3a6724a27aecfdae378422611",
+      "statement": "Stock Docker images and service mounts do not install native provider CLIs or mount host credentials or a Docker socket.",
+      "evidence": [
+        {
+          "resource": "repo://Dockerfile",
+          "version": "repo-file-v1:sha256:9da9f566ad0000f70ba07f094f6ba921f86b4b383db5544f740f54729933781b"
+        },
+        {
+          "resource": "repo://compose.yaml",
+          "version": "repo-file-v1:sha256:ec94ef2e2606ee8ebb8d336c44c9574388aaa05a3c48ab4f4c3a406f4091d6c1"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-07T23:10:49.194Z"
+  }
+}

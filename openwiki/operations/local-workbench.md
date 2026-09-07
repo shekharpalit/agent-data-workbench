@@ -4,6 +4,8 @@ title: Run the local workbench
 description: Start the bundled React UI, understand its local FastAPI session, and choose the correct interface for trace exploration, reviews, and execution.
 tags: [ui, fastapi, local, operations]
 sources:
+  - id: openwiki-source-012f2c78e3b1446dfc35803f
+    resource: repo://Makefile
   - id: openwiki-source-896da76531d8a33d2c9e76b8
     resource: repo://src/agent_data_workbench/api/application.py
   - id: openwiki-source-57d1f240e9d0552b9b058bdc
@@ -22,6 +24,8 @@ sources:
     resource: repo://src/agent_data_workbench/api/schemas.py
   - id: openwiki-source-12d025c9e4830dcc4dd30757
     resource: repo://src/agent_data_workbench/jobs.py
+  - id: openwiki-source-cda43c2246a0f3e6a5e89dce
+    resource: repo://src/agent_data_workbench/runtime.py
   - id: openwiki-source-013c413ca45af5e0569b46e0
     resource: repo://src/agent_data_workbench/server.py
   - id: openwiki-source-9c58a0b0672b6bdbd523d5ee
@@ -40,13 +44,17 @@ sources:
     resource: repo://ui/src/views/ResearchSnapshot.tsx
   - id: openwiki-source-826d1e88c728d7cfae868e97
     resource: repo://ui/tests/workflow.test.tsx
-generated: { by: "codex", at: "2026-09-07T22:32:10.726Z" }
+generated: { by: "codex", at: "2026-09-07T23:10:49.194Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T22:32:10.726Z
+    at: 2026-09-07T23:10:49.194Z
 ---
 
 # Run the local workbench
+
+From a repository checkout, `make init` and `make dev` run the workbench through Docker. Use `make ingest FILE=./traces.jsonl` to load a local export and open the backend's printed URL. `make up` runs the packaged app in the background; `make down` stops containers and preserves project data. See [Docker and Make workflow](containers.md) for setup and configuration.
+
+For a native Python process and existing host agent CLI authentication:
 
 ```sh
 uv run agent-data-workbench ui runs/workbench --open-browser
@@ -56,7 +64,7 @@ The CLI starts Uvicorn and binds a socket on `127.0.0.1`. The default port is se
 
 ## Local session and API
 
-Each server instance creates a fresh random access token. The printed URL puts it in the fragment; the frontend obtains the token and sends it as an Authorization bearer header for API requests. Use the complete printed URL again after a restart or an unauthorized response.
+Each full server start creates a fresh random access token. The Docker development reload process inherits that token across Python child restarts, so a code reload keeps the current browser session. The printed URL puts it in the fragment; the frontend obtains the token and sends it as an Authorization bearer header for API requests. Use the complete printed URL again after a restart or an unauthorized response.
 
 `api/middleware.py` checks the exact Host header and requires same-origin POST requests. API operations authenticate through FastAPI’s `HTTPBearer` dependency in `api/dependencies.py`. POST bodies must be JSON and are bounded to 2,000,000 bytes, including received chunks when Content-Length is absent. Responses use no-store caching, no-referrer, nosniff, and a content security policy. These are local browser boundaries; the app is not a hosted multiuser service.
 
@@ -101,7 +109,7 @@ Both research paths share the detail view, which shows successful, failed and pe
 
 Task audits in the UI are deterministic. A semantic rubric needs an explicitly configured judge through the [task CLI](../workflows/tasks-and-graders.md). Suite creation and training export use the [experiment CLI or SDK](../workflows/experiments-and-training.md). The Improvements view can launch paired comparisons from an existing suite and local runner configuration paths; it offers an explicit semantic judge when needed.
 
-Import trace files with the CLI before opening the UI. There is no browser upload endpoint. Exploration and inspection are local operations; starting native research is an explicit provider action that gives the chosen coding agent access to the investigation snapshot and context. Native account and model constraints still apply.
+Import trace files with the native CLI or `make ingest FILE=...`; refresh the UI after ingestion. There is no browser upload endpoint. Exploration and inspection are local operations; starting native research is an explicit provider action that gives the chosen coding agent access to the investigation snapshot and context. Native account and model constraints still apply.
 
 ## Troubleshooting and development
 

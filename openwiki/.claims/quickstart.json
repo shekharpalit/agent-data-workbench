@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:e660edb963c61a3b63bbda5911bc674826e8b7130ea7869cc9536a22ab003bc9",
+  "pageVersion": "sha256:18aaffc82a1e552f0be7854e706d951bd89a41666250ac44710c5f652044ea5b",
   "claims": [
     {
       "id": "claim_b88dee80e2334471a6a24e3675d10bd3",
@@ -99,10 +99,42 @@
           "version": "repo-lines-v1:sha256:47c4771214f25549123cb3d653a10f056a746ba4048d0f2df1fbd4cd1ce5298b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMwLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJmNGU1NTdhNGJiZDIzNjJiZGU1M2EwMmMwZGU4OTQ4Y2FmN2ZjMWFkOTY2ZDFhZWFkYzk3MTVlMTIzZDdiODVhIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJmYmE2M2ZkNTdiYzk4NzVlZmFiY2NkNWMzZThiZDQzMWQxN2I1ODM3ZGNiOTM0YTNkOTBkMWJiMTQ3MTFmMmQ4IiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI5M2U2N2VjZTJmMmE4Y2JlMjAwODQ4N2MyMDFjOGUxNTZjN2U1OTdlNmI4YWIxOTk4NGU3NzllODY3ZTI3YjlkIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI2NWNjZTAyMDhiNDg3YTdiODk4MzNlZDI1NDM3YWIwZDE2NTA4NTI2NmY4MTZiNDI3YTdjNWM1NTRhZjhiYmNiIn0"
         }
       ]
+    },
+    {
+      "id": "claim_a7604dbffebf4c50b7133544dc4d4c25",
+      "statement": "The repository supports Docker-first make init/dev setup with a persistent project, joint backend and UI startup, a trace-file import target, packaged background startup and configurable loopback port.",
+      "evidence": [
+        {
+          "resource": "repo://Makefile#L23-L60",
+          "version": "repo-lines-v1:sha256:fcf9b8d9f8e9fc183096c4ac26c9cba2ebea6774ee9a0395d14c886f09750acd:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlkYTcxNTBhNDY4MDRkMWMxNzkzMDEyN2ZiZjg4NTkzMzdlOTYwOGY0YjE5ZTUyZTBjMDE0NWQ0YWU2NjBjYjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE0ZTEwMTEwYzlhYTQ1ZDM5MDI4ZGYzNDFhNTM5YWQxMjI3MjljOTUyMTcyZGVkOTBiMjQwYTMyNTM2NDFmYTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIwYjI0OTUyYWJlZjhjMGJmN2ZiYTNhZWQyZDA3MDg3NDEzOGJmM2ZkZTE0ZDQ3ZDQ2ODFlMjI4MzQzMTgzMWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://compose.yaml#L26-L57",
+          "version": "repo-lines-v1:sha256:d1e88b8f8a370cdbc216d4c4cac54484abf4272f402539e4809b80f11ceec133:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk2YzgyZWI0NzlhN2VlMWRjMmU4Y2QxMjZjZjA4NTg5ODc2ZjM4ZGFkYWI1NjVhYzMwZjQ0YmQ3OGY2YzMyYjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwYWRmYWU2NGZhYmFhODNjMzBjZGE1Y2JkYjE4NTdjYWU4NDY1NzU1MTJmMTg5ZGRkMDVkMWQ5NmY1MjA4NTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM2MTU5MTJlZDhiZTUwNzIzMzEwNDVlNjlmNDVmOWMyNDVlMzNlMmM5Njg5ZjZiYWJmZTdlZDA4ZjNhNjQxZTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBhYTRhNGNmOTZiNzIzN2E2OWJkNDFkOTZkN2QwNmI4MTY0Yzc4ZWYxYTUyMzYwYWZlYTMxMTVhMmU1NGVkMDIifQ"
+        },
+        {
+          "resource": "repo://compose.yaml#L78-L95",
+          "version": "repo-lines-v1:sha256:da1262bbc30df587ee4212c6feca8c9e1eaf0fee83e27cd0637e2b9059683628:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE4ZTFlMDIwM2VlMGIyNTU1MWRhMzdiMWFiYzUwNDU5MjMyYTkwNDhmNjJjM2JhODY1MTczNGNhODExZmUzYjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjljNzQzM2Q3YzkwNzQ4YjIzNjZhZmI0MDM3NTA0YjExYmFhYThlZDg5YjI1ODcyMWIxZGY1ZWM3M2QyMTc2ZWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY5NDZlODE3YzBiODNlZDZhOTc4NmMxM2ZlZjk2M2EyZWVjNmFmOTQ0NzQ1ZjllODhjZWQ0MTBhZGZkNDE0ZmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7942b1520a2649f2b39d3a8c97003684",
+      "statement": "Docker initialization preserves a valid existing project, while the stock container provides workbench dependencies without installing or authenticating native agent CLIs.",
+      "evidence": [
+        {
+          "resource": "repo://Dockerfile",
+          "version": "repo-file-v1:sha256:9da9f566ad0000f70ba07f094f6ba921f86b4b383db5544f740f54729933781b"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/runtime.py#L58-L87",
+          "version": "repo-lines-v1:sha256:2a6d7cf896d76c5aeb897adf775deb7be8757bd9930e227d5ca63b0f9c309b4a:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1YjNhYjZmYmEzMThhMjk5NmYwODUzZTMwOGY4MmYyMDFkNzAwMjFhNWVhMGVhOTBlZGE1YWQyMDM4Y2ZjYjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiNWM4MjYzMmZjODJkNGIyYzM0MGY0MjU1OGJhM2RmYTMxYzc2NTVkZjZmY2MxNjhiNGZkY2U1N2ZhYzYwNDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIzZGYyYWNmMDZlOGMzZjAzYzcxMzVjNmU4YWM1YTljYTU0MzJhYmUwNmE3NGFjYTBmZGQ5YTUzYTAwOGY5ODciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFkNDk3YjljZDM0NDJmZjA1OGNkZmUxZTIyMjUzMjkxZGE0MjNiOGUzN2Y5NmZlZWRiN2ViOWYwMTgyYTVmMTUifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-07T22:32:10.726Z"
+    "at": "2026-09-07T23:10:49.194Z"
   }
 }

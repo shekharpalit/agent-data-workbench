@@ -1,0 +1,26 @@
+# Send only the application and its locked build inputs to Docker.
+*
+!Dockerfile
+!.dockerignore
+!pyproject.toml
+!uv.lock
+!.python-version
+!README.md
+!LICENSE
+!src/
+!src/**
+!tests/
+!tests/**
+!ui/
+!ui/**
+
+**/__pycache__/
+**/*.pyc
+**/.pytest_cache/
+**/.ruff_cache/
+**/node_modules/
+**/coverage/
+**/*.tsbuildinfo
+**/.env
+**/.env.*
+**/.DS_Store

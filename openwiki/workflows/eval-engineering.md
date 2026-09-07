@@ -3,9 +3,6 @@ type: guide
 title: Worlds, environments and continuous evaluation
 description: Connect reviewed domain knowledge, continuous target sessions, independently observed outcomes, calibrated graders and exact candidate decisions.
 tags: [evals, environments, conversations, calibration, coverage, harbor]
-verified:
-  - by: openwiki/0.5.0
-    at: 2026-09-07T22:32:10.726Z
 sources:
   - id: openwiki-source-ae7ba63e2ef90c1060215164
     resource: repo://src/agent_data_workbench/calibration.py
@@ -21,7 +18,12 @@ sources:
     resource: repo://src/agent_data_workbench/improvements.py
   - id: openwiki-source-c20ca7c3c1f89c4195dc51eb
     resource: repo://src/agent_data_workbench/worlds.py
-generated: { by: "codex", at: "2026-09-07T22:32:10.726Z" }
+  - id: openwiki-source-112a1a63cd2b0ece8abb41df
+    resource: repo://tests/test_environment_sessions.py
+generated: { by: "codex", at: "2026-09-07T23:10:49.194Z" }
+verified:
+  - by: openwiki/0.5.0
+    at: 2026-09-07T23:10:49.194Z
 ---
 
 # Worlds, environments and continuous evaluation
@@ -58,7 +60,7 @@ Keep the user request and allowed fixtures in `TaskSpec.input_json`. World metad
 
 ## Reproduce and inspect the environment
 
-`EnvironmentConfig` requires a name, version, authority description and explicit argv lists for `setup`, `reset`, `ready` and `inspect`. Optional fields are teardown argv, additional source files, declared dependency versions, expected initial-state digest and developer-selected timeout. Commands run on the trusted local host. This lifecycle is an integration contract, not container isolation or an automatic service simulator.
+`EnvironmentConfig` requires a name, version, authority description and explicit argv lists for `setup`, `reset`, `ready` and `inspect`. Optional fields are teardown argv, additional source files, declared dependency versions, expected initial-state digest and developer-selected timeout. Commands run on the trusted local host. This lifecycle is an integration contract, not container isolation or an automatic service simulator. With the [Docker workbench launcher](../operations/containers.md), local execution occurs inside the workbench container; make integration commands and their data available in that environment.
 
 Each phase receives one JSON object on stdin:
 
@@ -105,7 +107,7 @@ For command targets, the workbench launches one process and exchanges newline-de
 }
 ```
 
-The adapter must keep the real agent's conversation and tool state across requests. Evidence is the adapter's reported events; the workbench does not infer tool calls from prose. stdout is the protocol channel; stderr is retained separately. Crashes and malformed replies preserve attempted turns and partial conversation evidence. The final output is the last reply's output object; the verifier determines success, independently of whether the script ended.
+The adapter must keep the real agent's conversation and tool state across requests. Evidence is the adapter's reported events; the workbench does not infer tool calls from prose. stdout is the protocol channel; stderr is retained separately. Crashes and malformed replies preserve attempted turns and partial conversation evidence. The final output is the last reply's output object; the verifier determines success, independently of whether the script ended. If final source validation detects a target changing its pinned source during shutdown, the execution becomes `runner_error` with `cleanup_error`, while the observed turns and last output remain saved in `interaction.json`. A successful-looking reply does not turn that invalid execution into a pass.
 
 For reactive simulation, supply one initial turn plus `simulator: {command, source_files, timeout}`. The command receives `{"interaction": [...]}` with actual prior turns and returns `{"message": "..."}` or `{"message": null}` to stop. It can wrap a user-selected model/provider, but there is no built-in model-user service or automatic API billing. `max_turns` is optional and developer-controlled. A Python integration may instead implement `ReactiveUser` and `SessionTarget`. Built-in one-shot Codex/Claude target adapters do not silently become continuous sessions; use an explicit persistent command/session adapter. This is separate from native researcher session resume.
 

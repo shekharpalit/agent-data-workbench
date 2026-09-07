@@ -6,6 +6,12 @@ tags: [quickstart, traces, workflows, documentation]
 sources:
   - id: openwiki-source-868b3402493aef58bb5db066
     resource: repo://.python-version
+  - id: openwiki-source-e201e686a785f09b6d899f0b
+    resource: repo://compose.yaml
+  - id: openwiki-source-bb1ebe868e35e9e500714501
+    resource: repo://Dockerfile
+  - id: openwiki-source-012f2c78e3b1446dfc35803f
+    resource: repo://Makefile
   - id: openwiki-source-05ccef8d4cf1698187f20464
     resource: repo://pyproject.toml
   - id: openwiki-source-e6d7f541d0e16503af405c8b
@@ -22,6 +28,8 @@ sources:
     resource: repo://src/agent_data_workbench/project.py
   - id: openwiki-source-2dbe8753da4267ce652f414e
     resource: repo://src/agent_data_workbench/research/workspace.py
+  - id: openwiki-source-cda43c2246a0f3e6a5e89dce
+    resource: repo://src/agent_data_workbench/runtime.py
   - id: openwiki-source-013c413ca45af5e0569b46e0
     resource: repo://src/agent_data_workbench/server.py
   - id: openwiki-source-9c58a0b0672b6bdbd523d5ee
@@ -30,10 +38,10 @@ sources:
     resource: repo://ui/src/views/ManualResearchEditor.tsx
   - id: openwiki-source-a6ff0ad9c45aedc12177eaec
     resource: repo://ui/src/views/ResearchControls.tsx
-generated: { by: "codex", at: "2026-09-07T22:32:10.726Z" }
+generated: { by: "codex", at: "2026-09-07T23:10:49.194Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T22:32:10.726Z
+    at: 2026-09-07T23:10:49.194Z
 ---
 
 # Quickstart
@@ -42,7 +50,28 @@ Agent Data Workbench turns exported agent traces into investigated findings, rev
 
 This OpenWiki is the documentation entry point. Source code and tests remain authoritative.
 
-## Install from the repository
+## Start with Docker and Make
+
+From a repository checkout, install Docker with Compose v2 and Make, then run:
+
+```sh
+make init
+make dev
+```
+
+Docker installs the locked Python and TypeScript dependencies and initializes an empty project in a persistent named volume. Open the complete private URL printed by the backend. Ctrl-C stops the backend and UI watcher together. Repeating `make init` preserves existing project data.
+
+Import your own export from another terminal:
+
+```sh
+make ingest FILE=./traces.jsonl
+```
+
+Refresh the UI after import. JSON and JSONL exports use the normal trace importer. `make up` runs the packaged app in the background; `make down` stops containers while keeping their data. Change the host port with `make dev PORT=9000`. On Windows, use WSL2 with Docker integration. See [Docker and Make workflow](operations/containers.md) for volumes, checks, rebuilding and configuration.
+
+Manual research works in the stock container. Native agent investigations additionally need the selected Codex or Claude Code CLI installed and authenticated in the backend's environment. To use an existing host CLI login, follow the native setup below.
+
+## Native setup and agent CLI authentication
 
 Use Python 3.14+ and uv. The repository pins Python 3.14.7 and locks its dependency resolution:
 
@@ -121,6 +150,7 @@ Start with one important failure: capture its evidence, review the relevant doma
 | Define worlds, continuous conversations, independent state, human calibration, coverage or Harbor tasks | [Eval engineering](workflows/eval-engineering.md) |
 | Execute a baseline/candidate comparison or export training records | [Experiments and training exports](workflows/experiments-and-training.md) |
 | Analyze a small batch or grade output files already produced | [Batch analysis and evaluation](workflows/batch-evaluation.md) |
+| Set up containers, import host files, or manage persistent data | [Docker and Make workflow](operations/containers.md) |
 | Run or troubleshoot the local trace workbench | [Local workbench](operations/local-workbench.md) |
 | Understand the SDK, storage, CLI, and server boundaries | [System architecture](architecture/system.md) |
 | Change code and run the relevant checks | [Development and verification](development/contributing.md) |

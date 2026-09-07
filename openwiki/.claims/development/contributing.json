@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:6639ac5279f3fb84560b746a47db3b4d4d084072b74c2f1c293bf0f160e76a94",
+  "pageVersion": "sha256:3efb319cab7f96a189bb8a0767df766b613532ecdc4df18fcabc913bb2e4cca6",
   "claims": [
     {
       "id": "claim_80e3a5075dd34ed7b7f0393a15e92a9a",
@@ -22,15 +22,15 @@
     },
     {
       "id": "claim_5394a41e2023448b8e72c4a3ec7b5fe9",
-      "statement": "The frontend build runs TypeScript checking followed by Vite, which replaces bundled assets under the Python package; the dev command watches and rebuilds rather than launching a separate development server.",
+      "statement": "The production frontend build checks TypeScript and replaces bundled assets; development watches and rebuilds without a separate UI server, retaining prior assets and polling while excluding generated files and dependencies.",
       "evidence": [
         {
           "resource": "repo://ui/package.json#L9-L15",
-          "version": "repo-lines-v1:sha256:b61ec3586d76a0ef1303353edd0292e58cb4a00196f2eb45d4dda80d7e8caa73:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzQ4MzNkNTk0OWMwM2E0MGNhOTUyNDkxNjEwYTY2NTk2NDRiM2FhNDY2MzYyZjc5OTAyMGRiZjE5ODE1NDdkYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTNlNWM0NGYxNTIxYzgyOGNmMWViYmVlOWMyZTk4Nzc2MzQzMDg3ZWEwMTVkYjRmYjRhMzljMjRkM2UyMTMyZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGEyNTNkYTUxOTI0OTQyNDQ4NzRjNDE2ZTQzOTYzZDZlOTRiMzQwY2ZmMWY0MTYzMWRlOWE5NjUwMTQ2NDBlMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODI0OWI5ZTM3ZjZlNzkxZDY1ZjZkN2Q1MDljZmJhNGM4NjIxY2ZjNWE1ZmUyNmRiOTljMmYzMmY1YzM4MjhlNiJ9"
+          "version": "repo-lines-v1:sha256:b61ec3586d76a0ef1303353edd0292e58cb4a00196f2eb45d4dda80d7e8caa73:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzQ4MzNkNTk0OWMwM2E0MGNhOTUyNDkxNjEwYTY2NTk2NDRiM2FhNDY2MzYyZjc5OTAyMGRiZjE5ODE1NDdkYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTNlNWM0NGYxNTIxYzgyOGNmMWViYmVlOWMyZTk4Nzc2MzQzMDg3ZWEwMTVkYjRmYjRhMzljMjRkM2UyMTMyZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMmZjZGMxZWQzZGFkMGY2ZmVjYjhlMmJhOWQzNzUyM2VkYTYxZTg2YjI1M2NmOGNlZThkYmZjYzJlOTVjYzM1YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODI0OWI5ZTM3ZjZlNzkxZDY1ZjZkN2Q1MDljZmJhNGM4NjIxY2ZjNWE1ZmUyNmRiOTljMmYzMmY1YzM4MjhlNiJ9"
         },
         {
-          "resource": "repo://ui/vite.config.ts#L4-L10",
-          "version": "repo-lines-v1:sha256:6adc173b0bd5908c6fc0aee48ceb3603874307b0b87b730b486c92462e1b5108:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjJjZWNiMTQ0YTQ2ZjVkY2YxMmE2MTY5ZmNlZWQ3Njk1ZTgyOTRiMDkwZGU3NmYzNjYxY2RkMDI0OTMwMDE0NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ1Y2QyZmI0ZjNkZjg4NDUxNTI1NWIzOTUyM2YyZjhiNTQ3MmJlZWE5ZjU2NmZmY2EyMDRkYjgwMjU2MTA0MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzBlMDkzMWNlZWNlOWM4YTE0OWEzNjZkNGRhMzA2Y2YwMjEyZGVjNTc3ZWQyNjI2YzMxNTkyMWUxZTM3MWIzMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjZmNWI0MGIxNTg0NTdkMTc4NjRmMjE3OTA3ODZkZDVhMmVjZGI2NGI2NmE2NTFmNzg4ZDRlMjVjZDMzMDNkMiJ9"
+          "resource": "repo://ui/vite.config.ts#L4-L23",
+          "version": "repo-lines-v1:sha256:0e7718d29e90c698bc6f172b845471200e92639981282f87c598511a7794ecfe:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU3MjZmYmM5ZTNlZGNlYzUwZWRmZmI4MjQ3NDBjNTk0ZjcyNjZhOWNmODViMjgxMzZiMTU5ZTM2NTM5ZDlmYzYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMwZTA5MzFjZWVjZTljOGExNDlhMzY2ZDRkYTMwNmNmMDIxMmRlYzU3N2VkMjYyNmMzMTU5MjFlMWUzNzFiMzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
     },
@@ -155,10 +155,34 @@
           "version": "repo-lines-v1:sha256:ad0b86261a385b7c534f4ce5b19c485173198c0f8fa95f520bcc903e0bfc788b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAyLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJmMGZlZTQ0MGYzZmVmZGYwNjEzYjdjZjExZmViMzJmNTcyMjdiNmY3Nzc5NmNhZDRmZWJhZjBkMDU5NjY3YWZlIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiIwNzhmY2E4YWU2NWMzNWFiZDYxMTM3MTNhMmU5YTAzOGVjMjQ3ZTBiYTYzN2Y5MDA3ZjczMTRjOTViMzY4Mzg2IiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJkZDVkYjg5ZjRjNjNkYjg3YTM2ZTNlMWUyOGE3M2YwOGI2YTAxZTcyODE5ZjdkNjMzZTkwYzNiYTRmMzBiMDUwIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
         }
       ]
+    },
+    {
+      "id": "claim_4a3f3a40284244839ff1e429ade9aa15",
+      "statement": "The Makefile provides Docker setup and joint backend/UI development, and runs Python tests, Ruff, UI tests, formatting and the TypeScript production build in containers.",
+      "evidence": [
+        {
+          "resource": "repo://Makefile#L23-L55",
+          "version": "repo-lines-v1:sha256:f5fd159cee82adb4bb280d7b76aefcbee644d8cc40ba29bcdcf2a3b1035eb1f6:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlkYTcxNTBhNDY4MDRkMWMxNzkzMDEyN2ZiZjg4NTkzMzdlOTYwOGY0YjE5ZTUyZTBjMDE0NWQ0YWU2NjBjYjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJmMDljYjUzYTVkM2FkNjIzOWU1MGUxMWEzNGVhYTcwODFkOWUxZjBlY2I5ZjhkZjFjZDAyOGM0MDg1MjBmZjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIwYjI0OTUyYWJlZjhjMGJmN2ZiYTNhZWQyZDA3MDg3NDEzOGJmM2ZkZTE0ZDQ3ZDQ2ODFlMjI4MzQzMTgzMWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRlZTc5ZjllNTRlMDEyYTkyMWJiMDJiMGIwZTljY2FiNmE2NzZkMDhkNmU4ODk5Y2UxNjZjODc1ZmJlZjE1MjIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_17b18e4b2cd44a3aa482a857e2e043f1",
+      "statement": "Runtime tests exercise idempotent initialization, container request boundaries, reload token preservation and real signal-driven server shutdown.",
+      "evidence": [
+        {
+          "resource": "repo://tests/test_runtime.py#L144-L238",
+          "version": "repo-lines-v1:sha256:33724309af8e62adcae205eed450e6c1e5dbd3812dee90b2e2f317506a6d4460:eyJzZWxlY3RlZExpbmVDb3VudCI6OTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhMDI1ZmM2YTQ0NDIwMTRmODcyZjRhZTE4M2NmMzhhOWM1MDdkN2ZlZDA0MTNhN2UxNTM1MTdmNWYzNzUyYzAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkyYzkwYzU5ODE4MDZlNWYzNThjNmZkNjRhM2JmYTM1ZDNkMjk5NzA3YjVlYTUzMTgwYmFhZDkyYjhkODBmZTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE0ZjA4OTU0MjA5YzU1OTc3NjFlMDI2ZWM3YTY0NzY4NmQ2MWU4YjA1ZTM0NjI1YjkyZWZmMWY3YjkzOWRkYzQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUwMjQxYjBiZTUwYmE1ODgzZDEzMDJhYTBjZWE2Y2UzN2M1NzFjMzJkNjE4MjhmZmU3ZWJlZjZkYTM3OWNhODYifQ"
+        },
+        {
+          "resource": "repo://tests/test_runtime.py#L20-L68",
+          "version": "repo-lines-v1:sha256:28c35c4d132eedeae8ddc0508f031d7846d02594893c13bbe8e844a581fd454f:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQzY2ZjYjAxY2QwNWIyMzEyNTQzZjNhZWZiNjZhMGQ0NzQ3ZGVmZTZhYjVjMjc2MmU5ZDJlMDliYmIzZDUxYzkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdhMzRlNWFlMGYzZTJlYjhlOWEwMDY3YjhkNGY5ODYyYTBhYmExNmRiY2EzMzUzYjAyODlmMDE3OTgxZTg3ZTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE3YzAzMDQ3MDAwZWJhOTQ2MWZjNDExNTQ2YjAwM2ZlMTZiNjdiZTYxZjBkMmMxNWM3ZDRlNDI4ZTMxZmNjNmQifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-07T22:32:10.726Z"
+    "at": "2026-09-07T23:10:49.194Z"
   }
 }

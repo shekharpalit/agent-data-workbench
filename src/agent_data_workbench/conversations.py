@@ -268,9 +268,9 @@ class ConversationRunner:
             if session is not None:
                 try:
                     session.close()
-                except OSError, RuntimeError:
+                except OSError, RuntimeError, ValueError:
                     result.status = "runner_error"
-                    result.error = "Target session did not close cleanly"
+                    result.error = "Target session cleanup or source validation failed"
                     stop_reason = "cleanup_error"
             result.latency_seconds = time.monotonic() - started
             record = {

@@ -5,8 +5,12 @@ description: How the CLI, Python SDK, FastAPI service, React workbench, and loca
 tags: [architecture, sdk, persistence, provenance]
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T22:32:10.726Z
+    at: 2026-09-07T23:10:49.194Z
 sources:
+  - id: openwiki-source-e201e686a785f09b6d899f0b
+    resource: repo://compose.yaml
+  - id: openwiki-source-bb1ebe868e35e9e500714501
+    resource: repo://Dockerfile
   - id: openwiki-source-896da76531d8a33d2c9e76b8
     resource: repo://src/agent_data_workbench/api/application.py
   - id: openwiki-source-57d1f240e9d0552b9b058bdc
@@ -41,6 +45,8 @@ sources:
     resource: repo://src/agent_data_workbench/research/sessions.py
   - id: openwiki-source-2dbe8753da4267ce652f414e
     resource: repo://src/agent_data_workbench/research/workspace.py
+  - id: openwiki-source-cda43c2246a0f3e6a5e89dce
+    resource: repo://src/agent_data_workbench/runtime.py
   - id: openwiki-source-069858a5e395202064ced424
     resource: repo://src/agent_data_workbench/store.py
   - id: openwiki-source-c20ca7c3c1f89c4195dc51eb
@@ -49,7 +55,7 @@ sources:
     resource: repo://tests/test_manual_research_api.py
   - id: openwiki-source-09d2a8f36f3ecb7ab9487ab2
     resource: repo://tests/test_store.py
-generated: { by: "codex", at: "2026-09-07T22:32:10.726Z" }
+generated: { by: "codex", at: "2026-09-07T23:10:49.194Z" }
 ---
 
 # System architecture
@@ -130,3 +136,11 @@ Next: [import and explore traces](../workflows/traces.md), [run the local workbe
 Accepted world lineage heads feed research context; a task can explicitly pin an older accepted world by UUID and digest. Independent state assertions read only observer-owned evidence, separately from target artifacts. Experiment records retain world/task snapshots, effective runner identities, chronological conversation evidence, and copied trial files.
 
 Calibration freezes actual attempt evidence and records reviewer labels and adjudication. Behavioral coverage maps exact trace/task versions to reviewed capabilities and slices; it does not reuse research-completion counts as coverage. Improvement records capture source snapshots and a patch, require exact baseline/candidate identities when linked to experiments, and retain explicit keep/reject/inconclusive decisions with available calibration summaries. A decision does not apply or deploy code.
+
+## Container process and storage ownership
+
+The root Makefile drives Docker Compose. Development runs a FastAPI/Uvicorn backend and a separate TypeScript build watcher. The watcher writes a shared asset volume that FastAPI serves on the same browser origin; it does not expose a second UI server. Compose waits for the UI assets to be readable before starting the backend. The packaged app instead installs a wheel containing the production bundle and runs one Python service. See [Docker and Make workflow](../operations/containers.md).
+
+The development image contains Python, Node and locked development dependencies. The runtime image uses the production Python environment. Both run as the workbench user. A named volume holds `/data/project` independently from source mounts and container lifetime. Python dependencies remain under `/opt/venv`; UI dependencies have their own named volume.
+
+`runtime.py` creates an empty project once or opens the existing project, then starts Uvicorn. Development reload uses an import-string factory and inherits the same bearer token across child restarts. The externally visible origin is configured separately from the container bind address. Compose binds Python to `0.0.0.0` inside the container and publishes only the host loopback address. Native agent CLI processes still need installation and authentication in the environment hosting the backend.

@@ -1,3 +1,4 @@
+import json
 import sys
 from pathlib import Path
 
@@ -280,6 +281,72 @@ print(json.dumps({'message':'okay','output':{'claim':'success'}}), flush=True)
         "status": "runner_error",
         "output": {},
         "source_is_pinned": True,
+    }
+
+
+def test_source_mutation_during_shutdown_invalidates_reply_and_saves_evidence(tmp_path):
+    # Given: the target replies before changing its pinned source during shutdown.
+    runner = configured(
+        tmp_path,
+        environment=False,
+        script="""
+import json,signal,sys
+from pathlib import Path
+
+def shutdown(signum=None, frame=None):
+    Path(__file__).write_text('changed during shutdown')
+    raise SystemExit(0)
+
+signal.signal(signal.SIGTERM, shutdown)
+request=json.loads(sys.stdin.readline())
+print(json.dumps({'message':'okay','output':{'claim':'success'}}), flush=True)
+sys.stdin.read()
+shutdown()
+""",
+        turns=[UserTurn(message="Run")],
+    )
+    trial = tmp_path / "trial"
+    trial.mkdir()
+    # When: cleanup detects the changed source after a successfully parsed reply.
+    result = runner.run({}, trial, 0)
+    record = runner.trial_evidence(trial)["conversation"]
+    # Then: the attempt is invalid and its evidence persists instead of raising out of cleanup.
+    assert {
+        "execution": {"status": result.status, "output": result.output, "error": result.error},
+        "interaction": {
+            "status": record["status"],
+            "stop_reason": record["stop_reason"],
+            "error": record["error"],
+            "turns": record["turns"],
+        },
+        "saved_record": json.loads((trial / "interaction.json").read_text()),
+    } == {
+        "execution": {
+            "status": "runner_error",
+            "output": {"claim": "success"},
+            "error": "Target session cleanup or source validation failed",
+        },
+        "interaction": {
+            "status": "runner_error",
+            "stop_reason": "cleanup_error",
+            "error": "Target session cleanup or source validation failed",
+            "turns": [
+                {
+                    "index": 0,
+                    "user": {"message": "Run"},
+                    "reply": {
+                        "message": "okay",
+                        "output": {"claim": "success"},
+                        "evidence": [],
+                        "cost_usd": None,
+                        "usage": {},
+                    },
+                    "status": "completed",
+                    "error": None,
+                }
+            ],
+        },
+        "saved_record": record,
     }
 
 

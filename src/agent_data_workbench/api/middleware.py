@@ -1,5 +1,7 @@
 """Session access, response headers and bounded bodies around the FastAPI application."""
 
+from urllib.parse import urlsplit
+
 from starlette.datastructures import Headers, MutableHeaders
 from starlette.exceptions import HTTPException
 from starlette.responses import JSONResponse
@@ -21,7 +23,7 @@ class RequestBoundaryMiddleware:
     def __init__(self, app: ASGIApp, *, origin: str):
         self.app = app
         self.origin = origin
-        self.host = origin.removeprefix("http://")
+        self.host = urlsplit(origin).netloc
 
     async def __call__(self, scope: Scope, receive: Receive, send: Send):
         if scope["type"] != "http":

@@ -8,6 +8,8 @@ sources:
     resource: repo://.python-version
   - id: openwiki-source-8037e2358a2c4f9b2c722a11
     resource: repo://AGENTS.md
+  - id: openwiki-source-012f2c78e3b1446dfc35803f
+    resource: repo://Makefile
   - id: openwiki-source-05ccef8d4cf1698187f20464
     resource: repo://pyproject.toml
   - id: openwiki-source-f0a6e7dc03522b2682f88655
@@ -26,6 +28,8 @@ sources:
     resource: repo://tests/test_manual_research_api.py
   - id: openwiki-source-3589dc1fc29ba0bfe0e2a50c
     resource: repo://tests/test_research.py
+  - id: openwiki-source-d19087670ca2c8e59a9fb6a3
+    resource: repo://tests/test_runtime.py
   - id: openwiki-source-af0e5443d83442c11181e6ce
     resource: repo://tests/test_workbench_execution.py
   - id: openwiki-source-436f4179fe22abf615d2f7d0
@@ -38,17 +42,28 @@ sources:
     resource: repo://ui/tests/research.test.tsx
   - id: openwiki-source-a741d432f952c0dbfb4fb35d
     resource: repo://ui/vite.config.ts
-generated: { by: "codex", at: "2026-09-07T22:32:10.726Z" }
+generated: { by: "codex", at: "2026-09-07T23:10:49.194Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T22:32:10.726Z
+    at: 2026-09-07T23:10:49.194Z
 ---
 
 # Development and verification
 
 [AGENTS.md](../../AGENTS.md) is the repository's implementation brief; [CLAUDE.md](../../CLAUDE.md) points Claude Code to the same conventions. Use [system architecture](../architecture/system.md) to locate the owner of a behavior before changing it.
 
-## Set up and verify Python
+## Start development with Docker
+
+Install Docker with Compose v2 and Make; on Windows use WSL2. From the repository root:
+
+```sh
+make init
+make dev
+```
+
+Open the backend's printed private URL. Python source changes restart the backend with the same browser token. The UI watcher rebuilds the bundled assets; refresh the browser after a rebuild. Ctrl-C stops both services. `make test` runs Python tests, Ruff checks, UI tests, formatting and the TypeScript/production build inside containers. `make build` builds both development and packaged images. Use [Docker and Make workflow](../operations/containers.md) for imports, persistent volumes and custom ports.
+
+## Set up and verify Python natively
 
 The repository pins Python 3.14.7 in `.python-version`, declares Python 3.14+ support, and targets Python 3.14 in Ruff. Keep uv current enough to obtain the pinned interpreter.
 
@@ -73,7 +88,7 @@ npm --prefix ui test
 npm --prefix ui run format:check
 ```
 
-The build runs strict TypeScript compilation, then Vite. Vite writes into `src/agent_data_workbench/web`, replacing the previous bundle. Commit those assets with the source so Python installations work without Node. For iteration, run `npm --prefix ui run dev` beside the local Python workbench; it watches and rebuilds files rather than starting a separate UI development server. Refresh the browser after a rebuild.
+The production build runs strict TypeScript compilation, then Vite. Vite writes into `src/agent_data_workbench/web`, replacing the previous bundle. The development watcher retains existing assets while writing the next build, ignores its own output and dependencies, and uses filesystem polling for container bind mounts. Commit those assets with the source so Python installations work without Node. For iteration, run `npm --prefix ui run dev` beside the local Python workbench; it watches and rebuilds files rather than starting a separate UI development server. Refresh the browser after a rebuild.
 
 ## Tests describe behavior
 
@@ -118,3 +133,5 @@ After source changes are complete, use the [OpenWiki maintenance workflow](../op
 Use `test_environment_sessions.py` for reset drift, partial transcripts, cancellation, source changes, and reactive-user behavior; `test_worlds_improvements.py` for historical world references, exact candidate drift, and multiple conversation scenarios in one suite. `test_calibration_coverage.py` covers actual human/model labels, adjudication, slice gaps, stale mappings and exposure. `test_workflow_controls.py` exercises the typed UI API and CLI with provider constructors forbidden.
 
 `test_harbor_export.py` verifies real template bundling, visible-input separation, source exposure, pinned manifests and synthetic CLI transport. It does not run a Harbor container or a provider model. `test_conversation_exports.py` uses real persistent local sessions to verify complete observed trajectories, exclusion of hidden truth and identical preferences, and legacy one-shot compatibility. `ui/tests/workflow.test.tsx` verifies human review and exact evidence identities, including hiding grader answers before a first label. See [eval engineering](../workflows/eval-engineering.md) for adapter contracts.
+
+`tests/test_runtime.py` covers idempotent initialization, refusal to adopt unrelated directories, normalized browser origins, bearer/Host/Origin enforcement under container binding, inherited reload tokens, and real SIGINT/SIGTERM listener shutdown. `test_environment_sessions.py` also verifies that a target mutating its pinned source during shutdown becomes invalid while its already observed interaction remains saved.
