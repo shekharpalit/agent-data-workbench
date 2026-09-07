@@ -31,6 +31,7 @@ const item: Investigation = {
     analysis: {
       summary: "Intermediate finding",
       findings: [],
+      cases: [],
       limitations: [],
     },
     signals: [],
@@ -57,6 +58,7 @@ describe("native research", () => {
     const user = userEvent.setup();
     wrap(<ResearchControls />);
     // When
+    await user.click(screen.getByRole("button", { name: "Use an agent" }));
     await user.selectOptions(
       screen.getByLabelText("Analysis mode"),
       "complete",
@@ -90,9 +92,17 @@ describe("native research", () => {
       records: [],
       next_cursor: null,
     });
+    vi.spyOn(api, "searchResearch").mockResolvedValue({
+      records: [],
+      next_cursor: null,
+      coverage: item.coverage,
+    });
     const user = userEvent.setup();
     wrap(<InvestigationDetail id={item.id} navigate={() => {}} />);
     // When
+    await user.click(
+      await screen.findByRole("button", { name: "Continue with an agent" }),
+    );
     await user.click(
       await screen.findByRole("button", { name: "Resume investigation" }),
     );

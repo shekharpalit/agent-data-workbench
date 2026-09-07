@@ -8,6 +8,8 @@ sources:
     resource: repo://.python-version
   - id: openwiki-source-05ccef8d4cf1698187f20464
     resource: repo://pyproject.toml
+  - id: openwiki-source-e6d7f541d0e16503af405c8b
+    resource: repo://src/agent_data_workbench/api/routers/investigations.py
   - id: openwiki-source-2ee7fba2bd1c703c70f5f285
     resource: repo://src/agent_data_workbench/cli/project.py
   - id: openwiki-source-25b71218f03a1e216debf67e
@@ -20,10 +22,14 @@ sources:
     resource: repo://src/agent_data_workbench/server.py
   - id: openwiki-source-9c58a0b0672b6bdbd523d5ee
     resource: repo://tests/test_identifiers.py
-generated: { by: "codex", at: "2026-09-07T20:56:39.229Z" }
+  - id: openwiki-source-2d1b137901c9e38ec418fdad
+    resource: repo://ui/src/views/ManualResearchEditor.tsx
+  - id: openwiki-source-a6ff0ad9c45aedc12177eaec
+    resource: repo://ui/src/views/ResearchControls.tsx
+generated: { by: "codex", at: "2026-09-07T21:47:36.843Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T20:56:39.229Z
+    at: 2026-09-07T21:47:36.843Z
 ---
 
 # Quickstart
@@ -64,6 +70,14 @@ Version 0.3 uses UUIDs for internal artifacts and keeps external trace IDs uncha
 
 Import the corpus needed for your question; native research makes the full snapshot available. Preserve source groups such as conversation IDs so related tasks stay together in later splits. Add reviewed policies and tool contracts before asking an analyzer to judge behavior that depends on them.
 
+## Research without a model
+
+In the local UI, open **Investigations → Research myself**, enter your question, choose a mode and click **Start manual research**. This opens a captured dataset without a Codex/Claude process or a provider account.
+
+Search records in **Research dataset**, inspect original fields, save your observations as record outcomes, and add journal notes. **Write findings** lets you connect conclusions to exact trace/pointer/quote evidence. Save a draft while working and publish final findings when ready. You can also create bar charts from label/value rows. Complete mode requires successful outcomes for every input; exploratory research can finish with partial coverage.
+
+A saved investigation can later use **Bring in an agent** on the same snapshot, or you can continue manually. Save drafts before leaving the view or refreshing. [The research guide](workflows/investigations.md) covers evidence, coverage and handoff details.
+
 ## Run native research
 
 Use an installed, authenticated Codex or Claude Code CLI. Ingestion and local exploration need no model. To start a persistent native investigation:
@@ -90,7 +104,7 @@ Version 0.3 projects remain compatible. Native investigations use protocol 0.4; 
 | Goal | Read |
 | --- | --- |
 | Map exports, preserve IDs, or implement an importer | [Import and explore traces](workflows/traces.md) |
-| Add project knowledge and investigate evidence | [Investigations and reviewed knowledge](workflows/investigations.md) |
+| Research manually or with an agent and add project knowledge | [Investigations and reviewed knowledge](workflows/investigations.md) |
 | Turn findings or chat prefixes into reviewed evaluations | [Tasks and grader review](workflows/tasks-and-graders.md) |
 | Execute a baseline/candidate comparison or export training records | [Experiments and training exports](workflows/experiments-and-training.md) |
 | Analyze a small batch or grade output files already produced | [Batch analysis and evaluation](workflows/batch-evaluation.md) |

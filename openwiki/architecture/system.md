@@ -5,12 +5,14 @@ description: How the CLI, Python SDK, FastAPI service, React workbench, and loca
 tags: [architecture, sdk, persistence, provenance]
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T20:56:39.229Z
+    at: 2026-09-07T21:47:36.843Z
 sources:
   - id: openwiki-source-896da76531d8a33d2c9e76b8
     resource: repo://src/agent_data_workbench/api/application.py
   - id: openwiki-source-57d1f240e9d0552b9b058bdc
     resource: repo://src/agent_data_workbench/api/dependencies.py
+  - id: openwiki-source-e6d7f541d0e16503af405c8b
+    resource: repo://src/agent_data_workbench/api/routers/investigations.py
   - id: openwiki-source-98bfc373ed8e75b28dcf239e
     resource: repo://src/agent_data_workbench/api/routers/tasks.py
   - id: openwiki-source-fd74f7907459785462506ae7
@@ -41,9 +43,11 @@ sources:
     resource: repo://src/agent_data_workbench/store.py
   - id: openwiki-source-c90a57f259e123cf538cdd9c
     resource: repo://src/agent_data_workbench/workflow.py
+  - id: openwiki-source-3e6ae5cbfb3aa3af0850499a
+    resource: repo://tests/test_manual_research_api.py
   - id: openwiki-source-09d2a8f36f3ecb7ab9487ab2
     resource: repo://tests/test_store.py
-generated: { by: "codex", at: "2026-09-07T20:56:39.229Z" }
+generated: { by: "codex", at: "2026-09-07T21:47:36.843Z" }
 ---
 
 # System architecture
@@ -59,6 +63,9 @@ flowchart TD
   SDK --> Store
   Store --> SQLite[Local SQLite traces]
   SDK --> Artifacts[Versioned JSON and reports]
+  Human[Human researcher] --> UI
+  SDK --> Workspace[Shared ResearchWorkspace]
+  Workspace --> Snapshot
   SDK --> Session[Native Codex or Claude Code session]
   Session --> Tools[MCP and Python workspace tools]
   Tools --> Snapshot[Investigation SQLite snapshot and outcomes]
@@ -92,7 +99,11 @@ Internal artifact IDs are canonical UUID strings validated with Python UUID/Pyda
 
 Structured artifacts are written through `persistence.atomic_text`; Markdown escaping is shared through `reports.md`. Mutating workflows use a nonblocking POSIX project lock; a concurrent mutation returns a busy error. The HTTP job queue separately permits one background model job at a time. These mechanisms serve a local process-and-files workflow, not a distributed job system.
 
-## Native research workspace
+## Shared human and agent research workspace
+
+Manual UI research creates a snapshot through the same SDK without invoking a native CLI or background model job. The browser can search and read that investigation snapshot, record typed outcomes, checkpoint notes, publish findings and create charts. It uses the same evidence and complete-pass rules as native research. Human creation does not introduce a different project format or a separate dataset owner.
+
+The manual HTTP mutation routes acquire the same nonblocking session lock as native research. This prevents a stale browser tab from publishing final findings or changing outcomes underneath a running native session. The native session's own SDK and MCP tools remain available while it owns that lock. Pausing the native session returns manual write access; the UI keeps unsaved findings, note and chart forms mounted but hidden and disabled during active sessions.
 
 `research/sessions.py` launches one native Codex or Claude Code session per invocation. The native agent owns planning, tools, code execution, context management, and session continuation. The workbench supplies `ResearchWorkspace`, exposed through Python, the CLI, and the official MCP SDK. It does not drive another model-call loop. Existing `Analyzer` integrations remain available for batch analysis, task design and semantic judging.
 

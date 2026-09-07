@@ -707,3 +707,35 @@ textarea {
     align-items: flex-start;
   }
 }
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.checkbox-label input {
+  width: auto;
+}
+.research-choice {
+  margin-bottom: 8px;
+}
+
+fieldset {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 0;
+}
+legend {
+  padding: 0 6px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.manual-research-editor {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}

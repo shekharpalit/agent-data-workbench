@@ -18,20 +18,26 @@ sources:
     resource: repo://tests/test_cli.py
   - id: openwiki-source-9c58a0b0672b6bdbd523d5ee
     resource: repo://tests/test_identifiers.py
+  - id: openwiki-source-3e6ae5cbfb3aa3af0850499a
+    resource: repo://tests/test_manual_research_api.py
   - id: openwiki-source-3589dc1fc29ba0bfe0e2a50c
     resource: repo://tests/test_research.py
   - id: openwiki-source-af0e5443d83442c11181e6ce
     resource: repo://tests/test_workbench_execution.py
   - id: openwiki-source-436f4179fe22abf615d2f7d0
     resource: repo://ui/package.json
+  - id: openwiki-source-434ba4f21f543ddea1569be6
+    resource: repo://ui/tests/manual-editor.test.tsx
+  - id: openwiki-source-85ab1a7a14e4d8d1bcfef689
+    resource: repo://ui/tests/manual-research.test.tsx
   - id: openwiki-source-6c2199ef844fc5690d6362d0
     resource: repo://ui/tests/research.test.tsx
   - id: openwiki-source-a741d432f952c0dbfb4fb35d
     resource: repo://ui/vite.config.ts
-generated: { by: "codex", at: "2026-09-07T20:56:39.229Z" }
+generated: { by: "codex", at: "2026-09-07T21:47:36.843Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T20:56:39.229Z
+    at: 2026-09-07T21:47:36.843Z
 ---
 
 # Development and verification
@@ -79,6 +85,7 @@ For example, trace-store tests check that an ID conflict rolls back the whole ne
 | UUIDs and project compatibility | `tests/test_identifiers.py` |
 | CLI workflow integration | `tests/test_cli.py` |
 | Native research, coverage and MCP | `tests/test_research.py`, `ui/tests/research.test.tsx` |
+| Manual research and human/agent handoff | `tests/test_manual_research_api.py`, `ui/tests/manual-research.test.tsx`, `ui/tests/manual-editor.test.tsx` |
 | Evidence, task review and batch backends | `tests/test_workbench_data.py`, `tests/test_backends.py` |
 | Runner execution and exports | `tests/test_workbench_execution.py` |
 | Batch analysis | `tests/test_workflow.py`, `tests/test_evaluation.py`, `tests/test_cli.py` |
@@ -87,6 +94,8 @@ For example, trace-store tests check that an ID conflict rolls back the whole ne
 Runtime demo commands and canned agent data have been removed. Explicit synthetic fixtures live under `tests/fixtures/` and are loaded only by tests. The CLI integration test initializes a project, imports traces and tasks, requires audits before acceptance, creates a named suite with a UUID, executes command adapters, and exports reviewed outcomes. UUID tests verify canonicalization, unchanged external trace IDs, typed API rejection, and refusal to rewrite an older project.
 
 Native research tests execute local subprocesses emitting Codex-shaped events and a real official MCP client/server exchange. They verify session persistence before cancellation or failure, complete-pass retries, a 257-record corpus crossing page boundaries, full large-record reads, artifact integrity, and CLI publication without a model. These tests do not exercise live provider inference or prove analysis quality.
+
+Manual API tests create a snapshot, read exact evidence, record every outcome and publish without a provider; they also check snapshot stability after imports, typed requests, chart output, bearer authentication and final-data exposure. Session ownership tests hold the native lock, confirm manual HTTP writes are rejected without changes, and verify those writes succeed after release while native SDK access remains available. UI tests cover manual navigation, cursor and field paging, typed outcomes, citation reads from the snapshot, draft preservation across polling and active-session transitions, and retaining existing linked agent outputs.
 
 Keep tests synthetic and independent of provider credentials. An explicitly requested live analyzer check is separate from the ordinary test suite. Record what was run and any limitation; passing fixtures do not establish production agent improvement.
 

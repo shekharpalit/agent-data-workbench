@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:125a76cb9b672b6aba9cb4383041cb93757ee144858dced8e355a006cad290a5",
+  "pageVersion": "sha256:1515f0e4454152ea3b4476564bfca6be9acc596bc912ca543e9055b46619f504",
   "claims": [
     {
       "id": "claim_25574e40cfb048b39464c4e95bba596d",
@@ -50,11 +50,11 @@
     },
     {
       "id": "claim_96c1215d43c14e8ba36aede91f42f56b",
-      "statement": "Investigation and task-design routes use the background queue; an investigation is created only after job capacity is reserved, and task audit through the API uses no configured semantic judge.",
+      "statement": "Native investigation and task-design routes use the background queue; a native investigation is created only after job capacity is reserved, and task audit through the API uses no configured semantic judge.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/api/routers/investigations.py#L23-L44",
-          "version": "repo-lines-v1:sha256:5c00c11ac9092ba7d30640224a286cca61cb57e079bcacad3a508600acad2a59:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2MzJkNjMxZTc3ZTY2NTZjNGVkMTkxNmU3ZGU0NzcyYjQ4M2U0MTBkMzg2N2ZhOTBhNTBkMDdmYTAwN2I2MzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk0MDcxODhlMWVjNGQ0ZWNlNmJlM2RkNWUxMTBkZDEyMmUyYTJkYzU4YjlmODM5ZDllZDgwOTk0ZWIyM2E1ZmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA0OGY4ZTBmZjEyYWE3ZTAyNmIyYWJlZjllMzJmZmU2MmZlNTE4OThkMDlhNjRlODZmNzk5NDNiOTZhY2QyMmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgwZmJkNDBkMTcwODU1NDIwODNlOTA5NjQ0NTk4ZjZiM2Y0MjI3NDhiN2EzNjFiZDIyNGNjYTVhMDQ1NTRhOTkifQ"
+          "resource": "repo://src/agent_data_workbench/api/routers/investigations.py#L29-L53",
+          "version": "repo-lines-v1:sha256:af132b3eb79bb4606ea97c623a2679323af36815987fcb5d80abe0ac7910dd00:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMyNjA0MjYxYWM4MGM5ZDIzYjk2ZmNmMjZjOTVmNDNmMzMxZWY5NTU2NjJlNWYyNjY1ZmVhYmVjYjM4YzVmNTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk0MDcxODhlMWVjNGQ0ZWNlNmJlM2RkNWUxMTBkZDEyMmUyYTJkYzU4YjlmODM5ZDllZDgwOTk0ZWIyM2E1ZmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNkNzY5OTU5NjQ4YTA4MzZhNDg1MjYyZTM0ODFmNzFiMDEyNWZhM2ViM2EzY2I0ZDA2ZDUwZmEyZDZlMjA3OGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgwZmJkNDBkMTcwODU1NDIwODNlOTA5NjQ0NTk4ZjZiM2Y0MjI3NDhiN2EzNjFiZDIyNGNjYTVhMDQ1NTRhOTkifQ"
         },
         {
           "resource": "repo://src/agent_data_workbench/api/routers/tasks.py#L28-L41",
@@ -92,25 +92,57 @@
     },
     {
       "id": "claim_066464bed15a4279a95cc9ecde0df3f6",
-      "statement": "The native research UI offers research or complete mode, explicit final-data exclusion, saved-session resume, coverage, paginated outcomes and journals, inline bar charts and authenticated file downloads.",
+      "statement": "The research UI offers manual or native research, research or complete mode, explicit final-data exclusion, saved-session resume, coverage, paginated outcomes and journals, inline bar charts and authenticated downloads.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/api/routers/investigations.py#L47-L81",
-          "version": "repo-lines-v1:sha256:12d0a2e71bd3ac00793980320f14bf2912fcb5e432c272db05622cc64a6830ac:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxMWEyNzhjNjYwZTM0NjY3OWIzNmEwNzU3Zjg3NGY0NjI5ZTgzZmVkOTg3ODU1NTIxMTE5MDZkNWZhMjAzZjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI3MGVkZDdhMzQ0NmFhMDZkNzk5MTk3NGMxOWNiNGI1NmNlN2QwNjkwOTYwNzc4OWMyZmE5MzA3NjdmNjA5ZTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU0OTA1ZjZkYjVkOWYzNWQwZTg3Y2Q3NTQ5NTEwMGU3OTY5NGJmNzdiMDkzYzM3NjMwOGMyNzY1NTEzMjczZDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://src/agent_data_workbench/api/routers/investigations.py#L61-L100",
+          "version": "repo-lines-v1:sha256:04f23849f811f9118dc78e9a2c672b792e1ac0856f95d3b18d81355d20ba926d:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJlOWQ3NzMzOTNmNjg2NzA4NDU0YzYwOTRjMGQzMDU3NmY2MWFlYTVhMjg5MzM0YjU1ZTdjNGIwOTM0N2M2OWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkxN2U1NzZjZTM3OWU1ZTFmNDU5N2FjYmJiMzAxMjBhM2ZkMDMwZjJmNjA1YTdhNDkyNmMyMWM4NzhhYWZhMWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjllYjg4NWNhZjZkYjY2MzJiOGU3Y2RkNjJlMzgxZTNlZWMyYmNiMWEzOGRmMzBiZjlkNzE3MGY0YWY0YTc1YTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE4OTgxZWI5ODI0ZjIzOWJjYjEwMzg5YmM5MWQ4MGQ2ZTgzZDhkZmMyNTI3MTYzZjhlYzZhZDBhNjZkYjljYjMifQ"
         },
         {
-          "resource": "repo://ui/src/views/ResearchControls.tsx#L24-L112",
-          "version": "repo-lines-v1:sha256:4312f3907b89e287ad83cda21387acb72020477e437b7cdbe8c9237590ba3009:eyJzZWxlY3RlZExpbmVDb3VudCI6ODksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhkMDZhNDQ3NjM5Zjk4ZmU5NWI4ZTNiNGQwMDVlZWRkMTE4ZDI3MDc0YmZhMjExOWQ2ZDdkMmM4MDAyNzczYmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRhYjIzMmVlMzczMTY1NGJkYTI4ZWNkMjFmM2ExN2YxNDIxM2I4ZjVmZmUwNDA2MTk1ZDNkNmJhYTk0NDJiMTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://ui/src/views/ResearchControls.tsx#L12-L154",
+          "version": "repo-lines-v1:sha256:26704597433a4c2c455be3ace187c3502161057626a5e59ad548a11a240e3cf1:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQzLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI3NDFjZWRiZmQ1MzFlMzg1NGEwZmViZTRkMGY3ZGIzNjVmYjA3MTBlZjQ0MWVmMmFmNGM0NDE1ZTg0ODczYTk2IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI0YTdjMThjOWE5MTFlYzNhY2M4MTJhN2VlZmU5M2E3YjJkYmM5YzQzYzNjNTIyMDcwZjAyMzc5MGVkMDZlYWUxIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
         },
         {
           "resource": "repo://ui/src/views/ResearchOutputs.tsx",
           "version": "repo-file-v1:sha256:8c71e35afad81737369fb22bf861e52a4b1fc7f19c37d4d2e4fbf12038924726"
         }
       ]
+    },
+    {
+      "id": "claim_d88e099d9c37407a81d0ff85ccd5b615",
+      "statement": "Human UI research can inspect snapshot fields, record typed outcomes, save notes and publish structured findings and charts without invoking a provider.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/api/routers/investigations.py#L93-L157",
+          "version": "repo-lines-v1:sha256:80015c578050764b5feeacb9f5e69683afeaa217828436b7f90d2b962bbaeaad:eyJzZWxlY3RlZExpbmVDb3VudCI6NjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyNmZjYTI5ZWMwNGQ3YWRmMzBmNzc5NTk4NTY4OTkxZmRmNGZkMGEzNjVmZjJjY2I0MzliOTIwMGU2YjQ1MmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJhZmJmOWFhMjBlZjkxMjE2YWNmZjhhMTM2ZjI3NzAzNzRiMTRiYWJmNmU2YjQ3Nzg0ZDZlMjZhZDkyN2Q2NzUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM5ODNiNDA3NWYxMDJhNDJiNmM0MTViMjU2Njk1YWExYWNmZDU3ZGFhOTc1YTE4NjFkNWU0ZGM4NjEyM2Q2MDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://ui/src/views/ManualResearchEditor.tsx#L170-L454",
+          "version": "repo-lines-v1:sha256:aacda49f775d61c9a5857b9944a3784b8657b3e95cd868baccdfd8d18b44e7d4:eyJzZWxlY3RlZExpbmVDb3VudCI6Mjg1LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJlZTE4ZWVkNmQ3N2RmZjg3MGQ5NjcxODljNzMwNTYxZmVhNjFhODQ1OTljZTU3Yzc1Yzk3OGZkOGU4YjYyMzM0IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIwOTRmYzBjMTczZDFlYzNmYzUwMWQ3ZGZhOTI4NTUwMWM1MjdjZmI0NzEyNTgzZGEzY2MzNjE4MDU2NmI0YmUzIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIwYmZkZjM2NDU4ZmUyYzFlZmQ4MjI2ZjZhYmQ4Yzk4ZDYxNzg3YmRhMmY1MGM5ZmIzMjI0YmI3Zjk1NDNmMzhkIn0"
+        },
+        {
+          "resource": "repo://ui/src/views/ResearchSnapshot.tsx#L1-L197",
+          "version": "repo-lines-v1:sha256:30f8c8a3a260b2c7d9b4e3a6768a030d252b0ff53db305335420c9d293437746:eyJzZWxlY3RlZExpbmVDb3VudCI6MTk3LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI2MTBmMjU2ZjQ3YTU5ZWJjNTBjYmY4NjlkNThjYmNiMzRmZWRjMmY3ODMyOWQ3YTgyZjJhNWY5MzU1ZmRjNDQyIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI5NWVmMDFiYzA4ZGJjM2I2M2U0ZTc1ZWEzZDI2YTViOTQxODkxODc3ZTI3YWQ4OTEzMjljODQxMWQ3ZDhkYzRkIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MCwicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI0M2JhZWU0NjJjOTNkYjdjODk3MTljN2IyYWZjOGVlZDQyZjZmMDRhOGZhZWJmNzU2MmZkYzgxM2MxOWQ0OWU5In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_b83c03c82e8e4eb9ba0deceb680911bf",
+      "statement": "Human HTTP mutations are serialized against active native sessions, and the UI retains mounted finding, note and chart form state while hiding and disabling it during agent ownership.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/api/routers/investigations.py#L132-L157",
+          "version": "repo-lines-v1:sha256:b388e2f3be20a549feb31641759e4668dc99e99b0d0dbb193d4f143e788a4cc7:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVjZjRkMTU1OTc0MzIwNzBhMmVkOTJiMThlM2M2ZGM0NjQyZTMwODdkOTM2YmU3MjE5YTljMmQxMDA0ZjM4YzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJhZmJmOWFhMjBlZjkxMjE2YWNmZjhhMTM2ZjI3NzAzNzRiMTRiYWJmNmU2YjQ3Nzg0ZDZlMjZhZDkyN2Q2NzUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhjYzRhN2QxY2M3OTZhYmEzZTQ2NzIzMzI3ZjUxN2U5ZjgxMTk4MmQyNTBmMDcwMjk4NmU0YjU3NjRhZDk1ODkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://ui/src/views/ManualResearchEditor.tsx#L456-L468",
+          "version": "repo-lines-v1:sha256:b721559f1097a26600349c12f1dfa2d46b75daee06393a6ff32bc6a9a793ce11:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY3ZjQ2YjQ2MDE5YTc2MWQxODY5MjI2ZTI3NWZlN2NjYjZjYWJiYTAyNzI2ZjEyYjNkOTY2NDVhNmNlMDAyMWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA5NGZjMGMxNzNkMWVjM2ZjNTAxZDdkZmE5Mjg1NTAxYzUyN2NmYjQ3MTI1ODNkYTNjYzM2MTgwNTY2YjRiZTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-07T20:56:39.229Z"
+    "at": "2026-09-07T21:47:36.843Z"
   }
 }

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:38b6a33d2396ac576b293a0531c295082b6bc3d4bbc4860f8aec0d18f0cc1883",
+  "pageVersion": "sha256:692b1a980f910ec3126ee8e78160a367cff02df25c12785348cbe3b824a7a5ac",
   "claims": [
     {
       "id": "claim_b88dee80e2334471a6a24e3675d10bd3",
@@ -67,10 +67,28 @@
           "version": "repo-lines-v1:sha256:f8074d8ac6460d8abe1a8f7b846c97e5806a6747602da7792f516bbf22deb555:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ3YzIzMTE1MDZmMzJkOTgwMjY2MjAwYmQ4ZWVjOGEyZmI5ODg1NTI3YmZjNjY4NTNiNTVmNmIyYjhhMzg3Y2MiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg0MjMwYWI2MzJkOTBhNmU2MGExODkzODRjNjg3MGY3Zjk3MmRlYzBmN2Q5YzhlMmY0NTQ4YmQ1YmVjOWMxODkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk3ZWI2YTU4N2Y4MjM4NTVlZDAwMGQ4NGQyYzIwY2UzMmNhMjk4MjBiYjBhZTM4NzI4ZmUzZDRlN2FhZTI3ZDAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIxNTVhZGFhYWMyZmJmZmZlMTI5MzI4MGU5NTM2M2MwMDEyMmRlZjgxZTdmOGI2OWY0MWQ4Y2IxOTdkN2NlZjQifQ"
         }
       ]
+    },
+    {
+      "id": "claim_2f453228cc3b41f399ba73e1dbdae1ef",
+      "statement": "The local UI defaults to manual research and opens a snapshot without provider calls; humans can record outcomes, notes, findings and charts, then optionally invite a native agent.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/api/routers/investigations.py#L93-L157",
+          "version": "repo-lines-v1:sha256:80015c578050764b5feeacb9f5e69683afeaa217828436b7f90d2b962bbaeaad:eyJzZWxlY3RlZExpbmVDb3VudCI6NjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyNmZjYTI5ZWMwNGQ3YWRmMzBmNzc5NTk4NTY4OTkxZmRmNGZkMGEzNjVmZjJjY2I0MzliOTIwMGU2YjQ1MmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJhZmJmOWFhMjBlZjkxMjE2YWNmZjhhMTM2ZjI3NzAzNzRiMTRiYWJmNmU2YjQ3Nzg0ZDZlMjZhZDkyN2Q2NzUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM5ODNiNDA3NWYxMDJhNDJiNmM0MTViMjU2Njk1YWExYWNmZDU3ZGFhOTc1YTE4NjFkNWU0ZGM4NjEyM2Q2MDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://ui/src/views/ManualResearchEditor.tsx#L170-L454",
+          "version": "repo-lines-v1:sha256:aacda49f775d61c9a5857b9944a3784b8657b3e95cd868baccdfd8d18b44e7d4:eyJzZWxlY3RlZExpbmVDb3VudCI6Mjg1LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJlZTE4ZWVkNmQ3N2RmZjg3MGQ5NjcxODljNzMwNTYxZmVhNjFhODQ1OTljZTU3Yzc1Yzk3OGZkOGU4YjYyMzM0IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIwOTRmYzBjMTczZDFlYzNmYzUwMWQ3ZGZhOTI4NTUwMWM1MjdjZmI0NzEyNTgzZGEzY2MzNjE4MDU2NmI0YmUzIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIwYmZkZjM2NDU4ZmUyYzFlZmQ4MjI2ZjZhYmQ4Yzk4ZDYxNzg3YmRhMmY1MGM5ZmIzMjI0YmI3Zjk1NDNmMzhkIn0"
+        },
+        {
+          "resource": "repo://ui/src/views/ResearchControls.tsx#L12-L154",
+          "version": "repo-lines-v1:sha256:26704597433a4c2c455be3ace187c3502161057626a5e59ad548a11a240e3cf1:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQzLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI3NDFjZWRiZmQ1MzFlMzg1NGEwZmViZTRkMGY3ZGIzNjVmYjA3MTBlZjQ0MWVmMmFmNGM0NDE1ZTg0ODczYTk2IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI0YTdjMThjOWE5MTFlYzNhY2M4MTJhN2VlZmU5M2E3YjJkYmM5YzQzYzNjNTIyMDcwZjAyMzc5MGVkMDZlYWUxIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-07T20:56:39.229Z"
+    "at": "2026-09-07T21:47:36.843Z"
   }
 }

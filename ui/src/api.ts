@@ -1,5 +1,14 @@
 import type {
   ArtifactMap,
+  Coverage,
+  Investigation,
+  RecordOutcome,
+  ResearchArtifact,
+  ResearchChart,
+  ResearchResult,
+  ResearchSearch,
+  ResearchSearchPage,
+  ResearchTracePage,
   Audit,
   Backend,
   ClusterRequest,
@@ -105,6 +114,52 @@ export class ApiClient {
     mode?: "research" | "complete";
     exclude_final?: boolean;
   }) => this.request<{ job_id: string }>("/api/investigate", request);
+  createResearch = (request: {
+    question: string;
+    mode: "research" | "complete";
+    exclude_final: boolean;
+  }) => this.request<Investigation>("/api/investigation/create", request);
+  searchResearch = (
+    id: string,
+    query: ResearchSearch,
+    signal?: AbortSignal,
+  ) => {
+    const params = new URLSearchParams({
+      id,
+      text: query.text,
+      stratum: query.stratum,
+      pending_only: String(query.pending_only),
+    });
+    if (query.after !== null) params.set("after", query.after);
+    return this.request<ResearchSearchPage>(
+      `/api/investigation/search?${params}`,
+      undefined,
+      signal,
+    );
+  };
+  researchTrace = (
+    id: string,
+    traceId: string,
+    pointer: string,
+    offset: number,
+    signal?: AbortSignal,
+  ) =>
+    this.request<ResearchTracePage>(
+      `/api/investigation/trace?${new URLSearchParams({ id, trace_id: traceId, pointer, offset: String(offset) })}`,
+      undefined,
+      signal,
+    );
+  researchCheckpoint = (id: string, note: string) =>
+    this.request<Coverage>("/api/investigation/checkpoint", { id, note });
+  recordResearch = (id: string, outcomes: RecordOutcome[]) =>
+    this.request<Coverage>("/api/investigation/record", { id, outcomes });
+  publishResearch = (id: string, result: ResearchResult, complete: boolean) =>
+    this.request<{ id: string; status: string; coverage: Coverage }>(
+      "/api/investigation/publish",
+      { id, result, complete },
+    );
+  createResearchChart = (id: string, chart: ResearchChart) =>
+    this.request<ResearchArtifact>("/api/investigation/chart", { id, chart });
   pauseResearch = (id: string) =>
     this.request("/api/investigation/pause", { id });
   researchJournal = (id: string, offset: number, signal?: AbortSignal) =>

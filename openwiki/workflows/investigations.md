@@ -1,7 +1,7 @@
 ---
 type: workflow
 title: Investigations and reviewed knowledge
-description: Run persistent Codex or Claude Code research over complete local snapshots, record resumable outcomes, and publish evidence, tasks, reports and charts.
+description: Research agent traces manually or with persistent Codex and Claude Code sessions over shared snapshots, and publish outcomes, evidence and charts.
 tags: [research, evidence, knowledge, codex, claude]
 sources:
   - id: openwiki-source-32f4d2812881234bd0f7d75a
@@ -26,19 +26,27 @@ sources:
     resource: repo://src/agent_data_workbench/research/validation.py
   - id: openwiki-source-2dbe8753da4267ce652f414e
     resource: repo://src/agent_data_workbench/research/workspace.py
+  - id: openwiki-source-3e6ae5cbfb3aa3af0850499a
+    resource: repo://tests/test_manual_research_api.py
   - id: openwiki-source-3589dc1fc29ba0bfe0e2a50c
     resource: repo://tests/test_research.py
   - id: openwiki-source-9dba1709c16fd704c45276e9
     resource: repo://tests/test_workbench_data.py
-generated: { by: "codex", at: "2026-09-07T21:14:42.725Z" }
+  - id: openwiki-source-2d1b137901c9e38ec418fdad
+    resource: repo://ui/src/views/ManualResearchEditor.tsx
+  - id: openwiki-source-a6ff0ad9c45aedc12177eaec
+    resource: repo://ui/src/views/ResearchControls.tsx
+  - id: openwiki-source-14a72935f36008706a0aa989
+    resource: repo://ui/src/views/ResearchSnapshot.tsx
+generated: { by: "codex", at: "2026-09-07T21:47:36.843Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T21:14:42.725Z
+    at: 2026-09-07T21:47:36.843Z
 ---
 
 # Investigations and reviewed knowledge
 
-An investigation gives a native Codex or Claude Code session a complete local data workspace. The coding agent decides how to explore, writes and runs analysis code, manages its own context, and publishes findings and useful outputs. The workbench stores inputs, progress, evidence and outcomes. It does not implement another model-call loop.
+An investigation is a complete local data workspace for a human researcher, a native Codex or Claude Code session, or both in turn. Humans can research directly in the UI without a model. When invited, the coding agent decides how to explore, writes and runs analysis code, manages its own context, and publishes findings and useful outputs. The workbench stores inputs, progress, evidence and outcomes. It does not implement another model-call loop.
 
 Import a corpus using [trace ingestion](traces.md). The question and reviewed project knowledge define what matters for your agent.
 
@@ -56,7 +64,23 @@ Use the UUID printed by the first command. New knowledge starts as draft. Only a
 
 Keep context specific enough to distinguish a real failure from missing information. A trace alone may not establish whether an action was authorized, a tool contract was violated, or a result was useful.
 
-## Choose research or complete processing
+## Research yourself in the UI
+
+Start the local workbench with `uv run agent-data-workbench ui runs/my-agent --open-browser`. Open **Investigations**, keep **Research myself** selected, enter a question and click **Start manual research**. This captures the same dataset and accepted context as native research, returns the investigation, and opens it without creating a model job. Choose `research` for exploratory work or `complete` when every record needs an outcome. Reserved final data remains included unless you explicitly exclude it.
+
+1. Search **Research dataset** by text or stratum, or select only pending/failed records. Select a record to read the frozen source, use a JSON pointer for a field, and page through long text. New imports do not change this evidence.
+2. Record an observation with a review method. The standard form saves an object containing your note; the structured option accepts a JSON object and preserves types. A failed review saves its error and remains unfinished.
+3. Save a journal note to retain what you checked and what to do next. Use **Write findings** to enter a summary, finding title, category, confidence, explanation, recommendation and one or more trace/pointer/quote citations. Finding IDs are generated UUIDs.
+4. Use **Save findings draft** while researching, or **Publish final findings** when ready. Both validate exact evidence; complete mode additionally requires no pending or failed records for final publication. Editing findings retains existing cases, signals, proposals, limitations and open questions. Linked finding IDs remain stable.
+5. Use **Create a chart** to publish titled label/value bars. Values are finite nonnegative numbers, and the chart joins the downloadable research outputs.
+
+Citation links inspect the original snapshot field. Saving a record outcome counts recorded processing, not proof that the observation is correct. Research mode can finish with unreviewed records; its displayed coverage makes that scope visible.
+
+Save drafts before leaving the view or refreshing the browser. Polling does not replace local edits. To collaborate with an agent, open **Bring in an agent**, choose the backend and start the session. A previous native session appears under **Continue with an agent**. Unsaved finding, note and chart forms stay mounted but hidden and disabled while that session is active, and return after pause. Manual API writes acquire the session lock so a stale browser tab cannot alter the active native investigation. SDK and MCP tools remain available to the agent that owns the session. Completed investigations retain their results and hide manual mutation controls.
+
+See [local workbench operations](../operations/local-workbench.md) for authentication and API behavior.
+
+## Choose native research or complete processing
 
 Install and authenticate your chosen native CLI separately, and make it available on PATH:
 
@@ -153,7 +177,7 @@ To publish a chart, write a workspace-relative JSON file:
 {"title":"Outcome counts","description":"Population and analysis method","values":[{"label":"Needs review","value":12}]}
 ```
 
-Register it with `save_artifact(path="counts.json", title="Outcome counts", kind="chart")` over MCP or `w.attach("counts.json", "Outcome counts", "chart")` in Python. Values must be finite and nonnegative for the inline bar renderer. Other charts, code, reports and datasets can be attached as downloadable files. Publication copies a file under an artifact UUID, records its digest, and verifies that copy when downloaded. Changing the source script or file does not change the published copy.
+Register it with `save_artifact(path="counts.json", title="Outcome counts", kind="chart")` over MCP or `w.attach("counts.json", "Outcome counts", "chart")` in Python. Python callers can also pass the chart object directly to `w.save_chart(chart)`; the SDK handles temporary UUID filenames and registration. Values must be finite and nonnegative for the inline bar renderer. Other charts, code, reports and datasets can be attached as downloadable files. Publication copies a file under an artifact UUID, records its digest, and verifies that copy when downloaded. Changing the source script or file does not change the published copy.
 
 A proposal includes a hypothesis, expected effect and evaluation plan. Export it against a source checkout:
 
@@ -166,6 +190,6 @@ Export requires completed research. Each edit is one complete before/after pair 
 
 ## Verification and next steps
 
-`tests/test_research.py` exercises native-shaped subprocesses, interruption and retry behavior, a complete corpus larger than one page, official MCP stdio, workspace CLI operations, tasks and artifacts. `tests/test_workbench_data.py` checks exact evidence, stable snapshots after project changes and proposal export. Tests use synthetic inputs without live provider inference.
+`tests/test_research.py` exercises native-shaped subprocesses, interruption and retry behavior, a complete corpus larger than one page, official MCP stdio, workspace CLI operations, tasks and artifacts. `tests/test_workbench_data.py` checks exact evidence, stable snapshots after project changes and proposal export. Manual research API and UI tests cover creation through publication, exact snapshot reads, typed outcomes, chart creation, draft preservation and human/native session ownership. Tests use synthetic inputs without live provider inference.
 
 Next: [design tasks and audit graders](tasks-and-graders.md), [inspect the local UI](../operations/local-workbench.md), then [execute an experiment](experiments-and-training.md).

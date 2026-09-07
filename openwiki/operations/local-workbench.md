@@ -26,14 +26,18 @@ sources:
     resource: repo://tests/test_identifiers.py
   - id: openwiki-source-6d94b2e299387b69a79c432d
     resource: repo://ui/src/App.tsx
+  - id: openwiki-source-2d1b137901c9e38ec418fdad
+    resource: repo://ui/src/views/ManualResearchEditor.tsx
   - id: openwiki-source-a6ff0ad9c45aedc12177eaec
     resource: repo://ui/src/views/ResearchControls.tsx
   - id: openwiki-source-e1d27805221c9fa6fa8b7e3a
     resource: repo://ui/src/views/ResearchOutputs.tsx
-generated: { by: "codex", at: "2026-09-07T20:56:39.229Z" }
+  - id: openwiki-source-14a72935f36008706a0aa989
+    resource: repo://ui/src/views/ResearchSnapshot.tsx
+generated: { by: "codex", at: "2026-09-07T21:47:36.843Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T20:56:39.229Z
+    at: 2026-09-07T21:47:36.843Z
 ---
 
 # Run the local workbench
@@ -60,20 +64,30 @@ The Python package includes the UI entry point and hashed assets. FastAPI serves
 | Trace explorer | Combined filters, numeric ranges, sorting, pagination, distribution, and record inspection |
 | Clusters | Bounded lexical grouping of the matching traces and membership drill-down |
 | Evidence graph | Recorded trace, finding, task, and experiment relationships |
-| Investigations | Run native research or complete processing, pause/resume sessions, inspect coverage and evidence, and download outputs |
+| Investigations | Research manually or with an agent, inspect snapshot evidence, record outcomes, publish findings/charts, and pause/resume native sessions |
 | Project knowledge | Add and review explicit policy or tool context |
 | Tasks & graders | Inspect/edit specifications, run deterministic audits, and record reviews |
 | Experiments | Inspect baseline/candidate summaries, per-trial results, and artifacts |
 
 The graph bundle loads on demand. Trace filters and cluster membership are shared through application query state; changing filters resets pagination. See [trace exploration](../workflows/traces.md) for query semantics and limits.
 
+## Research manually
+
+Open Investigations, leave **Research myself** selected, enter a question, choose research or complete mode, and click **Start manual research**. The request captures the dataset and opens its workspace without starting a native CLI or a model job. No provider account is required. Final evaluation inputs are included unless you select their explicit exclusion.
+
+Use **Research dataset** to search the frozen snapshot by text or stratum, optionally narrowing to unfinished records. Select a record to inspect its original JSON, read a field by JSON pointer, and page through long content. Record a human observation or structured JSON object with a method; select failed when missing context prevents review. Notes go into the journal. **Write findings** opens summary, finding and exact citation fields; **Save findings draft** preserves unfinished research and **Publish final findings** completes it. **Create a chart** accepts labels and numeric values for a local bar chart. Citation links reopen the original snapshot field.
+
+Draft editing retains existing cases, signals, proposals, limitations and open questions. Edits survive polling. Saved drafts survive reopening the investigation; unsaved form values remain local to the mounted view, so save before navigating away or refreshing the browser.
+
+**Bring in an agent** explicitly starts native research on this same investigation; a saved session offers **Continue with an agent**. While a native session is active, human mutation controls are hidden/disabled and their current form values remain mounted for return after pause. The manual write endpoints also acquire the native session lock so a stale browser request cannot publish underneath the agent. Completed investigations expose their results without manual editing controls.
+
 ## Model jobs and execution
 
-Investigation and task-design requests enter a background queue so the HTTP request can return while analysis continues. Only one job may be running at a time. The queue reserves capacity before starting an investigation, so a rejected concurrent request does not leave an orphan investigation artifact. Job status is process-local; durable domain artifacts hold completed work.
+Native investigation and task-design requests enter a background queue so the HTTP request can return while analysis continues. Only one job may be running at a time. The queue reserves capacity before starting an investigation, so a rejected concurrent request does not leave an orphan investigation artifact. Job status is process-local; durable domain artifacts hold completed work.
 
-The research form selects a native backend and either adaptive `research` or per-record `complete` mode. Final evaluation inputs are included unless the developer selects their explicit exclusion. There is no maximum-call input. A saved session resumes with its original backend and model settings; partial findings remain visible while work is unfinished. A live session exposes Pause, and a released session lock allows recovery after a process crash.
+Selecting **Use an agent** exposes a native backend and either adaptive `research` or per-record `complete` mode. Final evaluation inputs are included unless the developer selects their explicit exclusion. There is no maximum-call input. A saved session resumes with its original backend and model settings; partial findings remain visible while work is unfinished. A live session exposes Pause, and a released session lock allows recovery after a process crash.
 
-The detail view shows successful, failed and pending record counts separately from SDK retrieval. It polls active progress, paginates record outcomes and journal entries, and displays each recorded analysis method. Registered chart JSON renders as bars; other files are downloads authenticated with the local bearer token and checked against their recorded digest. Generated HTML is downloaded as a file rather than embedded in the workbench.
+Both research paths share the detail view, which shows successful, failed and pending record counts separately from SDK retrieval. It polls active progress, paginates record outcomes and journal entries, and displays each recorded analysis method. Registered chart JSON renders as bars; other files are downloads authenticated with the local bearer token and checked against their recorded digest. Generated HTML is downloaded as a file rather than embedded in the workbench.
 
 Task audits in the UI are deterministic. A semantic rubric needs an explicitly configured judge through the [task CLI](../workflows/tasks-and-graders.md). Suite creation, baseline/candidate execution, and training export use the [experiment CLI or SDK](../workflows/experiments-and-training.md); the experiments view inspects the resulting artifacts.
 

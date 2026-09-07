@@ -12,10 +12,13 @@ import {
 export function ResearchControls({
   resume,
   investigation,
+  onCreated,
 }: {
   resume?: Investigation;
   investigation?: string;
+  onCreated?: (item: Investigation) => void;
 }) {
+  const [researcher, setResearcher] = useState<"manual" | "agent">("manual");
   const [backend, setBackend] = useState<Backend>("codex");
   const [model, setModel] = useState("");
   const [question, setQuestion] = useState(
@@ -23,18 +26,41 @@ export function ResearchControls({
   );
   const [mode, setMode] = useState<"research" | "complete">("research");
   const [excludeFinal, setExcludeFinal] = useState(false);
+  const manual = !resume && !investigation && researcher === "manual";
   return (
     <Card
       title={
         investigation
           ? "Turn findings into draft tasks"
           : resume
-            ? "Continue this investigation"
-            : "Ask a research question"
+            ? resume.session
+              ? "Continue with your agent"
+              : "Bring in an agent"
+            : "Start research"
       }
     >
       {!resume && !investigation && (
-        <>
+        <div className="stack">
+          <div
+            className="row research-choice"
+            role="group"
+            aria-label="Who will research?"
+          >
+            <button
+              className={manual ? "" : "secondary"}
+              aria-pressed={manual}
+              onClick={() => setResearcher("manual")}
+            >
+              Research myself
+            </button>
+            <button
+              className={manual ? "secondary" : ""}
+              aria-pressed={!manual}
+              onClick={() => setResearcher("agent")}
+            >
+              Use an agent
+            </button>
+          </div>
           <Field
             label="What do you want to understand?"
             multiline
@@ -49,41 +75,53 @@ export function ResearchControls({
           />
           <p className="muted">
             {mode === "research"
-              ? "Explore adaptively and publish evidence for your question."
-              : "Process every supplied record, save an outcome for each, and resolve failures before finishing."}
+              ? "Explore the dataset and publish evidence for your question."
+              : "Save an outcome for every supplied record and resolve failures before finishing."}
           </p>
-          <label>
+          <label className="checkbox-label">
             <input
               type="checkbox"
               checked={excludeFinal}
               onChange={(event) => setExcludeFinal(event.target.checked)}
-            />{" "}
+            />
             Exclude reserved final evaluation data
           </label>
-        </>
+        </div>
       )}
-      {resume?.session ? (
-        <p>
-          Resume {resume.session.backend} ·{" "}
-          {resume.session.model || "CLI default model"}. The native session
-          retains its context.
-        </p>
-      ) : (
-        <ProviderFields
-          backend={backend}
-          model={model}
-          onBackend={setBackend}
-          onModel={setModel}
-        />
-      )}
+      {!manual &&
+        (resume?.session ? (
+          <p>
+            Resume {resume.session.backend} ·{" "}
+            {resume.session.model || "CLI default model"}. The native session
+            retains its context.
+          </p>
+        ) : (
+          <ProviderFields
+            backend={backend}
+            model={model}
+            onBackend={setBackend}
+            onModel={setModel}
+          />
+        ))}
       <p className="muted">
-        {investigation
-          ? "The selected CLI creates drafts for review."
-          : "Your native coding agent can query the full snapshot, write analysis code, and save reports and charts. Your CLI account and model limits apply."}
+        {manual
+          ? "Open a workspace to inspect records, save notes and outcomes, and publish your findings and charts. No model is called."
+          : investigation
+            ? "The selected CLI creates drafts for review."
+            : "Your native coding agent can query the full snapshot, write analysis code, and save reports and charts. Your CLI account and model limits apply."}
       </p>
       <ActionButton
-        action={() =>
-          investigation
+        action={async () => {
+          if (manual) {
+            const created = await api.createResearch({
+              question,
+              mode,
+              exclude_final: excludeFinal,
+            });
+            onCreated?.(created);
+            return;
+          }
+          return investigation
             ? api.designTasks(investigation, backend, model)
             : api.investigate(
                 resume
@@ -98,14 +136,18 @@ export function ResearchControls({
                       mode,
                       exclude_final: excludeFinal,
                     },
-              )
-        }
+              );
+        }}
       >
-        {investigation
-          ? "Design tasks"
-          : resume
-            ? "Resume investigation"
-            : "Investigate"}
+        {manual
+          ? "Start manual research"
+          : investigation
+            ? "Design tasks"
+            : resume
+              ? resume.session
+                ? "Resume investigation"
+                : "Start agent session"
+              : "Investigate"}
       </ActionButton>
     </Card>
   );

@@ -7,6 +7,8 @@ from pydantic import Field, model_validator
 from ..explore import SearchQuery
 from ..identifiers import UUIDString
 from ..models import Contract, pointer_parts
+from ..research.contracts import ResearchResult
+from ..research.workspace import Chart, RecordOutcome
 from ..tasks import TaskSpec
 
 ArtifactKind = Literal["knowledge", "investigations", "tasks", "suites", "experiments", "exports"]
@@ -73,3 +75,26 @@ class InvestigationRequest(Contract):
 
 class TaskDesignRequest(AnalyzerRequest):
     investigation: UUIDString
+
+
+class ManualInvestigationRequest(Contract):
+    question: str = Field(min_length=1)
+    mode: Literal["research", "complete"] = "research"
+    exclude_final: bool = False
+
+
+class InvestigationCheckpointRequest(ArtifactRequest):
+    note: str = Field(min_length=1)
+
+
+class InvestigationRecordRequest(ArtifactRequest):
+    outcomes: list[RecordOutcome]
+
+
+class InvestigationPublishRequest(ArtifactRequest):
+    result: ResearchResult
+    complete: bool = True
+
+
+class InvestigationChartRequest(ArtifactRequest):
+    chart: Chart

@@ -11,6 +11,9 @@ import {
   Table,
 } from "../components/shared";
 
+import { useState } from "react";
+import { ManualResearchEditor } from "./ManualResearchEditor";
+import { ResearchSnapshot, SnapshotCitation } from "./ResearchSnapshot";
 import { ResearchControls } from "./ResearchControls";
 import { ResearchFiles, ResearchProgress } from "./ResearchOutputs";
 
@@ -26,7 +29,9 @@ export function InvestigationsView({
   });
   return (
     <>
-      <ResearchControls />
+      <ResearchControls
+        onCreated={(item) => navigate({ view: "investigations", id: item.id })}
+      />
       {request.data ? (
         <Card title="Research history">
           {[...request.data]
@@ -54,8 +59,8 @@ export function InvestigationsView({
             ))}
           {!request.data.length && (
             <p className="muted">
-              Start with a question. Your native agent can explore the dataset,
-              process records, and publish evidence and outputs.
+              Start with a question. Research the dataset yourself or ask an
+              agent to help.
             </p>
           )}
         </Card>
@@ -72,6 +77,7 @@ export function InvestigationDetail({
   id: string;
   navigate: (route: Route) => void;
 }) {
+  const [agentControls, setAgentControls] = useState(false);
   const request = useQuery({
     queryKey: ["investigation", id],
     queryFn: ({ signal }) => api.artifact("investigations", id, signal),
@@ -125,13 +131,32 @@ export function InvestigationDetail({
       {item.status !== "complete" &&
         !item.active &&
         (item.protocol_version === "0.4" ? (
-          <ResearchControls resume={item} />
+          <>
+            <button
+              className="ghost breadcrumb"
+              aria-expanded={agentControls}
+              onClick={() => setAgentControls(!agentControls)}
+            >
+              {agentControls
+                ? "Hide agent controls"
+                : item.session
+                  ? "Continue with an agent"
+                  : "Bring in an agent"}
+            </button>
+            {agentControls && <ResearchControls resume={item} />}
+          </>
         ) : (
           <p className="scope-note">
             This investigation uses the earlier protocol. Start a new
             investigation to use native sessions.
           </p>
         ))}
+      {item.protocol_version === "0.4" && (
+        <>
+          <ResearchSnapshot key={id} item={item} />
+          <ManualResearchEditor key={id} item={item} />
+        </>
+      )}
       <ResearchFiles item={item} />
       {result ? (
         <>
@@ -148,14 +173,18 @@ export function InvestigationDetail({
               <p>Suggested action: {finding.recommendation}</p>
               {finding.evidence.map((evidence, index) => (
                 <blockquote key={index}>
-                  <button
-                    className="ghost"
-                    onClick={() =>
-                      navigate({ view: "traces", id: evidence.trace_id })
-                    }
-                  >
-                    {evidence.trace_id} · {evidence.pointer}
-                  </button>
+                  {item.protocol_version === "0.4" ? (
+                    <SnapshotCitation item={item} evidence={evidence} />
+                  ) : (
+                    <button
+                      className="ghost"
+                      onClick={() =>
+                        navigate({ view: "traces", id: evidence.trace_id })
+                      }
+                    >
+                      {evidence.trace_id} · {evidence.pointer}
+                    </button>
+                  )}
                   <p>{evidence.quote}</p>
                 </blockquote>
               ))}
@@ -199,7 +228,9 @@ export function InvestigationDetail({
               ),
             )}
           </Card>
-          <ResearchControls investigation={id} />
+          <Details title="Use an agent to design tasks">
+            <ResearchControls investigation={id} />
+          </Details>
         </>
       ) : null}
       {item.protocol_version === "0.4" ? (

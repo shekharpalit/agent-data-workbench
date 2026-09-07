@@ -234,6 +234,16 @@ class ResearchWorkspace:
         self.dataset.event("artifact", title, {"id": key, "kind": kind})
         return artifact
 
+    def save_chart(self, chart: Chart | dict) -> dict:
+        """Publish chart content without requiring a caller-chosen workspace path."""
+        chart = Chart.model_validate(chart)
+        path = self.directory / (new_id() + ".json")
+        try:
+            save(path, chart.model_dump())
+            return self.attach(path.name, chart.title, "chart")
+        finally:
+            path.unlink(missing_ok=True)
+
     def artifact_path(self, key: str) -> tuple[Path, dict]:
         from ..identifiers import canonical_uuid
 

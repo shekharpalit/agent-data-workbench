@@ -124,6 +124,7 @@ export interface Proposal {
   id: string;
   title: string;
   kind: string;
+  finding_ids: string[];
   hypothesis: string;
   expected_effect: string;
   evaluation_plan: string;
@@ -194,17 +195,7 @@ export interface Investigation {
   published_coverage?: Coverage;
   journal: Journal;
   attachments?: ResearchArtifact[];
-  result: null | {
-    analysis: { summary: string; findings: Finding[]; limitations: string[] };
-    signals: {
-      finding_id: string;
-      kind: string;
-      impact: string;
-      impact_reason: string;
-    }[];
-    proposals: Proposal[];
-    open_questions: string[];
-  };
+  result: ResearchResult | null;
 }
 export interface Knowledge {
   id: string;
@@ -341,4 +332,68 @@ export interface Job {
   name: string;
   status: "running" | "complete" | "error";
   error: string | null;
+}
+
+export interface ResearchResult {
+  analysis: {
+    summary: string;
+    findings: Finding[];
+    cases: {
+      id: string;
+      title: string;
+      finding_ids: string[];
+      trace_ids: string[];
+      input: string;
+      required_context: string[];
+      assertions: { pointer: string; operator: string; expected: string }[];
+    }[];
+    limitations: string[];
+  };
+  signals: {
+    finding_id: string;
+    kind: string;
+    impact: string;
+    impact_reason: string;
+    evidence: Evidence[];
+  }[];
+  proposals: Proposal[];
+  open_questions: string[];
+}
+export interface ResearchChart {
+  title: string;
+  description: string;
+  values: { label: string; value: number }[];
+}
+export interface ResearchSearch {
+  text: string;
+  stratum: string;
+  after: string | null;
+  pending_only: boolean;
+}
+export interface ResearchSearchPage {
+  records: {
+    trace_id: string;
+    stratum: string;
+    group_id: string;
+    preview: string;
+    total_chars: number;
+    truncated: boolean;
+    status: string;
+  }[];
+  next_cursor: string | null;
+  coverage: Coverage;
+}
+export interface ResearchTracePage {
+  trace_id: string;
+  pointer: string;
+  content: string;
+  offset: number;
+  total_chars: number;
+  next_offset: number | null;
+}
+export interface RecordOutcome {
+  trace_id: string;
+  output: Record<string, Json> | null;
+  error: string | null;
+  method: string;
 }

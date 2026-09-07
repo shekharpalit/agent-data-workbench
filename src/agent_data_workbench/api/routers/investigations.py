@@ -1,4 +1,4 @@
-"""Native research sessions, coverage, journal pages and published files."""
+"""Shared human and native-agent research, coverage, journal and published files."""
 
 from typing import Annotated
 
@@ -13,9 +13,18 @@ from ...research import (
     pause_investigation,
     start_investigation,
 )
-from ...research.artifacts import load_investigation
+from ...research.artifacts import investigation_view, load_investigation
+from ...research.sessions import session_lock
 from ..dependencies import JobsDependency, ProjectDependency
-from ..schemas import ArtifactRequest, InvestigationRequest
+from ..schemas import (
+    ArtifactRequest,
+    InvestigationChartRequest,
+    InvestigationCheckpointRequest,
+    InvestigationPublishRequest,
+    InvestigationRecordRequest,
+    InvestigationRequest,
+    ManualInvestigationRequest,
+)
 
 router = APIRouter()
 
@@ -79,3 +88,70 @@ def outcomes(
 def research_file(project: ProjectDependency, id: UUIDString, artifact: UUIDString):
     path, value = ResearchWorkspace(project, id).artifact_path(artifact)
     return FileResponse(path, media_type="application/octet-stream", filename=value["filename"])
+
+
+@router.post("/investigation/create")
+def create_manual_investigation(
+    project: ProjectDependency, payload: ManualInvestigationRequest
+) -> dict:
+    value = start_investigation(
+        project, payload.question, mode=payload.mode, exclude_final=payload.exclude_final
+    )
+    return investigation_view(project, value["id"])
+
+
+@router.get("/investigation/search")
+def search_snapshot(
+    project: ProjectDependency,
+    id: UUIDString,
+    text: str = "",
+    stratum: str = "",
+    after: str | None = None,
+    pending_only: bool = False,
+    page_size: Annotated[int, Query(gt=0)] = 20,
+) -> dict:
+    return ResearchWorkspace(project, id).search(
+        text=text, stratum=stratum, after=after, pending_only=pending_only, page_size=page_size
+    )
+
+
+@router.get("/investigation/trace")
+def read_snapshot_trace(
+    project: ProjectDependency,
+    id: UUIDString,
+    trace_id: str,
+    pointer: str = "",
+    offset: Annotated[int, Query(ge=0)] = 0,
+    max_chars: Annotated[int | None, Query(gt=0)] = 16000,
+) -> dict:
+    return ResearchWorkspace(project, id).read(
+        trace_id, pointer=pointer, offset=offset, max_chars=max_chars
+    )
+
+
+@router.post("/investigation/checkpoint")
+def checkpoint(project: ProjectDependency, payload: InvestigationCheckpointRequest) -> dict:
+    workspace = ResearchWorkspace(project, payload.id)
+    with session_lock(workspace.directory):
+        return workspace.checkpoint(payload.note)
+
+
+@router.post("/investigation/record")
+def record(project: ProjectDependency, payload: InvestigationRecordRequest) -> dict:
+    workspace = ResearchWorkspace(project, payload.id)
+    with session_lock(workspace.directory):
+        return workspace.record_outcomes(payload.outcomes)
+
+
+@router.post("/investigation/publish")
+def publish(project: ProjectDependency, payload: InvestigationPublishRequest) -> dict:
+    workspace = ResearchWorkspace(project, payload.id)
+    with session_lock(workspace.directory):
+        return workspace.publish(payload.result, complete=payload.complete)
+
+
+@router.post("/investigation/chart")
+def chart(project: ProjectDependency, payload: InvestigationChartRequest) -> dict:
+    workspace = ResearchWorkspace(project, payload.id)
+    with session_lock(workspace.directory):
+        return workspace.save_chart(payload.chart)

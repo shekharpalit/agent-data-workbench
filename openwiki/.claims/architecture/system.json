@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:09f1776268bdc234a3cd3d7feaea3ac0ee19e3eaaeff6f31caa9dbd8ca6d0bd5",
+  "pageVersion": "sha256:17425961831dc3fdc5d4d1c08cad0abba3920ba318134362b966ad2d5175dcd0",
   "claims": [
     {
       "id": "claim_d9a6c98de02d49279a29adf7c1ea2d00",
@@ -153,10 +153,34 @@
           "version": "repo-lines-v1:sha256:fdd41064e8c75cfd66bd6c703e64076462ed0d8255f58625e9df2c4edfed3afc:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgzZDAyOTYwYmJkMGM3MjYzNDg0ZDU4NmJiYjVmYjQ0YWMwYzNjY2E0MzgyYTAwZTc4YTExYTI5NWE3NDkyZGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc2MDQzMzExMTI1NzU2MjI5MjgzOGQ3M2NlZTU1Mzc2MjZiOWVlMzA5ZTZiZmZmNWQ3NzNjYmVhMmUwZDA0Y2EiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgyOGM2ODRlMWY4NGEyODBiYTNhYjg4OTg4Y2EzNGRmMDEyMjY4ZDUyNmFkMjViYjA1YzZmOGFmNmM1ZjE4YTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJlZTU0M2NkNjA4Yjc1ZTEyOTcxODRhOWQ0ZDhlZTNhZjgyNjkyZmVkOGFhNTQ1Mjk4OTE2OTZiNmUwMjdhNjgifQ"
         }
       ]
+    },
+    {
+      "id": "claim_77aa3946c0f14679952d123254b360b4",
+      "statement": "Manual UI creation and research operations reuse the captured ResearchWorkspace without invoking a native CLI or model job.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/api/routers/investigations.py#L93-L157",
+          "version": "repo-lines-v1:sha256:80015c578050764b5feeacb9f5e69683afeaa217828436b7f90d2b962bbaeaad:eyJzZWxlY3RlZExpbmVDb3VudCI6NjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyNmZjYTI5ZWMwNGQ3YWRmMzBmNzc5NTk4NTY4OTkxZmRmNGZkMGEzNjVmZjJjY2I0MzliOTIwMGU2YjQ1MmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJhZmJmOWFhMjBlZjkxMjE2YWNmZjhhMTM2ZjI3NzAzNzRiMTRiYWJmNmU2YjQ3Nzg0ZDZlMjZhZDkyN2Q2NzUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM5ODNiNDA3NWYxMDJhNDJiNmM0MTViMjU2Njk1YWExYWNmZDU3ZGFhOTc1YTE4NjFkNWU0ZGM4NjEyM2Q2MDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_121a21a9b6374dab8c3297f734ea3f89",
+      "statement": "Manual HTTP writes acquire native session ownership before SDK mutation, preventing concurrent publication while leaving native SDK operations available.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/api/routers/investigations.py#L132-L157",
+          "version": "repo-lines-v1:sha256:b388e2f3be20a549feb31641759e4668dc99e99b0d0dbb193d4f143e788a4cc7:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVjZjRkMTU1OTc0MzIwNzBhMmVkOTJiMThlM2M2ZGM0NjQyZTMwODdkOTM2YmU3MjE5YTljMmQxMDA0ZjM4YzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJhZmJmOWFhMjBlZjkxMjE2YWNmZjhhMTM2ZjI3NzAzNzRiMTRiYWJmNmU2YjQ3Nzg0ZDZlMjZhZDkyN2Q2NzUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhjYzRhN2QxY2M3OTZhYmEzZTQ2NzIzMzI3ZjUxN2U5ZjgxMTk4MmQyNTBmMDcwMjk4NmU0YjU3NjRhZDk1ODkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/test_manual_research_api.py",
+          "version": "repo-file-v1:sha256:024b8c08bbbb5b009656539a9ba1fef3d74eecdff42448b071c55c931cf4cf78"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-07T20:56:39.229Z"
+    "at": "2026-09-07T21:47:36.843Z"
   }
 }
