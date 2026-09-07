@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:9df2d39447e0e6f227f9b12ff8fcff30d7e4befae9b24769a3f6bd907e61608c",
+  "claims": [
+    {
+      "id": "claim_f83d89a6433945739981ce1000bc9f73",
+      "statement": "The repository-scoped Codex and Claude MCP configurations launch OpenWiki with explicit host identities and use the OpenWiki CLI executable.",
+      "evidence": [
+        {
+          "resource": "repo://.codex/config.toml#L1-L5",
+          "version": "repo-lines-v1:sha256:105d79d76ddaba3b4d108ecb4ea9fb01bffa132a93d6fa2780ae307252afd842:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTI0MjhkNGNkOTIwYzkwNTA2ZDRmNWExNzA2OWQ2YTNiZTA3MTAyOTkzMWVkMTQwMmQxN2NjOWUwMWY2ZjViZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZGQ1NDVjYWQ1MWZmNTY1MDViNzZjNGMxMWM1YzI0MGQxM2Y1YzNiYTQwYzliOWZkMGJjOGFkNTYzZDM4NzRhNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://.mcp.json#L1-L12",
+          "version": "repo-lines-v1:sha256:1217fe8aff83c5e31c83d562c6e21d66cc6745e870d49c737cf8a32df7c39ef3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2ZmIwOGZkYTFhY2I5NTdiNjExNmJkMzc4MTFhMWZlNDFhMDE2MTFjMDYzMWVkYmY3ODZkNjg4OWEyN2E1NWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_714db4ad64634086b7609e085db5077e",
+      "statement": "The installed OpenWiki skill requires begin, plan when needed, sequential assigned-page submission, and finish; success is reported only after finish returns complete.",
+      "evidence": [
+        {
+          "resource": "repo://.agents/skills/openwiki/SKILL.md#L14-L69",
+          "version": "repo-lines-v1:sha256:8c55f8e2c12c66bfaaa9fc823b2fe627b0c121d6f375573dfb2a6ed58af21ee0:eyJzZWxlY3RlZExpbmVDb3VudCI6NTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUzZGM0MGE1NmZlMDI5NDk2YmE4M2UwMjZmN2JhOTA0N2I1YWQ0NjRhODk5MTg0ZWQxNzMxYzBjNGY4OTZiOTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUyMTk0ZTJhM2ZlYTM4NWU0OGE3MzQ4OTkxMjQ2NjI2ODUxNGJhZTcyZDcyNTk3NDNiYjZiNzMxYzk5YjhmYmEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM5YWZjZmYzNmYyMGExMzg2NDIxODRhZmU5N2VlMjNmMDhkNjUwMjQ3Mjk1NzA3MzY4YzU4NmE4Nzc2YWYxM2QiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdhYTUwODJlOTM2NGJhZDQ4YzQwNDA4MzMwYTZiYzU2MmM5NjU1MmNjODhiZDU2NjdiMDlkNmY1ZjMwZTE5NzgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_cc3f7e6f51564f45a6af1fd2ef3ddbc5",
+      "statement": "Repository guidance makes documentation generation on demand and uses AGENTS.md as the shared implementation brief, with CLAUDE.md pointing to it.",
+      "evidence": [
+        {
+          "resource": "repo://AGENTS.md#L1-L19",
+          "version": "repo-lines-v1:sha256:1232a2f836b1d55623be35badf88c8f6b7726488ec2e7ddffb7d456a811837b3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY0MzkwYWVlYjM0ZDY2OWE3YzNkYzU4ZDk3Mzk4YjdhYTMzNTYyZjQ1YTEzMDg1OTlmZmQzNTFmMmM0MzU4OGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ5NWIyZWUxYTc2MGMxYzBhMDZlYzQ3YmFiNjE5YmZkNGFlMzRlMzg0NzZlMTYwY2IzMDZlMmM0OTA1MDhkZTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImViMWJjNWJjNGEyMzdmNTc4ZTZhZjRhNDE1ZDA2NDdmOTkxMGIwM2IzNjRlMWUyN2MxZjFkYmFhNzQzZDAzYmEifQ"
+        },
+        {
+          "resource": "repo://CLAUDE.md#L1-L3",
+          "version": "repo-lines-v1:sha256:41517bab160626b360539a8f0495813b6b8c112b43f51db7e84b8fa033c1e5e3:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTEzZGYwN2UwMjRlYmQzODhjYmY1NDQyMDQ3ZTliMDg4Njc3ZmVhNjRiNzA5YmUzN2M4M2NjODgzYzZkNGM2NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDdmMThmNWNjMzc5ZGZlNzU1ZDU0NWE3YjQyMWJkNzMwOTliY2QxMGQ2MTg1NWNkYjRhZDQyN2I2NTNkMmU5NCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWIxYmM1YmM0YTIzN2Y1NzhlNmFmNGE0MTVkMDY0N2Y5OTEwYjAzYjM2NGUxZTI3YzFmMWRiYWE3NDNkMDNiYSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_d2b25c472fd74dafaa4db8c8ffaabf55",
+      "statement": "OpenWiki documentation input rules exclude local runs, credentials, database files, dependency trees, generated frontend bundles, and root-anchored legacy documentation paths.",
+      "evidence": [
+        {
+          "resource": "repo://.openwikiignore#L1-L22",
+          "version": "repo-lines-v1:sha256:8cab8b837079f2c73681e53e15a6f2a556bf6d0cbf63587226050a035e165d15:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA0MzQzZTdjYWM4OGQxYWYxOWZhOTY5MWY0YmEyNjgwZmM5NWU4NGMxODAzMjYxMDBiNjk5ZTIzZGE1NzFmMDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk4NmMxZTgzODQ0OGU3OTljMmNlNTcyNWVmZDM5NGE2YTIyMGY0NzNkZmE3YzFlNDNhYTMzZDk4MzgyNmM1MmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-07T17:18:36.762Z"
+  }
+}

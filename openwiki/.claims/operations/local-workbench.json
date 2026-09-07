@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:36885d61818662d703d47674569171de54073af3faceaa97e57fe677d16d1b65",
+  "claims": [
+    {
+      "id": "claim_25574e40cfb048b39464c4e95bba596d",
+      "statement": "The workbench binds only to 127.0.0.1, selects an ephemeral port by default, creates a new token per server instance, and opens the browser only after Uvicorn reports started.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/server.py#L16-L36",
+          "version": "repo-lines-v1:sha256:896b0dcfa8725e923dc096eb3d889e0f415402156cbdb08b834dd5fe65152bb9:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUzYTYxZmI0NWQxNDMxYzc2ZGZlMmQ5NzFmZTgzNThjZGZiNGI4NTY1Y2Y4NTQwMjViOWI2YTQyZjE3NWJjMzAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxMDM0ODFjNTdkMGYwZGMwZjc2Y2QyY2M4YjM2MDRjNGU4Mjk2ZGE0MTIyYWRkMTllODE3NDVkYzdlMzMxYTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjczYzczZDgzMzgwYzViZTRkNGExN2NlZjViZTRhZDRjZGRlMDFjMDVlYjY5MDFiMTQ4ZWE0ZDQ3ZmIyNGQyZDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM0ZGY3ZGZmNmQ4MjJkZmY3ZTcyNjdiYzUyY2UyM2U1OGU0YTM4M2E2YjZmOTI1OWRkMjc5ODVlZGM2YmE4ZWYifQ"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/server.py#L56-L79",
+          "version": "repo-lines-v1:sha256:d653bd64a8c205de27b5383d49fafc70938b8aec198bd51deb479c3464d517b0:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMxNGVmMTkzNTI3MDQ5NmNiNGQ1ZDFlNzEzZTQ3ZmNkZDIwMzdmMWMxMGQzYmVjOTJmNzdhZjIwZjAwNDUwMWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1MzhjYzAyNmU5MzVhYThhMzcwZmQwNWM3M2NhZTY0YTZiN2U4NzU3MjJmZTVlZjAyZTk0ZmM3YzYxYjIyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBjNDc0NTU0N2RlMmM4NGI1ZDM3NDJmOTRmNDY5MGUyNDhhZDg3NWI2OWRhZjQ0NTAxMTI0MDBhMGJlMWExN2EiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_76b547e0e36e477299f5d0bfadf5a94d",
+      "statement": "Local HTTP middleware enforces the exact Host, same-origin POST requests, bearer authorization for API paths, JSON POST bodies, and a received-body limit of 2,000,000 bytes.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/local_http.py#L10-L18",
+          "version": "repo-lines-v1:sha256:ce1bfa27cb3a225de5f8c2ea254012611700efb97e698f08c3e694f60fa85e4a:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjg3YmI1NTdiYmJhNzM0MDVlZWMxMzIyYTM2NzdmYTU0ZmIxNmI1ZWY1ZWU1NDlhN2IyOTE3M2Y4YTMyNmFlMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzAyYzQxNGI1NGNmODZkZmI0ZjkwZGZlN2Q3YmRiZmE2NjZiN2RkZGQzMmYxMjg2ZjIzMGE1YjUzMjQxODE4YSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjliMGM5MDAzMDM2NTIzOGZjYmYyYTE5NzIyZWVmY2MwYjk0ODE4MDY5NTMxNDhkYWE3MTM5Y2VmYmRmYWY4YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDlmOTMwODNjMTk3MTIxYjk4MjcwMGJhOGFmYWJkMTcyMmNmMWQzZTc0MDQ1MDllODBlZmEyNzI0N2Y2MmYwNyJ9"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/local_http.py#L39-L78",
+          "version": "repo-lines-v1:sha256:b8235c542bbb606ff94d102f2bbdd921963cab522c6170d28b008a7434699419:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ2YjVhZDYyYTcyMTAxN2I2YjZiZGY3ZTVmZWM2NWU0MTcxM2NhNTkzYzk0NWIzNTRjNGQzYWU1ZDg0ODMxMTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY4NjMzZmE4NmEzMTBmOGFiZjBlYWI2NmVhMTI0NjdmNmUwYTljYmI3NzhlM2E2OGNkYTY2ZjgzYzdlNjBjNTkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU1NzMxNWU1NjA4NGVmZGZmOGIyNzYzZmZlOTNlZTgwNWZhNTkxOTY4MjA2YzE2NmZhZGNlNDJkYTllNmM0MWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_42b415ea9f33489487d432daab2ccfb3",
+      "statement": "FastAPI serves the Python package’s bundled UI and assets, disables the default interactive API documentation routes, and returns a bounded 400 error envelope for structured validation failures.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/api.py#L199-L205",
+          "version": "repo-lines-v1:sha256:5963d72797846e84af98ded0944417012c619bc317e037b513b8110dc8484edc:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDU2OTVkZTRlNGM0NTlmN2NmZTk1MDUxOTY0YTljNGNkZTI4YTBmMWRjNDBhOWI0Y2Q4YmM1YTExYTA5MDFhYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTBkNDU1NjM3NDQ4ZGYyMzM1NDRiNmQ3MDA3NDE1M2ZkZDQyNzU5ODg4MjgzYzEzMTJkZmUzYzViYmM2MmQyMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjI0ZGU4ZGJjNThiYjIyZGM0MjM2OGU4NjcxYzI2YmE5ZDU0ZWFmYTNlYTk5YmRjMzY3ZmVmYWI5MmEzMTY5MSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjIsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDNiYzY1MmUzYjRhMjFlN2M1ZWRlODJlOTBlNTNhZmI2ZWJmNTg1ZDZhNjUxZjYyNDVhNzUxNTQ1YzI3NWJkMiJ9"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/api.py#L35-L55",
+          "version": "repo-lines-v1:sha256:0c38bcffba4a1aad916b855ead1e43c4dc6cd096dab9fd4817bedea6534ad426:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwN2I0OWI3OTcyZDI0NTc0MzJkODRmNjZjOThjODhmMzJlODM3NDEwOGFmOTdkYjg3YjdlZDRiOTllZGE0NmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5MDlhNTNhNjE4ZDAyOGUxZDMwMDBjMGE3YWJjZWVjYmU1ZmIzN2Y0ZTUxMWVmZTQ2NjQzZmFkNmU2Njg3MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk1YjliOTdmMGU3Yjg4YmJlNWM1NmQwMDc5YzZjNWFlYTQzNzEwOTQwNDhjMjc2NzFmNGRhZjI2ODcxYzM3ZGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJjNjFmZGMwNjMzM2NlZTU4NTY2N2Y5Yjg0YWNjNWY5NjNlY2ExNjgwNWQ0MWE0MWQ5NTE2ZjQ1MjQyMzliMGUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_96c1215d43c14e8ba36aede91f42f56b",
+      "statement": "Investigation and task-design routes use the background queue; an investigation is created only after job capacity is reserved, and task audit through the API uses no configured semantic judge.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/api.py#L163-L197",
+          "version": "repo-lines-v1:sha256:3f2664c25b4bb14f96f909ccc409ae80d7eb8d953f301e7265e2e47a2d51a14c:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliNmMzY2Y2ZTEzNDQ2ZGMxMTMxYzM1ZmNhMjVjN2E3OGVkNTQ3MjAzMWQxZTdmY2QxZTA3OWUwYzk4N2JiYzUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5MDlhNTNhNjE4ZDAyOGUxZDMwMDBjMGE3YWJjZWVjYmU1ZmIzN2Y0ZTUxMWVmZTQ2NjQzZmFkNmU2Njg3MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk0N2Y3ZGIyZGI3ZjAyYWMyODBiMTA3MzcyYjc2NDQyZWJiYjY0ZGEyOTE1MDlkOTgxMTU1NWNmYzNjZDk1OTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM1OWFjZWVjMTA1M2M1NzE1OTBhMjU4ZmIxODExMjZlNmI2ZGU5ZDJlYzFmM2JiZGQ5NGJmY2VkODZkYzI0NjAifQ"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/jobs.py#L18-L45",
+          "version": "repo-lines-v1:sha256:11dfbaf4f40db293dbfc4512b444a99da632094ae7aa7e8d25207ed8700c2f42:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE5ZDg1Nzk2Nzk2NzhkYmNhNGYyMWYyY2QyZGFjZWE3NjkyZTI1MzQxNmJmZjViNjZkNTg5YWEwMzMyMDY3MGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU2YWM2ZjM1NDhmN2JkZjcyZGYwYWY0ZGY3MzZiZmNkN2E4Mjc1YjdhMGQ1ODI0NWJiYWZiNGMwZjMwMDlhMjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU5YTM4NjFlNzc3ZWNjOWQ1ZGM1MjQzZjlhOTljZTljYTdlZTlkZmU3ZTBiYzJiYzQ1Y2ZkMzg0NjM0Nzg4YWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5304a6969a5e4ec3bc7d4967a589326f",
+      "statement": "The UI provides eight workbench views, lazy-loads its graph view, and polls background jobs while a job is running.",
+      "evidence": [
+        {
+          "resource": "repo://ui/src/App.tsx#L18-L53",
+          "version": "repo-lines-v1:sha256:d4a9b86fb761afe3fb02d117c654a7429bd0a7b3db7e1819d72a9c328e6529b7:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU1Y2VjZjcyOWIwMGJhOTg1MmE5ZjYyYmVhZDFlNzQ0YTY3ODBhNWIwMTc0ZDU1ZTRiMGJmZTZkNmYyM2MwMzIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBjZTVkODE4YjZhY2RhZTU0OGFlMDdlNzA2YmNjNzMwMjY0MjRiMmNmOWU0YTQ4OGUyMjRkOTQ1MGIxMThlZWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ2NTA0YmQzZTY3MDFjYWM2YmVlMzE0MzFkZGQ1Y2U0NzJjZDhiYjU2YmMyMmI1NGZjOWNhN2I0OGIxYjMwNjgifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-07T17:18:36.762Z"
+  }
+}

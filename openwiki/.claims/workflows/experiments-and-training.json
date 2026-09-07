@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:90557de8fc59e83d378ef87e3243d0b8bc7d0fc5ee97c5c85c647a20162bf808",
+  "claims": [
+    {
+      "id": "claim_6b153675d8c742159eedf08fe4a2b250",
+      "statement": "Suite creation groups transitively related tasks, requires at least three independent groups, freezes task hashes, and prevents existing source groups from changing split roles.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/experiments.py#L20-L110",
+          "version": "repo-lines-v1:sha256:546883a225924f69ca95cf1f927b88bfcc649081a845222676f907582d36334d:eyJzZWxlY3RlZExpbmVDb3VudCI6OTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYyYzNjMjMwYmRiNTdjMzM2MTBhMTJkMzY5ZTU3Yzk4Y2M5NmIxNWZkYzliMmYwZjA4ZDYwYzI3MTg4OWRjNWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk1YjliOTdmMGU3Yjg4YmJlNWM1NmQwMDc5YzZjNWFlYTQzNzEwOTQwNDhjMjc2NzFmNGRhZjI2ODcxYzM3ZGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMyYzIwZTYyYWYyZTcwYzYwMWQ4YjU4ZDdiMjg0YjYzOGEyMjBjNWIxMjEzY2FiOTIyN2I3MzA1NDRhYjE0OTYifQ"
+        },
+        {
+          "resource": "repo://tests/test_workbench_execution.py#L56-L75",
+          "version": "repo-lines-v1:sha256:726ffa5d1aa2d72205e5668e19c0681311ca0eac9e644c2309949b480107edd0:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhhZjc1YWM1MWZiZmI5ZjQyZmRhZDEwNjE5YmNkYTQ3ZmRmNGZkYWMzODFmZDg3ZmVmNDgzZGJhNzAwZTVhYjgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAxNjcwYWExOTMzYTczNmU0Njk0MmFjNDBlMzA1ZTc4Y2Q0ZGIyNWUwYmZmYmIxMGZlNDQzODNjMzkxNTgyNDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBiMjhlMTExYTE0ZWU2N2Y0YTgwMGY3YjkzYWQ4NTNkMjdmZTRkZjlkZDYyY2Q1ZjE2NTZmMzZiNGNlZDZhYmQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5244a9903d8e4c49b5bd41e775347f37",
+      "statement": "Configured command targets receive JSON input and a seed in fresh per-trial directories, record configured source hashes, require a JSON output envelope, and expose native CLI seed control as unsupported.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/experiments.py#L273-L312",
+          "version": "repo-lines-v1:sha256:22beccb158e031c673e59618742cac290485772614c848be147f4e26dccb3013:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1NjljYjA5MjgwZWUwNzgxOTQ1ZTQ4ZDQwNDFiZDJkZmFhZTY5MWFkMmVhYmY1ZDNjYmEwODQ2YzcyMTZjYWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVkMTAxMmNmYTc5YjdhODAzYjZmN2Q0M2Q4NzE5ZGE4NGMwYmZjZDM0N2Q5NDUwNzk3ZTViMzc4Zjk3ZWQ3ZTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk5YzFhODU3ZjI2N2U5ODc2ODJmZTQ2YzM5OGI3Njk3YWU5NDQ1OTI1ZTMwOTAzMzllZGFiMjgxZTE4ZWE4M2MiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJjZGRlMDUyMDQ0MGFjZWIwZTFkMzE2ZmNlMDYwNzliZjM5OTgwNjMyMTQyM2Q1NmRhMmJlODdlZmY2YmIxZWEifQ"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/runners.py#L59-L137",
+          "version": "repo-lines-v1:sha256:6c9d79467e16daca777261d29a38e4b81edb5046806470354748f8a8ce61d7d7:eyJzZWxlY3RlZExpbmVDb3VudCI6NzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUwZmM2ZDZhZDlhZjc0NzhkZTA2MDc5NGRjMGM3NzdiODE2MDQ4NzAyMmM5NDcwMDE3NWQ4MWVmNWVjMGI0MTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MDMyZTk2NGQwOTMyMzUxZTVkMTg1MjY5MjgxYjE3MWEzYTA5YjA4YjI4NmU2NjFlYTQ3MDMyM2M4MmViNGQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVlZjhkMTM2ZDA1YjRkNGQ4MzExY2ZlNzJhY2I3NDY3NzZjZjJhNzkzMzFkNDI1YWEwOGVmMzUxZTBjNTZjYjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI2YWZhZDE2NGQ3ODhhZDlmODQ2NzcwNzA5MWI2ZTM2NzA4Yzc5YTU1YTIwMDg1YWMyOWZhZGUwMDY5ZmEyY2EifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e9676342d48d466593e06c4834349e6f",
+      "statement": "Experiment results preserve invalid pairs separately and calculate uncertainty over independent source groups, omitting the bootstrap interval below five valid independent groups.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/experiments.py#L120-L187",
+          "version": "repo-lines-v1:sha256:d32e24a59d94ac3c91214bad692107bf9e71275ceff4fa7a9c501df8dcb5bfd3:eyJzZWxlY3RlZExpbmVDb3VudCI6NjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg4OWM5YTBiYjZkZjkxYjIxYjY4OTgwMGY1YmI0YmE0NTI4NDY1YmFhMDQxYWVjZGQxYTUzOGM2Zjk4Mzc5NGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjlkNDdkZjJiOWQ5OWQzY2YzZDBhYjM1MjdmMTgzYmRkOGI2ZTEyM2UyYzAyYTBiMjNjNzkyNTk3M2JjZGQ1MTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjlhNDg2MTI3MDA2YTQzZTM0OGZkNTE0ZjZlZmY0Yzk0ZDQ1Y2Q4NGRhYTFmMDFlZDJhODM3ZTRmZjE0ZTRiNWQifQ"
+        },
+        {
+          "resource": "repo://tests/test_workbench_execution.py#L172-L199",
+          "version": "repo-lines-v1:sha256:c02b31f90d1f0ba5257aa1d5061bf51717549dfb46318f34eeb62817df821a6b:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQwNTA4YjdiYjJhNzFlZTIwNjYwMDljODEwYzNjYTk0MTUzMWU1OTViMGMwYmJlOGRkZWNmM2Q4ZDc2NTBlODQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRkZGNkODI1MThlZTEyM2ZlNTc2OTg5NDM4YzdlMWYwMmY3YjcxODI3MDhkNjNlMTJhY2ExYTZkMzg3Y2Y0YzciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc1NzU5YzNjZTI5NTg1YjQ3MjU4NGYyYmMwZDBjYTc1YTQ2YTQ5MTBkMmJmOWMzNjAzODFkMjUyYTViNzVmYjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU0N2I5NDMzODM3YWM5MzNiYzViZTg2MWIzNjk4N2RmNjgxNmYxNTdiOGY1NDBhNWZlYzM4ODQ3MGEzNWQyZTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_adb68dcf185f44338bb740681462d9f5",
+      "statement": "Final exposure is recorded before target execution, and consumed final source groups cannot be rerun through another suite after interruption.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/experiments.py#L205-L219",
+          "version": "repo-lines-v1:sha256:e3f1a5c1caeddea3783186a8d6eee41af471ccf0153da6be474e87f550891126:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1ODUxMWQ0OGI4Mjg0NGM4MmRlMzE5MDdkOGJmNzVkNGJhOWJmNzBlNGM3MzM4YWVmNDY5NGFkMzlkN2Y4ZjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5NWY5MjFlZDVkNjRmOGM5NTQ2MTg5NjhjMDExZDNhOGI2OThkZGUwOTYyZmI0M2FkNmY2MTZlOTA1MDJjMmEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI0MDY1ZjY3NDVlMWE4MmE3OWFkZjk3YTkyN2QwMTk4NWQ2Y2Q4YTVlODAxZDA5NjE4NGExODhiNmQzNDI5YWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI0MDgyYzg4MTA0MjhmZDQ5OTNkNWZiNzQ1ZWI4ZmU4YWVmN2FkMTU2ZGEwZjhkMjI3MzA5MGJiZGQ4ZTA5MmUifQ"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/experiments.py#L265-L270",
+          "version": "repo-lines-v1:sha256:b1515adf15fb796bded3b6fac0e5e5637bb1adb3ac3cb699ccc57b337fb57e3e:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGJhMWZjN2JkMjJjN2Q1NzNhMTExMjdhY2FmODdlZTEyOGQzYzUyYjVmOGRiZmE4YjJjMDA1Y2RkYTJjZTc4NSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTQ1M2ZlZDUxZDY5ODExYTkyY2FiODBkNjY5MWI1Nzg1OTFjZGU3YTE2NmY5OGQ1ZDZmMzRlZGZjNzhkNjI2NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzIwZTI0YjY4NDE5NTUxNmUzNjk4NWU1ZTAwYTYyNWZjZjYxYTFmZWVlNTVmMjA1NmFmYmZmMzAyNzZhY2M1MyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2NjNzIzMzk0NTQwOTZmMmM1NGZlMzM0OGY0NDNjMGUwNDBjODJiMzZlODViOTA0OGIwNDQwMjkxMjg1MzdiNyJ9"
+        },
+        {
+          "resource": "repo://tests/test_workbench_execution.py#L125-L153",
+          "version": "repo-lines-v1:sha256:0a0ff3e1f1c24e7a0a0c27fb68c0ea2c93734bb57d9a947307cedbe94e84cdc5:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjExMzk0MWFmZjFhYjlkY2UzNDgxYmRiNjJhNGZiYmFiZDlmMjJkOTQ1MzEwYjk2NGU4OTQ1Y2U5NGU3YTEwZTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmYmQwMDkzMTRiYzI3MDg0MTY3MzRhMDJhZTVmZjM5YTFlNDhhMDUwYmU5MWY0M2IyZmFhOTIwMDJjNjJiZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYxZDM0MDhmMDFjNGFkNmRiMjk4YzEyOWI4ZTI4OTFiNjM0ZGMwYzllZGM1NzY4MDFiNmZlMzI3MTdiMDFlN2QifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_2c13d9f758184de586d8bab586dc712f",
+      "statement": "Training export accepts only complete optimization experiments, selects passing outcomes with failing alternatives for preferences, excludes invalid pairs, deduplicates visible inputs, and writes provenance plus user-supplied notes without running training or redaction.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/commands.py#L258-L278",
+          "version": "repo-lines-v1:sha256:ee2a9f4690c0de7b41a06cc308110edb6f2da7698fcd778f696a1f95c6d1393a:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY1MDA1NTQzMzYxNzg5ODdhYmYxOWYxZjcyYzk1NTY5ZDQwMzYwZjUxM2FhMTE2MzRlNzMwZjQxNWRlNDk2OGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJkMTQxNjcyMTQyNTI3OTBjMTVhM2Q4YmZhYjFlNmI5YzRmZmJmZjA1M2E0NTU4MTVkOGVlZjYzMTU3MzBjMzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJiNTY2ZDdkN2IxYmM1NDE3YmQ2OTU2NmZkZjg3MmRiNjI1MTVlNDcwMTE3ZGRiODcwOTMwMzZmNzQ3ZTdkNmIifQ"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/exports.py#L12-L90",
+          "version": "repo-lines-v1:sha256:cb482ba94d13d08c7df2fb70de7f70f03b0074fdc046ff4e7d0ea787cc8337a2:eyJzZWxlY3RlZExpbmVDb3VudCI6NzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBlNjMyM2E1ZWMyYjQxMjllZDQ1NmE4ZWFlMmI2MTExZTFkMGVmY2I0ZjE5YmI3MTRlZjg1ZWZlN2I3NWZiZDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdkN2ZhNWI1MDVlYTNlNWFiMTc0YjU4MDg2M2FkODlmYWNkYzIyMTM4NGY2NTBjZmZlNmJmMTFiOWM5MDI5ZjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk1YjliOTdmMGU3Yjg4YmJlNWM1NmQwMDc5YzZjNWFlYTQzNzEwOTQwNDhjMjc2NzFmNGRhZjI2ODcxYzM3ZGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-07T17:18:36.762Z"
+  }
+}

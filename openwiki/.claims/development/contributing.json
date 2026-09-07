@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:d64c338fcd8371f6b2be57a2ad03b61d77b78a24ce8a7dd778bf6a30da6c75b3",
+  "claims": [
+    {
+      "id": "claim_80e3a5075dd34ed7b7f0393a15e92a9a",
+      "statement": "The repository uses Python 3.14.7 for development, declares Python 3.14+ support, targets py314 in Ruff, and excludes prereleases in uv resolution.",
+      "evidence": [
+        {
+          "resource": "repo://.python-version#L1-L1",
+          "version": "repo-lines-v1:sha256:922fe0c3de073b01988e23348ea184456161678c5e329e6f34be89be24383f93:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTIyZmUwYzNkZTA3M2IwMTk4OGUyMzM0OGVhMTg0NDU2MTYxNjc4YzVlMzI5ZTZmMzRiZTg5YmUyNDM4M2Y5MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTIyZmUwYzNkZTA3M2IwMTk4OGUyMzM0OGVhMTg0NDU2MTYxNjc4YzVlMzI5ZTZmMzRiZTg5YmUyNDM4M2Y5MyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://pyproject.toml#L10-L10",
+          "version": "repo-lines-v1:sha256:4e76877e94051bff0fdd30652a676b692e3d2a1e581fc2169282256d13cb1c2d:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGU3Njg3N2U5NDA1MWJmZjBmZGQzMDY1MmE2NzZiNjkyZTNkMmExZTU4MWZjMjE2OTI4MjI1NmQxM2NiMWMyZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGU3Njg3N2U5NDA1MWJmZjBmZGQzMDY1MmE2NzZiNjkyZTNkMmExZTU4MWZjMjE2OTI4MjI1NmQxM2NiMWMyZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMWFjMDE5YjY4OGE1OTMzM2NkOTE1NTQ3NWM0OWJlNmI2M2RjMjFiM2I0NzA5ZGZiZTdmNTZmNDFkOWYzMWZjMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjVjZjU2MTMwNzE2ZTMzY2M5ZTg4YmFhMGRmODhmNjAyZjNmN2UyMzcxZWJhMDJhYTdkZWU0ZjBiNWFjZmZlYyJ9"
+        },
+        {
+          "resource": "repo://pyproject.toml#L37-L45",
+          "version": "repo-lines-v1:sha256:acd99c5734d7da488268cb64bc14112642ae33daaff6fe72dc2fa1de083a1ecb:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODNhMDA5ZjBjYTU2MzRiNzcwMjAyMDk0MmZkMTg5Y2RjZDg0YjE2N2FiODAxNTAxMjhlNmY1YjVkYmYyNDAzMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjVhODFkNzQ3NGZhMDRjYWUyYTkxZWJlMzhjMDJmZGQzMjM0OWZhYmIzNDFlOTlhNzYyYTQ5ZTNlODBmMjY2MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOWY2OTcxZTI1MjgyZjUxODRkZmVlYjgzOGE3ZWFlOTA4ZGQyNDRjMjAzOTI4MmZkNjViMjllZWIxMWQ0YWYyNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzM5MzFhMGJlOWQwMDE1OTQxZDE3YmU3OTk3ZTU2MmNkZWQyNDQxMDhjNDdhOTZmMzdkMTVlMTFjNzUwNTBmNyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_5394a41e2023448b8e72c4a3ec7b5fe9",
+      "statement": "The frontend build runs TypeScript checking followed by Vite, which replaces bundled assets under the Python package; the dev command watches and rebuilds rather than launching a separate development server.",
+      "evidence": [
+        {
+          "resource": "repo://ui/package.json#L9-L15",
+          "version": "repo-lines-v1:sha256:b61ec3586d76a0ef1303353edd0292e58cb4a00196f2eb45d4dda80d7e8caa73:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzQ4MzNkNTk0OWMwM2E0MGNhOTUyNDkxNjEwYTY2NTk2NDRiM2FhNDY2MzYyZjc5OTAyMGRiZjE5ODE1NDdkYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTNlNWM0NGYxNTIxYzgyOGNmMWViYmVlOWMyZTk4Nzc2MzQzMDg3ZWEwMTVkYjRmYjRhMzljMjRkM2UyMTMyZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGEyNTNkYTUxOTI0OTQyNDQ4NzRjNDE2ZTQzOTYzZDZlOTRiMzQwY2ZmMWY0MTYzMWRlOWE5NjUwMTQ2NDBlMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODI0OWI5ZTM3ZjZlNzkxZDY1ZjZkN2Q1MDljZmJhNGM4NjIxY2ZjNWE1ZmUyNmRiOTljMmYzMmY1YzM4MjhlNiJ9"
+        },
+        {
+          "resource": "repo://ui/vite.config.ts#L4-L10",
+          "version": "repo-lines-v1:sha256:6adc173b0bd5908c6fc0aee48ceb3603874307b0b87b730b486c92462e1b5108:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjJjZWNiMTQ0YTQ2ZjVkY2YxMmE2MTY5ZmNlZWQ3Njk1ZTgyOTRiMDkwZGU3NmYzNjYxY2RkMDI0OTMwMDE0NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ1Y2QyZmI0ZjNkZjg4NDUxNTI1NWIzOTUyM2YyZjhiNTQ3MmJlZWE5ZjU2NmZmY2EyMDRkYjgwMjU2MTA0MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzBlMDkzMWNlZWNlOWM4YTE0OWEzNjZkNGRhMzA2Y2YwMjEyZGVjNTc3ZWQyNjI2YzMxNTkyMWUxZTM3MWIzMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjZmNWI0MGIxNTg0NTdkMTc4NjRmMjE3OTA3ODZkZDVhMmVjZGI2NGI2NmE2NTFmNzg4ZDRlMjVjZDMzMDNkMiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_6c70e03c5c904ccaaff0c7cffd64f309",
+      "statement": "Repository guidance requires Given/When/Then tests and complete object comparisons, using Python equality and TypeScript toStrictEqual.",
+      "evidence": [
+        {
+          "resource": "repo://AGENTS.md#L7-L12",
+          "version": "repo-lines-v1:sha256:3b7bcf5118582949522365873be1cda8deb05e385fe7a2a1f59f6e4db05e40ad:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGIyZjU1MGUxMDYwZTc2YjJlNDY4MzdiNTg0MDFiNjhiNjkxNTNlYTc3Y2I5MjNjYTJlNTRmN2ZjMzYxMzgxZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNmY5NmZlMTgxZTcwZjJiZTU4ZTAwMTdjY2JkMDRlMThjNzAxZmIzYmNiMjAxYTQ5MzhlMjg4NjI3OTIyODM3NSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOWUxYWZjNGJmMzlmMTM0NGQyOTYyN2VhYzg1MjkzM2JmMjdlYjBjMDc3NTRjZTJlMTA1ZTYyYWZmNGQ0YmNkMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzljOWFhZjQxYWZiYjQ5OWZkYTI1YWI3MjI3YzQ0NjBkMDc3YTZiZDlkYTJiMGI3MDg5ZmE5NmQ5N2M0OTU4OSJ9"
+        },
+        {
+          "resource": "repo://tests/test_store.py#L73-L104",
+          "version": "repo-lines-v1:sha256:7d4c9027b5a5c6bf36b260edaaac986ab9654b85670d39d8cf6d3b5248174deb:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNiYmMyM2NmNTg3ZDllMzAyNzVlNGQzYjJiZmU2YWJiYTY3MTY5YjEzN2Q1YWNhYzBmNTZkNDY3NWVjYTcxYmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmYmQwMDkzMTRiYzI3MDg0MTY3MzRhMDJhZTVmZjM5YTFlNDhhMDUwYmU5MWY0M2IyZmFhOTIwMDJjNjJiZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM3ZDIzNWFmNTVjOGM2Nzg0ZDAyMDRiMmUwNjg3YjYwOTVjMGRiZDE2MzAyNmEwMjMxNjM3YjNkZjA4YTE0NTEifQ"
+        },
+        {
+          "resource": "repo://ui/tests/state.test.ts#L11-L31",
+          "version": "repo-lines-v1:sha256:d2aa1d9344fd869efb05281a22c183f47c7cf93f86265e807027c585f09a64c9:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1OTQ1NTIyMmU5ODM2NTI5NjExMWFkYjVlZDdjMzA1NjFkN2I4YWUxMTQ1ZjE2Zjc1MTRiNTQxOGNlYTU2ODMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI0OGFiYjU4YzZlZmNjNmU2NTEyNGE1M2M1ODM3ZGQxZjcxZTBmNTEzMmQyZmQ4MDJiY2UyMGM3NmIwNjhhZjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQxODA4NDVjMTIxMzQ5ZjUxYjI2YjM1N2EwZmMyNDE5ZTlkM2YwNjY3ZTcxOWU4MzNiNTgzNDliZTk0OTMyZDUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_eb600fcff46d4526875ac00499f4f2c8",
+      "statement": "The API tests jointly verify generated request schemas and rejection of unauthenticated OpenAPI access.",
+      "evidence": [
+        {
+          "resource": "repo://tests/test_api.py#L74-L99",
+          "version": "repo-lines-v1:sha256:31251e2a6a4d9d876b98d228bfb01a5ab2a1f017127ff02fa8072551bd36040f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ0YjRlYzU3NTI1NDc3NjNjYTJjNGJjMTc2ZjAzOTYzMDlkOTcxNmVjNTlmYWJmNGJmMDdkZTJmNzJhMjkxOTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc3Nzg0ZmJiODM5MDgxZDViM2FiYzE4ODcwOTBiNmJmNDgyZDJhZmFjMzYyZDY5M2M0YzQ2Mzk4NTM4MjQ2YzQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU2ODBiMGYyOTI4YWMwZGJmM2RkNGEzMWQ1YzE2ZTkxOThhMjlhNjA4NmQzOWNmYjU3YzIwZjYwYmUzM2E2NWQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8ce46a3fc6894fa38e45c2d6701483a1",
+      "statement": "The experiment tests check fresh target directories, preserved regression pairs, and recorded reports for executed trials.",
+      "evidence": [
+        {
+          "resource": "repo://tests/test_workbench_execution.py#L77-L99",
+          "version": "repo-lines-v1:sha256:5628a65ada8da2bd1e6ecac7abb6e1ec2348a82ce64f06e56be253136795da44:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM1MTFkYjVlOTk5ODBlMGU1MzM1Y2Q4ZWJlMDBkNmNmNWIwMTVkOWViNjE0MjI1NmY4ZTdkZGU0ZTVhODY3ZmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmYmQwMDkzMTRiYzI3MDg0MTY3MzRhMDJhZTVmZjM5YTFlNDhhMDUwYmU5MWY0M2IyZmFhOTIwMDJjNjJiZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjkwYWM1NTk5ZTQzZTM0OWFmNTU1MmZhMTE2MGIwZmNlNGYwNDQ0ODg3ZGQ1MjM0NWQ1MGNmYWI1NjY4ZWVhZTkifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-07T17:18:36.762Z"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:3a64bd4a08ea5cd9267cfbd353433e01e3602d03e30df613966902c45350ace8",
+  "claims": [
+    {
+      "id": "claim_399da148ea9d4659a1c1f01b3f13a8a8",
+      "statement": "New knowledge is draft, only accepted knowledge enters the hashed project context, and reviews record revisions with prior content hashes.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/project.py#L96-L136",
+          "version": "repo-lines-v1:sha256:6df6a20c848e7ea5bd8681cd94fd124cae83ba1d0ab4c54e858c335d22167f8e:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyZGJmOWI5ZDU4M2NmZWM0MjhmZTlkYTliNzFkMzYzZDY3YWI2ZmQ4ZTA1ZGNmMjZjNTkwNTI4ZmQyZmZhMDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI1NmU5Y2M0MDMyNjUyNjg3MTg5NTIyNTNlMmMwYzQxMzdmMWNjZWNlMTg0ODI1NzE1ZTA5MTY1NWVmZjliNTIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE3MWY5NmM0ZDUyMjcyYWM1YTRlYWM0YjA3OWU3ZDRmOTExMmVlMTRmNmFlYjhmNmRhMDQ5M2VkOTg2YTJmZTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI3ODRjZTQzZDcxODE4OWZiZjZjZDE1ZWQ0ZGU3OTExMDAwYjcxMGE5ZDdkN2M0ZTE4Y2QyZDEyYTkyYTY1N2IifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_73bae9af066b44e483d07b7c1018708e",
+      "statement": "Investigations expose only named read tools with bounded previews and inspection ranges, and exclude reserved final source groups from the research store.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/research.py#L124-L179",
+          "version": "repo-lines-v1:sha256:fa0a0f2f546270ef273a163e553f7eb48a3200675d2f7182dba240e8e121634f:eyJzZWxlY3RlZExpbmVDb3VudCI6NTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZkOTIyMDQ2ZDM1ZThlZjMwM2Y1ZDk5YjZmYjU4MzQ4MDY2YWQ4MWNhNzdhZjI2ZWJlZjE1MjBhM2U4ZmRlYjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZhNDI4NjljMTQzMjA1MTYyZDkwODI3MWM2MzIwZDg4YjAyZDc3ZTRmODJlYzEyOTllZjVlYTRjMmFmNGY0ZGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI5ZWUxOTMyODRlODJmYjc2YWY0ZjRmNTgzZTQzZjA1MDdiNWYxMzJiMTY0ZTZkMzUyM2JhZmI5NGMwYzdiMWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJiNmIyM2YwYjZmNzdmOTQ5M2Q5NWVkMGU5MzJmMTY0ZGMwMTYwNjM0YzhhMTFiNWZmM2FmYThiYjAxOGYwOTMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6fa0d40263474279ada7ec83fc0d73bf",
+      "statement": "The local Codex and Claude adapters request structured results with restrictive tool settings, depend on their native CLI/account, and raise errors without provider fallback.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/backends.py#L47-L84",
+          "version": "repo-lines-v1:sha256:01a8450ceeac064ab436de7a2987782f85d523bbd1c07f86061cb54d4dfbf661:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhODQwMGNlZTdjZmI1ZmNlYzUxNmRmNmQ3YjVhM2U4ODM4MzBmZDY1YTZmM2ZhZTAwNmYwM2E4ZmYyYzEzZTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZkNzQ4YzRiZmQyNmZiMjAxMzgyZjkwZGUwYjQxYjRlMGViMzE3NjRkNDdkMGQyYWQwNDY1ZTZkZWZkMGY0MWMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ3MjIzMTA2ZmQ4NzQyYjcwZWEyMzNmOWRjMzU5ZjRiMDJiYmIwNjliNzI4M2VlZjc2MjQ5OTUxNmJkN2I5YzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc1Yzc1MzJkZGRmYWI0YzU0ZDBlZDY4MDJlMWI0NTg3YWU1Yzc0Mzc1ZGQyNWQzOWRkYjIxZTI0M2Q3ZmY2OWYifQ"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/backends.py#L87-L176",
+          "version": "repo-lines-v1:sha256:0781b05c9d6d6b8474da3f85aecd2306cf6571776f291d7ab65692b6f6f4047e:eyJzZWxlY3RlZExpbmVDb3VudCI6OTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkyZDJhOGYzODdlMTAxNmMyNzY4ZmU1MGUwYmRmOGU0MTk1NWZiZWY5MmJkNGIyYmYxZmE1YTZjYmM4NzhiNjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYzYmE5OWQ0ODc1ZDA1NDE0MWE2NjYxYjE5MmM4YTBiZTYxYjEwMjNkMWU1ODE1MDEyMDgyY2QwMTRjYzk1YmEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI2NDU5YmU2N2Y5NzNjNWY4NjkwYjI3MWI1OWVkMTMyODJhNDI3YzRiZTllZGU5ZGRlYjNjYmVmZDEzMmFiYzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c1664e6ef58c4127b4f44233f84d0c79",
+      "statement": "Investigations persist decisions and observations, pause on exhausted budgets or analyzer failures, reject resume after corpus or accepted-context changes, and validate final evidence against visited trace snapshots.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/research.py#L243-L320",
+          "version": "repo-lines-v1:sha256:42beddd1b31c946c9a1132ad34668346aad037daaf29a8914bf1ab27bbf8d7af:eyJzZWxlY3RlZExpbmVDb3VudCI6NzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZjNzcxYzM1MDcxOTZiZDE4ZmY1NzI4YmY4YzI5Zjg4ZDVmZjI3Mzg4YmJlNDRlMGVlM2E5MzlkZmZmMzExN2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFlM2NmY2ViMzNlMDExZjliNjk1MDg4ZTBiM2FhODNiMTYwM2Q2OWRiNGRjNjU4MDNhYTgzNjM1M2U4MWIwZDciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIxNDdjMWU3YWJmYjEwMTQxMmUzZjkwMTk4YjgxN2IyZDlmMzc4OWIzNTNlNDlhNjI3YTg1N2E3MjdhZWExZjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE1ZWIyZjk2N2VmYjIxZWU1NmYyZTdlMThhMzBiN2MwNjViZGY3MDcxMmViZjE1MTAyZGUyZDM5NDM5YTMwYWIifQ"
+        },
+        {
+          "resource": "repo://tests/test_workbench_data.py#L276-L368",
+          "version": "repo-lines-v1:sha256:d86789b698f46de5d59af993065b501ae9067fccb8f89daa96a7a5ebe295733a:eyJzZWxlY3RlZExpbmVDb3VudCI6OTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIwOTVhNTg1NzY0NzRlYjQyYmVlMDI1NjE1YjZlODM4ZjMzMTVkNDQ2ZTlmOWY4NGY5Y2MwMmY1MDM5NGI2ODEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjIxNTY4ZDEyODFlOWRhYmRlMTM1ZWYxZmQ4YzFjYzQ3MTA2YTY5NWI3MzhiNzFkM2Q1Mjc5OWNkYzhmN2U5MzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg4YmU0ZjljN2U5ZDZhYmRlMmY1OGY1Y2Y1YTA2NTdkYWI0Zjc1ZTZmNTRhMDZiZDEwNjYzZWUyNjllNjNlMGQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_037edd3978f14f018d9b4dd590c2ad22",
+      "statement": "Proposal export requires completed research and matching whole-file before content within the supplied source root, then writes review artifacts without applying source changes.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/research.py#L384-L431",
+          "version": "repo-lines-v1:sha256:393708428c6e57c5241af3bb205db7892a596895b4645f6da0b9aa97b1ef3275:eyJzZWxlY3RlZExpbmVDb3VudCI6NDgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhkMGRjMzM0MGIyNTkxZDE4NDZmODhlYThmOTlmZTk0NzM5ZjY1M2JmMWE2NGM0OTBkMWYxMjczZTg5MTUwYTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4NTJhN2ZiNmE0MzUxYTQ5ZWEzYzc5MTU2MjNiNTg3YWNkODk0ZmNlNjk3OWNlYTRkMDdjNGU0ODA5YzlhMjYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjMxMWQ3YjQ3ODQ0NjA2YTI0OGYzOWE1Y2EwNzg4YTIzOTcyNmJhMzQ1ZTJlMWE1ZTUxYTBhYjllNWZmYjMyNDEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/test_workbench_data.py#L518-L552",
+          "version": "repo-lines-v1:sha256:12f5a98d01bbf11538c5359c8c60c7da84951473d1deaf8425cf10f1df54fa00:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkM2NiZTQ1OTg1ZWY2MDQ3NmZiYmJmZTgzODQ3OTE2MzcyMTViNmQwZDVhNTQxYTJjZGU2NDg3NDlkMTViZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ2MWE0NmZjNTNlYjU3YWY5ODZiNWVkYTA3ZTFjMmNjOTY1OTc1YzM2ZTAxOTIzZTljZjNiYTY0ODA4MmM1YjYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQyYWRjMzI4MmIxYjlmMjU1OGVjNmViYjQyMDYxOTIwMDNmNGYwMzM0MzkyN2NhZmVlZWI1MzQwZTdhMGE4NjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU1NTFjOGQ4MTIxMjc1M2U3ODJiMGNkNDZlYTI0MjFjOGIwYWJlN2YxMzQzMDcwNzYzMzI4ZjkwODM0YzA5ODUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-07T17:18:36.762Z"
+  }
+}

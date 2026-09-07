@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "pages": {
+    "/openwiki/architecture/system.md": {
+      "pageVersion": "sha256:807c2615f9ada4e81076b509df48d6e11f7ff21108cbc79407d089012b95d588",
+      "completedBy": "codex",
+      "completedRunId": "6069e109-d3d0-47cc-a0ac-8e5b79e0a09a",
+      "gitHead": "560c5e88b3e8016e5fbc7282ba759017b566d185",
+      "sourceFingerprint": "sha256:45ec3b9b108245d3244d46271da936d9ee33f7d9772825fdabc5de0d07bcc7c7"
+    },
+    "/openwiki/development/contributing.md": {
+      "pageVersion": "sha256:d64c338fcd8371f6b2be57a2ad03b61d77b78a24ce8a7dd778bf6a30da6c75b3",
+      "completedBy": "codex",
+      "completedRunId": "6069e109-d3d0-47cc-a0ac-8e5b79e0a09a",
+      "gitHead": "560c5e88b3e8016e5fbc7282ba759017b566d185",
+      "sourceFingerprint": "sha256:45ec3b9b108245d3244d46271da936d9ee33f7d9772825fdabc5de0d07bcc7c7"
+    },
+    "/openwiki/operations/documentation.md": {
+      "pageVersion": "sha256:9df2d39447e0e6f227f9b12ff8fcff30d7e4befae9b24769a3f6bd907e61608c",
+      "completedBy": "codex",
+      "completedRunId": "6069e109-d3d0-47cc-a0ac-8e5b79e0a09a",
+      "gitHead": "560c5e88b3e8016e5fbc7282ba759017b566d185",
+      "sourceFingerprint": "sha256:45ec3b9b108245d3244d46271da936d9ee33f7d9772825fdabc5de0d07bcc7c7"
+    },
+    "/openwiki/operations/local-workbench.md": {
+      "pageVersion": "sha256:36885d61818662d703d47674569171de54073af3faceaa97e57fe677d16d1b65",
+      "completedBy": "codex",
+      "completedRunId": "6069e109-d3d0-47cc-a0ac-8e5b79e0a09a",
+      "gitHead": "560c5e88b3e8016e5fbc7282ba759017b566d185",
+      "sourceFingerprint": "sha256:45ec3b9b108245d3244d46271da936d9ee33f7d9772825fdabc5de0d07bcc7c7"
+    },
+    "/openwiki/quickstart.md": {
+      "pageVersion": "sha256:0fc6cdf374f94155566cc3bc86f01aa7ed81c426a6bd28ff45d14d7e10b7365b",
+      "completedBy": "codex",
+      "completedRunId": "6069e109-d3d0-47cc-a0ac-8e5b79e0a09a",
+      "gitHead": "560c5e88b3e8016e5fbc7282ba759017b566d185",
+      "sourceFingerprint": "sha256:45ec3b9b108245d3244d46271da936d9ee33f7d9772825fdabc5de0d07bcc7c7"
+    },
+    "/openwiki/workflows/batch-evaluation.md": {
+      "pageVersion": "sha256:9e389ed7d206faaae0a5b6412a27e9e409745fae3b7be2aca8c7f58fe34ed415",
+      "completedBy": "codex",
+      "completedRunId": "6069e109-d3d0-47cc-a0ac-8e5b79e0a09a",
+      "gitHead": "560c5e88b3e8016e5fbc7282ba759017b566d185",
+      "sourceFingerprint": "sha256:45ec3b9b108245d3244d46271da936d9ee33f7d9772825fdabc5de0d07bcc7c7"
+    },
+    "/openwiki/workflows/experiments-and-training.md": {
+      "pageVersion": "sha256:90557de8fc59e83d378ef87e3243d0b8bc7d0fc5ee97c5c85c647a20162bf808",
+      "completedBy": "codex",
+      "completedRunId": "6069e109-d3d0-47cc-a0ac-8e5b79e0a09a",
+      "gitHead": "560c5e88b3e8016e5fbc7282ba759017b566d185",
+      "sourceFingerprint": "sha256:45ec3b9b108245d3244d46271da936d9ee33f7d9772825fdabc5de0d07bcc7c7"
+    },
+    "/openwiki/workflows/investigations.md": {
+      "pageVersion": "sha256:3a64bd4a08ea5cd9267cfbd353433e01e3602d03e30df613966902c45350ace8",
+      "completedBy": "codex",
+      "completedRunId": "6069e109-d3d0-47cc-a0ac-8e5b79e0a09a",
+      "gitHead": "560c5e88b3e8016e5fbc7282ba759017b566d185",
+      "sourceFingerprint": "sha256:45ec3b9b108245d3244d46271da936d9ee33f7d9772825fdabc5de0d07bcc7c7"
+    },
+    "/openwiki/workflows/tasks-and-graders.md": {
+      "pageVersion": "sha256:9837df05a8982f401199398421affeebb65f689375b17f46ae50f499f7ed6cce",
+      "completedBy": "codex",
+      "completedRunId": "6069e109-d3d0-47cc-a0ac-8e5b79e0a09a",
+      "gitHead": "560c5e88b3e8016e5fbc7282ba759017b566d185",
+      "sourceFingerprint": "sha256:45ec3b9b108245d3244d46271da936d9ee33f7d9772825fdabc5de0d07bcc7c7"
+    },
+    "/openwiki/workflows/traces.md": {
+      "pageVersion": "sha256:6588e0c1baaf0a0123595eff0af29d9f4b97d3cde59ae9eea2b6a13e239c2434",
+      "completedBy": "codex",
+      "completedRunId": "6069e109-d3d0-47cc-a0ac-8e5b79e0a09a",
+      "gitHead": "560c5e88b3e8016e5fbc7282ba759017b566d185",
+      "sourceFingerprint": "sha256:45ec3b9b108245d3244d46271da936d9ee33f7d9772825fdabc5de0d07bcc7c7"
+    }
+  }
+}

@@ -12,3 +12,6 @@ coverage/
 .env
 .env.*
 !.env.example
+
+# Transient OpenWiki generation state
+openwiki/.run.json

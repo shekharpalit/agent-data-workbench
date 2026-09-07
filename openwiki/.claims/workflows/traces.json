@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:6588e0c1baaf0a0123595eff0af29d9f4b97d3cde59ae9eea2b6a13e239c2434",
+  "claims": [
+    {
+      "id": "claim_823274351dbc48b9a25071ef1a7bf612",
+      "statement": "File ingestion preserves record bodies, normalizes supplied or content-derived IDs, streams bounded JSONL records, and rolls back a batch when an existing ID has conflicting content.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/store.py#L22-L118",
+          "version": "repo-lines-v1:sha256:c2e749c0606e9b51f53ec3510b6a064f20fdeba2b111e04f87774fd47cfcbaf9:eyJzZWxlY3RlZExpbmVDb3VudCI6OTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU1NzU5YjQ1NWY0ZGRmOGE0MGI2YjdiYTVjNGNjMThhZDhiY2YxOTc1OTc1YTJjNDNmYjg5NjE1ZDUzMzZlY2YiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRiOTE4YmU2ODAyODM0NTNiOTNlYTUzYmI3NDk4N2ZkNTE4ZGQxZTc4YmM2NGNhODI4YWY3NTFhZGM5YmY5NGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMwOWMwOGYzMzZiZTQzMjZlMDcwNWVhOGMzNzYxMzhkYjRlMDRhZTdiN2Q1MmE3YWVhMGZkNmM1ODNjYmYyODciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgwMjg2NjhjZDFlM2M0ODNjMjc2OTJhYTRlMWQ0MDc2NWFkMzU2YzdlMGRiMjk3OWIxMWQ1NTE1NjU5MTFjYTEifQ"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/traces.py#L21-L59",
+          "version": "repo-lines-v1:sha256:67cb1d97664f09afa878341786226e59e14a9dbc6b1fc8dea38582000a4e72e0:eyJzZWxlY3RlZExpbmVDb3VudCI6MzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJmY2RiMjFlYjA5MTc3ODg0NGY5OTEzMWEyNDhmODRkM2FmNTNlNzlkOTNlNDM4YThiMWE4YzBmMzcxNWE4OTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhmOWFkNTAyOWFlMzM4YTJkMzVmZTAxMjIxNTRlYjMyNzQ5NTE1NjQ5MjQzNTZmYTlmYmFhZTJhYmI1NDQxYmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjIxNGQ3ZDU4Y2M4OGE2YWQ2NzMyM2Q3YmJkNjBlM2Q5MzQ5MDgxZTNhYWM0MzFiYTZiYmY2Mzg3MTA0MzRhMGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM5ODdmNmM2NmFjMjE4NDRiYTc2MTZlYTZhZDVhZmU4YzY0NzMzNGI2NzFlOTU5ODkxOWM1MjY1N2IyMmE2NjcifQ"
+        },
+        {
+          "resource": "repo://tests/test_workbench_data.py#L198-L229",
+          "version": "repo-lines-v1:sha256:be7f6d7cbaae578f6204a55d1d57ba954b26fa84b5b654370e16a5b80efec1d7:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcyN2IwZmYxYTExMjFkOGVlMmMzYzUyOGFkODg3ZWFiOTIyZDM5NmNjMjIwYzFmMmQzYzliZWJiNWNjNjkyODciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUxODdhYTU3NTIwMGM2Mzg5Y2Q0NWFiM2QxZjZkNzM3MzA0OTQxYzcxM2U5OWJkMmI5M2YwNzhmMGE3Yjg0NDkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZlMTViMWYzMDNiYjZkZDNhMGIzZTAyZWYyYjBkYjZhMTdhZDM2Mzg5NTZiYWE1YTdkYTQ0NDA4YTI2NmJlMWEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9e236c124b1548299f3b9c653166d688",
+      "statement": "Trace groups and strata are derived from configured pointers with trace-ID and unclassified fallbacks, and unchanged reimports do not update those stored labels.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/store.py#L75-L118",
+          "version": "repo-lines-v1:sha256:03409434a1109769fd2612dbfe1075fc0757d34995247670a50f3443f1544320:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNkZjMxYzg0MjYxZjk5YWEzMTk0YWE4MWM2ODYwMGQ4M2NjMzRhOWFjNjUwMDVhNzMyMTNjMTZkMzBjNjI4YWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRiOTE4YmU2ODAyODM0NTNiOTNlYTUzYmI3NDk4N2ZkNTE4ZGQxZTc4YmM2NGNhODI4YWY3NTFhZGM5YmY5NGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU5MTlmMmFkNjc4ZTg5MTJlNmUwYTI3YWFkNTM0ZDc5NDA4Y2I5OTNmY2FmZDE4ZDY0ZGYxNGEyNWMxNGUwNDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgwMjg2NjhjZDFlM2M0ODNjMjc2OTJhYTRlMWQ0MDc2NWFkMzU2YzdlMGRiMjk3OWIxMWQ1NTE1NjU5MTFjYTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c7a81c5e34894049941dcf8b1d662256",
+      "statement": "The CLI supports stable local substring search, seeded round-robin sampling across strata, and corpus aggregates that report missing values and cap displayed counts at fifty.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/commands.py#L91-L111",
+          "version": "repo-lines-v1:sha256:0b1065a0a6d4525d35ee82085c930f01b52009873e56a32a13b142ac12d40169:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBiOTgyMjEwODBkYTcyMjc2Yzk5MGRiNTRmMDBlMThjZGEzZmE5ZjRkNzNhNjkxYjIzNmFlZmYwNzg5MDdkZGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5MDlhNTNhNjE4ZDAyOGUxZDMwMDBjMGE3YWJjZWVjYmU1ZmIzN2Y0ZTUxMWVmZTQ2NjQzZmFkNmU2Njg3MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI5NjAzNmViYTY2MmI0MGUwNTBjNDI0YTJlZjIwNDRiNmQ1NTY0YzVlMmM0YzE3OTk1YmVlZTExYzFhZTA3MDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRkYzc1NDIxNjE1YWVmZmI4NjlkM2QzMDk3MDNmZGUwYmE2NzBhM2FjMmI2NDVmOWJiNGYyNWE1YjliM2NiZmEifQ"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/store.py#L163-L251",
+          "version": "repo-lines-v1:sha256:d1c6674ad19a81995e174ff2b5a4632a021de5d31c52a92cedb74c8eccc300aa:eyJzZWxlY3RlZExpbmVDb3VudCI6ODksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2N2I0Y2JiMTljYTExZTAwY2E0YTMwZTVjYTU4MmUwZDZjZTIzNWZhYmI2YWY4ZmE1ZWY2ZWM5YmRhNmQxNmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU2ODM5NTIwYjJjYjFlOTY5ZjE3NmNmYmQ5NjY0MjdmNTI1NGI2ODE5MTA1MWM1OTllNDY2ZTVmMGE1YjcxOTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM0ZGM1N2I1NDExZDRiMGQ4MWQ3M2EzNDNlZGI5YWI1ZjgxNzAzYjJlMzc2ZTRiNTBmODgzMjAyYzU1ZjQxOTgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a6c71510bb614dbfa90e42ef6f2a1553",
+      "statement": "Typed search combines up to eight field filters, shares its matched corpus with distributions, sorts missing values last, and breaks ties by trace ID.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/explore.py#L22-L195",
+          "version": "repo-lines-v1:sha256:2917c70d75782ae344f28194a9988de393d08dd3ca92dd8c1fcc0d335a38d679:eyJzZWxlY3RlZExpbmVDb3VudCI6MTc0LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJiZWY3ZTBiZGU1NjRkNzdkMmUzZTQyOTE2ZWUyZDlkMThhOWIyMWVjYWFhYTMxMTU3MjA1MzQ5OTAxMjYzNGRkIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0ODkzZjQwZTM3ODFlYjg5NmM4MmQwNDZhMDgwNjdhMTFlMzVjZGYyZjFkZmFmMjZmZWE5MGI4ZGI2Njc2NDEzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJjNjcwYTZhNDlhY2NjZDBiMzU1NzA2NzU0Mjg0ZDExOGQxYWM1MTNhMjY1YmFkY2Y0ZjIwMWFmZWRmMDQ3ZTQ4IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiJiZmQ1Mjk2YTFhODM4NzQyZTc5MjM4NGYxMTVkMDA4Zjk1MDE1ZDIyMjMxMDZhZDcxNDg4ZThmNTk3NDhhMWUzIn0"
+        },
+        {
+          "resource": "repo://tests/test_explore.py#L25-L117",
+          "version": "repo-lines-v1:sha256:4faf3b4f33cd5e14379d0480d80c0382ffb7d28f57c7b9575ba6dc67d5e447cf:eyJzZWxlY3RlZExpbmVDb3VudCI6OTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMyYzFhMDVjNGNmMWViNTdlYWI1ZGI2NjZhMjQ4MGE4ZWRhYzNjNTM3MDlhZTM4YTc1NTQyZGMzZDdhNTIyNjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkzNzRiYTAxNGNkMDFhZDJkMDMyNmU1NTU4YWM4OWYzZTU2ZjE2NjhjMjJkYTAzMjU5MzkzNTM3NDQ1NTg5OGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI4MGZmOTJmYTIyYTZmMzEyMTI5MjNjM2JiNzRmYjI0NGQ5YTIxN2YyZDU5OGY3OWYxYzc0NDgzMGRmODlmNGYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_836877c667f64b8bbc5866b4d8d95397",
+      "statement": "Clustering computes TF-IDF cosine connected components over a bounded ID-ordered selection, shares a 20,000-character budget across nested text, and reports omissions and truncation rather than semantic labels.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/explore.py#L204-L309",
+          "version": "repo-lines-v1:sha256:e18e21c77433f706c490668241d73fba3240ab7426a843eb0d9fd6dd08aa02b1:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA2LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJiNDM0NzE4M2E0ZWExZTlmYTQzNDdlYWE4ZGQ5NmI1MDg5MTViMmU2ZjQ3NWY3OGIzNWE1MDZkZWQxOGViMjIyIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0ODkzZjQwZTM3ODFlYjg5NmM4MmQwNDZhMDgwNjdhMTFlMzVjZGYyZjFkZmFmMjZmZWE5MGI4ZGI2Njc2NDEzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJhOThiMDYzZDliNDdlNjUzNzk2MjU1NzJjY2UxOTc2NjlkNTc2N2UxMmMxOGJlMDc1NjUyYjhjZDk4MWNlOGQ1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIyZjdiNGQyNzVkNzRmYjE0MTE5MTJkZTMwODJjYjI0MTkzYzU2NzM1Y2I2NjQ5NTRiMTY5NWQ5NDAyMzE2MWMwIn0"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/explore.py#L56-L65",
+          "version": "repo-lines-v1:sha256:a5e2743a3f71ab0ac57ed367b22b25c1cd05d2d4d55898c1f800c45e9b6a4743:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMzMTljOTc2YmNhYmYzOTY2NmRiYjk0MWY1OTBkODZmODExZTYwZDQ5YjgyYWMwMjY1OTM3YzRkMDU2OGE0MzIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEyYWIwOTBiY2QxNjIwZmE2MmVhZWUxNTdhNzRmY2E2MzVhYTI5ZTEyY2JmZmQ2MThiNTc5MmQ4N2JjMDNhM2YiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRiNTMwZWRlNGYzZTg4MmQ2ZTg1ZTllNmE3N2JiYTI5NTk5OTk3MWU2NTk5NGU0ZTA0MWJjMDAzYjE1NzhkMmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI0YmI2ZjhmZWZlNzk5N2VjMDVmNDljN2Y5N2E2YzFlMTM2NzMyNmQzMDUwMWNiYzMwZDAxYzI5OWY2ZWUxODAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a51ee9001acf44be8526fd6aef39f60e",
+      "statement": "Lineage uses recorded trace, finding, task, and experiment references and focuses downstream without pulling unrelated siblings into a trace graph.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/explore.py#L312-L402",
+          "version": "repo-lines-v1:sha256:b3032974dbefa9a003afc6620eaddedee1a27187bed79e5319130eee8014601b:eyJzZWxlY3RlZExpbmVDb3VudCI6OTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQwODQxYjA5NDExM2Y4YjllZjRmMTBmMTViNjBlMjY0N2RmN2IzMDA1MmNkOTQwNGEzYmIwOGQ2ZWNjNDEwZjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmYmQwMDkzMTRiYzI3MDg0MTY3MzRhMDJhZTVmZjM5YTFlNDhhMDUwYmU5MWY0M2IyZmFhOTIwMDJjNjJiZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/test_explore.py#L216-L276",
+          "version": "repo-lines-v1:sha256:b273251b9121428e348098fab801eda5fe626672e794dcefede18d4dc3c9863d:eyJzZWxlY3RlZExpbmVDb3VudCI6NjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMyYTQ0ZGE4YjFlODE5M2E5MzdlNDc5MDBkNTlkM2M3YjU5YWVhZjU5ZjZhYjI3MmM1YWZhOGM1MTgyOWU5ZDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFlOGJhNzcwNWYwMTVkYzY3OTVlMmExYzk3YTk3ZDNjZTg4ODIxMzQ1Nzg3MTI1MzI3MzI5ZjYyNDNhYjRhYzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmYmQwMDkzMTRiYzI3MDg0MTY3MzRhMDJhZTVmZjM5YTFlNDhhMDUwYmU5MWY0M2IyZmFhOTIwMDJjNjJiZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAzN2ZiMGIyYzNmOGUwMTFiNDhjZjFmZmZmMDZkZTFlMTM2NjRmOTkyOWNmMGE5YjIwZjgwNWIyMTU4OGY5ZTIifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-07T17:18:36.762Z"
+  }
+}

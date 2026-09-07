@@ -1,0 +1,22 @@
+# Local data, credentials, dependency trees, and generated bundles
+.git/
+.venv/
+**/node_modules/
+runs/
+dist/
+coverage/
+**/__pycache__/
+.pytest_cache/
+.ruff_cache/
+.env
+.env.*
+*.sqlite3
+*.sqlite3-*
+*.db
+*.db-*
+*.tsbuildinfo
+src/agent_data_workbench/web/assets/
+# Legacy documentation being replaced; source and tests are authoritative.
+/docs/
+/CONTRIBUTING.md
+/ui/README.md

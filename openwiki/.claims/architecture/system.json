@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:807c2615f9ada4e81076b509df48d6e11f7ff21108cbc79407d089012b95d588",
+  "claims": [
+    {
+      "id": "claim_d9a6c98de02d49279a29adf7c1ea2d00",
+      "statement": "The CLI and FastAPI layer reuse the Python domain functions for research, storage, task review and execution rather than implementing independent workflows.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/api.py#L24-L31",
+          "version": "repo-lines-v1:sha256:d2dfa7cd76ab5218b07507d26e2da7489f70eaa6e6fe92981c009a0601120f53:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiY2QyYmRmNmI4ZDhiMDJjZWUxYWYxNjJmYzY4NGI5YjMyMmJjOTRlNDA5ZjdkMWRiN2I2Nzg2YTcwYWU5ODU2MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzJiZjk2N2ZmY2ZlNTdjMjM3ZWY3NDc4YTIyZWVhNDFhMDJlM2FmOTVmNDc4OTUzYjEwNDk3ZGQwNTU2NmJlMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDc4NmIzNTkyYWQ0Y2EzNGRlMjkyNTJlMGU2ZjI2NzQ4ZTEyMDVkNTk1YzJhYTIyYTdjYjQwMGVhM2M1OTlhMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTViOWI5N2YwZTdiODhiYmU1YzU2ZDAwNzljNmM1YWVhNDM3MTA5NDA0OGMyNzY3MWY0ZGFmMjY4NzFjMzdkZiJ9"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/commands.py#L11-L28",
+          "version": "repo-lines-v1:sha256:62c831fed809d628fe7b38642d8622b5d72f2e46ae79041366ed5e0a5c08287c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkMmJkZjZiOGQ4YjAyY2VlMWFmMTYyZmM2ODRiOWIzMjJiYzk0ZTQwOWY3ZDFkYjdiNjc4NmE3MGFlOTg1NjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg3YmNkYzQ3YzA2MjE0ZDYyYmQzYTRlMzk0NTNjY2Y0NTY4NTAzMjI5MTc0MmIwNjhhMzYzN2M0OTY5MDJlOTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk1YjliOTdmMGU3Yjg4YmJlNWM1NmQwMDc5YzZjNWFlYTQzNzEwOTQwNDhjMjc2NzFmNGRhZjI2ODcxYzM3ZGYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1aebc7a5e8cd42c09db61b734da4e21d",
+      "statement": "A project is initialized only in a new or empty directory, with project configuration, six artifact directories and a project-local gitignore that excludes its contents.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/project.py#L55-L65",
+          "version": "repo-lines-v1:sha256:0dc83bc1c6213697ab07e2ee285b37581a0f39e00da57c70ab2fda7e34266203:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyMGI0NTNmNWUwYzkyZDVmNmMyNTFhNWVhMTk2MGQ3MmYzYmQwNzk1NmFlODU3ZGEyMGUzMWE4OGM1NTk2OWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjExMWYyZTdhNDVjYjNjNjU0YzViYTU0ZmU0ZDhiMWUzNDgzZjM0NGNiYTgzMjk1MTVjMDgzOGQ2MGY0MDY5YTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM3NmVhNmNhMzE2MjZhZDBjNzRmYWM5YjkxNDBjMDc5NWNiN2Y0NDdhOWQ4ODRlYjllZmIwM2Q2OTAyYWU2MGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU5YjdmYjJjZjk4ZjFhMjM5NmQ2NThhZTE5MWRmODI2MGIyNzkzMGVmZjdlYWQwMTQ4MmRlMmNjODY5YzMwMTIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_609c36bd3bea43789c850d1c85a37b00",
+      "statement": "TraceStore uses operation-scoped SQLAlchemy transactions, canonical JSON and hash comparisons; conflicting content for an existing ID aborts the import transaction.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/store.py#L49-L119",
+          "version": "repo-lines-v1:sha256:b08e7b22db01f467e2603ddf9acbd13c088a7e8e7e9e3607fc0b71decd01ebe4:eyJzZWxlY3RlZExpbmVDb3VudCI6NzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRhMzMyYTNiMzZmMjZmYjZiZTg1MjFhZTIyMmM2MTZlMTFiMjhlNTMyMzQxNGFiNjM2MWVlNTRkNTcyNmRiMmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA4OWExNjg1ZDZkNTdmNGVlOWIyY2I3MzU2MjA0MWIyMDQ1MTllODZkY2RiZWIzMGNiODhmNDlkZmIyMzRjYWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjcwNWYwN2I0NTBkNTFlODA0NTY1NjIxODcwN2QxYzc1NTYyZjAwMDA5MGI3MTNkNTg0M2NkZDIxNTYxNDk1NGUifQ"
+        },
+        {
+          "resource": "repo://tests/test_store.py#L87-L104",
+          "version": "repo-lines-v1:sha256:5f70d5f2720c55273dd6058aa8fe2e6afa4c7c88fb0a8110520c1391305d6be4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI1MWU0MWY4ZjdiY2QzOTUxNTRjMmU0MzIxMjk2YWMzMzc2ZGQzOWNkM2ZlMzM1MzUxMjlhNTU4ZmZjMjZiOWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmYmQwMDkzMTRiYzI3MDg0MTY3MzRhMDJhZTVmZjM5YTFlNDhhMDUwYmU5MWY0M2IyZmFhOTIwMDJjNjJiZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM3ZDIzNWFmNTVjOGM2Nzg0ZDAyMDRiMmUwNjg3YjYwOTVjMGRiZDE2MzAyNmEwMjMxNjM3YjNkZjA4YTE0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_75bf7ec6c47e428bad9f38849f92fdb2",
+      "statement": "The SQLite engine preserves the six-column trace mapping, uses NullPool, and serializes first-use schema creation within the process.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/database.py#L16-L45",
+          "version": "repo-lines-v1:sha256:f3d3db1867907506101519f86d69c5ea9bc52ef2e76f221cb6d0c6ef0594b8b2:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA1NDExY2JkNGZkYTE5Yjk1NDZhMjM4MmVmNTZhYzE0OWU3NDIxMjk3NTdkNzQ0MWQ2MmE3ODkwM2M1MmQwYmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEwZjE3NjhmNjljMzg1ZTYyNGI5OWZlZmFhZDI2MDI5ZDI3OTI1NDZiY2U1ZTFjYjE1MDBlYTk2NGZmM2MyODciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg1NDEyNzMwOWZkZTJiZWUxOWQzODY1MWRkOWU5ZmJiZmQzM2E5MGM2Yjc1ODk4NjY4MzM3N2U1YmNjNzUyOWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d4dceae04c9a4e819247ff0c779c5925",
+      "statement": "Mutating project workflows use a nonblocking POSIX file lock, while the HTTP background job queue independently rejects another running model operation.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/jobs.py#L18-L45",
+          "version": "repo-lines-v1:sha256:11dfbaf4f40db293dbfc4512b444a99da632094ae7aa7e8d25207ed8700c2f42:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE5ZDg1Nzk2Nzk2NzhkYmNhNGYyMWYyY2QyZGFjZWE3NjkyZTI1MzQxNmJmZjViNjZkNTg5YWEwMzMyMDY3MGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU2YWM2ZjM1NDhmN2JkZjcyZGYwYWY0ZGY3MzZiZmNkN2E4Mjc1YjdhMGQ1ODI0NWJiYWZiNGMwZjMwMDlhMjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU5YTM4NjFlNzc3ZWNjOWQ1ZGM1MjQzZjlhOTljZTljYTdlZTlkZmU3ZTBiYzJiYzQ1Y2ZkMzg0NjM0Nzg4YWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/project.py#L75-L90",
+          "version": "repo-lines-v1:sha256:9cfa67848ba88f36c1332ec7ee4bf41e49d4f75f713e4024a381362d291ca2a1:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1NjdlYTcxNTM5ZmEwOTRhYmNlNmU3MWU3ZGFlYTllZjQyMTg5YmQ3ZmE5MjExOTZiN2VlYjFkMzY4YmQ5M2MiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFiMmI2ZjA2OTU5NDExYzU3ZGM3YjMzNWZiNzNmNTM3MDFlYWU0YTViZjlhNDA5NWI2OGE0YWI3N2M4OWQ3YTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY4NGU5ZjllN2M1OWUzNDIyNzNiMzRhNTljMzFiMWY1ZWQxNDNhNGY3MzgyYzRiY2EwMGE5MTI3ZTVmZTI3YjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRlMGVmNDQwMGUwNmFmZmJlYTAyNzBiNzQzMDk3Y2I0MGYyM2RkNjQxNGVhZjhkYjUwMGQwYzQ3YmYyNzMwOTEifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-07T17:18:36.762Z"
+  }
+}

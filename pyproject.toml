@@ -31,8 +31,8 @@ dev = [
 packages = ["src/agent_data_workbench"]
 
 [tool.hatch.build.targets.sdist]
-include = ["/src", "/ui", "/tests", "/docs", "/examples", "/README.md", "/CONTRIBUTING.md", "/LICENSE", "/pyproject.toml", "/uv.lock", "/.python-version", "/.gitignore"]
-exclude = ["/ui/node_modules", "/ui/coverage", "**/__pycache__", "**/*.tsbuildinfo"]
+include = ["/src", "/ui", "/tests", "/openwiki", "/AGENTS.md", "/CLAUDE.md", "/.agents", "/.claude", "/.codex", "/.mcp.json", "/.openwikiignore", "/README.md", "/LICENSE", "/pyproject.toml", "/uv.lock", "/.python-version", "/.gitignore"]
+exclude = ["/ui/node_modules", "/ui/coverage", "**/__pycache__", "**/*.tsbuildinfo", "/openwiki/.run.json"]
 
 [tool.uv]
 prerelease = "disallow"

@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:9e389ed7d206faaae0a5b6412a27e9e409745fae3b7be2aca8c7f58fe34ed415",
+  "claims": [
+    {
+      "id": "claim_bf28a65284e642f49a2ea26a2cc81ff0",
+      "statement": "Batch preparation selects the first N exported records, enforces a prompt-size bound, records snapshot/request fingerprints, and writes inspectable prompt, schema, request, and trace artifacts.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/workflow.py#L52-L100",
+          "version": "repo-lines-v1:sha256:2acdacb8f89ff2338e36350766ffd47b59fd79cf58db907c96afb7f0cefe2f53:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIxMzJiOGQ1NTE4YTBkMjRlMGIzZjAwMzUwYzQ4NzcwN2FlMmNjYzQwZDc1Yzg1ZjQ1YTU2MDVlMmZlNGQ1NDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM0YmQyM2M2ZjU0ZGQzZDkxMWMyYWI3MGE4ZWQ0ZTUxMmMyMWJlODVhMTJlMWFlNzJjYTVlMmFmNDgxMjQwNmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdmODQxNjY5ZWY4ZDMyYWE2YTcwY2Y4ZDYwYjU4M2Y4ZmUwMmJmNjQxZmQ3YmYyOTQxZWYwZjA5ZWQ5NDMxYTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc4OWNhYjViZTM2NDZkYzcwNTZhY2M4MDE5ZTUzNDY5ZGVkMzY0YzI4NmU2ZTFmNjJhNWQ5YWNjYzljMzE0OTkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3a6ccd22ab0e472ebffa24bd4d3d380d",
+      "statement": "Completing a prepared batch rejects an existing analysis, validates the snapshot and evidence, and emits candidate cases, a Markdown report, and structured analysis metadata.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/workflow.py#L103-L125",
+          "version": "repo-lines-v1:sha256:75f39d5955aba4bae36785564677e3fcc5e97c5540bb93a5f048846f8a016c1c:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJlOTAwMmVmMGU5Y2VjYTcyYWI3MmZiNjE1NWQwN2I5ODI1ZDg1M2Q0OWY3YTBmMWUwZWQxZDc3OGY3MDc1YWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRiNDAwODgzMWJkYjQ1YjhmYzM2ODQ0MTQzYmQ1ZWQ4MWJhNjVhMjk0ZDg5YzQ1YTZhYTllMGFkOTBmYWRmMzIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUyY2Y2MTBmYTllYmFlOGRjNmI1OTljOTc1MzYwZDAwMTJkZTBjNTgwMTlkNGY4NDU3YTk1N2MyMGFkN2I1NTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIwYjcwZTJlZjJjMjlhYTMxY2IzNzA0MzNmZDE5NjAwODA3YzYzODVkNWYzNDQ2ODcwODc3MGU4YmMzMjhhNjcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e1c89915be7e4480a1f9223e4ae37d07",
+      "statement": "Supplied-output evaluation uses accepted cases only and marks missing outputs as failures, while comparison rejects missing baseline or candidate outputs for accepted cases.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/evaluation.py#L118-L171",
+          "version": "repo-lines-v1:sha256:21130f0132b686220a3385485ab2949fe17d926f108204fed70254d1e23261c8:eyJzZWxlY3RlZExpbmVDb3VudCI6NTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk1OWFhNDFhOWVkMDJjZGI2NjU4ZTYwNTRlNmZkNzYxN2UyNzJlNDhiNTM1YTE4YWM0ZGE1OTNhODk3ZThkY2MiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM4M2E5YTA5ZDBkMmVjN2UwYzQ2YWEzMDdmNWU5MmE0OTIzYWM5NzA3OTBiNzAyYTM4NTI1YmRjZDk3MmJkNTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZjZjg1MjFhYWI5NGE4OGZhZDIzZTc3YzdhZjdhNzBkMzFhZTNiNGFlODcyZGI3MTZiMmY2Y2U1NDAxNDdhZTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_44f9d2bf5bc94698a9e48946e5b8262a",
+      "statement": "The analyzer benchmark scores exact trace-ID, pointer, and category triples, counts extra supporting spans as extra labels, and records analyzer errors separately.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/benchmark.py#L75-L146",
+          "version": "repo-lines-v1:sha256:b9d4188adb462682a766a65f86ec46da04691acbc71fa72380738bab2fad455c:eyJzZWxlY3RlZExpbmVDb3VudCI6NzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcxOTdjZDFjNTA1YmU3ZGFmZGE5NTEwZjZiNDA5NmRjODUwMjJiNWYxNmQzYzE0MGNmOTQ2Y2RhMDY4YmMwZDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ1ZTFhMTczZDViMTRhMTM5MTdhYzA4ZDhlMTFiNjViNmQ5MGQ5NTRhZTI0NjRlYmI3ZDE2MzczZTE1NDc5OGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI5ZWUxOTMyODRlODJmYjc2YWY0ZjRmNTgzZTQzZjA1MDdiNWYxMzJiMTY0ZTZkMzUyM2JhZmI5NGMwYzdiMWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7e34bc5dae1b4e44be233ff1b9e1c6b8",
+      "statement": "Human benchmark assessments separately record correctness, actionability, task usefulness, review time, and coverage for unique returned findings.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/benchmark.py#L32-L72",
+          "version": "repo-lines-v1:sha256:06f479980a1e931d1b341a461f9a7d6721b2275a2352aa60422abaf155e96797:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJmZjliYzljYzBkYjQ0ZTQ5YTQ0ZTJlZTM0ZjVmOGMwNTM4NGVjZmFmMDlmZmM0MzI4ODdmYzg2MmI3YTQxMGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk5M2ExMzA2MmYxMGVlNGYxMjE4ZDkzZTM3YTZmODFkMzQ2ZmYxMWVjN2U1NWRkNTQyZTJkMmQyZWYwNzExZjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNjZTdiMjYxNWJlMjgxNjMwNzk0ZDI2MjQ0ODc1YTdkNWFkMTI0ODcwZWFjODhjZDZkOGFhZTg4ZmZhOTBjOTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRhODRlYzA2YzhlMGIxOTJjMGU2MzBjYTVmNmQyMTRmOGFmMTc5MGU0N2EwYmQ0MzMyNDc3NTk1YjFhYWVmMTAifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-07T17:18:36.762Z"
+  }
+}
