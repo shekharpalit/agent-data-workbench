@@ -8,6 +8,8 @@ from typing import Any, Literal, Self
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
+from .identifiers import UUIDString
+
 
 def pointer_parts(pointer: str) -> list[str]:
     if pointer == "":
@@ -35,7 +37,7 @@ class Evidence(Contract):
 
 
 class Finding(Contract):
-    id: str = Field(pattern=r"^[A-Za-z0-9_-]{1,64}$")
+    id: UUIDString
     title: str = Field(min_length=1)
     category: Literal["failure", "opportunity"]
     confidence: Literal["observation", "hypothesis"]
@@ -73,9 +75,9 @@ class Assertion(Contract):
 
 
 class Case(Contract):
-    id: str = Field(pattern=r"^[A-Za-z0-9_-]{1,64}$")
+    id: UUIDString
     title: str = Field(min_length=1)
-    finding_ids: list[str] = Field(min_length=1)
+    finding_ids: list[UUIDString] = Field(min_length=1)
     trace_ids: list[str] = Field(min_length=1)
     input: str = Field(min_length=1, description="The complete request for the agent under test.")
     required_context: list[str] = Field(

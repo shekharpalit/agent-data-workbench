@@ -5,16 +5,15 @@ from __future__ import annotations
 import hashlib
 import json
 import os
-import re
 from contextlib import contextmanager
 from datetime import UTC, datetime
 from pathlib import Path
-from uuid import uuid4
 
 from pydantic import Field
 
-from .evaluation import atomic_text
+from .identifiers import canonical_uuid, new_id
 from .models import Contract, json_text
+from .persistence import atomic_text
 from .traces import read_json
 
 
@@ -26,19 +25,13 @@ def digest(value) -> str:
     return hashlib.sha256(json_text(value).encode()).hexdigest()
 
 
-def identifier(value: str) -> str:
-    if not re.fullmatch(r"[A-Za-z0-9_-]{1,80}", value):
-        raise ValueError("IDs must contain 1–80 letters, numbers, underscores or hyphens")
-    return value
-
-
 def save(path: Path, value) -> None:
     path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
     atomic_text(path, json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n")
 
 
 class ProjectConfig(Contract):
-    version: str = "0.2"
+    version: str = "0.3"
     name: str = Field(min_length=1)
     objective: str = Field(min_length=1)
     success_criteria: list[str] = Field(default_factory=list)
@@ -49,8 +42,11 @@ class Project:
     def __init__(self, root: Path):
         self.root = root.resolve()
         self.config = ProjectConfig.model_validate(read_json(self.root / "project.json"))
-        if self.config.version != "0.2":
-            raise ValueError("Unsupported project version")
+        if self.config.version != "0.3":
+            raise ValueError(
+                "This project uses an older artifact format. Create a new project and reimport "
+                "its traces; existing files are unchanged."
+            )
 
     @classmethod
     def create(cls, root: Path, name: str, objective: str, criteria: list[str] | None = None):
@@ -64,10 +60,16 @@ class Project:
         (root / ".gitignore").write_text("*\n", encoding="utf-8")
         return cls(root)
 
-    def path(self, kind: str, name: str, suffix: str = ".json") -> Path:
+    def directory(self, kind: str) -> Path:
         if kind not in {"knowledge", "investigations", "tasks", "suites", "experiments", "exports"}:
             raise ValueError("Unknown artifact kind")
-        path = self.root / kind / (identifier(name) + suffix)
+        directory = self.root / kind
+        if not directory.resolve().is_relative_to(self.root):
+            raise ValueError("Artifact directory escapes project")
+        return directory
+
+    def path(self, kind: str, name: str, suffix: str = ".json") -> Path:
+        path = self.directory(kind) / (canonical_uuid(name) + suffix)
         if not path.resolve().is_relative_to(self.root):
             raise ValueError("Artifact path escapes project")
         return path
@@ -90,7 +92,7 @@ class Project:
                 fcntl.flock(stream, fcntl.LOCK_UN)
 
     def artifacts(self, kind: str) -> list[dict]:
-        directory = self.path(kind, "placeholder").parent
+        directory = self.directory(kind)
         return [read_json(p) for p in sorted(directory.glob("*.json"))]
 
     def add_knowledge(self, title: str, content: str, source: str) -> dict:
@@ -99,7 +101,7 @@ class Project:
         if len(content) > 100_000:
             raise ValueError("Knowledge entry exceeds 100,000 characters")
         entry = {
-            "id": "K-" + uuid4().hex[:12],
+            "id": new_id(),
             "title": title,
             "content": content,
             "source": source,
@@ -163,6 +165,6 @@ def environment_identity() -> dict:
     return {
         "python": sys.version.split()[0],
         "platform": platform.platform(),
-        "package": "0.2.0",
+        "package": "0.3.0",
         "pid": os.getpid(),
     }

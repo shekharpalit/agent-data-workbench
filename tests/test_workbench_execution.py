@@ -6,15 +6,13 @@ import time
 from http.client import HTTPConnection
 
 import pytest
+from identities import uid
 from test_workbench_data import Scripted, accept, make_project, result, spec
-from typer.testing import CliRunner
 
 from agent_data_workbench.benchmark import benchmark, review_benchmark
-from agent_data_workbench.cli import app
-from agent_data_workbench.demo import build_demo
 from agent_data_workbench.experiments import make_suite, run_experiment, summarize
 from agent_data_workbench.exports import export_training
-from agent_data_workbench.project import Project, save
+from agent_data_workbench.project import save
 from agent_data_workbench.runners import ConfiguredRunner, Execution, RunnerConfig, read_artifacts
 from agent_data_workbench.server import WorkbenchServer
 from agent_data_workbench.tasks import load_task, replace_task
@@ -61,10 +59,28 @@ def test_correlated_and_transitively_related_tasks_never_cross_splits(project):
     # Then
     assert {
         "related_split_count": len(
-            {entries[t]["split"] for t in ["T0", "T1", "T2", "joined", "transitive"]}
+            {
+                entries[t]["split"]
+                for t in [
+                    uid("T0"),
+                    uid("T1"),
+                    uid("T2"),
+                    uid("joined"),
+                    uid("transitive"),
+                ]
+            }
         ),
         "related_cluster_count": len(
-            {entries[t]["cluster_id"] for t in ["T0", "T1", "T2", "joined", "transitive"]}
+            {
+                entries[t]["cluster_id"]
+                for t in [
+                    uid("T0"),
+                    uid("T1"),
+                    uid("T2"),
+                    uid("joined"),
+                    uid("transitive"),
+                ]
+            }
         ),
         "all_splits": {t["split"] for t in entries.values()},
     } == {
@@ -101,9 +117,11 @@ def test_experiment_executes_fresh_trials_and_preserves_regressions(project):
 
 def test_invalid_runs_are_not_counted_as_capability_failures(project):
     # Given
-    suite(project)
+    manifest = suite(project)
     # When
-    value = run_experiment(project, "suite", FixedRunner(), FixedRunner(status="runner_error"))
+    value = run_experiment(
+        project, manifest["id"], FixedRunner(), FixedRunner(status="runner_error")
+    )
     candidate = value["summary"]["candidate"]
     # Then
     assert candidate == {
@@ -125,7 +143,9 @@ def test_invalid_runs_are_not_counted_as_capability_failures(project):
 def test_final_exposure_consumed_before_interruption_and_cannot_be_reused(project):
     # Given
     manifest = suite(project)
-    make_suite(project, "same-tasks-new-name", [t["id"] for t in manifest["tasks"]], seed=7)
+    second = make_suite(
+        project, "same-tasks-new-name", [t["id"] for t in manifest["tasks"]], seed=7
+    )
 
     def interrupt(row):
         raise KeyboardInterrupt()
@@ -133,10 +153,10 @@ def test_final_exposure_consumed_before_interruption_and_cannot_be_reused(projec
     # When / Then
     with pytest.raises(KeyboardInterrupt):
         run_experiment(
-            project, "suite", FixedRunner(), FixedRunner(), split="final", on_trial=interrupt
+            project, manifest["id"], FixedRunner(), FixedRunner(), split="final", on_trial=interrupt
         )
     # When
-    saved = read_json(project.path("suites", "suite"))
+    saved = read_json(project.path("suites", manifest["id"]))
     # Then
     assert saved["final_exposure"]
     # When
@@ -147,7 +167,7 @@ def test_final_exposure_consumed_before_interruption_and_cannot_be_reused(projec
         "trial_count": 1,
     }
     # When
-    for name in ["suite", "same-tasks-new-name"]:
+    for name in [manifest["id"], second["id"]]:
         with pytest.raises(ValueError, match="exposed"):
             run_experiment(project, name, FixedRunner(), FixedRunner(), split="final")
 
@@ -160,13 +180,13 @@ def test_suite_and_task_changes_prevent_running_stale_configuration(project):
     replace_task(project, key, old.model_copy(update={"purpose": "Changed"}), "Revise")
     # When / Then
     with pytest.raises(ValueError, match="review"):
-        run_experiment(project, "suite", FixedRunner(), FixedRunner())
+        run_experiment(project, manifest["id"], FixedRunner(), FixedRunner())
     # When
     manifest["seed"] = 999
-    save(project.path("suites", "suite"), manifest)
+    save(project.path("suites", manifest["id"]), manifest)
     # Then
     with pytest.raises(ValueError, match="manifest changed"):
-        run_experiment(project, "suite", FixedRunner(), FixedRunner())
+        run_experiment(project, manifest["id"], FixedRunner(), FixedRunner())
 
 
 def test_bootstrap_does_not_treat_repeated_or_related_tasks_as_independent():
@@ -274,9 +294,14 @@ def test_artifact_escape_and_nonfinite_data_are_rejected(tmp_path):
 
 def test_training_exports_use_winning_variant_and_deduplicate(project, tmp_path):
     # Given
-    suite(project)
+    suite_manifest = suite(project)
     experiment = run_experiment(
-        project, "suite", FixedRunner(1), FixedRunner(0), split="optimization", repeats=2
+        project,
+        suite_manifest["id"],
+        FixedRunner(1),
+        FixedRunner(0),
+        split="optimization",
+        repeats=2,
     )
     out = tmp_path / "preferences"
     # When
@@ -299,7 +324,9 @@ def test_training_exports_use_winning_variant_and_deduplicate(project, tmp_path)
         "chosen_variant": record["provenance"]["chosen_variant"],
     } == {"chosen": {"value": 1}, "rejected": {"value": 0}, "chosen_variant": "baseline"}
     # When
-    held = run_experiment(project, "suite", FixedRunner(), FixedRunner(), split="validation")
+    held = run_experiment(
+        project, suite_manifest["id"], FixedRunner(), FixedRunner(), split="validation"
+    )
     # Then
     with pytest.raises(ValueError, match="optimization"):
         export_training(
@@ -343,7 +370,7 @@ def test_benchmark_scores_spans_and_keeps_human_review_separate(tmp_path):
         [
             {
                 "case_id": "G1",
-                "finding_id": "F1",
+                "finding_id": uid("F1"),
                 "correct": True,
                 "actionable": False,
                 "useful_for_task": False,
@@ -503,23 +530,3 @@ def test_ui_analytics_endpoints_share_filters_and_enforce_access_controls(server
         "invalid_filter": 400,
         "wrong_origin": 403,
     }
-
-
-def test_workbench_demo_really_executes_and_preserves_final_set(tmp_path):
-    # Given
-    out = tmp_path / "demo"
-    value = build_demo(out)
-    # When
-    project = Project(out)
-    # Then
-    assert value["tasks"] == 18
-    assert read_json(out / "demo.json")["provider_calls"] == 0
-    assert len(project.artifacts("experiments")) == 2
-    assert all(e["status"] == "complete" for e in project.artifacts("experiments"))
-    assert all(e["summary"]["candidate"]["failed"] == 0 for e in project.artifacts("experiments"))
-    assert project.artifacts("suites")[0]["final_exposure"] is None
-    # When
-    result = CliRunner().invoke(app, ["query", str(out), "--aggregate", "/tool_result/status"])
-    # Then
-    assert result.exit_code == 0
-    assert json.loads(result.output)["eligible"] == 18

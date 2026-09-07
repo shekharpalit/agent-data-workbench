@@ -5,7 +5,7 @@ description: Set up Python and TypeScript development, preserve the shared contr
 tags: [development, testing, packaging]
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T17:18:36.762Z
+    at: 2026-09-07T19:39:22.177Z
 sources:
   - id: openwiki-source-868b3402493aef58bb5db066
     resource: repo://.python-version
@@ -13,8 +13,14 @@ sources:
     resource: repo://AGENTS.md
   - id: openwiki-source-05ccef8d4cf1698187f20464
     resource: repo://pyproject.toml
+  - id: openwiki-source-f0a6e7dc03522b2682f88655
+    resource: repo://tests/conftest.py
   - id: openwiki-source-11519246eac934485315b3cb
     resource: repo://tests/test_api.py
+  - id: openwiki-source-9ec6473d05fcc2cd40915af2
+    resource: repo://tests/test_cli.py
+  - id: openwiki-source-9c58a0b0672b6bdbd523d5ee
+    resource: repo://tests/test_identifiers.py
   - id: openwiki-source-09d2a8f36f3ecb7ab9487ab2
     resource: repo://tests/test_store.py
   - id: openwiki-source-af0e5443d83442c11181e6ce
@@ -25,7 +31,7 @@ sources:
     resource: repo://ui/tests/state.test.ts
   - id: openwiki-source-a741d432f952c0dbfb4fb35d
     resource: repo://ui/vite.config.ts
-generated: { by: "codex", at: "2026-09-07T17:18:36.762Z" }
+generated: { by: "codex", at: "2026-09-07T19:39:22.177Z" }
 ---
 
 # Development and verification
@@ -69,11 +75,15 @@ For example, trace-store tests check that an ID conflict rolls back the whole ne
 | --- | --- |
 | Storage or import | `tests/test_store.py`, import cases in `tests/test_workbench_data.py` |
 | Search, clustering, lineage | `tests/test_explore.py`, `ui/tests/state.test.ts`, `ui/tests/search.test.tsx` |
-| HTTP behavior | `tests/test_api.py`, `ui/tests/api.test.ts` |
+| HTTP behavior | `tests/test_api.py`, `tests/test_identifiers.py`, `ui/tests/api.test.ts` |
+| UUIDs and project compatibility | `tests/test_identifiers.py` |
+| CLI workflow integration | `tests/test_cli.py` |
 | Research and task review | `tests/test_workbench_data.py`, `tests/test_backends.py` |
 | Runner execution and exports | `tests/test_workbench_execution.py` |
-| Legacy batch mode | `tests/test_workflow.py`, `tests/test_evaluation.py`, `tests/test_cli.py` |
+| Batch analysis | `tests/test_workflow.py`, `tests/test_evaluation.py`, `tests/test_cli.py` |
 | Packaging | `uv build`, install the wheel in an isolated environment, exercise bundled resources |
+
+Runtime demo commands and canned agent data have been removed. Explicit synthetic fixtures live under `tests/fixtures/` and are loaded only by tests. The CLI integration test initializes a project, imports traces and tasks, requires audits before acceptance, creates a named suite with a UUID, executes command adapters, and exports reviewed outcomes. UUID tests verify canonicalization, unchanged external trace IDs, typed API rejection, and refusal to rewrite an older project.
 
 Keep tests synthetic and independent of provider credentials. An explicitly requested live analyzer check is separate from the ordinary test suite. Record what was run and any limitation; passing fixtures do not establish production agent improvement.
 

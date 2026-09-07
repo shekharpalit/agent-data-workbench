@@ -5,14 +5,14 @@ from __future__ import annotations
 import json
 from pathlib import Path
 from typing import Literal
-from uuid import uuid4
 
 from pydantic import Field, model_validator
 
 from .backends import Analyzer
 from .evaluation import check_assertion
+from .identifiers import UUIDString, canonical_uuid, new_id
 from .models import Assertion, Contract, Evidence, json_text, pointer_value
-from .project import Project, digest, identifier, now, save
+from .project import Project, digest, now, save
 from .traces import read_json
 
 
@@ -33,7 +33,7 @@ def relative_path(value: str) -> str:
 
 
 class Criterion(Contract):
-    id: str
+    id: UUIDString
     description: str = Field(min_length=1)
     source: Literal["output", "artifact"]
     artifact: str = ""
@@ -43,7 +43,6 @@ class Criterion(Contract):
 
     @model_validator(mode="after")
     def valid(self):
-        identifier(self.id)
         if self.source == "artifact":
             relative_path(self.artifact)
         if self.kind == "assertion" and self.assertion is None:
@@ -73,11 +72,11 @@ class VerifierExample(Contract):
 
 
 class TaskSpec(Contract):
-    id: str
+    id: UUIDString
     title: str = Field(min_length=1)
     purpose: str = Field(min_length=1)
     behavior: str = Field(min_length=1)
-    finding_ids: list[str] = Field(default_factory=list)
+    finding_ids: list[UUIDString] = Field(default_factory=list)
     trace_ids: list[str] = Field(min_length=1)
     fidelity: Literal["output", "next_action", "environment"]
     input_json: str = Field(description="Agent-visible JSON only. Exclude answers and graders.")
@@ -89,7 +88,6 @@ class TaskSpec(Contract):
 
     @model_validator(mode="after")
     def valid(self):
-        identifier(self.id)
         value = parse_object(self.input_json)
         if self.fidelity == "next_action":
             if not isinstance(value.get("messages"), list) or not value["messages"]:
@@ -176,6 +174,7 @@ def review_task(project: Project, key: str, status: str, note: str):
 def replace_task(project: Project, key: str, task: TaskSpec, note: str) -> dict:
     from .store import TraceStore
 
+    key = canonical_uuid(key)
     if task.id != key or not note.strip():
         raise ValueError("Keep the task ID and supply an edit note")
     store = TraceStore(project)
@@ -327,7 +326,7 @@ Include verifier examples: valid, valid alternative, realistic mistake, superfic
 and missing evidence. These are synthetic audit fixtures, not production observations.
 Expected is pass/fail/invalid. Missing whole artifact means invalid, missing output field fails.
 JSON pointers in criteria address the future output/artifact, not the source trace.
-Give each task unique short IDs and exact trace/finding lineage. At most 5 tasks.
+Give each task unique UUIDs and exact trace/finding lineage. At most 5 tasks.
 """
     prompt += json_text(
         {
@@ -366,7 +365,7 @@ def replay_task(project: Project, trace_id: str, cutoff: int, title: str) -> dic
     messages = trace.data.get("messages")
     if not isinstance(messages, list) or not 0 < cutoff < len(messages):
         raise ValueError("Trace needs messages and a cutoff before an existing later message")
-    key = "T-" + uuid4().hex[:12]
+    key = new_id()
     task = TaskSpec(
         id=key,
         title=title,
@@ -379,7 +378,7 @@ def replay_task(project: Project, trace_id: str, cutoff: int, title: str) -> dic
         missing_context=["Define the expected behavior, relevant tools, and audit examples"],
         criteria=[
             Criterion(
-                id="C1",
+                id=new_id(),
                 description="Replace with a reviewed criterion",
                 source="output",
                 kind="semantic",

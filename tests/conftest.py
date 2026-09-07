@@ -1,5 +1,4 @@
 import json
-from importlib.resources import files
 from pathlib import Path
 
 import pytest
@@ -10,7 +9,7 @@ from agent_data_workbench.traces import load_traces
 
 @pytest.fixture
 def sample_data():
-    return files("agent_data_workbench").joinpath("data")
+    return Path(__file__).parent / "fixtures"
 
 
 @pytest.fixture

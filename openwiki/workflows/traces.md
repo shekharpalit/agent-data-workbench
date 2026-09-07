@@ -3,23 +3,25 @@ type: workflow
 title: Import and explore traces
 description: Bring JSON or JSONL execution data into the SQLAlchemy-backed local store, then search, sample, aggregate, cluster, and follow recorded lineage.
 tags: [traces, ingestion, search, clustering, lineage]
-verified:
-  - by: openwiki/0.5.0
-    at: 2026-09-07T17:18:36.762Z
 sources:
-  - id: openwiki-source-457345d957e5f357847df6bd
-    resource: repo://src/agent_data_workbench/commands.py
+  - id: openwiki-source-2ee7fba2bd1c703c70f5f285
+    resource: repo://src/agent_data_workbench/cli/project.py
   - id: openwiki-source-5673900c5660ce9e89d18d23
     resource: repo://src/agent_data_workbench/explore.py
+  - id: openwiki-source-4c04fd9d10dcc0e748ac55cc
+    resource: repo://src/agent_data_workbench/identifiers.py
   - id: openwiki-source-069858a5e395202064ced424
     resource: repo://src/agent_data_workbench/store.py
   - id: openwiki-source-b9538130baf947854165db93
     resource: repo://src/agent_data_workbench/traces.py
   - id: openwiki-source-66a8a10b0365fc2079585762
     resource: repo://tests/test_explore.py
-  - id: openwiki-source-9dba1709c16fd704c45276e9
-    resource: repo://tests/test_workbench_data.py
-generated: { by: "codex", at: "2026-09-07T17:18:36.762Z" }
+  - id: openwiki-source-9c58a0b0672b6bdbd523d5ee
+    resource: repo://tests/test_identifiers.py
+generated: { by: "codex", at: "2026-09-07T19:39:22.177Z" }
+verified:
+  - by: openwiki/0.5.0
+    at: 2026-09-07T19:39:22.177Z
 ---
 
 # Import and explore traces
@@ -44,7 +46,7 @@ A JSONL file contains one nonempty object per line. For example:
 
 JSON files may hold a single record, an array, or an object with a `traces` array. JSONL and NDJSON ingestion streams records with a two-million-character line limit; ordinary JSON loading has a 50 MiB file limit. Invalid data rolls back the ingest transaction.
 
-Normalization uses `trace_id`, falling back to `id`, or generates a content-derived ID when neither is supplied. The original object becomes `Trace.data`. Thus the sample's tool status is at `/tool/status`, not `/data/tool/status`. Supply stable IDs to make later evidence easier to inspect.
+Normalization uses `trace_id`, falling back to `id`, or generates a deterministic UUIDv5 from canonical JSON when neither is supplied. Supplied IDs are preserved verbatim, including provider-specific identifiers. The original object becomes `Trace.data`. Thus the sample's tool status is at `/tool/status`, not `/data/tool/status`. Supply stable IDs to make later evidence easier to inspect.
 
 The SQLAlchemy store uses `traces.sqlite3` inside the project. Importing the same ID and content again is idempotent. A conflicting body for an existing ID rejects the batch, including new records earlier in that transaction. Trace data is not automatically redacted; prepare the export before ingestion when fields must be removed.
 
@@ -102,7 +104,7 @@ Search pages and distribution charts use the same matching-corpus function. Pagi
 
 Clustering uses TF-IDF cosine similarity and connected components over a chosen text field. It examines up to 200 matching traces in ID order, independently of the search page's current sort or offset. The default field is `/input`.
 
-A shared 20,000-character text budget applies per selected field value, including nested strings. Results identify omitted records, text truncation, and corpus truncation. Cluster terms and labels are derived from word weights.
+A shared 20,000-character text budget applies per selected field value, including nested strings. Results identify omitted records, text truncation, and corpus truncation. Cluster terms and labels are derived from word weights. Cluster IDs are deterministic UUIDv5 values derived from membership.
 
 A cluster indicates lexical similarity. It does not establish a shared failure mode, causal mechanism, or semantic category. Transitive links can put two traces in the same component even when their direct similarity is below the threshold.
 
@@ -110,7 +112,7 @@ A cluster indicates lexical similarity. It does not establish a shared failure m
 
 The lineage graph connects trace evidence to findings, tasks, and experiments using saved artifact references. Focusing on a trace follows downstream edges; it does not add unrelated sibling tasks merely because they share an experiment.
 
-The graph reports truncation and supports a 10–300-node limit. Task nodes link identities; experiment artifacts preserve the exact evaluated specification snapshots. Use the graph to navigate evidence, and the saved experiment to inspect what actually ran. Edges represent recorded relationships, not inferred causality.
+The graph reports truncation and supports a 10–300-node limit. Task nodes link identities; experiment artifacts preserve the exact evaluated specification snapshots. Use the graph to navigate evidence, and the saved experiment to inspect what actually ran. Edges represent recorded relationships, not inferred causality. Edge IDs are deterministic UUIDv5 values; node keys include their kind and source or artifact identity so different kinds remain distinct.
 
 Final-set exclusions depend on the caller: model-directed investigations use a store excluding reserved final groups, while the ordinary CLI query uses the full project store. A local exploration tool is not a hidden-data access boundary.
 

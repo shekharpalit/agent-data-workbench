@@ -3,21 +3,33 @@ type: operations
 title: Run the local workbench
 description: Start the bundled React UI, understand its local FastAPI session, and choose the correct interface for trace exploration, reviews, and execution.
 tags: [ui, fastapi, local, operations]
-verified:
-  - by: openwiki/0.5.0
-    at: 2026-09-07T17:18:36.762Z
 sources:
-  - id: openwiki-source-bf36d615b629a6a49d40e06d
-    resource: repo://src/agent_data_workbench/api.py
+  - id: openwiki-source-896da76531d8a33d2c9e76b8
+    resource: repo://src/agent_data_workbench/api/application.py
+  - id: openwiki-source-57d1f240e9d0552b9b058bdc
+    resource: repo://src/agent_data_workbench/api/dependencies.py
+  - id: openwiki-source-d4898276f02a9fa6cae75c52
+    resource: repo://src/agent_data_workbench/api/errors.py
+  - id: openwiki-source-1848987f753961721cee2571
+    resource: repo://src/agent_data_workbench/api/middleware.py
+  - id: openwiki-source-e6d7f541d0e16503af405c8b
+    resource: repo://src/agent_data_workbench/api/routers/investigations.py
+  - id: openwiki-source-98bfc373ed8e75b28dcf239e
+    resource: repo://src/agent_data_workbench/api/routers/tasks.py
+  - id: openwiki-source-4105c547b3781d406b01e383
+    resource: repo://src/agent_data_workbench/api/schemas.py
   - id: openwiki-source-12d025c9e4830dcc4dd30757
     resource: repo://src/agent_data_workbench/jobs.py
-  - id: openwiki-source-0ec248246e792c935c3b8719
-    resource: repo://src/agent_data_workbench/local_http.py
   - id: openwiki-source-013c413ca45af5e0569b46e0
     resource: repo://src/agent_data_workbench/server.py
+  - id: openwiki-source-9c58a0b0672b6bdbd523d5ee
+    resource: repo://tests/test_identifiers.py
   - id: openwiki-source-6d94b2e299387b69a79c432d
     resource: repo://ui/src/App.tsx
-generated: { by: "codex", at: "2026-09-07T17:18:36.762Z" }
+generated: { by: "codex", at: "2026-09-07T19:39:22.177Z" }
+verified:
+  - by: openwiki/0.5.0
+    at: 2026-09-07T19:39:22.177Z
 ---
 
 # Run the local workbench
@@ -32,15 +44,15 @@ The CLI starts Uvicorn and binds a socket on `127.0.0.1`. The default port is se
 
 Each server instance creates a fresh random access token. The printed URL puts it in the fragment; the frontend obtains the token and sends it as an Authorization bearer header for API requests. Use the complete printed URL again after a restart or an unauthorized response.
 
-The middleware checks the exact Host header, requires same-origin POST requests, and authenticates `/api/` paths. POST bodies must be JSON and are bounded to 2,000,000 bytes, including received chunks when Content-Length is absent. Responses use no-store caching, no-referrer, nosniff, and a content security policy. These are local browser boundaries; the app is not a hosted multiuser service.
+`api/middleware.py` checks the exact Host header and requires same-origin POST requests. API operations authenticate through FastAPI’s `HTTPBearer` dependency in `api/dependencies.py`. POST bodies must be JSON and are bounded to 2,000,000 bytes, including received chunks when Content-Length is absent. Responses use no-store caching, no-referrer, nosniff, and a content security policy. These are local browser boundaries; the app is not a hosted multiuser service.
 
-The Python package includes the UI entry point and hashed assets. FastAPI serves those files and typed SDK operations from the same origin. No separate Node server is needed for normal use. `/api/openapi.json` is available with the same session authorization; the default Swagger and ReDoc pages are disabled. Invalid structured requests return HTTP 400 with an `error` field and do not echo the input values.
+The Python package includes the UI entry point and hashed assets. FastAPI serves those files and typed SDK operations from the same origin. No separate Node server is needed for normal use. `/api/openapi.json` is available with the same session authorization; the default Swagger and ReDoc pages are disabled. Invalid structured requests return HTTP 400 with an `error` field and do not echo the input values. Internal artifact request IDs use the `uuid` format in OpenAPI; imported trace identifiers remain opaque strings. Domain routers under `api/routers/` keep trace, knowledge, task, investigation, and job operations separate.
 
 ## What each view does
 
 | View | Use it for |
 | --- | --- |
-| Overview | Corpus counts, task review state, recent experiments, and synthetic-demo labeling |
+| Overview | Corpus counts, task review state, recent experiments, and project objectives |
 | Trace explorer | Combined filters, numeric ranges, sorting, pagination, distribution, and record inspection |
 | Clusters | Bounded lexical grouping of the matching traces and membership drill-down |
 | Evidence graph | Recorded trace, finding, task, and experiment relationships |

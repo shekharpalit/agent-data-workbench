@@ -8,10 +8,12 @@ import webbrowser
 
 import pytest
 from fastapi.testclient import TestClient
+from identities import uid
 from test_workbench_data import make_project
 
 from agent_data_workbench import api, server
-from agent_data_workbench.local_http import MAX_BODY_BYTES, RESPONSE_HEADERS
+from agent_data_workbench.api.middleware import MAX_BODY_BYTES, RESPONSE_HEADERS
+from agent_data_workbench.api.routers import investigations, tasks
 
 ORIGIN = "http://127.0.0.1:8765"
 TOKEN = "synthetic-session-token"
@@ -106,13 +108,25 @@ def test_openapi_describes_typed_operations_and_requires_the_local_session(clien
         ("GET", "/api/traces?offset=invalid", None),
         ("GET", "/api/artifacts?kind=unknown", None),
         ("GET", "/api/graph?limit=999", None),
-        ("POST", "/api/task/review", {"id": "T1", "status": "unknown", "note": "PRIVATE"}),
-        ("POST", "/api/task/edit", {"id": "T1", "spec": {}, "note": "PRIVATE"}),
+        (
+            "POST",
+            "/api/task/review",
+            {"id": uid("T1"), "status": "unknown", "note": "PRIVATE"},
+        ),
+        (
+            "POST",
+            "/api/task/edit",
+            {"id": uid("T1"), "spec": {}, "note": "PRIVATE"},
+        ),
         ("POST", "/api/distribution", {"query": {}, "pointer": "/bad~2key"}),
         ("POST", "/api/investigate", {"question": "PRIVATE", "steps": 1.5}),
         ("POST", "/api/investigate", {"question": ""}),
         ("POST", "/api/investigate", {"question": "PRIVATE", "backend": "other"}),
-        ("POST", "/api/task/design", {"investigation": "I1", "unexpected": "PRIVATE"}),
+        (
+            "POST",
+            "/api/task/design",
+            {"investigation": uid("I1"), "unexpected": "PRIVATE"},
+        ),
     ],
 )
 def test_invalid_requests_keep_the_error_contract_and_write_nothing(
@@ -264,7 +278,7 @@ def test_investigation_jobs_remain_nonblocking_and_reject_concurrent_artifacts(
     entered, release = threading.Event(), threading.Event()
     calls = []
     monkeypatch.setattr(
-        api,
+        investigations,
         "CliAnalyzer",
         lambda backend, model, timeout: {"backend": backend, "model": model, "timeout": timeout},
     )
@@ -275,7 +289,7 @@ def test_investigation_jobs_remain_nonblocking_and_reject_concurrent_artifacts(
         assert release.wait(3)
         return {"status": "complete"}
 
-    monkeypatch.setattr(api, "investigate", investigate)
+    monkeypatch.setattr(investigations, "investigate", investigate)
     # When
     started = client.post(
         "/api/investigate",
@@ -333,14 +347,14 @@ def test_failed_background_job_returns_a_recoverable_error_without_provider_text
     client, monkeypatch
 ):
     # Given
-    monkeypatch.setattr(api, "CliAnalyzer", lambda *args, **kwargs: object())
+    monkeypatch.setattr(tasks, "CliAnalyzer", lambda *args, **kwargs: object())
 
     def fail(*args, **kwargs):
         raise RuntimeError("PRIVATE provider response")
 
-    monkeypatch.setattr(api, "design_tasks", fail)
+    monkeypatch.setattr(tasks, "design_tasks", fail)
     # When
-    client.post("/api/task/design", json={"investigation": "I1"})
+    client.post("/api/task/design", json={"investigation": uid("I1")})
     deadline = time.monotonic() + 2
     while (jobs := client.get("/api/jobs").json())[0][
         "status"

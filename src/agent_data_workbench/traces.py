@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+from .identifiers import stable_id
 from .models import Trace, _reject_constant, json_text
 
 MAX_FILE_BYTES = 50 * 1024 * 1024
@@ -28,7 +29,7 @@ def normalize(records: list[Any]) -> list[Trace]:
             raise ValueError(f"Record {index} must be a nonempty JSON object")
         supplied_id = record.get("trace_id", record.get("id"))
         if supplied_id is None:
-            supplied_id = "trace-" + hashlib.sha256(json_text(record).encode()).hexdigest()[:16]
+            supplied_id = stable_id("trace", json_text(record))
         if not isinstance(supplied_id, str) or not supplied_id.strip():
             raise ValueError(f"Record {index}: trace_id/id must be a nonempty string")
         if supplied_id in seen:

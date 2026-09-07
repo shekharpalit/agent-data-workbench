@@ -7,10 +7,10 @@ import random
 import tempfile
 from collections import defaultdict
 from pathlib import Path
-from uuid import uuid4
 
 from .backends import Analyzer
-from .project import Project, digest, environment_identity, identifier, now, save
+from .identifiers import canonical_uuid, new_id
+from .project import Project, digest, environment_identity, now, save
 from .runners import TargetRunner, read_artifacts
 from .store import TraceStore
 from .tasks import grade, load_task, parse_object, task_digest
@@ -18,7 +18,9 @@ from .traces import read_json
 
 
 def make_suite(project: Project, name: str, task_ids: list[str], seed: int = 0) -> dict:
-    identifier(name)
+    if not name.strip():
+        raise ValueError("Supply a suite name")
+    task_ids = [canonical_uuid(key) for key in task_ids]
     if not task_ids or len(set(task_ids)) != len(task_ids):
         raise ValueError("Provide unique task IDs")
     store = TraceStore(project)
@@ -76,7 +78,8 @@ def make_suite(project: Project, name: str, task_ids: list[str], seed: int = 0) 
             if roles and roles != {assignment[key]}:
                 raise ValueError("Source group already belongs to another split; use fresh data")
     suite = {
-        "id": name,
+        "id": new_id(),
+        "name": name,
         "created_at": now(),
         "seed": seed,
         "source": store.inventory(),
@@ -101,9 +104,7 @@ def make_suite(project: Project, name: str, task_ids: list[str], seed: int = 0) 
     }
     suite["sha256"] = digest({k: v for k, v in suite.items() if k != "final_exposure"})
     with project.lock():
-        path = project.path("suites", name)
-        if path.exists():
-            raise ValueError("Suite already exists; use a new version name")
+        path = project.path("suites", suite["id"])
         save(path, suite)
     return suite
 
@@ -235,7 +236,7 @@ def run_experiment(
                 ) != getattr(judge, "model", None):
                     raise ValueError("Judge differs from audited judge; re-audit the task")
             tasks[task.id] = task
-        key = "E-" + uuid4().hex[:12]
+        key = new_id()
         record = {
             "id": key,
             "created_at": now(),
@@ -332,7 +333,7 @@ def run_experiment(
 
 
 def experiment_report(record: dict) -> str:
-    from .workflow import md
+    from .reports import md
 
     summary = record["summary"]
     lines = [

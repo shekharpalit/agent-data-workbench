@@ -1,25 +1,25 @@
 ---
 type: guide
 title: Quickstart
-description: Install Agent Data Workbench, run its synthetic end-to-end example, and find the right workflow for your own agent traces and improvement experiments.
-tags: [quickstart, demo, workflows, documentation]
-verified:
-  - by: openwiki/0.5.0
-    at: 2026-09-07T17:18:36.762Z
+description: Install Agent Data Workbench, import your own traces, and use the local UI to begin an evidence-based improvement workflow.
+tags: [quickstart, traces, workflows, documentation]
 sources:
   - id: openwiki-source-868b3402493aef58bb5db066
     resource: repo://.python-version
   - id: openwiki-source-05ccef8d4cf1698187f20464
     resource: repo://pyproject.toml
-  - id: openwiki-source-457345d957e5f357847df6bd
-    resource: repo://src/agent_data_workbench/commands.py
-  - id: openwiki-source-1bb80de56d07cfb0dc0536b5
-    resource: repo://src/agent_data_workbench/demo.py
+  - id: openwiki-source-2ee7fba2bd1c703c70f5f285
+    resource: repo://src/agent_data_workbench/cli/project.py
+  - id: openwiki-source-b5025a250cbf9f845fc9224a
+    resource: repo://src/agent_data_workbench/project.py
   - id: openwiki-source-013c413ca45af5e0569b46e0
     resource: repo://src/agent_data_workbench/server.py
-  - id: openwiki-source-af0e5443d83442c11181e6ce
-    resource: repo://tests/test_workbench_execution.py
-generated: { by: "codex", at: "2026-09-07T17:18:36.762Z" }
+  - id: openwiki-source-9c58a0b0672b6bdbd523d5ee
+    resource: repo://tests/test_identifiers.py
+generated: { by: "codex", at: "2026-09-07T19:39:22.177Z" }
+verified:
+  - by: openwiki/0.5.0
+    at: 2026-09-07T19:39:22.177Z
 ---
 
 # Quickstart
@@ -40,33 +40,23 @@ uv sync --locked
 
 The GitHub repository currently requires access because it is private. The built UI is included in the Python package, so running the workbench does not require a Node build. UI development does; see [development and verification](development/contributing.md).
 
-## Run the synthetic example
-
-From the checkout:
-
-```sh
-uv run agent-data-workbench workbench-demo runs/workbench
-uv run agent-data-workbench ui runs/workbench --open-browser
-```
-
-Use a new directory for the demo. If `runs/workbench` already contains a project, open it with the second command or choose another directory for a fresh demo.
-
-The demo creates 18 synthetic traces and tasks, a scripted investigation, a grouped suite, and optimization/validation experiments with two repeats. It actually runs two deterministic Python target variants, performs zero provider calls, and leaves the final split unused. This demonstrates the workflow and recorded evidence; it is not evidence that an AI model improved.
-
-The UI starts on loopback using an available port and a per-session access token. Follow the URL printed by the command. Stop the server with Ctrl-C when finished.
-
-Explore the trace search, field distributions, lexical clusters, and lineage graph, then inspect the investigation, task audits, and experiment results. Read [local workbench operation](operations/local-workbench.md) for request contracts and limitations.
-
 ## Bring your own agent data
 
-Create a separate project with a concrete objective, then import your export:
+Create a new project with a concrete objective, import your export, and open the UI:
 
 ```sh
 uv run agent-data-workbench init runs/my-agent "My agent" \
   "Improve reliable task completion"
 uv run agent-data-workbench ingest runs/my-agent ./traces.jsonl
 uv run agent-data-workbench query runs/my-agent --limit 20
+uv run agent-data-workbench ui runs/my-agent --open-browser
 ```
+
+The project starts empty. The runtime contains no demo commands, fake agent, or canned corpus. JSON/JSONL records come from your own exports; see [trace import](workflows/traces.md) for the record format. Synthetic fixtures remain confined to tests.
+
+The UI starts on loopback using an available port and a per-session access token. Follow the printed URL and stop the server with Ctrl-C when finished. Search traces and field distributions first; investigations, tasks, and experiments appear as you create them. Read [local operation](operations/local-workbench.md) for details.
+
+Version 0.3 uses UUIDs for internal artifacts and keeps external trace IDs unchanged. Older project formats are rejected without rewriting their files. Create a new project directory and reimport the original traces; prior derived artifacts remain in the old directory. Suite names are friendly labels, and execution uses the suite UUID returned at creation.
 
 Start with the smallest corpus that can answer a useful question. Preserve source groups such as conversation IDs so related tasks stay together in later splits. Add reviewed policies and tool contracts before asking an analyzer to judge behavior that depends on them.
 

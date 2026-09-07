@@ -283,7 +283,6 @@ export interface Overview {
     Experiment,
     "id" | "created_at" | "split" | "status" | "summary" | "conclusion"
   >[];
-  synthetic: boolean;
 }
 export interface Job {
   id: string;

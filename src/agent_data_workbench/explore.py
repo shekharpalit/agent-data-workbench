@@ -14,6 +14,7 @@ from typing import Literal
 from pydantic import Field, model_validator
 
 from .evaluation import json_equal
+from .identifiers import stable_id
 from .models import Contract, _reject_constant, json_text, pointer_parts, pointer_value
 from .project import Project, digest
 from .store import TraceStore
@@ -283,7 +284,7 @@ def cluster(store: TraceStore, request: ClusterQuery) -> dict:
         top = sorted(terms, key=lambda term: (-terms[term], term))[:5]
         clusters.append(
             {
-                "id": "cluster-" + digest(ids)[:12],
+                "id": stable_id("cluster", json_text(ids)),
                 "trace_ids": ids,
                 "count": len(ids),
                 "terms": top,
@@ -389,7 +390,12 @@ def lineage(project: Project, *, trace_id: str = "", limit: int = 200) -> dict:
     return {
         "nodes": selected,
         "edges": [
-            {"id": digest([a, b, label])[:20], "source": a, "target": b, "label": label}
+            {
+                "id": stable_id("edge", json_text([a, b, label])),
+                "source": a,
+                "target": b,
+                "label": label,
+            }
             for a, b, label in sorted(edges)
             if a in keys and b in keys
         ],

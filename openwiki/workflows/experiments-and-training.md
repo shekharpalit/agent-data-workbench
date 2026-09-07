@@ -3,12 +3,11 @@ type: workflow
 title: Experiments and training exports
 description: Execute baseline and candidate agents against reviewed tasks, preserve split boundaries and uncertainty, and export eligible optimization outcomes.
 tags: [experiments, runners, splits, training, provenance]
-verified:
-  - by: openwiki/0.5.0
-    at: 2026-09-07T17:18:36.762Z
 sources:
-  - id: openwiki-source-457345d957e5f357847df6bd
-    resource: repo://src/agent_data_workbench/commands.py
+  - id: openwiki-source-bc1c81655ba5541ecce98f99
+    resource: repo://src/agent_data_workbench/cli/experiments.py
+  - id: openwiki-source-f4e6f61890af760b72e18127
+    resource: repo://src/agent_data_workbench/cli/exports.py
   - id: openwiki-source-fb8bc98ca92f65c4b5c08595
     resource: repo://src/agent_data_workbench/experiments.py
   - id: openwiki-source-17fefd32a0fa5ffbd20a3c46
@@ -17,7 +16,10 @@ sources:
     resource: repo://src/agent_data_workbench/runners.py
   - id: openwiki-source-af0e5443d83442c11181e6ce
     resource: repo://tests/test_workbench_execution.py
-generated: { by: "codex", at: "2026-09-07T17:18:36.762Z" }
+generated: { by: "codex", at: "2026-09-07T19:39:22.177Z" }
+verified:
+  - by: openwiki/0.5.0
+    at: 2026-09-07T19:39:22.177Z
 ---
 
 # Experiments and training exports
@@ -28,16 +30,16 @@ Start with [accepted, audited tasks](tasks-and-graders.md). Use [batch evaluatio
 
 ## Freeze a suite
 
-Supply accepted task IDs from the project:
+Supply accepted task UUIDs from the project. The second argument is a friendly suite name:
 
 ```sh
-uv run agent-data-workbench suite runs/my-agent my-suite-v1 \
+uv run agent-data-workbench suite runs/my-agent "Accuracy / current" \
   --task-id TASK_A --task-id TASK_B --task-id TASK_C --seed 7
 ```
 
 The suite groups tasks that share source groups, including transitive relationships. It requires at least three independent connected groups and allocates optimization, validation, and final roles using a seeded, behavior-stratified ordering. The repeating assignment targets a 60/20/20 distribution; small suites need not match that ratio exactly.
 
-The manifest freezes task hashes, group membership, split roles, and source inventory. Existing group assignments cannot change in a later suite. Choose a new suite name for a new manifest, and obtain fresh source groups when existing assignments conflict. Previously investigated traces are marked; allocating them to a final split does not make them unseen.
+The manifest freezes task hashes, group membership, split roles, and source inventory. Existing group assignments cannot change in a later suite. Every manifest receives a new UUID independent of its name. Names can repeat; use the returned `id` for execution. Obtain fresh source groups when existing assignments conflict. Previously investigated traces are marked; allocating them to a final split does not make them unseen.
 
 ## Configure the targets
 
@@ -78,11 +80,11 @@ Native `codex` and `claude` target runners require explicit `model` and `prompt`
 ## Run and interpret an experiment
 
 ```sh
-uv run agent-data-workbench experiment runs/my-agent my-suite-v1 \
+uv run agent-data-workbench experiment runs/my-agent SUITE_UUID \
   ./baseline.json ./candidate.json --split optimization --repeats 2 --seed 7
 ```
 
-Use optimization results to iterate, then run the selected configuration on validation. Semantic criteria require an explicit judge matching the task's audited backend and model, for example `--judge codex --judge-model MODEL`.
+Replace `SUITE_UUID` with the ID printed by `suite`. Use optimization results to iterate, then run the selected configuration on validation. Semantic criteria require an explicit judge matching the task's audited backend and model, for example `--judge codex --judge-model MODEL`.
 
 Before execution, the workbench checks the suite hash, accepted task snapshots, target fidelity, and required judge identity. It saves each trial as it completes. Baseline/candidate ordering reverses on alternating repeats. An interruption leaves an interrupted record with the evidence collected so far.
 
@@ -98,7 +100,7 @@ The uncertainty estimate resamples independent source groups, preserving correla
 
 ## Preserve the final set
 
-Run `--split final` only when the chosen configuration is ready for its final measurement. Final exposure is consumed **before the first execution**, including runs that later fail or are interrupted. Consumed final source groups cannot be reused through another suite name. This prevents silently treating a retry as fresh held-out evidence; it does not erase knowledge already acquired from those examples.
+Run `--split final` only when the chosen configuration is ready for its final measurement. Final exposure is consumed **before the first execution**, including runs that later fail or are interrupted. Consumed final source groups cannot be reused through another suite. This prevents silently treating a retry as fresh held-out evidence; it does not erase knowledge already acquired from those examples.
 
 ## Export curated outcomes
 
@@ -107,7 +109,7 @@ After reviewing a completed optimization experiment, supply its ID and a new out
 ```sh
 uv run agent-data-workbench training-export runs/my-agent EXPERIMENT_ID \
   ./training-data "Reviewed selected task outcomes" \
-  "Synthetic data owned by this project" --kind preference
+  "Permission recorded for these selected records" --kind preference
 ```
 
 Use `--kind sft` for chosen-only records. Export excludes validation and final experiments, incomplete experiments, missing pairs, and invalid pairs. SFT needs a passing outcome; preference data additionally needs a failing outcome. The passing variant can be the baseline. Identical visible inputs are deduplicated.

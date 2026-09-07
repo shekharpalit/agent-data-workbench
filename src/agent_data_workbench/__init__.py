@@ -11,7 +11,7 @@ from .tasks import TaskSpec, audit_task, design_tasks, grade
 from .traces import load_traces, normalize
 from .workflow import analyze_traces, complete_run, prepare_run
 
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 __all__ = [
     "Analysis",
     "Analyzer",

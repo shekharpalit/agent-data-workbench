@@ -3,9 +3,6 @@ type: workflow
 title: Investigations and reviewed knowledge
 description: Use a native Codex or Claude analyzer to investigate trace evidence through bounded local tools, review project context, and export unexecuted improvement proposals.
 tags: [research, evidence, knowledge, codex, claude]
-verified:
-  - by: openwiki/0.5.0
-    at: 2026-09-07T17:18:36.762Z
 sources:
   - id: openwiki-source-1f37d6e3d3e1f41c68ed94e2
     resource: repo://src/agent_data_workbench/backends.py
@@ -15,7 +12,10 @@ sources:
     resource: repo://src/agent_data_workbench/research.py
   - id: openwiki-source-9dba1709c16fd704c45276e9
     resource: repo://tests/test_workbench_data.py
-generated: { by: "codex", at: "2026-09-07T17:18:36.762Z" }
+generated: { by: "codex", at: "2026-09-07T19:39:22.177Z" }
+verified:
+  - by: openwiki/0.5.0
+    at: 2026-09-07T19:39:22.177Z
 ---
 
 # Investigations and reviewed knowledge
@@ -34,7 +34,7 @@ uv run agent-data-workbench knowledge review runs/my-agent KNOWLEDGE_ID accepted
   "Reviewed against the current product contract"
 ```
 
-Use the ID printed by the first command. New knowledge starts as draft. Only accepted knowledge enters the research context. Reviews record a note, revision, and prior content hash; the context itself is hashed. The CLI limits each supplied file to 100,000 bytes.
+Use the UUID printed by the first command. New knowledge starts as draft. Only accepted knowledge enters the research context. Reviews record a note, revision, and prior content hash; the context itself is hashed. The CLI limits each supplied file to 100,000 bytes.
 
 Keep context specific enough to distinguish a real failure from missing information. A trace alone may not establish whether an action was authorized, a tool contract was violated, or a result was commercially useful.
 
@@ -82,6 +82,8 @@ uv run agent-data-workbench investigate runs/my-agent \
 Resume checks the trace inventory and reviewed-context hashes. Changed inputs require a new investigation. Tool argument errors are saved as observations so the analyzer can correct them in a later step. Oversized reviewed context raises an error rather than being silently discarded.
 
 ## Read evidence and proposals
+
+Investigation, knowledge, finding, and proposal IDs are UUIDs; external trace IDs remain unchanged. The analyzer schema validates finding and proposal references with the shared UUID type.
 
 Completion validates finding and signal citations against the visited trace snapshots. Evidence uses exact quotes and RFC 6901 pointers into `trace.data`; proposals must reference known findings. The saved result contains analysis, categorized signals, proposals, and open questions, alongside a Markdown research report.
 

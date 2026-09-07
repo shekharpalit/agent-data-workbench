@@ -1,6 +1,7 @@
 import json
 
 import pytest
+from identities import uid
 from test_workbench_data import Source, make_project
 
 from agent_data_workbench.explore import (
@@ -216,39 +217,49 @@ def test_cluster_text_budget_is_shared_across_nested_fields_and_disclosed(projec
 def test_graph_focus_follows_recorded_links_without_inventing_sibling_relationships(project):
     # Given
     save(
-        project.path("investigations", "I1"),
+        project.path("investigations", uid("I1")),
         {
-            "id": "I1",
+            "id": uid("I1"),
             "result": {
                 "analysis": {
                     "findings": [
-                        {"id": "F1", "title": "Observed failure", "evidence": [{"trace_id": "r0"}]},
+                        {
+                            "id": uid("F1"),
+                            "title": "Observed failure",
+                            "evidence": [{"trace_id": "r0"}],
+                        },
                     ]
                 }
             },
         },
     )
-    for key, trace_id in [("T1", "r0"), ("T2", "r1")]:
+    for key, trace_id in [
+        (uid("T1"), "r0"),
+        (uid("T2"), "r1"),
+    ]:
         save(
             project.path("tasks", key),
             {
                 "id": key,
-                "origin": "I1",
+                "origin": uid("I1"),
                 "review": {"status": "draft"},
                 "spec": {
                     "title": key,
                     "trace_ids": [trace_id],
-                    "finding_ids": ["F1"] if key == "T1" else [],
+                    "finding_ids": [uid("F1")] if key == uid("T1") else [],
                 },
             },
         )
     save(
-        project.path("experiments", "E1"),
+        project.path("experiments", uid("E1")),
         {
-            "id": "E1",
+            "id": uid("E1"),
             "conclusion": "Observed gain",
             "status": "complete",
-            "task_snapshots": [{"id": "T1"}, {"id": "T2"}],
+            "task_snapshots": [
+                {"id": uid("T1")},
+                {"id": uid("T2")},
+            ],
         },
     )
 
@@ -266,32 +277,48 @@ def test_graph_focus_follows_recorded_links_without_inventing_sibling_relationsh
         "nodes": [
             {"id": "trace:r0", "kind": "trace", "label": "r0", "trace_id": "r0"},
             {
-                "id": "finding:I1:F1",
+                "id": f"finding:{uid('I1')}:{uid('F1')}",
                 "kind": "finding",
                 "label": "Observed failure",
-                "artifact_id": "I1",
-                "finding_id": "F1",
+                "artifact_id": uid("I1"),
+                "finding_id": uid("F1"),
             },
             {
-                "id": "task:T1",
+                "id": "task:c209c7a0-1bcf-5629-83bc-7e0b5f9b4fe1",
                 "kind": "task",
-                "label": "T1",
-                "artifact_id": "T1",
+                "label": uid("T1"),
+                "artifact_id": uid("T1"),
                 "status": "draft",
             },
             {
-                "id": "experiment:E1",
+                "id": "experiment:1d9e2923-95e0-576e-96d4-e7ec66b00345",
                 "kind": "experiment",
                 "label": "Observed gain",
-                "artifact_id": "E1",
+                "artifact_id": uid("E1"),
                 "status": "complete",
             },
         ],
         "edges": [
-            {"source": "finding:I1:F1", "target": "task:T1", "label": "tests"},
-            {"source": "task:T1", "target": "experiment:E1", "label": "evaluated in"},
-            {"source": "trace:r0", "target": "finding:I1:F1", "label": "supports"},
-            {"source": "trace:r0", "target": "task:T1", "label": "derived from"},
+            {
+                "source": f"finding:{uid('I1')}:{uid('F1')}",
+                "target": "task:c209c7a0-1bcf-5629-83bc-7e0b5f9b4fe1",
+                "label": "tests",
+            },
+            {
+                "source": "task:c209c7a0-1bcf-5629-83bc-7e0b5f9b4fe1",
+                "target": "experiment:1d9e2923-95e0-576e-96d4-e7ec66b00345",
+                "label": "evaluated in",
+            },
+            {
+                "source": "trace:r0",
+                "target": f"finding:{uid('I1')}:{uid('F1')}",
+                "label": "supports",
+            },
+            {
+                "source": "trace:r0",
+                "target": "task:c209c7a0-1bcf-5629-83bc-7e0b5f9b4fe1",
+                "label": "derived from",
+            },
         ],
         "total": 4,
         "shown": 4,

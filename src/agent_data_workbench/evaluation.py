@@ -3,24 +3,12 @@
 from __future__ import annotations
 
 import json
-import os
-import tempfile
 from pathlib import Path
 from typing import Any
 
 from .models import Assertion, ReviewedCase, _reject_constant, pointer_value
+from .persistence import atomic_text
 from .traces import MAX_FILE_BYTES, read_json
-
-
-def atomic_text(path: Path, text: str) -> None:
-    descriptor, temporary = tempfile.mkstemp(dir=path.parent, prefix=".agent-data-workbench-")
-    try:
-        with os.fdopen(descriptor, "w", encoding="utf-8") as stream:
-            stream.write(text)
-        os.replace(temporary, path)
-    finally:
-        if os.path.exists(temporary):
-            os.unlink(temporary)
 
 
 def read_lines(path: Path) -> list[Any]:

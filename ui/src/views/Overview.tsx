@@ -13,11 +13,7 @@ export function OverviewView({
   return (
     <>
       <Card className="hero">
-        <span className="kicker">
-          {data.synthetic
-            ? "SYNTHETIC EXAMPLE · EXECUTED TARGETS"
-            : "FROM AGENT EXPERIENCE TO EVIDENCE"}
-        </span>
+        <span className="kicker">FROM AGENT EXPERIENCE TO EVIDENCE</span>
         <h2>{data.project.objective}</h2>
         <p>
           Investigate what happened, review what good looks like, and measure

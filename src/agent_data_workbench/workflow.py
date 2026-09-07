@@ -12,6 +12,7 @@ from typing import Any
 from .backends import Analyzer
 from .models import Analysis, ReviewedCase, Trace, json_text, validate_evidence
 from .prompt import PROMPT_VERSION, build_prompt
+from .reports import md
 from .traces import fingerprint, read_json
 
 DEFAULT_QUESTION = "Which recurring failures and improvement opportunities should I work on next?"
@@ -131,11 +132,6 @@ def write_json(path: Path, value: Any) -> None:
     )
 
 
-def md(value: str) -> str:
-    # Keep supplied text as text instead of turning trace content into HTML/links/images.
-    return re.sub(r"([\\\x60*_{}\[\]()<>#!|])", r"\\\1", value).replace("\n", " ")
-
-
 def anchor(trace_id: str) -> str:
     return "trace-" + hashlib.sha256(trace_id.encode()).hexdigest()[:16]
 
@@ -178,8 +174,6 @@ def render_report(analysis: Analysis, request: dict[str, Any], backend: str) -> 
         "Findings and candidate tests still require domain review.",
         "",
     ]
-    if backend == "fixture":
-        parts.extend(["**Synthetic demo with a prewritten analysis; no model was called.**", ""])
     parts.extend([md(analysis.summary), "", "## Findings", ""])
     if not analysis.findings:
         parts.extend(["No supported findings returned for this batch.", ""])

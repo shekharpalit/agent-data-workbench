@@ -2,7 +2,7 @@
 
 from .models import Analysis, Trace, json_text
 
-PROMPT_VERSION = "0.1"
+PROMPT_VERSION = "0.3"
 
 
 def build_prompt(traces: list[Trace], question: str, context: str) -> str:
@@ -30,7 +30,8 @@ exists with an empty expected string. A missing pointer fails every operator. Av
 exact prose matching. Explain rubric or environment checks that this simple checker cannot
 express in limitations. Generated assertions do not establish real-world correctness.
 
-IDs must be unique alphanumeric/underscore/hyphen strings. Cases must reference existing
+Finding and case IDs must be unique UUIDs. Keep original source trace IDs.
+Cases must reference existing
 finding IDs and trace IDs. Keep the summary concise and include material limitations."""
     payload = {
         "developer_question": question,

@@ -3,15 +3,15 @@ type: workflow
 title: Tasks and grader review
 description: Convert investigated evidence or explicit specifications into draft tasks, validate grader behavior, and preserve the review history required for experiments.
 tags: [tasks, graders, review, replay, evidence]
-verified:
-  - by: openwiki/0.5.0
-    at: 2026-09-07T17:18:36.762Z
 sources:
   - id: openwiki-source-b486bbac4ad50f2085fcbadb
     resource: repo://src/agent_data_workbench/tasks.py
   - id: openwiki-source-9dba1709c16fd704c45276e9
     resource: repo://tests/test_workbench_data.py
-generated: { by: "codex", at: "2026-09-07T17:18:36.762Z" }
+generated: { by: "codex", at: "2026-09-07T19:39:22.177Z" }
+verified:
+  - by: openwiki/0.5.0
+    at: 2026-09-07T19:39:22.177Z
 ---
 
 # Tasks and grader review
@@ -32,6 +32,8 @@ Replay copies only `messages[:cutoff]`, with an exclusive cutoff before an exist
 
 ## Understand the task contract
 
+Task and criterion IDs are canonical UUID strings. Finding references use UUIDs too; trace references retain the original source IDs. Use `uv run python -m uuid` to generate an ID for a manually authored specification. The CLI prints generated IDs for design and replay.
+
 A TaskSpec includes an ID, title, purpose, behavior, source trace IDs, optional finding lineage, fidelity, visible input, assumptions, missing context, criteria, and verifier examples.
 
 | Fidelity | What the task claims to measure |
@@ -48,7 +50,7 @@ Criteria read either the output object or a named relative JSON artifact. Assert
 
 ```json
 {
-  "id": "C1",
+  "id": "a9be7944-4099-43b9-9b4a-b2cb7e78a22a",
   "description": "Preserve the actual operation status",
   "source": "output",
   "kind": "assertion",

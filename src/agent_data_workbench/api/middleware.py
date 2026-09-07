@@ -1,7 +1,5 @@
 """Session access, response headers and bounded bodies around the FastAPI application."""
 
-import secrets
-
 from starlette.datastructures import Headers, MutableHeaders
 from starlette.exceptions import HTTPException
 from starlette.responses import JSONResponse
@@ -19,12 +17,11 @@ RESPONSE_HEADERS = {
 }
 
 
-class LocalSessionMiddleware:
-    def __init__(self, app: ASGIApp, *, origin: str, token: str):
+class RequestBoundaryMiddleware:
+    def __init__(self, app: ASGIApp, *, origin: str):
         self.app = app
         self.origin = origin
         self.host = origin.removeprefix("http://")
-        self.authorization = ("Bearer " + token).encode()
 
     async def __call__(self, scope: Scope, receive: Receive, send: Send):
         if scope["type"] != "http":
@@ -42,10 +39,6 @@ class LocalSessionMiddleware:
             error = (403, "Invalid host")
         elif scope["method"] == "POST" and headers.get("origin") != self.origin:
             error = (403, "Same-origin request required")
-        elif scope["path"].startswith("/api/") and not secrets.compare_digest(
-            headers.get("authorization", "").encode(), self.authorization
-        ):
-            error = (401, "Open the complete local URL printed by agent-data-workbench ui")
         elif scope["method"] == "POST":
             try:
                 length = int(headers["content-length"]) if "content-length" in headers else None

@@ -3,7 +3,8 @@
 import copy
 import threading
 from collections.abc import Callable
-from uuid import uuid4
+
+from .identifiers import new_id
 
 
 class JobQueue:
@@ -19,7 +20,7 @@ class JobQueue:
         with self._lock:
             if any(job["status"] == "running" for job in self._jobs.values()):
                 raise ValueError("An operation is already running")
-            key = uuid4().hex[:12]
+            key = new_id()
             self._jobs[key] = {
                 "id": key,
                 "name": name,

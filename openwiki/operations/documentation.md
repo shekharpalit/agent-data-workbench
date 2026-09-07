@@ -3,9 +3,6 @@ type: operations
 title: Maintain the OpenWiki
 description: Generate and update repository documentation through the installed Codex or Claude OpenWiki integration, then browse the result locally.
 tags: [openwiki, codex, claude, documentation]
-verified:
-  - by: openwiki/0.5.0
-    at: 2026-09-07T17:18:36.762Z
 sources:
   - id: openwiki-source-0f2091252a9c3383cef44ad0
     resource: repo://.agents/skills/openwiki/SKILL.md
@@ -20,6 +17,9 @@ sources:
   - id: openwiki-source-a2371d6362e5db4bc834ad03
     resource: repo://CLAUDE.md
 generated: { by: "codex", at: "2026-09-07T17:18:36.762Z" }
+verified:
+  - by: openwiki/0.5.0
+    at: 2026-09-07T19:39:22.177Z
 ---
 
 # Maintain the OpenWiki

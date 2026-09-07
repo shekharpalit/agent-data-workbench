@@ -4,7 +4,7 @@ okf_version: "0.2"
 
 # Files
 
-- [Quickstart](quickstart.md) - Install Agent Data Workbench, run its synthetic end-to-end example, and find the right workflow for your own agent traces and improvement experiments.
+- [Quickstart](quickstart.md) - Install Agent Data Workbench, import your own traces, and use the local UI to begin an evidence-based improvement workflow.
 
 # Directories
 

@@ -8,6 +8,7 @@ from pathlib import Path
 from pydantic import Field
 
 from .backends import Analyzer
+from .identifiers import UUIDString, new_id
 from .models import Contract
 from .project import digest, now, save
 from .traces import normalize, read_json
@@ -31,7 +32,7 @@ class GoldCase(Contract):
 
 class HumanAssessment(Contract):
     case_id: str
-    finding_id: str
+    finding_id: UUIDString
     correct: bool
     actionable: bool
     useful_for_task: bool
@@ -66,9 +67,7 @@ def review_benchmark(out: Path, annotations: Path, reviewer: str) -> dict:
         "total_review_seconds": sum(v.review_seconds for v in values),
         "scope": "Human judgments over reviewed findings only; record misses in gold labels.",
     }
-    from uuid import uuid4
-
-    save(out / ("human-review-" + uuid4().hex[:12] + ".json"), value)
+    save(out / (new_id() + ".json"), value)
     return value
 
 

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:0fc6cdf374f94155566cc3bc86f01aa7ed81c426a6bd28ff45d14d7e10b7365b",
+  "pageVersion": "sha256:57b1658af89efd44b7cbf07b607e1b2c983b255a7935965c68c79334c9a5de0c",
   "claims": [
     {
       "id": "claim_b88dee80e2334471a6a24e3675d10bd3",
@@ -12,25 +12,7 @@
         },
         {
           "resource": "repo://pyproject.toml#L1-L24",
-          "version": "repo-lines-v1:sha256:2fba171a5c5ae41fced6c572e88ebccc26b7c65f19a590be877905fbd825ba27:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA0NTY5OTQ2YWM5YmJlN2NiMmNkZWMzZjhiZWNmMzQzNzUwYzU4YjliMzIxZWMyMTk1YmZiYWFiMmFhOGM0YmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4YTMzZjViNmM5Y2Y4ODc0ZGE5Mjg0NmZlM2JiZDM5Yzc3ZmRmODM5NWViNWI4NDJjYTcwNWRkNWIxNDNkMzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYzZGQ3MTkyYTNjN2RiOGZiYWQ4Yjk4ZTgwZGVhN2Y0NWViMGI3ZGViYjc0YzUwYzdhZWRjYjkxZjU5ZWRmMWQifQ"
-        }
-      ]
-    },
-    {
-      "id": "claim_11ad4cf50a3b4eaa8cb0179ba2b64087",
-      "statement": "The workbench demo creates synthetic research and tasks, executes deterministic baseline and candidate variants on optimization and validation with two repeats, performs no provider calls, and preserves the final split.",
-      "evidence": [
-        {
-          "resource": "repo://src/agent_data_workbench/demo.py#L216-L258",
-          "version": "repo-lines-v1:sha256:00228cd1e3418dd15352955b78658cb1bb61f2cb0380258042079a0bc6f3c825:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFjMjI5MTE4OWY3YWVmMWY0MjQ3ZmQzMTdjOWY3YWYzNmFiNDljNzU1YmZkNTdmMTNkYTk0NmVjYjlmYzhlZWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ2ZWIxNjhkZmI0MzY1ZjBmYThkNzFiNmM4NGViMzAwNWRiMDNkOWEzNzVkYzA2ZTIyZTA2YmZmOWI2ODQxYTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
-        },
-        {
-          "resource": "repo://src/agent_data_workbench/demo.py#L50-L83",
-          "version": "repo-lines-v1:sha256:409be42bef3b46a9c00c8a971e6b0329a422aae86b67233156cd6a8e74d3cde1:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNiYzdmMTkxMmM5OGU4MzdlMGQzNjQ5YmQ2Y2QxYTRlNzllMDdkYjI5ODFhMDE3Y2ExNjhkZTk4ZGIyMjhkMWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEzMjM4ZTY5MmNiNDhhN2M4ODdjOGZkMTgxNWI5ODFkZThkMzZjNjM2Zjk1ZTQ5MzI4MmNhMjcyYjFhOGY2NWMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBmOGNmNmU2MjBjMDg2ZDAzMTIyYzIxNThkMTY2ODZkMmIzYzBkZGE3YjY1ZDdkMjc4YjVkNWFlOGE2MDMxMmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRiNWMyYThlZjkxZDc1MTU1MGM5NDYyZTVlYTNjZDcwZGQxMmFmNzAwZjZhNzUzNzA3ZjE1ZmQ4NWExNDUwYjMifQ"
-        },
-        {
-          "resource": "repo://tests/test_workbench_execution.py#L508-L522",
-          "version": "repo-lines-v1:sha256:83e1993818298ac44fe3143f8e664e60df1ff53881b21eafad8237b7df52c1f9:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU2ODlhZjZmMDBiZjYxNzk3NzVmNTU1MGY2ODUyODJmZDc3M2Y0Zjc4NDYwYTgxNTYwNWM5YjA3OWExYTY4YjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRiYmVmNDgyZTJiYTY5MTEwYzc3MjIzMGJjODU1NzQ2N2E2YTViMzBlMGE1MmJlYjUzZjViZGI5MTFjNDY4ZjkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmYmQwMDkzMTRiYzI3MDg0MTY3MzRhMDJhZTVmZjM5YTFlNDhhMDUwYmU5MWY0M2IyZmFhOTIwMDJjNjJiZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFkMTQ2MmRlOGJlNzE2NGY2ZTMxYjlmNmZhZDI2OTg0ZmNiYjQ1OTU3YmE1NzkyMjg0MjY1MDU2NDY1MDczOTcifQ"
+          "version": "repo-lines-v1:sha256:076de768e6646187a6483e36ae165d63bdb3f9f3d9146539fd75351076bdf75a:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA0NTY5OTQ2YWM5YmJlN2NiMmNkZWMzZjhiZWNmMzQzNzUwYzU4YjliMzIxZWMyMTk1YmZiYWFiMmFhOGM0YmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4YTMzZjViNmM5Y2Y4ODc0ZGE5Mjg0NmZlM2JiZDM5Yzc3ZmRmODM5NWViNWI4NDJjYTcwNWRkNWIxNDNkMzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYzZGQ3MTkyYTNjN2RiOGZiYWQ4Yjk4ZTgwZGVhN2Y0NWViMGI3ZGViYjc0YzUwYzdhZWRjYjkxZjU5ZWRmMWQifQ"
         }
       ]
     },
@@ -39,8 +21,8 @@
       "statement": "The CLI supports creating a project, ingesting exported traces, and querying the local corpus without calling a model.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/commands.py#L64-L111",
-          "version": "repo-lines-v1:sha256:7668f22c494f18975e7bb3cc9dda92901d7d63163276e2e79931546096479f7b:eyJzZWxlY3RlZExpbmVDb3VudCI6NDgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUyYTc3ZGQwNGU4ZDdmMTUyMTBhYTMwYmQ2ZDE2Mjk0MmRkNjlkM2Y3MGZjYTg5OGE1YzM0YzYyZDQ3NjY4MDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5MDlhNTNhNjE4ZDAyOGUxZDMwMDBjMGE3YWJjZWVjYmU1ZmIzN2Y0ZTUxMWVmZTQ2NjQzZmFkNmU2Njg3MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYwYjM5MjA5OGIzMzVkMWIxOTFiNWZjZGUzYmI0NGU0YWQ4OTY0NjJjYTA2YjE2OTM1NzQyN2I0YTVmOTRhYTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRkYzc1NDIxNjE1YWVmZmI4NjlkM2QzMDk3MDNmZGUwYmE2NzBhM2FjMmI2NDVmOWJiNGYyNWE1YjliM2NiZmEifQ"
+          "resource": "repo://src/agent_data_workbench/cli/project.py#L40-L89",
+          "version": "repo-lines-v1:sha256:329a56e00651ee1fbd0010c1dc63e705ce6b8a56e6d5cf60a1b582a842c003ce:eyJzZWxlY3RlZExpbmVDb3VudCI6NTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJhZGEwZjQ4NWEzOTk2YTJhZDFhY2Y1ZDViNzM0NDlhNzI1OTJhMWIzYjhhNmY1OWMyYzYwM2YxMDU3NmQwYjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ5ZGQ3ZWQzZGFkNGQ0ODRkZTkzYzdmMDdhMDFjYjA4NWM4YzY5OTRjNjNmNTA2YzliN2NkZmNiZDU2N2I3NjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY5YzFhNDNiODJmYjNlZGZlMGNjYTQ0YzQyM2MwYzcxYmIxOWY1NzRiMjUwMmIwZjY4NTQyOTQxMWVkM2Y3NGUifQ"
         }
       ]
     },
@@ -49,18 +31,32 @@
       "statement": "The UI command starts the project workbench through its local server and accepts an optional port and automatic browser opening.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/commands.py#L298-L304",
-          "version": "repo-lines-v1:sha256:ed9ca29bca3e7b837124ae40db0989a288e197f8c39352dcc7aa08310411bc57:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmNkZTg3YjhmYmRiN2JmYjU2ZjM2ZWFhY2M0MmYzZTdmY2JmZTQ1NDdmZTljYzk2NGQwZTg0ZDk3OWRiNDU1YSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMGY2OTRmYjkyOWFjZThjYTYzODkyOGY3NzY1NDYwMTkyMTNjZmQwNjIxMmJjMTRjM2MwNmVhMjhiMTQ1MTU3OCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOWE2MjhhMzk4ZTdiNDIxY2IzOGQ3NWM2Nzg5MThkMTJjMzEyM2I3NzMxNTkwM2JkZTRhNzU4OTBlMjlmNWEzZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNGVhMjdjOGZlMmQ4MGUxN2FjNTI0ZThlOTA0YzI5ZWUxNmY4ZjIyYmRiZjU1N2IzNmExYzc2M2JjZTNiYTk0YSJ9"
+          "resource": "repo://src/agent_data_workbench/cli/project.py#L92-L98",
+          "version": "repo-lines-v1:sha256:d9f3778c8660871540397f22e68382f01cd0cad2ff0df257dfed8264bc5c7661:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOGZhNWYyMzg5MWI1OThhZTljMjIxNjc3MjFiOWRiYzNiODJmZDEwNTVlYjE1ZjcyMjNiYzNmOWIzZDBiYWM0NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzlmNDFhNTRlYjI0N2RhNGZmYTVlMTRhNjRkNGFhZTc5MWM0OGIwYWM0OWEzZGEwNWZkZGU1MzMyNTliNTVhMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGNjNGE3ZDFjYzc5NmFiYTNlNDY3MjMzMjdmNTE3ZTlmODExOTgyZDI1MGYwNzAyOTg2ZTRiNTc2NGFkOTU4OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
         },
         {
-          "resource": "repo://src/agent_data_workbench/server.py",
-          "version": "repo-file-v1:sha256:c44c157aa23b6bcab8116eb66d6dae3774d33edce0a60ac37998c5c9c267601f"
+          "resource": "repo://src/agent_data_workbench/server.py#L56-L79",
+          "version": "repo-lines-v1:sha256:d653bd64a8c205de27b5383d49fafc70938b8aec198bd51deb479c3464d517b0:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMxNGVmMTkzNTI3MDQ5NmNiNGQ1ZDFlNzEzZTQ3ZmNkZDIwMzdmMWMxMGQzYmVjOTJmNzdhZjIwZjAwNDUwMWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1MzhjYzAyNmU5MzVhYThhMzcwZmQwNWM3M2NhZTY0YTZiN2U4NzU3MjJmZTVlZjAyZTk0ZmM3YzYxYjIyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBjNDc0NTU0N2RlMmM4NGI1ZDM3NDJmOTRmNDY5MGUyNDhhZDg3NWI2OWRhZjQ0NTAxMTI0MDBhMGJlMWExN2EiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_dce749dc05f746b6947787ab1012f232",
+      "statement": "New workbench projects begin with empty artifact directories in format 0.3; opening an older project format fails without rewriting its files.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/project.py#L33-L61",
+          "version": "repo-lines-v1:sha256:1f5a40a2c862abe9793afdb45594491750d54f20c153122350a0aa013168aa71:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhNzMxNTExNjBiYzJlMGMzZjc4MDA0NjA5YTVmNzcwYjA1ZTgwYjRlYzljZGU0YmIyODExYjA2N2JiYjVmOGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjExMWYyZTdhNDVjYjNjNjU0YzViYTU0ZmU0ZDhiMWUzNDgzZjM0NGNiYTgzMjk1MTVjMDgzOGQ2MGY0MDY5YTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVhM2RmOTM3ZTMzYmZmZDNlZmE3MzIyMDljYjdhZTBkYjE5OWFhNDJlZTJlNTU3ZTJmNGIyMTJkYmE3N2JkNmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNjNTMwNWY1YWFhMzcxNzIzNzQ1MDA0OGI1MTM3NjVlM2ViMWQwMjEyMjA0NmZiN2MzNjczNWRlN2I5NjI5YjMifQ"
+        },
+        {
+          "resource": "repo://tests/test_identifiers.py#L99-L113",
+          "version": "repo-lines-v1:sha256:c94d413e763626e912ec455950880775c8f90cabec99cd27c37d644cdf795fb2:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkyMmIwNjQ0Y2YwOTUxMzFkOTEwMWFkODg2YzQzYTRjZDA1YTMwMTZkNTU2ZTcwZWJlMTBhNWY0MTk3ZjAxNTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBmOGNmNmU2MjBjMDg2ZDAzMTIyYzIxNThkMTY2ODZkMmIzYzBkZGE3YjY1ZDdkMjc4YjVkNWFlOGE2MDMxMmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJlMDgwNGRkYTcxZTJkMGU1OTBjNGM4YmYyZTIxMTQyYzI0MDE4MjNmZGQ2OWY3MTQ4ZjQyYzYyN2I1MGNhNmQifQ"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-07T17:18:36.762Z"
+    "at": "2026-09-07T19:39:22.177Z"
   }
 }

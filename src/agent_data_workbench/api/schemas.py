@@ -4,9 +4,10 @@ from typing import Literal
 
 from pydantic import Field, model_validator
 
-from .explore import SearchQuery
-from .models import Contract, pointer_parts
-from .tasks import TaskSpec
+from ..explore import SearchQuery
+from ..identifiers import UUIDString
+from ..models import Contract, pointer_parts
+from ..tasks import TaskSpec
 
 ArtifactKind = Literal["knowledge", "investigations", "tasks", "suites", "experiments", "exports"]
 
@@ -30,7 +31,7 @@ class DistributionRequest(Contract):
 
 
 class ArtifactRequest(Contract):
-    id: str = Field(min_length=1, max_length=80)
+    id: UUIDString
 
 
 class ReviewRequest(ArtifactRequest):
@@ -56,7 +57,7 @@ class AnalyzerRequest(Contract):
 
 class InvestigationRequest(AnalyzerRequest):
     question: str | None = Field(default=None, max_length=10000)
-    resume: str | None = Field(default=None, max_length=80)
+    resume: UUIDString | None = None
     steps: int = Field(default=6, ge=1, le=12, strict=True)
 
     @model_validator(mode="after")
@@ -69,4 +70,4 @@ class InvestigationRequest(AnalyzerRequest):
 
 
 class TaskDesignRequest(AnalyzerRequest):
-    investigation: str = Field(min_length=1, max_length=80)
+    investigation: UUIDString

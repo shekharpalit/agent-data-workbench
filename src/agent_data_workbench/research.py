@@ -4,11 +4,11 @@ from __future__ import annotations
 
 from pathlib import Path
 from typing import Literal
-from uuid import uuid4
 
 from pydantic import Field
 
 from .backends import Analyzer
+from .identifiers import UUIDString, canonical_uuid, new_id
 from .models import Analysis, Contract, Evidence, Trace, json_text, validate_evidence
 from .project import Project, digest, now, save
 from .store import TraceStore
@@ -17,7 +17,7 @@ from .traces import read_json
 
 
 class Signal(Contract):
-    finding_id: str
+    finding_id: UUIDString
     kind: Literal[
         "error",
         "user_correction",
@@ -40,9 +40,9 @@ class Edit(Contract):
 
 
 class Proposal(Contract):
-    id: str
+    id: UUIDString
     title: str
-    finding_ids: list[str] = Field(min_length=1)
+    finding_ids: list[UUIDString] = Field(min_length=1)
     kind: Literal["prompt", "tool", "context", "harness", "training_data"]
     hypothesis: str
     expected_effect: str
@@ -84,6 +84,7 @@ aggregate: pointer, text, stratum. Exact scalar counts and numeric summaries ove
 context: no args. Reviewed project knowledge.
 history: no args. Summaries of previous experiments, including unsuccessful ones.
 finish: no args; supply result. Otherwise result is null.
+Use UUIDs for finding, case, and proposal IDs; retain original source trace IDs.
 Use only observed trace IDs. Cite exact text actually inspected. Final analysis uses
 summary/findings/cases/limitations; candidate cases can be empty when context is missing.
 Propose concrete improvements linked to findings. edits contain exact before/after content and a
@@ -102,7 +103,7 @@ def start_investigation(project: Project, question: str, seed: int = 0) -> dict:
     if not question.strip() or store.inventory()["total"] == 0:
         raise ValueError("Import traces and supply an investigation question")
     value = {
-        "id": "I-" + uuid4().hex[:12],
+        "id": new_id(),
         "created_at": now(),
         "question": question,
         "status": "paused",
@@ -114,7 +115,7 @@ def start_investigation(project: Project, question: str, seed: int = 0) -> dict:
         "evidence_snapshot": [],
         "visited_ids": [],
         "error": None,
-        "protocol_version": "0.2",
+        "protocol_version": "0.3",
     }
     with project.lock():
         save(project.path("investigations", value["id"]), value)
@@ -188,7 +189,7 @@ def validate_result(result: ResearchResult, traces: list[Trace]) -> None:
         from .models import Finding
 
         probe = Finding(
-            id="signal",
+            id=new_id(),
             title="signal",
             category="opportunity",
             confidence="observation",
@@ -201,9 +202,6 @@ def validate_result(result: ResearchResult, traces: list[Trace]) -> None:
         )
     ids = set()
     for proposal in result.proposals:
-        from .project import identifier
-
-        identifier(proposal.id)
         if proposal.id in ids or not set(proposal.finding_ids) <= findings:
             raise ValueError("Proposal has duplicate ID or invalid finding lineage")
         ids.add(proposal.id)
@@ -314,14 +312,14 @@ def investigate(
             raise
         save(path, value)
         if value["status"] == "complete":
-            from .evaluation import atomic_text
+            from .persistence import atomic_text
 
             atomic_text(project.path("investigations", key, ".md"), research_report(value))
         return value
 
 
 def research_report(value: dict) -> str:
-    from .workflow import md
+    from .reports import md
 
     result = value["result"]
     analysis = result["analysis"]
@@ -386,6 +384,7 @@ def export_proposal(
 ) -> dict:
     import difflib
 
+    proposal_id = canonical_uuid(proposal_id)
     value = load_investigation(project, investigation_id)
     if value["status"] != "complete":
         raise ValueError("Investigation is incomplete")

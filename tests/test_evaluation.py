@@ -1,4 +1,5 @@
 import pytest
+from identities import uid
 
 from agent_data_workbench.evaluation import (
     check_assertion,
@@ -48,8 +49,14 @@ def test_compare_and_regression_detection(analysis, outputs):
     } == {
         "baseline_passed": 0,
         "candidate_passed": 2,
-        "improved": ["C1", "C2"],
-        "regressed": ["C1", "C2"],
+        "improved": [
+            uid("C1"),
+            uid("C2"),
+        ],
+        "regressed": [
+            uid("C1"),
+            uid("C2"),
+        ],
     }
 
 
@@ -57,7 +64,7 @@ def test_compare_and_regression_detection(analysis, outputs):
 def test_compare_requires_matching_complete_coverage(analysis, outputs, side):
     # Given
     baseline, candidate = outputs("baseline.jsonl"), outputs("candidate.jsonl")
-    (baseline if side == "baseline" else candidate).pop("C1")
+    (baseline if side == "baseline" else candidate).pop(uid("C1"))
 
     # When / Then
     with pytest.raises(ValueError, match="Missing"):
@@ -134,7 +141,9 @@ def test_nonstring_cannot_pass_text_assertion():
 def test_duplicate_output_rejected(tmp_path):
     # Given
     path = tmp_path / "outputs.jsonl"
-    path.write_text('{"case_id":"C1","output":{}}\n{"case_id":"C1","output":{}}\n')
+    path.write_text(
+        '{"case_id":"7707caa1-6992-5c3a-bbd0-7ac198458224","output":{}}\n{"case_id":"7707caa1-6992-5c3a-bbd0-7ac198458224","output":{}}\n'
+    )
 
     # When / Then
     with pytest.raises(ValueError, match="Duplicate output"):
@@ -153,8 +162,13 @@ def test_review_roundtrip_and_invalid_review_does_not_modify(tmp_path, traces, a
         review_cases(path, ["missing"], "accepted", "Review note")
     after_invalid = path.read_text()
     with pytest.raises(ValueError, match="review note"):
-        review_cases(path, ["C1"], "accepted", "")
-    review_cases(path, ["C1"], "accepted", "Fixture and status assertion reviewed")
+        review_cases(path, [uid("C1")], "accepted", "")
+    review_cases(
+        path,
+        [uid("C1")],
+        "accepted",
+        "Fixture and status assertion reviewed",
+    )
     cases = load_cases(path)
 
     # Then
@@ -164,8 +178,11 @@ def test_review_roundtrip_and_invalid_review_does_not_modify(tmp_path, traces, a
     } == {
         "unchanged_after_invalid": True,
         "reviews": {
-            "C1": {"status": "accepted", "note": "Fixture and status assertion reviewed"},
-            "C2": {"status": "candidate", "note": ""},
+            uid("C1"): {
+                "status": "accepted",
+                "note": "Fixture and status assertion reviewed",
+            },
+            uid("C2"): {"status": "candidate", "note": ""},
         },
     }
 

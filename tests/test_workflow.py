@@ -139,7 +139,7 @@ def test_snapshot_selection_and_evidence_report(tmp_path, traces, analysis):
         "selected": request["selected_traces"],
         "total": request["total_traces"],
         "links_evidence": "traces.md#trace-" in report,
-        "includes_summary": "Synthetic demo" in report,
+        "includes_summary": analysis.summary in report,
         "review": case["review"]["status"],
     } == {
         "selected": 4,

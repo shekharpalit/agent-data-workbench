@@ -1,6 +1,7 @@
 import json
 
 import pytest
+from identities import uid
 
 from agent_data_workbench.models import Analysis, Assertion, Finding, Trace
 from agent_data_workbench.project import Project, save
@@ -69,10 +70,10 @@ def project(tmp_path):
     return make_project(tmp_path)
 
 
-def spec(project, key="T1", trace_ids=None, artifact=False):
+def spec(project, key=uid("T1"), trace_ids=None, artifact=False):
     criteria = [
         Criterion(
-            id="C1",
+            id=uid("C1"),
             description="Actual outcome",
             source="output",
             assertion=Assertion(pointer="/value", operator="equals", expected="1"),
@@ -81,7 +82,7 @@ def spec(project, key="T1", trace_ids=None, artifact=False):
     if artifact:
         criteria.append(
             Criterion(
-                id="C2",
+                id=uid("C2"),
                 description="Recorded state",
                 source="artifact",
                 artifact="state.json",
@@ -126,7 +127,7 @@ def spec(project, key="T1", trace_ids=None, artifact=False):
         ),
     ]
     return TaskSpec(
-        id=key,
+        id=uid(key),
         title=key,
         purpose="Test outcome",
         behavior="accuracy",
@@ -177,7 +178,7 @@ def result(quote="actual result", trace_id="r0"):
             summary="An observed outcome",
             findings=[
                 Finding(
-                    id="F1",
+                    id=uid("F1"),
                     title="Outcome",
                     category="opportunity",
                     confidence="observation",
@@ -258,7 +259,7 @@ def test_balanced_sampling_and_exact_drilldown(project):
 def test_reserved_groups_cannot_be_inspected_or_aggregated(project):
     # Given
     save(
-        project.path("suites", "reserved"),
+        project.path("suites", uid("reserved")),
         {"tasks": [{"split": "final", "trace_groups": ["g0"]}], "final_exposure": None},
     )
     # When
@@ -418,7 +419,11 @@ def test_task_edit_and_context_changes_invalidate_approval(project):
         "audit": value["audit"],
         "review_status": value["review"]["status"],
         "previous_title": value["revisions"][0]["spec"]["title"],
-    } == {"audit": None, "review_status": "draft", "previous_title": "T1"}
+    } == {
+        "audit": None,
+        "review_status": "draft",
+        "previous_title": uid("T1"),
+    }
     # When
     audit_task(project, task.id)
     review_task(project, task.id, "accepted", "Re-reviewed")
@@ -462,7 +467,7 @@ def test_semantic_judge_must_provide_verifiable_evidence(project, evidence):
     task = spec(project)
     task.criteria = [
         Criterion(
-            id="S1",
+            id=uid("S1"),
             description="Explain outcome",
             source="output",
             kind="semantic",
@@ -521,9 +526,9 @@ def test_proposal_export_checks_source_and_never_applies_it(project, tmp_path):
     value = result()
     value["proposals"] = [
         {
-            "id": "P1",
+            "id": uid("P1"),
             "title": "Preserve outcome",
-            "finding_ids": ["F1"],
+            "finding_ids": [uid("F1")],
             "kind": "prompt",
             "hypothesis": "Actual status improves accuracy",
             "expected_effect": "Fewer false claims",
@@ -542,7 +547,7 @@ def test_proposal_export_checks_source_and_never_applies_it(project, tmp_path):
     (source / "prompt.txt").write_text("old")
     out = tmp_path / "patch"
     # When
-    artifact = export_proposal(project, i["id"], "P1", source, out)
+    artifact = export_proposal(project, i["id"], uid("P1"), source, out)
     # Then
     assert {
         "applied": artifact["applied"],
@@ -554,4 +559,4 @@ def test_proposal_export_checks_source_and_never_applies_it(project, tmp_path):
     (source / "prompt.txt").write_text("changed")
     # Then
     with pytest.raises(ValueError, match="does not match"):
-        export_proposal(project, i["id"], "P1", source, tmp_path / "patch2")
+        export_proposal(project, i["id"], uid("P1"), source, tmp_path / "patch2")

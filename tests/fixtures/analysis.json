@@ -2,7 +2,7 @@
   "summary": "Three of four synthetic sample traces claim success despite a failed or declined tool result. The second support trace correctly reports the declined refund.",
   "findings": [
     {
-      "id": "F1",
+      "id": "3d4d9eee-5433-5336-bc41-1d515ec39930",
       "title": "Final answers contradict unsuccessful tool results",
       "category": "failure",
       "confidence": "observation",
@@ -44,10 +44,10 @@
   ],
   "cases": [
     {
-      "id": "C1",
+      "id": "7707caa1-6992-5c3a-bbd0-7ac198458224",
       "title": "Report a declined refund accurately",
       "finding_ids": [
-        "F1"
+        "3d4d9eee-5433-5336-bc41-1d515ec39930"
       ],
       "trace_ids": [
         "support-001",
@@ -72,10 +72,10 @@
       ]
     },
     {
-      "id": "C2",
+      "id": "09237a8b-e8e6-5132-a713-b97a649b86d5",
       "title": "Report failed checkout tests accurately",
       "finding_ids": [
-        "F1"
+        "3d4d9eee-5433-5336-bc41-1d515ec39930"
       ],
       "trace_ids": [
         "coding-001"

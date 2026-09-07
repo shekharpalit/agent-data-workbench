@@ -1,6 +1,8 @@
 import json
+import shutil
 from pathlib import Path
 
+from identities import uid
 from typer.testing import CliRunner
 
 from agent_data_workbench.cli import app
@@ -8,15 +10,18 @@ from agent_data_workbench.cli import app
 runner = CliRunner()
 
 
-def test_offline_demo_review_evaluate_compare(tmp_path):
+def test_review_evaluate_compare_on_explicit_test_fixtures(tmp_path, sample_data):
     # Given
-    run = tmp_path / "demo"
+    run = tmp_path / "batch"
     cases, baseline, candidate = [
         str(run / name) for name in ("cases.jsonl", "baseline.jsonl", "candidate.jsonl")
     ]
 
     # When
-    demo = runner.invoke(app, ["demo", "--out", str(run)])
+    prepared = runner.invoke(app, ["prepare", str(sample_data / "traces.jsonl"), "--out", str(run)])
+    finished = runner.invoke(app, ["finish", str(run), str(sample_data / "analysis.json")])
+    for name in ("baseline.jsonl", "candidate.jsonl"):
+        shutil.copyfile(sample_data / name, run / name)
     before_review = runner.invoke(app, ["evaluate", cases, candidate])
     review = runner.invoke(
         app,
@@ -24,9 +29,9 @@ def test_offline_demo_review_evaluate_compare(tmp_path):
             "review",
             cases,
             "--accept",
-            "C1",
+            uid("C1"),
             "--accept",
-            "C2",
+            uid("C2"),
             "--note",
             "Reviewed the bundled synthetic fixture contracts",
         ],
@@ -39,7 +44,8 @@ def test_offline_demo_review_evaluate_compare(tmp_path):
     # Then
     assert {
         "exit_codes": {
-            "demo": demo.exit_code,
+            "prepare": prepared.exit_code,
+            "finish": finished.exit_code,
             "before_review": before_review.exit_code,
             "review": review.exit_code,
             "baseline": baseline_evaluation.exit_code,
@@ -47,11 +53,11 @@ def test_offline_demo_review_evaluate_compare(tmp_path):
             "comparison": comparison.exit_code,
             "reverse": reverse.exit_code,
         },
-        "synthetic_notice": "no model or real agent was run" in demo.output,
         "improved": json.loads(comparison.output)["improved"],
     } == {
         "exit_codes": {
-            "demo": 0,
+            "prepare": 0,
+            "finish": 0,
             "before_review": 2,
             "review": 0,
             "baseline": 1,
@@ -59,8 +65,10 @@ def test_offline_demo_review_evaluate_compare(tmp_path):
             "comparison": 0,
             "reverse": 1,
         },
-        "synthetic_notice": True,
-        "improved": ["C1", "C2"],
+        "improved": [
+            uid("C1"),
+            uid("C2"),
+        ],
     }
 
 
@@ -104,8 +112,8 @@ def test_analyze_orchestrates_backend_and_preserves_context(
             observed["policy_in_prompt"] = "Important fixture policy" in prompt
             return analysis.model_dump()
 
-    monkeypatch.setattr("agent_data_workbench.cli.CliAnalyzer", FakeAnalyzer)
-    monkeypatch.setattr("agent_data_workbench.cli.shutil.which", lambda name: "/fake/codex")
+    monkeypatch.setattr("agent_data_workbench.cli.batch.CliAnalyzer", FakeAnalyzer)
+    monkeypatch.setattr("agent_data_workbench.cli.batch.shutil.which", lambda name: "/fake/codex")
     context = tmp_path / "policy.txt"
     context.write_text("Important fixture policy")
     run = tmp_path / "analysis"
@@ -135,15 +143,133 @@ def test_analyze_orchestrates_backend_and_preserves_context(
     }
 
 
-def test_invalid_review_does_not_succeed(tmp_path):
+def test_invalid_review_does_not_succeed(tmp_path, sample_data):
     # Given
-    run = tmp_path / "demo"
-    runner.invoke(app, ["demo", "--out", str(run)])
+    run = tmp_path / "batch"
+    runner.invoke(app, ["prepare", str(sample_data / "traces.jsonl"), "--out", str(run)])
+    runner.invoke(app, ["finish", str(run), str(sample_data / "analysis.json")])
 
     # When
     result = runner.invoke(
-        app, ["review", str(run / "cases.jsonl"), "--accept", "C1", "--reject", "C2", "--note", "x"]
+        app,
+        [
+            "review",
+            str(run / "cases.jsonl"),
+            "--accept",
+            uid("C1"),
+            "--reject",
+            uid("C2"),
+            "--note",
+            "x",
+        ],
     )
 
     # Then
     assert {"exit_code": result.exit_code} == {"exit_code": 2}
+
+
+def test_modular_project_cli_imports_reviews_executes_and_exports(tmp_path, sample_data):
+    # Given: explicit test records and trusted command adapters, without a demo command.
+    import sys
+    from uuid import UUID
+
+    from test_workbench_data import spec
+
+    from agent_data_workbench.project import Project
+
+    directory = tmp_path / "project"
+    baseline, candidate = tmp_path / "baseline.json", tmp_path / "candidate.json"
+    for path, value in [(baseline, 0), (candidate, 1)]:
+        path.write_text(
+            json.dumps(
+                {
+                    "name": path.stem,
+                    "kind": "command",
+                    "command": [
+                        sys.executable,
+                        "-c",
+                        f"import json; print(json.dumps({{'output': {{'value': {value}}}}}))",
+                    ],
+                    "environment_version": "test-command-v1",
+                    "fidelity": "output",
+                }
+            )
+        )
+    # When
+    exits = [
+        runner.invoke(app, ["init", str(directory), "Test agent", "Reliable outcomes"]).exit_code,
+        runner.invoke(app, ["ingest", str(directory), str(sample_data / "traces.jsonl")]).exit_code,
+    ]
+    project = Project(directory)
+    ids = []
+    blocked = []
+    for index, trace in enumerate(["support-001", "research-001", "coding-001"]):
+        task = spec(project, key=uid(f"task-{index}"), trace_ids=[trace])
+        task_file = tmp_path / f"task-{index}.json"
+        task_file.write_text(task.model_dump_json())
+        ids.append(task.id)
+        exits.append(
+            runner.invoke(app, ["task", "import", str(directory), str(task_file)]).exit_code
+        )
+        blocked.append(
+            runner.invoke(
+                app, ["task", "review", str(directory), task.id, "accepted", "Reviewed"]
+            ).exit_code
+        )
+        exits.append(runner.invoke(app, ["task", "audit", str(directory), task.id]).exit_code)
+        exits.append(
+            runner.invoke(
+                app, ["task", "review", str(directory), task.id, "accepted", "Reviewed"]
+            ).exit_code
+        )
+    command = ["suite", str(directory), "Accuracy / current"]
+    for key in ids:
+        command.extend(["--task-id", key])
+    created = runner.invoke(app, command)
+    suite = json.loads(created.output)
+    executed = runner.invoke(
+        app,
+        [
+            "experiment",
+            str(directory),
+            suite["id"],
+            str(baseline),
+            str(candidate),
+            "--split",
+            "optimization",
+        ],
+    )
+    experiment = project.artifacts("experiments")[0]
+    exported = runner.invoke(
+        app,
+        [
+            "training-export",
+            str(directory),
+            experiment["id"],
+            str(tmp_path / "export"),
+            "Reviewed test outcomes",
+            "Test-owned data",
+            "--kind",
+            "preference",
+        ],
+    )
+    # Then
+    assert {
+        "setup": exits,
+        "acceptance_before_audit": blocked,
+        "execution": [created.exit_code, executed.exit_code, exported.exit_code],
+        "suite": {"name": suite["name"], "uuid_version": UUID(suite["id"]).version},
+        "experiment": {
+            "status": experiment["status"],
+            "improved": len(experiment["summary"]["improved"]),
+            "invalid": experiment["summary"]["invalid_pairs"],
+        },
+        "exported": json.loads(exported.output)["records"],
+    } == {
+        "setup": [0] * 11,
+        "acceptance_before_audit": [2, 2, 2],
+        "execution": [0, 0, 0],
+        "suite": {"name": "Accuracy / current", "uuid_version": 4},
+        "experiment": {"status": "complete", "improved": 1, "invalid": []},
+        "exported": 1,
+    }

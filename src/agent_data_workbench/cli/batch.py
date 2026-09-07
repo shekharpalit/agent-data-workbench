@@ -4,26 +4,22 @@ from __future__ import annotations
 
 import json
 import shutil
-from datetime import UTC, datetime
 from enum import Enum
-from functools import wraps
-from importlib.resources import files
 from pathlib import Path
 from typing import Annotated
-from uuid import uuid4
 
 import typer
-from pydantic import ValidationError
 
-from .backends import BackendError, CliAnalyzer
-from .commands import register
-from .evaluation import compare as compare_outputs
-from .evaluation import evaluate as evaluate_outputs
-from .evaluation import load_cases, load_outputs, review_cases
-from .models import Analysis
-from .prompt import build_prompt
-from .traces import load_traces, read_json
-from .workflow import DEFAULT_QUESTION, complete_run, load_request, prepare_run
+from ..backends import BackendError, CliAnalyzer
+from ..evaluation import compare as compare_outputs
+from ..evaluation import evaluate as evaluate_outputs
+from ..evaluation import load_cases, load_outputs, review_cases
+from ..identifiers import new_id
+from ..models import Analysis
+from ..prompt import build_prompt
+from ..traces import load_traces, read_json
+from ..workflow import DEFAULT_QUESTION, complete_run, load_request, prepare_run
+from .common import errors
 
 app = typer.Typer(
     no_args_is_help=True,
@@ -38,28 +34,8 @@ class Backend(str, Enum):
     claude = "claude"
 
 
-def errors(function):
-    @wraps(function)
-    def wrapped(*args, **kwargs):
-        try:
-            return function(*args, **kwargs)
-        except ValidationError as exc:
-            fields = [".".join(map(str, error["loc"])) for error in exc.errors(include_input=False)]
-            typer.echo("Invalid structured data at: " + ", ".join(fields[:10]), err=True)
-            raise typer.Exit(2) from exc
-        except (ValueError, OSError, BackendError) as exc:
-            typer.echo(f"Error: {exc}", err=True)
-            raise typer.Exit(2) from exc
-
-    return wrapped
-
-
 def output_path(out: Path | None) -> Path:
-    return (
-        out
-        if out is not None
-        else Path("runs") / (datetime.now(UTC).strftime("%Y%m%d-%H%M%S") + "-" + uuid4().hex[:6])
-    )
+    return out if out is not None else Path("runs") / new_id()
 
 
 def context_text(paths: list[Path]) -> str:
@@ -185,37 +161,6 @@ def compare(cases: File, baseline: File, candidate: File):
     if result["regressed"]:
         raise typer.Exit(1)
 
-
-@app.command()
-@errors
-def demo(out: Annotated[Path | None, typer.Option()] = None):
-    """Render a synthetic, prewritten example. No provider call or credentials required."""
-    data = files("agent_data_workbench").joinpath("data")
-    destination = output_path(out)
-    traces = load_traces(Path(str(data.joinpath("traces.jsonl"))))
-    prepare_run(traces, destination)
-    complete_run(
-        destination,
-        json.loads(data.joinpath("analysis.json").read_text(encoding="utf-8")),
-        backend="fixture",
-    )
-    for name in ("baseline.jsonl", "candidate.jsonl"):
-        (destination / name).write_text(
-            data.joinpath(name).read_text(encoding="utf-8"), encoding="utf-8"
-        )
-    typer.echo("Synthetic demo: prewritten analysis and outputs; no model or real agent was run.")
-    typer.echo(f"Report: {(destination / 'report.md').resolve()}")
-    typer.echo("Review cases.jsonl, then use review and compare to exercise the local eval loop.")
-
-
-@app.command()
-def doctor():
-    """Check local CLI availability without reading credentials or making provider calls."""
-    for name in ("codex", "claude"):
-        typer.echo(f"{name}: {shutil.which(name) or 'not found on PATH'}")
-
-
-register(app, errors)
 
 if __name__ == "__main__":
     app()
