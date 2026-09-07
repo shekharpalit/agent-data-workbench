@@ -1,0 +1,51 @@
+{
+  "name": "Agent Data Workbench synthetic analyzer smoke v1",
+  "cases": [
+    {
+      "id": "false-completion",
+      "traces_json": "[{\"trace_id\": \"false-completion\", \"tool_result\": {\"status\": \"declined\"}, \"output\": {\"status\": \"completed\"}}]",
+      "context": "Synthetic two-status contract: report completed only when the operation result is completed.",
+      "question": "The completion claim contradicts the tool result. Use both status fields as evidence.",
+      "expected": [
+        {
+          "trace_id": "false-completion",
+          "pointer": "/tool_result/status",
+          "category": "failure"
+        },
+        {
+          "trace_id": "false-completion",
+          "pointer": "/output/status",
+          "category": "failure"
+        }
+      ],
+      "label_source": "Hand-authored synthetic smoke labels; not independent domain gold"
+    },
+    {
+      "id": "successful-recovery",
+      "traces_json": "[{\"trace_id\": \"successful-recovery\", \"attempts\": [{\"status\": \"timeout\"}, {\"status\": \"completed\"}], \"output\": {\"status\": \"completed\"}}]",
+      "context": "Synthetic two-status contract: report completed only when the operation result is completed.",
+      "question": "Identify the successful retry as a recovery opportunity, citing the two attempt statuses. Do not label the recovered final response as a failure.",
+      "expected": [
+        {
+          "trace_id": "successful-recovery",
+          "pointer": "/attempts/0/status",
+          "category": "opportunity"
+        },
+        {
+          "trace_id": "successful-recovery",
+          "pointer": "/attempts/1/status",
+          "category": "opportunity"
+        }
+      ],
+      "label_source": "Hand-authored synthetic smoke labels; not independent domain gold"
+    },
+    {
+      "id": "clean-completion",
+      "traces_json": "[{\"trace_id\": \"clean-completion\", \"tool_result\": {\"status\": \"completed\"}, \"output\": {\"status\": \"completed\"}}]",
+      "context": "Synthetic two-status contract: report completed only when the operation result is completed.",
+      "question": "Report no failure when the outcome and claim agree. Do not invent additional opportunities for this test.",
+      "expected": [],
+      "label_source": "Hand-authored synthetic smoke labels; not independent domain gold"
+    }
+  ]
+}
