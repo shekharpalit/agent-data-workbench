@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "agent-data-workbench"
-version = "0.4.0"
+version = "0.5.0"
 description = "A local workbench for researching agent traces and running reviewed improvement experiments."
 readme = "README.md"
 requires-python = ">=3.14"

@@ -11,7 +11,19 @@ from ..research.contracts import ResearchResult
 from ..research.workspace import Chart, RecordOutcome
 from ..tasks import TaskSpec
 
-ArtifactKind = Literal["knowledge", "investigations", "tasks", "suites", "experiments", "exports"]
+ArtifactKind = Literal[
+    "knowledge",
+    "investigations",
+    "tasks",
+    "suites",
+    "experiments",
+    "exports",
+    "worlds",
+    "improvements",
+    "calibrations",
+    "taxonomies",
+    "coverage",
+]
 
 
 class TraceQuery(Contract):

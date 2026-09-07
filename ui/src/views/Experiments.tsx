@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { TrialEvidence } from "./TrialEvidence";
 import { api } from "../api";
 import type { Route, Trial } from "../contracts";
 import {
@@ -174,7 +175,7 @@ export function ExperimentDetail({
           >
             <div id="trial-evidence">
               {selected ? (
-                <JsonView value={selected} />
+                <TrialEvidence trial={selected} />
               ) : (
                 <p className="muted">
                   Select a trial to inspect actual output, captured artifacts

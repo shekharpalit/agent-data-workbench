@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:cee55a7290899073890018199b9494cbb13170061726c03ca6f92284740b7196",
+  "pageVersion": "sha256:06287279f6ce8b04c0f78dcd42c7ffbdf44a5f1405b1ae8e0b23954c91146a12",
   "claims": [
     {
       "id": "claim_76321b67958a482697bbe4cb279feef1",
@@ -28,39 +28,35 @@
     },
     {
       "id": "claim_68f13d4ebc3149e7b8b8ea97bf2605c8",
-      "statement": "Verifier audits require valid, alternative, mistake, shortcut, and missing-evidence fixtures with matching observed labels, and record the specification hash and judge identity.",
+      "statement": "Verifier audits require valid, alternative, mistake, shortcut and missing-evidence fixtures, plus a failing collateral-change fixture for state criteria, and record the exact specification and judge identity.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/tasks.py#L266-L307",
-          "version": "repo-lines-v1:sha256:6abc5c3f32c3d9c81edd7c8588760272f149cf8b274053a42dd15514049d7276:eyJzZWxlY3RlZExpbmVDb3VudCI6NDIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3MmI3N2YzOTNjYjdhMWZiY2RkMTZhYTYyMjYxZGI1NDQ3Mzg5MTcwYjgyYjZjNmExMGVkNTc4NzI3MzY4OTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdmNTRlMTY3Y2EwZDU3ODMwMjQyYjk3M2Y4NDliZTc2NDZkNzAzYjBmNmE1YWMyYzFjM2ZiMTJiYjMxNGFlMjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk1NTc4ZjZhM2JlZTMxMGI0ZDczMTJkNTRkOTNlZWU2NzQ0YzJhYjc3ODFlMjY4ZjRkNmIzZTRlN2M1Y2M1MTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgyNDU4MWE0ZjViNjYwYTVlNmNhZDIzMDdiZDZhNjAzNGUwNjdkNGFhZGY0Mjk5MjMzNTkzNmMzNTMzYzQzN2IifQ"
+          "resource": "repo://src/agent_data_workbench/tasks.py#L310-L359",
+          "version": "repo-lines-v1:sha256:31562558f6614e9ec2c4934242db460bd213e9653eac7eb3f20abc2354cf81a0:eyJzZWxlY3RlZExpbmVDb3VudCI6NTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3MmI3N2YzOTNjYjdhMWZiY2RkMTZhYTYyMjYxZGI1NDQ3Mzg5MTcwYjgyYjZjNmExMGVkNTc4NzI3MzY4OTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdmNTRlMTY3Y2EwZDU3ODMwMjQyYjk3M2Y4NDliZTc2NDZkNzAzYjBmNmE1YWMyYzFjM2ZiMTJiYjMxNGFlMjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk1NTc4ZjZhM2JlZTMxMGI0ZDczMTJkNTRkOTNlZWU2NzQ0YzJhYjc3ODFlMjY4ZjRkNmIzZTRlN2M1Y2M1MTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgyNDU4MWE0ZjViNjYwYTVlNmNhZDIzMDdiZDZhNjAzNGUwNjdkNGFhZGY0Mjk5MjMzNTkzNmMzNTMzYzQzN2IifQ"
         },
         {
-          "resource": "repo://src/agent_data_workbench/tasks.py#L56-L72",
-          "version": "repo-lines-v1:sha256:76eebe618a97ba6dfb9979996e983551eb6b5fcef222a27874f3f3d09adcf597:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlmOGMzNTUwYTJjNzY0OWQyNDk0NDM1ZDI3ODAzNGZhN2I0ZjdlOTRmMDc1Y2MzMTU5NzExMGVkNjI0M2ViODkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEyYWIwOTBiY2QxNjIwZmE2MmVhZWUxNTdhNzRmY2E2MzVhYTI5ZTEyY2JmZmQ2MThiNTc5MmQ4N2JjMDNhM2YiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRiNTMwZWRlNGYzZTg4MmQ2ZTg1ZTllNmE3N2JiYTI5NTk5OTk3MWU2NTk5NGU0ZTA0MWJjMDAzYjE1NzhkMmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUyNWI2MGQ0NjFhNmIxNzM3ZTIzYWE5NmQzNTU0YTE1OWExNzU1ZDI1MzAxMzY5Y2VkYmQwOWQyZGQ2OWRkNzMifQ"
+          "resource": "repo://src/agent_data_workbench/tasks.py#L58-L84",
+          "version": "repo-lines-v1:sha256:0b6fe094f3011a4f3c1fdc1c0525a24586c5f9a276179d6628f9c0ee07214fa2:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlmOGMzNTUwYTJjNzY0OWQyNDk0NDM1ZDI3ODAzNGZhN2I0ZjdlOTRmMDc1Y2MzMTU5NzExMGVkNjI0M2ViODkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEyYWIwOTBiY2QxNjIwZmE2MmVhZWUxNTdhNzRmY2E2MzVhYTI5ZTEyY2JmZmQ2MThiNTc5MmQ4N2JjMDNhM2YiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRiNTMwZWRlNGYzZTg4MmQ2ZTg1ZTllNmE3N2JiYTI5NTk5OTk3MWU2NTk5NGU0ZTA0MWJjMDAzYjE1NzhkMmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUyNWI2MGQ0NjFhNmIxNzM3ZTIzYWE5NmQzNTU0YTE1OWExNzU1ZDI1MzAxMzY5Y2VkYmQwOWQyZGQ2OWRkNzMifQ"
         }
       ]
     },
     {
       "id": "claim_58c651d6fe7549bf81d88bce2bd3fef8",
-      "statement": "Grading distinguishes missing whole artifacts from failing output assertions and rejects semantic pass/fail judgments without verifiable result citations; any invalid criterion makes the overall grade invalid.",
+      "statement": "Grading treats missing whole artifacts or independent state as invalid and rejects semantic pass/fail judgments without verifiable result citations; any invalid criterion makes the overall grade invalid.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/tasks.py#L193-L262",
-          "version": "repo-lines-v1:sha256:deafe43d1f7b51a2cd7b21fbbf6a94c9a229bc02fb915946d756b4bf18d89f0c:eyJzZWxlY3RlZExpbmVDb3VudCI6NzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNhZDYyMjJkYTdmMTRmYmY0OTZjNjRiNTA1NTUxMjViMmI2ZTc5OGU5NDZlMjEzMGZmMzQyY2E1MGQwMWQ2N2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk2ZTFmMWU5MTQxNjA0NzdlNGIzMGJjNmRlZTRhOTNjZDc0ZDcxYTljNTQyOWNiOWU5Y2Y4Y2Q1MTljZGU4MWQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI5ZWUxOTMyODRlODJmYjc2YWY0ZjRmNTgzZTQzZjA1MDdiNWYxMzJiMTY0ZTZkMzUyM2JhZmI5NGMwYzdiMWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIxNTQ2MWQ2MjUwNGJiZmI1YTBjZDcwYWFhZTkwYTE2OTM3MGQ0MTVmZmRiZTJhMWJmMjlhZWFjOWZkMzU1YTYifQ"
-        },
-        {
-          "resource": "repo://tests/test_workbench_data.py#L462-L481",
-          "version": "repo-lines-v1:sha256:480ae245a385f8e018b1ac985ec5ab395781f67e8aa22a9723505c9c8bf1ca49:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFmMzQ1ODNhNTk4NzY3YmY1NmFlZmViNjVlMjAzM2ExNjUxY2M0YzhkN2U2ZjBhZjNlNWNmZDMyOTNmOTMzYjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyNzY2NTU5NmE1MjIxMjAxOGVkY2UwNzU4MDA4MGZlYjg0NzI5MWRlM2IyMjdiNTdiZjJlZmQ1YzI0MTJkZmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmYmQwMDkzMTRiYzI3MDg0MTY3MzRhMDJhZTVmZjM5YTFlNDhhMDUwYmU5MWY0M2IyZmFhOTIwMDJjNjJiZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRiZTJmYWM4YjU1MjM3YzMwYzNhNzEzOWE2MDA1ZDNiMWM1OGFkN2RlNGVhZjI5MWVlNjA2ZDMzMWZmOTE4MDcifQ"
+          "resource": "repo://src/agent_data_workbench/tasks.py#L225-L307",
+          "version": "repo-lines-v1:sha256:252152fd0ac5b939f8273dc16fcd791158db5572f4d5ae8209d55790984f6ffa:eyJzZWxlY3RlZExpbmVDb3VudCI6ODMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAyZGM1YTdlZDY2ZjVlMTMwY2M1NTdkY2UwNmFjYTUxM2Y0ZWMzYzA4YmY3ZmZhOGU0NGI1OTg1ZGRmZTIxOWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk2ZTFmMWU5MTQxNjA0NzdlNGIzMGJjNmRlZTRhOTNjZDc0ZDcxYTljNTQyOWNiOWU5Y2Y4Y2Q1MTljZGU4MWQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI5ZWUxOTMyODRlODJmYjc2YWY0ZjRmNTgzZTQzZjA1MDdiNWYxMzJiMTY0ZTZkMzUyM2JhZmI5NGMwYzdiMWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIxNTQ2MWQ2MjUwNGJiZmI1YTBjZDcwYWFhZTkwYTE2OTM3MGQ0MTVmZmRiZTJhMWJmMjlhZWFjOWZkMzU1YTYifQ"
         }
       ]
     },
     {
       "id": "claim_c70ba4ed37db4164b7006271768c60e4",
-      "statement": "Task acceptance requires resolved missing context and a current passing audit, while edits preserve old specifications and invalidate audit and acceptance; accepted loads also check bound context freshness.",
+      "statement": "Task acceptance requires resolved context, a current passing audit and a matching accepted world when referenced; edits retain revisions while invalidating audit and review, and accepted loads recheck bound context.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/tasks.py#L139-L190",
-          "version": "repo-lines-v1:sha256:d7101c5c48c5169f5715febaf8e072d21a87bab9179e2150112f000459fb66bb:eyJzZWxlY3RlZExpbmVDb3VudCI6NTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEzMzExNDk4ZTA0ODUzYmM3NDIzMzliYTIzY2U2NWYxNDU1N2NkNjc3Y2FkMjNmNjlhNmRkYzI2NTZmNTlkYjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk5M2ExMzA2MmYxMGVlNGYxMjE4ZDkzZTM3YTZmODFkMzQ2ZmYxMWVjN2U1NWRkNTQyZTJkMmQyZWYwNzExZjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNiMTg0NGZhZDI3Nzc4N2MzZjhkZjViMzQxZWNmNzIyM2Y1NTQ5Yzg0ZjI3MmUxOTdjYjE0MTI2ZjAyYzc3NjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQzOWM2ODRjYjAyZDJjYjFjMjM0YjMwOTc3NjcyMjA5NDljNDNiYWMzNjgxM2YzNGJjNTNlYmUyMzc3YjE3NTYifQ"
+          "resource": "repo://src/agent_data_workbench/tasks.py#L167-L222",
+          "version": "repo-lines-v1:sha256:80f5179e68dad55da54372ccd04f4b7be99952c64100b0c1bde5a0a6a6a74d2b:eyJzZWxlY3RlZExpbmVDb3VudCI6NTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEzMzExNDk4ZTA0ODUzYmM3NDIzMzliYTIzY2U2NWYxNDU1N2NkNjc3Y2FkMjNmNjlhNmRkYzI2NTZmNTlkYjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk5M2ExMzA2MmYxMGVlNGYxMjE4ZDkzZTM3YTZmODFkMzQ2ZmYxMWVjN2U1NWRkNTQyZTJkMmQyZWYwNzExZjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNiMTg0NGZhZDI3Nzc4N2MzZjhkZjViMzQxZWNmNzIyM2Y1NTQ5Yzg0ZjI3MmUxOTdjYjE0MTI2ZjAyYzc3NjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhiYTk1MGRlNzVhMmMzZTg5ZDAxMTdjYmM2ZmQxZDE3NjVkY2Y2NjE5Y2RiODc2NDg3MmRjZThhY2MzYjcxNGQifQ"
         }
       ]
     },
@@ -69,16 +65,16 @@
       "statement": "Task and criterion identities and finding references are validated as UUIDs; replay creates new UUIDs and preserves the referenced external trace ID.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/tasks.py#L35-L42",
-          "version": "repo-lines-v1:sha256:50a24b0b1cfddfb9a0c434cd7c4d3e8892ce4b9959669e7bb9353ec44ba66cd5:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzRjZjk5YjU2ZjRlMjVkNjMwMWI2ZjBhYjU4ODhmYjA2OWJjZWEyNDQwYmZiMTZlNzM5YjUyZmY5NTEzZWQyMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTZiMzBiZTI1ZThiMWY0NmZjY2M0MWMxY2Y3NGIxMDM3Y2FjZjEzYzgwZjI2OTY4ZDFlNGQ2MmEwMmE4YTk3OSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjllZTE5MzI4NGU4MmZiNzZhZjRmNGY1ODNlNDNmMDUwN2I1ZjEzMmIxNjRlNmQzNTIzYmFmYjk0YzBjN2IxZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTcwNTEwNjA0M2NiMzQyZmRjOTg1ZDg2MTRmODc2MDc2ZTMyYzhiMmE0OTE1Y2VkNDI4OGJhODRjODI3ZTQyMiJ9"
+          "resource": "repo://src/agent_data_workbench/tasks.py#L38-L55",
+          "version": "repo-lines-v1:sha256:7aec70581d661f5658e8acdf0743c8da7efb2eb55a98334b6091ef1d8a1cbfba:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc0Y2Y5OWI1NmY0ZTI1ZDYzMDFiNmYwYWI1ODg4ZmIwNjliY2VhMjQ0MGJmYjE2ZTczOWI1MmZmOTUxM2VkMjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEyYWIwOTBiY2QxNjIwZmE2MmVhZWUxNTdhNzRmY2E2MzVhYTI5ZTEyY2JmZmQ2MThiNTc5MmQ4N2JjMDNhM2YiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI5ZWUxOTMyODRlODJmYjc2YWY0ZjRmNTgzZTQzZjA1MDdiNWYxMzJiMTY0ZTZkMzUyM2JhZmI5NGMwYzdiMWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY5MTVmODY3YjJiMmFmMmJhNDZjYTU2Y2FhNDkzMDhkMWI3YzIyNWI5OWMyODU0MjViMjExNzI4Mjk0ZjNmNGUifQ"
         },
         {
-          "resource": "repo://src/agent_data_workbench/tasks.py#L368-L386",
-          "version": "repo-lines-v1:sha256:8c7c430a8294ef7d82ca234bea6ccd9f010eddbaabf92368b7bc4f8065f00c20:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3NjYxNjVlYjBlZGY1NTc5Mzc5Nzk5NTkyYzcwNTVkMmU4YmFjNDlmZTM5NWRkNmZmMzhmNTIzOTUzMjdkMDkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MDMyZTk2NGQwOTMyMzUxZTVkMTg1MjY5MjgxYjE3MWEzYTA5YjA4YjI4NmU2NjFlYTQ3MDMyM2M4MmViNGQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE2ZTczMDFmNmYyMjNjZjhhZDM4MmZlNDJjN2JmMWMyMWIyYjNmNTgwOGU5OTJhMGM0NjczNmZlZDNhNDgyOWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYwMGZhMmU5MTMwZWNkZGIyNzcyYzdlN2MwZGUyM2ViOGRmZDU2OTQ2MTgwMGNlNzk5YzZmMzYzZjc2ZGM0OGYifQ"
+          "resource": "repo://src/agent_data_workbench/tasks.py#L414-L443",
+          "version": "repo-lines-v1:sha256:b17e3a340a44090329d66afc11c8deb5b70fd7228f587cc49ae620909db9590e:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUyNTE0MmU4MTNjOGYwZjRkOWRlNjk3OTM4NjA5ZDhmYWJiYmEzNzhmNzE0OWM2OTZiNzA0OWZkZDQ1NTk3M2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE4MWYyODFjMjRmMDk3ZmMwMDc5NGE4MzcxNTQ2MGU2OWY0MmFiNGRlMzE3NDlmNmI0MzZmZDNmYTcwNjMxMTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUzNWMzMWJkYmEyYzZiZDUyMzRmYjA3OWViMDgwMjgyZTFkYTk4OGEzZjA1ODNjMGM0OGVhNDgwODRjNGU5ZmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
-          "resource": "repo://src/agent_data_workbench/tasks.py#L74-L87",
-          "version": "repo-lines-v1:sha256:41ac82b4aa2e0653ae71634c673ac6182206a6f883580ab0ddf718796599cbc6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY3NjlkMzhkODc3ZGZhNzQ0OTg3MmU0ODA0ZmE3MjEyMmM0NTlkOTAxZWJhOTZhM2I0OGE0M2U4OWE5NDk0Y2MiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFjODJkOTcyMmQyZjJlY2VmZjY2YzM0MGM4OGRlNDIwNTdiYjgyNGYyMTA5YTgwMGNiZWU5NjczZDYyZGMzNzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRiNTMwZWRlNGYzZTg4MmQ2ZTg1ZTllNmE3N2JiYTI5NTk5OTk3MWU2NTk5NGU0ZTA0MWJjMDAzYjE1NzhkMmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE3MDUxMDYwNDNjYjM0MmZkYzk4NWQ4NjE0Zjg3NjA3NmUzMmM4YjJhNDkxNWNlZDQyODhiYTg0YzgyN2U0MjIifQ"
+          "resource": "repo://src/agent_data_workbench/tasks.py#L87-L120",
+          "version": "repo-lines-v1:sha256:99230d1f363831ad607362393b8d28f9206584458e460783333a9a1b8294f207:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY3NjlkMzhkODc3ZGZhNzQ0OTg3MmU0ODA0ZmE3MjEyMmM0NTlkOTAxZWJhOTZhM2I0OGE0M2U4OWE5NDk0Y2MiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRiNTMwZWRlNGYzZTg4MmQ2ZTg1ZTllNmE3N2JiYTI5NTk5OTk3MWU2NTk5NGU0ZTA0MWJjMDAzYjE1NzhkMmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFhMWRhMDkyMjVhZDgxMmEzYjVlNzEwM2IxNWQ0Njg2NDkwMmE1NjlhMzRkOTZlYTYxYWQ3YzcxNGVmMDAxMTYifQ"
         }
       ]
     },
@@ -95,10 +91,24 @@
           "version": "repo-lines-v1:sha256:72f182ffa7d20ce83e3dad24f4425a6bb026f1aba6b7cc1b3f93ede14c1f5018:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc0MzZmOGMyZWQ1MWE1YjRmMzYxYTA4M2I1M2U4ZTRlNGFmMmU5ODQ4M2Y2OTNjNWY0OGYyMjFhODg3ODI0MWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2ZTEwNTViZTAyYmQ3MDYzMmY4YTY2Y2M4MzYwYzYxMzgzMjA2OTBiYzEwODNmMzg0MTQ1MjNhNWEyMjBjNGQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcwZWNkMTVjMThlOWU1ZDYyZDI5MTAzZDM2Y2ZkNmI0OTI5YzFiNDhjMDgyZTllMjdhOTMyODZiZjYxZGQzOTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjllNDAyZTVjNmM4MWViNTI2OGIwYWFlMTkyNjYxZWY1MWI2YTY3OTU1NDk3ZWJkMDkyMDQ3ZWNiZWIwZTUxYWMifQ"
         }
       ]
+    },
+    {
+      "id": "claim_89e370151d014c4cbac00da2be720d48",
+      "statement": "State criteria require an explicit environment and read only the separately supplied observer map; optional world/environment/conversation fields preserve legacy task digests when absent.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/tasks.py#L105-L142",
+          "version": "repo-lines-v1:sha256:521834579ec0c788ed5a442f012e262fe5e1229203ad123fa9ae5d117382c07d:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFlZjFjZGQwZjU3NDMzY2U1MDc3OTA3MjJlMmY1MWQ5NzM1NmNiZmZhN2IyNGRkN2NhMTM0NDgzMmQ0ZTUyNDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4MDU0MDgyNjc4ZmFjY2FhYWFmNzE5MzdjMzMzMTA1ZTMzZThkZTkyYmE3ZmU0ZThjZDJhM2U2MjBhOWQ4OGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjMwZDkwYTc1NWFhZWEwZGY1MTNhZjE2OTQxYTliYmYzYjAzMTI0ODY3ZGUwYzIxYTg0YjhjNmExM2Y0OWE3ZWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNjZWRhN2I1MDU4Yzc4MTE0ODExYzA1Y2ViOTZkZmEwN2EzYTUxNWRkNGU0NTk0M2MwNzBjZmE5YmIzMDhlNDkifQ"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/tasks.py#L225-L246",
+          "version": "repo-lines-v1:sha256:ec65eb2d1f39e9daf26052323be4c55f8aa586db94f2be9e90c19d5a4b680103:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAyZGM1YTdlZDY2ZjVlMTMwY2M1NTdkY2UwNmFjYTUxM2Y0ZWMzYzA4YmY3ZmZhOGU0NGI1OTg1ZGRmZTIxOWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVhNDZiNTQ1ZTFhMzYzZmRhMGRmMjU3NGEwOTgwNjM0MzlkMGYwMGNjMTJjOGJjZGIyYWVlZWFkYjlhMDJmY2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI5ZWUxOTMyODRlODJmYjc2YWY0ZjRmNTgzZTQzZjA1MDdiNWYxMzJiMTY0ZTZkMzUyM2JhZmI5NGMwYzdiMWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFmYzAwYTRjMDEzYzAzMWQzN2VjMjEyOGMxN2VhOTRmYzY5MTdmOThkYmIyNjQzNjhlMWNhZjFkY2UyYjMyYjYifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-07T20:56:39.229Z"
+    "at": "2026-09-07T22:32:10.726Z"
   }
 }

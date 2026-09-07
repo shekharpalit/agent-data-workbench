@@ -4,14 +4,16 @@ from __future__ import annotations
 
 import math
 import random
+import shutil
 import tempfile
 from collections import defaultdict
 from pathlib import Path
 
 from .backends import Analyzer
+from .command_sources import file_sha256
 from .identifiers import canonical_uuid, new_id
 from .project import Project, digest, environment_identity, now, save
-from .runners import TargetRunner, read_artifacts
+from .runners import ConfiguredRunner, TargetRunner, read_artifacts
 from .store import TraceStore
 from .tasks import grade, load_task, parse_object, task_digest
 from .traces import read_json
@@ -83,6 +85,9 @@ def make_suite(project: Project, name: str, task_ids: list[str], seed: int = 0) 
                 after = rows[-1]["trace_id"]
         else:
             exposed.update(investigation["visited_ids"])
+    for export in project.artifacts("exports"):
+        if export.get("kind") == "harbor":
+            exposed.update(export.get("trace_ids", []))
     for key, task in tasks.items():
         for trace_id in task.trace_ids:
             roles = old_roles.get(store.metadata(trace_id)["group_id"], set())
@@ -211,12 +216,21 @@ def run_experiment(
     repeats: int = 1,
     seed: int = 0,
     proposal: str = "",
+    improvement_id: str | None = None,
     judge: Analyzer | None = None,
     on_trial=None,
 ) -> dict:
     if split not in {"optimization", "validation", "final"} or not 1 <= repeats <= 100:
         raise ValueError("Invalid split or trial count")
+    from .improvements import link_experiment, verify_candidate
+    from .worlds import resolve_world
+
     with project.lock():
+        improvement = (
+            verify_candidate(project, improvement_id, baseline, candidate)
+            if improvement_id
+            else None
+        )
         suite_path = project.path("suites", suite_id)
         suite = read_json(suite_path)
         expected = digest(
@@ -239,14 +253,35 @@ def run_experiment(
             raise ValueError("Final source groups were already exposed in research or evaluation")
         clusters = {t["id"]: t.get("cluster_id", t["id"]) for t in selected}
         tasks = {}
+        task_runners = {}
+        for feature in ("environment", "conversation"):
+            if baseline.identity().get("config", {}).get(feature) != candidate.identity().get(
+                "config", {}
+            ).get(feature):
+                raise ValueError(
+                    "Baseline and candidate must use the same scenario defaults; "
+                    "scenarios belong to reviewed tasks"
+                )
         for entry in selected:
             value, task = load_task(project, entry["id"], accepted=True)
             if task_digest(task) != entry["spec_sha256"]:
                 raise ValueError("Task changed after splitting; create a new suite")
-            for runner in (baseline, candidate):
-                fidelity = runner.identity().get("config", {}).get("fidelity")
+            task_runners[task.id] = {}
+            for variant, runner in (("baseline", baseline), ("candidate", candidate)):
+                runner_config = runner.identity().get("config", {})
+                fidelity = runner_config.get("fidelity")
                 if fidelity and fidelity != task.fidelity:
                     raise ValueError("Runner fidelity does not match the task")
+                if isinstance(runner, ConfiguredRunner):
+                    effective = runner.for_task(task.environment, task.conversation)
+                else:
+                    effective = runner
+                    for feature in ("environment", "conversation"):
+                        configured = getattr(task, feature)
+                        expected_config = configured.model_dump() if configured else None
+                        if runner_config.get(feature) != expected_config:
+                            raise ValueError(f"Custom runner {feature} does not match the task")
+                task_runners[task.id][variant] = effective
             if any(c.kind == "semantic" for c in task.criteria):
                 if judge is None:
                     raise ValueError("Configure a semantic judge before running these tasks")
@@ -265,6 +300,7 @@ def run_experiment(
             "repeats": repeats,
             "seed": seed,
             "proposal": proposal,
+            "improvement": improvement,
             "previously_investigated_tasks": [
                 t["id"] for t in selected if t.get("previously_investigated")
             ],
@@ -278,12 +314,21 @@ def run_experiment(
             "host": environment_identity(),
             "context_sha256": project.context()["sha256"],
             "task_snapshots": [t.model_dump() for t in tasks.values()],
+            "world_snapshots": {
+                t.world.id: resolve_world(project, t.world) for t in tasks.values() if t.world
+            },
+            "trial_runner_identities": {
+                task_id: {variant: runner.identity() for variant, runner in variants.items()}
+                for task_id, variants in task_runners.items()
+            },
             "trials": [],
             "summary": {},
             "conclusion": "Incomplete experiment",
         }
         path = project.path("experiments", key)
         save(path, record)
+        if improvement_id:
+            link_experiment(project, improvement_id, record)
         if split == "final":
             # Consume exposure before the first execution, including interrupted/error runs.
             suite["final_exposure"] = {"at": now(), "experiment_id": key}
@@ -294,7 +339,7 @@ def run_experiment(
             for task in tasks.values():
                 for trial in range(repeats):
                     trial_seed = seed + trial
-                    variants = [("baseline", baseline), ("candidate", candidate)]
+                    variants = list(task_runners[task.id].items())
                     if trial % 2:
                         variants.reverse()
                     for variant, runner in variants:
@@ -307,11 +352,29 @@ def run_experiment(
                                 trial_dir,
                                 [c.artifact for c in task.criteria if c.source == "artifact"],
                             )
+                            state = (
+                                runner.authoritative_artifacts(trial_dir)
+                                if callable(getattr(runner, "authoritative_artifacts", None))
+                                else {}
+                            )
+                            runtime_evidence = (
+                                runner.trial_evidence(trial_dir)
+                                if callable(getattr(runner, "trial_evidence", None))
+                                else {}
+                            )
                             result = (
-                                grade(task, execution.output, artifacts, judge)
+                                grade(task, execution.output, artifacts, judge, state=state)
                                 if execution.status == "completed"
                                 else {"status": "invalid", "checks": [], "reason": execution.status}
                             )
+                            files_id = new_id()
+                            files_path = evidence_dir / files_id
+                            shutil.copytree(trial_dir, files_path, symlinks=True)
+                            captured_files = {
+                                file.relative_to(files_path).as_posix(): file_sha256(file)
+                                for file in files_path.rglob("*")
+                                if file.is_file() and not file.is_symlink()
+                            }
                             row = {
                                 "task_id": task.id,
                                 "cluster_id": clusters[task.id],
@@ -323,6 +386,12 @@ def run_experiment(
                                 "execution": execution.model_dump(),
                                 "grade": result,
                                 "artifacts": artifacts,
+                                "state": state,
+                                "runtime_evidence": runtime_evidence,
+                                "runner_identity": record["trial_runner_identities"][task.id][
+                                    variant
+                                ],
+                                "files": {"directory": files_id, "sha256": captured_files},
                             }
                             record["trials"].append(row)
                             save(evidence_dir / f"{task.id}-{trial}-{variant}.json", row)

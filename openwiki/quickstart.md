@@ -10,10 +10,14 @@ sources:
     resource: repo://pyproject.toml
   - id: openwiki-source-e6d7f541d0e16503af405c8b
     resource: repo://src/agent_data_workbench/api/routers/investigations.py
+  - id: openwiki-source-732d0f8c004bbddbd6363fdf
+    resource: repo://src/agent_data_workbench/api/routers/workflow.py
   - id: openwiki-source-2ee7fba2bd1c703c70f5f285
     resource: repo://src/agent_data_workbench/cli/project.py
   - id: openwiki-source-25b71218f03a1e216debf67e
     resource: repo://src/agent_data_workbench/cli/research.py
+  - id: openwiki-source-758da06aa8f472c43add8d88
+    resource: repo://src/agent_data_workbench/cli/workflow.py
   - id: openwiki-source-b5025a250cbf9f845fc9224a
     resource: repo://src/agent_data_workbench/project.py
   - id: openwiki-source-2dbe8753da4267ce652f414e
@@ -26,10 +30,10 @@ sources:
     resource: repo://ui/src/views/ManualResearchEditor.tsx
   - id: openwiki-source-a6ff0ad9c45aedc12177eaec
     resource: repo://ui/src/views/ResearchControls.tsx
-generated: { by: "codex", at: "2026-09-07T21:47:36.843Z" }
+generated: { by: "codex", at: "2026-09-07T22:32:10.726Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T21:47:36.843Z
+    at: 2026-09-07T22:32:10.726Z
 ---
 
 # Quickstart
@@ -99,6 +103,14 @@ To use your current coding-agent session instead of launching another process, r
 
 Version 0.3 projects remain compatible. Native investigations use protocol 0.4; old completed investigations are readable, while paused legacy investigations need a new native investigation.
 
+## Complete the improvement loop
+
+Version 0.5 adds reviewed world specifications, reproducible environment commands, continuous target sessions, human grader calibration, behavioral coverage and candidate decisions. Project format 0.3 and native research protocol 0.4 remain compatible.
+
+Start with one important failure: capture its evidence, review the relevant domain rules, and author an audited task. Configure your real target and the environment observer; run a baseline/candidate pair on a reserved execution split. In the UI, use **Grader calibration** to label the actual attempts, **Behavioral coverage** to inspect missing cases, and **Improvements** to capture and decide on an exact source change. Human decisions retain evidence without applying or deploying code.
+
+[Eval engineering](workflows/eval-engineering.md) specifies the runtime protocols and CLI commands. Optional Harbor export uses your real environment/verifier template. The full loop is verified with synthetic local processes; a production performance claim still needs your real agent and fresh cases.
+
 ## Choose the next workflow
 
 | Goal | Read |
@@ -106,6 +118,7 @@ Version 0.3 projects remain compatible. Native investigations use protocol 0.4; 
 | Map exports, preserve IDs, or implement an importer | [Import and explore traces](workflows/traces.md) |
 | Research manually or with an agent and add project knowledge | [Investigations and reviewed knowledge](workflows/investigations.md) |
 | Turn findings or chat prefixes into reviewed evaluations | [Tasks and grader review](workflows/tasks-and-graders.md) |
+| Define worlds, continuous conversations, independent state, human calibration, coverage or Harbor tasks | [Eval engineering](workflows/eval-engineering.md) |
 | Execute a baseline/candidate comparison or export training records | [Experiments and training exports](workflows/experiments-and-training.md) |
 | Analyze a small batch or grade output files already produced | [Batch analysis and evaluation](workflows/batch-evaluation.md) |
 | Run or troubleshoot the local trace workbench | [Local workbench](operations/local-workbench.md) |

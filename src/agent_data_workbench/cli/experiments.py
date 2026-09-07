@@ -33,6 +33,7 @@ def experiment(
     repeats: int = 1,
     seed: int = 0,
     proposal: str = "",
+    improvement_id: str | None = None,
     judge: str = "",
     judge_model: str | None = None,
 ):
@@ -46,6 +47,7 @@ def experiment(
         repeats=repeats,
         seed=seed,
         proposal=proposal,
+        improvement_id=improvement_id,
         judge=CliAnalyzer(judge, judge_model) if judge else None,
         on_trial=lambda r: typer.echo(f"{r['task_id']} {r['variant']}: {r['grade']['status']}"),
     )

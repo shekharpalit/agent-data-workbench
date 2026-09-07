@@ -2,7 +2,7 @@
 
 import typer
 
-from . import batch, benchmark, experiments, exports, knowledge, project, research, tasks
+from . import batch, benchmark, experiments, exports, knowledge, project, research, tasks, workflow
 
 app = typer.Typer(
     no_args_is_help=True,
@@ -15,3 +15,7 @@ app.add_typer(knowledge.app, name="knowledge", help="Review versioned project kn
 app.add_typer(tasks.app, name="task", help="Design, audit and review tasks.")
 
 app.add_typer(research.operations, name="research", help="Use a persistent research workspace.")
+
+app.add_typer(
+    workflow.app, name="workflow", help="Worlds, calibration, coverage and candidate decisions."
+)

@@ -9,11 +9,14 @@ from typing import Literal
 from pydantic import Field, model_validator
 
 from .backends import Analyzer
+from .conversations import ConversationSpec
+from .environments import EnvironmentConfig
 from .evaluation import check_assertion
 from .identifiers import UUIDString, canonical_uuid, new_id
 from .models import Assertion, Contract, Evidence, json_text, pointer_value
 from .project import Project, digest, now, save
 from .traces import read_json
+from .worlds import WorldReference, resolve_world
 
 
 def parse_object(value: str) -> dict:
@@ -35,7 +38,7 @@ def relative_path(value: str) -> str:
 class Criterion(Contract):
     id: UUIDString
     description: str = Field(min_length=1)
-    source: Literal["output", "artifact"]
+    source: Literal["output", "artifact", "state"]
     artifact: str = ""
     kind: Literal["assertion", "semantic"] = "assertion"
     assertion: Assertion | None = None
@@ -43,7 +46,7 @@ class Criterion(Contract):
 
     @model_validator(mode="after")
     def valid(self):
-        if self.source == "artifact":
+        if self.source in {"artifact", "state"}:
             relative_path(self.artifact)
         if self.kind == "assertion" and self.assertion is None:
             raise ValueError("Assertion criterion requires an assertion")
@@ -54,16 +57,26 @@ class Criterion(Contract):
 
 class VerifierExample(Contract):
     name: str = Field(min_length=1)
-    kind: Literal["valid", "alternative", "mistake", "shortcut", "missing_evidence"]
+    kind: Literal[
+        "valid", "alternative", "mistake", "shortcut", "missing_evidence", "collateral_change"
+    ]
     output_json: str
     artifacts_json: str = "{}"
+    state_json: str = "{}"
     expected: Literal["pass", "fail", "invalid"]
 
     @model_validator(mode="after")
     def valid(self):
         parse_object(self.output_json)
         parse_object(self.artifacts_json)
-        required = {"valid": "pass", "alternative": "pass", "mistake": "fail", "shortcut": "fail"}
+        parse_object(self.state_json)
+        required = {
+            "valid": "pass",
+            "alternative": "pass",
+            "mistake": "fail",
+            "shortcut": "fail",
+            "collateral_change": "fail",
+        }
         if self.kind in required and self.expected != required[self.kind]:
             raise ValueError("Verifier example label contradicts its kind")
         if self.kind == "missing_evidence" and self.expected == "pass":
@@ -81,6 +94,9 @@ class TaskSpec(Contract):
     fidelity: Literal["output", "next_action", "environment"]
     input_json: str = Field(description="Agent-visible JSON only. Exclude answers and graders.")
     context_sha256: str = ""
+    world: WorldReference | None = None
+    environment: EnvironmentConfig | None = None
+    conversation: ConversationSpec | None = None
     assumptions: list[str] = Field(default_factory=list)
     missing_context: list[str] = Field(default_factory=list)
     criteria: list[Criterion] = Field(min_length=1)
@@ -92,6 +108,10 @@ class TaskSpec(Contract):
         if self.fidelity == "next_action":
             if not isinstance(value.get("messages"), list) or not value["messages"]:
                 raise ValueError("Next-action input requires a nonempty messages prefix")
+        if self.environment and self.fidelity != "environment":
+            raise ValueError("Environment lifecycle requires environment fidelity")
+        if any(c.source == "state" for c in self.criteria) and self.environment is None:
+            raise ValueError("Independent state criteria require a configured environment")
         if len({c.id for c in self.criteria}) != len(self.criteria):
             raise ValueError("Duplicate criterion IDs")
         if len({e.name for e in self.verifier_examples}) != len(self.verifier_examples):
@@ -111,7 +131,15 @@ class SemanticGrade(Contract):
 
 
 def task_digest(task: TaskSpec) -> str:
-    return digest(task.model_dump())
+    value = task.model_dump()
+    # Keep pre-workflow task digests stable when no new feature is used.
+    for field in ("world", "environment", "conversation"):
+        if value[field] is None:
+            value.pop(field)
+    for example in value["verifier_examples"]:
+        if example["state_json"] == "{}":
+            example.pop("state_json")
+    return digest(value)
 
 
 def write_task(project: Project, task: TaskSpec, *, origin: str) -> dict:
@@ -140,6 +168,8 @@ def load_task(project: Project, key: str, *, accepted: bool = False) -> tuple[di
     value = read_json(project.path("tasks", key))
     task = TaskSpec.model_validate(value["spec"])
     if accepted:
+        if task.world:
+            resolve_world(project, task.world)
         review = value["review"]
         if review["status"] != "accepted" or review.get("spec_sha256") != task_digest(task):
             raise ValueError(f"Task {key} needs review of its current specification")
@@ -157,6 +187,8 @@ def review_task(project: Project, key: str, status: str, note: str):
     with project.lock():
         value, task = load_task(project, key)
         if status == "accepted":
+            if task.world:
+                resolve_world(project, task.world)
             if task.missing_context:
                 raise ValueError("Resolve missing context before accepting the task")
             audit = value.get("audit")
@@ -190,10 +222,23 @@ def replace_task(project: Project, key: str, task: TaskSpec, note: str) -> dict:
     return value
 
 
-def grade(task: TaskSpec, output: dict, artifacts: dict, judge: Analyzer | None = None) -> dict:
+def grade(
+    task: TaskSpec,
+    output: dict,
+    artifacts: dict,
+    judge: Analyzer | None = None,
+    *,
+    state: dict | None = None,
+) -> dict:
     checks = []
     for criterion in task.criteria:
-        data = output if criterion.source == "output" else artifacts.get(criterion.artifact)
+        data = (
+            output
+            if criterion.source == "output"
+            else (state or {}).get(criterion.artifact)
+            if criterion.source == "state"
+            else artifacts.get(criterion.artifact)
+        )
         status, explanation, evidence = "invalid", "Required evidence is absent", []
         if data is not None:
             if criterion.kind == "assertion":
@@ -266,10 +311,18 @@ def audit_task(project: Project, key: str, judge: Analyzer | None = None) -> dic
     with project.lock():
         value, task = load_task(project, key)
         required = {"valid", "alternative", "mistake", "shortcut", "missing_evidence"}
+        if any(c.source == "state" for c in task.criteria):
+            required.add("collateral_change")
         missing = sorted(required - {e.kind for e in task.verifier_examples})
         results = []
         for e in task.verifier_examples:
-            result = grade(task, parse_object(e.output_json), parse_object(e.artifacts_json), judge)
+            result = grade(
+                task,
+                parse_object(e.output_json),
+                parse_object(e.artifacts_json),
+                judge,
+                state=parse_object(e.state_json),
+            )
             results.append(
                 {
                     "name": e.name,

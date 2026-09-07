@@ -16,8 +16,12 @@ sources:
     resource: repo://tests/test_api.py
   - id: openwiki-source-9ec6473d05fcc2cd40915af2
     resource: repo://tests/test_cli.py
+  - id: openwiki-source-1d5897d9fc482596678731c2
+    resource: repo://tests/test_conversation_exports.py
   - id: openwiki-source-9c58a0b0672b6bdbd523d5ee
     resource: repo://tests/test_identifiers.py
+  - id: openwiki-source-0bb6c35cfc5dfdfa5db20794
+    resource: repo://tests/test_improvement_loop.py
   - id: openwiki-source-3e6ae5cbfb3aa3af0850499a
     resource: repo://tests/test_manual_research_api.py
   - id: openwiki-source-3589dc1fc29ba0bfe0e2a50c
@@ -34,10 +38,10 @@ sources:
     resource: repo://ui/tests/research.test.tsx
   - id: openwiki-source-a741d432f952c0dbfb4fb35d
     resource: repo://ui/vite.config.ts
-generated: { by: "codex", at: "2026-09-07T21:47:36.843Z" }
+generated: { by: "codex", at: "2026-09-07T22:32:10.726Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T21:47:36.843Z
+    at: 2026-09-07T22:32:10.726Z
 ---
 
 # Development and verification
@@ -106,3 +110,11 @@ Keep native investigation orchestration separate from data processing: Codex/Cla
 Use FastAPI routes with typed Pydantic contracts. Keep domain operations in the SDK and SQLAlchemy access in the storage layer. Preserve import rollback, canonical trace content, review invalidation, source-group assignment, and invalid-versus-failed outcomes. Keep UI JSON types and lineage consistent with backend behavior.
 
 After source changes are complete, use the [OpenWiki maintenance workflow](../operations/documentation.md). Do not regenerate against source that is still being edited. Keep local runs, credentials, virtual environments, and installed dependencies out of commits.
+
+## Verify the complete eval workflow
+
+`tests/test_improvement_loop.py` runs a synthetic cancellation failure through a captured human investigation, accepted world/task, verifier audit, real persistent target subprocesses, independent state observation, exact candidate change, calibration, coverage and decision. Both targets claim cancellation; only the corrected target leaves the authoritative store in the expected state. This verifies the workflow, not production model gains.
+
+Use `test_environment_sessions.py` for reset drift, partial transcripts, cancellation, source changes, and reactive-user behavior; `test_worlds_improvements.py` for historical world references, exact candidate drift, and multiple conversation scenarios in one suite. `test_calibration_coverage.py` covers actual human/model labels, adjudication, slice gaps, stale mappings and exposure. `test_workflow_controls.py` exercises the typed UI API and CLI with provider constructors forbidden.
+
+`test_harbor_export.py` verifies real template bundling, visible-input separation, source exposure, pinned manifests and synthetic CLI transport. It does not run a Harbor container or a provider model. `test_conversation_exports.py` uses real persistent local sessions to verify complete observed trajectories, exclusion of hidden truth and identical preferences, and legacy one-shot compatibility. `ui/tests/workflow.test.tsx` verifies human review and exact evidence identities, including hiding grader answers before a first label. See [eval engineering](../workflows/eval-engineering.md) for adapter contracts.

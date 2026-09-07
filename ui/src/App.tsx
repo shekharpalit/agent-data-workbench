@@ -15,6 +15,11 @@ import { KnowledgeView } from "./views/Knowledge";
 import { TasksView, TaskDetail } from "./views/Tasks";
 import { ExperimentsView, ExperimentDetail } from "./views/Experiments";
 
+import { WorldsView } from "./views/Worlds";
+import { CalibrationView } from "./views/Calibration";
+import { BehavioralCoverageView } from "./views/BehavioralCoverage";
+import { ImprovementsView } from "./views/Improvements";
+
 const GraphView = lazy(() => import("./views/Graph"));
 const labels: Record<View, string> = {
   overview: "Overview",
@@ -25,6 +30,10 @@ const labels: Record<View, string> = {
   knowledge: "Project knowledge",
   tasks: "Tasks & graders",
   experiments: "Experiments",
+  worlds: "World specifications",
+  calibration: "Grader calibration",
+  coverage: "Behavioral coverage",
+  improvements: "Improvements",
 };
 const navigation: View[] = [
   "overview",
@@ -35,6 +44,10 @@ const navigation: View[] = [
   "knowledge",
   "tasks",
   "experiments",
+  "worlds",
+  "calibration",
+  "coverage",
+  "improvements",
 ];
 
 export default function App() {
@@ -129,6 +142,14 @@ export default function App() {
         ) : (
           <TasksView navigate={navigate} />
         );
+      case "worlds":
+        return <WorldsView />;
+      case "calibration":
+        return <CalibrationView navigate={navigate} />;
+      case "coverage":
+        return <BehavioralCoverageView navigate={navigate} />;
+      case "improvements":
+        return <ImprovementsView navigate={navigate} />;
       case "experiments":
         return route.id ? (
           <ExperimentDetail key={route.id} id={route.id} navigate={navigate} />

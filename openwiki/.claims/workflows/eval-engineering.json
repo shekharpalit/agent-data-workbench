@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:14f2d6221fa3c3df641c008558dfc117f8f30524d659dfd7de3cffd413fc4fdd",
+  "claims": [
+    {
+      "id": "claim_69fd6c03ae1f4359840452ae8bb67826",
+      "statement": "Accepted world lineage heads enter research context while exact historical accepted world UUID/digest references remain available to tasks.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/worlds.py#L38-L112",
+          "version": "repo-lines-v1:sha256:812e36b5183dc3010f3dbeb684eed0a661ad29be216ed2958c382bd8959132a2:eyJzZWxlY3RlZExpbmVDb3VudCI6NzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNhZDg3ZWEwZDJmNDBlYmJiYzU2NDFhNGFkODAxZmU4OTdhNjExNzY5N2Y0MGNmNTNiZjNjOWNjMzhhZjE4OWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyZmE4MGNlNmMwM2FhMzMzNzI0NzVjM2ZmOTk4MWVmODkwZmZkZWZmMmE3ZTM1ZmIxY2RlYTIxZGU5ZDExODAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI2ZWZiNzM1MjM4MzU1YzA1NDY1YzhkNTYxZmZmODYyMTUwN2I1MmVjMzYxNGM2ZmEyOTZiN2YyNDJhNTQxMmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a36c553fdd0a4a3ab30440a78a847889",
+      "statement": "Environment trials execute setup/reset/readiness and initial/final authoritative observations, retain lifecycle evidence, and expose observer-owned state separately from target usage or artifacts.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/environments.py#L48-L188",
+          "version": "repo-lines-v1:sha256:3c942f9b850ccc5255c86838aa791af50e7364b917aee3aafb88035e919332ad:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQxLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJmMDI4NGY4MTAyMTJhNmE5MmQ0MmM2MTkyMzg0OWZiYzk2NWQ3ZTc1NDIwNGRkZGE2MDdmNTEzZDUyZDkzN2QwIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI3NzJmOTY5NWM3NDY3Yzc0NzczYzljZTdmYzQyOWM1ZDBkMGU0ODdmM2M1MWQxNWQ2NjY4YTNkMjQwNzJiYjk1IiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIyMjQ0ZDgxZTRhZjIzM2JlZTgxZGY1ZGRlMTVhOGI5MTcxYTM1ZmI1MWVmZGVmZTJlM2RmMmZhYzhlZmRkNGY5IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_34e7843994f8406fbf5586a9deb5680e",
+      "statement": "Continuous command targets receive NDJSON turns in one persistent process, and conversation records preserve attempted turns, replies, source identities and stop reasons.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/conversations.py#L203-L289",
+          "version": "repo-lines-v1:sha256:908cf4f2f27762c50d36596cfb2fc137288a619ac8bcda059abfcaffa33dde3f:eyJzZWxlY3RlZExpbmVDb3VudCI6ODcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiMDFiMTQ2YmRmNTNlNWQ0YTEyMGY1ZWU2MTE1MTBmOWZhOTY2Nzk0OTNiMTQwM2RjMDZlZDU1NzJhZGNiZmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc3MmY5Njk1Yzc0NjdjNzQ3NzNjOWNlN2ZjNDI5YzVkMGQwZTQ4N2YzYzUxZDE1ZDY2NjhhM2QyNDA3MmJiOTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAwYmM3ZWRkYzI2NDVkYTE0NmNjODVkMjVjMTVmYmIyN2QzYTAyOWEzZDM1MjhhZWVjNmFjMzE1MjY4NDg4YjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/conversations.py#L78-L175",
+          "version": "repo-lines-v1:sha256:52e2e071960b8b7e34173926a6b1adcb39fd0822a0a9600736c1d85f6203cdf6:eyJzZWxlY3RlZExpbmVDb3VudCI6OTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU3ZjM0ZjBhODQ4NmY5YmJkNjFiOGI3ZWE3MDJhZGI5OWQzMTAzMmNhZGY0YTM1NTI0MWYwYzMwMWU4YjhhZWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkzNjgxZjJkMmMwZWM5ZDllYzMwYTExZTkzNmZkNjBjOGZkZDI4YzRkYzJmNTZiY2EwNzgyOWU0ZmQ4YzRhZjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFhMGNjN2U0YTczOWViNWM5NjkwOGUwMzYwNGUzNmQ3NTE0MWZiZTVkNzgwNDRjMDI2NDBlZDI2NTEyODEzM2IifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ac827dfb1cd24d659984614d2cf77d01",
+      "statement": "Reactive user commands receive only the prior interaction payload and return a followup message or null; optional developer turn limits do not determine task success.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/conversations.py#L177-L289",
+          "version": "repo-lines-v1:sha256:96d1e03c1fa6caa57f4f8d41628509f634481e436a604bbdc604e7bfac53fdda:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEzLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI2MzljYjQxNjZmZGExOTI0NGRhYjhiZmQ3NTcwOTQyYTNkNDFiNzNlMDRmYTVhOTEwYjk3ZjAzYWU0Mzc1Yzc1IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI3NzJmOTY5NWM3NDY3Yzc0NzczYzljZTdmYzQyOWM1ZDBkMGU0ODdmM2M1MWQxNWQ2NjY4YTNkMjQwNzJiYjk1IiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJkYTUxNjQ3Y2Y2NGY4OWI4NjQ3MzYwM2JjNmM1OTY5NWVhY2QyZDBhOTIxZDBlZjMxNmVlZmQzZjYxNWEzMWQ5IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_ba4d9ab762cc431e853962c3edc650c6",
+      "statement": "Calibration freezes actual experiment attempts, records versioned human/model labels and adjudication, excludes declared model suggestions from human consensus, and reports false pass/fail separately from invalid disagreements.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/calibration.py#L28-L266",
+          "version": "repo-lines-v1:sha256:9c18193e38ef667530b8ba6e9e29d73d484218c67c3bbfef393919fd8c4c80dc:eyJzZWxlY3RlZExpbmVDb3VudCI6MjM5LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI3N2YxMmYzYTRhZDU3ZjliNTk0YzQyMGJjMjVjYTc5NjkyNWQwYTEwMmIwYmIyYWUzMTE0YjEyMTM2MjFhYzZkIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0ODkzZjQwZTM3ODFlYjg5NmM4MmQwNDZhMDgwNjdhMTFlMzVjZGYyZjFkZmFmMjZmZWE5MGI4ZGI2Njc2NDEzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJkM2QxNzFkZTc1NDMxYTAyMWEwZDk0ZmE3NmZhYmYwZDcxMzljODk4YzFhMGI0NGI0M2NhNjA5MDNmYTFiODQ1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_4554a1690c68408da7283ee7bb130540",
+      "statement": "Reviewed taxonomy mappings preserve exact source snapshots, detect stale task revisions and report behavioral gaps, duplicates and observed execution coverage independently of research completion.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/coverage.py#L133-L321",
+          "version": "repo-lines-v1:sha256:ec0936901d9705a0d43efeaf8b781935921f2495e0e50606b9cc342bde3e4baa:eyJzZWxlY3RlZExpbmVDb3VudCI6MTg5LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJiYTEzMGNjOWFmMjQ0ZTIwYWE0ZTJjOWE0Zjc1MjkwNjI4NmEwNWE2NjRiMjAxYTc2NGNjMWQ5ZTY3OTI5ODQ0IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0ODkzZjQwZTM3ODFlYjg5NmM4MmQwNDZhMDgwNjdhMTFlMzVjZGYyZjFkZmFmMjZmZWE5MGI4ZGI2Njc2NDEzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJiNWIxNDljZDE2MThiZmVjOTE4NDRlODU5MTIyZGQwMTU5NGJmNDc4NmViODZiODI0NjBlODM3YmI0MjNhYWM1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_c77f5ea1ca154f17911abf3314dae160",
+      "statement": "Improvement records capture runner sources and patches, verify exact candidate identities before linking experiments, and preserve human decisions with experiment and calibration provenance.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/improvements.py#L16-L198",
+          "version": "repo-lines-v1:sha256:d754ee727741c8665777d98a69841be274fea49be1447cf1db1e7df54a951118:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgzLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI2NWRmNWRlOTQ2ZGFiY2MyY2I2NjNmNzNmOTdjZTdmOGMxNDc2NTZmYTlmZmU1ZjFjNGRiZDNlZGQzZmE2NDBjIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJmMjVmZjQ2YTQ5OThlYTQ5YTcyZjQ3ODk2MjQ3NTlhNWYwYWMzNDFiNWYyYzZkOWYwY2Y0NWM4OTAyYTdkZjk4IiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI5NWI5Yjk3ZjBlN2I4OGJiZTVjNTZkMDA3OWM2YzVhZWE0MzcxMDk0MDQ4YzI3NjcxZjRkYWYyNjg3MWMzN2RmIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_f974bd075cc448eea5e318e35ecf0f05",
+      "statement": "Harbor exports use supplied schema-1.4 environment/verifier templates, separate hidden task truth, request trajectory resume for scripted steps, track final exposure and reject changed manifests or bundles before CLI execution.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/harbor.py#L44-L254",
+          "version": "repo-lines-v1:sha256:8a7344687c46d40fd0872b0b7de65d425b34b0b5eec7d7563a8e2a33405ac38c:eyJzZWxlY3RlZExpbmVDb3VudCI6MjExLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI0YTRjZDkyYmM5NDdkNThiNTQ4ZjJmODBmZDdmNThmNjkxMzI0M2JlZmM0OGMyODM4MWE0OWM5Y2YzOWM3NDY1IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJmYTExYzA1NjdkMGE1ZjllOWIxMzVmNjVjZDI1MzcyZGZkNjI4Nzc1ZjdjMWVkMjUzZjhiYWQ0MmRkMmQ2NjY5IiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJkNzIyMzEwNmZkODc0MmI3MGVhMjMzZjlkYzM1OWY0YjAyYmJiMDY5YjcyODNlZWY3NjI0OTk1MTZiZDdiOWM4IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-07T22:32:10.726Z"
+  }
+}

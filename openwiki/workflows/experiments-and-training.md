@@ -4,26 +4,24 @@ title: Experiments and training exports
 description: Execute baseline and candidate agents against reviewed tasks, preserve split boundaries and uncertainty, and export eligible optimization outcomes.
 tags: [experiments, runners, splits, training, provenance]
 sources:
-  - id: openwiki-source-bc1c81655ba5541ecce98f99
-    resource: repo://src/agent_data_workbench/cli/experiments.py
-  - id: openwiki-source-f4e6f61890af760b72e18127
-    resource: repo://src/agent_data_workbench/cli/exports.py
+  - id: openwiki-source-c95f46408a17b56d039755eb
+    resource: repo://src/agent_data_workbench/command_sources.py
   - id: openwiki-source-fb8bc98ca92f65c4b5c08595
     resource: repo://src/agent_data_workbench/experiments.py
   - id: openwiki-source-17fefd32a0fa5ffbd20a3c46
     resource: repo://src/agent_data_workbench/exports.py
-  - id: openwiki-source-b5025a250cbf9f845fc9224a
-    resource: repo://src/agent_data_workbench/project.py
   - id: openwiki-source-c792213eed7e8f73d739e358
     resource: repo://src/agent_data_workbench/research/artifacts.py
   - id: openwiki-source-362b588ee7b1871bafaf5b44
     resource: repo://src/agent_data_workbench/runners.py
+  - id: openwiki-source-1d5897d9fc482596678731c2
+    resource: repo://tests/test_conversation_exports.py
   - id: openwiki-source-af0e5443d83442c11181e6ce
     resource: repo://tests/test_workbench_execution.py
-generated: { by: "codex", at: "2026-09-07T20:56:39.229Z" }
+generated: { by: "codex", at: "2026-09-07T22:32:10.726Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T21:10:14.760Z
+    at: 2026-09-07T22:32:10.726Z
 ---
 
 # Experiments and training exports
@@ -63,7 +61,7 @@ A command runner configuration is a JSON file alongside the target code:
 
 Create a candidate file with its own name and command arguments. Use an executable available on PATH or an explicit interpreter path. File arguments that exist relative to the configuration directory are resolved before switching to a trial directory.
 
-For each execution the adapter sends one JSON object on stdin:
+For one-shot execution the adapter sends one JSON object on stdin:
 
 ```json
 {"input": {"request": "Task-visible input"}, "seed": 7}
@@ -75,9 +73,9 @@ The command must return a JSON execution envelope on stdout:
 {"output": {"answer": "Target result"}, "status": "completed"}
 ```
 
-Additional execution fields can include nonnegative `cost_usd` and a `usage` object. Unknown cost stays unknown. Write diagnostic logging to stderr so stdout remains parseable. Explicitly list files in `source_files` to hash them; this is not a recursive capture of every dependency.
+Additional execution fields can include nonnegative `cost_usd` and a `usage` object. Unknown cost stays unknown. Write diagnostic logging to stderr so stdout remains parseable. The executable and directly invoked script files are hashed automatically. List imported modules, lockfiles and other dependencies in `source_files`; this is not a recursive capture of every dependency.
 
-The runner identity records configuration, resolved command, and listed source hashes. Changed listed sources invalidate execution. A fresh temporary directory is created per variant and trial, and required JSON artifacts are captured before cleanup. This directory provides clean working state, not host isolation: command adapters execute trusted code with host access. Supply a container or other external isolation through your adapter when needed.
+The runner identity records configuration, resolved command and pinned source hashes. Changed sources invalidate execution. A fresh temporary directory is created per variant and trial; JSON artifacts, independent state, runtime records and a hashed copy of trial files are retained before cleanup. This directory provides clean working state, not host isolation: command adapters execute trusted code with host access. Supply a container or other external isolation through your adapter when needed.
 
 Native `codex` and `claude` target runners require explicit `model` and `prompt`. They support output or next-action fidelity, cannot claim environment execution, and record that seed control is unsupported. Analysis and target execution are separate roles even when they use the same CLI.
 
@@ -118,14 +116,32 @@ uv run agent-data-workbench training-export runs/my-agent EXPERIMENT_ID \
   "Permission recorded for these selected records" --kind preference
 ```
 
-Use `--kind sft` for chosen-only records. Export excludes validation and final experiments, incomplete experiments, missing pairs, and invalid pairs. SFT needs a passing outcome; preference data additionally needs a failing outcome. The passing variant can be the baseline. Identical visible inputs are deduplicated.
+Use `--kind sft` for chosen-only records. Export excludes validation and final experiments, incomplete experiments, missing pairs, and invalid pairs. SFT needs a passing outcome; preference data additionally needs a failing outcome. The passing variant can be the baseline. Deduplication includes visible input and conversation/world/environment specifications; legacy tasks without these features still deduplicate by input. Identical chosen/rejected preferences are excluded.
 
 The output contains `data.jsonl` and `manifest.json`. Records preserve task, experiment, trace, split, variant, and verifier provenance. The manifest records hashes and the supplied review and permission notes. Those notes document the user's review; they do not verify permission automatically.
 
-Adapt the portable `input`, `chosen`, and optional `rejected` fields to your trainer's schema. Export performs no training job or automatic redaction.
+Adapt the portable `input`, `chosen`, and optional `rejected` fields to your trainer's schema. One-shot targets retain their output-object format. Conversation targets use `agent-data-workbench.trajectory.v1` with observed user turns, assistant messages/output and `reported_evidence`. Incomplete or mismatched conversation evidence is excluded; there is no fallback to a misleading final response. Hidden verifier and authoritative state stay in the source experiment and are referenced by hashes. Export performs no training job or automatic redaction.
 
 ## Verification and next steps
 
 `tests/test_workbench_execution.py` covers transitive grouping, fresh execution, invalid outcomes, interrupted final exposure, frozen configuration, grouped uncertainty, command artifacts, and training selection.
 
 Next: [investigate trace evidence](investigations.md), [task design and grader audits](tasks-and-graders.md), or [local workbench](../operations/local-workbench.md).
+
+## Connect scenarios, calibration and decisions
+
+A task can pin an accepted world, an environment lifecycle and a scripted/reactive conversation. The configured target is bound to each frozen task scenario, so a suite can exercise different user follow-ups using the same target code. Baseline/candidate scenario defaults must agree; each trial records its effective runner identity. See [eval engineering](eval-engineering.md) for the continuous NDJSON session and independent observer contracts.
+
+Capture an improvement before running it:
+
+```sh
+agent-data-workbench workflow improvement PROJECT "Change name" "Hypothesis" \
+  "Expected behavior" baseline.json candidate.json
+agent-data-workbench experiment PROJECT SUITE_ID baseline.json candidate.json \
+  --improvement-id IMPROVEMENT_ID --split validation
+agent-data-workbench workflow calibrate PROJECT EXPERIMENT_ID "Human review"
+agent-data-workbench workflow decide PROJECT IMPROVEMENT_ID EXPERIMENT_ID keep \
+  "Reviewer" "Evidence and regression assessment"
+```
+
+Captured sources and identities must still match when the linked experiment begins. The decision preserves exact experiment and calibration evidence and does not modify the candidate. Optional parent improvement IDs connect iterations. Coverage mapping and Harbor export/run also record reserved final exposure; exports created before a suite are recorded as prior available evidence.

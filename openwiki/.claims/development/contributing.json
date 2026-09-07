@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:b991fb5369613e4b502cd47435fa71a0f82a40be921da522442d2dadd6dd4015",
+  "pageVersion": "sha256:6639ac5279f3fb84560b746a47db3b4d4d084072b74c2f1c293bf0f160e76a94",
   "claims": [
     {
       "id": "claim_80e3a5075dd34ed7b7f0393a15e92a9a",
@@ -131,10 +131,34 @@
           "version": "repo-lines-v1:sha256:a5f57754558b7b8eb1e784ab122c487590e13ebc680896bbbc7ba2951f7c28dc:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM4YzMxZDNhMmY1NjA3YjJlOWQ2MDhkMDYzZTE5NDc4ZDNhMTIwOTUwMGUxZDNlNzYyMGZhMDZhMDRjYTZjY2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAyMWJmZGU0NjljMzgzYzA0Zjc5MDYyMDc2MWM5MTk5N2ZjMjQ4N2UwZWJkYTk4MWNmM2VjMDg0YmNhMDliYzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIifQ"
         }
       ]
+    },
+    {
+      "id": "claim_0e76612bca5c4271a6ecab035c42a46d",
+      "statement": "The synthetic full-loop test connects human research, reviewed worlds/tasks, continuous command targets, independent state grading, calibration, coverage and an exact candidate decision.",
+      "evidence": [
+        {
+          "resource": "repo://tests/test_improvement_loop.py#L50-L330",
+          "version": "repo-lines-v1:sha256:e82dbebe2775d8c99e177ea21a88cb1bc48e2a217adbedd63623ac8226294913:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgxLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJlN2RiYWVmZGUzYWRkM2MyNjQyODA1YmU2ZjMyMWRkMGRiMTM1MjliMTk2NDEzOTk3M2MyNTZiZmY2Njk5NDE2IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJlNmIwNDQ5MTQ2OTcyMmU4MzYzYTk0ZTQwNDQ1MzhlMDEzYTJhMjE3ZTM2YjFlNTY4YmE2MGFjYjdiNGM4ZjJlIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJhMjU4Yzc4YjBjM2E2ZjRkOWY5MjRkMDJmYzQ1YTM1YmE2NTYzMGVmZDc0NzQxNDdiZTc5NzRlM2JjOTdiMWJmIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_c2bfe2ac5d984a91a9b9a2644cb4a327",
+      "statement": "Conversation export tests verify observed trajectories from persistent local subprocesses and reject identical, incomplete or unverifiable training preferences while preserving one-shot compatibility.",
+      "evidence": [
+        {
+          "resource": "repo://tests/test_conversation_exports.py#L107-L236",
+          "version": "repo-lines-v1:sha256:3a282b3a6fd867cc62086aa36b87d9fdcfb9dc25518a5a9ca308dc6e7f1eda30:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMwLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJlMzQxYmQ2YjY4ZDQ2OGEyNzAxN2E3YTJiN2Q4NDY5NzM5ZTMxOTg0YjBhMmU3NTljMGUxNThlODEwNGNkZjk4IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiIzNWRmOGYzN2JlOGUyM2ExZDA1MTBkYjhjYjZkOWYxNGIwODAwOGNmZWU4NTJkZjFkNzVjNTNmY2U4OTA2MjYyIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJmNDY1ODhiMGY0ZmQ4YTM4Y2I2M2JhMjRjYTFjZjdmMjA3MDQ1NTUzZjI4MGNkNzdmODI2MWE0MmQ2YjkwMGVjIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIwMWM5YjIxODliNGEyYTYyNmIyMTU2ZWFiNGFhMWM3MzAxYTZhOWFlNTc3YWMwN2YxYmVkMzBlNzYwNjMzNjlkIn0"
+        },
+        {
+          "resource": "repo://tests/test_conversation_exports.py#L254-L355",
+          "version": "repo-lines-v1:sha256:ad0b86261a385b7c534f4ce5b19c485173198c0f8fa95f520bcc903e0bfc788b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAyLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJmMGZlZTQ0MGYzZmVmZGYwNjEzYjdjZjExZmViMzJmNTcyMjdiNmY3Nzc5NmNhZDRmZWJhZjBkMDU5NjY3YWZlIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiIwNzhmY2E4YWU2NWMzNWFiZDYxMTM3MTNhMmU5YTAzOGVjMjQ3ZTBiYTYzN2Y5MDA3ZjczMTRjOTViMzY4Mzg2IiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJkZDVkYjg5ZjRjNjNkYjg3YTM2ZTNlMWUyOGE3M2YwOGI2YTAxZTcyODE5ZjdkNjMzZTkwYzNiYTRmMzBiMDUwIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-07T21:47:36.843Z"
+    "at": "2026-09-07T22:32:10.726Z"
   }
 }

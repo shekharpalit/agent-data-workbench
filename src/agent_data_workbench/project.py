@@ -16,6 +16,20 @@ from .models import Contract, json_text
 from .persistence import atomic_text
 from .traces import read_json
 
+ARTIFACT_KINDS = {
+    "knowledge",
+    "investigations",
+    "tasks",
+    "suites",
+    "experiments",
+    "exports",
+    "worlds",
+    "improvements",
+    "calibrations",
+    "taxonomies",
+    "coverage",
+}
+
 
 def now() -> str:
     return datetime.now(UTC).isoformat()
@@ -55,13 +69,13 @@ class Project:
         root.mkdir(parents=True, exist_ok=True, mode=0o700)
         config = ProjectConfig(name=name, objective=objective, success_criteria=criteria or [])
         save(root / "project.json", config.model_dump())
-        for folder in ("knowledge", "investigations", "tasks", "suites", "experiments", "exports"):
+        for folder in ARTIFACT_KINDS:
             (root / folder).mkdir(mode=0o700)
         (root / ".gitignore").write_text("*\n", encoding="utf-8")
         return cls(root)
 
     def directory(self, kind: str) -> Path:
-        if kind not in {"knowledge", "investigations", "tasks", "suites", "experiments", "exports"}:
+        if kind not in ARTIFACT_KINDS:
             raise ValueError("Unknown artifact kind")
         directory = self.root / kind
         if not directory.resolve().is_relative_to(self.root):
@@ -133,6 +147,11 @@ class Project:
     def context(self) -> dict:
         entries = [e for e in self.artifacts("knowledge") if e["status"] == "accepted"]
         value = {"project": self.config.model_dump(), "knowledge": entries}
+        from .worlds import active_worlds
+
+        worlds = active_worlds(self)
+        if worlds:
+            value["worlds"] = worlds
         return {**value, "sha256": digest(value)}
 
     def history(self, limit: int = 10) -> list[dict]:
@@ -163,6 +182,6 @@ def environment_identity() -> dict:
     return {
         "python": sys.version.split()[0],
         "platform": platform.platform(),
-        "package": "0.4.0",
+        "package": "0.5.0",
         "pid": os.getpid(),
     }

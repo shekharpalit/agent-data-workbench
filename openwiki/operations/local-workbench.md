@@ -16,6 +16,8 @@ sources:
     resource: repo://src/agent_data_workbench/api/routers/investigations.py
   - id: openwiki-source-98bfc373ed8e75b28dcf239e
     resource: repo://src/agent_data_workbench/api/routers/tasks.py
+  - id: openwiki-source-732d0f8c004bbddbd6363fdf
+    resource: repo://src/agent_data_workbench/api/routers/workflow.py
   - id: openwiki-source-4105c547b3781d406b01e383
     resource: repo://src/agent_data_workbench/api/schemas.py
   - id: openwiki-source-12d025c9e4830dcc4dd30757
@@ -26,6 +28,8 @@ sources:
     resource: repo://tests/test_identifiers.py
   - id: openwiki-source-6d94b2e299387b69a79c432d
     resource: repo://ui/src/App.tsx
+  - id: openwiki-source-5bdf087920ed404535bafa26
+    resource: repo://ui/src/views/Calibration.tsx
   - id: openwiki-source-2d1b137901c9e38ec418fdad
     resource: repo://ui/src/views/ManualResearchEditor.tsx
   - id: openwiki-source-a6ff0ad9c45aedc12177eaec
@@ -34,10 +38,12 @@ sources:
     resource: repo://ui/src/views/ResearchOutputs.tsx
   - id: openwiki-source-14a72935f36008706a0aa989
     resource: repo://ui/src/views/ResearchSnapshot.tsx
-generated: { by: "codex", at: "2026-09-07T21:47:36.843Z" }
+  - id: openwiki-source-826d1e88c728d7cfae868e97
+    resource: repo://ui/tests/workflow.test.tsx
+generated: { by: "codex", at: "2026-09-07T22:32:10.726Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T21:47:36.843Z
+    at: 2026-09-07T22:32:10.726Z
 ---
 
 # Run the local workbench
@@ -67,7 +73,11 @@ The Python package includes the UI entry point and hashed assets. FastAPI serves
 | Investigations | Research manually or with an agent, inspect snapshot evidence, record outcomes, publish findings/charts, and pause/resume native sessions |
 | Project knowledge | Add and review explicit policy or tool context |
 | Tasks & graders | Inspect/edit specifications, run deterministic audits, and record reviews |
-| Experiments | Inspect baseline/candidate summaries, per-trial results, and artifacts |
+| Experiments | Inspect paired results, continuous transcripts, lifecycle phases and independent state |
+| World specifications | Create/review reusable world versions and inspect pinned contracts |
+| Grader calibration | Label actual attempts, classify causes, compare judgments and adjudicate |
+| Behavioral coverage | Review capability versions, map traces/tasks, and inspect gaps/duplicates |
+| Improvements | Capture exact candidates, launch paired runs, and record decisions |
 
 The graph bundle loads on demand. Trace filters and cluster membership are shared through application query state; changing filters resets pagination. See [trace exploration](../workflows/traces.md) for query semantics and limits.
 
@@ -89,7 +99,7 @@ Selecting **Use an agent** exposes a native backend and either adaptive `researc
 
 Both research paths share the detail view, which shows successful, failed and pending record counts separately from SDK retrieval. It polls active progress, paginates record outcomes and journal entries, and displays each recorded analysis method. Registered chart JSON renders as bars; other files are downloads authenticated with the local bearer token and checked against their recorded digest. Generated HTML is downloaded as a file rather than embedded in the workbench.
 
-Task audits in the UI are deterministic. A semantic rubric needs an explicitly configured judge through the [task CLI](../workflows/tasks-and-graders.md). Suite creation, baseline/candidate execution, and training export use the [experiment CLI or SDK](../workflows/experiments-and-training.md); the experiments view inspects the resulting artifacts.
+Task audits in the UI are deterministic. A semantic rubric needs an explicitly configured judge through the [task CLI](../workflows/tasks-and-graders.md). Suite creation and training export use the [experiment CLI or SDK](../workflows/experiments-and-training.md). The Improvements view can launch paired comparisons from an existing suite and local runner configuration paths; it offers an explicit semantic judge when needed.
 
 Import trace files with the CLI before opening the UI. There is no browser upload endpoint. Exploration and inspection are local operations; starting native research is an explicit provider action that gives the chosen coding agent access to the investigation snapshot and context. Native account and model constraints still apply.
 
@@ -98,3 +108,13 @@ Import trace files with the CLI before opening the UI. There is no browser uploa
 A busy-project error means a mutating workflow holds the project lock. Retry after that short mutation finishes; a native investigation does not hold the project lock for its whole session. Failed jobs show a bounded error; inspect the saved artifact and explicitly resume or start the relevant CLI operation. Do not interpret an interrupted execution as a completed comparison.
 
 For UI changes, [rebuild the TypeScript bundle](../development/contributing.md), then refresh the browser. OpenWiki's `visualize` command is a separate documentation reader, described in [documentation maintenance](documentation.md).
+
+## Human eval engineering
+
+Start with **World specifications** to capture sourced domain rules, schemas, tool contracts and permissions. Save a draft, resolve outstanding questions in a new immutable version, and record reviewer and reason for acceptance. Task specification JSON can pin that world and define environment commands, state criteria and conversation turns. Accepted task detail offers **Harbor export** with an existing local template directory and target configuration.
+
+In **Grader calibration**, choose a recorded experiment and create a calibration. Review the frozen requirements, chronological turns and observed state. Grader verdicts are hidden before a first assessment until explicitly revealed. Save pass/fail/invalid, a reason and optional cause; adjudication is bound to the exact displayed human label set. Reviewer identity is locally declared, not account authentication.
+
+In **Behavioral coverage**, create and accept a capability taxonomy, then map trace IDs or exact task versions with source and rationale. Inspect missing accepted slices, unexecuted versions, duplicates and stale mappings. Research completion and production prevalence are separate measures.
+
+In **Improvements**, supply baseline and candidate RunnerConfig file paths, the hypothesis and expected behavior. Inspect the captured patch, run the linked suite, review results/calibration, and record keep/reject/inconclusive. The decision records evidence and does not apply or deploy source changes. `/api/workflow` and its typed domain endpoints expose the same SDK operations. [Eval engineering](../workflows/eval-engineering.md) contains the runtime and file contracts.

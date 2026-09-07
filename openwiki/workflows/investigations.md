@@ -26,6 +26,8 @@ sources:
     resource: repo://src/agent_data_workbench/research/validation.py
   - id: openwiki-source-2dbe8753da4267ce652f414e
     resource: repo://src/agent_data_workbench/research/workspace.py
+  - id: openwiki-source-c20ca7c3c1f89c4195dc51eb
+    resource: repo://src/agent_data_workbench/worlds.py
   - id: openwiki-source-3e6ae5cbfb3aa3af0850499a
     resource: repo://tests/test_manual_research_api.py
   - id: openwiki-source-3589dc1fc29ba0bfe0e2a50c
@@ -38,10 +40,10 @@ sources:
     resource: repo://ui/src/views/ResearchControls.tsx
   - id: openwiki-source-14a72935f36008706a0aa989
     resource: repo://ui/src/views/ResearchSnapshot.tsx
-generated: { by: "codex", at: "2026-09-07T21:47:36.843Z" }
+generated: { by: "codex", at: "2026-09-07T22:32:10.726Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T21:47:36.843Z
+    at: 2026-09-07T22:32:10.726Z
 ---
 
 # Investigations and reviewed knowledge
@@ -61,6 +63,8 @@ uv run agent-data-workbench knowledge review runs/my-agent KNOWLEDGE_ID accepted
 ```
 
 Use the UUID printed by the first command. New knowledge starts as draft. Only accepted knowledge enters the hashed project context. Reviews record a note, revision and prior content hash. Knowledge import and SDK revision preserve the full supplied content without a fixed size cap. The local HTTP API still has its general request-body boundary; use the CLI or SDK for larger files.
+
+For reusable structured domain knowledge, use **World specifications** or `workflow world`. Accepted lineage heads join the captured context with schemas, tool contracts, relationships, permissions and invariants; historical accepted versions remain available through explicit task references. See [worlds and eval engineering](eval-engineering.md). A world created after this investigation does not rewrite its frozen context.
 
 Keep context specific enough to distinguish a real failure from missing information. A trace alone may not establish whether an action was authorized, a tool contract was violated, or a result was useful.
 

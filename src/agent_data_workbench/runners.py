@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-import shutil
 import time
 from pathlib import Path
 from typing import Any, Literal, Protocol
@@ -11,6 +10,14 @@ from typing import Any, Literal, Protocol
 from pydantic import Field, model_validator
 
 from .backends import CliAnalyzer, run_process
+from .command_sources import check_sources, pinned_command
+from .conversations import (
+    CommandSession,
+    CommandUserSimulator,
+    ConversationRunner,
+    ConversationSpec,
+)
+from .environments import EnvironmentConfig, EnvironmentRunner
 from .models import Contract, json_text
 from .project import digest
 from .tasks import parse_object, relative_path
@@ -40,6 +47,8 @@ class RunnerConfig(Contract):
     environment_version: str = Field(min_length=1)
     source_files: list[str] = Field(default_factory=list)
     fidelity: Literal["output", "next_action", "environment"] = "output"
+    environment: EnvironmentConfig | None = None
+    conversation: ConversationSpec | None = None
 
     @model_validator(mode="after")
     def valid(self):
@@ -47,6 +56,8 @@ class RunnerConfig(Contract):
             raise ValueError("Command runner requires an explicit argv list")
         if self.kind != "command" and (not self.model or not self.prompt):
             raise ValueError("Model runner requires an explicit model and target prompt")
+        if self.kind != "command" and self.conversation is not None:
+            raise ValueError("Multi-turn runs require a persistent command session adapter")
         if self.kind != "command" and self.fidelity == "environment":
             raise ValueError("CLI model runner cannot claim environment execution")
         return self
@@ -58,47 +69,83 @@ class JsonReply(Contract):
 
 class ConfiguredRunner:
     def __init__(self, config: RunnerConfig, base_dir: Path):
-        self.config = config
+        self.config = config.model_copy(deep=True)
         self.base_dir = base_dir.resolve()
-        self.sources = {}
-        for filename in config.source_files:
-            path = (self.base_dir / filename).resolve()
-            if not path.is_file():
-                raise ValueError("Runner source file does not exist")
-            self.sources[str(path)] = digest(path.read_text(encoding="utf-8"))
-        self.args = list(config.command)
-        if self.args:
-            executable = Path(self.args[0])
-            if executable.is_absolute():
-                resolved = str(executable)
-            elif "/" in self.args[0]:
-                resolved = str((self.base_dir / executable).resolve())
-            else:
-                resolved = shutil.which(self.args[0])
-            if not resolved or not Path(resolved).is_file():
-                raise ValueError("Runner executable not found")
-            self.args[0] = resolved
-            # Resolve explicitly supplied relative script paths before switching trial cwd.
-            for i, arg in enumerate(self.args[1:], 1):
-                if not arg.startswith("-") and (self.base_dir / arg).is_file():
-                    self.args[i] = str((self.base_dir / arg).resolve())
+        self.args, self.sources = pinned_command(config.command, config.source_files, self.base_dir)
+        self._conversation = None
+        self._simulator = None
+        if config.conversation:
+            if config.conversation.simulator:
+                self._simulator = CommandUserSimulator(
+                    config.conversation.simulator, self.base_dir, self.base_dir
+                )
+            self._conversation = ConversationRunner(self, config.conversation, self._simulator)
+        target = self._conversation or _OneShot(self)
+        self._environment = (
+            EnvironmentRunner(target, config.environment, self.base_dir)
+            if config.environment
+            else None
+        )
 
     def identity(self) -> dict:
-        return {
+        value = {
             "config": self.config.model_dump(),
             "source_sha256": self.sources,
             "resolved_command": self.args,
-            "sha256": digest(
-                {"config": self.config.model_dump(), "sources": self.sources, "command": self.args}
+            "environment": self._environment.environment_identity() if self._environment else None,
+            "simulator": self._simulator.identity() if self._simulator else None,
+        }
+        return {**value, "sha256": digest(value)}
+
+    def for_task(
+        self, environment: EnvironmentConfig | None, conversation: ConversationSpec | None
+    ) -> ConfiguredRunner:
+        """Bind a task's frozen scenario without accepting changed target implementation."""
+        check_sources(self.sources)
+        config = self.config.model_copy(
+            deep=True,
+            update={
+                "environment": environment,
+                "conversation": conversation,
+            },
+        )
+        runner = ConfiguredRunner(RunnerConfig.model_validate(config.model_dump()), self.base_dir)
+        if runner.sources != self.sources:
+            raise ValueError("Target sources changed while binding the task scenario")
+        return runner
+
+    def authoritative_artifacts(self, trial_dir: Path) -> dict:
+        return self._environment.authoritative_artifacts(trial_dir) if self._environment else {}
+
+    def trial_evidence(self, trial_dir: Path) -> dict:
+        return {
+            "environment": self._environment.trial_evidence(trial_dir)
+            if self._environment
+            else None,
+            "conversation": (
+                self._conversation.trial_evidence(trial_dir) if self._conversation else None
             ),
         }
 
+    def open_session(self, visible_input: dict, trial_dir: Path, seed: int) -> CommandSession:
+        check_sources(self.sources)
+        if self.config.kind != "command":
+            raise ValueError("Target does not support persistent sessions")
+        return CommandSession(
+            self.args, visible_input, trial_dir, seed, self.config.timeout, self.sources
+        )
+
     def run(self, visible_input: dict, trial_dir: Path, seed: int) -> Execution:
+        if self._environment:
+            return self._environment.run(visible_input, trial_dir, seed)
+        if self._conversation:
+            return self._conversation.run(visible_input, trial_dir, seed)
+        return self._run_once(visible_input, trial_dir, seed)
+
+    def _run_once(self, visible_input: dict, trial_dir: Path, seed: int) -> Execution:
         started = time.monotonic()
         try:
-            for filename, sha in self.sources.items():
-                if digest(Path(filename).read_text(encoding="utf-8")) != sha:
-                    raise ValueError("Runner source changed during the experiment")
+            check_sources(self.sources)
             if self.config.kind == "command":
                 request = json_text({"input": visible_input, "seed": seed})
                 raw = run_process(self.args, request, trial_dir, self.config.timeout)
@@ -124,6 +171,7 @@ class ConfiguredRunner:
                     output=parse_object(result.output_json),
                     usage={"seed_control": "unsupported by this CLI adapter"},
                 )
+            check_sources(self.sources)
             result.latency_seconds = time.monotonic() - started
             if result.cost_usd is not None and result.cost_usd < 0:
                 raise ValueError("Recorded cost must be nonnegative")
@@ -135,6 +183,17 @@ class ConfiguredRunner:
                 error="Target failed; inspect its configuration, dependencies and limits",
                 latency_seconds=time.monotonic() - started,
             )
+
+
+class _OneShot:
+    def __init__(self, runner: ConfiguredRunner):
+        self.runner = runner
+
+    def identity(self):
+        return self.runner.identity()
+
+    def run(self, visible_input: dict, trial_dir: Path, seed: int) -> Execution:
+        return self.runner._run_once(visible_input, trial_dir, seed)
 
 
 def read_artifacts(trial_dir: Path, names: list[str]) -> dict:

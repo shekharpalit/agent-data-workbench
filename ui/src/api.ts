@@ -1,4 +1,22 @@
 import type {
+  HarborExport,
+  HarborExportConfig,
+  AttemptAdjudication,
+  AttemptLabel,
+  BehavioralCoverage,
+  Calibration,
+  CalibrationSummary,
+  CoverageMapping,
+  Improvement,
+  ImprovementCreate,
+  Taxonomy,
+  TaxonomySpec,
+  Workflow,
+  WorkflowExperiment,
+  World,
+  WorldSpec,
+} from "./workflow-contracts";
+import type {
   ArtifactMap,
   Coverage,
   Investigation,
@@ -198,6 +216,88 @@ export class ApiClient {
   auditTask = (id: string) => this.request<Audit>("/api/task/audit", { id });
   reviewTask = (id: string, status: ReviewStatus, note: string) =>
     this.request<Task>("/api/task/review", { id, status, note });
+  exportHarbor = (task_id: string, config: HarborExportConfig) =>
+    this.request<HarborExport>("/api/workflow/harbor/export", {
+      task_id,
+      config,
+    });
+  workflow = (signal?: AbortSignal) =>
+    this.request<Workflow>("/api/workflow", undefined, signal);
+  createWorld = (spec: WorldSpec, previous_id?: string) =>
+    this.request<World>("/api/workflow/world", {
+      spec,
+      ...(previous_id ? { previous_id } : {}),
+    });
+  reviewWorld = (
+    id: string,
+    status: ReviewStatus,
+    note: string,
+    reviewer: string,
+  ) =>
+    this.request<World>("/api/workflow/world/review", {
+      id,
+      status,
+      note,
+      reviewer,
+    });
+  createTaxonomy = (spec: TaxonomySpec, previous_id?: string) =>
+    this.request<Taxonomy>("/api/workflow/taxonomy", {
+      spec,
+      ...(previous_id ? { previous_id } : {}),
+    });
+  reviewTaxonomy = (
+    id: string,
+    status: ReviewStatus,
+    note: string,
+    reviewer: string,
+  ) =>
+    this.request<Taxonomy>("/api/workflow/taxonomy/review", {
+      id,
+      status,
+      note,
+      reviewer,
+    });
+  behavioralCoverage = (id: string, signal?: AbortSignal) =>
+    this.request<BehavioralCoverage>(
+      `/api/workflow/coverage/${encodeURIComponent(id)}`,
+      undefined,
+      signal,
+    );
+  mapCoverage = (taxonomy_id: string, mapping: CoverageMapping) =>
+    this.request<unknown>("/api/workflow/coverage/map", {
+      taxonomy_id,
+      mapping,
+    });
+  createCalibration = (experiment_id: string, name: string) =>
+    this.request<Calibration>("/api/workflow/calibration", {
+      experiment_id,
+      name,
+    });
+  calibration = (id: string, signal?: AbortSignal) =>
+    this.request<{ calibration: Calibration; summary: CalibrationSummary }>(
+      `/api/workflow/calibration/${encodeURIComponent(id)}`,
+      undefined,
+      signal,
+    );
+  labelAttempt = (id: string, label: AttemptLabel) =>
+    this.request<Calibration>("/api/workflow/calibration/label", { id, label });
+  adjudicateAttempt = (id: string, decision: AttemptAdjudication) =>
+    this.request<Calibration>("/api/workflow/calibration/adjudicate", {
+      id,
+      decision,
+    });
+  createImprovement = (request: ImprovementCreate) =>
+    this.request<Improvement>("/api/workflow/improvement", request);
+  decideImprovement = (request: {
+    id: string;
+    experiment_id: string;
+    decision: "keep" | "reject" | "inconclusive";
+    reviewer: string;
+    reason: string;
+  }) =>
+    this.request<Improvement>("/api/workflow/improvement/decision", request);
+  runWorkflowExperiment = (request: WorkflowExperiment) =>
+    this.request<{ job_id: string }>("/api/workflow/experiment", request);
   editTask = (id: string, spec: TaskSpec, note: string) =>
     this.request<Task>("/api/task/edit", { id, spec, note });
 }

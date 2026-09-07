@@ -12,10 +12,10 @@ sources:
     resource: repo://tests/test_research.py
   - id: openwiki-source-9dba1709c16fd704c45276e9
     resource: repo://tests/test_workbench_data.py
-generated: { by: "codex", at: "2026-09-07T20:56:39.229Z" }
+generated: { by: "codex", at: "2026-09-07T22:32:10.726Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T20:56:39.229Z
+    at: 2026-09-07T22:32:10.726Z
 ---
 
 # Tasks and grader review
@@ -41,7 +41,7 @@ Replay copies only `messages[:cutoff]`, with an exclusive cutoff before an exist
 
 Task and criterion IDs are canonical UUID strings. Finding references use UUIDs too; trace references retain the original source IDs. Use `uv run python -m uuid` to generate an ID for a manually authored specification. The CLI prints generated IDs for design and replay.
 
-A TaskSpec includes an ID, title, purpose, behavior, source trace IDs, optional finding lineage, fidelity, visible input, assumptions, missing context, criteria, and verifier examples.
+A TaskSpec includes an ID, title, purpose, behavior, source trace IDs, optional finding lineage, fidelity, visible input, assumptions, missing context, criteria and verifier examples. Optional `world` pins an accepted UUID/digest; `environment` defines its reproducible lifecycle and observer; `conversation` defines scripted or reactive user turns.
 
 | Fidelity | What the task claims to measure |
 | --- | --- |
@@ -53,7 +53,7 @@ Fidelity is a declared contract. Choosing `environment` does not create a contai
 
 `input_json` is a string encoding a JSON object, containing only agent-visible input and fixtures. Keep answers, criteria, and hidden task details outside it. The schema checks object shape and next-action message presence; human review must still detect answer leakage.
 
-Criteria read either the output object or a named relative JSON artifact. Assertion pointers address the future result or artifact, not the source trace. An example assertion criterion is:
+Criteria read the output object, a named relative target JSON artifact, or independently observed state with `source: "state"`. State criteria require a configured environment and use the `artifact` name as a key into the observer map; target-written artifacts and usage cannot satisfy them. Assertion pointers address the future result or artifact, not the source trace. An example assertion criterion is:
 
 ```json
 {
@@ -73,7 +73,7 @@ For `equals`, `expected` is a JSON-encoded value; a string therefore includes en
 
 ## Audit the grader
 
-Provide verifier examples for all five required categories:
+Provide verifier examples for all five base categories; state criteria also require a `collateral_change` example expected to fail:
 
 | Kind | Required expected behavior |
 | --- | --- |
@@ -100,7 +100,7 @@ An audit passes only when all categories are present and every observed label ma
 
 ## Keep invalid evidence distinct
 
-A missing field in an existing output can fail an assertion. A missing whole required artifact produces an invalid observation. Semantic criteria without a judge, failed judge calls, or unverifiable evidence also remain invalid.
+A missing field in an existing output can fail an assertion. A missing whole required artifact or observer-state entry produces an invalid observation. Semantic criteria without a judge, failed judge calls, or unverifiable evidence also remain invalid.
 
 For a semantic pass or fail, the judge must return exact quotes with `trace_id="result"` and JSON pointers into the judged result. The host verifies those quotes. This grounds the decision in supplied data; it does not prove the rubric or interpretation is correct. Any invalid criterion makes the overall task grade invalid.
 
@@ -113,7 +113,7 @@ uv run agent-data-workbench task review runs/my-agent TASK_ID accepted \
   "Reviewed behavior, fixtures, alternatives, and evidence requirements"
 ```
 
-Acceptance requires no unresolved `missing_context`, a passing audit of the current specification, and a current context hash when the task binds one. Review notes and specification hashes are retained.
+Acceptance requires no unresolved `missing_context`, a passing audit of the current specification, a current context hash when bound, and an exact accepted world reference when supplied. Review notes and specification hashes are retained.
 
 To revise a task, keep its ID and supply the new specification:
 
@@ -129,3 +129,11 @@ Editing preserves the old specification as a revision, clears the audit, and ret
 `tests/test_workbench_data.py` covers audit categories, missing context, stale acceptance, prefix replay, semantic evidence, and design lineage.
 
 Next: [freeze a suite and execute targets](experiments-and-training.md). Return to [investigations](investigations.md) when the task exposes missing policy or unsupported assumptions.
+
+## Review state and collaboration behavior
+
+State verifier examples carry `state_json`, independently of `output_json` and `artifacts_json`. Include correct state, a valid alternative, a plausible wrong state, a misleading success claim, prohibited collateral changes and missing evidence. Whole-object equality at pointer `""` can check an expected record together with protected fields. The runtime independently invokes the configured observer; the example data only audits grader behavior.
+
+A saved chat prefix remains a next-action task. To measure continued collaboration, provide a `conversation` and a persistent command target. Each task may define different follow-up turns within the same suite. [Eval engineering](eval-engineering.md) explains world versions, environment phases, NDJSON target sessions and reactive users.
+
+After actual execution, create a calibration and compare independent human labels with the grader. False passes/fails and disputed labels help distinguish a bad task/verifier from a weak agent. Revising a task invalidates its audit and acceptance; old experiment/calibration evidence stays frozen. Existing task digests remain compatible when the new optional fields are absent.

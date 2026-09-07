@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:1515f0e4454152ea3b4476564bfca6be9acc596bc912ca543e9055b46619f504",
+  "pageVersion": "sha256:1145b23cc6e74bdc9390c0508678386445d4c4412fd0d9730ea5385b8b6cc018",
   "claims": [
     {
       "id": "claim_25574e40cfb048b39464c4e95bba596d",
@@ -21,8 +21,8 @@
       "statement": "Request middleware enforces exact Host, same-origin POST, JSON bodies and a 2,000,000-byte received-body limit; FastAPI bearer dependencies authenticate API operations.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/api/application.py#L31-L39",
-          "version": "repo-lines-v1:sha256:3d2a8514d11641b6585483427fa6a3e712cb3ffa75e6bfc5edddbf7b37a190d5:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiN2I0MjdkMzkwZTc3MzcyMDcwZTkxOWI3ZDVjNGY2YzAzNDMzYWRmMWI2Y2Y1OTM4MGViM2Y1MjA0YzFmMDliNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDU2OTVkZTRlNGM0NTlmN2NmZTk1MDUxOTY0YTljNGNkZTI4YTBmMWRjNDBhOWI0Y2Q4YmM1YTExYTA5MDFhYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTQ1Nzg1Y2RiYThmZDIxZjViZjMxYzAwNTk0OGE3YmU4MmYxMmU1MDJhZjVlYWVlZjJkNDUxNmM2MTdlOTk2YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjViMmZmMmJjM2YzNDAyOTNjNGFlMDQzOWQ3YTFkYWEzNGM2YjkxMzczZTEwOTVkM2Q2MzM1NTRjZTI1M2Y4NSJ9"
+          "resource": "repo://src/agent_data_workbench/api/application.py#L26-L39",
+          "version": "repo-lines-v1:sha256:9f1eeaf77f42b6939a61b8a1978c4729346d7e5410833e36c886fb16805ef137:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFjYmM5ZGNjYjBkNGU0NTM1MjQ0ZTEyMzZjMzg0NDI2NmM1NDczMGJlYjM4NTBhNTNjMzYyY2RmYTMzYmRjZDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA1Njk1ZGU0ZTRjNDU5ZjdjZmU5NTA1MTk2NGE5YzRjZGUyOGEwZjFkYzQwYTliNGNkOGJjNWExMWEwOTAxYWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUyZTA0YWViNDc3OWRjYzZlMzI1YzIxZjAyZGI2Yzc4YjhkYjVkZmQxYmE0ZDM2MTJhOGI2YjkzNjhhYmVjMDEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY1YjJmZjJiYzNmMzQwMjkzYzRhZTA0MzlkN2ExZGFhMzRjNmI5MTM3M2UxMDk1ZDNkNjMzNTU0Y2UyNTNmODUifQ"
         },
         {
           "resource": "repo://src/agent_data_workbench/api/dependencies.py#L12-L21",
@@ -39,8 +39,8 @@
       "statement": "FastAPI serves the Python package’s bundled UI and assets, disables the default interactive API documentation routes, and returns a bounded 400 error envelope for structured validation failures.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/api/application.py#L17-L45",
-          "version": "repo-lines-v1:sha256:f8e1c44967c818e71b6cec12031ce62a34aa8611e7a5dd09b22bbc938ff95f53:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwN2I0OWI3OTcyZDI0NTc0MzJkODRmNjZjOThjODhmMzJlODM3NDEwOGFmOTdkYjg3YjdlZDRiOTllZGE0NmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwZDQ1NTYzNzQ0OGRmMjMzNTQ0YjZkNzAwNzQxNTNmZGQ0Mjc1OTg4ODI4M2MxMzEyZGZlM2M1YmJjNjJkMjMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUxMzVhMDk0ZGJiYWMyOTNhNDc0YzgzZjcyOWNlNmI0NTQxNzdjYmY0YmYyM2VkMmJlYzBmMWQxMjEzYTU2ODUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAzYmM2NTJlM2I0YTIxZTdjNWVkZTgyZTkwZTUzYWZiNmViZjU4NWQ2YTY1MWY2MjQ1YTc1MTU0NWMyNzViZDIifQ"
+          "resource": "repo://src/agent_data_workbench/api/application.py#L17-L47",
+          "version": "repo-lines-v1:sha256:1cbea0afc539a1d3d0d52cf318d1ed3e8ed0978acb99bb2c15cc7b9795161f43:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwN2I0OWI3OTcyZDI0NTc0MzJkODRmNjZjOThjODhmMzJlODM3NDEwOGFmOTdkYjg3YjdlZDRiOTllZGE0NmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkNjdiNDY2Mzc4NzVjM2JiN2Y5MDNiMWRiODczNGI0YTI5NjY4NWRmNGRiZTY2YTRmNmNlZjdmZGM0MTE2M2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRkNDc0M2UwMWNiNzVjYzIzMTRkMjE5NjIxZGExN2YzNmIyZDMxYjRiODYyZGE3NWM0MDBhNWYwOTNjMDZkYTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
           "resource": "repo://src/agent_data_workbench/api/errors.py#L10-L17",
@@ -68,11 +68,11 @@
     },
     {
       "id": "claim_5304a6969a5e4ec3bc7d4967a589326f",
-      "statement": "The UI provides eight workbench views, lazy-loads its graph view, and polls background jobs while a job is running.",
+      "statement": "The UI includes world, calibration, behavioral coverage and improvement views alongside existing research views, lazy-loads the graph, and polls running background jobs.",
       "evidence": [
         {
-          "resource": "repo://ui/src/App.tsx#L18-L53",
-          "version": "repo-lines-v1:sha256:d4a9b86fb761afe3fb02d117c654a7429bd0a7b3db7e1819d72a9c328e6529b7:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU1Y2VjZjcyOWIwMGJhOTg1MmE5ZjYyYmVhZDFlNzQ0YTY3ODBhNWIwMTc0ZDU1ZTRiMGJmZTZkNmYyM2MwMzIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBjZTVkODE4YjZhY2RhZTU0OGFlMDdlNzA2YmNjNzMwMjY0MjRiMmNmOWU0YTQ4OGUyMjRkOTQ1MGIxMThlZWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ2NTA0YmQzZTY3MDFjYWM2YmVlMzE0MzFkZGQ1Y2U0NzJjZDhiYjU2YmMyMmI1NGZjOWNhN2I0OGIxYjMwNjgifQ"
+          "resource": "repo://ui/src/App.tsx#L18-L66",
+          "version": "repo-lines-v1:sha256:a9981556041517ca79a66a7665d40605ff4157e9273b8cf50e626e7b7f2124fa:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNmMjM5ZTk1YTg4ZDVmM2NiMmIxNTdlZmMzYTJhNGQ2MGMyNzE5MTI1M2FkODU4NTk1MDAzZTdkMGQ1NjUxODEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBjZTVkODE4YjZhY2RhZTU0OGFlMDdlNzA2YmNjNzMwMjY0MjRiMmNmOWU0YTQ4OGUyMjRkOTQ1MGIxMThlZWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ2NTA0YmQzZTY3MDFjYWM2YmVlMzE0MzFkZGQ1Y2U0NzJjZDhiYjU2YmMyMmI1NGZjOWNhN2I0OGIxYjMwNjgifQ"
         }
       ]
     },
@@ -139,10 +139,34 @@
           "version": "repo-lines-v1:sha256:b721559f1097a26600349c12f1dfa2d46b75daee06393a6ff32bc6a9a793ce11:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY3ZjQ2YjQ2MDE5YTc2MWQxODY5MjI2ZTI3NWZlN2NjYjZjYWJiYTAyNzI2ZjEyYjNkOTY2NDVhNmNlMDAyMWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA5NGZjMGMxNzNkMWVjM2ZjNTAxZDdkZmE5Mjg1NTAxYzUyN2NmYjQ3MTI1ODNkYTNjYzM2MTgwNTY2YjRiZTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
+    },
+    {
+      "id": "claim_3b807b3c180045a3a1e4aba017ca085e",
+      "statement": "Typed workflow endpoints reuse SDK world review, calibration, taxonomy mapping, candidate capture and decision operations; paired experiments and explicit Harbor runs use the background queue.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/api/routers/workflow.py#L112-L241",
+          "version": "repo-lines-v1:sha256:c2d7874896c1a73fa735d362fb92140d8b1a6d07962485758bb0da6240b52836:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMwLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI4NGY0MDMxNzJhNjQ5N2I5YmJkYTJiZmVjMjFjODM5ZDFhYzI1Y2IzMzIyNDlkZjA0ODM3NWUxMGVlNGFmMDk3IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJkMjMyMDM4NjM5MjU2MWJkMjZhMDQzZjdiZjQxYzlmZWM5YmY0YjJmMmM2ZGY3MjNmZDRhMWJkZWEwOTlhNGVmIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJjMmU0OGE3NzVkOGYwNGQxZWE4NTg5MmRkMzBiZTJjZmIxYjlkMWFkODg4OWQ2OTZkMDlhNGRmNTI3ODAzMjhiIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiJiOTVjNTQ0NGI1YzRmODQ5NjgxYzEwMjY4MTUwZmQ4NzJjZGY5NGY2NDVkODEzMzNiMzg5MGQ4YWVkOTYxMGEwIn0"
+        }
+      ]
+    },
+    {
+      "id": "claim_d6f9ba953076405d82e3176613483ce4",
+      "statement": "The calibration UI initially hides grader verdicts for unlabeled attempts and records assessments/adjudication against exact evidence and label-set hashes.",
+      "evidence": [
+        {
+          "resource": "repo://ui/src/views/Calibration.tsx",
+          "version": "repo-file-v1:sha256:bbbdd1acb2118e9d48a7aae7dcf8ae7b126b3a2acaad7bdde7fbf419d85c2112"
+        },
+        {
+          "resource": "repo://ui/tests/workflow.test.tsx#L110-L220",
+          "version": "repo-lines-v1:sha256:fdad4938c8dc5636e23ae57403c39474bbbefd9b243c74a3b90249fd4e6ec226:eyJzZWxlY3RlZExpbmVDb3VudCI6MTExLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIyNDFlZDg4YWQ5MzYyODViN2UzNjQxMDMzMmVlMDgwOWE4ZWYxOTJjMTg0ODJmNDdjMGI5OTczNjYzYjllNDk1IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiIyMWU2YTkxZTM3ZjZlYTM4ZmMzMWU2MmQzNjBiODQwMTc5NmUwZDY2YzMzOGIxYTk5MTMyNzRjNWNkODMzNGUwIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI1Nzc3NzMxM2JiYjE2MTc0ZDQ1NzkzOTc3OWM0YzAyNTk0ODk5MjYzYzcyNzU3ZGZiNTM1Y2QzZGI3ZDk4MmYwIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI1NmQzYzllM2FjNjRhZGQ1ZmU3ZjZkNGY1ZjkxMmE4ZTQ1ZDE1NzM4MTZhMDA2NGRiMGY1ZjlhZWJlMzJmNTM1In0"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-07T21:47:36.843Z"
+    "at": "2026-09-07T22:32:10.726Z"
   }
 }

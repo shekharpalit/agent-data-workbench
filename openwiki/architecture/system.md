@@ -5,7 +5,7 @@ description: How the CLI, Python SDK, FastAPI service, React workbench, and loca
 tags: [architecture, sdk, persistence, provenance]
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T21:47:36.843Z
+    at: 2026-09-07T22:32:10.726Z
 sources:
   - id: openwiki-source-896da76531d8a33d2c9e76b8
     resource: repo://src/agent_data_workbench/api/application.py
@@ -21,6 +21,8 @@ sources:
     resource: repo://src/agent_data_workbench/database.py
   - id: openwiki-source-4c04fd9d10dcc0e748ac55cc
     resource: repo://src/agent_data_workbench/identifiers.py
+  - id: openwiki-source-ed554b753fa6f37387755486
+    resource: repo://src/agent_data_workbench/improvements.py
   - id: openwiki-source-12d025c9e4830dcc4dd30757
     resource: repo://src/agent_data_workbench/jobs.py
   - id: openwiki-source-1188f1141809a45a7d20b02f
@@ -41,13 +43,13 @@ sources:
     resource: repo://src/agent_data_workbench/research/workspace.py
   - id: openwiki-source-069858a5e395202064ced424
     resource: repo://src/agent_data_workbench/store.py
-  - id: openwiki-source-c90a57f259e123cf538cdd9c
-    resource: repo://src/agent_data_workbench/workflow.py
+  - id: openwiki-source-c20ca7c3c1f89c4195dc51eb
+    resource: repo://src/agent_data_workbench/worlds.py
   - id: openwiki-source-3e6ae5cbfb3aa3af0850499a
     resource: repo://tests/test_manual_research_api.py
   - id: openwiki-source-09d2a8f36f3ecb7ab9487ab2
     resource: repo://tests/test_store.py
-generated: { by: "codex", at: "2026-09-07T21:47:36.843Z" }
+generated: { by: "codex", at: "2026-09-07T22:32:10.726Z" }
 ---
 
 # System architecture
@@ -91,7 +93,7 @@ The service layer translates requests into SDK operations. It does not contain a
 
 ## Local state and consistency
 
-`Project.create` requires a new or empty directory. It writes `project.json` and creates `knowledge/`, `investigations/`, `tasks/`, `suites/`, `experiments/`, and `exports/`. A project-local `.gitignore` excludes its contents. Use a directory under `runs/` for private working data.
+`Project.create` requires a new or empty directory. It writes `project.json` and creates `knowledge/`, `investigations/`, `tasks/`, `suites/`, `experiments/`, `exports/`, `worlds/`, `improvements/`, `calibrations/`, `taxonomies/`, and `coverage/`. A project-local `.gitignore` excludes its contents. Use a directory under `runs/` for private working data.
 
 `TraceStore` uses `traces.sqlite3`. SQLAlchemy maps the original six-column trace layout: ID, source group, stratum, canonical JSON, content hash, and import time. A session transaction wraps each operation; an import conflict rolls back its batch. The engine uses `NullPool`, and first-use schema creation is serialized inside the process. Worker threads obtain their own sessions.
 
@@ -119,6 +121,12 @@ These records provide provenance and detect accidental drift. They do not isolat
 
 ## Extension seams
 
-Implement `TraceSource.read()` to import another export format, `Analyzer.analyze(prompt, schema)` for another batch/judge backend, or `TargetRunner.identity()` and `run(visible_input, trial_dir, seed)` for another execution harness. Native research can also use the shared `ResearchWorkspace` directly from an existing coding-agent session or a custom `NativeSession` adapter. Keep real environment reset and authoritative state capture inside the runner integration. Direct service connectors, Harbor integration, distributed execution, and training-job execution are not bundled.
+Implement `TraceSource.read()` to import another export format, `Analyzer.analyze(prompt, schema)` for another batch/judge backend, or `TargetRunner.identity()` and `run(visible_input, trial_dir, seed)` for another execution harness. Native research can also use the shared `ResearchWorkspace` directly from an existing coding-agent session or a custom `NativeSession` adapter. `EnvironmentRunner` supplies a setup/reset/readiness/observer/teardown lifecycle, while `ConversationRunner` owns one continuous command target session. Each reviewed task supplies its scenario; experiments record the effective runner identity. The optional Harbor adapter exports a supplied real template and invokes the installed Harbor CLI. Direct service connectors, distributed workbench execution, and training-job execution remain extension work. See [eval engineering](../workflows/eval-engineering.md).
 
 Next: [import and explore traces](../workflows/traces.md), [run the local workbench](../operations/local-workbench.md), or [development](../development/contributing.md).
+
+## Versioned improvement evidence
+
+Accepted world lineage heads feed research context; a task can explicitly pin an older accepted world by UUID and digest. Independent state assertions read only observer-owned evidence, separately from target artifacts. Experiment records retain world/task snapshots, effective runner identities, chronological conversation evidence, and copied trial files.
+
+Calibration freezes actual attempt evidence and records reviewer labels and adjudication. Behavioral coverage maps exact trace/task versions to reviewed capabilities and slices; it does not reuse research-completion counts as coverage. Improvement records capture source snapshots and a patch, require exact baseline/candidate identities when linked to experiments, and retain explicit keep/reject/inconclusive decisions with available calibration summaries. A decision does not apply or deploy code.

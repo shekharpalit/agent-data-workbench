@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { HarborExportForm } from "./HarborExport";
 import { api } from "../api";
 import type { Route, Task, TaskSpec } from "../contracts";
 import {
@@ -87,7 +88,9 @@ function TaskReview({ task }: { task: Task }) {
         <Card title="Edit task">
           <p className="muted">
             Saving retains the previous revision and resets both audit and
-            review.
+            review. The specification supports a pinned world reference,
+            environment lifecycle commands, and scripted or reactive
+            conversation turns.
           </p>
           <Field
             label="Specification JSON"
@@ -180,6 +183,51 @@ export function TaskDetail({
           ))}
         </Card>
       </div>
+      {(spec.world || spec.environment || spec.conversation) && (
+        <Card title="World and conversation runtime">
+          {spec.world && (
+            <Details title="Pinned world version">
+              <JsonView value={spec.world} />
+            </Details>
+          )}
+          {spec.environment && (
+            <>
+              <h3>
+                {spec.environment.name} · {spec.environment.version}
+              </h3>
+              <p>Observed authority: {spec.environment.authority}</p>
+              <Details title="Setup, reset, readiness and observer commands">
+                <JsonView value={spec.environment} />
+              </Details>
+            </>
+          )}
+          {spec.conversation && (
+            <>
+              <h3>
+                {spec.conversation.simulator
+                  ? "Reactive user conversation"
+                  : "Scripted conversation"}
+              </h3>
+              {spec.conversation.turns.map((turn, index) => (
+                <p key={index} className="conversation-user">
+                  <strong>User turn {index + 1}</strong>
+                  <br />
+                  {turn.message}
+                </p>
+              ))}
+              <p className="muted">
+                The target keeps one continuous session across turns. The task
+                verifier determines success.
+              </p>
+              {spec.conversation.simulator && (
+                <Details title="Reactive user configuration">
+                  <JsonView value={spec.conversation.simulator} />
+                </Details>
+              )}
+            </>
+          )}
+        </Card>
+      )}
       {spec.missing_context.length > 0 && (
         <Card title="Context needed before acceptance">
           {spec.missing_context.map((item, index) => (
@@ -231,6 +279,7 @@ export function TaskDetail({
           <JsonView value={spec.verifier_examples} />
         </Details>
       </Card>
+      {task.review.status === "accepted" && <HarborExportForm taskId={id} />}
       <TaskReview key={`${id}-${JSON.stringify(spec)}`} task={task} />
     </>
   );

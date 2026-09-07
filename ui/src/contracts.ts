@@ -8,7 +8,11 @@ export type View =
   | "investigations"
   | "knowledge"
   | "tasks"
-  | "experiments";
+  | "experiments"
+  | "worlds"
+  | "calibration"
+  | "coverage"
+  | "improvements";
 export type Route = { view: View; id?: string };
 export type ReviewStatus = "draft" | "accepted" | "rejected";
 export type GradeStatus = "pass" | "fail" | "invalid";
@@ -209,11 +213,34 @@ export interface Knowledge {
 export interface Criterion {
   id: string;
   description: string;
-  source: "output" | "artifact";
+  source: "output" | "artifact" | "state";
   artifact: string;
   kind: "assertion" | "semantic";
   assertion: null | { pointer: string; operator: string; expected: string };
   rubric: string;
+}
+export interface EnvironmentConfig {
+  name: string;
+  version: string;
+  authority: string;
+  setup: string[];
+  reset: string[];
+  ready: string[];
+  inspect: string[];
+  teardown?: string[];
+  source_files?: string[];
+  dependency_versions?: Record<string, string>;
+  initial_state_sha256?: string | null;
+  timeout?: number | null;
+}
+export interface ConversationSpec {
+  turns: { message: string }[];
+  simulator?: {
+    command: string[];
+    source_files?: string[];
+    timeout?: number | null;
+  } | null;
+  max_turns?: number | null;
 }
 export interface TaskSpec {
   id: string;
@@ -224,6 +251,9 @@ export interface TaskSpec {
   trace_ids: string[];
   fidelity: "output" | "next_action" | "environment";
   input_json: string;
+  world?: { id: string; sha256: string } | null;
+  environment?: EnvironmentConfig | null;
+  conversation?: ConversationSpec | null;
   context_sha256: string;
   assumptions: string[];
   missing_context: string[];
@@ -233,6 +263,7 @@ export interface TaskSpec {
     kind: string;
     output_json: string;
     artifacts_json: string;
+    state_json?: string;
     expected: GradeStatus;
   }[];
 }
@@ -293,6 +324,38 @@ export interface Trial {
     cost_usd: number | null;
   };
   artifacts: Record<string, Json>;
+  state?: Record<string, Json>;
+  runtime_evidence?: {
+    conversation?: {
+      turns: {
+        index: number;
+        user: { message: string };
+        reply: {
+          message: string;
+          evidence: Record<string, Json>[];
+          output: Record<string, Json>;
+        } | null;
+        status: string;
+        error: string | null;
+      }[];
+      stop_reason: string;
+      session_id: string | null;
+      [key: string]: unknown;
+    };
+    environment?: {
+      phases: {
+        phase: string;
+        moment: string | null;
+        status: string;
+        output: unknown;
+      }[];
+      initial_state: unknown;
+      final_state: unknown;
+      evidence_source: string;
+      isolation: string;
+      [key: string]: unknown;
+    };
+  };
 }
 export interface Experiment {
   id: string;

@@ -11,13 +11,13 @@ from ..project import Project
 from .dependencies import require_session
 from .errors import register_error_handlers
 from .middleware import RequestBoundaryMiddleware
-from .routers import artifacts, investigations, jobs, knowledge, overview, tasks, traces
+from .routers import artifacts, investigations, jobs, knowledge, overview, tasks, traces, workflow
 
 
 def create_app(project: Project, *, origin: str, token: str) -> FastAPI:
     app = FastAPI(
         title="Agent Data Workbench Local API",
-        version="0.4.0",
+        version="0.5.0",
         docs_url=None,
         redoc_url=None,
         openapi_url=None,
@@ -29,7 +29,7 @@ def create_app(project: Project, *, origin: str, token: str) -> FastAPI:
     app.add_middleware(RequestBoundaryMiddleware, origin=origin)
     register_error_handlers(app)
     api = APIRouter(prefix="/api", dependencies=[Depends(require_session)])
-    for module in (overview, traces, artifacts, knowledge, tasks, investigations, jobs):
+    for module in (overview, traces, artifacts, knowledge, tasks, investigations, jobs, workflow):
         api.include_router(module.router, tags=[module.__name__.rsplit(".", 1)[-1]])
 
     @api.get("/openapi.json", include_in_schema=False)
