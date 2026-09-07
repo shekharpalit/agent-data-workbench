@@ -6,12 +6,12 @@ Turn agent traces into evidence, reviewed tasks, and measurable improvement expe
 
 ## Try the whole workflow
 
-Requires Python 3.12+, macOS or Linux, and [uv](https://docs.astral.sh/uv/).
+Requires Python 3.14+, macOS or Linux, and [uv](https://docs.astral.sh/uv/).
 
 ```sh
 git clone https://github.com/shekharpalit/agent-data-workbench.git
 cd agent-data-workbench
-uv sync
+uv sync --locked
 uv run agent-data-workbench workbench-demo runs/workbench
 uv run agent-data-workbench ui runs/workbench --open-browser
 ```

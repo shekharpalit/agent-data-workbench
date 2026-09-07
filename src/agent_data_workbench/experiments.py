@@ -310,7 +310,7 @@ def run_experiment(
                             if on_trial:
                                 on_trial(row)
             record["status"] = "complete"
-        except (Exception, KeyboardInterrupt):
+        except Exception, KeyboardInterrupt:
             record["status"] = "interrupted"
             record["summary"] = summarize(record["trials"])
             save(path, record)

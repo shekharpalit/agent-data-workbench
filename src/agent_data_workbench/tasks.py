@@ -240,7 +240,7 @@ def grade(task: TaskSpec, output: dict, artifacts: dict, judge: Analyzer | None 
                             raise ValueError("Invalid grading evidence")
                     status, explanation = result.status, result.explanation
                     evidence = [e.model_dump() for e in result.evidence]
-                except (ValueError, RuntimeError, OSError):
+                except ValueError, RuntimeError, OSError:
                     explanation = "Judge failed or returned unverifiable evidence"
         checks.append(
             {

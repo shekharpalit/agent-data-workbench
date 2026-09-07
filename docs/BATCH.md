@@ -2,14 +2,14 @@
 
 Turn agent execution traces into evidence-linked findings and reviewable eval cases.
 
-Local Python CLI and SDK. **Day-one alpha; working name.** The repository and package have not been published.
+Local Python CLI and SDK. **v0.2 alpha.** The package is not published to PyPI; install from the repository.
 
 ## Run it
 
-Requires Python 3.12+ and [uv](https://docs.astral.sh/uv/).
+Requires Python 3.14+ and [uv](https://docs.astral.sh/uv/).
 
 ```sh
-uv sync
+uv sync --locked
 uv run agent-data-workbench demo --out runs/demo
 ```
 

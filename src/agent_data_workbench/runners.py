@@ -152,6 +152,6 @@ def read_artifacts(trial_dir: Path, names: list[str]) -> dict:
             artifacts[name] = json.loads(
                 path.read_text(encoding="utf-8"), parse_constant=_reject_constant
             )
-        except (ValueError, UnicodeError):
+        except ValueError, UnicodeError:
             continue
     return artifacts

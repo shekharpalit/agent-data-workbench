@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling>=1.26,<2"]
+requires = ["hatchling>=1.32.0,<2"]
 build-backend = "hatchling.build"
 
 [project]
@@ -7,29 +7,42 @@ name = "agent-data-workbench"
 version = "0.2.0"
 description = "A local workbench for researching agent traces and running reviewed improvement experiments."
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.14"
 license = "MIT"
-dependencies = ["pydantic>=2.10,<3", "typer>=0.15,<1", "fastapi>=0.115,<1", "uvicorn>=0.34,<1", "sqlalchemy>=2.0.36,<2.1"]
+dependencies = [
+    "pydantic>=2.13.5,<3",
+    "typer>=0.27.2,<1",
+    "fastapi>=0.141.1,<1",
+    "uvicorn>=0.52.4,<1",
+    "sqlalchemy>=2.0.52,<3",
+]
 
 [project.scripts]
 agent-data-workbench = "agent_data_workbench.cli:app"
 
 [dependency-groups]
-dev = ["pytest>=8,<10", "ruff>=0.12,<1", "httpx2>=2.12,<3"]
+dev = [
+    "pytest>=9.1.1,<10",
+    "ruff>=0.16.6,<1",
+    "httpx2>=2.12.0,<3",
+]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/agent_data_workbench"]
 
 [tool.hatch.build.targets.sdist]
-include = ["/src", "/ui", "/tests", "/docs", "/examples", "/README.md", "/CONTRIBUTING.md", "/LICENSE", "/pyproject.toml", "/uv.lock", "/.gitignore"]
+include = ["/src", "/ui", "/tests", "/docs", "/examples", "/README.md", "/CONTRIBUTING.md", "/LICENSE", "/pyproject.toml", "/uv.lock", "/.python-version", "/.gitignore"]
 exclude = ["/ui/node_modules", "/ui/coverage", "**/__pycache__", "**/*.tsbuildinfo"]
+
+[tool.uv]
+prerelease = "disallow"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 
 [tool.ruff]
 line-length = 100
-target-version = "py312"
+target-version = "py314"
 
 [tool.ruff.lint]
 select = ["E", "F", "I"]

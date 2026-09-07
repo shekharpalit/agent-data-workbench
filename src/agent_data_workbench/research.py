@@ -305,7 +305,7 @@ def investigate(
                     break
             if value["status"] != "complete":
                 value["status"] = "paused"
-        except (RuntimeError, ValueError, OSError, KeyboardInterrupt):
+        except RuntimeError, ValueError, OSError, KeyboardInterrupt:
             value.update(
                 status="paused",
                 error="Analyzer interrupted or returned invalid data; resume explicitly",

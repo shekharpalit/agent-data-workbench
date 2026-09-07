@@ -2,7 +2,7 @@
 
 Keep the core independent of any agent framework. Trace import, analysis, artifact generation, and evaluation are separate modules.
 
-Start with `uv sync`, then run `uv run pytest -q` and `uv run ruff check src tests`.
+Start with `uv sync --locked`, then run `uv run pytest -q` and `uv run ruff check src tests`.
 
 The UI is React + TypeScript. Use `npm ci --prefix ui`, `npm --prefix ui run build` and `npm --prefix ui test`. Run `npm --prefix ui run format:check` before handing off changes. Commit the resulting `src/agent_data_workbench/web` assets along with source changes so Python installations work without Node. Do not commit `node_modules`. See [ui/README.md](ui/README.md).
 
@@ -41,3 +41,7 @@ Changes to the analysis contract need compatible provider schemas and tests that
 Keep output formats portable. Add a source or analyzer adapter without assuming all users adopt its framework. Never report a generated candidate as an executed or validated environment.
 
 Do not include private production traces or account credentials in contributions.
+
+## Runtime and dependency updates
+
+Use Python 3.14.7; `.python-version` pins the tested patch release for uv. Commit `uv.lock` and `ui/package-lock.json` so installs use the reviewed dependency versions. To update Python dependencies, run `uv lock --upgrade`, review the changes, then `uv sync --locked` and the checks above. Use stable releases and update the declared minimums when adopting a new tested baseline.

@@ -117,7 +117,7 @@ def benchmark(analyzer: Analyzer, dataset: Path, out: Path) -> dict:
                     "seconds": time.monotonic() - started,
                 }
             )
-        except (RuntimeError, ValueError, OSError):
+        except RuntimeError, ValueError, OSError:
             errors += 1
             fn += len(expected)
             results.append(
