@@ -13,7 +13,13 @@ class BackendError(RuntimeError):
 
 
 def run_process(
-    args: list[str], prompt: str, cwd: Path, timeout: int | None, *, log_prefix: Path | None = None
+    args: list[str],
+    prompt: str,
+    cwd: Path,
+    timeout: int | None,
+    *,
+    log_prefix: Path | None = None,
+    env: dict[str, str] | None = None,
 ) -> str:
     process = subprocess.Popen(
         args,
@@ -23,6 +29,7 @@ def run_process(
         text=True,
         encoding="utf-8",
         cwd=cwd,
+        env=env,
         start_new_session=(os.name == "posix"),
     )
     try:

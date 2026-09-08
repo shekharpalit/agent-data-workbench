@@ -7,9 +7,9 @@ from pathlib import Path
 from agent_data_workbench.data.contracts import Trace
 from agent_data_workbench.data.store import TraceStore
 from agent_data_workbench.shared.identifiers import stable_id
-from agent_data_workbench.shared.json import read_json
 from agent_data_workbench.workspace.project import Project
 
+from .artifacts import read_artifact
 from .contracts import HarborComparisonConfig
 
 
@@ -70,7 +70,22 @@ def collect_trial(
     paths = sorted(directory.glob("*/result.json"))
     # The comparison launches one attempt per job. Extra/missing results are invalid,
     # not silently paired with a different task or repeat.
-    raw = read_json(paths[0]) if len(paths) == 1 else {}
+    captured = []
+    errors = []
+    for path in paths:
+        original, error = read_artifact(path)
+        if error:
+            errors.append(error)
+        trajectories = []
+        for item in sorted(path.parent.rglob("trajectory.json")):
+            trajectory, error = read_artifact(item)
+            trajectories.append(
+                {"path": item.relative_to(path.parent).as_posix(), "data": trajectory}
+            )
+            if error:
+                errors.append(error)
+        captured.append((path, original, trajectories))
+    raw = captured[0][1] if len(captured) == 1 else {}
     if len(paths) != 1 or run["status"] != "completed":
         raw = {
             **raw,
@@ -80,14 +95,17 @@ def collect_trial(
                 or f"Expected one trial result, found {len(paths)}",
             },
         }
+    if errors:
+        raw = {
+            **raw,
+            "exception_info": {
+                "exception_type": "WorkbenchHarborArtifactError",
+                "exception_message": "; ".join(errors),
+            },
+        }
     grade = verifier_grade(raw, config)
     trace_ids = []
-    for path in paths:
-        original = read_json(path)
-        trajectories = [
-            {"path": item.relative_to(path.parent).as_posix(), "data": read_json(item)}
-            for item in sorted(path.parent.rglob("trajectory.json"))
-        ]
+    for path, original, trajectories in captured:
         key = stable_id("harbor-trial", str(path.resolve()))
         data = {
             "source": {

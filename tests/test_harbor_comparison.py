@@ -197,3 +197,74 @@ def test_failed_command_saves_complete_private_logs_without_echoing_them_in_erro
         "stderr": "private diagnostic\n",
         "echoed_private_log": False,
     }
+
+
+@pytest.mark.parametrize("damaged_file", ["result", "trajectory"])
+def test_malformed_harbor_artifacts_are_preserved_and_do_not_abort_comparison(
+    tmp_path, monkeypatch, damaged_file
+):
+    # Given
+    project = make_project(tmp_path)
+    task = accept(project, spec(project))
+    config = HarborComparisonConfig(
+        template_directory=str(template_at(tmp_path)),
+        baseline=HarborAgentConfig(agent="nop"),
+        candidate=HarborAgentConfig(agent="codex", use_host_codex_login=True),
+    )
+    damaged = '{"count": [REDACTED], "message": "full evidence Ω 1 true"}\n'
+    calls = []
+
+    def process(args, prompt, cwd, timeout, **kwargs):
+        if args[1:] == ["--version"]:
+            return "harbor synthetic-test"
+        agent = args[args.index("--agent") + 1]
+        calls.append(
+            {
+                "agent": agent,
+                "login": kwargs.get("env", {}).get("CODEX_FORCE_AUTH_JSON"),
+                "agent_env_option": "--ae" in args,
+            }
+        )
+        folder = (
+            Path(args[args.index("--jobs-dir") + 1]) / args[args.index("--job-name") + 1] / "trial"
+        )
+        (folder / "agent").mkdir(parents=True)
+        (folder / "result.json").write_text(
+            json.dumps({"verifier_result": {"rewards": {"reward": 1}}})
+        )
+        (folder / "agent/trajectory.json").write_text('{"steps": [{"message": "complete"}]}')
+        if agent == "codex":
+            (
+                folder / ("result.json" if damaged_file == "result" else "agent/trajectory.json")
+            ).write_text(damaged)
+        return "Complete"
+
+    monkeypatch.delenv("CODEX_FORCE_AUTH_JSON", raising=False)
+    monkeypatch.setattr(runtime, "run_process", process)
+    monkeypatch.setattr(runtime, "pinned_command", lambda command, *args: (command, {}))
+    # When
+    actual = compare_harbor(project, task.id, config)
+    candidate = actual["trials"][1]
+    trace = TraceStore(project).get(candidate["trace_ids"][0]).data
+    artifact = trace["result"] if damaged_file == "result" else trace["trajectories"][0]["data"]
+    # Then
+    assert {
+        "status": actual["status"],
+        "outcomes": [trial["grade"]["status"] for trial in actual["trials"]],
+        "raw_text": artifact["raw_text"],
+        "resolved": trace["resolved"],
+        "error_type": candidate["grade"]["checks"][0]["exception"]["exception_type"],
+        "calls": calls,
+        "captured_environment": candidate["runner_identity"]["environment"],
+    } == {
+        "status": "complete",
+        "outcomes": ["pass", "invalid"],
+        "raw_text": damaged,
+        "resolved": None,
+        "error_type": "WorkbenchHarborArtifactError",
+        "calls": [
+            {"agent": "nop", "login": None, "agent_env_option": False},
+            {"agent": "codex", "login": "1", "agent_env_option": False},
+        ],
+        "captured_environment": {"CODEX_FORCE_AUTH_JSON": "1"},
+    }

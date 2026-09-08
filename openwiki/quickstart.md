@@ -65,7 +65,7 @@ sources:
 generated: { by: "codex", at: "2026-09-08T14:06:39.851Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T14:06:39.851Z
+    at: 2026-09-08T15:20:02.026Z
 ---
 
 # Quickstart

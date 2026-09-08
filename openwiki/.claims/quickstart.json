@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:be18ad402b9e13f6bb1b4d903f81be0738ad4f736476c16651ffb27bcbdd8121",
+  "pageVersion": "sha256:d97be47b5c9fae1d08630a4d32fa413983f8df203d314708b68a360c8997fd2c",
   "claims": [
     {
       "id": "claim_b88dee80e2334471a6a24e3675d10bd3",
@@ -224,11 +224,11 @@
         },
         {
           "resource": "repo://src/agent_data_workbench/integrations/harbor/results.py",
-          "version": "repo-file-v1:sha256:182f2c2c90359b014c0a86d0117cb2296e3b911a2ac6c4808d835d144cca9249"
+          "version": "repo-file-v1:sha256:ffdd044f2f7054a4d3d3af65e58e1bccb5bfbb9ae9cde1ebaea17da84ab1f86d"
         },
         {
           "resource": "repo://ui/src/views/HarborComparison.tsx",
-          "version": "repo-file-v1:sha256:0ea8b8cca9b6dc18b11857c118380d2c7e9541a50a4830129061ffd639ffe95d"
+          "version": "repo-file-v1:sha256:71adaa46b09d0d9f698e80a1ab72420f89128b28d34457f54264dbaa97427e1a"
         }
       ]
     },
@@ -253,6 +253,6 @@
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T14:06:39.851Z"
+    "at": "2026-09-08T15:20:02.026Z"
   }
 }

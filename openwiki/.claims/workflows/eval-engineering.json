@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:3ef16ac7f5e9919a1ad3ba194740dce7e69f41515c269470986d34355868e49b",
+  "pageVersion": "sha256:6d6bea46b88581bf9a132708d6fea82cc2ebcbd2d981f4311c5eb8e326b3ce0f",
   "claims": [
     {
       "id": "claim_69fd6c03ae1f4359840452ae8bb67826",
@@ -114,15 +114,15 @@
       "evidence": [
         {
           "resource": "repo://src/agent_data_workbench/integrations/harbor/commands.py",
-          "version": "repo-file-v1:sha256:4103393686a4017b1aff84948879f8e9720c9640d82037e5f159376808ea6c00"
+          "version": "repo-file-v1:sha256:722f4411c6a816f0d866aab4b8f8684f3586793ef0df94c18e0e374258fca848"
         },
         {
           "resource": "repo://src/agent_data_workbench/integrations/harbor/exporting.py",
-          "version": "repo-file-v1:sha256:45fc01151eaa86fe60c4d07d44beda6c4492683a403eeb47a40c3ea2a352fb56"
+          "version": "repo-file-v1:sha256:bad5ac1b50b50e264f1cbdf538ec10c05c8a3da8ee943492d86f346802993f2b"
         },
         {
           "resource": "repo://src/agent_data_workbench/integrations/harbor/runtime.py",
-          "version": "repo-file-v1:sha256:b36436ab1b6b00659f1cb83cbe5d7883a9e64f35455d8671b5854d14d757d83c"
+          "version": "repo-file-v1:sha256:b9fec751efe1b26b18170d0334a98238700e847ea81831ba46a42d89ac246b49"
         }
       ]
     },
@@ -146,13 +146,31 @@
         },
         {
           "resource": "repo://src/agent_data_workbench/integrations/harbor/results.py",
-          "version": "repo-file-v1:sha256:182f2c2c90359b014c0a86d0117cb2296e3b911a2ac6c4808d835d144cca9249"
+          "version": "repo-file-v1:sha256:ffdd044f2f7054a4d3d3af65e58e1bccb5bfbb9ae9cde1ebaea17da84ab1f86d"
+        }
+      ]
+    },
+    {
+      "id": "claim_546c6777942d4450a1e0742282794ee6",
+      "statement": "Harbor exports record process environment overrides separately from argv, and malformed JSON artifacts retain their raw text while the affected comparison trial is graded invalid.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/integrations/harbor/artifacts.py#L8-L16",
+          "version": "repo-lines-v1:sha256:485591c0d4873e02db83dc58968a485801be9a81941fa687a887cb5e2346b45b:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjRjYjgzNzFlMzhhNTg3MzNkNjAyZTUyNDNiYmE4ZDQ3MjQxNDkyZjYwNjhlNDI0MmZlZWQ0ZWJhM2M5MTcyYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODE3YzkzNjZkN2JkYmExYzliMTEzODcwYTE4MTE3Njc5NmQ1ZmIzYjQ1YmUxN2QxODVlZTNlYWJmYzY1YTk1ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZWRkNDY4ZjRhZGIxODE3OThmODkwYjlhNTFiZDY1NTY0YTBmMzlkNzY4OTc5ODM2OTdjNzA4MzdmYzJiNTc4YiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/integrations/harbor/exporting.py",
+          "version": "repo-file-v1:sha256:bad5ac1b50b50e264f1cbdf538ec10c05c8a3da8ee943492d86f346802993f2b"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/integrations/harbor/results.py#L59-L165",
+          "version": "repo-lines-v1:sha256:c8263279578d353a5eac9cf49d5be173ca013354d7e75347c8bc0ab4d0c60b5d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA3LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIyMTBmY2Q0MmZjMGQ4NGQ3YzZhOGFkZGMxZjlmNWFmY2E3MzhhNDJkMzZkMWEwMDZhMzNlMTZmZjU1OTQyMmI4IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0ODkzZjQwZTM3ODFlYjg5NmM4MmQwNDZhMDgwNjdhMTFlMzVjZGYyZjFkZmFmMjZmZWE5MGI4ZGI2Njc2NDEzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIwZjBhNDdmMTcwNjMwOWIwMjBlNDRiMmFjOGZkZWYwMGYwOWIyYzlkZDM5YjQ3NjkyZGY3M2IyZjk3YmVmY2U3IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T04:50:29.215Z"
+    "at": "2026-09-08T15:20:02.026Z"
   }
 }

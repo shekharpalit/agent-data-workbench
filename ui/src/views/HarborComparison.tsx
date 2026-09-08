@@ -2,6 +2,7 @@ import { useState } from "react";
 import { api } from "../api";
 import type { Route } from "../contracts";
 import type { HarborAgentConfig } from "../workflow-contracts";
+import { HarborCodexLogin } from "../components/HarborCodexLogin";
 import { RuntimeStatus } from "../components/RuntimeStatus";
 import { ActionButton, Card, Details, Field } from "../components/shared";
 
@@ -32,6 +33,8 @@ export function HarborComparisonForm({
   const [candidate, setCandidate] = useState({ agent: "", model: "" });
   const [baselineKwargs, setBaselineKwargs] = useState("{}");
   const [candidateKwargs, setCandidateKwargs] = useState("{}");
+  const [baselineLogin, setBaselineLogin] = useState(false);
+  const [candidateLogin, setCandidateLogin] = useState(false);
   const [environment, setEnvironment] = useState("docker");
   const [repeats, setRepeats] = useState("1");
   const [reward, setReward] = useState("reward");
@@ -75,6 +78,16 @@ export function HarborComparisonForm({
                 label={`${variant} model (optional)`}
                 value={value.model}
                 onChange={(model) => change({ ...value, model })}
+              />
+              <HarborCodexLogin
+                agent={value.agent}
+                checked={
+                  variant === "baseline" ? baselineLogin : candidateLogin
+                }
+                onChange={
+                  variant === "baseline" ? setBaselineLogin : setCandidateLogin
+                }
+                label={`${variant} use host Codex login`}
               />
               <Details title={`${variant} agent options`}>
                 <Field
@@ -151,10 +164,16 @@ export function HarborComparisonForm({
             template_directory: template,
             baseline: {
               ...baseline,
+              agent: baseline.agent.trim(),
+              use_host_codex_login:
+                baseline.agent.trim() === "codex" && baselineLogin,
               agent_kwargs: parseKwargs(baselineKwargs),
             },
             candidate: {
               ...candidate,
+              agent: candidate.agent.trim(),
+              use_host_codex_login:
+                candidate.agent.trim() === "codex" && candidateLogin,
               agent_kwargs: parseKwargs(candidateKwargs),
             },
             environment_type: environment,

@@ -2,11 +2,12 @@ import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { expect, it, vi } from "vitest";
-import type { Trace } from "../src/contracts";
+import type { Experiment, Trace } from "../src/contracts";
 import type { ReactNode } from "react";
 import { api } from "../src/api";
 import { ImportsView } from "../src/views/Imports";
 import { DatasetView } from "../src/views/Dataset";
+import { ExperimentDetail } from "../src/views/Experiments";
 import { HarborComparisonForm } from "../src/views/HarborComparison";
 import { Conversation } from "../src/components/traces/Conversation";
 import { traceMessages } from "../src/components/traces/presentation";
@@ -175,10 +176,8 @@ it("Given Harbor setup, When launching a comparison, Then sends both agent confi
     "/tmp/template",
   );
   await user.type(screen.getByLabelText("baseline agent"), "my_agent:Baseline");
-  await user.type(
-    screen.getByLabelText("candidate agent"),
-    "my_agent:Candidate",
-  );
+  await user.type(screen.getByLabelText("candidate agent"), "codex");
+  await user.click(screen.getByLabelText("candidate use host Codex login"));
   await user.click(
     screen.getByRole("button", { name: "Run baseline & candidate" }),
   );
@@ -191,8 +190,18 @@ it("Given Harbor setup, When launching a comparison, Then sends both agent confi
       "task",
       {
         template_directory: "/tmp/template",
-        baseline: { agent: "my_agent:Baseline", model: "", agent_kwargs: {} },
-        candidate: { agent: "my_agent:Candidate", model: "", agent_kwargs: {} },
+        baseline: {
+          agent: "my_agent:Baseline",
+          model: "",
+          agent_kwargs: {},
+          use_host_codex_login: false,
+        },
+        candidate: {
+          agent: "codex",
+          model: "",
+          agent_kwargs: {},
+          use_host_codex_login: true,
+        },
         environment_type: "docker",
         repetitions: 1,
         reward_key: "reward",
@@ -202,3 +211,54 @@ it("Given Harbor setup, When launching a comparison, Then sends both agent confi
     ],
   ]);
 });
+
+it.each(["running", "complete"] as const)(
+  "Given a %s experiment with an incomplete pair, When inspecting it, Then distinguishes provisional pairing from final invalid outcomes",
+  async (status) => {
+    // Given
+    const counts = {
+      passed: 0,
+      failed: 0,
+      invalid: 0,
+      total: 0,
+      valid: 0,
+      pass_rate: null,
+      recorded_cost_usd: null,
+      cost_coverage: 0,
+      mean_latency_seconds: null,
+    };
+    const experiment = {
+      id: "experiment",
+      status,
+      split: "exploratory",
+      repeats: 1,
+      conclusion: "Harbor comparison",
+      trials: [],
+      summary: {
+        baseline: counts,
+        candidate: counts,
+        improved: [],
+        regressed: [],
+        invalid_pairs: [{ task_id: "task", trial: 0 }],
+        task_mean_delta: null,
+        task_bootstrap_95_interval: null,
+        uncertainty_note: "One source group",
+      },
+    } as unknown as Experiment;
+    vi.spyOn(api, "artifact").mockResolvedValue(experiment);
+    // When
+    show(<ExperimentDetail id="experiment" navigate={vi.fn()} />);
+    await screen.findByRole("heading", { name: "Paired outcomes" });
+    // Then
+    expect({
+      provisional:
+        screen.queryByText(
+          /pair counts are provisional until both variants finish/,
+        ) !== null,
+      invalid: screen.queryByText(/1 invalid pairs/) !== null,
+    }).toStrictEqual({
+      provisional: status === "running",
+      invalid: status === "complete",
+    });
+  },
+);

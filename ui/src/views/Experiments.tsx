@@ -135,8 +135,10 @@ export function ExperimentDetail({
           <Card title="Paired outcomes">
             <p>
               {summary.improved.length} improvements ·{" "}
-              {summary.regressed.length} regressions ·{" "}
-              {summary.invalid_pairs.length} invalid pairs
+              {summary.regressed.length} regressions
+              {experiment.status === "running"
+                ? " · pair counts are provisional until both variants finish"
+                : ` · ${summary.invalid_pairs.length} invalid pairs`}
             </p>
             <Table
               headings={["Task", "Trial", "Variant", "Outcome", "Evidence"]}

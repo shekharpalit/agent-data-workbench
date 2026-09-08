@@ -1,6 +1,6 @@
 """Explicit configuration for Harbor exports and paired executions."""
 
-from pydantic import Field
+from pydantic import Field, model_validator
 
 from agent_data_workbench.shared.contracts import Contract
 
@@ -9,6 +9,13 @@ class HarborAgentConfig(Contract):
     agent: str = Field(min_length=1)
     model: str = ""
     agent_kwargs: dict[str, str | int | float | bool] = Field(default_factory=dict)
+    use_host_codex_login: bool = False
+
+    @model_validator(mode="after")
+    def validate_codex_login(self) -> "HarborAgentConfig":
+        if self.use_host_codex_login and self.agent != "codex":
+            raise ValueError("The host Codex login option requires the codex agent")
+        return self
 
 
 class HarborExportConfig(HarborAgentConfig):

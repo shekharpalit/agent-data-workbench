@@ -36,6 +36,8 @@ sources:
     resource: repo://src/agent_data_workbench/exploration/lineage.py
   - id: openwiki-source-8b95b7fe4c43d79511f093d7
     resource: repo://src/agent_data_workbench/exploration/schemas.py
+  - id: openwiki-source-2c6ca2c432f71cd1c01e4d4b
+    resource: repo://src/agent_data_workbench/integrations/harbor/contracts.py
   - id: openwiki-source-1c842561c46278adab40a06d
     resource: repo://src/agent_data_workbench/research/mcp.py
   - id: openwiki-source-2dbe8753da4267ce652f414e
@@ -54,6 +56,8 @@ sources:
     resource: repo://ui/src/App.tsx
   - id: openwiki-source-74100799ff8e26159a68e317
     resource: repo://ui/src/components/graphs/ClusterGraph.tsx
+  - id: openwiki-source-9fac10da181d7d7fd8cb978e
+    resource: repo://ui/src/components/HarborCodexLogin.tsx
   - id: openwiki-source-c6d4399e4032ee953ab85f39
     resource: repo://ui/src/components/traces/Conversation.tsx
   - id: openwiki-source-5bdf087920ed404535bafa26
@@ -86,10 +90,10 @@ sources:
     resource: repo://ui/tests/research.test.tsx
   - id: openwiki-source-826d1e88c728d7cfae868e97
     resource: repo://ui/tests/workflow.test.tsx
-generated: { by: "codex", at: "2026-09-08T14:40:31.067Z" }
+generated: { by: "codex", at: "2026-09-08T15:20:02.026Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T14:40:31.067Z
+    at: 2026-09-08T15:20:02.026Z
 ---
 
 # Run the local workbench
@@ -186,7 +190,7 @@ For UI changes, [rebuild the TypeScript bundle](../development/contributing.md),
 
 ## Human eval engineering
 
-Start with **World specifications** to capture sourced domain rules, schemas, tool contracts and permissions. Save a draft, resolve outstanding questions in a new immutable version, and record reviewer and reason for acceptance. Task specification JSON can pin that world and define environment commands, state criteria and conversation turns. Accepted task detail offers **Run a Harbor comparison** with an existing local template, baseline/candidate targets and verifier settings. The background operation imports paired results and available generated trajectories automatically; the lower-level **Harbor export** remains available. See [Harbor comparisons](../integrations/harbor.md).
+Start with **World specifications** to capture sourced domain rules, schemas, tool contracts and permissions. Save a draft, resolve outstanding questions in a new immutable version, and record reviewer and reason for acceptance. Task specification JSON can pin that world and define environment commands, state criteria and conversation turns. Accepted task detail offers **Run a Harbor comparison** with an existing local template, baseline/candidate targets and verifier settings. The background operation imports paired results and available generated trajectories automatically; the lower-level **Harbor export** remains available. For the built-in Codex target, **Use host Codex login** explicitly passes the backend user's existing subscription login to the trusted task environment. Other targets keep their own Harbor credential setup. See [Harbor comparisons](../integrations/harbor.md).
 
 In **Grader calibration**, choose a recorded experiment and create a calibration. Review the frozen requirements, chronological turns and observed state. Grader verdicts are hidden before a first assessment until explicitly revealed. Save pass/fail/invalid, a reason and optional cause; adjudication is bound to the exact displayed human label set. Reviewer identity is locally declared, not account authentication.
 

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { HarborCodexLogin } from "../components/HarborCodexLogin";
 import { api } from "../api";
 import type { HarborExport } from "../workflow-contracts";
 import {
@@ -12,6 +13,7 @@ export function HarborExportForm({ taskId }: { taskId: string }) {
   const [template, setTemplate] = useState("");
   const [agent, setAgent] = useState("");
   const [model, setModel] = useState("");
+  const [codexLogin, setCodexLogin] = useState(false);
   const [environment, setEnvironment] = useState("docker");
   const [repetitions, setRepetitions] = useState("1");
   const [result, setResult] = useState<HarborExport | null>(null);
@@ -51,6 +53,11 @@ export function HarborExportForm({ taskId }: { taskId: string }) {
               min={1}
             />
           </div>
+          <HarborCodexLogin
+            agent={agent}
+            checked={codexLogin}
+            onChange={setCodexLogin}
+          />
           <ActionButton
             action={async () => {
               if (
@@ -67,7 +74,8 @@ export function HarborExportForm({ taskId }: { taskId: string }) {
               setResult(
                 await api.exportHarbor(taskId, {
                   template_directory: template,
-                  agent,
+                  agent: agent.trim(),
+                  use_host_codex_login: agent.trim() === "codex" && codexLogin,
                   model,
                   environment_type: environment,
                   repetitions: Number(repetitions),
@@ -85,7 +93,16 @@ export function HarborExportForm({ taskId }: { taskId: string }) {
             </p>
             <p className="scope-note">{result.validation}</p>
             <Details title="Harbor launch arguments">
-              <JsonView value={result.command} />
+              <JsonView
+                value={{
+                  command: result.command,
+                  environment: result.environment ?? {},
+                }}
+              />
+              <p className="muted">
+                Apply these environment values when launching the command
+                yourself. The workbench runner applies them automatically.
+              </p>
             </Details>
             <Details title="Export manifest and source identity">
               <JsonView value={result} />

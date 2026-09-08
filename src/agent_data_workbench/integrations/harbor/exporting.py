@@ -20,7 +20,7 @@ from agent_data_workbench.shared.json import digest, json_text
 from agent_data_workbench.shared.time import now
 from agent_data_workbench.workspace.project import Project
 
-from .commands import _command
+from .commands import _command, _environment
 from .contracts import HarborExportConfig
 
 
@@ -142,6 +142,7 @@ def _export_harbor(project: Project, task_id: str, config: HarborExportConfig) -
             "bundle_sha256": digest(files),
             "bundle_directory": str(bundle),
             "command": command,
+            "environment": _environment(config),
             "conversation_continuity": bool(conversation),
             "validation": "exported; execute and calibrate the supplied Harbor verifier",
             "sources": [

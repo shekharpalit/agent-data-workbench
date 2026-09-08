@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:ba3c2fbe08c29b84f0b2001ea5ab6c4dae63c9324483493bd45ec7411da98358",
+  "pageVersion": "sha256:e10f90d0abc82149de50337c569adea581a58a180c0a200ce5c2aa5c0e4d5bdf",
   "claims": [
     {
       "id": "claim_80e3a5075dd34ed7b7f0393a15e92a9a",
@@ -326,7 +326,7 @@
       "evidence": [
         {
           "resource": "repo://tests/test_harbor_comparison.py",
-          "version": "repo-file-v1:sha256:ef9b6c3d544c98c0e11a406274f9efbcd30b9bc40cdb98290574fa74648e1876"
+          "version": "repo-file-v1:sha256:0c3a04b4255a0f9765d799addcacb039575e2055bce587b07691202af4094738"
         },
         {
           "resource": "repo://tests/test_huggingface.py",
@@ -340,7 +340,7 @@
       "evidence": [
         {
           "resource": "repo://ui/tests/data-workflows.test.tsx",
-          "version": "repo-file-v1:sha256:c6c5bf05bd781ee400d357c29e63da5ae7d6784a1c2641d3c9e1bff0189c7efb"
+          "version": "repo-file-v1:sha256:1c1e709a4dd593aaa2548d2c577c44a5838e697c61f5166f3f3506c52d33c49e"
         }
       ]
     },
@@ -353,10 +353,30 @@
           "version": "repo-file-v1:sha256:2527e6d3d1c9132edaa6f59355a975fb07fde47d58e6b06312482a6634e7c8cb"
         }
       ]
+    },
+    {
+      "id": "claim_f2addd9e4ceb4d11b7e6ee15b295ef25",
+      "statement": "Harbor regressions preserve malformed result or trajectory JSON as raw text, mark the affected candidate invalid without aborting the comparison, and pass the Codex host-login flag through the subprocess environment instead of agent env CLI options.",
+      "evidence": [
+        {
+          "resource": "repo://tests/test_harbor_comparison.py#L202-L270",
+          "version": "repo-lines-v1:sha256:b01959b1084b6362eb2b3580b7a58f98cf44a946163d307efc5966adb7da3c04:eyJzZWxlY3RlZExpbmVDb3VudCI6NjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhhNjhiNjBkMjY1Y2E5MGE3MGU0YTRmMGM1NTU3NWMzNzllOThiMTZmNmFiNjA1YjA3YzVmOGI4NDMwODI3OWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmYmQwMDkzMTRiYzI3MDg0MTY3MzRhMDJhZTVmZjM5YTFlNDhhMDUwYmU5MWY0M2IyZmFhOTIwMDJjNjJiZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3f0a112de3cc487daa4d4deca6877e99",
+      "statement": "UI regression coverage distinguishes provisional pairing during a running experiment from invalid pair counts after completion.",
+      "evidence": [
+        {
+          "resource": "repo://ui/tests/data-workflows.test.tsx",
+          "version": "repo-file-v1:sha256:1c1e709a4dd593aaa2548d2c577c44a5838e697c61f5166f3f3506c52d33c49e"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T04:50:29.215Z"
+    "at": "2026-09-08T15:20:02.026Z"
   }
 }

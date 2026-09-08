@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:6f995768040aaba72a4aa127b6b09a40e7ed6f141c80a09272748e5241a91faf",
+  "pageVersion": "sha256:aed59ed0ea47433201145fbe66e223797f4027011745515c4b270a86507a22c6",
   "claims": [
     {
       "id": "claim_25574e40cfb048b39464c4e95bba596d",
@@ -300,11 +300,11 @@
         },
         {
           "resource": "repo://ui/src/views/Experiments.tsx",
-          "version": "repo-file-v1:sha256:1151cb7c4aa0a5e3f5f15cf99b2d060c15b5963f887e018913a6446f02786795"
+          "version": "repo-file-v1:sha256:e650fb93692fa942c1992a8db8ec40b5c6af932f23bdcf26b8b8c128cab5dab0"
         },
         {
           "resource": "repo://ui/src/views/HarborComparison.tsx",
-          "version": "repo-file-v1:sha256:0ea8b8cca9b6dc18b11857c118380d2c7e9541a50a4830129061ffd639ffe95d"
+          "version": "repo-file-v1:sha256:71adaa46b09d0d9f698e80a1ab72420f89128b28d34457f54264dbaa97427e1a"
         }
       ]
     },
@@ -361,10 +361,28 @@
           "version": "repo-file-v1:sha256:d4024d41103d19c220a960a6e5180e02eca3be270aef67178b31774b3b5c3fd5"
         }
       ]
+    },
+    {
+      "id": "claim_4755c6566c6f428f9e88cae1748c54a2",
+      "statement": "Accepted-task Harbor controls expose an explicit host Codex login option for built-in Codex targets; configuration stores the opt-in, not credential contents.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/integrations/harbor/contracts.py#L8-L18",
+          "version": "repo-lines-v1:sha256:d8a978096f7fc3a702d9699a8d885cba045b21db461f4d616cbacd96064c7414:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhZmRkYWQxYjQxNDBhZDY2N2M4ZWQ1ZDIyM2NkMWZlYmUxYmU0MGVmMmM1YTFhNjY5MDM3OWUwZmQ1ZWQ3ZjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEyYWIwOTBiY2QxNjIwZmE2MmVhZWUxNTdhNzRmY2E2MzVhYTI5ZTEyY2JmZmQ2MThiNTc5MmQ4N2JjMDNhM2YiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMxOGE0YzI1YjhkMGEwMWM2MjY0ZjBhZjM3NWMxZTEyMzE0MTcwZjdjOTkwZDBjNmJlMzMxNGNkMDI3ODdkNmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM4ZDJhY2NmN2I3MmIyMTVjMjdlZDk5OTc1NTc4ZTcwNGE0MjczNTJjZWMyMzQwODhmMzM3MTI0ZDUxOGU2NGEifQ"
+        },
+        {
+          "resource": "repo://ui/src/components/HarborCodexLogin.tsx",
+          "version": "repo-file-v1:sha256:4a41c8c0bd24de0c4e1f7f0da5e7a862c68c1e317bd1bcbae9dc17c4b2a04d05"
+        },
+        {
+          "resource": "repo://ui/src/views/HarborComparison.tsx",
+          "version": "repo-file-v1:sha256:71adaa46b09d0d9f698e80a1ab72420f89128b28d34457f54264dbaa97427e1a"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T14:40:31.067Z"
+    "at": "2026-09-08T15:20:02.026Z"
   }
 }

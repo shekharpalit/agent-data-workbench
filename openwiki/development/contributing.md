@@ -72,10 +72,10 @@ sources:
     resource: repo://ui/tests/research.test.tsx
   - id: openwiki-source-a741d432f952c0dbfb4fb35d
     resource: repo://ui/vite.config.ts
-generated: { by: "codex", at: "2026-09-08T04:50:29.215Z" }
+generated: { by: "codex", at: "2026-09-08T15:20:02.026Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T04:50:29.215Z
+    at: 2026-09-08T15:20:02.026Z
 ---
 
 # Development and verification
@@ -180,9 +180,9 @@ The ingest CLI now defaults to one file per run; use `--layout records` for prio
 
 `tests/test_huggingface.py` exercises a real synthetic Parquet file, nested long-row preservation, explicit row selections, stable identities for identical attempts, atomic rollback, failed-access receipts and rejection of changed group mappings. It substitutes the Hub metadata transport and requires no remote dataset. `tests/test_dataset_profile.py` checks exact matching-corpus counts and unknown outcomes without inferring failures from words in a message.
 
-`tests/test_harbor_comparison.py` checks frozen-task pairing, alternating target order, imported trajectories, invalid verifier rewards, generated evidence links and complete failure logs with synthetic commands. Run a supplied real environment separately to validate Docker/provider integration. These deterministic tests do not establish model quality.
+`tests/test_harbor_comparison.py` checks frozen-task pairing, alternating target order, imported trajectories, invalid verifier rewards, generated evidence links and complete failure logs with synthetic commands. Run a supplied real environment separately to validate Docker/provider integration. These deterministic tests do not establish model quality. Malformed Harbor result and trajectory JSON is exercised separately: the comparison must finish with an invalid outcome, retain the original text and keep the generated evidence link. The Codex login regression checks that the nonsecret opt-in flag is passed in the Harbor child environment, never through `--ae`.
 
-`ui/tests/data-workflows.test.tsx` verifies dataset mappings, deliberate row selection, long-message tail access, group pagination and Harbor configuration submission. `ui/tests/jobs.test.ts` checks result destinations. Browser QA should import a public selection, follow a chart to its exact records, launch a deterministic Harbor comparison and inspect its generated trajectory and experiment link. Keep downloaded rows and validation reports outside Git.
+`ui/tests/data-workflows.test.tsx` verifies dataset mappings, deliberate row selection, long-message tail access, group pagination and Harbor configuration submission, explicit host Codex login and provisional pairing while an experiment runs. `ui/tests/jobs.test.ts` checks result destinations. Browser QA should import a public selection, follow a chart to its exact records, launch a deterministic Harbor comparison and inspect its generated trajectory and experiment link. Keep downloaded rows and validation reports outside Git.
 
 ## Change the owning package
 

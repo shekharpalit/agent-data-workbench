@@ -1,5 +1,6 @@
 """Execute a frozen Harbor bundle and retain the complete local job directory."""
 
+import os
 from pathlib import Path
 
 from agent_data_workbench.evaluation.tasks.contracts import TaskSpec
@@ -12,7 +13,7 @@ from agent_data_workbench.shared.processes import run_process
 from agent_data_workbench.shared.time import now
 from agent_data_workbench.workspace.project import Project
 
-from .commands import _command
+from .commands import _command, _environment
 from .contracts import HarborAgentConfig, HarborExportConfig
 from .exporting import _expose_final_source, _files
 
@@ -79,6 +80,7 @@ def _run_harbor_export(
         "config": config.model_dump(),
         "job_directory": str(bundle.parent / "jobs" / run_id),
         "command": args,
+        "environment": _environment(config),
         "harbor_version": version,
         "source_sha256": sources,
         "logs": {
@@ -92,7 +94,14 @@ def _run_harbor_export(
     path = bundle.parent / (run_id + ".json")
     save(path, result)
     try:
-        run_process(args, "", bundle.parent, timeout, log_prefix=bundle.parent / run_id)
+        run_process(
+            args,
+            "",
+            bundle.parent,
+            timeout,
+            log_prefix=bundle.parent / run_id,
+            env={**os.environ, **_environment(config)},
+        )
         check_sources(sources)
         if _files(bundle) != manifest["files"]:
             raise ValueError("Harbor bundle changed during execution")
