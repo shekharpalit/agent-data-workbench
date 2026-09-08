@@ -1,36 +1,36 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:c75969c71d16fa6799fce5543bf4a36108ce455a2b1699b7958d7e806d106eb3",
+  "pageVersion": "sha256:26faab905a5b02238db189f3bec64386270e018b5b700ab0f27d3b4eb008a336",
   "claims": [
     {
       "id": "claim_80e3a5075dd34ed7b7f0393a15e92a9a",
       "statement": "The repository uses Python 3.14.7 for development, declares Python 3.14+ support, targets py314 in Ruff, and excludes prereleases in uv resolution.",
       "evidence": [
         {
-          "resource": "repo://.python-version#L1-L1",
-          "version": "repo-lines-v1:sha256:922fe0c3de073b01988e23348ea184456161678c5e329e6f34be89be24383f93:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTIyZmUwYzNkZTA3M2IwMTk4OGUyMzM0OGVhMTg0NDU2MTYxNjc4YzVlMzI5ZTZmMzRiZTg5YmUyNDM4M2Y5MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTIyZmUwYzNkZTA3M2IwMTk4OGUyMzM0OGVhMTg0NDU2MTYxNjc4YzVlMzI5ZTZmMzRiZTg5YmUyNDM4M2Y5MyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+          "resource": "repo://.python-version",
+          "version": "repo-file-v1:sha256:922fe0c3de073b01988e23348ea184456161678c5e329e6f34be89be24383f93"
         },
         {
           "resource": "repo://pyproject.toml#L10-L10",
-          "version": "repo-lines-v1:sha256:4e76877e94051bff0fdd30652a676b692e3d2a1e581fc2169282256d13cb1c2d:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGU3Njg3N2U5NDA1MWJmZjBmZGQzMDY1MmE2NzZiNjkyZTNkMmExZTU4MWZjMjE2OTI4MjI1NmQxM2NiMWMyZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGU3Njg3N2U5NDA1MWJmZjBmZGQzMDY1MmE2NzZiNjkyZTNkMmExZTU4MWZjMjE2OTI4MjI1NmQxM2NiMWMyZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMWFjMDE5YjY4OGE1OTMzM2NkOTE1NTQ3NWM0OWJlNmI2M2RjMjFiM2I0NzA5ZGZiZTdmNTZmNDFkOWYzMWZjMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjVjZjU2MTMwNzE2ZTMzY2M5ZTg4YmFhMGRmODhmNjAyZjNmN2UyMzcxZWJhMDJhYTdkZWU0ZjBiNWFjZmZlYyJ9"
+          "version": "repo-lines-v1:sha256:4e76877e94051bff0fdd30652a676b692e3d2a1e581fc2169282256d13cb1c2d:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGU3Njg3N2U5NDA1MWJmZjBmZGQzMDY1MmE2NzZiNjkyZTNkMmExZTU4MWZjMjE2OTI4MjI1NmQxM2NiMWMyZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGU3Njg3N2U5NDA1MWJmZjBmZGQzMDY1MmE2NzZiNjkyZTNkMmExZTU4MWZjMjE2OTI4MjI1NmQxM2NiMWMyZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjcwZGY4MjkwYTZjMjY1Mjc4NjJjZDY2MzNjMjQwZGFiODBmYjljOGU3ZjliM2RhZTE0Y2ZkMTdhYzhhOWM0OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjVjZjU2MTMwNzE2ZTMzY2M5ZTg4YmFhMGRmODhmNjAyZjNmN2UyMzcxZWJhMDJhYTdkZWU0ZjBiNWFjZmZlYyJ9"
         },
         {
-          "resource": "repo://pyproject.toml#L37-L45",
-          "version": "repo-lines-v1:sha256:acd99c5734d7da488268cb64bc14112642ae33daaff6fe72dc2fa1de083a1ecb:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODNhMDA5ZjBjYTU2MzRiNzcwMjAyMDk0MmZkMTg5Y2RjZDg0YjE2N2FiODAxNTAxMjhlNmY1YjVkYmYyNDAzMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjVhODFkNzQ3NGZhMDRjYWUyYTkxZWJlMzhjMDJmZGQzMjM0OWZhYmIzNDFlOTlhNzYyYTQ5ZTNlODBmMjY2MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOWY2OTcxZTI1MjgyZjUxODRkZmVlYjgzOGE3ZWFlOTA4ZGQyNDRjMjAzOTI4MmZkNjViMjllZWIxMWQ0YWYyNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzM5MzFhMGJlOWQwMDE1OTQxZDE3YmU3OTk3ZTU2MmNkZWQyNDQxMDhjNDdhOTZmMzdkMTVlMTFjNzUwNTBmNyJ9"
+          "resource": "repo://pyproject.toml#L44-L55",
+          "version": "repo-lines-v1:sha256:bc6a09abe3115fccc7473718d77a0c204c3276b6c69bb6ef9ca873e0237f48ba:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgzYTAwOWYwY2E1NjM0Yjc3MDIwMjA5NDJmZDE4OWNkY2Q4NGIxNjdhYjgwMTUwMTI4ZTZmNWI1ZGJmMjQwMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM3ZTRhMjRmZWUyYTM2YzUwZDVjMjExNTAwZGIxZjI2OWYwOGVlZTZlZmY3MTYzMDA4Y2Y3NTViZDdiNGY2MTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzOGZhOTllNzEwN2FkMmE4NGZlNzRkMmM4M2UwOTRlNzY4NGU2M2UxNjZhNDJiN2YzM2NjZjJkMTMxZTAyZmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
     },
     {
       "id": "claim_5394a41e2023448b8e72c4a3ec7b5fe9",
-      "statement": "The production frontend build checks TypeScript and replaces bundled assets; development watches and rebuilds without a separate UI server, retaining prior assets and polling while excluding generated files and dependencies.",
+      "statement": "The production frontend build checks TypeScript and replaces ignored ui/dist; development watches and rebuilds without a separate UI server, retaining prior assets and polling while excluding generated files and dependencies.",
       "evidence": [
         {
-          "resource": "repo://ui/package.json#L9-L15",
-          "version": "repo-lines-v1:sha256:b61ec3586d76a0ef1303353edd0292e58cb4a00196f2eb45d4dda80d7e8caa73:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzQ4MzNkNTk0OWMwM2E0MGNhOTUyNDkxNjEwYTY2NTk2NDRiM2FhNDY2MzYyZjc5OTAyMGRiZjE5ODE1NDdkYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTNlNWM0NGYxNTIxYzgyOGNmMWViYmVlOWMyZTk4Nzc2MzQzMDg3ZWEwMTVkYjRmYjRhMzljMjRkM2UyMTMyZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMmZjZGMxZWQzZGFkMGY2ZmVjYjhlMmJhOWQzNzUyM2VkYTYxZTg2YjI1M2NmOGNlZThkYmZjYzJlOTVjYzM1YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODI0OWI5ZTM3ZjZlNzkxZDY1ZjZkN2Q1MDljZmJhNGM4NjIxY2ZjNWE1ZmUyNmRiOTljMmYzMmY1YzM4MjhlNiJ9"
+          "resource": "repo://ui/package.json",
+          "version": "repo-file-v1:sha256:aac723d9f52b969a8ab8d7a4d36bd94b0a0f0c5c1e5be54280e12c661d4e1c3f"
         },
         {
-          "resource": "repo://ui/vite.config.ts#L4-L23",
-          "version": "repo-lines-v1:sha256:0e7718d29e90c698bc6f172b845471200e92639981282f87c598511a7794ecfe:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU3MjZmYmM5ZTNlZGNlYzUwZWRmZmI4MjQ3NDBjNTk0ZjcyNjZhOWNmODViMjgxMzZiMTU5ZTM2NTM5ZDlmYzYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMwZTA5MzFjZWVjZTljOGExNDlhMzY2ZDRkYTMwNmNmMDIxMmRlYzU3N2VkMjYyNmMzMTU5MjFlMWUzNzFiMzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://ui/vite.config.ts",
+          "version": "repo-file-v1:sha256:9d4e6da24291ffabaa1ad8ee15abd188d87f4f49a5762e5c2c50460795cbe667"
         }
       ]
     },
@@ -214,7 +214,7 @@
       "evidence": [
         {
           "resource": "repo://AGENTS.md",
-          "version": "repo-file-v1:sha256:309b6b8ae02190dfa0d48451dadc7dabf93471bb87a47081df75886a7ace9aac"
+          "version": "repo-file-v1:sha256:b2ca85dd59f7b28dbd76813b6851ad7fc941b641f64e8bfebac351518e21b46a"
         },
         {
           "resource": "repo://src/agent_data_workbench/exploration/clustering/tokenization.py",
@@ -239,10 +239,28 @@
           "version": "repo-file-v1:sha256:83b6c9bae8d8060240483b88ebc0580f3ebaec2e0e3edc9e9f2a1aa3add19ea1"
         }
       ]
+    },
+    {
+      "id": "claim_d02dd6422717406194acf15782c33e5f",
+      "statement": "Native source setup builds the TypeScript UI before editable installation; standard Hatch force-include packages ui/dist into wheels and source distributions without committing compiled assets.",
+      "evidence": [
+        {
+          "resource": "repo://AGENTS.md",
+          "version": "repo-file-v1:sha256:b2ca85dd59f7b28dbd76813b6851ad7fc941b641f64e8bfebac351518e21b46a"
+        },
+        {
+          "resource": "repo://README.md",
+          "version": "repo-file-v1:sha256:9627a54eed7b7b3ab99ebae7da8f6b52533b96eda109653efc615dbe7259868b"
+        },
+        {
+          "resource": "repo://pyproject.toml#L31-L42",
+          "version": "repo-lines-v1:sha256:6d34248a438dc01995f2affc3d901145b409b7105344c0d0cceebd536f589154:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAzYzBlNzIzOGYwYjE4Y2JlNmE0NjY2NDFmZGNkNTk0ODUyNDQ4ZGRmN2ZmODhkMGE5ZjQ5NTBlYWRlYzM5M2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg0N2FiMDc1M2NkZjg5MzMyYmQ2ZDU2YzY3OTVlMDM5MmE2M2FkMmU5ZTBhODNjMWNmNDgzMTg5NzgwNDFiNGIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM2N2M1YzE0MmM4YzE1MTFjNDgxMTI1MThhMWQ5MGE5OTJmYjkzM2ZlYmY1NmE3ODk5MGZhYjAyYWU3Mjg3ZWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIzMjg3NjM1YTBiZGJlZjliNGM1N2FlOTU5NGQwZWE5M2Y4ZGRmMWJmM2Y3MDA2MzVhZGRlMmUzNjhlMTI4MGIifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T00:33:25.897Z"
+    "at": "2026-09-08T00:51:51.689Z"
   }
 }

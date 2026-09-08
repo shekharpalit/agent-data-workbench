@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:18c652beb597fe09c7e8cbe34c8d9c90db2c5ff43501602e02093bc1a9ecf686",
+  "pageVersion": "sha256:64b849b9219d0e145c13b1ed6638bd4d92a7bc550a2fe7a73c8495f26335b8e3",
   "claims": [
     {
       "id": "claim_d9a6c98de02d49279a29adf7c1ea2d00",
@@ -74,7 +74,7 @@
       "evidence": [
         {
           "resource": "repo://src/agent_data_workbench/api/application.py#L26-L56",
-          "version": "repo-lines-v1:sha256:bc697de5cd4a850625f963a9cb798ec21bbe93674025717e31c54249918cd81b:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwN2I0OWI3OTcyZDI0NTc0MzJkODRmNjZjOThjODhmMzJlODM3NDEwOGFmOTdkYjg3YjdlZDRiOTllZGE0NmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkNjdiNDY2Mzc4NzVjM2JiN2Y5MDNiMWRiODczNGI0YTI5NjY4NWRmNGRiZTY2YTRmNmNlZjdmZGM0MTE2M2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVhYjM1ODMxZjk2NWQ4M2QxMDg0ODRkMzkwZDA1MGFhYzUwOWJiMGQ5ZmI0NDQ5YTU0MzA4NDUxYmY2MWNiNTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "version": "repo-lines-v1:sha256:4d03575d2db729e48a9a177ce77e12eb2d06b5ef709fc0ef60960eaf6d68419f:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwN2I0OWI3OTcyZDI0NTc0MzJkODRmNjZjOThjODhmMzJlODM3NDEwOGFmOTdkYjg3YjdlZDRiOTllZGE0NmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkNjdiNDY2Mzc4NzVjM2JiN2Y5MDNiMWRiODczNGI0YTI5NjY4NWRmNGRiZTY2YTRmNmNlZjdmZGM0MTE2M2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVhYjM1ODMxZjk2NWQ4M2QxMDg0ODRkMzkwZDA1MGFhYzUwOWJiMGQ5ZmI0NDQ5YTU0MzA4NDUxYmY2MWNiNTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
           "resource": "repo://src/agent_data_workbench/api/dependencies.py",
@@ -220,11 +220,11 @@
       "evidence": [
         {
           "resource": "repo://Dockerfile",
-          "version": "repo-file-v1:sha256:dd9853af09879c9e4be05b624de8596bbcba9637b8a01ab5e5e5fd681f19f759"
+          "version": "repo-file-v1:sha256:664294a887ba1cfef14e42c390f7f7c187b2ceaebf6f66f94e995ff17f222190"
         },
         {
           "resource": "repo://compose.yaml",
-          "version": "repo-file-v1:sha256:edcccb78e9f93ae41cddc541f39abdf47c74d83c0cdecaed1ce49678da821f80"
+          "version": "repo-file-v1:sha256:356fef054e1412606b833a84b869850c556fe9b3ec038589d21c3dee54bc5703"
         }
       ]
     },
@@ -252,11 +252,11 @@
       "evidence": [
         {
           "resource": "repo://Dockerfile",
-          "version": "repo-file-v1:sha256:dd9853af09879c9e4be05b624de8596bbcba9637b8a01ab5e5e5fd681f19f759"
+          "version": "repo-file-v1:sha256:664294a887ba1cfef14e42c390f7f7c187b2ceaebf6f66f94e995ff17f222190"
         },
         {
           "resource": "repo://compose.yaml",
-          "version": "repo-file-v1:sha256:edcccb78e9f93ae41cddc541f39abdf47c74d83c0cdecaed1ce49678da821f80"
+          "version": "repo-file-v1:sha256:356fef054e1412606b833a84b869850c556fe9b3ec038589d21c3dee54bc5703"
         }
       ]
     },
@@ -266,7 +266,7 @@
       "evidence": [
         {
           "resource": "repo://AGENTS.md",
-          "version": "repo-file-v1:sha256:309b6b8ae02190dfa0d48451dadc7dabf93471bb87a47081df75886a7ace9aac"
+          "version": "repo-file-v1:sha256:b2ca85dd59f7b28dbd76813b6851ad7fc941b641f64e8bfebac351518e21b46a"
         },
         {
           "resource": "repo://src/agent_data_workbench/__init__.py",
@@ -307,10 +307,32 @@
           "version": "repo-lines-v1:sha256:991b51a5e0ab7ba3940edfa99b71f0155a87184b03e4c806d9ac50886c470023:eyJzZWxlY3RlZExpbmVDb3VudCI6NDYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2OWExMzk3NWMyNTZlYzgzMjBlMjAxNjA4M2M5NmRmNjM3Y2EzZDM1YmViZGUyMzE0YmVlM2E0NzExYjU2Y2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5MDlhNTNhNjE4ZDAyOGUxZDMwMDBjMGE3YWJjZWVjYmU1ZmIzN2Y0ZTUxMWVmZTQ2NjQzZmFkNmU2Njg3MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZmYThkNzg5YTE4NGQ3NzdkNDc3NDgxZTJkNzc0NDc0NDk5NzQ2YTVlNTJhNjMxZmIzNGViNTlmMGY1ZmE2NWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
+    },
+    {
+      "id": "claim_7a41d07cf0e34186b391dcf1b9f3b662",
+      "statement": "Vite generates ignored ui/dist from the TypeScript source; Hatch includes it as wheel-only agent_data_workbench/_ui and in source distributions, while FastAPI serves packaged assets or the editable checkout build.",
+      "evidence": [
+        {
+          "resource": "repo://.gitignore",
+          "version": "repo-file-v1:sha256:507be25e69987ca181205dedcdd09962930dce6068bdc28e60cd809a0a6d30a9"
+        },
+        {
+          "resource": "repo://pyproject.toml",
+          "version": "repo-file-v1:sha256:262ae498da985ecea5916206333451473ec6023214750374f436ad16558c2ced"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/api/application.py#L27-L60",
+          "version": "repo-lines-v1:sha256:4d03575d2db729e48a9a177ce77e12eb2d06b5ef709fc0ef60960eaf6d68419f:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwN2I0OWI3OTcyZDI0NTc0MzJkODRmNjZjOThjODhmMzJlODM3NDEwOGFmOTdkYjg3YjdlZDRiOTllZGE0NmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkNjdiNDY2Mzc4NzVjM2JiN2Y5MDNiMWRiODczNGI0YTI5NjY4NWRmNGRiZTY2YTRmNmNlZjdmZGM0MTE2M2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVhYjM1ODMxZjk2NWQ4M2QxMDg0ODRkMzkwZDA1MGFhYzUwOWJiMGQ5ZmI0NDQ5YTU0MzA4NDUxYmY2MWNiNTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://ui/vite.config.ts",
+          "version": "repo-file-v1:sha256:9d4e6da24291ffabaa1ad8ee15abd188d87f4f49a5762e5c2c50460795cbe667"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T00:33:25.897Z"
+    "at": "2026-09-08T00:51:51.689Z"
   }
 }

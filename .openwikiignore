@@ -15,7 +15,7 @@ coverage/
 *.db
 *.db-*
 *.tsbuildinfo
-src/agent_data_workbench/web/assets/
+ui/dist/
 # Legacy documentation being replaced; source and tests are authoritative.
 /docs/
 /CONTRIBUTING.md

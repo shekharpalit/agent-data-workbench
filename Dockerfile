@@ -38,7 +38,7 @@ COPY pyproject.toml uv.lock .python-version README.md ./
 FROM python-base AS production-dependencies
 RUN --mount=type=cache,target=/root/.cache/uv uv sync --locked --no-dev --no-install-project
 COPY src/ ./src/
-COPY --from=frontend /app/src/agent_data_workbench/web/ ./src/agent_data_workbench/web/
+COPY --from=frontend /app/ui/dist/ ./ui/dist/
 RUN --mount=type=cache,target=/root/.cache/uv uv sync --locked --no-dev --no-editable
 
 FROM python-base AS development
@@ -51,7 +51,7 @@ COPY --chown=workbench:workbench src/ ./src/
 COPY --chown=workbench:workbench tests/ ./tests/
 COPY --chown=workbench:workbench ui/ ./ui/
 COPY --from=frontend --chown=workbench:workbench /app/ui/node_modules/ ./ui/node_modules/
-COPY --from=frontend --chown=workbench:workbench /app/src/agent_data_workbench/web/ ./src/agent_data_workbench/web/
+COPY --from=frontend --chown=workbench:workbench /app/ui/dist/ ./ui/dist/
 RUN --mount=type=cache,target=/root/.cache/uv uv sync --locked
 USER workbench
 EXPOSE 8765

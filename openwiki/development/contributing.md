@@ -12,6 +12,8 @@ sources:
     resource: repo://Makefile
   - id: openwiki-source-05ccef8d4cf1698187f20464
     resource: repo://pyproject.toml
+  - id: openwiki-source-23775c3de52f3ab95a13cb8b
+    resource: repo://README.md
   - id: openwiki-source-576495909f5ee2bf8d15af81
     resource: repo://src/agent_data_workbench/exploration/clustering/tokenization.py
   - id: openwiki-source-f0a6e7dc03522b2682f88655
@@ -58,10 +60,10 @@ sources:
     resource: repo://ui/tests/research.test.tsx
   - id: openwiki-source-a741d432f952c0dbfb4fb35d
     resource: repo://ui/vite.config.ts
-generated: { by: "codex", at: "2026-09-08T00:33:25.897Z" }
+generated: { by: "codex", at: "2026-09-08T00:51:51.689Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T00:33:25.897Z
+    at: 2026-09-08T00:51:51.689Z
 ---
 
 # Development and verification
@@ -81,9 +83,11 @@ Open the backend's printed private URL. Python source changes restart the backen
 
 ## Set up and verify Python natively
 
-The repository pins Python 3.14.7 in `.python-version`, declares Python 3.14+ support, and targets Python 3.14 in Ruff. Keep uv current enough to obtain the pinned interpreter.
+The repository pins Python 3.14.7 in `.python-version`, declares Python 3.14+ support, and targets Python 3.14 in Ruff. Keep uv current enough to obtain the pinned interpreter. A source checkout needs a supported Node version to build the UI before editable installation:
 
 ```sh
+npm ci --prefix ui
+npm --prefix ui run build
 uv sync --locked
 uv run pytest -q
 uv run ruff check src tests
@@ -104,7 +108,7 @@ npm --prefix ui test
 npm --prefix ui run format:check
 ```
 
-The production build runs strict TypeScript compilation, then Vite. Vite writes into `src/agent_data_workbench/web`, replacing the previous bundle. The development watcher retains existing assets while writing the next build, ignores its own output and dependencies, and uses filesystem polling for container bind mounts. Commit those assets with the source so Python installations work without Node. For iteration, run `npm --prefix ui run dev` beside the local Python workbench; it watches and rebuilds files rather than starting a separate UI development server. Refresh the browser after a rebuild.
+The production build runs strict TypeScript compilation, then Vite. Vite writes into ignored `ui/dist/`, replacing the previous production build. The development watcher retains existing assets while writing the next build, ignores its own output and dependencies, and uses filesystem polling for container bind mounts. Commit frontend source and configuration only. Hatch includes `ui/dist/` as package-only `agent_data_workbench/_ui/` in wheels and preserves `ui/dist/` in source distributions. Building a wheel from that source distribution needs no Node; building or installing an editable checkout requires the frontend build first. A missing `ui/dist/` causes packaging to fail instead of producing a package without its UI. For iteration, run `npm --prefix ui run dev` beside the local Python workbench; it watches and rebuilds files rather than starting a separate UI development server. Refresh the browser after a rebuild.
 
 ## Tests describe behavior
 

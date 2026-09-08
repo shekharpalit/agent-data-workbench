@@ -36,7 +36,7 @@ services:
       - ./src:/app/src:ro
       - ./tests:/app/tests:ro
       - project-data:/data
-      - web-assets:/app/src/agent_data_workbench/web:ro
+      - ui-build:/app/ui/dist:ro
     healthcheck: *workbench-health
     depends_on:
       ui:
@@ -53,7 +53,7 @@ services:
     volumes:
       - ./ui:/app/ui
       - ui-dependencies:/app/ui/node_modules
-      - web-assets:/app/src/agent_data_workbench/web
+      - ui-build:/app/ui/dist
     command: ["sh", "-c", "npm ci && exec npm run dev"]
     healthcheck:
       test:
@@ -65,7 +65,7 @@ services:
           import {readFileSync, accessSync} from "node:fs";
           import {join} from "node:path";
           import {JSDOM} from "jsdom";
-          const root = "/app/src/agent_data_workbench/web";
+          const root = "/app/ui/dist";
           const document = new JSDOM(readFileSync(join(root, "index.html"), "utf8")).window.document;
           const files = [...document.querySelectorAll('script[src], link[rel="stylesheet"][href]')];
           if (!files.some(element => element.tagName === "SCRIPT")) throw new Error("Waiting for UI build");
@@ -91,5 +91,5 @@ services:
 
 volumes:
   project-data:
-  web-assets:
+  ui-build:
   ui-dependencies:

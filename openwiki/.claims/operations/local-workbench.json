@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:c28b202cfc2c3cd9439f7ea717e11e56e4de62519d1da537680dd5cb95c0a848",
+  "pageVersion": "sha256:e444756aa70c567ddee4267805073b8bd463dde682e435ed68da0473db879428",
   "claims": [
     {
       "id": "claim_25574e40cfb048b39464c4e95bba596d",
@@ -40,11 +40,15 @@
     },
     {
       "id": "claim_42b415ea9f33489487d432daab2ccfb3",
-      "statement": "FastAPI serves the Python package’s bundled UI and assets, disables the default interactive API documentation routes, and returns a bounded 400 error envelope for structured validation failures.",
+      "statement": "FastAPI serves ui/dist in editable checkouts or package-only _ui assets in installed wheels, disables default interactive API documentation routes, and returns a bounded 400 error envelope for structured validation failures.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/api/application.py#L26-L56",
-          "version": "repo-lines-v1:sha256:bc697de5cd4a850625f963a9cb798ec21bbe93674025717e31c54249918cd81b:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwN2I0OWI3OTcyZDI0NTc0MzJkODRmNjZjOThjODhmMzJlODM3NDEwOGFmOTdkYjg3YjdlZDRiOTllZGE0NmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkNjdiNDY2Mzc4NzVjM2JiN2Y5MDNiMWRiODczNGI0YTI5NjY4NWRmNGRiZTY2YTRmNmNlZjdmZGM0MTE2M2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVhYjM1ODMxZjk2NWQ4M2QxMDg0ODRkMzkwZDA1MGFhYzUwOWJiMGQ5ZmI0NDQ5YTU0MzA4NDUxYmY2MWNiNTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://pyproject.toml#L31-L42",
+          "version": "repo-lines-v1:sha256:6d34248a438dc01995f2affc3d901145b409b7105344c0d0cceebd536f589154:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAzYzBlNzIzOGYwYjE4Y2JlNmE0NjY2NDFmZGNkNTk0ODUyNDQ4ZGRmN2ZmODhkMGE5ZjQ5NTBlYWRlYzM5M2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg0N2FiMDc1M2NkZjg5MzMyYmQ2ZDU2YzY3OTVlMDM5MmE2M2FkMmU5ZTBhODNjMWNmNDgzMTg5NzgwNDFiNGIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM2N2M1YzE0MmM4YzE1MTFjNDgxMTI1MThhMWQ5MGE5OTJmYjkzM2ZlYmY1NmE3ODk5MGZhYjAyYWU3Mjg3ZWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIzMjg3NjM1YTBiZGJlZjliNGM1N2FlOTU5NGQwZWE5M2Y4ZGRmMWJmM2Y3MDA2MzVhZGRlMmUzNjhlMTI4MGIifQ"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/api/application.py#L27-L60",
+          "version": "repo-lines-v1:sha256:4d03575d2db729e48a9a177ce77e12eb2d06b5ef709fc0ef60960eaf6d68419f:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwN2I0OWI3OTcyZDI0NTc0MzJkODRmNjZjOThjODhmMzJlODM3NDEwOGFmOTdkYjg3YjdlZDRiOTllZGE0NmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkNjdiNDY2Mzc4NzVjM2JiN2Y5MDNiMWRiODczNGI0YTI5NjY4NWRmNGRiZTY2YTRmNmNlZjdmZGM0MTE2M2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVhYjM1ODMxZjk2NWQ4M2QxMDg0ODRkMzkwZDA1MGFhYzUwOWJiMGQ5ZmI0NDQ5YTU0MzA4NDUxYmY2MWNiNTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
           "resource": "repo://src/agent_data_workbench/api/errors.py",
@@ -199,6 +203,6 @@
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T00:33:25.897Z"
+    "at": "2026-09-08T00:51:51.689Z"
   }
 }

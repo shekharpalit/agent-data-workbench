@@ -1,6 +1,7 @@
 """Compose FastAPI routers, dependencies, middleware and packaged assets."""
 
 from importlib.resources import files
+from pathlib import Path
 
 from fastapi import APIRouter, Depends, FastAPI, Request
 from fastapi.responses import FileResponse
@@ -46,11 +47,14 @@ def create_app(project: Project, *, origin: str, token: str) -> FastAPI:
         return request.app.openapi()
 
     app.include_router(api)
-    web = files("agent_data_workbench").joinpath("web")
-    app.mount("/assets", StaticFiles(directory=str(web.joinpath("assets"))), name="assets")
+    ui = files("agent_data_workbench").joinpath("_ui")
+    if not ui.is_dir():
+        # Editable checkouts serve the Vite build directly from the frontend project.
+        ui = Path(__file__).resolve().parents[3] / "ui" / "dist"
+    app.mount("/assets", StaticFiles(directory=str(ui.joinpath("assets"))), name="assets")
 
     @app.get("/", include_in_schema=False)
     def index():
-        return FileResponse(str(web.joinpath("index.html")), media_type="text/html")
+        return FileResponse(str(ui.joinpath("index.html")), media_type="text/html")
 
     return app

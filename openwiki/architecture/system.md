@@ -5,14 +5,18 @@ description: How the CLI, Python SDK, FastAPI service, React workbench, and loca
 tags: [architecture, sdk, persistence, provenance]
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T00:33:25.897Z
+    at: 2026-09-08T00:51:51.689Z
 sources:
+  - id: openwiki-source-ea70eb6c045047448e446296
+    resource: repo://.gitignore
   - id: openwiki-source-8037e2358a2c4f9b2c722a11
     resource: repo://AGENTS.md
   - id: openwiki-source-e201e686a785f09b6d899f0b
     resource: repo://compose.yaml
   - id: openwiki-source-bb1ebe868e35e9e500714501
     resource: repo://Dockerfile
+  - id: openwiki-source-05ccef8d4cf1698187f20464
+    resource: repo://pyproject.toml
   - id: openwiki-source-a06d79006637fc11757f605b
     resource: repo://src/agent_data_workbench/__init__.py
   - id: openwiki-source-6015b7f3661c24935a195829
@@ -71,7 +75,9 @@ sources:
     resource: repo://src/agent_data_workbench/workspace/project.py
   - id: openwiki-source-3e6ae5cbfb3aa3af0850499a
     resource: repo://tests/test_manual_research_api.py
-generated: { by: "codex", at: "2026-09-08T00:33:25.897Z" }
+  - id: openwiki-source-a741d432f952c0dbfb4fb35d
+    resource: repo://ui/vite.config.ts
+generated: { by: "codex", at: "2026-09-08T00:51:51.689Z" }
 ---
 
 # System architecture
@@ -116,7 +122,7 @@ All Python paths below are relative to `src/agent_data_workbench/`. The package 
 | `workbench/` | Typed startup configuration, session token and job status | `settings.py`, `runtime.py`, `jobs.py` |
 | `api/`, `cli/` | Typed HTTP and command entrypoints calling domain operations | `api/application.py`, `api/routers/`, `cli/__init__.py` |
 
-The React/TypeScript UI remains in `ui/`; the packaged browser assets remain in `web/`. Domain modules import shared infrastructure. Shared infrastructure does not import domain packages. Task contracts, persistence/review, grading, authoring and replay have separate modules inside `evaluation/tasks/`; moving a file should not mix these responsibilities again.
+The React/TypeScript UI source lives in the repository’s `ui/` directory. Vite generates ignored `ui/dist/`; compiled files are not committed under Python source. FastAPI serves that build in editable checkouts and package-only `_ui/` assets from installed wheels. Standard Hatch configuration includes the build in both wheels and source distributions, so installing a built distribution needs no Node runtime. Domain modules import shared infrastructure. Shared infrastructure does not import domain packages. Task contracts, persistence/review, grading, authoring and replay have separate modules inside `evaluation/tasks/`; moving a file should not mix these responsibilities again.
 
 Public imports such as `from agent_data_workbench import Project, FilesSource, TraceStore` remain available. Code importing former internal flat modules must use the owning domain path. The CLI names, HTTP routes and persisted project format are unchanged by this reorganization.
 
@@ -166,7 +172,7 @@ Calibration freezes actual attempt evidence and records reviewer labels and adju
 
 ## Container process and storage ownership
 
-The root Makefile drives Docker Compose. Development runs a FastAPI/Uvicorn backend and a separate TypeScript build watcher. The watcher writes a shared asset volume that FastAPI serves on the same browser origin; it does not expose a second UI server. Compose waits for the UI assets to be readable before starting the backend. The packaged app instead installs a wheel containing the production bundle and runs one Python service. See [Docker and Make workflow](../operations/containers.md).
+The root Makefile drives Docker Compose. Development runs a FastAPI/Uvicorn backend and a separate TypeScript build watcher. The watcher writes `ui/dist/` through the shared `ui-build` volume that FastAPI serves on the same browser origin; it does not expose a second UI server. Compose waits for the UI assets to be readable before starting the backend. The packaged app instead installs a wheel containing the production bundle and runs one Python service. See [Docker and Make workflow](../operations/containers.md).
 
 The development image contains Python, Node and locked development dependencies. The runtime image uses the production Python environment. Both run as the workbench user. A named volume holds `/data/project` independently from source mounts and container lifetime. Python dependencies remain under `/opt/venv`; UI dependencies have their own named volume.
 

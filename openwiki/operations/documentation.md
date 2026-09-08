@@ -16,10 +16,10 @@ sources:
     resource: repo://AGENTS.md
   - id: openwiki-source-a2371d6362e5db4bc834ad03
     resource: repo://CLAUDE.md
-generated: { by: "codex", at: "2026-09-07T17:18:36.762Z" }
+generated: { by: "codex", at: "2026-09-08T00:51:51.689Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T00:33:25.897Z
+    at: 2026-09-08T00:51:51.689Z
 ---
 
 # Maintain the OpenWiki
@@ -69,7 +69,7 @@ Do not edit `.claims/`, `.run.json`, indexes, logs, or generated provenance by h
 
 ## Scope and review
 
-`.openwikiignore` excludes local runs, credentials, databases, installed dependencies, caches, generated frontend bundles, and the removed legacy documentation paths. Root-anchored rules for legacy files avoid accidentally excluding wiki pages with the same basename.
+`.openwikiignore` excludes local runs, credentials, databases, installed dependencies, caches, generated `ui/dist/` frontend output, and the removed legacy documentation paths. Root-anchored rules for legacy files avoid accidentally excluding wiki pages with the same basename.
 
 Review claims against source and tests. Versioned evidence establishes where a claim came from and whether its source changed; it does not prove the prose's interpretation automatically. Keep gaps and unsupported future integrations explicit. Update `openwiki/INSTRUCTIONS.md` when documentation scope changes.
 

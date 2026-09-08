@@ -14,6 +14,8 @@ sources:
     resource: repo://Makefile
   - id: openwiki-source-05ccef8d4cf1698187f20464
     resource: repo://pyproject.toml
+  - id: openwiki-source-23775c3de52f3ab95a13cb8b
+    resource: repo://README.md
   - id: openwiki-source-e6d7f541d0e16503af405c8b
     resource: repo://src/agent_data_workbench/api/routers/investigations.py
   - id: openwiki-source-732d0f8c004bbddbd6363fdf
@@ -38,10 +40,12 @@ sources:
     resource: repo://ui/src/views/ManualResearchEditor.tsx
   - id: openwiki-source-a6ff0ad9c45aedc12177eaec
     resource: repo://ui/src/views/ResearchControls.tsx
-generated: { by: "codex", at: "2026-09-08T00:33:25.897Z" }
+  - id: openwiki-source-a741d432f952c0dbfb4fb35d
+    resource: repo://ui/vite.config.ts
+generated: { by: "codex", at: "2026-09-08T00:51:51.689Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T00:33:25.897Z
+    at: 2026-09-08T00:51:51.689Z
 ---
 
 # Quickstart
@@ -73,15 +77,17 @@ Manual research works in the stock container. Native agent investigations additi
 
 ## Native setup and agent CLI authentication
 
-Use Python 3.14+ and uv. The repository pins Python 3.14.7 and locks its dependency resolution:
+Use Python 3.14+, uv and a supported Node version such as Node 24.15+. The repository pins Python 3.14.7 and locks its dependencies. Build the TypeScript UI before installing the editable checkout:
 
 ```sh
 git clone git@github.com:shekharpalit/agent-data-workbench.git
 cd agent-data-workbench
+npm ci --prefix ui
+npm --prefix ui run build
 uv sync --locked
 ```
 
-The GitHub repository currently requires access because it is private. The built UI is included in the Python package, so running the workbench does not require a Node build. UI development does; see [development and verification](development/contributing.md).
+The GitHub repository currently requires access because it is private. Frontend source lives in `ui/`; its generated `ui/dist/` output is ignored by Git. Installed wheels include those compiled assets and need no Node runtime. Source checkouts require the build step above, while Docker performs it automatically. See [development and verification](development/contributing.md) for rebuilding and packaging.
 
 ## Bring your own agent data
 

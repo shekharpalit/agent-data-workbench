@@ -12,7 +12,7 @@ Use source code and tests as the authority. Documentation lives in `openwiki/`; 
 - Use React and TypeScript for the UI. Preserve JSON types, evidence lineage, and shared search/filter semantics.
 - Write tests in Given / When / Then format. Compare complete result objects: `assert actual == expected` in Python and `expect(actual).toStrictEqual(expected)` in TypeScript. JavaScript `{} === {}` compares identity, not object contents.
 - Keep tests synthetic and independent of provider credentials. Run the narrow checks relevant to each change. Backend checks: `uv run pytest -q`, `uv run ruff check src tests`, and `uv run ruff format --check src tests`. Use a supported Node release (`ui/package.json` engines; Node 24.15+ is supported). Frontend checks: `npm ci --prefix ui`, `npm --prefix ui run build`, `npm --prefix ui test`, and `npm --prefix ui run format:check`.
-- Commit rebuilt `src/agent_data_workbench/web` assets when UI source changes. Verify `uv build` when packaging changes.
+- Keep frontend source in `ui/`. Vite generates ignored `ui/dist/`; never commit compiled UI assets under the Python source tree. Build the UI before creating a Python package, and verify `uv build` when packaging changes.
 - Generate internal artifact IDs with UUIDs and validate them through the shared UUID type. Preserve external trace IDs verbatim.
 - Preserve canonical trace data, import rollback, accepted-task audit gates, source-group separation, invalid outcomes, and final-split exposure bookkeeping.
 - State what experiments actually establish. Synthetic test results do not establish model improvement; captured target files are not independent ground truth. Command runners execute trusted code with host access.

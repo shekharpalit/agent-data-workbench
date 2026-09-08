@@ -12,6 +12,8 @@ sources:
     resource: repo://Dockerfile
   - id: openwiki-source-012f2c78e3b1446dfc35803f
     resource: repo://Makefile
+  - id: openwiki-source-05ccef8d4cf1698187f20464
+    resource: repo://pyproject.toml
   - id: openwiki-source-57d1f240e9d0552b9b058bdc
     resource: repo://src/agent_data_workbench/api/dependencies.py
   - id: openwiki-source-1848987f753961721cee2571
@@ -30,10 +32,10 @@ sources:
     resource: repo://src/agent_data_workbench/workbench/settings.py
   - id: openwiki-source-a741d432f952c0dbfb4fb35d
     resource: repo://ui/vite.config.ts
-generated: { by: "codex", at: "2026-09-08T00:33:25.897Z" }
+generated: { by: "codex", at: "2026-09-08T00:51:51.689Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T00:33:25.897Z
+    at: 2026-09-08T00:51:51.689Z
 ---
 
 # Docker and Make workflow
@@ -99,9 +101,9 @@ Use `make dev PORT=9000` or `make up PORT=9000` to change the host port. The int
 
 Both development and packaged services use the same `project-data` volume at `/data`, with the project under `/data/project`. Removing containers does not delete this volume. Preserve it when moving or backing up a workspace; it contains the SQLite trace store and derived artifacts. Deleting Docker volumes deletes the corresponding local data.
 
-Development binds Python source and tests read-only, mounts UI source for editing, and keeps `node_modules` in `ui-dependencies`. Compiled assets live in `web-assets`. Python dependencies remain inside the image at `/opt/venv`. Run `make init` or restart `make dev` after changing Python dependencies; the UI service runs `npm ci` on startup to refresh its locked dependencies.
+Development binds Python source and tests read-only, mounts UI source for editing, and keeps `node_modules` in `ui-dependencies`. Compiled assets live in `ui-build`, mounted at `/app/ui/dist` in both services. The UI watcher writes that volume and FastAPI reads it; generated output is not written into the Python source tree. Python dependencies remain inside the image at `/opt/venv`. Run `make init` or restart `make dev` after changing Python dependencies; the UI service runs `npm ci` on startup to refresh its locked dependencies.
 
-The Dockerfile pins Python 3.14.7, Node 24.20.0 and uv 0.12.10. It builds production assets in a Node stage and installs them in the runtime wheel. The development image includes test and UI tooling; the packaged runtime uses production Python dependencies. Both run as the non-root workbench user. The build context excludes private runs, Git metadata, provider login files and host dependency installations through an explicit allowlist.
+The Dockerfile pins Python 3.14.7, Node 24.20.0 and uv 0.12.10. Its Node stage builds the TypeScript source into `/app/ui/dist`. Standard Hatch packaging includes that output under package-only `_ui/` in the runtime wheel; the production container serves those installed assets without a UI source mount. Host `ui/dist` output is excluded from the build context so the image compiles its own frontend. The development image includes test and UI tooling; the packaged runtime uses production Python dependencies. Both run as the non-root workbench user. The build context excludes private runs, Git metadata, provider login files and host dependency installations through an explicit allowlist.
 
 ## Runtime configuration and agent integrations
 

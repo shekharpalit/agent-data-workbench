@@ -20,6 +20,7 @@
 **/.ruff_cache/
 **/node_modules/
 **/coverage/
+**/dist/
 **/*.tsbuildinfo
 **/.env
 **/.env.*

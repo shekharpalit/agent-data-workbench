@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:445b63c6b2f1cec5e8ffd973c46db1b3683a679311d9e3b397e2c29311d981e0",
+  "pageVersion": "sha256:c5900b0a6c1e4fb2b915d2f97875eb474822f427139c3b362637210326868d9a",
   "claims": [
     {
       "id": "claim_b88dee80e2334471a6a24e3675d10bd3",
@@ -110,11 +110,11 @@
         },
         {
           "resource": "repo://compose.yaml#L26-L57",
-          "version": "repo-lines-v1:sha256:2e21332c3c9baa4ba1def095614738a65c9ebf0ed167945efa5bce56af902d71:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk2YzgyZWI0NzlhN2VlMWRjMmU4Y2QxMjZjZjA4NTg5ODc2ZjM4ZGFkYWI1NjVhYzMwZjQ0YmQ3OGY2YzMyYjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwYWRmYWU2NGZhYmFhODNjMzBjZGE1Y2JkYjE4NTdjYWU4NDY1NzU1MTJmMTg5ZGRkMDVkMWQ5NmY1MjA4NTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM2MTU5MTJlZDhiZTUwNzIzMzEwNDVlNjlmNDVmOWMyNDVlMzNlMmM5Njg5ZjZiYWJmZTdlZDA4ZjNhNjQxZTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBhYTRhNGNmOTZiNzIzN2E2OWJkNDFkOTZkN2QwNmI4MTY0Yzc4ZWYxYTUyMzYwYWZlYTMxMTVhMmU1NGVkMDIifQ"
+          "version": "repo-lines-v1:sha256:8e80fff37fe932d1c56482d5b2d85ba9e439d1138fefded52415e8db2e76cd7a:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk2YzgyZWI0NzlhN2VlMWRjMmU4Y2QxMjZjZjA4NTg5ODc2ZjM4ZGFkYWI1NjVhYzMwZjQ0YmQ3OGY2YzMyYjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwYWRmYWU2NGZhYmFhODNjMzBjZGE1Y2JkYjE4NTdjYWU4NDY1NzU1MTJmMTg5ZGRkMDVkMWQ5NmY1MjA4NTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM2MTU5MTJlZDhiZTUwNzIzMzEwNDVlNjlmNDVmOWMyNDVlMzNlMmM5Njg5ZjZiYWJmZTdlZDA4ZjNhNjQxZTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBhYTRhNGNmOTZiNzIzN2E2OWJkNDFkOTZkN2QwNmI4MTY0Yzc4ZWYxYTUyMzYwYWZlYTMxMTVhMmU1NGVkMDIifQ"
         },
         {
           "resource": "repo://compose.yaml#L78-L95",
-          "version": "repo-lines-v1:sha256:da1262bbc30df587ee4212c6feca8c9e1eaf0fee83e27cd0637e2b9059683628:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE4ZTFlMDIwM2VlMGIyNTU1MWRhMzdiMWFiYzUwNDU5MjMyYTkwNDhmNjJjM2JhODY1MTczNGNhODExZmUzYjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjljNzQzM2Q3YzkwNzQ4YjIzNjZhZmI0MDM3NTA0YjExYmFhYThlZDg5YjI1ODcyMWIxZGY1ZWM3M2QyMTc2ZWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY5NDZlODE3YzBiODNlZDZhOTc4NmMxM2ZlZjk2M2EyZWVjNmFmOTQ0NzQ1ZjllODhjZWQ0MTBhZGZkNDE0ZmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "version": "repo-lines-v1:sha256:ce84f5d8973f9d0d829301f059960f5823fb3f638ddf7199a30f1bf890be1a68:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE4ZTFlMDIwM2VlMGIyNTU1MWRhMzdiMWFiYzUwNDU5MjMyYTkwNDhmNjJjM2JhODY1MTczNGNhODExZmUzYjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjljNzQzM2Q3YzkwNzQ4YjIzNjZhZmI0MDM3NTA0YjExYmFhYThlZDg5YjI1ODcyMWIxZGY1ZWM3M2QyMTc2ZWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY5NDZlODE3YzBiODNlZDZhOTc4NmMxM2ZlZjk2M2EyZWVjNmFmOTQ0NzQ1ZjllODhjZWQ0MTBhZGZkNDE0ZmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
     },
@@ -124,11 +124,11 @@
       "evidence": [
         {
           "resource": "repo://Dockerfile",
-          "version": "repo-file-v1:sha256:dd9853af09879c9e4be05b624de8596bbcba9637b8a01ab5e5e5fd681f19f759"
+          "version": "repo-file-v1:sha256:664294a887ba1cfef14e42c390f7f7c187b2ceaebf6f66f94e995ff17f222190"
         },
         {
-          "resource": "repo://src/agent_data_workbench/workbench/runtime.py#L58-L63",
-          "version": "repo-lines-v1:sha256:19b50005e68ce6d24a027c94b17a21e7abf0b4fb07c86500f80e0f870f9c27ae:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODViM2FiNmZiYTMxOGEyOTk2ZjA4NTNlMzA4ZjgyZjIwMWQ3MDAyMWE1ZWEwZWE5MGVkYTVhZDIwMzhjZmNiNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2ZiMmE2MjU3ZjQ1YWM2OWIwM2I3Y2VjODM0NjUwODkxYmNhNTgwNGExMDZlZDMxZmQwNGUwMTA2MjczOGI0ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjNkZjJhY2YwNmU4YzNmMDNjNzEzNWM2ZThhYzVhOWNhNTQzMmFiZTA2YTc0YWNhMGZkZDlhNTNhMDA4Zjk4NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTAzYmMyMjIxY2FhMjIzZTBlNTViNTI5YjE4ZDM0ZTYwZTlmYWQ5NmQ1YmViYmM5N2NmNjFkZDhmNGI1ZjczZCJ9"
+          "resource": "repo://src/agent_data_workbench/workbench/runtime.py#L20-L25",
+          "version": "repo-lines-v1:sha256:19b50005e68ce6d24a027c94b17a21e7abf0b4fb07c86500f80e0f870f9c27ae:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODViM2FiNmZiYTMxOGEyOTk2ZjA4NTNlMzA4ZjgyZjIwMWQ3MDAyMWE1ZWEwZWE5MGVkYTVhZDIwMzhjZmNiNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2ZiMmE2MjU3ZjQ1YWM2OWIwM2I3Y2VjODM0NjUwODkxYmNhNTgwNGExMDZlZDMxZmQwNGUwMTA2MjczOGI0ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjUxOTVmZjQ2ZjYzYzJhNzNlYjRjMzU3YTBmNjQ4ZDQ4MTJjNTE3ZmY2ZTgxMzBjOTA5ZDcxOTIxZjI0MTNiNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTAzYmMyMjIxY2FhMjIzZTBlNTViNTI5YjE4ZDM0ZTYwZTlmYWQ5NmQ1YmViYmM5N2NmNjFkZDhmNGI1ZjczZCJ9"
         }
       ]
     },
@@ -145,10 +145,32 @@
           "version": "repo-file-v1:sha256:b3fc49ea88b0378dafe933382e631ec2e90e2626135bd7d0b75b59b5ec678e24"
         }
       ]
+    },
+    {
+      "id": "claim_3a70bb5946d74ec1a4a909c011a49a85",
+      "statement": "Native checkout setup builds the TypeScript frontend into ignored ui/dist before uv sync; wheels bundle the generated assets under package-only _ui, while Docker performs the frontend build automatically.",
+      "evidence": [
+        {
+          "resource": "repo://Dockerfile",
+          "version": "repo-file-v1:sha256:664294a887ba1cfef14e42c390f7f7c187b2ceaebf6f66f94e995ff17f222190"
+        },
+        {
+          "resource": "repo://README.md",
+          "version": "repo-file-v1:sha256:9627a54eed7b7b3ab99ebae7da8f6b52533b96eda109653efc615dbe7259868b"
+        },
+        {
+          "resource": "repo://pyproject.toml#L31-L42",
+          "version": "repo-lines-v1:sha256:6d34248a438dc01995f2affc3d901145b409b7105344c0d0cceebd536f589154:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAzYzBlNzIzOGYwYjE4Y2JlNmE0NjY2NDFmZGNkNTk0ODUyNDQ4ZGRmN2ZmODhkMGE5ZjQ5NTBlYWRlYzM5M2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg0N2FiMDc1M2NkZjg5MzMyYmQ2ZDU2YzY3OTVlMDM5MmE2M2FkMmU5ZTBhODNjMWNmNDgzMTg5NzgwNDFiNGIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM2N2M1YzE0MmM4YzE1MTFjNDgxMTI1MThhMWQ5MGE5OTJmYjkzM2ZlYmY1NmE3ODk5MGZhYjAyYWU3Mjg3ZWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIzMjg3NjM1YTBiZGJlZjliNGM1N2FlOTU5NGQwZWE5M2Y4ZGRmMWJmM2Y3MDA2MzVhZGRlMmUzNjhlMTI4MGIifQ"
+        },
+        {
+          "resource": "repo://ui/vite.config.ts",
+          "version": "repo-file-v1:sha256:9d4e6da24291ffabaa1ad8ee15abd188d87f4f49a5762e5c2c50460795cbe667"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T00:33:25.897Z"
+    "at": "2026-09-08T00:51:51.689Z"
   }
 }

@@ -6,13 +6,13 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
     build: {
-      outDir: "../src/agent_data_workbench/web",
+      outDir: "dist",
       // FastAPI serves the previous build while the watcher writes the next one.
       emptyOutDir: !development,
       sourcemap: false,
       watch: development
         ? {
-            exclude: ["**/node_modules/**", "**/agent_data_workbench/web/**"],
+            exclude: ["**/node_modules/**", "**/dist/**"],
             buildDelay: 100,
             // Vite adapts these options to Rolldown's filesystem watcher.
             chokidar: { usePolling: true, interval: 300 },

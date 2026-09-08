@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:a8661ae53fbbf33ac24f36f5e54ea6a1669b7c83a50996001b9f7261eb4dacd5",
+  "pageVersion": "sha256:104249ac3015302ce36fc1ddae4e5af3b751b10134721d2131f840821203403a",
   "claims": [
     {
       "id": "claim_0214ec89ef294dfaaad35ee54cb09813",
@@ -21,16 +21,16 @@
       "statement": "make dev starts the UI watcher and reloading backend together; Compose waits for readable UI assets, and the development watcher retains old assets while ignoring its generated output and dependencies.",
       "evidence": [
         {
-          "resource": "repo://Makefile#L31-L34",
-          "version": "repo-lines-v1:sha256:61e2148f76bc100dbbaeee002835a24da455820d1eeabcd7d27322f00190de11:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWVhYThlNzhhZGRiZDkxMGU2MmI4OWU5ZDE5MDFkNjBhMGUzMGFjZmM0YmQ3NjFmZThkZjNiMzY1YjAyOGM3MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjMyODdiYzAyZDYwMmUzNGMxZjNhOWE0OTc4MDcyNjdlYzA3NDgwY2M1YmE5OGExMWIwYjI1M2EyOTUyYWM3YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTM5YjkzMDRiMmQ1MmU0OGRlOGNmYzM2NjAxYzU5N2VmNDZkODFkNzk2YTZlYTQyOWU4NDg2NjYyMjRiYmE3ZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzA2N2E0MjJlYTliNmJiMDVmZmIwOWYxN2I3N2FlM2QxNjIzOWUzZDY5MjVjZDY3M2IzMjhmZGVkNDllNTA2MCJ9"
+          "resource": "repo://Makefile",
+          "version": "repo-file-v1:sha256:744a80d95a8419e0113d85d0d334ccafdfbf2d2fd1be97548c95b0e899e7e6ed"
         },
         {
-          "resource": "repo://compose.yaml#L40-L76",
-          "version": "repo-lines-v1:sha256:d23ab1ca621b16cf50770ac4ca38e6b6b68f02dc2c6cec92290cf41588f78160:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEwOTUxNWU5YjQzZTMxNTZmYTUxMjcxMzI1ZTExMjI4ZGMxY2YzMjFhNGY2NDIxZDcxNzJlODk2MTkyY2I0Y2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZiM2VmNmE0ZWEwZTU2MzdjMjNkZGJmMWU0YzdhMTUyYTYyNGZjOTQwNjIxZGU5YjEwOGJkNDNjODc4ZjU1N2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQwMTAwYTk1OTkwNTJiZmEzZmU2ZjA3YjA1YWZjYTU4ZWRiOTFiNTRkMmFmMDZmYzFlMjhlYjY1ZWFmYWEyN2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZiNDVjNzIyNzk2NmE4YzliNThiNzU4NDBhNDAxZGViM2QyMzQyYzg3OTc0ZjQ1M2M1YjE1MmY4NTk5NTczMDYifQ"
+          "resource": "repo://compose.yaml",
+          "version": "repo-file-v1:sha256:356fef054e1412606b833a84b869850c556fe9b3ec038589d21c3dee54bc5703"
         },
         {
-          "resource": "repo://ui/vite.config.ts#L4-L23",
-          "version": "repo-lines-v1:sha256:0e7718d29e90c698bc6f172b845471200e92639981282f87c598511a7794ecfe:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU3MjZmYmM5ZTNlZGNlYzUwZWRmZmI4MjQ3NDBjNTk0ZjcyNjZhOWNmODViMjgxMzZiMTU5ZTM2NTM5ZDlmYzYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMwZTA5MzFjZWVjZTljOGExNDlhMzY2ZDRkYTMwNmNmMDIxMmRlYzU3N2VkMjYyNmMzMTU5MjFlMWUzNzFiMzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://ui/vite.config.ts",
+          "version": "repo-file-v1:sha256:9d4e6da24291ffabaa1ad8ee15abd188d87f4f49a5762e5c2c50460795cbe667"
         }
       ]
     },
@@ -64,43 +64,35 @@
     },
     {
       "id": "claim_ef2b03d534014db48fe5c03712005af5",
-      "statement": "Development and packaged services share project-data at /data; development separately mounts source, compiled assets and isolated UI dependencies, while the host port is loopback-only and configurable.",
+      "statement": "Development and packaged services share project-data at /data; development mounts source, ui-build at /app/ui/dist and isolated UI dependencies, while the host port is loopback-only and configurable.",
       "evidence": [
         {
-          "resource": "repo://compose.yaml#L1-L7",
-          "version": "repo-lines-v1:sha256:8e30fad324442fa833ba337d4de74a069c774882e83931f74d25ecd5ef1bfe70:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjM3ZDU3ZDc1ZjI1ZjQxMzYyNmJjMmJiZWM3NzUwNDE2MDIwNWZhZTk0NWZjOTUwM2Y0MGZlN2QxZjI3OWY3YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDI5NzI5MWFkODQ3NjEzYjQ2MzkwYjQ5ODdhNTk0MmFiODUyM2Y0OWE3NmJjOTE2Y2U5YjNiMjgzZTAxNDMwYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjgwYjI1YTU5NmQwZDQ5NWY0MzExYWE3NzBiNWI1ZjJmMDc2ODUyMmM2NmZlZDU4NTE0YzRlNjIxOTFiYzI1YyJ9"
-        },
-        {
-          "resource": "repo://compose.yaml#L26-L57",
-          "version": "repo-lines-v1:sha256:2e21332c3c9baa4ba1def095614738a65c9ebf0ed167945efa5bce56af902d71:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk2YzgyZWI0NzlhN2VlMWRjMmU4Y2QxMjZjZjA4NTg5ODc2ZjM4ZGFkYWI1NjVhYzMwZjQ0YmQ3OGY2YzMyYjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwYWRmYWU2NGZhYmFhODNjMzBjZGE1Y2JkYjE4NTdjYWU4NDY1NzU1MTJmMTg5ZGRkMDVkMWQ5NmY1MjA4NTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM2MTU5MTJlZDhiZTUwNzIzMzEwNDVlNjlmNDVmOWMyNDVlMzNlMmM5Njg5ZjZiYWJmZTdlZDA4ZjNhNjQxZTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBhYTRhNGNmOTZiNzIzN2E2OWJkNDFkOTZkN2QwNmI4MTY0Yzc4ZWYxYTUyMzYwYWZlYTMxMTVhMmU1NGVkMDIifQ"
-        },
-        {
-          "resource": "repo://compose.yaml#L78-L95",
-          "version": "repo-lines-v1:sha256:da1262bbc30df587ee4212c6feca8c9e1eaf0fee83e27cd0637e2b9059683628:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE4ZTFlMDIwM2VlMGIyNTU1MWRhMzdiMWFiYzUwNDU5MjMyYTkwNDhmNjJjM2JhODY1MTczNGNhODExZmUzYjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjljNzQzM2Q3YzkwNzQ4YjIzNjZhZmI0MDM3NTA0YjExYmFhYThlZDg5YjI1ODcyMWIxZGY1ZWM3M2QyMTc2ZWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY5NDZlODE3YzBiODNlZDZhOTc4NmMxM2ZlZjk2M2EyZWVjNmFmOTQ0NzQ1ZjllODhjZWQ0MTBhZGZkNDE0ZmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://compose.yaml",
+          "version": "repo-file-v1:sha256:356fef054e1412606b833a84b869850c556fe9b3ec038589d21c3dee54bc5703"
         }
       ]
     },
     {
       "id": "claim_0204019f39c744a4b37a214cbc4ae4f6",
-      "statement": "The Dockerfile pins Python, Node and uv, builds bundled UI assets, installs a production wheel and runs both final targets as the non-root workbench user.",
+      "statement": "The Dockerfile pins Python, Node and uv, compiles TypeScript into ui/dist, installs a production wheel containing package-only _ui assets and runs both final targets as the non-root workbench user.",
       "evidence": [
         {
-          "resource": "repo://Dockerfile#L1-L14",
-          "version": "repo-lines-v1:sha256:7bf195cfe8bda26d4e0ad993cacc2067821750b1cfd71a9f122bec4c3a08370b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlYjQ4YmQ3NThhMDRiMjU4MGM2MDIxYTg2ZGZiY2UyMTFmMDE1YTFkZDVjYzRmMzljMTNiNmVjZmUxNTcyOTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkzZWFhMWFmMDA3NDQwZmQ1MmYwYjk1MmU2N2UyMjNjN2ZjOWU1NjQ0OGMyN2JlOTMwMDMwYjZlMTM0MmFiNmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBiYmIwOWYyODlhYzA4MTdiOThiZDMwZTdmMzQzMzNmZTAwMTNjMzRmMmYxNjZlZDRjYTk0ZGI5MTBhODRlNzcifQ"
+          "resource": "repo://Dockerfile",
+          "version": "repo-file-v1:sha256:664294a887ba1cfef14e42c390f7f7c187b2ceaebf6f66f94e995ff17f222190"
         },
         {
-          "resource": "repo://Dockerfile#L28-L64",
-          "version": "repo-lines-v1:sha256:db966bd4e2ab700f31d9ce26f151113bcc472cd6c3efb6ccf5603e96abec6bd3:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJjZGE1ZjVhZGUwYzY5M2M5MzJkNWI3YTI1ZWUwNDc1ZjgyYzNlYzJiYTMxYjlmZDJkZGJhOGM5ZTQ2MmQxZTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU1ZTk5YzQ4YTJjZGQ3NzM1MjUzMDQ1ZGE0NzgwYjljZWM3MDU2NzM2NTJiNzg1MTU5ZWRiNTg3ODYxOTA3MzgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM3YjdkYjU4NWY1Mzc0M2I5M2M0YzlkMTBmMTg2OGM5NTg1Y2NiZDFkNTJlNzM5ZWQ3NGY2ZTBmN2ExZGUwMGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://pyproject.toml#L31-L42",
+          "version": "repo-lines-v1:sha256:6d34248a438dc01995f2affc3d901145b409b7105344c0d0cceebd536f589154:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAzYzBlNzIzOGYwYjE4Y2JlNmE0NjY2NDFmZGNkNTk0ODUyNDQ4ZGRmN2ZmODhkMGE5ZjQ5NTBlYWRlYzM5M2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg0N2FiMDc1M2NkZjg5MzMyYmQ2ZDU2YzY3OTVlMDM5MmE2M2FkMmU5ZTBhODNjMWNmNDgzMTg5NzgwNDFiNGIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM2N2M1YzE0MmM4YzE1MTFjNDgxMTI1MThhMWQ5MGE5OTJmYjkzM2ZlYmY1NmE3ODk5MGZhYjAyYWU3Mjg3ZWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIzMjg3NjM1YTBiZGJlZjliNGM1N2FlOTU5NGQwZWE5M2Y4ZGRmMWJmM2Y3MDA2MzVhZGRlMmUzNjhlMTI4MGIifQ"
         }
       ]
     },
     {
       "id": "claim_a9a9f72134864e42b3eb342ceb446c99",
-      "statement": "The Docker build context allowlists application inputs and excludes host dependencies, private runs, Git metadata and login directories.",
+      "statement": "The Docker build context allowlists application inputs and excludes host dependencies, private runs, Git metadata, login directories and generated host dist output.",
       "evidence": [
         {
           "resource": "repo://.dockerignore",
-          "version": "repo-file-v1:sha256:a8f5ac25c8c332fcffbcd5c0b3680540abb8ecfe70feb93e7c8c1236c66af0e2"
+          "version": "repo-file-v1:sha256:c54a97e00827a4c5484923c7b80e6448c949d7ffb5241309f8941f41bc93c312"
         }
       ]
     },
@@ -128,7 +120,7 @@
       "evidence": [
         {
           "resource": "repo://compose.yaml",
-          "version": "repo-file-v1:sha256:edcccb78e9f93ae41cddc541f39abdf47c74d83c0cdecaed1ce49678da821f80"
+          "version": "repo-file-v1:sha256:356fef054e1412606b833a84b869850c556fe9b3ec038589d21c3dee54bc5703"
         },
         {
           "resource": "repo://src/agent_data_workbench/api/dependencies.py#L15-L21",
@@ -146,11 +138,11 @@
       "evidence": [
         {
           "resource": "repo://Dockerfile",
-          "version": "repo-file-v1:sha256:dd9853af09879c9e4be05b624de8596bbcba9637b8a01ab5e5e5fd681f19f759"
+          "version": "repo-file-v1:sha256:664294a887ba1cfef14e42c390f7f7c187b2ceaebf6f66f94e995ff17f222190"
         },
         {
           "resource": "repo://compose.yaml",
-          "version": "repo-file-v1:sha256:edcccb78e9f93ae41cddc541f39abdf47c74d83c0cdecaed1ce49678da821f80"
+          "version": "repo-file-v1:sha256:356fef054e1412606b833a84b869850c556fe9b3ec038589d21c3dee54bc5703"
         }
       ]
     },
@@ -189,6 +181,6 @@
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T00:33:25.897Z"
+    "at": "2026-09-08T00:51:51.689Z"
   }
 }

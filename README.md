@@ -13,9 +13,11 @@ Requires Docker with Compose v2 and Make (use WSL2 on Windows). Open the private
 
 Import a folder of agent runs with `make ingest DIR=./traces`. Each JSONL file becomes one trace with its events preserved in order; all runs can be researched together. `FILE=./run.jsonl` imports one run. For exports with one complete trace per line, use `LAYOUT=records`. Choose **Research myself → Start manual research** to inspect data, record outcomes, save notes, and publish findings and charts. Containers include the workbench; agent investigations additionally need an installed, authenticated Codex or Claude Code CLI in the environment running the backend.
 
-For native development and existing local agent CLI authentication, use Python 3.14+ and uv:
+For native development and existing local agent CLI authentication, use Python 3.14+, uv and a supported Node version (Node 24.15+). Build the TypeScript UI before installing the checkout:
 
 ```sh
+npm ci --prefix ui
+npm --prefix ui run build
 uv sync --locked
 uv run agent-data-workbench init runs/workbench "My agent" "Improve task completion"
 uv run agent-data-workbench ingest runs/workbench ./traces

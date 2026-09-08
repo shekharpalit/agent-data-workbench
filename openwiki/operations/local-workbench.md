@@ -6,6 +6,8 @@ tags: [ui, fastapi, local, operations]
 sources:
   - id: openwiki-source-012f2c78e3b1446dfc35803f
     resource: repo://Makefile
+  - id: openwiki-source-05ccef8d4cf1698187f20464
+    resource: repo://pyproject.toml
   - id: openwiki-source-896da76531d8a33d2c9e76b8
     resource: repo://src/agent_data_workbench/api/application.py
   - id: openwiki-source-57d1f240e9d0552b9b058bdc
@@ -50,17 +52,17 @@ sources:
     resource: repo://ui/src/views/ResearchSnapshot.tsx
   - id: openwiki-source-826d1e88c728d7cfae868e97
     resource: repo://ui/tests/workflow.test.tsx
-generated: { by: "codex", at: "2026-09-08T00:33:25.897Z" }
+generated: { by: "codex", at: "2026-09-08T00:51:51.689Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T00:33:25.897Z
+    at: 2026-09-08T00:51:51.689Z
 ---
 
 # Run the local workbench
 
 From a repository checkout, `make init` and `make dev` run the workbench through Docker. Use `make ingest DIR=./traces` to load a directory of agent-run files and open the backend's printed URL. Each JSONL file is one trace by default, with its events kept in order. `make up` runs the packaged app in the background; `make down` stops containers and preserves project data. See [Docker and Make workflow](containers.md) for setup and configuration.
 
-For a native Python process and existing host agent CLI authentication:
+For a native Python process and existing host agent CLI authentication, first complete the [native setup](../quickstart.md#native-setup-and-agent-cli-authentication). Source checkouts must build the TypeScript UI before `uv sync --locked`; then open an existing project:
 
 ```sh
 uv run agent-data-workbench ui runs/workbench
@@ -78,7 +80,7 @@ Each full server start creates a fresh random access token. The Docker developme
 
 FastAPI parses JSON and Pydantic validates typed bodies. There is no workbench-wide 2 MB request-body cap; machine resources and field-specific contracts still apply. Responses retain no-store caching, no-referrer, nosniff, and a content security policy. The browser origin must use an IPv4 address or hostname; use `localhost` for an IPv6 listener. The app remains a local, single-session tool.
 
-The Python package includes the UI entry point and hashed assets. FastAPI serves those files and typed SDK operations from the same origin. No separate Node server is needed for normal use. `/api/openapi.json` is available with the same session authorization; the default Swagger and ReDoc pages are disabled. Invalid structured requests return HTTP 400 with an `error` field and do not echo the input values. Internal artifact request IDs use the `uuid` format in OpenAPI; imported trace identifiers remain opaque strings. Domain routers under `api/routers/` keep trace, knowledge, task, investigation, and job operations separate.
+Frontend source lives in `ui/`, and Vite generates ignored `ui/dist/`. FastAPI serves that directory in editable checkouts. Built wheels include the same entry point and hashed assets under package-only `_ui/`, so installed packages work without Node. FastAPI serves the files and typed SDK operations from the same origin. No separate Node server is needed for normal use. `/api/openapi.json` is available with the same session authorization; the default Swagger and ReDoc pages are disabled. Invalid structured requests return HTTP 400 with an `error` field and do not echo the input values. Internal artifact request IDs use the `uuid` format in OpenAPI; imported trace identifiers remain opaque strings. Domain routers under `api/routers/` keep trace, knowledge, task, investigation, and job operations separate.
 
 ## What each view does
 
