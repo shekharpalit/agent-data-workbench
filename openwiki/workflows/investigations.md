@@ -4,6 +4,12 @@ title: Investigations and reviewed knowledge
 description: Research agent traces manually or with persistent Codex and Claude Code sessions over shared snapshots, and publish outcomes, evidence and charts.
 tags: [research, evidence, knowledge, codex, claude]
 sources:
+  - id: openwiki-source-1848987f753961721cee2571
+    resource: repo://src/agent_data_workbench/api/middleware.py
+  - id: openwiki-source-0556adefe8908fe3f0817112
+    resource: repo://src/agent_data_workbench/api/routers/knowledge.py
+  - id: openwiki-source-4105c547b3781d406b01e383
+    resource: repo://src/agent_data_workbench/api/schemas.py
   - id: openwiki-source-32f4d2812881234bd0f7d75a
     resource: repo://src/agent_data_workbench/cli/knowledge.py
   - id: openwiki-source-25b71218f03a1e216debf67e
@@ -42,10 +48,10 @@ sources:
     resource: repo://ui/src/views/ResearchControls.tsx
   - id: openwiki-source-14a72935f36008706a0aa989
     resource: repo://ui/src/views/ResearchSnapshot.tsx
-generated: { by: "codex", at: "2026-09-08T00:07:39.310Z" }
+generated: { by: "codex", at: "2026-09-08T00:33:25.897Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T00:07:39.310Z
+    at: 2026-09-08T00:33:25.897Z
 ---
 
 # Investigations and reviewed knowledge
@@ -66,7 +72,7 @@ uv run agent-data-workbench knowledge review runs/my-agent KNOWLEDGE_ID accepted
   "Reviewed against the current product contract"
 ```
 
-Use the UUID printed by the first command. New knowledge starts as draft. Only accepted knowledge enters the hashed project context. Reviews record a note, revision and prior content hash. Knowledge import and SDK revision preserve the full supplied content without a fixed size cap. The local HTTP API still has its general request-body boundary; use the CLI or SDK for larger files.
+Use the UUID printed by the first command. New knowledge starts as draft. Only accepted knowledge enters the hashed project context. Reviews record a note, revision and prior content hash. Knowledge import and SDK revision preserve the full supplied content without a fixed size cap. The knowledge HTTP endpoint also accepts full content through its Pydantic contract, without a workbench-wide body-size cap.
 
 For reusable structured domain knowledge, use **World specifications** or `workflow world`. Accepted lineage heads join the captured context with schemas, tool contracts, relationships, permissions and invariants; historical accepted versions remain available through explicit task references. See [worlds and eval engineering](eval-engineering.md). A world created after this investigation does not rewrite its frozen context.
 
@@ -74,7 +80,7 @@ Keep context specific enough to distinguish a real failure from missing informat
 
 ## Research yourself in the UI
 
-Start the local workbench with `uv run agent-data-workbench ui runs/my-agent --open-browser`. Open **Investigations**, keep **Research myself** selected, enter a question and click **Start manual research**. This captures the same dataset and accepted context as native research, returns the investigation, and opens it without creating a model job. Choose `research` for exploratory work or `complete` when every record needs an outcome. Reserved final data remains included unless you explicitly exclude it.
+Start the local workbench with `uv run agent-data-workbench ui runs/my-agent`, then open its printed private URL after startup. Open **Investigations**, keep **Research myself** selected, enter a question and click **Start manual research**. This captures the same dataset and accepted context as native research, returns the investigation, and opens it without creating a model job. Choose `research` for exploratory work or `complete` when every record needs an outcome. Reserved final data remains included unless you explicitly exclude it.
 
 1. Search **Research dataset** by text or stratum, or select only pending/failed records. Select a record to read the frozen source, use a JSON pointer for a field, and page through long text. New imports do not change this evidence.
 2. Record an observation with a review method. The standard form saves an object containing your note; the structured option accepts a JSON object and preserves types. A failed review saves its error and remains unfinished.

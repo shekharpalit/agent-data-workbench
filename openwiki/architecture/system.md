@@ -5,7 +5,7 @@ description: How the CLI, Python SDK, FastAPI service, React workbench, and loca
 tags: [architecture, sdk, persistence, provenance]
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T00:07:39.310Z
+    at: 2026-09-08T00:33:25.897Z
 sources:
   - id: openwiki-source-8037e2358a2c4f9b2c722a11
     resource: repo://AGENTS.md
@@ -23,6 +23,8 @@ sources:
     resource: repo://src/agent_data_workbench/api/application.py
   - id: openwiki-source-57d1f240e9d0552b9b058bdc
     resource: repo://src/agent_data_workbench/api/dependencies.py
+  - id: openwiki-source-1848987f753961721cee2571
+    resource: repo://src/agent_data_workbench/api/middleware.py
   - id: openwiki-source-e6d7f541d0e16503af405c8b
     resource: repo://src/agent_data_workbench/api/routers/investigations.py
   - id: openwiki-source-98bfc373ed8e75b28dcf239e
@@ -63,11 +65,13 @@ sources:
     resource: repo://src/agent_data_workbench/workbench/jobs.py
   - id: openwiki-source-56b68af7c871c44d9ba4d64d
     resource: repo://src/agent_data_workbench/workbench/runtime.py
+  - id: openwiki-source-4a774cace930992dc66c0bda
+    resource: repo://src/agent_data_workbench/workbench/settings.py
   - id: openwiki-source-b9e04cc4343208a80c47ef02
     resource: repo://src/agent_data_workbench/workspace/project.py
   - id: openwiki-source-3e6ae5cbfb3aa3af0850499a
     resource: repo://tests/test_manual_research_api.py
-generated: { by: "codex", at: "2026-09-08T00:07:39.310Z" }
+generated: { by: "codex", at: "2026-09-08T00:33:25.897Z" }
 ---
 
 # System architecture
@@ -109,14 +113,14 @@ All Python paths below are relative to `src/agent_data_workbench/`. The package 
 | `integrations/` | Native CLI analyzer adapters, Harbor and training exports | `analyzers.py`, `harbor.py`, `training.py` |
 | `workspace/` | Project configuration, artifact directories, reviewed knowledge and locks | `project.py` |
 | `shared/` | Domain-independent JSON/pointers/equality, UUIDs, persistence, Markdown and process helpers | `json.py`, `files.py`, `identifiers.py`, `processes.py` |
-| `workbench/` | Application startup, listener/session lifecycle and background jobs | `runtime.py`, `server.py`, `jobs.py` |
+| `workbench/` | Typed startup configuration, session token and job status | `settings.py`, `runtime.py`, `jobs.py` |
 | `api/`, `cli/` | Typed HTTP and command entrypoints calling domain operations | `api/application.py`, `api/routers/`, `cli/__init__.py` |
 
 The React/TypeScript UI remains in `ui/`; the packaged browser assets remain in `web/`. Domain modules import shared infrastructure. Shared infrastructure does not import domain packages. Task contracts, persistence/review, grading, authoring and replay have separate modules inside `evaluation/tasks/`; moving a file should not mix these responsibilities again.
 
 Public imports such as `from agent_data_workbench import Project, FilesSource, TraceStore` remain available. Code importing former internal flat modules must use the owning domain path. The CLI names, HTTP routes and persisted project format are unchanged by this reorganization.
 
-The app factory composes domain routers. FastAPI dependencies supply the project, job queue, and bearer authentication; request middleware enforces host, origin, and body limits. `workbench/server.py` starts Uvicorn and owns the local session lifecycle.
+The app factory composes domain routers. FastAPI dependencies supply the project, job registry and bearer authentication. Standard `TrustedHostMiddleware` validates the browser hostname and `CORSMiddleware` handles allowed browser origins and preflight; FastAPI/Pydantic parses typed request bodies without a workbench-wide size cap. Host matching ignores the port, and CORS does not replace bearer authorization. `workbench/runtime.py` passes the app factory to `uvicorn.run` in both regular and reload modes; Uvicorn owns sockets, serving and shutdown.
 
 The service layer translates requests into SDK operations. It does not contain a separate copy of task acceptance or research logic. FastAPI's interactive documentation routes are disabled; the session-protected `/api/openapi.json` describes the implemented API.
 
@@ -128,7 +132,7 @@ The service layer translates requests into SDK operations. It does not contain a
 
 Internal artifact IDs are canonical UUID strings validated with Python UUID/Pydantic types. Generated records use UUIDv4; content-derived identities use UUIDv5. Imported trace IDs remain unchanged. Suite names are friendly labels separate from their UUIDs. Project format 0.3 rejects older project formats before rewriting any files; create a new project and reimport the traces.
 
-Structured artifacts are written through `shared.files.atomic_text`; Markdown escaping is shared through `shared.markdown.md`. Mutating workflows use a nonblocking POSIX project lock; a concurrent mutation returns a busy error. The HTTP job queue separately permits one background model job at a time. These mechanisms serve a local process-and-files workflow, not a distributed job system.
+Structured artifacts are written through `shared.files.atomic_text`; Markdown escaping is shared through `shared.markdown.md`. Mutating workflows use a nonblocking POSIX project lock; a concurrent mutation returns a busy error. The HTTP job registry separately reserves one model operation at a time and records its result or error. Routes schedule that operation with FastAPI `BackgroundTasks`, which runs after the response through the framework thread pool. These mechanisms serve a local process-and-files workflow, not a distributed job system.
 
 ## Shared human and agent research workspace
 
@@ -166,4 +170,4 @@ The root Makefile drives Docker Compose. Development runs a FastAPI/Uvicorn back
 
 The development image contains Python, Node and locked development dependencies. The runtime image uses the production Python environment. Both run as the workbench user. A named volume holds `/data/project` independently from source mounts and container lifetime. Python dependencies remain under `/opt/venv`; UI dependencies have their own named volume.
 
-`workbench/runtime.py` creates an empty project once or opens the existing project, then starts Uvicorn. Development reload uses an import-string factory and inherits the same bearer token across child restarts. The externally visible origin is configured separately from the container bind address. Compose binds Python to `0.0.0.0` inside the container and publishes only the host loopback address. Native agent CLI processes still need installation and authentication in the environment hosting the backend.
+`workbench/runtime.py` creates an empty project once or opens the existing project, then starts Uvicorn. Development reload uses an import-string factory and inherits the same bearer token across child restarts. Uvicorn graceful shutdown waits for active response background tasks by default; pause long native research before stopping if it should remain resumable. Typed Pydantic settings separate the externally visible origin from the container bind address. Compose binds Python to `0.0.0.0` inside the container and publishes only the host loopback address. Native agent CLI processes still need installation and authentication in the environment hosting the backend.

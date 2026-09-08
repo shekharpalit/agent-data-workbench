@@ -20,7 +20,7 @@ uv sync --locked
 uv run agent-data-workbench init runs/workbench "My agent" "Improve task completion"
 uv run agent-data-workbench ingest runs/workbench ./traces
 uv run agent-data-workbench investigate runs/workbench --backend codex --question "What should improve?"
-uv run agent-data-workbench ui runs/workbench --open-browser
+uv run agent-data-workbench ui runs/workbench
 ```
 
 Agent sessions use their native account limits. `--mode complete` requires an outcome for every input; `--resume <investigation UUID>` continues saved work. Local exploration and `research create` make no provider calls.

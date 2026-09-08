@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:e92c1f8c2c078ad03cb7ca0596fef56f42ec58f0cd236df6b6f104648e6a9073",
+  "pageVersion": "sha256:c75969c71d16fa6799fce5543bf4a36108ce455a2b1699b7958d7e806d106eb3",
   "claims": [
     {
       "id": "claim_80e3a5075dd34ed7b7f0393a15e92a9a",
@@ -171,12 +171,8 @@
       "statement": "Runtime tests exercise idempotent initialization, container request boundaries, reload token preservation and real signal-driven server shutdown.",
       "evidence": [
         {
-          "resource": "repo://tests/test_runtime.py#L144-L238",
-          "version": "repo-lines-v1:sha256:68dcea4fedaadb43c4914f268d6dcf4bf2e7376ad67e49c3533af0029b58b949:eyJzZWxlY3RlZExpbmVDb3VudCI6OTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhMDI1ZmM2YTQ0NDIwMTRmODcyZjRhZTE4M2NmMzhhOWM1MDdkN2ZlZDA0MTNhN2UxNTM1MTdmNWYzNzUyYzAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkyYzkwYzU5ODE4MDZlNWYzNThjNmZkNjRhM2JmYTM1ZDNkMjk5NzA3YjVlYTUzMTgwYmFhZDkyYjhkODBmZTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE0ZjA4OTU0MjA5YzU1OTc3NjFlMDI2ZWM3YTY0NzY4NmQ2MWU4YjA1ZTM0NjI1YjkyZWZmMWY3YjkzOWRkYzQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUwMjQxYjBiZTUwYmE1ODgzZDEzMDJhYTBjZWE2Y2UzN2M1NzFjMzJkNjE4MjhmZmU3ZWJlZjZkYTM3OWNhODYifQ"
-        },
-        {
-          "resource": "repo://tests/test_runtime.py#L20-L68",
-          "version": "repo-lines-v1:sha256:28c35c4d132eedeae8ddc0508f031d7846d02594893c13bbe8e844a581fd454f:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQzY2ZjYjAxY2QwNWIyMzEyNTQzZjNhZWZiNjZhMGQ0NzQ3ZGVmZTZhYjVjMjc2MmU5ZDJlMDliYmIzZDUxYzkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdhMzRlNWFlMGYzZTJlYjhlOWEwMDY3YjhkNGY5ODYyYTBhYmExNmRiY2EzMzUzYjAyODlmMDE3OTgxZTg3ZTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE3YzAzMDQ3MDAwZWJhOTQ2MWZjNDExNTQ2YjAwM2ZlMTZiNjdiZTYxZjBkMmMxNWM3ZDRlNDI4ZTMxZmNjNmQifQ"
+          "resource": "repo://tests/test_runtime.py",
+          "version": "repo-file-v1:sha256:197f952c09330c025fd7f4508db22909fee66624ac776602902e66bb2926c91b"
         }
       ]
     },
@@ -218,7 +214,7 @@
       "evidence": [
         {
           "resource": "repo://AGENTS.md",
-          "version": "repo-file-v1:sha256:86b5b495bec3e8eaecdf35591201ff2c54a6529ee68fc00ec90ba32de5a83cdc"
+          "version": "repo-file-v1:sha256:309b6b8ae02190dfa0d48451dadc7dabf93471bb87a47081df75886a7ace9aac"
         },
         {
           "resource": "repo://src/agent_data_workbench/exploration/clustering/tokenization.py",
@@ -229,10 +225,24 @@
           "version": "repo-file-v1:sha256:13a8d4cd3a7d4f47f9df035eeeb8157406579180516f6634da9c412bbe5948ce"
         }
       ]
+    },
+    {
+      "id": "claim_61960f21e9f342c3a7ad977ae6b22a94",
+      "statement": "CLI and job regression tests verify explicit startup settings, framework-deferred background execution, reservation before artifact creation and failure recovery.",
+      "evidence": [
+        {
+          "resource": "repo://tests/test_jobs.py",
+          "version": "repo-file-v1:sha256:ae69cadfc490bbce72b26a1eaa965c61809e4549e1b1b6701d671ccd6127774b"
+        },
+        {
+          "resource": "repo://tests/test_runtime_cli.py",
+          "version": "repo-file-v1:sha256:83b6c9bae8d8060240483b88ebc0580f3ebaec2e0e3edc9e9f2a1aa3add19ea1"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T00:07:39.310Z"
+    "at": "2026-09-08T00:33:25.897Z"
   }
 }

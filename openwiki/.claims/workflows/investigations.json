@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:63460bbc520b44e390f02c994722730deadbee36512530bb517cd038b47b2b77",
+  "pageVersion": "sha256:3f2c4812f9279621c469d7025b9015d085c3da365ddeb83a1012d70258476511",
   "claims": [
     {
       "id": "claim_399da148ea9d4659a1c1f01b3f13a8a8",
@@ -235,10 +235,28 @@
           "version": "repo-lines-v1:sha256:3afbb0034dec2d4973b172a08bf65416782397207decabf7aa27c76c4a9f9f8a:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjgxNjkxM2U1NjhjZWQzM2FiOTMzYWI5MDYxMWY2NWI3ZmFjNzc5NmJkODMwNDBjN2M1OTE3NzA4MjJkNDRlMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjU2ZTljYzQwMzI2NTI2ODcxODk1MjI1M2UyYzBjNDEzN2YxY2NlY2UxODQ4MjU3MTVlMDkxNjU1ZWZmOWI1MiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDY2NTZlNTFiMDczODFlMzY3ZGYwNmRlODZlODAwYjM5ZjMzNmY3ZTk0MzBiYTFjMGVmYzI5ZmU0MDFlMmNkNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjc4NGNlNDNkNzE4MTg5ZmJmNmNkMTVlZDRkZTc5MTEwMDBiNzEwYTlkN2Q3YzRlMThjZDJkMTJhOTJhNjU3YiJ9"
         }
       ]
+    },
+    {
+      "id": "claim_8ea43b4395794d118fbb529c8b8d2509",
+      "statement": "The knowledge HTTP endpoint accepts full nonempty content through a Pydantic contract without a workbench-wide request-body size cap.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/api/middleware.py",
+          "version": "repo-file-v1:sha256:4be0f612091dce70bbe80e548ad2892a61f8dd89a1beae08f877ce92d154a8c6"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/api/routers/knowledge.py#L11-L13",
+          "version": "repo-lines-v1:sha256:3608f6141bdc5244f41170ceac53959eed7b4c45c722b8bd15f2404319db93b6:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjgyZGM0ZjQ5ODhkYzJlMGNmYTIwMWQ4MmZiNzhkMjlhMzdlMWZhYzg2NzBmNjgwNjE3NTViZWQxNTYxMTdlNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2I1ZjYzMjAyMGIzYTVhY2Q2NWY5OWY4ZDQ0MzQzZDBlNDE1N2QxZjQyMGM4ZGFmN2NiZDljZWQ5MTdkNGM0ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDQ4ZjhlMGZmMTJhYTdlMDI2YjJhYmVmOWUzMmZmZTYyZmU1MTg5OGQwOWE2NGU4NmY3OTk0M2I5NmFjZDIyYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNmNkMDJjY2I1ZGJmNTc5NDk4N2U0ZjUzOTMxOTkxY2JjZjdlMGRmNzE5MjM1ZDIyYzE1NTk1N2Q0MmMzYzhjZSJ9"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/api/schemas.py#L62-L65",
+          "version": "repo-lines-v1:sha256:bb64b8d7d90ca85fa15b128969c9c144ba7343cc1f76046505d63df7066a72bf:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDE2N2U4MjNlOWEwZjVjZjlmY2Y0N2I5MzQ1NDIyMzYyMWZkNDJlZTkyZmJhNWE1MTQwMjZkMGVkNWFhNDI2MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzI1ZGFmM2NiOTE2N2U5MjE2NTE1N2FiYjA2MTViZDg4MTgyZGRmYTkwM2Y3NWYzNWVjZjIxNTExOGMwYTdmNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTMxOTc4MjhiN2JkM2RiY2MwZDFlNTYxZGYxMDQzYmZmYTkwMjUzMmE2MWRjY2NlNTRhMGU4MmZlMDQwOWRhOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTVhNDk1MDBhMjBmZDMwYzAzMjQzYjhhMjc1YzkzZGEwNzE1Y2M1MjVkYTAzN2QwYTM4MzNiYTRiZTVlNGFhMCJ9"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T00:07:39.310Z"
+    "at": "2026-09-08T00:33:25.897Z"
   }
 }

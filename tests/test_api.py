@@ -1,10 +1,6 @@
-import asyncio
-import json
 import re
 import threading
-import time
-import urllib.request
-import webbrowser
+from concurrent.futures import ThreadPoolExecutor
 
 import pytest
 from fastapi.testclient import TestClient
@@ -12,50 +8,12 @@ from identities import uid
 from test_workbench_data import make_project
 
 from agent_data_workbench import api
-from agent_data_workbench.api.middleware import MAX_BODY_BYTES, RESPONSE_HEADERS
+from agent_data_workbench.api.middleware import RESPONSE_HEADERS
 from agent_data_workbench.api.routers import investigations, tasks
-from agent_data_workbench.workbench import server
 
 ORIGIN = "http://127.0.0.1:8765"
 TOKEN = "synthetic-session-token"
 AUTH = {"Authorization": "Bearer " + TOKEN, "Origin": ORIGIN}
-
-
-def test_cli_opens_the_browser_after_the_workbench_can_serve_requests(project, monkeypatch):
-    # Given: a real loopback server and a browser substitute that requests its page.
-    workbench = server.WorkbenchServer(project)
-    monkeypatch.setattr(server, "WorkbenchServer", lambda project, port: workbench)
-    observed = []
-
-    def open_browser(url):
-        try:
-            with urllib.request.urlopen(url.split("#")[0], timeout=2) as response:
-                observed.append(
-                    {"url": url, "started": workbench.started, "status": response.status}
-                )
-        finally:
-            workbench.shutdown()
-
-    monkeypatch.setattr(webbrowser, "open", open_browser)
-    # When
-    thread = threading.Thread(target=server.serve, args=(project,), kwargs={"open_browser": True})
-    thread.start()
-    try:
-        thread.join(5)
-        # Then
-        assert {"stopped": not thread.is_alive(), "opened": observed} == {
-            "stopped": True,
-            "opened": [
-                {
-                    "url": workbench.origin + "/#token=" + workbench.token,
-                    "started": True,
-                    "status": 200,
-                }
-            ],
-        }
-    finally:
-        workbench.shutdown()
-        thread.join(2)
 
 
 @pytest.fixture
@@ -172,18 +130,18 @@ def test_static_assets_and_http_errors_retain_local_response_headers(client):
             "method": method.status_code,
             "host": host.status_code,
         },
-        "error_bodies": [missing.json(), method.json(), host.json()],
+        "error_bodies": [missing.json(), method.json(), host.text],
         "headers": [
             {key: r.headers[key] for key in RESPONSE_HEADERS} for r in [*responses, missing, host]
         ],
     } == {
         "asset_types": ["text/css", "text/javascript"],
         "asset_statuses": [200, 200],
-        "errors": {"missing": 404, "traversal": 404, "method": 405, "host": 403},
+        "errors": {"missing": 404, "traversal": 404, "method": 405, "host": 400},
         "error_bodies": [
             {"error": "Not Found"},
             {"error": "Method Not Allowed"},
-            {"error": "Invalid host"},
+            "Invalid host header",
         ],
         "headers": [RESPONSE_HEADERS] * 4,
     }
@@ -208,68 +166,102 @@ def test_json_media_type_and_malformed_body_fail_without_echoing_content(client)
         "valid": {"status": valid.status_code, "eligible": valid.json()["eligible"]},
     } == {
         "rejected": [
-            {"status": 400, "body": {"error": "Supply a JSON body up to 2 MB"}},
+            {"status": 400, "body": {"error": "Invalid structured data; check required fields"}},
             {"status": 400, "body": {"error": "Invalid structured data; check required fields"}},
         ],
         "valid": {"status": 200, "eligible": 9},
     }
 
 
-def test_body_limit_counts_received_chunks_when_content_length_is_absent(app):
-    # Given: an ASGI transport delivering bounded chunks without Content-Length.
-    chunk = b" " * 100_000
-    received, sent = [], []
-    scope = {
-        "type": "http",
-        "asgi": {"version": "3.0"},
-        "http_version": "1.1",
-        "method": "POST",
-        "scheme": "http",
-        "path": "/api/search",
-        "raw_path": b"/api/search",
-        "root_path": "",
-        "query_string": b"",
-        "server": ("127.0.0.1", 8765),
-        "client": ("127.0.0.1", 12345),
-        "headers": [
-            (b"host", b"127.0.0.1:8765"),
-            (b"origin", ORIGIN.encode()),
-            (b"authorization", AUTH["Authorization"].encode()),
-            (b"content-type", b"application/json"),
-        ],
-    }
-
-    async def receive():
-        received.append(len(chunk))
-        return {"type": "http.request", "body": chunk, "more_body": True}
-
-    async def send(message):
-        sent.append(message)
-
+def test_valid_json_bodies_above_two_megabytes_use_normal_fastapi_parsing(client):
+    # Given: a valid request padded beyond the former transport-level body cap.
+    body = " " * 2_000_001 + "{}"
+    expected = client.post("/api/search", json={}).json()
     # When
-    asyncio.run(app(scope, receive, send))
-    # Then
-    assert {
-        "bytes_read": sum(received),
-        "status": sent[0]["status"],
-        "body": json.loads(b"".join(m.get("body", b"") for m in sent[1:])),
-    } == {
-        "bytes_read": MAX_BODY_BYTES + len(chunk),
-        "status": 400,
-        "body": {"error": "Supply a JSON body up to 2 MB"},
-    }
-
-
-def test_declared_oversized_body_is_rejected_before_json_parsing(client):
-    # Given
-    headers = {"Content-Length": str(MAX_BODY_BYTES + 1)}
-    # When
-    response = client.post("/api/search", json={}, headers=headers)
+    response = client.post(
+        "/api/search", content=body, headers={"Content-Type": "application/json"}
+    )
     # Then
     assert {"status": response.status_code, "body": response.json()} == {
-        "status": 400,
-        "body": {"error": "Supply a JSON body up to 2 MB"},
+        "status": 200,
+        "body": expected,
     }
+
+
+@pytest.mark.parametrize("port", [8765, 8766])
+def test_trusted_host_validation_matches_the_hostname_independently_of_port(client, port):
+    # Given: the configured hostname with either the configured port or a different one.
+    # When
+    response = client.get("/api/jobs", headers={"Host": f"127.0.0.1:{port}"})
+    # Then
+    assert {"status": response.status_code, "body": response.json()} == {
+        "status": 200,
+        "body": [],
+    }
+
+
+@pytest.mark.parametrize(
+    "origin,expected",
+    [
+        (ORIGIN, {"status": 200, "body": "OK", "allowed_origin": ORIGIN}),
+        (
+            "https://other.example",
+            {"status": 400, "body": "Disallowed CORS origin", "allowed_origin": None},
+        ),
+    ],
+)
+def test_cors_preflight_allows_only_the_configured_browser_origin(client, origin, expected):
+    # Given: a browser checking whether it may submit authenticated JSON.
+    headers = {
+        "Origin": origin,
+        "Access-Control-Request-Method": "POST",
+        "Access-Control-Request-Headers": "Authorization, Content-Type",
+    }
+    # When
+    response = client.options("/api/search", headers=headers)
+    # Then
+    assert {
+        "status": response.status_code,
+        "body": response.text,
+        "allowed_origin": response.headers.get("access-control-allow-origin"),
+    } == expected
+
+
+def test_non_browser_clients_use_bearer_authentication_without_an_origin_header(app):
+    # Given: an API client without the browser's Origin header.
+    with TestClient(app, base_url=ORIGIN) as client:
+        # When
+        authorized = client.post(
+            "/api/search", json={}, headers={"Authorization": AUTH["Authorization"]}
+        )
+        denied = client.post("/api/search", json={})
+    # Then
+    assert {
+        "authorized": {
+            "status": authorized.status_code,
+            "eligible": authorized.json()["eligible"],
+            "allowed_origin": authorized.headers.get("access-control-allow-origin"),
+        },
+        "denied": {"status": denied.status_code, "body": denied.json()},
+    } == {
+        "authorized": {"status": 200, "eligible": 9, "allowed_origin": None},
+        "denied": {
+            "status": 401,
+            "body": {"error": "Open the complete local URL printed by agent-data-workbench ui"},
+        },
+    }
+
+
+def test_cors_does_not_replace_bearer_authentication_for_direct_requests(client):
+    # Given: a direct client holding the token and sending an unapproved browser origin.
+    # When
+    response = client.post("/api/search", json={}, headers={"Origin": "https://other.example"})
+    # Then: authentication authorizes the request; CORS does not grant browser response access.
+    assert {
+        "status": response.status_code,
+        "eligible": response.json()["eligible"],
+        "allowed_origin": response.headers.get("access-control-allow-origin"),
+    } == {"status": 200, "eligible": 9, "allowed_origin": None}
 
 
 def test_investigation_jobs_remain_nonblocking_and_reject_concurrent_artifacts(
@@ -291,60 +283,59 @@ def test_investigation_jobs_remain_nonblocking_and_reject_concurrent_artifacts(
         return {"status": "complete"}
 
     monkeypatch.setattr(investigations, "investigate", investigate)
-    # When
-    started = client.post(
-        "/api/investigate",
-        json={
-            "question": "Find outcomes",
-            "backend": "claude",
-            "model": "fixture",
-            "mode": "complete",
-        },
-    )
-    try:
-        assert entered.wait(2)
-        rejected = client.post("/api/investigate", json={"question": "Concurrent attempt"})
-        overview = client.get("/api/overview")
-        active = client.get("/api/jobs").json()
-        # Then
-        assert {
-            "started": started.status_code,
-            "job_keys": list(started.json()),
-            "rejected": {"status": rejected.status_code, "body": rejected.json()},
-            "responsive": overview.status_code,
-            "jobs": [j["status"] for j in active],
-            "investigations_created": len(project.artifacts("investigations")),
-            "calls": calls,
-        } == {
-            "started": 200,
-            "job_keys": ["job_id"],
-            "rejected": {"status": 400, "body": {"error": "An operation is already running"}},
-            "responsive": 200,
-            "jobs": ["running"],
-            "investigations_created": 1,
-            "calls": [
-                {
-                    "analyzer": {"backend": "claude", "model": "fixture", "timeout": None},
-                }
-            ],
-        }
-    finally:
-        release.set()
-    # When: the background operation finishes.
-    deadline = time.monotonic() + 2
-    while (final := client.get("/api/jobs").json())[0][
-        "status"
-    ] == "running" and time.monotonic() < deadline:
-        time.sleep(0.01)
+    # When: TestClient waits for BackgroundTasks while another request inspects the job.
+    with ThreadPoolExecutor(max_workers=1) as requests:
+        submitted = requests.submit(
+            client.post,
+            "/api/investigate",
+            json={
+                "question": "Find outcomes",
+                "backend": "claude",
+                "model": "fixture",
+                "mode": "complete",
+            },
+        )
+        try:
+            assert entered.wait(2)
+            rejected = client.post("/api/investigate", json={"question": "Concurrent attempt"})
+            overview = client.get("/api/overview")
+            active = client.get("/api/jobs").json()
+            # Then
+            assert {
+                "rejected": {"status": rejected.status_code, "body": rejected.json()},
+                "responsive": overview.status_code,
+                "jobs": [j["status"] for j in active],
+                "investigations_created": len(project.artifacts("investigations")),
+                "calls": calls,
+            } == {
+                "rejected": {"status": 400, "body": {"error": "An operation is already running"}},
+                "responsive": 200,
+                "jobs": ["running"],
+                "investigations_created": 1,
+                "calls": [
+                    {
+                        "analyzer": {"backend": "claude", "model": "fixture", "timeout": None},
+                    }
+                ],
+            }
+        finally:
+            release.set()
+        # When: the background operation finishes.
+        started = submitted.result(timeout=2)
+    final = client.get("/api/jobs").json()[0]
     # Then
     assert {
-        "status": final[0]["status"],
-        "result": final[0]["result"],
-        "error": final[0]["error"],
+        "response": {"status": started.status_code, "body": started.json()},
+        "job": final,
     } == {
-        "status": "complete",
-        "result": {"id": project.artifacts("investigations")[0]["id"], "status": "complete"},
-        "error": None,
+        "response": {"status": 200, "body": {"job_id": final["id"]}},
+        "job": {
+            "id": final["id"],
+            "name": "Investigate project",
+            "status": "complete",
+            "result": {"id": project.artifacts("investigations")[0]["id"], "status": "complete"},
+            "error": None,
+        },
     }
 
 
@@ -360,11 +351,7 @@ def test_failed_background_job_returns_a_recoverable_error_without_provider_text
     monkeypatch.setattr(tasks, "design_tasks", fail)
     # When
     client.post("/api/task/design", json={"investigation": uid("I1")})
-    deadline = time.monotonic() + 2
-    while (jobs := client.get("/api/jobs").json())[0][
-        "status"
-    ] == "running" and time.monotonic() < deadline:
-        time.sleep(0.01)
+    jobs = client.get("/api/jobs").json()
     # Then
     assert {
         "status": jobs[0]["status"],

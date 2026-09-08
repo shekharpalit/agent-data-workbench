@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:1e4f30f9158b2a61e4aa6ce14e5cfebe27b180b74d2a5167efd88861bf99acfa",
+  "pageVersion": "sha256:18c652beb597fe09c7e8cbe34c8d9c90db2c5ff43501602e02093bc1a9ecf686",
   "claims": [
     {
       "id": "claim_d9a6c98de02d49279a29adf7c1ea2d00",
@@ -8,7 +8,7 @@
       "evidence": [
         {
           "resource": "repo://src/agent_data_workbench/api/routers/tasks.py",
-          "version": "repo-file-v1:sha256:13674d6111ae4c547bae53ee9f41c95c31424c3fba77f8f40b66d95533d54a4a"
+          "version": "repo-file-v1:sha256:33c0a66cdccb6dc417f45d3eb507d75da2172a7c615661d4df8b3ff384ee450b"
         },
         {
           "resource": "repo://src/agent_data_workbench/cli/tasks.py",
@@ -56,11 +56,11 @@
     },
     {
       "id": "claim_d4dceae04c9a4e819247ff0c779c5925",
-      "statement": "Mutating project workflows use a nonblocking POSIX file lock, while the HTTP background job queue independently rejects another running model operation.",
+      "statement": "Mutating project workflows use a nonblocking POSIX file lock; the HTTP job registry independently reserves one model operation before FastAPI BackgroundTasks schedules it and records its completion or error.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/workbench/jobs.py#L10-L46",
-          "version": "repo-lines-v1:sha256:878bb9b95b24bba6b1d94888b8eeb9e68b889c43d23367a2dcff437a26d3d92d:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdmNzI1MTU2NjIwMDdlMTljMTkwZDg5ZDg2N2MxMzk5ZjBlMmY2Mzk5MGIwNzNkM2QwNDE5ODY0ODE2YTUwZTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU2YWM2ZjM1NDhmN2JkZjcyZGYwYWY0ZGY3MzZiZmNkN2E4Mjc1YjdhMGQ1ODI0NWJiYWZiNGMwZjMwMDlhMjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk2NTMzYTc2MDhmNjZhYjMyMGFjY2IwOGYxZWFmZmE3MjZkOTIzYTdhZTBhNTUyYmJjZDVlMmZkNjJjNmUxNDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://src/agent_data_workbench/workbench/jobs.py#L12-L49",
+          "version": "repo-lines-v1:sha256:114a4ee09460f760ba8179449e76836ddd2aa637682208925cc39fdf7a5df087:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdmNzI1MTU2NjIwMDdlMTljMTkwZDg5ZDg2N2MxMzk5ZjBlMmY2Mzk5MGIwNzNkM2QwNDE5ODY0ODE2YTUwZTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxMDM0ODFjNTdkMGYwZGMwZjc2Y2QyY2M4YjM2MDRjNGU4Mjk2ZGE0MTIyYWRkMTllODE3NDVkYzdlMzMxYTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk2NTMzYTc2MDhmNjZhYjMyMGFjY2IwOGYxZWFmZmE3MjZkOTIzYTdhZTBhNTUyYmJjZDVlMmZkNjJjNmUxNDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
           "resource": "repo://src/agent_data_workbench/workspace/project.py#L75-L90",
@@ -70,15 +70,19 @@
     },
     {
       "id": "claim_7a203cc9ddf741d4978d2cae2d78a620",
-      "statement": "The FastAPI app composes domain routers with shared bearer authentication, application state dependencies and request-boundary middleware.",
+      "statement": "The FastAPI app composes domain routers with bearer dependencies, typed request parsing and standard TrustedHost/CORS middleware; hostname matching ignores ports and CORS does not replace bearer authorization.",
       "evidence": [
         {
           "resource": "repo://src/agent_data_workbench/api/application.py#L26-L56",
-          "version": "repo-lines-v1:sha256:1cbea0afc539a1d3d0d52cf318d1ed3e8ed0978acb99bb2c15cc7b9795161f43:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwN2I0OWI3OTcyZDI0NTc0MzJkODRmNjZjOThjODhmMzJlODM3NDEwOGFmOTdkYjg3YjdlZDRiOTllZGE0NmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkNjdiNDY2Mzc4NzVjM2JiN2Y5MDNiMWRiODczNGI0YTI5NjY4NWRmNGRiZTY2YTRmNmNlZjdmZGM0MTE2M2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVhYjM1ODMxZjk2NWQ4M2QxMDg0ODRkMzkwZDA1MGFhYzUwOWJiMGQ5ZmI0NDQ5YTU0MzA4NDUxYmY2MWNiNTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "version": "repo-lines-v1:sha256:bc697de5cd4a850625f963a9cb798ec21bbe93674025717e31c54249918cd81b:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwN2I0OWI3OTcyZDI0NTc0MzJkODRmNjZjOThjODhmMzJlODM3NDEwOGFmOTdkYjg3YjdlZDRiOTllZGE0NmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkNjdiNDY2Mzc4NzVjM2JiN2Y5MDNiMWRiODczNGI0YTI5NjY4NWRmNGRiZTY2YTRmNmNlZjdmZGM0MTE2M2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVhYjM1ODMxZjk2NWQ4M2QxMDg0ODRkMzkwZDA1MGFhYzUwOWJiMGQ5ZmI0NDQ5YTU0MzA4NDUxYmY2MWNiNTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
           "resource": "repo://src/agent_data_workbench/api/dependencies.py",
           "version": "repo-file-v1:sha256:35e41e88605cf959974e0a9cf82020de9d025568e981ea0fe4894e6ef3cbf549"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/api/middleware.py#L22-L39",
+          "version": "repo-lines-v1:sha256:9a3cd5581eeacc50171dfd040b3bba8e12d7c3f6fb7fb4f3fd9dc5ef07672a6c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU1NWQwMDYyNTFjMTA1YjMyZGI1YWEzZDEyY2YzN2YyM2JiMTIwNzQ1ZTVkNjhmNTQ4YWIyMDI0NTdjNjQwNTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhhODQ5NmVlOTY0MjcyZmM5MTFhMmMyMmVlNDFkYTBmY2U3Zjg0OWJmYWRlMzQwNjUxMmJlMWQyYzgxODhjZWYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA5ZjkzMDgzYzE5NzEyMWI5ODI3MDBiYThhZmFiZDE3MjJjZjFkM2U3NDA0NTA5ZTgwZWZhMjcyNDdmNjJmMDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
     },
@@ -229,16 +233,16 @@
       "statement": "The runtime initializes missing projects without replacing existing ones and preserves the bearer token across Uvicorn reload child restarts.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/workbench/runtime.py#L58-L63",
-          "version": "repo-lines-v1:sha256:19b50005e68ce6d24a027c94b17a21e7abf0b4fb07c86500f80e0f870f9c27ae:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODViM2FiNmZiYTMxOGEyOTk2ZjA4NTNlMzA4ZjgyZjIwMWQ3MDAyMWE1ZWEwZWE5MGVkYTVhZDIwMzhjZmNiNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2ZiMmE2MjU3ZjQ1YWM2OWIwM2I3Y2VjODM0NjUwODkxYmNhNTgwNGExMDZlZDMxZmQwNGUwMTA2MjczOGI0ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjNkZjJhY2YwNmU4YzNmMDNjNzEzNWM2ZThhYzVhOWNhNTQzMmFiZTA2YTc0YWNhMGZkZDlhNTNhMDA4Zjk4NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTAzYmMyMjIxY2FhMjIzZTBlNTViNTI5YjE4ZDM0ZTYwZTlmYWQ5NmQ1YmViYmM5N2NmNjFkZDhmNGI1ZjczZCJ9"
+          "resource": "repo://src/agent_data_workbench/workbench/runtime.py#L20-L25",
+          "version": "repo-lines-v1:sha256:19b50005e68ce6d24a027c94b17a21e7abf0b4fb07c86500f80e0f870f9c27ae:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODViM2FiNmZiYTMxOGEyOTk2ZjA4NTNlMzA4ZjgyZjIwMWQ3MDAyMWE1ZWEwZWE5MGVkYTVhZDIwMzhjZmNiNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2ZiMmE2MjU3ZjQ1YWM2OWIwM2I3Y2VjODM0NjUwODkxYmNhNTgwNGExMDZlZDMxZmQwNGUwMTA2MjczOGI0ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjUxOTVmZjQ2ZjYzYzJhNzNlYjRjMzU3YTBmNjQ4ZDQ4MTJjNTE3ZmY2ZTgxMzBjOTA5ZDcxOTIxZjI0MTNiNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTAzYmMyMjIxY2FhMjIzZTBlNTViNTI5YjE4ZDM0ZTYwZTlmYWQ5NmQ1YmViYmM5N2NmNjFkZDhmNGI1ZjczZCJ9"
         },
         {
-          "resource": "repo://src/agent_data_workbench/workbench/runtime.py#L66-L70",
-          "version": "repo-lines-v1:sha256:aa2fb3e360683bce2a6b678004973fd28fa402d368a44682f0e4e8e163a392a6:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjM1ODM5MDJkZjYwNzNmZGQ5NmIxNTMwNjAzMTA0ZjViOWVhZjZjZDNhNmQ0Njk0MjRlZDBmMzNiZmU4OWQzMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzcyN2UyYmI5YjE3ZTFiNWMyZWEzOWQ1MzY2MGQ4ZGE0YjY0OGJiZDYwN2RiOTQzZmZjZmE0OTUwNmRkNmJmNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNWNkM2NmMDM0NDZkMTYwNTMzYmMzZjE2ZGVlNGJjYzBlYzJmMzAwNmU2MmZmMTkwMWEwOGEwMzhkZDk3ZjQ5YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNmM4NTVmNzExYWU2NTNiZGNjMzY3ZTdiZTc3OGNlNzQzMTYyMWZhOWI2NTUwNzVmYzRmNDMxNTJjNjAwZWE2MyJ9"
+          "resource": "repo://src/agent_data_workbench/workbench/runtime.py#L28-L32",
+          "version": "repo-lines-v1:sha256:b3ff1efc3ee3cf933ea3924b3281f41c662c8725e83284fb40c4748fbb6a220e:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjM1ODM5MDJkZjYwNzNmZGQ5NmIxNTMwNjAzMTA0ZjViOWVhZjZjZDNhNmQ0Njk0MjRlZDBmMzNiZmU4OWQzMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzcyN2UyYmI5YjE3ZTFiNWMyZWEzOWQ1MzY2MGQ4ZGE0YjY0OGJiZDYwN2RiOTQzZmZjZmE0OTUwNmRkNmJmNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNWNkM2NmMDM0NDZkMTYwNTMzYmMzZjE2ZGVlNGJjYzBlYzJmMzAwNmU2MmZmMTkwMWEwOGEwMzhkZDk3ZjQ5YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDMyNDE2OTFhZjllN2Q5YjllNTAyNWRhODVjNTU4NDc5NjBlODY0OTgwY2M0NTdlYTcwY2UzMWUyMmI5MWJjYiJ9"
         },
         {
-          "resource": "repo://src/agent_data_workbench/workbench/runtime.py#L73-L121",
-          "version": "repo-lines-v1:sha256:ed55405a382be9c132148963b67a763f1c20d338486a2f1b7d56c952194af434:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNiOGNiY2M4NGZjNDRmZTQ2ZjVhZTZiZDBmMTM2N2QwY2NiYjBiNTBkZWFjZDE2OWMxMGE4MzNjYzdhYmZjMjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk3M2M2NTA1NjFhNDVjMDUyY2YwMzg3ZGRiZGZkNzczOTY1NjA2ZTA5MjdkYTE2Yjc0MmMxYjIxYWE4NmRjNTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAxODQxOWI2YTgyY2UwN2MzNzA0NDQwZTBkMTczMmM1YjQ0MjhjOTE5YWUzM2YzNWQyYzBlZWZlZDM3MTM4NDkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+          "resource": "repo://src/agent_data_workbench/workbench/runtime.py#L35-L60",
+          "version": "repo-lines-v1:sha256:7f459ee3dd9ad7012c1b98be2e00fdcab4ff10a9b3a8fbac73c0e56f11d1c98f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk1YzQzNTc4MjlmY2YzZjJlZGI2YjY0ODYxZGNmOWM0NWUwOWFhYjA4NmZjNmMwZmVhYTk1NzAwM2FlNGFhZDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAxODQxOWI2YTgyY2UwN2MzNzA0NDQwZTBkMTczMmM1YjQ0MjhjOTE5YWUzM2YzNWQyYzBlZWZlZDM3MTM4NDkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZjODU1ZjcxMWFlNjUzYmRjYzM2N2U3YmU3NzhjZTc0MzE2MjFmYTliNjU1MDc1ZmM0ZjQzMTUyYzYwMGVhNjMifQ"
         }
       ]
     },
@@ -262,7 +266,7 @@
       "evidence": [
         {
           "resource": "repo://AGENTS.md",
-          "version": "repo-file-v1:sha256:86b5b495bec3e8eaecdf35591201ff2c54a6529ee68fc00ec90ba32de5a83cdc"
+          "version": "repo-file-v1:sha256:309b6b8ae02190dfa0d48451dadc7dabf93471bb87a47081df75886a7ace9aac"
         },
         {
           "resource": "repo://src/agent_data_workbench/__init__.py",
@@ -285,10 +289,28 @@
           "version": "repo-file-v1:sha256:78bcd262fb2e75c6b794c439239fdc8d29569dacfc22a9b3eb0fbd59f4fc2aac"
         }
       ]
+    },
+    {
+      "id": "claim_abe3b82d379d4efe9ca0ff682d51b8d9",
+      "statement": "Regular and reload startup use one Uvicorn application factory with Pydantic runtime settings; Uvicorn owns serving and graceful shutdown, including waiting for response background tasks by default.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/workbench/jobs.py#L21-L37",
+          "version": "repo-lines-v1:sha256:30a485090ab7e76f93af869c584c11ee8896dcc8579b1e39bcd015aad7dc5185:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIxMmY4OTNmODllYjk2NTI5OTc4MjQ4MzllNjFiM2JkYzkxYWQ0MzMyYjg3NGEyNTg1MmFlNDIzMWNlNTk1MGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU2YWM2ZjM1NDhmN2JkZjcyZGYwYWY0ZGY3MzZiZmNkN2E4Mjc1YjdhMGQ1ODI0NWJiYWZiNGMwZjMwMDlhMjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU5YTM4NjFlNzc3ZWNjOWQ1ZGM1MjQzZjlhOTljZTljYTdlZTlkZmU3ZTBiYzJiYzQ1Y2ZkMzg0NjM0Nzg4YWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQzNjg4MDkwMGI2NDg5MGI0NGVjYjU1NDY3MTE3ZTk3ODhjYWI1ZWM1YTNlNGQwMDczY2QxMTRjN2UxMDA1NTUifQ"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/workbench/runtime.py#L35-L60",
+          "version": "repo-lines-v1:sha256:7f459ee3dd9ad7012c1b98be2e00fdcab4ff10a9b3a8fbac73c0e56f11d1c98f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk1YzQzNTc4MjlmY2YzZjJlZGI2YjY0ODYxZGNmOWM0NWUwOWFhYjA4NmZjNmMwZmVhYTk1NzAwM2FlNGFhZDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAxODQxOWI2YTgyY2UwN2MzNzA0NDQwZTBkMTczMmM1YjQ0MjhjOTE5YWUzM2YzNWQyYzBlZWZlZDM3MTM4NDkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZjODU1ZjcxMWFlNjUzYmRjYzM2N2U3YmU3NzhjZTc0MzE2MjFmYTliNjU1MDc1ZmM0ZjQzMTUyYzYwMGVhNjMifQ"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/workbench/settings.py#L13-L58",
+          "version": "repo-lines-v1:sha256:991b51a5e0ab7ba3940edfa99b71f0155a87184b03e4c806d9ac50886c470023:eyJzZWxlY3RlZExpbmVDb3VudCI6NDYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2OWExMzk3NWMyNTZlYzgzMjBlMjAxNjA4M2M5NmRmNjM3Y2EzZDM1YmViZGUyMzE0YmVlM2E0NzExYjU2Y2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5MDlhNTNhNjE4ZDAyOGUxZDMwMDBjMGE3YWJjZWVjYmU1ZmIzN2Y0ZTUxMWVmZTQ2NjQzZmFkNmU2Njg3MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZmYThkNzg5YTE4NGQ3NzdkNDc3NDgxZTJkNzc0NDc0NDk5NzQ2YTVlNTJhNjMxZmIzNGViNTlmMGY1ZmE2NWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T00:07:39.310Z"
+    "at": "2026-09-08T00:33:25.897Z"
   }
 }

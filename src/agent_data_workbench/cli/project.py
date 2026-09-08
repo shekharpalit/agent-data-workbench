@@ -133,8 +133,19 @@ def query(
 
 @app.command("ui")
 @errors
-def ui(project: Path, port: int = 0, open_browser: bool = False):
+def ui(project: Path, port: Annotated[int, typer.Option(min=1, max=65535)] = 8765):
     """Serve the local workbench on loopback with a per-session access token."""
-    from agent_data_workbench.workbench.server import serve
+    from agent_data_workbench.workbench.runtime import launch
+    from agent_data_workbench.workbench.settings import RuntimeSettings
 
-    serve(Project(project), port=port, open_browser=open_browser)
+    current = Project(project)
+    launch(
+        RuntimeSettings(
+            project=current.root,
+            host="127.0.0.1",
+            port=port,
+            origin=f"http://127.0.0.1:{port}",
+            name=current.config.name,
+            objective=current.config.objective,
+        )
+    )

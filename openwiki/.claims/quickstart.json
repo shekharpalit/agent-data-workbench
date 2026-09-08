@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:3b55232ee08673d75bd10b243467a6b1e808943dc4ac62fcc47dbecfceece170",
+  "pageVersion": "sha256:445b63c6b2f1cec5e8ffd973c46db1b3683a679311d9e3b397e2c29311d981e0",
   "claims": [
     {
       "id": "claim_b88dee80e2334471a6a24e3675d10bd3",
@@ -22,21 +22,21 @@
       "evidence": [
         {
           "resource": "repo://src/agent_data_workbench/cli/project.py",
-          "version": "repo-file-v1:sha256:4ea5beaf570b87014d1c0da7fa2ce022fda107cad383b24fd68bf7a91a93bee2"
+          "version": "repo-file-v1:sha256:7fe03c9dae556c6c2e6a2d8ddb627c530b918c8b4cae1227c64b5c28cb13c52c"
         }
       ]
     },
     {
       "id": "claim_ef6d0276cc474a7f96a6402f4b6fe6f8",
-      "statement": "The UI command starts the project workbench through its local server and accepts an optional port and automatic browser opening.",
+      "statement": "The UI command serves the selected project through the FastAPI/Uvicorn factory on loopback port 8765 by default, accepts --port, and prints a fresh token URL for manual opening.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/cli/project.py",
-          "version": "repo-file-v1:sha256:4ea5beaf570b87014d1c0da7fa2ce022fda107cad383b24fd68bf7a91a93bee2"
+          "resource": "repo://src/agent_data_workbench/cli/project.py#L134-L151",
+          "version": "repo-lines-v1:sha256:793789fb3decb432b4bc4cfb0694b245fe426adb010aacab32893d176fa6cf60:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhmYTVmMjM4OTFiNTk4YWU5YzIyMTY3NzIxYjlkYmMzYjgyZmQxMDU1ZWIxNWY3MjIzYmMzZjliM2QwYmFjNDYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhjYzRhN2QxY2M3OTZhYmEzZTQ2NzIzMzI3ZjUxN2U5ZjgxMTk4MmQyNTBmMDcwMjk4NmU0YjU3NjRhZDk1ODkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
-          "resource": "repo://src/agent_data_workbench/workbench/server.py#L118-L141",
-          "version": "repo-lines-v1:sha256:d653bd64a8c205de27b5383d49fafc70938b8aec198bd51deb479c3464d517b0:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMxNGVmMTkzNTI3MDQ5NmNiNGQ1ZDFlNzEzZTQ3ZmNkZDIwMzdmMWMxMGQzYmVjOTJmNzdhZjIwZjAwNDUwMWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1MzhjYzAyNmU5MzVhYThhMzcwZmQwNWM3M2NhZTY0YTZiN2U4NzU3MjJmZTVlZjAyZTk0ZmM3YzYxYjIyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBjNDc0NTU0N2RlMmM4NGI1ZDM3NDJmOTRmNDY5MGUyNDhhZDg3NWI2OWRhZjQ0NTAxMTI0MDBhMGJlMWExN2EiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://src/agent_data_workbench/workbench/runtime.py#L35-L60",
+          "version": "repo-lines-v1:sha256:7f459ee3dd9ad7012c1b98be2e00fdcab4ff10a9b3a8fbac73c0e56f11d1c98f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk1YzQzNTc4MjlmY2YzZjJlZGI2YjY0ODYxZGNmOWM0NWUwOWFhYjA4NmZjNmMwZmVhYTk1NzAwM2FlNGFhZDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAxODQxOWI2YTgyY2UwN2MzNzA0NDQwZTBkMTczMmM1YjQ0MjhjOTE5YWUzM2YzNWQyYzBlZWZlZDM3MTM4NDkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZjODU1ZjcxMWFlNjUzYmRjYzM2N2U3YmU3NzhjZTc0MzE2MjFmYTliNjU1MDc1ZmM0ZjQzMTUyYzYwMGVhNjMifQ"
         }
       ]
     },
@@ -91,12 +91,12 @@
       "statement": "The local workflow adds world reviews, actual-attempt calibration, behavioral coverage and exact candidate decisions, with paired execution and optional Harbor export/run controls.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/api/routers/workflow.py#L112-L241",
-          "version": "repo-lines-v1:sha256:045f0c44b3f8f5560d27dd8c2cda9ff730587fb91c7687776683e54e2e0b3f7d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMwLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI4NGY0MDMxNzJhNjQ5N2I5YmJkYTJiZmVjMjFjODM5ZDFhYzI1Y2IzMzIyNDlkZjA0ODM3NWUxMGVlNGFmMDk3IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJkMjMyMDM4NjM5MjU2MWJkMjZhMDQzZjdiZjQxYzlmZWM5YmY0YjJmMmM2ZGY3MjNmZDRhMWJkZWEwOTlhNGVmIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJjMmU0OGE3NzVkOGYwNGQxZWE4NTg5MmRkMzBiZTJjZmIxYjlkMWFkODg4OWQ2OTZkMDlhNGRmNTI3ODAzMjhiIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiJiOTVjNTQ0NGI1YzRmODQ5NjgxYzEwMjY4MTUwZmQ4NzJjZGY5NGY2NDVkODEzMzNiMzg5MGQ4YWVkOTYxMGEwIn0"
+          "resource": "repo://src/agent_data_workbench/api/routers/workflow.py",
+          "version": "repo-file-v1:sha256:522f51ef401d80c7181ce0b8ffc094f461f984c0ba5af7f528343d156a5ea28d"
         },
         {
-          "resource": "repo://src/agent_data_workbench/cli/workflow.py#L32-L161",
-          "version": "repo-lines-v1:sha256:c0b1dc2bfbef836bf98ea64ea527a13dc2b9ca960cbd83b459904e08eb864eab:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMwLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJmNGU1NTdhNGJiZDIzNjJiZGU1M2EwMmMwZGU4OTQ4Y2FmN2ZjMWFkOTY2ZDFhZWFkYzk3MTVlMTIzZDdiODVhIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJmYmE2M2ZkNTdiYzk4NzVlZmFiY2NkNWMzZThiZDQzMWQxN2I1ODM3ZGNiOTM0YTNkOTBkMWJiMTQ3MTFmMmQ4IiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI5M2U2N2VjZTJmMmE4Y2JlMjAwODQ4N2MyMDFjOGUxNTZjN2U1OTdlNmI4YWIxOTk4NGU3NzllODY3ZTI3YjlkIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI2NWNjZTAyMDhiNDg3YTdiODk4MzNlZDI1NDM3YWIwZDE2NTA4NTI2NmY4MTZiNDI3YTdjNWM1NTRhZjhiYmNiIn0"
+          "resource": "repo://src/agent_data_workbench/cli/workflow.py",
+          "version": "repo-file-v1:sha256:8ae39c04f3152265112226f33f000e43a3995f691be439b5541aa6da8eeee278"
         }
       ]
     },
@@ -149,6 +149,6 @@
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T00:07:39.310Z"
+    "at": "2026-09-08T00:33:25.897Z"
   }
 }

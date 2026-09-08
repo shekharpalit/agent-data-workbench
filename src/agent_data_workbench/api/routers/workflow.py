@@ -3,7 +3,7 @@
 from pathlib import Path
 from typing import Literal
 
-from fastapi import APIRouter
+from fastapi import APIRouter, BackgroundTasks
 from pydantic import Field
 
 from agent_data_workbench.api.dependencies import JobsDependency, ProjectDependency
@@ -160,12 +160,18 @@ def improvement_decide(project: ProjectDependency, payload: DecisionRequest):
 
 
 @router.post("/experiment")
-def experiment_run(project: ProjectDependency, jobs: JobsDependency, payload: ExperimentRequest):
+def experiment_run(
+    project: ProjectDependency,
+    jobs: JobsDependency,
+    payload: ExperimentRequest,
+    background_tasks: BackgroundTasks,
+):
     from agent_data_workbench.integrations.analyzers import CliAnalyzer
 
     baseline, candidate = configured(payload.baseline_path), configured(payload.candidate_path)
     judge = CliAnalyzer(payload.judge, payload.judge_model) if payload.judge else None
     return jobs.launch(
+        background_tasks,
         "Run paired experiment",
         lambda: run_experiment(
             project,
@@ -240,8 +246,14 @@ def harbor_export(project: ProjectDependency, payload: HarborRequest):
 
 
 @router.post("/harbor/run")
-def harbor_run(project: ProjectDependency, jobs: JobsDependency, payload: HarborRunRequest):
+def harbor_run(
+    project: ProjectDependency,
+    jobs: JobsDependency,
+    payload: HarborRunRequest,
+    background_tasks: BackgroundTasks,
+):
     return jobs.launch(
+        background_tasks,
         "Run exported Harbor task",
         lambda: run_harbor_export(
             project,

@@ -22,14 +22,16 @@ sources:
     resource: repo://src/agent_data_workbench/api/routers/workflow.py
   - id: openwiki-source-4105c547b3781d406b01e383
     resource: repo://src/agent_data_workbench/api/schemas.py
+  - id: openwiki-source-2ee7fba2bd1c703c70f5f285
+    resource: repo://src/agent_data_workbench/cli/project.py
   - id: openwiki-source-a69866c703779e64969315b7
     resource: repo://src/agent_data_workbench/data/ingestion.py
   - id: openwiki-source-c8c7945f688b6b620d3800cf
     resource: repo://src/agent_data_workbench/workbench/jobs.py
   - id: openwiki-source-56b68af7c871c44d9ba4d64d
     resource: repo://src/agent_data_workbench/workbench/runtime.py
-  - id: openwiki-source-759b532db0b0156398d95b24
-    resource: repo://src/agent_data_workbench/workbench/server.py
+  - id: openwiki-source-4a774cace930992dc66c0bda
+    resource: repo://src/agent_data_workbench/workbench/settings.py
   - id: openwiki-source-9c58a0b0672b6bdbd523d5ee
     resource: repo://tests/test_identifiers.py
   - id: openwiki-source-7e7b3478097a461915e85751
@@ -48,10 +50,10 @@ sources:
     resource: repo://ui/src/views/ResearchSnapshot.tsx
   - id: openwiki-source-826d1e88c728d7cfae868e97
     resource: repo://ui/tests/workflow.test.tsx
-generated: { by: "codex", at: "2026-09-08T00:07:39.310Z" }
+generated: { by: "codex", at: "2026-09-08T00:33:25.897Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T00:07:39.310Z
+    at: 2026-09-08T00:33:25.897Z
 ---
 
 # Run the local workbench
@@ -61,18 +63,20 @@ From a repository checkout, `make init` and `make dev` run the workbench through
 For a native Python process and existing host agent CLI authentication:
 
 ```sh
-uv run agent-data-workbench ui runs/workbench --open-browser
+uv run agent-data-workbench ui runs/workbench
 ```
 
-The CLI starts Uvicorn and binds a socket on `127.0.0.1`. The default port is selected dynamically; `--port` requests a particular one. It prints the complete session URL and opens the browser only after Uvicorn reports that it can serve requests. Ctrl-C stops the service.
+The CLI runs the FastAPI app through Uvicorn on `127.0.0.1:8765`. Use `--port 9000` to select another port from 1 through 65535. Open the complete printed session URL after Uvicorn reports startup. Automatic port selection and `--open-browser` are removed. Ctrl-C initiates graceful shutdown.
 
-The startup and listener lifecycle live in `workbench/runtime.py` and `workbench/server.py`; the FastAPI application and typed routers live in `api/`. See the [package ownership map](../architecture/system.md#responsibilities) when changing either layer.
+Pydantic configuration lives in `workbench/settings.py`; `workbench/runtime.py` initializes the project and session token and calls `uvicorn.run` with the same app factory for regular and reload modes. Uvicorn owns sockets, serving and shutdown. The FastAPI application and typed routers live in `api/`. See the [package ownership map](../architecture/system.md#responsibilities) when changing either layer.
 
 ## Local session and API
 
 Each full server start creates a fresh random access token. The Docker development reload process inherits that token across Python child restarts, so a code reload keeps the current browser session. The printed URL puts it in the fragment; the frontend obtains the token and sends it as an Authorization bearer header for API requests. Use the complete printed URL again after a restart or an unauthorized response.
 
-`api/middleware.py` checks the exact Host header and requires same-origin POST requests. API operations authenticate through FastAPI’s `HTTPBearer` dependency in `api/dependencies.py`. POST bodies must be JSON and are bounded to 2,000,000 bytes, including received chunks when Content-Length is absent. Responses use no-store caching, no-referrer, nosniff, and a content security policy. These are local browser boundaries; the app is not a hosted multiuser service.
+`api/middleware.py` configures standard FastAPI/Starlette middleware. `TrustedHostMiddleware` checks the configured hostname, independently of the port, and returns its standard HTTP 400 “Invalid host header” response for other hosts. `CORSMiddleware` handles browser preflight and allowed-origin response headers. API operations authenticate through FastAPI’s `HTTPBearer` dependency in `api/dependencies.py`; authenticated non-browser clients can omit Origin. A direct request with a valid bearer token can execute even with another Origin, but receives no allowed-origin header. CORS does not authorize requests.
+
+FastAPI parses JSON and Pydantic validates typed bodies. There is no workbench-wide 2 MB request-body cap; machine resources and field-specific contracts still apply. Responses retain no-store caching, no-referrer, nosniff, and a content security policy. The browser origin must use an IPv4 address or hostname; use `localhost` for an IPv6 listener. The app remains a local, single-session tool.
 
 The Python package includes the UI entry point and hashed assets. FastAPI serves those files and typed SDK operations from the same origin. No separate Node server is needed for normal use. `/api/openapi.json` is available with the same session authorization; the default Swagger and ReDoc pages are disabled. Invalid structured requests return HTTP 400 with an `error` field and do not echo the input values. Internal artifact request IDs use the `uuid` format in OpenAPI; imported trace identifiers remain opaque strings. Domain routers under `api/routers/` keep trace, knowledge, task, investigation, and job operations separate.
 
@@ -107,7 +111,9 @@ Draft editing retains existing cases, signals, proposals, limitations and open q
 
 ## Model jobs and execution
 
-Native investigation and task-design requests enter a background queue so the HTTP request can return while analysis continues. Only one job may be running at a time. The queue reserves capacity before starting an investigation, so a rejected concurrent request does not leave an orphan investigation artifact. Job status is process-local; durable domain artifacts hold completed work.
+Native investigation, task-design, paired-experiment and Harbor-run routes schedule FastAPI `BackgroundTasks`, so the HTTP response returns before the operation runs through the framework thread pool. The job registry reserves one operation at a time and records status and results; it creates no worker threads. Reservation precedes investigation creation, so a rejected concurrent request does not leave an orphan artifact. Job status is process-local; durable domain artifacts hold completed work.
+
+Uvicorn graceful shutdown waits for active response background tasks by default. Pause long native research before stopping if it should resume later. An external Docker stop deadline can force termination; the workbench does not add a default analysis timeout.
 
 Selecting **Use an agent** exposes a native backend and either adaptive `research` or per-record `complete` mode. Final evaluation inputs are included unless the developer selects their explicit exclusion. There is no maximum-call input. A saved session resumes with its original backend and model settings; partial findings remain visible while work is unfinished. A live session exposes Pause, and a released session lock allows recovery after a process crash.
 

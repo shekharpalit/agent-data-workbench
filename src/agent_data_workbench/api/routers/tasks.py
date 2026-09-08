@@ -1,6 +1,6 @@
 """FastAPI routes for tasks; domain behavior lives in the SDK."""
 
-from fastapi import APIRouter
+from fastapi import APIRouter, BackgroundTasks
 
 from agent_data_workbench.api.dependencies import JobsDependency, ProjectDependency
 from agent_data_workbench.api.schemas import (
@@ -33,9 +33,15 @@ def task_audit(project: ProjectDependency, payload: ArtifactRequest):
 
 
 @router.post("/task/design")
-def task_design(project: ProjectDependency, jobs: JobsDependency, payload: TaskDesignRequest):
+def task_design(
+    project: ProjectDependency,
+    jobs: JobsDependency,
+    payload: TaskDesignRequest,
+    background_tasks: BackgroundTasks,
+):
     analyzer = CliAnalyzer(payload.backend, payload.model or None)
     return jobs.launch(
+        background_tasks,
         "Design tasks",
         lambda: {
             "tasks": [t.id for t in design_tasks(project, payload.investigation, analyzer).tasks]

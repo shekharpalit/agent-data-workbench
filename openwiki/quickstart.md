@@ -30,8 +30,6 @@ sources:
     resource: repo://src/agent_data_workbench/research/workspace.py
   - id: openwiki-source-56b68af7c871c44d9ba4d64d
     resource: repo://src/agent_data_workbench/workbench/runtime.py
-  - id: openwiki-source-759b532db0b0156398d95b24
-    resource: repo://src/agent_data_workbench/workbench/server.py
   - id: openwiki-source-b9e04cc4343208a80c47ef02
     resource: repo://src/agent_data_workbench/workspace/project.py
   - id: openwiki-source-7e7b3478097a461915e85751
@@ -40,10 +38,10 @@ sources:
     resource: repo://ui/src/views/ManualResearchEditor.tsx
   - id: openwiki-source-a6ff0ad9c45aedc12177eaec
     resource: repo://ui/src/views/ResearchControls.tsx
-generated: { by: "codex", at: "2026-09-08T00:07:39.310Z" }
+generated: { by: "codex", at: "2026-09-08T00:33:25.897Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T00:07:39.310Z
+    at: 2026-09-08T00:33:25.897Z
 ---
 
 # Quickstart
@@ -94,12 +92,12 @@ uv run agent-data-workbench init runs/my-agent "My agent" \
   "Improve reliable task completion"
 uv run agent-data-workbench ingest runs/my-agent ./traces
 uv run agent-data-workbench query runs/my-agent --limit 20
-uv run agent-data-workbench ui runs/my-agent --open-browser
+uv run agent-data-workbench ui runs/my-agent
 ```
 
 The project starts empty. You can also pass several files (`ingest runs/my-agent ./run-a.jsonl ./run-b.jsonl`) or a quoted glob. Use `--layout records` for the older record-per-line export format. Use `--source-root` when changing file selections within one collection; [trace import](workflows/traces.md) explains stable identities and `/events/N` evidence pointers. An invalid file rolls back the entire selected batch. The runtime contains no demo commands, fake agent, or canned corpus. JSON/JSONL records come from your own exports; see [trace import](workflows/traces.md) for the record format. Synthetic fixtures remain confined to tests.
 
-The UI starts on loopback using an available port and a per-session access token. Follow the printed URL and stop the server with Ctrl-C when finished. Search traces and field distributions first; investigations, tasks, and experiments appear as you create them. Read [local operation](operations/local-workbench.md) for details.
+The UI starts on `127.0.0.1:8765` with a per-session access token; add `--port 9000` to use another port. Open the printed URL after Uvicorn reports startup. Ctrl-C initiates graceful shutdown, which waits for active response background jobs; pause long native research first if it should resume later. Search traces and field distributions first; investigations, tasks, and experiments appear as you create them. Read [local operation](operations/local-workbench.md) for details.
 
 Version 0.3 uses UUIDs for internal artifacts and keeps external trace IDs unchanged. Older project formats are rejected without rewriting their files. Create a new project directory and reimport the original traces; prior derived artifacts remain in the old directory. Suite names are friendly labels, and execution uses the suite UUID returned at creation.
 

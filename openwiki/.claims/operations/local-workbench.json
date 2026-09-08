@@ -1,36 +1,40 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:55fadea959947e3eb484ef01fd6ae788f4a4027aa2d5d6588767c38cc6ba21ed",
+  "pageVersion": "sha256:c28b202cfc2c3cd9439f7ea717e11e56e4de62519d1da537680dd5cb95c0a848",
   "claims": [
     {
       "id": "claim_25574e40cfb048b39464c4e95bba596d",
-      "statement": "The native ui CLI defaults to a 127.0.0.1 socket and an ephemeral port, creates a new token per start, and opens the browser only after Uvicorn reports started; explicit runtime configuration can supply a different bind address and public origin.",
+      "statement": "The native UI defaults to 127.0.0.1:8765, accepts an explicit port from 1 through 65535, and prints a fresh token URL for manual opening; regular and reload startup use the same Uvicorn factory with typed settings.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/workbench/server.py#L118-L141",
-          "version": "repo-lines-v1:sha256:d653bd64a8c205de27b5383d49fafc70938b8aec198bd51deb479c3464d517b0:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMxNGVmMTkzNTI3MDQ5NmNiNGQ1ZDFlNzEzZTQ3ZmNkZDIwMzdmMWMxMGQzYmVjOTJmNzdhZjIwZjAwNDUwMWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1MzhjYzAyNmU5MzVhYThhMzcwZmQwNWM3M2NhZTY0YTZiN2U4NzU3MjJmZTVlZjAyZTk0ZmM3YzYxYjIyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBjNDc0NTU0N2RlMmM4NGI1ZDM3NDJmOTRmNDY5MGUyNDhhZDg3NWI2OWRhZjQ0NTAxMTI0MDBhMGJlMWExN2EiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://src/agent_data_workbench/cli/project.py#L134-L151",
+          "version": "repo-lines-v1:sha256:793789fb3decb432b4bc4cfb0694b245fe426adb010aacab32893d176fa6cf60:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhmYTVmMjM4OTFiNTk4YWU5YzIyMTY3NzIxYjlkYmMzYjgyZmQxMDU1ZWIxNWY3MjIzYmMzZjliM2QwYmFjNDYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhjYzRhN2QxY2M3OTZhYmEzZTQ2NzIzMzI3ZjUxN2U5ZjgxMTk4MmQyNTBmMDcwMjk4NmU0YjU3NjRhZDk1ODkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
-          "resource": "repo://src/agent_data_workbench/workbench/server.py#L62-L115",
-          "version": "repo-lines-v1:sha256:20229158598bccab369553f2129e8af68198e7fd4e9186df5376b2ad0bd47718:eyJzZWxlY3RlZExpbmVDb3VudCI6NTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY0YmUxMmU3NDA1MTlhYTcyZGQ5ZjBkMGI0OGNjYmNlNGZkNDllZjIyMjRkYjA3MjVhOTAzOTJjZTQwNGEyZGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE3NDlhYmEwOWYyZTA3ODdlNGQ2NjY2Y2Q4NTZmZTZjMzJjMmQwNGQ4YzkwNGUyNWYwNDEwNDViMDEzODZhNDkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJiYzI4NDNkYWI0NjFmZGY5MGYxY2NjY2Q2ZmUxNWI5NjBjZWJlZTcxOTc3NDMyZjg4ODE2YjNiOWU0ZTJlY2IiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM4OTc3MDBmMmNiNmYyNWE5ZmY1YmQ5Y2JkODlkNzdjZTU4MzFkYjQ2NTg1MTIzNjg5ZjZmMjg2YjY1NWYxZDgifQ"
+          "resource": "repo://src/agent_data_workbench/workbench/runtime.py#L35-L60",
+          "version": "repo-lines-v1:sha256:7f459ee3dd9ad7012c1b98be2e00fdcab4ff10a9b3a8fbac73c0e56f11d1c98f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk1YzQzNTc4MjlmY2YzZjJlZGI2YjY0ODYxZGNmOWM0NWUwOWFhYjA4NmZjNmMwZmVhYTk1NzAwM2FlNGFhZDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAxODQxOWI2YTgyY2UwN2MzNzA0NDQwZTBkMTczMmM1YjQ0MjhjOTE5YWUzM2YzNWQyYzBlZWZlZDM3MTM4NDkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZjODU1ZjcxMWFlNjUzYmRjYzM2N2U3YmU3NzhjZTc0MzE2MjFmYTliNjU1MDc1ZmM0ZjQzMTUyYzYwMGVhNjMifQ"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/workbench/settings.py#L13-L58",
+          "version": "repo-lines-v1:sha256:991b51a5e0ab7ba3940edfa99b71f0155a87184b03e4c806d9ac50886c470023:eyJzZWxlY3RlZExpbmVDb3VudCI6NDYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2OWExMzk3NWMyNTZlYzgzMjBlMjAxNjA4M2M5NmRmNjM3Y2EzZDM1YmViZGUyMzE0YmVlM2E0NzExYjU2Y2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5MDlhNTNhNjE4ZDAyOGUxZDMwMDBjMGE3YWJjZWVjYmU1ZmIzN2Y0ZTUxMWVmZTQ2NjQzZmFkNmU2Njg3MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZmYThkNzg5YTE4NGQ3NzdkNDc3NDgxZTJkNzc0NDc0NDk5NzQ2YTVlNTJhNjMxZmIzNGViNTlmMGY1ZmE2NWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
     },
     {
       "id": "claim_76b547e0e36e477299f5d0bfadf5a94d",
-      "statement": "Request middleware enforces exact Host, same-origin POST, JSON bodies and a 2,000,000-byte received-body limit; FastAPI bearer dependencies authenticate API operations.",
+      "statement": "Standard TrustedHostMiddleware checks hostnames independently of ports, CORSMiddleware handles browser origins and preflight, and HTTPBearer authenticates API calls with or without Origin; FastAPI/Pydantic parses typed JSON without a workbench-wide request-body cap.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/api/application.py#L26-L39",
-          "version": "repo-lines-v1:sha256:9f1eeaf77f42b6939a61b8a1978c4729346d7e5410833e36c886fb16805ef137:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFjYmM5ZGNjYjBkNGU0NTM1MjQ0ZTEyMzZjMzg0NDI2NmM1NDczMGJlYjM4NTBhNTNjMzYyY2RmYTMzYmRjZDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA1Njk1ZGU0ZTRjNDU5ZjdjZmU5NTA1MTk2NGE5YzRjZGUyOGEwZjFkYzQwYTliNGNkOGJjNWExMWEwOTAxYWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUyZTA0YWViNDc3OWRjYzZlMzI1YzIxZjAyZGI2Yzc4YjhkYjVkZmQxYmE0ZDM2MTJhOGI2YjkzNjhhYmVjMDEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY1YjJmZjJiYzNmMzQwMjkzYzRhZTA0MzlkN2ExZGFhMzRjNmI5MTM3M2UxMDk1ZDNkNjMzNTU0Y2UyNTNmODUifQ"
+          "resource": "repo://src/agent_data_workbench/api/dependencies.py#L15-L21",
+          "version": "repo-lines-v1:sha256:027265f35ae6b37d78108eb5bcfbbf93f06d6bf70e6059a3d884c247e206bafb:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMWUzNmVkOGY2YWM5YmZiYTMyODM3NDQ4YmRiYTMxODYyYjA1YWMxNTVhMjQ3N2I1NjgwOWVmYzgzNGRkOTkxZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjkzZTI3NmFmYTg2ODViN2MxNTIwODE5NjAzMmI0YTBlNGRmODdjMjI4OGYwOWY1ZWQwNTAwMjI1YTg2OWJhNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGRhZTdiYzQ0ZWJjZTRmNTNhOTk5MTI0Yzk0OGFiMjQzMTIxMDVmYTQzOTIzZDFmNjg4ZmM5ZjNjZTRiZmU3MyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNWJkNzgzZDZhMThhMTBkZjdmYzI0MGYxOTg3NzEyMDA2Zjg3YzRlOWE1YjM4NjU5ZmM0YjZjY2FiMmViN2Q0YyJ9"
         },
         {
-          "resource": "repo://src/agent_data_workbench/api/dependencies.py#L12-L21",
-          "version": "repo-lines-v1:sha256:c45745729964b12fa57f98e53d6e59b9c56ce526dcb1e9e79a37415ce09326ff:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA3Y2Q0ODQyZmEyZTgwNzE1NDJkMzZlYTQ5NWRlNjMxNWJkYTJmMDI3MzM5NjkzZGVmNTE2NDYwNDA4ZjQ0OGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY5M2UyNzZhZmE4Njg1YjdjMTUyMDgxOTYwMzJiNGEwZTRkZjg3YzIyODhmMDlmNWVkMDUwMDIyNWE4NjliYTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI0NTU1ZGRhOTBjZmJlMTg3NWVlMzk2NTZlOWNiMTg5YzAzMTI2Y2ZkOGU3MjdiOTNiYjU4NGIzYTI2Y2RhMmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjViZDc4M2Q2YTE4YTEwZGY3ZmMyNDBmMTk4NzcxMjAwNmY4N2M0ZTlhNWIzODY1OWZjNGI2Y2NhYjJlYjdkNGMifQ"
+          "resource": "repo://src/agent_data_workbench/api/middleware.py",
+          "version": "repo-file-v1:sha256:4be0f612091dce70bbe80e548ad2892a61f8dd89a1beae08f877ce92d154a8c6"
         },
         {
-          "resource": "repo://src/agent_data_workbench/api/middleware.py#L8-L71",
-          "version": "repo-lines-v1:sha256:06eeacfb5bf34311d16b401f5a2320d66d4a5bc50b0ac75569b98dc9022561f0:eyJzZWxlY3RlZExpbmVDb3VudCI6NjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4N2JiNTU3YmJiYTczNDA1ZWVjMTMyMmEzNjc3ZmE1NGZiMTZiNWVmNWVlNTQ5YTdiMjkxNzNmOGEzMjZhZTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY4NjMzZmE4NmEzMTBmOGFiZjBlYWI2NmVhMTI0NjdmNmUwYTljYmI3NzhlM2E2OGNkYTY2ZjgzYzdlNjBjNTkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY5YjBjOTAwMzAzNjUyMzhmY2JmMmExOTcyMmVlZmNjMGI5NDgxODA2OTUzMTQ4ZGFhNzEzOWNlZmJkZmFmOGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://src/agent_data_workbench/api/routers/tasks.py",
+          "version": "repo-file-v1:sha256:33c0a66cdccb6dc417f45d3eb507d75da2172a7c615661d4df8b3ff384ee450b"
         }
       ]
     },
@@ -39,30 +43,30 @@
       "statement": "FastAPI serves the Python package’s bundled UI and assets, disables the default interactive API documentation routes, and returns a bounded 400 error envelope for structured validation failures.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/api/application.py#L17-L47",
-          "version": "repo-lines-v1:sha256:1cbea0afc539a1d3d0d52cf318d1ed3e8ed0978acb99bb2c15cc7b9795161f43:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwN2I0OWI3OTcyZDI0NTc0MzJkODRmNjZjOThjODhmMzJlODM3NDEwOGFmOTdkYjg3YjdlZDRiOTllZGE0NmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkNjdiNDY2Mzc4NzVjM2JiN2Y5MDNiMWRiODczNGI0YTI5NjY4NWRmNGRiZTY2YTRmNmNlZjdmZGM0MTE2M2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRkNDc0M2UwMWNiNzVjYzIzMTRkMjE5NjIxZGExN2YzNmIyZDMxYjRiODYyZGE3NWM0MDBhNWYwOTNjMDZkYTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://src/agent_data_workbench/api/application.py#L26-L56",
+          "version": "repo-lines-v1:sha256:bc697de5cd4a850625f963a9cb798ec21bbe93674025717e31c54249918cd81b:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwN2I0OWI3OTcyZDI0NTc0MzJkODRmNjZjOThjODhmMzJlODM3NDEwOGFmOTdkYjg3YjdlZDRiOTllZGE0NmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkNjdiNDY2Mzc4NzVjM2JiN2Y5MDNiMWRiODczNGI0YTI5NjY4NWRmNGRiZTY2YTRmNmNlZjdmZGM0MTE2M2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVhYjM1ODMxZjk2NWQ4M2QxMDg0ODRkMzkwZDA1MGFhYzUwOWJiMGQ5ZmI0NDQ5YTU0MzA4NDUxYmY2MWNiNTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
-          "resource": "repo://src/agent_data_workbench/api/errors.py#L10-L17",
-          "version": "repo-lines-v1:sha256:bd49a74e056f367efe8e5e2c57d069f2c2c450a6a8cdfc04352db02dc556582b:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjYwNGRlMDg2MDc2YWE1YTU1NGJmMTc4NzE0Yjg5ZWM3ZGZjNjg0NmZhNTVjZDhkZmNkYWUzYWZmMzFkMzE1YyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTkwOWE1M2E2MThkMDI4ZTFkMzAwMGMwYTdhYmNlZWNiZTVmYjM3ZjRlNTExZWZlNDY2NDNmYWQ2ZTY2ODcyZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiN2UwYTI2YzZlYmFhNjAxYzc4MjFkODczNDE3ZDY4MGZhZmJhYTE4NmExNDFmY2Y5MDI5ZTBiZjdjZDYyZDViOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmM2MWZkYzA2MzMzY2VlNTg1NjY3ZjliODRhY2M1Zjk2M2VjYTE2ODA1ZDQxYTQxZDk1MTZmNDUyNDIzOWIwZSJ9"
+          "resource": "repo://src/agent_data_workbench/api/errors.py",
+          "version": "repo-file-v1:sha256:063d2528b75de8efe6733c44a1d1b9e780d59cb99c5971e1ace6acbee6988dc3"
         }
       ]
     },
     {
       "id": "claim_96c1215d43c14e8ba36aede91f42f56b",
-      "statement": "Native investigation and task-design routes use the background queue; a native investigation is created only after job capacity is reserved, and task audit through the API uses no configured semantic judge.",
+      "statement": "Native investigation and task-design routes use FastAPI BackgroundTasks with a process-local job registry; capacity is reserved before investigation creation, and API task audit has no configured semantic judge.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/api/routers/investigations.py",
-          "version": "repo-file-v1:sha256:b0555576f5ba8602a8cee7c98727a541ca2f86124286c8493b1c3e77bcd7e0fc"
+          "resource": "repo://src/agent_data_workbench/api/routers/investigations.py#L32-L56",
+          "version": "repo-lines-v1:sha256:11a02dbedcbf80ea0574fa6c4eb6737fd35f96742e36f688eefb5c5e0138fe66:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2MzJkNjMxZTc3ZTY2NTZjNGVkMTkxNmU3ZGU0NzcyYjQ4M2U0MTBkMzg2N2ZhOTBhNTBkMDdmYTAwN2I2MzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2NjhmMzRlNjAzMGM5M2YxNTZkMmM2ZTEwZmU5ZGU2ZjM4YWUxOTZiNDI4OTM1ZjZkZmU3ZGZjM2RiYjFkYjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA0OGY4ZTBmZjEyYWE3ZTAyNmIyYWJlZjllMzJmZmU2MmZlNTE4OThkMDlhNjRlODZmNzk5NDNiOTZhY2QyMmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgwZmJkNDBkMTcwODU1NDIwODNlOTA5NjQ0NTk4ZjZiM2Y0MjI3NDhiN2EzNjFiZDIyNGNjYTVhMDQ1NTRhOTkifQ"
         },
         {
           "resource": "repo://src/agent_data_workbench/api/routers/tasks.py",
-          "version": "repo-file-v1:sha256:13674d6111ae4c547bae53ee9f41c95c31424c3fba77f8f40b66d95533d54a4a"
+          "version": "repo-file-v1:sha256:33c0a66cdccb6dc417f45d3eb507d75da2172a7c615661d4df8b3ff384ee450b"
         },
         {
-          "resource": "repo://src/agent_data_workbench/workbench/jobs.py#L10-L46",
-          "version": "repo-lines-v1:sha256:878bb9b95b24bba6b1d94888b8eeb9e68b889c43d23367a2dcff437a26d3d92d:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdmNzI1MTU2NjIwMDdlMTljMTkwZDg5ZDg2N2MxMzk5ZjBlMmY2Mzk5MGIwNzNkM2QwNDE5ODY0ODE2YTUwZTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU2YWM2ZjM1NDhmN2JkZjcyZGYwYWY0ZGY3MzZiZmNkN2E4Mjc1YjdhMGQ1ODI0NWJiYWZiNGMwZjMwMDlhMjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk2NTMzYTc2MDhmNjZhYjMyMGFjY2IwOGYxZWFmZmE3MjZkOTIzYTdhZTBhNTUyYmJjZDVlMmZkNjJjNmUxNDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://src/agent_data_workbench/workbench/jobs.py#L12-L49",
+          "version": "repo-lines-v1:sha256:114a4ee09460f760ba8179449e76836ddd2aa637682208925cc39fdf7a5df087:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdmNzI1MTU2NjIwMDdlMTljMTkwZDg5ZDg2N2MxMzk5ZjBlMmY2Mzk5MGIwNzNkM2QwNDE5ODY0ODE2YTUwZTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxMDM0ODFjNTdkMGYwZGMwZjc2Y2QyY2M4YjM2MDRjNGU4Mjk2ZGE0MTIyYWRkMTllODE3NDVkYzdlMzMxYTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk2NTMzYTc2MDhmNjZhYjMyMGFjY2IwOGYxZWFmZmE3MjZkOTIzYTdhZTBhNTUyYmJjZDVlMmZkNjJjNmUxNDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
     },
@@ -142,11 +146,11 @@
     },
     {
       "id": "claim_3b807b3c180045a3a1e4aba017ca085e",
-      "statement": "Typed workflow endpoints reuse SDK world review, calibration, taxonomy mapping, candidate capture and decision operations; paired experiments and explicit Harbor runs use the background queue.",
+      "statement": "Typed workflow endpoints reuse SDK world review, calibration, taxonomy mapping, candidate capture and decision operations; paired experiments and explicit Harbor runs use FastAPI BackgroundTasks.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/api/routers/workflow.py#L112-L241",
-          "version": "repo-lines-v1:sha256:045f0c44b3f8f5560d27dd8c2cda9ff730587fb91c7687776683e54e2e0b3f7d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMwLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI4NGY0MDMxNzJhNjQ5N2I5YmJkYTJiZmVjMjFjODM5ZDFhYzI1Y2IzMzIyNDlkZjA0ODM3NWUxMGVlNGFmMDk3IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJkMjMyMDM4NjM5MjU2MWJkMjZhMDQzZjdiZjQxYzlmZWM5YmY0YjJmMmM2ZGY3MjNmZDRhMWJkZWEwOTlhNGVmIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJjMmU0OGE3NzVkOGYwNGQxZWE4NTg5MmRkMzBiZTJjZmIxYjlkMWFkODg4OWQ2OTZkMDlhNGRmNTI3ODAzMjhiIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiJiOTVjNTQ0NGI1YzRmODQ5NjgxYzEwMjY4MTUwZmQ4NzJjZGY5NGY2NDVkODEzMzNiMzg5MGQ4YWVkOTYxMGEwIn0"
+          "resource": "repo://src/agent_data_workbench/api/routers/workflow.py",
+          "version": "repo-file-v1:sha256:522f51ef401d80c7181ce0b8ffc094f461f984c0ba5af7f528343d156a5ea28d"
         }
       ]
     },
@@ -173,8 +177,8 @@
           "version": "repo-file-v1:sha256:744a80d95a8419e0113d85d0d334ccafdfbf2d2fd1be97548c95b0e899e7e6ed"
         },
         {
-          "resource": "repo://src/agent_data_workbench/workbench/runtime.py#L73-L121",
-          "version": "repo-lines-v1:sha256:ed55405a382be9c132148963b67a763f1c20d338486a2f1b7d56c952194af434:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNiOGNiY2M4NGZjNDRmZTQ2ZjVhZTZiZDBmMTM2N2QwY2NiYjBiNTBkZWFjZDE2OWMxMGE4MzNjYzdhYmZjMjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk3M2M2NTA1NjFhNDVjMDUyY2YwMzg3ZGRiZGZkNzczOTY1NjA2ZTA5MjdkYTE2Yjc0MmMxYjIxYWE4NmRjNTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAxODQxOWI2YTgyY2UwN2MzNzA0NDQwZTBkMTczMmM1YjQ0MjhjOTE5YWUzM2YzNWQyYzBlZWZlZDM3MTM4NDkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+          "resource": "repo://src/agent_data_workbench/workbench/runtime.py#L35-L60",
+          "version": "repo-lines-v1:sha256:7f459ee3dd9ad7012c1b98be2e00fdcab4ff10a9b3a8fbac73c0e56f11d1c98f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk1YzQzNTc4MjlmY2YzZjJlZGI2YjY0ODYxZGNmOWM0NWUwOWFhYjA4NmZjNmMwZmVhYTk1NzAwM2FlNGFhZDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAxODQxOWI2YTgyY2UwN2MzNzA0NDQwZTBkMTczMmM1YjQ0MjhjOTE5YWUzM2YzNWQyYzBlZWZlZDM3MTM4NDkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZjODU1ZjcxMWFlNjUzYmRjYzM2N2U3YmU3NzhjZTc0MzE2MjFmYTliNjU1MDc1ZmM0ZjQzMTUyYzYwMGVhNjMifQ"
         }
       ]
     },
@@ -195,6 +199,6 @@
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T00:07:39.310Z"
+    "at": "2026-09-08T00:33:25.897Z"
   }
 }

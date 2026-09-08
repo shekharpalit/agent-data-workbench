@@ -1,15 +1,14 @@
 import json
 import re
 import sys
-import threading
-import time
-from http.client import HTTPConnection
 
 import pytest
+from fastapi.testclient import TestClient
 from identities import uid
 from test_workbench_data import Scripted, accept, make_project, result, spec
 
 from agent_data_workbench.analysis.benchmark import benchmark, review_benchmark
+from agent_data_workbench.api import create_app
 from agent_data_workbench.evaluation.experiments import run_experiment
 from agent_data_workbench.evaluation.statistics import summarize
 from agent_data_workbench.evaluation.suites import make_suite
@@ -20,7 +19,6 @@ from agent_data_workbench.execution.runners import ConfiguredRunner
 from agent_data_workbench.integrations.training import export_training
 from agent_data_workbench.shared.files import save
 from agent_data_workbench.shared.json import read_json
-from agent_data_workbench.workbench.server import WorkbenchServer
 
 
 @pytest.fixture
@@ -390,91 +388,94 @@ def test_benchmark_scores_spans_and_keeps_human_review_separate(tmp_path):
 
 
 @pytest.fixture
-def server(project):
-    server = WorkbenchServer(project)
-    thread = threading.Thread(target=server.serve_forever, daemon=True)
-    thread.start()
-    deadline = time.monotonic() + 5
-    while not server.started and thread.is_alive() and time.monotonic() < deadline:
-        time.sleep(0.01)
-    assert server.started, "Uvicorn did not start"
-    try:
-        yield server
-    finally:
-        server.shutdown()
-        thread.join(5)
-        server.server_close()
+def client(project):
+    application = create_app(project, origin="http://127.0.0.1:8765", token="synthetic")
+    with TestClient(application, base_url="http://127.0.0.1:8765") as client:
+        yield client
 
 
-def request(server, path, payload=None, *, token=True, origin=None, host=None):
-    connection = HTTPConnection("127.0.0.1", server.server_port, timeout=3)
+def request(client, path, payload=None, *, token=True, origin=None, host=None):
     headers = {}
     if token:
-        headers["Authorization"] = "Bearer " + server.token
+        headers["Authorization"] = "Bearer synthetic"
     if origin is not None:
         headers["Origin"] = origin
     if host is not None:
         headers["Host"] = host
-    if payload is not None:
-        headers["Content-Type"] = "application/json"
-    connection.request(
-        "POST" if payload is not None else "GET",
-        path,
-        json.dumps(payload) if payload is not None else None,
-        headers,
+    response = client.request(
+        "POST" if payload is not None else "GET", path, json=payload, headers=headers
     )
-    response = connection.getresponse()
-    status, data = response.status, response.read().decode()
-    connection.close()
-    return status, data
+    return response.status_code, response.text
 
 
-def test_local_ui_requires_token_and_same_origin_for_writes(server):
-    # Given
+def test_local_ui_requires_token_and_allows_only_configured_browser_origin(client):
+    # Given: the UI uses a bearer session and FastAPI's standard browser-origin policy.
     payload = {"title": "Contract", "content": "Policy", "source": "Test"}
-    # When
-    no_token = request(server, "/api/overview", token=False)
-    wrong_host = request(server, "/api/overview", host="unrelated.example")
-    missing_origin = request(server, "/api/knowledge/add", payload)
-    wrong_origin = request(server, "/api/knowledge/add", payload, origin="https://other.example")
-    read_status, read_body = request(server, "/api/overview")
-    write_status, write_body = request(server, "/api/knowledge/add", payload, origin=server.origin)
-    path_escape = request(server, "/api/artifact?kind=tasks&id=../../project")
-    private_file = request(server, "/project.json")
-    # Then
+    origin = str(client.base_url).rstrip("/")
+    preflight_headers = {
+        "Access-Control-Request-Method": "POST",
+        "Access-Control-Request-Headers": "Authorization, Content-Type",
+    }
+    # When: browser preflights, native clients and invalid credentials reach FastAPI.
+    no_token = request(client, "/api/overview", token=False)
+    wrong_host = request(client, "/api/overview", host="unrelated.example")
+    wrong_origin = client.options(
+        "/api/knowledge/add", headers={**preflight_headers, "Origin": "https://other.example"}
+    )
+    allowed_origin = client.options(
+        "/api/knowledge/add", headers={**preflight_headers, "Origin": origin}
+    )
+    native_status, native_body = request(client, "/api/knowledge/add", payload)
+    read_status, read_body = request(client, "/api/overview")
+    write_status, write_body = request(client, "/api/knowledge/add", payload, origin=origin)
+    path_escape = request(client, "/api/artifact?kind=tasks&id=../../project")
+    private_file = request(client, "/project.json")
+    # Then: session credentials protect the API and browser access uses standard CORS.
     assert {
         "denied": {
             "no_token": no_token[0],
             "wrong_host": wrong_host[0],
-            "missing_origin": missing_origin[0],
-            "wrong_origin": wrong_origin[0],
             "path_escape": path_escape[0],
             "private_file": private_file[0],
         },
+        "preflight": {
+            "wrong_origin": {
+                "status": wrong_origin.status_code,
+                "allowed_origin": wrong_origin.headers.get("access-control-allow-origin"),
+            },
+            "allowed_origin": {
+                "status": allowed_origin.status_code,
+                "allowed_origin": allowed_origin.headers.get("access-control-allow-origin"),
+            },
+        },
+        "native_write": {"status": native_status, "review": json.loads(native_body)["status"]},
         "read": {"status": read_status, "total": json.loads(read_body)["inventory"]["total"]},
         "write": {"status": write_status, "review": json.loads(write_body)["status"]},
     } == {
         "denied": {
             "no_token": 401,
-            "wrong_host": 403,
-            "missing_origin": 403,
-            "wrong_origin": 403,
+            "wrong_host": 400,
             "path_escape": 400,
             "private_file": 404,
         },
+        "preflight": {
+            "wrong_origin": {"status": 400, "allowed_origin": None},
+            "allowed_origin": {"status": 200, "allowed_origin": origin},
+        },
+        "native_write": {"status": 200, "review": "draft"},
         "read": {"status": 200, "total": 9},
         "write": {"status": 200, "review": "draft"},
     }
 
 
-def test_ui_static_files_and_exact_aggregate_filter(server):
+def test_ui_static_files_and_exact_aggregate_filter(client):
     # Given: the built TypeScript entry point served without project credentials.
-    index_status, html = request(server, "/", token=False)
+    index_status, html = request(client, "/", token=False)
     assets = re.findall(r'(?:src|href)="(/assets/[^\"]+)"', html)
 
     # When
-    asset_statuses = [request(server, path, token=False)[0] for path in assets]
-    status, data = request(server, "/api/traces?equals_pointer=%2Fvalue&equals_json=1")
+    asset_statuses = [request(client, path, token=False)[0] for path in assets]
+    status, data = request(client, "/api/traces?equals_pointer=%2Fvalue&equals_json=1")
 
     # Then
     assert {
@@ -492,21 +493,23 @@ def test_ui_static_files_and_exact_aggregate_filter(server):
     }
 
 
-def test_ui_analytics_endpoints_share_filters_and_enforce_access_controls(server):
+def test_ui_analytics_endpoints_share_filters_and_enforce_access_controls(client):
     # Given
     query = {"filters": [{"pointer": "/value", "operator": "gte", "value_json": "7"}]}
 
     # When
     def post(path, payload):
-        status, body = request(server, path, payload, origin=server.origin)
+        status, body = request(client, path, payload, origin=str(client.base_url).rstrip("/"))
         return {"status": status, "body": json.loads(body)}
 
     found = post("/api/search", query)
     grouped = post("/api/clusters", {"query": query, "pointer": "/text"})
     counted = post("/api/distribution", {"query": query, "pointer": "/value"})
-    graph_status, graph_body = request(server, "/api/graph")
+    graph_status, graph_body = request(client, "/api/graph")
     denied = {
-        path: request(server, path, payload, token=False, origin=server.origin)[0]
+        path: request(client, path, payload, token=False, origin=str(client.base_url).rstrip("/"))[
+            0
+        ]
         for path, payload in [
             ("/api/search", query),
             ("/api/clusters", {"query": query}),
@@ -523,7 +526,6 @@ def test_ui_analytics_endpoints_share_filters_and_enforce_access_controls(server
         "graph": {k: json.loads(graph_body)[k] for k in ["nodes", "edges", "total_nodes"]},
         "denied": denied,
         "invalid_filter": post("/api/search", {"limit": 0})["status"],
-        "wrong_origin": request(server, "/api/search", query, origin="https://other.example")[0],
     } == {
         "statuses": [200, 200, 200, 200],
         "ids": ["r7", "r8"],
@@ -532,7 +534,6 @@ def test_ui_analytics_endpoints_share_filters_and_enforce_access_controls(server
         "graph": {"nodes": [], "edges": [], "total_nodes": 0},
         "denied": {"/api/search": 401, "/api/clusters": 401, "/api/distribution": 401},
         "invalid_filter": 400,
-        "wrong_origin": 403,
     }
 
 

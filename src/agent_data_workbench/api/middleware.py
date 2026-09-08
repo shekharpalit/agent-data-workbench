@@ -1,13 +1,13 @@
-"""Session access, response headers and bounded bodies around the FastAPI application."""
+"""Configure FastAPI middleware and application response headers."""
 
 from urllib.parse import urlsplit
 
-from starlette.datastructures import Headers, MutableHeaders
-from starlette.exceptions import HTTPException
-from starlette.responses import JSONResponse
-from starlette.types import ASGIApp, Message, Receive, Scope, Send
+from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
+from starlette.middleware.base import RequestResponseEndpoint
+from starlette.responses import Response
 
-MAX_BODY_BYTES = 2_000_000
 RESPONSE_HEADERS = {
     "Cache-Control": "no-store",
     "X-Content-Type-Options": "nosniff",
@@ -19,55 +19,21 @@ RESPONSE_HEADERS = {
 }
 
 
-class RequestBoundaryMiddleware:
-    def __init__(self, app: ASGIApp, *, origin: str):
-        self.app = app
-        self.origin = origin
-        self.host = urlsplit(origin).netloc
+def register_middleware(app: FastAPI, *, origin: str) -> None:
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=[origin],
+        allow_methods=["GET", "POST"],
+        allow_headers=["Authorization", "Content-Type"],
+    )
+    app.add_middleware(
+        TrustedHostMiddleware,
+        allowed_hosts=[urlsplit(origin).hostname],
+        www_redirect=False,
+    )
 
-    async def __call__(self, scope: Scope, receive: Receive, send: Send):
-        if scope["type"] != "http":
-            await self.app(scope, receive, send)
-            return
-
-        async def send_with_headers(message: Message):
-            if message["type"] == "http.response.start":
-                MutableHeaders(scope=message).update(RESPONSE_HEADERS)
-            await send(message)
-
-        headers = Headers(scope=scope)
-        error = None
-        if headers.get("host") != self.host:
-            error = (403, "Invalid host")
-        elif scope["method"] == "POST" and headers.get("origin") != self.origin:
-            error = (403, "Same-origin request required")
-        elif scope["method"] == "POST":
-            try:
-                length = int(headers["content-length"]) if "content-length" in headers else None
-            except ValueError:
-                length = -1
-            if (
-                length is not None
-                and not 0 < length <= MAX_BODY_BYTES
-                or headers.get("content-type", "").split(";", 1)[0].strip().lower()
-                != "application/json"
-            ):
-                error = (400, "Supply a JSON body up to 2 MB")
-        if error:
-            await JSONResponse({"error": error[1]}, status_code=error[0])(
-                scope, receive, send_with_headers
-            )
-            return
-
-        received = 0
-
-        async def receive_bounded():
-            nonlocal received
-            message = await receive()
-            if message["type"] == "http.request":
-                received += len(message.get("body", b""))
-                if received > MAX_BODY_BYTES:
-                    raise HTTPException(400, "Supply a JSON body up to 2 MB")
-            return message
-
-        await self.app(scope, receive_bounded, send_with_headers)
+    @app.middleware("http")
+    async def response_headers(request: Request, call_next: RequestResponseEndpoint) -> Response:
+        response = await call_next(request)
+        response.headers.update(RESPONSE_HEADERS)
+        return response

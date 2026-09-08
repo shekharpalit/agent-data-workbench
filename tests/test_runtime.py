@@ -12,8 +12,8 @@ from http.client import HTTPConnection
 import pytest
 from fastapi.testclient import TestClient
 
+from agent_data_workbench.api import create_app
 from agent_data_workbench.workbench import runtime
-from agent_data_workbench.workbench.server import WorkbenchServer, validate_origin
 from agent_data_workbench.workspace.project import ARTIFACT_KINDS
 
 
@@ -96,89 +96,116 @@ def test_initialize_only_validates_project_without_starting_server(tmp_path, mon
         "http://*",
         "http://0.0.0.0:8765",
         "http://[::]:8765",
-        "http://localhost/",
+        "http://[::1]:8765",
         "http://localhost/path",
         "http://user:secret@localhost",
         "http://localhost?query=x",
         "http://localhost#token=x",
         "ftp://localhost",
         "http://local host",
-        "http://localhost:",
         "http://localhost:0",
         "http://localhost:65536",
         "http://localhost:bad",
-        "http://localhost\n",
     ],
 )
 def test_public_origin_rejects_urls_that_cannot_identify_one_browser_origin(origin):
     # Given: a URL that cannot safely serve as a precise browser origin.
     # When
-    with pytest.raises(ValueError) as raised:
-        validate_origin(origin)
-    # Then
-    assert {"error": str(raised.value)} == {
-        "error": "Public origin must be an http(s) origin with an explicit hostname, "
-        "without credentials, paths, queries or fragments"
-    }
+    with pytest.raises(ValueError):
+        # Then: invalid configuration fails before Uvicorn starts.
+        runtime.RuntimeSettings.from_env({"WORKBENCH_ORIGIN": origin})
 
 
 @pytest.mark.parametrize(
     "origin,canonical",
     [
         ("http://localhost:18765", "http://localhost:18765"),
+        ("http://localhost/", "http://localhost"),
+        ("http://localhost:", "http://localhost"),
+        ("http://localhost\n", "http://localhost"),
         ("http://LOCALHOST:80", "http://localhost"),
         ("https://workbench.example:443", "https://workbench.example"),
         ("https://workbench.example:8443", "https://workbench.example:8443"),
-        ("http://[::1]:8765", "http://[::1]:8765"),
     ],
 )
 def test_public_origin_matches_browser_hostname_and_default_port_normalization(origin, canonical):
     # Given: a browser origin, including a hostname or default port requiring normalization.
     # When
-    actual = validate_origin(origin)
+    actual = runtime.RuntimeSettings.from_env({"WORKBENCH_ORIGIN": origin}).origin
     # Then
     assert {"origin": actual} == {"origin": canonical}
 
 
-@pytest.mark.parametrize("origin", ["http://localhost:18765", "https://workbench.example:8443"])
-def test_container_binding_retains_bearer_host_and_same_origin_requirements(tmp_path, origin):
-    # Given: a server binds every container interface but authorizes one public browser origin.
-    project = runtime.initialize_project(
-        runtime.RuntimeSettings.from_env({"WORKBENCH_PROJECT": str(tmp_path / "workspace")})
+@pytest.mark.parametrize(
+    "host,origin",
+    [
+        ("0.0.0.0", "http://localhost:18765"),
+        ("0.0.0.0", "https://workbench.example:8443"),
+        ("::1", "http://localhost:8765"),
+    ],
+)
+def test_container_binding_retains_bearer_host_and_browser_origin_requirements(
+    tmp_path, host, origin
+):
+    # Given: the container binds every interface while publishing one browser origin.
+    settings = runtime.RuntimeSettings.from_env(
+        {
+            "WORKBENCH_PROJECT": str(tmp_path / "workspace"),
+            "WORKBENCH_HOST": host,
+            "WORKBENCH_ORIGIN": origin,
+        }
     )
-    server = WorkbenchServer(project, host="0.0.0.0", public_origin=origin, token="synthetic")
-    try:
-        with TestClient(server.app, base_url=origin) as client:
-            # When: legitimate and cross-origin requests pass through the same FastAPI boundary.
-            unauthenticated = client.get("/api/jobs")
-            client.headers.update({"Authorization": "Bearer synthetic", "Origin": origin})
-            authenticated = client.get("/api/jobs")
-            wrong_host = client.get("/api/jobs", headers={"Host": "other.example"})
-            wrong_origin = client.post(
-                "/api/search", json={}, headers={"Origin": "http://other.example"}
-            )
-            valid_write = client.post("/api/search", json={})
-            # Then: external port mapping does not weaken the local session boundary.
-            assert {
-                "origin": server.origin,
-                "anonymous": unauthenticated.status_code,
-                "authenticated": {
-                    "status": authenticated.status_code,
-                    "body": authenticated.json(),
-                },
-                "wrong_host": {"status": wrong_host.status_code, "body": wrong_host.json()},
-                "wrong_origin": {"status": wrong_origin.status_code, "body": wrong_origin.json()},
-                "valid_write": valid_write.status_code,
-            } == {
-                "origin": origin,
-                "anonymous": 401,
-                "authenticated": {"status": 200, "body": []},
-                "wrong_host": {"status": 403, "body": {"error": "Invalid host"}},
-                "wrong_origin": {"status": 403, "body": {"error": "Same-origin request required"}},
-                "valid_write": 200,
-            }
-    finally:
-        server.server_close()
+    application = create_app(
+        runtime.initialize_project(settings), origin=settings.origin, token="synthetic"
+    )
+    with TestClient(application, base_url=origin) as client:
+        # When: clients encounter FastAPI authentication and standard Host/CORS middleware.
+        unauthenticated = client.get("/api/jobs")
+        client.headers.update({"Authorization": "Bearer synthetic", "Origin": origin})
+        authenticated = client.get("/api/jobs")
+        wrong_host = client.get("/api/jobs", headers={"Host": "other.example"})
+        wrong_origin = client.options(
+            "/api/search",
+            headers={
+                "Origin": "http://other.example",
+                "Access-Control-Request-Method": "POST",
+                "Access-Control-Request-Headers": "Authorization, Content-Type",
+            },
+        )
+        direct_cross_origin = client.post(
+            "/api/search", json={}, headers={"Origin": "http://other.example"}
+        )
+        valid_write = client.post("/api/search", json={})
+        # Then: the published origin and session work independently of the container bind host.
+        assert {
+            "binding": {"host": settings.host, "origin": settings.origin},
+            "anonymous": unauthenticated.status_code,
+            "authenticated": {
+                "status": authenticated.status_code,
+                "body": authenticated.json(),
+            },
+            "wrong_host": {"status": wrong_host.status_code, "body": wrong_host.text},
+            "wrong_origin": {
+                "status": wrong_origin.status_code,
+                "allowed_origin": wrong_origin.headers.get("access-control-allow-origin"),
+            },
+            "direct_cross_origin": {
+                "status": direct_cross_origin.status_code,
+                "allowed_origin": direct_cross_origin.headers.get("access-control-allow-origin"),
+            },
+            "valid_write": {
+                "status": valid_write.status_code,
+                "allowed_origin": valid_write.headers.get("access-control-allow-origin"),
+            },
+        } == {
+            "binding": {"host": host, "origin": origin},
+            "anonymous": 401,
+            "authenticated": {"status": 200, "body": []},
+            "wrong_host": {"status": 400, "body": "Invalid host header"},
+            "wrong_origin": {"status": 400, "allowed_origin": None},
+            "direct_cross_origin": {"status": 200, "allowed_origin": None},
+            "valid_write": {"status": 200, "allowed_origin": origin},
+        }
 
 
 def test_reload_factory_preserves_token_and_workspace_across_application_restarts(

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:7a18fa9b1e149ef32bb30349df8345ae5692201806ca9b7b6bf646d0ca2c7f86",
+  "pageVersion": "sha256:a8661ae53fbbf33ac24f36f5e54ea6a1669b7c83a50996001b9f7261eb4dacd5",
   "claims": [
     {
       "id": "claim_0214ec89ef294dfaaad35ee54cb09813",
@@ -44,7 +44,7 @@
         },
         {
           "resource": "repo://src/agent_data_workbench/cli/project.py",
-          "version": "repo-file-v1:sha256:4ea5beaf570b87014d1c0da7fa2ce022fda107cad383b24fd68bf7a91a93bee2"
+          "version": "repo-file-v1:sha256:7fe03c9dae556c6c2e6a2d8ddb627c530b918c8b4cae1227c64b5c28cb13c52c"
         },
         {
           "resource": "repo://src/agent_data_workbench/data/transport.py#L15-L71",
@@ -109,30 +109,34 @@
       "statement": "Runtime settings separate project path, bind address, port and public origin, and initialize metadata only when creating a project; reload inherits the same bearer token.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/workbench/runtime.py#L22-L55",
-          "version": "repo-lines-v1:sha256:1c18c475535bc4a4ea2d826ad113b41b72f1017f40e2dc27f449563f5dd065f2:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2OWExMzk3NWMyNTZlYzgzMjBlMjAxNjA4M2M5NmRmNjM3Y2EzZDM1YmViZGUyMzE0YmVlM2E0NzExYjU2Y2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5MDlhNTNhNjE4ZDAyOGUxZDMwMDBjMGE3YWJjZWVjYmU1ZmIzN2Y0ZTUxMWVmZTQ2NjQzZmFkNmU2Njg3MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI1MTk1ZmY0NmY2M2MyYTczZWI0YzM1N2EwZjY0OGQ0ODEyYzUxN2ZmNmU4MTMwYzkwOWQ3MTkyMWYyNDEzYjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZhZTVlYTAzMDRiNGY3N2JjODMzYzMxZGRiZDE3ZWZkYmE5NjJmODNiMWNjZGE4MmM1MDdlNDAzNThhY2QzYTcifQ"
+          "resource": "repo://src/agent_data_workbench/workbench/runtime.py#L20-L25",
+          "version": "repo-lines-v1:sha256:19b50005e68ce6d24a027c94b17a21e7abf0b4fb07c86500f80e0f870f9c27ae:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODViM2FiNmZiYTMxOGEyOTk2ZjA4NTNlMzA4ZjgyZjIwMWQ3MDAyMWE1ZWEwZWE5MGVkYTVhZDIwMzhjZmNiNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2ZiMmE2MjU3ZjQ1YWM2OWIwM2I3Y2VjODM0NjUwODkxYmNhNTgwNGExMDZlZDMxZmQwNGUwMTA2MjczOGI0ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjUxOTVmZjQ2ZjYzYzJhNzNlYjRjMzU3YTBmNjQ4ZDQ4MTJjNTE3ZmY2ZTgxMzBjOTA5ZDcxOTIxZjI0MTNiNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTAzYmMyMjIxY2FhMjIzZTBlNTViNTI5YjE4ZDM0ZTYwZTlmYWQ5NmQ1YmViYmM5N2NmNjFkZDhmNGI1ZjczZCJ9"
         },
         {
-          "resource": "repo://src/agent_data_workbench/workbench/runtime.py#L73-L121",
-          "version": "repo-lines-v1:sha256:ed55405a382be9c132148963b67a763f1c20d338486a2f1b7d56c952194af434:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNiOGNiY2M4NGZjNDRmZTQ2ZjVhZTZiZDBmMTM2N2QwY2NiYjBiNTBkZWFjZDE2OWMxMGE4MzNjYzdhYmZjMjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk3M2M2NTA1NjFhNDVjMDUyY2YwMzg3ZGRiZGZkNzczOTY1NjA2ZTA5MjdkYTE2Yjc0MmMxYjIxYWE4NmRjNTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAxODQxOWI2YTgyY2UwN2MzNzA0NDQwZTBkMTczMmM1YjQ0MjhjOTE5YWUzM2YzNWQyYzBlZWZlZDM3MTM4NDkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+          "resource": "repo://src/agent_data_workbench/workbench/runtime.py#L35-L60",
+          "version": "repo-lines-v1:sha256:7f459ee3dd9ad7012c1b98be2e00fdcab4ff10a9b3a8fbac73c0e56f11d1c98f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk1YzQzNTc4MjlmY2YzZjJlZGI2YjY0ODYxZGNmOWM0NWUwOWFhYjA4NmZjNmMwZmVhYTk1NzAwM2FlNGFhZDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAxODQxOWI2YTgyY2UwN2MzNzA0NDQwZTBkMTczMmM1YjQ0MjhjOTE5YWUzM2YzNWQyYzBlZWZlZDM3MTM4NDkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZjODU1ZjcxMWFlNjUzYmRjYzM2N2U3YmU3NzhjZTc0MzE2MjFmYTliNjU1MDc1ZmM0ZjQzMTUyYzYwMGVhNjMifQ"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/workbench/settings.py#L13-L58",
+          "version": "repo-lines-v1:sha256:991b51a5e0ab7ba3940edfa99b71f0155a87184b03e4c806d9ac50886c470023:eyJzZWxlY3RlZExpbmVDb3VudCI6NDYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2OWExMzk3NWMyNTZlYzgzMjBlMjAxNjA4M2M5NmRmNjM3Y2EzZDM1YmViZGUyMzE0YmVlM2E0NzExYjU2Y2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5MDlhNTNhNjE4ZDAyOGUxZDMwMDBjMGE3YWJjZWVjYmU1ZmIzN2Y0ZTUxMWVmZTQ2NjQzZmFkNmU2Njg3MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZmYThkNzg5YTE4NGQ3NzdkNDc3NDgxZTJkNzc0NDc0NDk5NzQ2YTVlNTJhNjMxZmIzNGViNTlmMGY1ZmE2NWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
     },
     {
       "id": "claim_a357a6b5f0b84d1d88bab74bfb639872",
-      "statement": "Compose healthchecks use the same normalized origin as the runtime while backend requests retain bearer, exact Host and same-origin protections.",
+      "statement": "Compose healthchecks use the runtime-normalized origin; standard middleware checks the hostname independently of its port and handles browser CORS, while bearer authentication authorizes API clients with or without Origin.",
       "evidence": [
         {
-          "resource": "repo://compose.yaml#L9-L23",
-          "version": "repo-lines-v1:sha256:90780aadc761ec3f4d9d8543ef0acc5a0e66ce59e0f9e13b8e367232f4788c75:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM3NTY3Y2NmMDRhYWFhMDU2NzgzM2IwZGQyZDEyYmNhYWU5NDQ1MTE5ODU1NDIxZGZmMGJlMDI1YjQ1OWYxODciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE5NmY5YzJkOWIwYTM5ZDY2OTJlYmFmZjZkZjVjM2EyY2M3Mzk5NmE2Yzk5YzcwZTFkNDA0MmVhOGJkYWIwNWYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVhMTg5MGM1OTY0NGE3NTAyMjZhNDYyM2U0ZmExYjI1OTkyN2JlYzRiZWJhNTE3NGFmZWU2ZjZmZGJlNjdiN2MiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE4NzAwNGViY2RjMjMxZWE4NmZlM2E3Nzg1OTJjMTA3MjA4YzdkNmUwNTI5YWI5NTdhNjk5NGYzY2RmOTUzNTYifQ"
+          "resource": "repo://compose.yaml",
+          "version": "repo-file-v1:sha256:edcccb78e9f93ae41cddc541f39abdf47c74d83c0cdecaed1ce49678da821f80"
         },
         {
-          "resource": "repo://src/agent_data_workbench/api/dependencies.py#L12-L22",
-          "version": "repo-lines-v1:sha256:e5a8dec9bff2c6c98420ecaef425f08e95b2eb2ead5998f6aaba703edcaf783f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA3Y2Q0ODQyZmEyZTgwNzE1NDJkMzZlYTQ5NWRlNjMxNWJkYTJmMDI3MzM5NjkzZGVmNTE2NDYwNDA4ZjQ0OGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI0NTU1ZGRhOTBjZmJlMTg3NWVlMzk2NTZlOWNiMTg5YzAzMTI2Y2ZkOGU3MjdiOTNiYjU4NGIzYTI2Y2RhMmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVlNzBkMWE4NmRmNzMwMDUxN2EyZmNiZmU5YThlYjcwMzdhNGY0YzYzZmVlODEyOWIyNTcyMjA5NWI3MDMxNTkifQ"
+          "resource": "repo://src/agent_data_workbench/api/dependencies.py#L15-L21",
+          "version": "repo-lines-v1:sha256:027265f35ae6b37d78108eb5bcfbbf93f06d6bf70e6059a3d884c247e206bafb:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMWUzNmVkOGY2YWM5YmZiYTMyODM3NDQ4YmRiYTMxODYyYjA1YWMxNTVhMjQ3N2I1NjgwOWVmYzgzNGRkOTkxZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjkzZTI3NmFmYTg2ODViN2MxNTIwODE5NjAzMmI0YTBlNGRmODdjMjI4OGYwOWY1ZWQwNTAwMjI1YTg2OWJhNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGRhZTdiYzQ0ZWJjZTRmNTNhOTk5MTI0Yzk0OGFiMjQzMTIxMDVmYTQzOTIzZDFmNjg4ZmM5ZjNjZTRiZmU3MyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNWJkNzgzZDZhMThhMTBkZjdmYzI0MGYxOTg3NzEyMDA2Zjg3YzRlOWE1YjM4NjU5ZmM0YjZjY2FiMmViN2Q0YyJ9"
         },
         {
-          "resource": "repo://src/agent_data_workbench/api/middleware.py#L23-L63",
-          "version": "repo-lines-v1:sha256:02bd2c450cce8f790fefd564511f329a3b60c5a2d4c9463dfc1eaa97ed59fda2:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwMDE5NzlmNzdjNGVmOWVkODk5ZDhmZjQxNWNiNTU2MjIyYjNmOWEzNjkzOTJmOTNiM2I4MWNjYzQyYWZiNDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ4NTM1OTM5Zjc1NTZmYWRlOGQ4OGYyOGZlM2ZmM2Q2ZDlhYzZhNDUyZTlkNjgwMWRhZWJkNzcxMjMxMWFlNDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNmYjk3YzYzN2ZmODM4N2Y1MmZlNDM3NjlkNGY4Y2NlY2VlMzU4N2UwYWVmNWEyMDg1ZDdhOWExY2Q4NDgyNzEifQ"
+          "resource": "repo://src/agent_data_workbench/api/middleware.py#L22-L39",
+          "version": "repo-lines-v1:sha256:9a3cd5581eeacc50171dfd040b3bba8e12d7c3f6fb7fb4f3fd9dc5ef07672a6c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU1NWQwMDYyNTFjMTA1YjMyZGI1YWEzZDEyY2YzN2YyM2JiMTIwNzQ1ZTVkNjhmNTQ4YWIyMDI0NTdjNjQwNTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhhODQ5NmVlOTY0MjcyZmM5MTFhMmMyMmVlNDFkYTBmY2U3Zjg0OWJmYWRlMzQwNjUxMmJlMWQyYzgxODhjZWYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA5ZjkzMDgzYzE5NzEyMWI5ODI3MDBiYThhZmFiZDE3MjJjZjFkM2U3NDA0NTA5ZTgwZWZhMjcyNDdmNjJmMDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
     },
@@ -185,6 +189,6 @@
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T00:07:39.310Z"
+    "at": "2026-09-08T00:33:25.897Z"
   }
 }

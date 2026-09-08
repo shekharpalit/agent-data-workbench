@@ -36,10 +36,14 @@ sources:
     resource: repo://tests/test_ingestion_research.py
   - id: openwiki-source-bde9a53225e597c9b2eaf2e1
     resource: repo://tests/test_ingestion.py
+  - id: openwiki-source-c08d6672f2d806f0654e2b66
+    resource: repo://tests/test_jobs.py
   - id: openwiki-source-3e6ae5cbfb3aa3af0850499a
     resource: repo://tests/test_manual_research_api.py
   - id: openwiki-source-3589dc1fc29ba0bfe0e2a50c
     resource: repo://tests/test_research.py
+  - id: openwiki-source-8e28e90babe501118d9344a8
+    resource: repo://tests/test_runtime_cli.py
   - id: openwiki-source-d19087670ca2c8e59a9fb6a3
     resource: repo://tests/test_runtime.py
   - id: openwiki-source-af0e5443d83442c11181e6ce
@@ -54,10 +58,10 @@ sources:
     resource: repo://ui/tests/research.test.tsx
   - id: openwiki-source-a741d432f952c0dbfb4fb35d
     resource: repo://ui/vite.config.ts
-generated: { by: "codex", at: "2026-09-08T00:07:39.310Z" }
+generated: { by: "codex", at: "2026-09-08T00:33:25.897Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T00:07:39.310Z
+    at: 2026-09-08T00:33:25.897Z
 ---
 
 # Development and verification
@@ -134,7 +138,7 @@ Keep tests synthetic and independent of provider credentials. An explicitly requ
 
 Keep native investigation orchestration separate from data processing: Codex/Claude own planning and session context; `ResearchWorkspace` owns datasets, outcomes, evidence and artifacts. Do not add a second model-call loop or default corpus/call ceilings.
 
-Use FastAPI routes with typed Pydantic contracts. Keep domain operations in the SDK and SQLAlchemy access in the storage layer. Preserve import rollback, canonical trace content, review invalidation, source-group assignment, and invalid-versus-failed outcomes. Keep UI JSON types and lineage consistent with backend behavior.
+Use FastAPI routes with typed Pydantic contracts, standard Host/CORS middleware and `BackgroundTasks`. Run the app through Uvicorn; do not recreate socket binding, raw ASGI request parsing, browser readiness loops or HTTP worker threads. Keep domain operations in the SDK and SQLAlchemy access in the storage layer. Preserve import rollback, canonical trace content, review invalidation, source-group assignment, and invalid-versus-failed outcomes. Keep UI JSON types and lineage consistent with backend behavior.
 
 After source changes are complete, use the [OpenWiki maintenance workflow](../operations/documentation.md). Do not regenerate against source that is still being edited. Keep local runs, credentials, virtual environments, and installed dependencies out of commits.
 
@@ -146,7 +150,7 @@ Use `test_environment_sessions.py` for reset drift, partial transcripts, cancell
 
 `test_harbor_export.py` verifies real template bundling, visible-input separation, source exposure, pinned manifests and synthetic CLI transport. It does not run a Harbor container or a provider model. `test_conversation_exports.py` uses real persistent local sessions to verify complete observed trajectories, exclusion of hidden truth and identical preferences, and legacy one-shot compatibility. `ui/tests/workflow.test.tsx` verifies human review and exact evidence identities, including hiding grader answers before a first label. See [eval engineering](../workflows/eval-engineering.md) for adapter contracts.
 
-`tests/test_runtime.py` covers idempotent initialization, refusal to adopt unrelated directories, normalized browser origins, bearer/Host/Origin enforcement under container binding, inherited reload tokens, and real SIGINT/SIGTERM listener shutdown. `test_environment_sessions.py` also verifies that a target mutating its pinned source during shutdown becomes invalid while its already observed interaction remains saved.
+`tests/test_runtime.py` covers idempotent initialization, refusal to adopt unrelated directories, Pydantic origin normalization, bearer authentication, standard hostname/CORS behavior under container binding, inherited reload tokens, and real SIGINT/SIGTERM listener shutdown. `tests/test_runtime_cli.py` checks that an explicit UI project and port reach the same FastAPI factory despite stale environment settings. `tests/test_jobs.py` checks deferred framework execution, reservation before artifact creation, and failure recovery; `tests/test_api.py` checks responsive reads during jobs and valid JSON bodies larger than the former 2 MB ceiling. `test_environment_sessions.py` also verifies that a target mutating its pinned source during shutdown becomes invalid while its already observed interaction remains saved.
 
 ## Verify multi-file run ingestion
 

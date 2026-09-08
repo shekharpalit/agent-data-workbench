@@ -8,7 +8,7 @@ from fastapi.staticfiles import StaticFiles
 
 from agent_data_workbench.api.dependencies import require_session
 from agent_data_workbench.api.errors import register_error_handlers
-from agent_data_workbench.api.middleware import RequestBoundaryMiddleware
+from agent_data_workbench.api.middleware import register_middleware
 from agent_data_workbench.api.routers import (
     artifacts,
     investigations,
@@ -35,7 +35,7 @@ def create_app(project: Project, *, origin: str, token: str) -> FastAPI:
     app.state.project = project
     app.state.jobs = JobQueue()
     app.state.token = token
-    app.add_middleware(RequestBoundaryMiddleware, origin=origin)
+    register_middleware(app, origin=origin)
     register_error_handlers(app)
     api = APIRouter(prefix="/api", dependencies=[Depends(require_session)])
     for module in (overview, traces, artifacts, knowledge, tasks, investigations, jobs, workflow):

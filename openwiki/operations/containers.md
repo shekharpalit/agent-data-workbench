@@ -26,12 +26,14 @@ sources:
     resource: repo://src/agent_data_workbench/data/transport.py
   - id: openwiki-source-56b68af7c871c44d9ba4d64d
     resource: repo://src/agent_data_workbench/workbench/runtime.py
+  - id: openwiki-source-4a774cace930992dc66c0bda
+    resource: repo://src/agent_data_workbench/workbench/settings.py
   - id: openwiki-source-a741d432f952c0dbfb4fb35d
     resource: repo://ui/vite.config.ts
-generated: { by: "codex", at: "2026-09-08T00:07:39.310Z" }
+generated: { by: "codex", at: "2026-09-08T00:33:25.897Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T00:07:39.310Z
+    at: 2026-09-08T00:33:25.897Z
 ---
 
 # Docker and Make workflow
@@ -49,7 +51,7 @@ make dev
 
 `make init` builds the development image from the locked dependencies, then creates `/data/project` in a named volume. Repeating it opens the same project and preserves traces and artifacts. An incompatible or unrelated nonempty project directory is rejected rather than overwritten. The workspace starts empty.
 
-`make dev` builds and starts the UI watcher and FastAPI backend together. It stops the packaged app first so they do not compete for the published port. Open the private URL printed by the backend. Python source changes restart Uvicorn while retaining the current browser token. UI changes rebuild the assets; refresh the browser to see them. Ctrl-C stops both services.
+`make dev` builds and starts the UI watcher and FastAPI backend together. It stops the packaged app first so they do not compete for the published port. Open the private URL printed by the backend. Python source changes restart Uvicorn while retaining the current browser token. UI changes rebuild the assets; refresh the browser to see them. Ctrl-C initiates shutdown of both services. Uvicorn waits for active response background tasks by default; pause long native research first when you want to resume it later. Docker can still force termination after its external stop deadline, which is separate from workbench analysis limits.
 
 The UI healthcheck verifies its index and referenced script/style files before Compose starts the backend. Development retains previous assets during rebuilds and polls source changes while excluding generated output and dependencies. FastAPI serves the resulting files and API on one origin.
 
@@ -103,8 +105,8 @@ The Dockerfile pins Python 3.14.7, Node 24.20.0 and uv 0.12.10. It builds produc
 
 ## Runtime configuration and agent integrations
 
-The Python entrypoint is `python -m agent_data_workbench.workbench.runtime`. It accepts `--initialize-only` and `--reload`. `WORKBENCH_PROJECT`, `WORKBENCH_HOST`, `WORKBENCH_PORT` and `WORKBENCH_ORIGIN` configure storage and serving. `WORKBENCH_NAME` and `WORKBENCH_OBJECTIVE` set metadata only when creating a new project. Custom runtime environment variables can be passed through a Compose override or a direct container invocation; the standard Compose file sets its own storage and network values.
+The Python entrypoint is `python -m agent_data_workbench.workbench.runtime`. Both normal and reload startup call the same Uvicorn app factory; Uvicorn owns the listener and shutdown. It accepts `--initialize-only` and `--reload`. `WORKBENCH_PROJECT`, `WORKBENCH_HOST`, `WORKBENCH_PORT` and `WORKBENCH_ORIGIN` configure storage and serving. `WORKBENCH_NAME` and `WORKBENCH_OBJECTIVE` set metadata only when creating a new project. Custom runtime environment variables can be passed through a Compose override or a direct container invocation; the standard Compose file sets its own storage and network values.
 
-The standard configuration binds the backend to `0.0.0.0` inside Docker and publishes only `127.0.0.1` on the host. The browser origin is independent of the bind address; healthchecks use its normalized host, and the existing bearer, Host and Origin checks apply. This configuration does not add TLS or a remote multiuser login system.
+The standard configuration binds the backend to `0.0.0.0` inside Docker and publishes only `127.0.0.1` on the host. Pydantic settings validate the port and browser origin independently of the bind address. Use an IPv4 address or hostname for the browser origin; use `localhost` when binding an IPv6 listener. Default ports and a trailing slash normalize through `HttpUrl`. Healthchecks use that normalized origin. Standard `TrustedHostMiddleware` checks the hostname independently of its port, and `CORSMiddleware` controls browser origins and preflight. Bearer authentication authorizes API calls, including direct clients without an Origin header; CORS is not an authorization check. This configuration does not add TLS or a remote multiuser login system.
 
 Agent investigations need an installed, authenticated Codex or Claude Code CLI in the same execution environment as the backend. The stock images do not install those CLIs or mount host credentials or the Docker socket. Manual research and deterministic local workflows work without them. To use an existing host CLI login, follow the native commands in the [quickstart](../quickstart.md). A Docker image for the workbench is separate from the optional Harbor environment and target-agent execution described in [eval engineering](../workflows/eval-engineering.md).

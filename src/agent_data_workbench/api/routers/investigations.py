@@ -2,7 +2,7 @@
 
 from typing import Annotated
 
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, BackgroundTasks, Query
 from fastapi.responses import FileResponse
 
 from agent_data_workbench.api.dependencies import JobsDependency, ProjectDependency
@@ -31,7 +31,10 @@ router = APIRouter()
 
 @router.post("/investigate")
 def run_investigation(
-    project: ProjectDependency, jobs: JobsDependency, payload: InvestigationRequest
+    project: ProjectDependency,
+    jobs: JobsDependency,
+    payload: InvestigationRequest,
+    background_tasks: BackgroundTasks,
 ):
     def work():
         value = (
@@ -50,7 +53,7 @@ def run_investigation(
         result = investigate(project, value["id"], agent)
         return {"id": value["id"], "status": result["status"]}
 
-    return jobs.launch("Investigate " + (payload.resume or "project"), work)
+    return jobs.launch(background_tasks, "Investigate " + (payload.resume or "project"), work)
 
 
 @router.post("/investigation/pause")
