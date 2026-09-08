@@ -14,10 +14,11 @@ from sqlalchemy import URL, Boolean, Text, create_engine, func, select
 from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column
 from sqlalchemy.pool import NullPool
 
-from ..identifiers import new_id
-from ..models import Trace, json_text, pointer_value
-from ..project import digest, now
-from ..store import TraceStore
+from agent_data_workbench.data.contracts import Trace
+from agent_data_workbench.data.store import TraceStore
+from agent_data_workbench.shared.identifiers import new_id
+from agent_data_workbench.shared.json import digest, json_text, pointer_value
+from agent_data_workbench.shared.time import now
 
 
 class Base(DeclarativeBase):
@@ -215,7 +216,7 @@ class Dataset:
         page_size: int = 50,
         results: bool = False,
     ) -> dict:
-        from ..models import pointer_parts
+        from agent_data_workbench.shared.json import pointer_parts
 
         pointer_parts(pointer)
         if offset < 0 or page_size < 1:

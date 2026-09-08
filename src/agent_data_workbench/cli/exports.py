@@ -6,10 +6,10 @@ from pathlib import Path
 
 import typer
 
-from ..exports import export_training
-from ..project import Project
-from ..research import export_proposal
-from .common import emit, errors
+from agent_data_workbench.cli.common import emit, errors
+from agent_data_workbench.integrations.training import export_training
+from agent_data_workbench.research import export_proposal
+from agent_data_workbench.workspace.project import Project
 
 app = typer.Typer(no_args_is_help=True)
 

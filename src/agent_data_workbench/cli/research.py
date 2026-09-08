@@ -4,18 +4,18 @@ from pathlib import Path
 
 import typer
 
-from ..project import Project
-from ..research import (
+from agent_data_workbench.cli.common import emit, errors
+from agent_data_workbench.research import (
     NativeSession,
     ResearchWorkspace,
     investigate,
     pause_investigation,
     start_investigation,
 )
-from ..research.artifacts import investigation_view, load_investigation
-from ..research.sessions import prepare_workspace
-from ..traces import read_json
-from .common import emit, errors
+from agent_data_workbench.research.artifacts import investigation_view, load_investigation
+from agent_data_workbench.research.sessions import prepare_workspace
+from agent_data_workbench.shared.json import read_json
+from agent_data_workbench.workspace.project import Project
 
 app = typer.Typer(no_args_is_help=True)
 operations = typer.Typer(no_args_is_help=True)
@@ -54,7 +54,7 @@ def investigate_command(
 @errors
 def mcp_server(project: Path, investigation: str):
     """Expose this investigation's data tools over local MCP stdio; no model call."""
-    from ..research.mcp import create_mcp
+    from agent_data_workbench.research.mcp import create_mcp
 
     create_mcp(ResearchWorkspace(project, investigation)).run()
 
@@ -100,7 +100,7 @@ def records(
 @operations.command("record")
 @errors
 def record(project: Path, investigation: str, outcomes: Path):
-    from ..research.workspace import RecordOutcome
+    from agent_data_workbench.research.workspace import RecordOutcome
 
     workspace = ResearchWorkspace(project, investigation)
     emit(workspace.record_outcomes([RecordOutcome.model_validate(v) for v in read_json(outcomes)]))

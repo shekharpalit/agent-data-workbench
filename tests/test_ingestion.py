@@ -4,11 +4,12 @@ import json
 
 import pytest
 
-from agent_data_workbench.identifiers import stable_id
-from agent_data_workbench.ingestion import FilesSource, SourceFile, discover_files
-from agent_data_workbench.models import json_text
-from agent_data_workbench.project import Project
-from agent_data_workbench.store import TraceStore
+from agent_data_workbench.data.discovery import SourceFile, discover_files
+from agent_data_workbench.data.ingestion import FilesSource
+from agent_data_workbench.data.store import TraceStore
+from agent_data_workbench.shared.identifiers import stable_id
+from agent_data_workbench.shared.json import json_text
+from agent_data_workbench.workspace.project import Project
 
 
 def write_events(path, events):

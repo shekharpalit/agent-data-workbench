@@ -12,6 +12,8 @@ sources:
     resource: repo://Makefile
   - id: openwiki-source-05ccef8d4cf1698187f20464
     resource: repo://pyproject.toml
+  - id: openwiki-source-576495909f5ee2bf8d15af81
+    resource: repo://src/agent_data_workbench/exploration/clustering/tokenization.py
   - id: openwiki-source-f0a6e7dc03522b2682f88655
     resource: repo://tests/conftest.py
   - id: openwiki-source-11519246eac934485315b3cb
@@ -20,6 +22,8 @@ sources:
     resource: repo://tests/test_cli.py
   - id: openwiki-source-1d5897d9fc482596678731c2
     resource: repo://tests/test_conversation_exports.py
+  - id: openwiki-source-66a8a10b0365fc2079585762
+    resource: repo://tests/test_explore.py
   - id: openwiki-source-9c58a0b0672b6bdbd523d5ee
     resource: repo://tests/test_identifiers.py
   - id: openwiki-source-0bb6c35cfc5dfdfa5db20794
@@ -50,10 +54,10 @@ sources:
     resource: repo://ui/tests/research.test.tsx
   - id: openwiki-source-a741d432f952c0dbfb4fb35d
     resource: repo://ui/vite.config.ts
-generated: { by: "codex", at: "2026-09-07T23:37:40.020Z" }
+generated: { by: "codex", at: "2026-09-08T00:07:39.310Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T23:37:40.020Z
+    at: 2026-09-08T00:07:39.310Z
 ---
 
 # Development and verification
@@ -149,3 +153,11 @@ Use `test_environment_sessions.py` for reset drift, partial transcripts, cancell
 The ingest CLI now defaults to one file per run; use `--layout records` for prior row-per-line exports. `tests/test_ingestion.py` checks recursive discovery, globs, ordered events, native/generated identities, stable source roots, aliases, both layouts and rollback across file boundaries. `tests/test_ingest_cli.py` exercises the same behavior through variadic paths and binary archive stdin. `tests/test_ingest_transport.py` verifies archive names, cleanup, hardlink deduplication and rejection before a partial import.
 
 `tests/test_ingestion_research.py` imports two event-stream files into one investigation, preserves each run's chronological data, and records separate comparison outcomes across dataset pages. This proves that an investigation can work across multiple complete traces; it does not measure model quality or establish large-corpus throughput. See [trace import](../workflows/traces.md) for the data contract.
+
+## Change the owning package
+
+Use the [package responsibility map](../architecture/system.md#responsibilities) before adding a module. Keep source adapters and SQLAlchemy storage in `data/`, task definitions and review/grading in `evaluation/tasks/`, persistent target adapters in `execution/`, and provider/export adapters in `integrations/`. `workbench/` owns startup and jobs; `api/` owns typed HTTP translation. Shared JSON, UUID, filesystem, Markdown and process helpers belong in `shared/` and must not depend on domain modules.
+
+The root SDK imports remain stable; former internal imports such as `agent_data_workbench.store` now use `agent_data_workbench.data.store`. Update module references in Docker, Make, generated commands and consumer-local test patches when moving code. Avoid filling package initializers with unrelated eager imports.
+
+Clustering has separate tokenization, TF-IDF vectorization, connected-components and response modules under `exploration/clustering/`. Its regression cases preserve negation, numeric tokens, single-character words and values under metadata-like field names, and avoid inventing a partial word when a preview is truncated. Search, aggregation and lineage remain separate operations.

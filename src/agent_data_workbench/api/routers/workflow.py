@@ -6,7 +6,8 @@ from typing import Literal
 from fastapi import APIRouter
 from pydantic import Field
 
-from ...calibration import (
+from agent_data_workbench.api.dependencies import JobsDependency, ProjectDependency
+from agent_data_workbench.evaluation.calibration import (
     AttemptAdjudication,
     AttemptLabel,
     adjudicate_attempt,
@@ -15,7 +16,7 @@ from ...calibration import (
     label_attempt,
     load_calibration,
 )
-from ...coverage import (
+from agent_data_workbench.evaluation.coverage import (
     CoverageMapping,
     TaxonomySpec,
     coverage_report,
@@ -23,15 +24,19 @@ from ...coverage import (
     map_coverage,
     review_taxonomy,
 )
-from ...experiments import run_experiment
-from ...harbor import HarborExportConfig, export_harbor, run_harbor_export
-from ...identifiers import UUIDString
-from ...improvements import create_improvement, decide_improvement
-from ...models import Contract
-from ...runners import ConfiguredRunner, RunnerConfig
-from ...traces import read_json
-from ...worlds import WorldSpec, create_world, review_world
-from ..dependencies import JobsDependency, ProjectDependency
+from agent_data_workbench.evaluation.experiments import run_experiment
+from agent_data_workbench.evaluation.improvements import create_improvement, decide_improvement
+from agent_data_workbench.evaluation.worlds import WorldSpec, create_world, review_world
+from agent_data_workbench.execution.contracts import RunnerConfig
+from agent_data_workbench.execution.runners import ConfiguredRunner
+from agent_data_workbench.integrations.harbor import (
+    HarborExportConfig,
+    export_harbor,
+    run_harbor_export,
+)
+from agent_data_workbench.shared.contracts import Contract
+from agent_data_workbench.shared.identifiers import UUIDString
+from agent_data_workbench.shared.json import read_json
 
 router = APIRouter(prefix="/workflow")
 
@@ -156,7 +161,7 @@ def improvement_decide(project: ProjectDependency, payload: DecisionRequest):
 
 @router.post("/experiment")
 def experiment_run(project: ProjectDependency, jobs: JobsDependency, payload: ExperimentRequest):
-    from ...backends import CliAnalyzer
+    from agent_data_workbench.integrations.analyzers import CliAnalyzer
 
     baseline, candidate = configured(payload.baseline_path), configured(payload.candidate_path)
     judge = CliAnalyzer(payload.judge, payload.judge_model) if payload.judge else None

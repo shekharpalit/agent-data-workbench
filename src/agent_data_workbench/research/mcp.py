@@ -6,9 +6,9 @@ from typing import Any
 from mcp.server import MCPServer
 from mcp.server.mcpserver.exceptions import ToolError
 
-from ..tasks import TaskSpec
-from .contracts import ResearchResult
-from .workspace import RecordOutcome, ResearchWorkspace
+from agent_data_workbench.evaluation.tasks.contracts import TaskSpec
+from agent_data_workbench.research.contracts import ResearchResult
+from agent_data_workbench.research.workspace import RecordOutcome, ResearchWorkspace
 
 
 def tool_errors(function):

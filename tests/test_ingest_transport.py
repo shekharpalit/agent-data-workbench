@@ -3,7 +3,7 @@ import tarfile
 
 import pytest
 
-from agent_data_workbench.ingest_transport import archive_files
+from agent_data_workbench.data.transport import archive_files
 
 
 def trace_archive(entries):

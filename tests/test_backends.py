@@ -4,14 +4,15 @@ from pathlib import Path
 
 import pytest
 
-from agent_data_workbench.backends import BackendError, CliAnalyzer, run_process
+from agent_data_workbench.integrations.analyzers import CliAnalyzer
+from agent_data_workbench.shared.processes import BackendError, run_process
 
 
 @pytest.mark.parametrize("backend", ["codex", "claude"])
 def test_provider_adapters_use_structured_output_and_native_auth(monkeypatch, analysis, backend):
     # Given
     monkeypatch.setattr(
-        "agent_data_workbench.backends.shutil.which", lambda name: "/usr/bin/" + name
+        "agent_data_workbench.integrations.analyzers.shutil.which", lambda name: "/usr/bin/" + name
     )
     observed = {}
 
@@ -34,7 +35,7 @@ def test_provider_adapters_use_structured_output_and_native_auth(monkeypatch, an
         )
         return json.dumps({"is_error": False, "structured_output": analysis.model_dump()})
 
-    monkeypatch.setattr("agent_data_workbench.backends.run_process", fake_run)
+    monkeypatch.setattr("agent_data_workbench.integrations.analyzers.run_process", fake_run)
 
     # When
     actual = CliAnalyzer(backend, model="explicit-model", timeout=37).analyze(
@@ -54,7 +55,9 @@ def test_provider_adapters_use_structured_output_and_native_auth(monkeypatch, an
 
 def test_missing_cli_is_actionable(monkeypatch):
     # Given
-    monkeypatch.setattr("agent_data_workbench.backends.shutil.which", lambda name: None)
+    monkeypatch.setattr(
+        "agent_data_workbench.integrations.analyzers.shutil.which", lambda name: None
+    )
 
     # When / Then
     with pytest.raises(BackendError, match="not installed"):
@@ -63,9 +66,11 @@ def test_missing_cli_is_actionable(monkeypatch):
 
 def test_provider_error_envelope_is_not_analysis(monkeypatch):
     # Given
-    monkeypatch.setattr("agent_data_workbench.backends.shutil.which", lambda name: name)
     monkeypatch.setattr(
-        "agent_data_workbench.backends.run_process",
+        "agent_data_workbench.integrations.analyzers.shutil.which", lambda name: name
+    )
+    monkeypatch.setattr(
+        "agent_data_workbench.integrations.analyzers.run_process",
         lambda *args: json.dumps({"is_error": True, "result": "sensitive account details"}),
     )
 

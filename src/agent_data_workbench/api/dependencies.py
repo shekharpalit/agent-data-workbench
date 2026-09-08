@@ -6,8 +6,8 @@ from typing import Annotated
 from fastapi import Depends, HTTPException, Request
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
-from ..jobs import JobQueue
-from ..project import Project
+from agent_data_workbench.workbench.jobs import JobQueue
+from agent_data_workbench.workspace.project import Project
 
 bearer = HTTPBearer(auto_error=False)
 

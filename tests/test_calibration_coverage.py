@@ -3,7 +3,7 @@ from identities import uid
 from test_workbench_data import make_project, spec
 from test_workbench_execution import FixedRunner, suite
 
-from agent_data_workbench.calibration import (
+from agent_data_workbench.evaluation.calibration import (
     AttemptAdjudication,
     AttemptLabel,
     adjudicate_attempt,
@@ -12,7 +12,7 @@ from agent_data_workbench.calibration import (
     label_attempt,
     load_calibration,
 )
-from agent_data_workbench.coverage import (
+from agent_data_workbench.evaluation.coverage import (
     Capability,
     CoverageMapping,
     TaxonomySpec,
@@ -22,11 +22,11 @@ from agent_data_workbench.coverage import (
     map_coverage,
     review_taxonomy,
 )
-from agent_data_workbench.experiments import run_experiment
-from agent_data_workbench.project import digest, save
-from agent_data_workbench.runners import Execution
-from agent_data_workbench.tasks import replace_task
-from agent_data_workbench.traces import read_json
+from agent_data_workbench.evaluation.experiments import run_experiment
+from agent_data_workbench.evaluation.tasks.repository import replace_task
+from agent_data_workbench.execution.contracts import Execution
+from agent_data_workbench.shared.files import save
+from agent_data_workbench.shared.json import digest, read_json
 
 
 @pytest.fixture

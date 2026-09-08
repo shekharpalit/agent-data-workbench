@@ -3,8 +3,21 @@ import json
 import pytest
 from identities import uid
 
-from agent_data_workbench.models import Analysis, Assertion, Finding, Trace
-from agent_data_workbench.project import Project, save
+from agent_data_workbench.analysis.contracts import Analysis, Finding
+from agent_data_workbench.data.contracts import Trace
+from agent_data_workbench.data.sources import JsonSource
+from agent_data_workbench.data.store import TraceStore
+from agent_data_workbench.evaluation.contracts import Assertion
+from agent_data_workbench.evaluation.tasks.contracts import Criterion, TaskSpec, VerifierExample
+from agent_data_workbench.evaluation.tasks.design import design_tasks
+from agent_data_workbench.evaluation.tasks.grading import audit_task, grade
+from agent_data_workbench.evaluation.tasks.replay import replay_task
+from agent_data_workbench.evaluation.tasks.repository import (
+    load_task,
+    replace_task,
+    review_task,
+    write_task,
+)
 from agent_data_workbench.research import (
     ResearchResult,
     ResearchWorkspace,
@@ -14,20 +27,8 @@ from agent_data_workbench.research import (
     research_store,
     start_investigation,
 )
-from agent_data_workbench.store import JsonSource, TraceStore
-from agent_data_workbench.tasks import (
-    Criterion,
-    TaskSpec,
-    VerifierExample,
-    audit_task,
-    design_tasks,
-    grade,
-    load_task,
-    replace_task,
-    replay_task,
-    review_task,
-    write_task,
-)
+from agent_data_workbench.shared.files import save
+from agent_data_workbench.workspace.project import Project
 
 
 class Source:

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:5f526ac4cb628408a6b14aa675276932332116d600e5a82aa71a1d9411f31c8f",
+  "pageVersion": "sha256:e92c1f8c2c078ad03cb7ca0596fef56f42ec58f0cd236df6b6f104648e6a9073",
   "claims": [
     {
       "id": "claim_80e3a5075dd34ed7b7f0393a15e92a9a",
@@ -78,7 +78,7 @@
         },
         {
           "resource": "repo://tests/test_cli.py#L171-L275",
-          "version": "repo-lines-v1:sha256:69e28654f213e2fdbe6c093f457edb1e2a9d69e31db3ef1aa3e20e2f6a102a7a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA4LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI5ODM0ZjVkZDdjMjU2YzFhMjRhYjNiOTZhZmZhZjJlOGIyNzIzOGYyNjE4YzIwMmJlYTM1MjQ5NDhmOTcwZDBkIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0ODkzZjQwZTM3ODFlYjg5NmM4MmQwNDZhMDgwNjdhMTFlMzVjZGYyZjFkZmFmMjZmZWE5MGI4ZGI2Njc2NDEzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIzYzM4NTNlYjgyMThhNTc3NzkwNGJjZmVjMDRjMTkzZjI3NmFhYWQ4ODQ0YzFkODNkMWEwNjc5MTFjMjZjODE5IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+          "version": "repo-lines-v1:sha256:580030db117ce74cd15bfa219dd8bf84b6d25ba4cc7a120be00783f232ebcf3e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA4LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI5ODM0ZjVkZDdjMjU2YzFhMjRhYjNiOTZhZmZhZjJlOGIyNzIzOGYyNjE4YzIwMmJlYTM1MjQ5NDhmOTcwZDBkIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0ODkzZjQwZTM3ODFlYjg5NmM4MmQwNDZhMDgwNjdhMTFlMzVjZGYyZjFkZmFmMjZmZWE5MGI4ZGI2Njc2NDEzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIzYzM4NTNlYjgyMThhNTc3NzkwNGJjZmVjMDRjMTkzZjI3NmFhYWQ4ODQ0YzFkODNkMWEwNjc5MTFjMjZjODE5IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
         },
         {
           "resource": "repo://tests/test_identifiers.py#L18-L113",
@@ -161,8 +161,8 @@
       "statement": "The Makefile provides Docker setup and joint backend/UI development, and runs Python tests, Ruff, UI tests, formatting and the TypeScript production build in containers.",
       "evidence": [
         {
-          "resource": "repo://Makefile#L23-L55",
-          "version": "repo-lines-v1:sha256:f5fd159cee82adb4bb280d7b76aefcbee644d8cc40ba29bcdcf2a3b1035eb1f6:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlkYTcxNTBhNDY4MDRkMWMxNzkzMDEyN2ZiZjg4NTkzMzdlOTYwOGY0YjE5ZTUyZTBjMDE0NWQ0YWU2NjBjYjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJmMDljYjUzYTVkM2FkNjIzOWU1MGUxMWEzNGVhYTcwODFkOWUxZjBlY2I5ZjhkZjFjZDAyOGM0MDg1MjBmZjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIwYjI0OTUyYWJlZjhjMGJmN2ZiYTNhZWQyZDA3MDg3NDEzOGJmM2ZkZTE0ZDQ3ZDQ2ODFlMjI4MzQzMTgzMWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRlZTc5ZjllNTRlMDEyYTkyMWJiMDJiMGIwZTljY2FiNmE2NzZkMDhkNmU4ODk5Y2UxNjZjODc1ZmJlZjE1MjIifQ"
+          "resource": "repo://Makefile",
+          "version": "repo-file-v1:sha256:744a80d95a8419e0113d85d0d334ccafdfbf2d2fd1be97548c95b0e899e7e6ed"
         }
       ]
     },
@@ -172,7 +172,7 @@
       "evidence": [
         {
           "resource": "repo://tests/test_runtime.py#L144-L238",
-          "version": "repo-lines-v1:sha256:33724309af8e62adcae205eed450e6c1e5dbd3812dee90b2e2f317506a6d4460:eyJzZWxlY3RlZExpbmVDb3VudCI6OTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhMDI1ZmM2YTQ0NDIwMTRmODcyZjRhZTE4M2NmMzhhOWM1MDdkN2ZlZDA0MTNhN2UxNTM1MTdmNWYzNzUyYzAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkyYzkwYzU5ODE4MDZlNWYzNThjNmZkNjRhM2JmYTM1ZDNkMjk5NzA3YjVlYTUzMTgwYmFhZDkyYjhkODBmZTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE0ZjA4OTU0MjA5YzU1OTc3NjFlMDI2ZWM3YTY0NzY4NmQ2MWU4YjA1ZTM0NjI1YjkyZWZmMWY3YjkzOWRkYzQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUwMjQxYjBiZTUwYmE1ODgzZDEzMDJhYTBjZWE2Y2UzN2M1NzFjMzJkNjE4MjhmZmU3ZWJlZjZkYTM3OWNhODYifQ"
+          "version": "repo-lines-v1:sha256:68dcea4fedaadb43c4914f268d6dcf4bf2e7376ad67e49c3533af0029b58b949:eyJzZWxlY3RlZExpbmVDb3VudCI6OTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhMDI1ZmM2YTQ0NDIwMTRmODcyZjRhZTE4M2NmMzhhOWM1MDdkN2ZlZDA0MTNhN2UxNTM1MTdmNWYzNzUyYzAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkyYzkwYzU5ODE4MDZlNWYzNThjNmZkNjRhM2JmYTM1ZDNkMjk5NzA3YjVlYTUzMTgwYmFhZDkyYjhkODBmZTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE0ZjA4OTU0MjA5YzU1OTc3NjFlMDI2ZWM3YTY0NzY4NmQ2MWU4YjA1ZTM0NjI1YjkyZWZmMWY3YjkzOWRkYzQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUwMjQxYjBiZTUwYmE1ODgzZDEzMDJhYTBjZWE2Y2UzN2M1NzFjMzJkNjE4MjhmZmU3ZWJlZjZkYTM3OWNhODYifQ"
         },
         {
           "resource": "repo://tests/test_runtime.py#L20-L68",
@@ -211,10 +211,28 @@
           "version": "repo-lines-v1:sha256:29fc47fd1ee98eb1b045db224e11ba5ffd0add04261a65aef24f84616fdda0e3:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIyNWNlMDQxY2VlMDA0ODA5NjQ1MjgyMzI3YzI5NjkyMjliZTU5NzdkYmIyYjQxYmU5OWFmY2NiZjc5NWRiZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI1YmUzOGM1YjMwOTdjNWFlZDJmY2YxYWYwNGZlMTI5OGZmYTc4YzAxMTllZmI2Y2E1Njc0NmU2OTU5NmM3MjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
+    },
+    {
+      "id": "claim_5078bc4fdc814f23982ab6d6f9c64a26",
+      "statement": "Contributor guidance requires domain ownership and domain-independent shared helpers, while exploration regression tests retain meaningful lexical values and prevent partial preview words.",
+      "evidence": [
+        {
+          "resource": "repo://AGENTS.md",
+          "version": "repo-file-v1:sha256:86b5b495bec3e8eaecdf35591201ff2c54a6529ee68fc00ec90ba32de5a83cdc"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/exploration/clustering/tokenization.py",
+          "version": "repo-file-v1:sha256:d5c4f63eff3245395ceb1a6423069031c38be9f5e3683d5a0dd6d5b0b4f31f64"
+        },
+        {
+          "resource": "repo://tests/test_explore.py",
+          "version": "repo-file-v1:sha256:13a8d4cd3a7d4f47f9df035eeeb8157406579180516f6634da9c412bbe5948ce"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-07T23:37:40.020Z"
+    "at": "2026-09-08T00:07:39.310Z"
   }
 }

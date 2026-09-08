@@ -6,15 +6,17 @@ import sys
 from fastapi.testclient import TestClient
 from test_workbench_data import Source
 
+from agent_data_workbench.analysis.contracts import Analysis, Evidence, Finding
 from agent_data_workbench.api import create_app
-from agent_data_workbench.calibration import (
+from agent_data_workbench.data.store import TraceStore
+from agent_data_workbench.evaluation.calibration import (
     AttemptLabel,
     calibration_summary,
     create_calibration,
     label_attempt,
 )
-from agent_data_workbench.conversations import ConversationSpec, UserTurn
-from agent_data_workbench.coverage import (
+from agent_data_workbench.evaluation.contracts import Assertion
+from agent_data_workbench.evaluation.coverage import (
     Capability,
     CoverageMapping,
     TaxonomySpec,
@@ -23,28 +25,32 @@ from agent_data_workbench.coverage import (
     map_coverage,
     review_taxonomy,
 )
-from agent_data_workbench.environments import EnvironmentConfig
-from agent_data_workbench.experiments import make_suite, run_experiment
-from agent_data_workbench.identifiers import new_id
-from agent_data_workbench.improvements import create_improvement, decide_improvement
-from agent_data_workbench.models import Analysis, Assertion, Evidence, Finding
-from agent_data_workbench.project import Project, digest
+from agent_data_workbench.evaluation.experiments import run_experiment
+from agent_data_workbench.evaluation.improvements import create_improvement, decide_improvement
+from agent_data_workbench.evaluation.suites import make_suite
+from agent_data_workbench.evaluation.tasks.contracts import Criterion, TaskSpec, VerifierExample
+from agent_data_workbench.evaluation.tasks.grading import audit_task, grade
+from agent_data_workbench.evaluation.tasks.repository import review_task, write_task
+from agent_data_workbench.evaluation.worlds import (
+    WorldReference,
+    WorldSpec,
+    create_world,
+    review_world,
+)
+from agent_data_workbench.execution.contracts import (
+    ConversationSpec,
+    EnvironmentConfig,
+    RunnerConfig,
+    UserTurn,
+)
+from agent_data_workbench.execution.runners import ConfiguredRunner
 from agent_data_workbench.research import ResearchWorkspace
 from agent_data_workbench.research.artifacts import start_investigation
 from agent_data_workbench.research.contracts import ResearchResult
 from agent_data_workbench.research.workspace import RecordOutcome
-from agent_data_workbench.runners import ConfiguredRunner, RunnerConfig
-from agent_data_workbench.store import TraceStore
-from agent_data_workbench.tasks import (
-    Criterion,
-    TaskSpec,
-    VerifierExample,
-    audit_task,
-    grade,
-    review_task,
-    write_task,
-)
-from agent_data_workbench.worlds import WorldReference, WorldSpec, create_world, review_world
+from agent_data_workbench.shared.identifiers import new_id
+from agent_data_workbench.shared.json import digest
+from agent_data_workbench.workspace.project import Project
 
 
 def test_cancellation_failure_becomes_reviewed_multiturn_eval_and_measured_candidate(tmp_path):

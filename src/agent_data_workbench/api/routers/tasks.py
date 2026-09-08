@@ -2,15 +2,17 @@
 
 from fastapi import APIRouter
 
-from ...backends import CliAnalyzer
-from ...tasks import audit_task, design_tasks, replace_task, review_task
-from ..dependencies import JobsDependency, ProjectDependency
-from ..schemas import (
+from agent_data_workbench.api.dependencies import JobsDependency, ProjectDependency
+from agent_data_workbench.api.schemas import (
     ArtifactRequest,
     ReviewRequest,
     TaskDesignRequest,
     TaskEditRequest,
 )
+from agent_data_workbench.evaluation.tasks.design import design_tasks
+from agent_data_workbench.evaluation.tasks.grading import audit_task
+from agent_data_workbench.evaluation.tasks.repository import replace_task, review_task
+from agent_data_workbench.integrations.analyzers import CliAnalyzer
 
 router = APIRouter()
 

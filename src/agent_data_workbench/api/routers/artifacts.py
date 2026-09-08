@@ -4,14 +4,12 @@ from typing import Annotated
 
 from fastapi import APIRouter, Query
 
-from ...explore import lineage
-from ...identifiers import UUIDString
-from ...research.artifacts import investigation_view
-from ...traces import read_json
-from ..dependencies import ProjectDependency
-from ..schemas import (
-    ArtifactKind,
-)
+from agent_data_workbench.api.dependencies import ProjectDependency
+from agent_data_workbench.api.schemas import ArtifactKind
+from agent_data_workbench.exploration.lineage import lineage
+from agent_data_workbench.research.artifacts import investigation_view
+from agent_data_workbench.shared.identifiers import UUIDString
+from agent_data_workbench.shared.json import read_json
 
 router = APIRouter()
 

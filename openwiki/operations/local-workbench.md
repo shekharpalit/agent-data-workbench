@@ -22,14 +22,14 @@ sources:
     resource: repo://src/agent_data_workbench/api/routers/workflow.py
   - id: openwiki-source-4105c547b3781d406b01e383
     resource: repo://src/agent_data_workbench/api/schemas.py
-  - id: openwiki-source-73ad8573b871e625469a2194
-    resource: repo://src/agent_data_workbench/ingestion.py
-  - id: openwiki-source-12d025c9e4830dcc4dd30757
-    resource: repo://src/agent_data_workbench/jobs.py
-  - id: openwiki-source-cda43c2246a0f3e6a5e89dce
-    resource: repo://src/agent_data_workbench/runtime.py
-  - id: openwiki-source-013c413ca45af5e0569b46e0
-    resource: repo://src/agent_data_workbench/server.py
+  - id: openwiki-source-a69866c703779e64969315b7
+    resource: repo://src/agent_data_workbench/data/ingestion.py
+  - id: openwiki-source-c8c7945f688b6b620d3800cf
+    resource: repo://src/agent_data_workbench/workbench/jobs.py
+  - id: openwiki-source-56b68af7c871c44d9ba4d64d
+    resource: repo://src/agent_data_workbench/workbench/runtime.py
+  - id: openwiki-source-759b532db0b0156398d95b24
+    resource: repo://src/agent_data_workbench/workbench/server.py
   - id: openwiki-source-9c58a0b0672b6bdbd523d5ee
     resource: repo://tests/test_identifiers.py
   - id: openwiki-source-7e7b3478097a461915e85751
@@ -48,10 +48,10 @@ sources:
     resource: repo://ui/src/views/ResearchSnapshot.tsx
   - id: openwiki-source-826d1e88c728d7cfae868e97
     resource: repo://ui/tests/workflow.test.tsx
-generated: { by: "codex", at: "2026-09-07T23:37:40.020Z" }
+generated: { by: "codex", at: "2026-09-08T00:07:39.310Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T23:37:40.020Z
+    at: 2026-09-08T00:07:39.310Z
 ---
 
 # Run the local workbench
@@ -65,6 +65,8 @@ uv run agent-data-workbench ui runs/workbench --open-browser
 ```
 
 The CLI starts Uvicorn and binds a socket on `127.0.0.1`. The default port is selected dynamically; `--port` requests a particular one. It prints the complete session URL and opens the browser only after Uvicorn reports that it can serve requests. Ctrl-C stops the service.
+
+The startup and listener lifecycle live in `workbench/runtime.py` and `workbench/server.py`; the FastAPI application and typed routers live in `api/`. See the [package ownership map](../architecture/system.md#responsibilities) when changing either layer.
 
 ## Local session and API
 

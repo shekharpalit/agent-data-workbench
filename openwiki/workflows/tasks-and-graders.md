@@ -4,23 +4,31 @@ title: Tasks and grader review
 description: Convert investigated evidence or explicit specifications into draft tasks, validate grader behavior, and preserve the review history required for experiments.
 tags: [tasks, graders, review, replay, evidence]
 sources:
+  - id: openwiki-source-52eab09bd9973949325f2e9e
+    resource: repo://src/agent_data_workbench/evaluation/tasks/contracts.py
+  - id: openwiki-source-b89c31d236f340bd64f3fd31
+    resource: repo://src/agent_data_workbench/evaluation/tasks/design.py
+  - id: openwiki-source-7873eadc6e06d9c18f47371a
+    resource: repo://src/agent_data_workbench/evaluation/tasks/grading.py
+  - id: openwiki-source-6574208c922e293382d49e13
+    resource: repo://src/agent_data_workbench/evaluation/tasks/replay.py
+  - id: openwiki-source-0c67ad46a6bd6ff73934e82d
+    resource: repo://src/agent_data_workbench/evaluation/tasks/repository.py
   - id: openwiki-source-2dbe8753da4267ce652f414e
     resource: repo://src/agent_data_workbench/research/workspace.py
-  - id: openwiki-source-b486bbac4ad50f2085fcbadb
-    resource: repo://src/agent_data_workbench/tasks.py
   - id: openwiki-source-3589dc1fc29ba0bfe0e2a50c
     resource: repo://tests/test_research.py
-  - id: openwiki-source-9dba1709c16fd704c45276e9
-    resource: repo://tests/test_workbench_data.py
-generated: { by: "codex", at: "2026-09-07T22:32:10.726Z" }
+generated: { by: "codex", at: "2026-09-08T00:07:39.310Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T22:32:10.726Z
+    at: 2026-09-08T00:07:39.310Z
 ---
 
 # Tasks and grader review
 
 A task describes what the target sees, which behavior matters, and how its result will be judged. Task creation produces a draft. A passing verifier audit and an explicit review are separate requirements for acceptance.
+
+The `evaluation/tasks/` package separates schema validation (`contracts.py`), persistence and review (`repository.py`), grading and verifier audits (`grading.py`), model-assisted design (`design.py`), and trace-prefix replay (`replay.py`). Shared JSON equality and pointer resolution live in `shared/json.py`. This keeps changing a grader separate from changing task storage or creation.
 
 ## Choose a creation route
 

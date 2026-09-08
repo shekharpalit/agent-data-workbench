@@ -10,16 +10,23 @@ from typing import Annotated
 
 import typer
 
-from ..backends import BackendError, CliAnalyzer
-from ..evaluation import compare as compare_outputs
-from ..evaluation import evaluate as evaluate_outputs
-from ..evaluation import load_cases, load_outputs, review_cases
-from ..identifiers import new_id
-from ..models import Analysis
-from ..prompt import build_prompt
-from ..traces import load_traces, read_json
-from ..workflow import DEFAULT_QUESTION, complete_run, load_request, prepare_run
-from .common import errors
+from agent_data_workbench.analysis.batch import (
+    DEFAULT_QUESTION,
+    complete_run,
+    load_request,
+    prepare_run,
+)
+from agent_data_workbench.analysis.contracts import Analysis
+from agent_data_workbench.analysis.prompt import build_prompt
+from agent_data_workbench.cli.common import errors
+from agent_data_workbench.data.normalization import load_traces
+from agent_data_workbench.evaluation.cases import compare as compare_outputs
+from agent_data_workbench.evaluation.cases import evaluate as evaluate_outputs
+from agent_data_workbench.evaluation.cases import load_cases, load_outputs, review_cases
+from agent_data_workbench.integrations.analyzers import CliAnalyzer
+from agent_data_workbench.shared.identifiers import new_id
+from agent_data_workbench.shared.json import read_json
+from agent_data_workbench.shared.processes import BackendError
 
 app = typer.Typer(
     no_args_is_help=True,

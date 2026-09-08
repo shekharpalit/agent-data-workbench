@@ -5,12 +5,20 @@ description: How the CLI, Python SDK, FastAPI service, React workbench, and loca
 tags: [architecture, sdk, persistence, provenance]
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T23:10:49.194Z
+    at: 2026-09-08T00:07:39.310Z
 sources:
+  - id: openwiki-source-8037e2358a2c4f9b2c722a11
+    resource: repo://AGENTS.md
   - id: openwiki-source-e201e686a785f09b6d899f0b
     resource: repo://compose.yaml
   - id: openwiki-source-bb1ebe868e35e9e500714501
     resource: repo://Dockerfile
+  - id: openwiki-source-a06d79006637fc11757f605b
+    resource: repo://src/agent_data_workbench/__init__.py
+  - id: openwiki-source-6015b7f3661c24935a195829
+    resource: repo://src/agent_data_workbench/__main__.py
+  - id: openwiki-source-fe89c78dfebbfceed4c54c0f
+    resource: repo://src/agent_data_workbench/analysis/reporting.py
   - id: openwiki-source-896da76531d8a33d2c9e76b8
     resource: repo://src/agent_data_workbench/api/application.py
   - id: openwiki-source-57d1f240e9d0552b9b058bdc
@@ -21,20 +29,18 @@ sources:
     resource: repo://src/agent_data_workbench/api/routers/tasks.py
   - id: openwiki-source-fd74f7907459785462506ae7
     resource: repo://src/agent_data_workbench/cli/tasks.py
-  - id: openwiki-source-2dd7f78b8d8a37f91c61de42
-    resource: repo://src/agent_data_workbench/database.py
-  - id: openwiki-source-4c04fd9d10dcc0e748ac55cc
-    resource: repo://src/agent_data_workbench/identifiers.py
-  - id: openwiki-source-ed554b753fa6f37387755486
-    resource: repo://src/agent_data_workbench/improvements.py
-  - id: openwiki-source-12d025c9e4830dcc4dd30757
-    resource: repo://src/agent_data_workbench/jobs.py
-  - id: openwiki-source-1188f1141809a45a7d20b02f
-    resource: repo://src/agent_data_workbench/persistence.py
-  - id: openwiki-source-b5025a250cbf9f845fc9224a
-    resource: repo://src/agent_data_workbench/project.py
-  - id: openwiki-source-df79e35713d914a8f9a3aa91
-    resource: repo://src/agent_data_workbench/reports.py
+  - id: openwiki-source-cdad3fe88d744628d97a2fa6
+    resource: repo://src/agent_data_workbench/data/database.py
+  - id: openwiki-source-ece138f4d793e07725c336eb
+    resource: repo://src/agent_data_workbench/data/store.py
+  - id: openwiki-source-fbcc81f66a8993d5ee2b7eda
+    resource: repo://src/agent_data_workbench/evaluation/improvements.py
+  - id: openwiki-source-7873eadc6e06d9c18f47371a
+    resource: repo://src/agent_data_workbench/evaluation/tasks/grading.py
+  - id: openwiki-source-0c67ad46a6bd6ff73934e82d
+    resource: repo://src/agent_data_workbench/evaluation/tasks/repository.py
+  - id: openwiki-source-7758acda0a6d0691a2dad9c9
+    resource: repo://src/agent_data_workbench/evaluation/worlds.py
   - id: openwiki-source-c792213eed7e8f73d739e358
     resource: repo://src/agent_data_workbench/research/artifacts.py
   - id: openwiki-source-19e7dd6c7eb0091ce3762537
@@ -45,17 +51,23 @@ sources:
     resource: repo://src/agent_data_workbench/research/sessions.py
   - id: openwiki-source-2dbe8753da4267ce652f414e
     resource: repo://src/agent_data_workbench/research/workspace.py
-  - id: openwiki-source-cda43c2246a0f3e6a5e89dce
-    resource: repo://src/agent_data_workbench/runtime.py
-  - id: openwiki-source-069858a5e395202064ced424
-    resource: repo://src/agent_data_workbench/store.py
-  - id: openwiki-source-c20ca7c3c1f89c4195dc51eb
-    resource: repo://src/agent_data_workbench/worlds.py
+  - id: openwiki-source-672190e2dfc145657515919f
+    resource: repo://src/agent_data_workbench/shared/files.py
+  - id: openwiki-source-b9263f82c99973ba337bc796
+    resource: repo://src/agent_data_workbench/shared/identifiers.py
+  - id: openwiki-source-a03e12d6f53e66e8a7ae34ba
+    resource: repo://src/agent_data_workbench/shared/json.py
+  - id: openwiki-source-6346ce0d406446ce0fd7a1db
+    resource: repo://src/agent_data_workbench/shared/markdown.py
+  - id: openwiki-source-c8c7945f688b6b620d3800cf
+    resource: repo://src/agent_data_workbench/workbench/jobs.py
+  - id: openwiki-source-56b68af7c871c44d9ba4d64d
+    resource: repo://src/agent_data_workbench/workbench/runtime.py
+  - id: openwiki-source-b9e04cc4343208a80c47ef02
+    resource: repo://src/agent_data_workbench/workspace/project.py
   - id: openwiki-source-3e6ae5cbfb3aa3af0850499a
     resource: repo://tests/test_manual_research_api.py
-  - id: openwiki-source-09d2a8f36f3ecb7ab9487ab2
-    resource: repo://tests/test_store.py
-generated: { by: "codex", at: "2026-09-07T23:10:49.194Z" }
+generated: { by: "codex", at: "2026-09-08T00:07:39.310Z" }
 ---
 
 # System architecture
@@ -84,16 +96,27 @@ flowchart TD
 
 ## Responsibilities
 
-| Component | Responsibility | Main entry points |
-| --- | --- | --- |
-| CLI | Import, research, task review, experiments, and export commands | `cli/__init__.py`, `cli/project.py`, and domain command modules |
-| SDK | Domain contracts and the improvement workflow | `__init__.py`, `research/`, `tasks.py`, `experiments.py` |
-| Storage | Canonical trace records and query primitives | `store.py`, `database.py` |
-| FastAPI | Typed operations, session boundaries, static assets, background jobs | `api/application.py`, `api/routers/`, `api/schemas.py`, `api/dependencies.py`, `api/middleware.py`, `jobs.py` |
-| UI | Trace search, clusters, lineage, reviews, and experiment inspection | `ui/src/App.tsx`, `ui/src/views/` |
-| Extensions | Bring another trace source, analyzer, or target harness | `TraceSource`, `Analyzer`, `TargetRunner` |
+All Python paths below are relative to `src/agent_data_workbench/`. The package root contains only the public SDK exports and module CLI entrypoint.
 
-The app factory composes domain routers. FastAPI dependencies supply the project, job queue, and bearer authentication; request middleware enforces host, origin, and body limits. `server.py` starts Uvicorn and owns the local session lifecycle. The former `local_http.py` was middleware, not another server.
+| Package | Owns | Where to start |
+| --- | --- | --- |
+| `data/` | File discovery, run/record ingestion, source contracts and SQLAlchemy trace storage | `discovery.py`, `ingestion.py`, `sources.py`, `store.py` |
+| `analysis/` | Batch findings, evidence validation, prompts, reports and analyzer benchmarks | `contracts.py`, `validation.py`, `batch.py` |
+| `research/` | Human/native investigation snapshots, outcomes, sessions and MCP tools | `workspace.py`, `dataset.py`, `sessions.py` |
+| `evaluation/` | Tasks, grading, suites, paired experiments, worlds, calibration and improvement decisions | `tasks/`, `suites.py`, `experiments.py` |
+| `execution/` | Target contracts, persistent sessions, user simulators, environments and artifact capture | `contracts.py`, `sessions.py`, `environments.py`, `runners.py` |
+| `exploration/` | Typed search, distributions, lexical clusters and evidence lineage | `schemas.py`, `search.py`, `clustering/`, `lineage.py` |
+| `integrations/` | Native CLI analyzer adapters, Harbor and training exports | `analyzers.py`, `harbor.py`, `training.py` |
+| `workspace/` | Project configuration, artifact directories, reviewed knowledge and locks | `project.py` |
+| `shared/` | Domain-independent JSON/pointers/equality, UUIDs, persistence, Markdown and process helpers | `json.py`, `files.py`, `identifiers.py`, `processes.py` |
+| `workbench/` | Application startup, listener/session lifecycle and background jobs | `runtime.py`, `server.py`, `jobs.py` |
+| `api/`, `cli/` | Typed HTTP and command entrypoints calling domain operations | `api/application.py`, `api/routers/`, `cli/__init__.py` |
+
+The React/TypeScript UI remains in `ui/`; the packaged browser assets remain in `web/`. Domain modules import shared infrastructure. Shared infrastructure does not import domain packages. Task contracts, persistence/review, grading, authoring and replay have separate modules inside `evaluation/tasks/`; moving a file should not mix these responsibilities again.
+
+Public imports such as `from agent_data_workbench import Project, FilesSource, TraceStore` remain available. Code importing former internal flat modules must use the owning domain path. The CLI names, HTTP routes and persisted project format are unchanged by this reorganization.
+
+The app factory composes domain routers. FastAPI dependencies supply the project, job queue, and bearer authentication; request middleware enforces host, origin, and body limits. `workbench/server.py` starts Uvicorn and owns the local session lifecycle.
 
 The service layer translates requests into SDK operations. It does not contain a separate copy of task acceptance or research logic. FastAPI's interactive documentation routes are disabled; the session-protected `/api/openapi.json` describes the implemented API.
 
@@ -105,7 +128,7 @@ The service layer translates requests into SDK operations. It does not contain a
 
 Internal artifact IDs are canonical UUID strings validated with Python UUID/Pydantic types. Generated records use UUIDv4; content-derived identities use UUIDv5. Imported trace IDs remain unchanged. Suite names are friendly labels separate from their UUIDs. Project format 0.3 rejects older project formats before rewriting any files; create a new project and reimport the traces.
 
-Structured artifacts are written through `persistence.atomic_text`; Markdown escaping is shared through `reports.md`. Mutating workflows use a nonblocking POSIX project lock; a concurrent mutation returns a busy error. The HTTP job queue separately permits one background model job at a time. These mechanisms serve a local process-and-files workflow, not a distributed job system.
+Structured artifacts are written through `shared.files.atomic_text`; Markdown escaping is shared through `shared.markdown.md`. Mutating workflows use a nonblocking POSIX project lock; a concurrent mutation returns a busy error. The HTTP job queue separately permits one background model job at a time. These mechanisms serve a local process-and-files workflow, not a distributed job system.
 
 ## Shared human and agent research workspace
 
@@ -143,4 +166,4 @@ The root Makefile drives Docker Compose. Development runs a FastAPI/Uvicorn back
 
 The development image contains Python, Node and locked development dependencies. The runtime image uses the production Python environment. Both run as the workbench user. A named volume holds `/data/project` independently from source mounts and container lifetime. Python dependencies remain under `/opt/venv`; UI dependencies have their own named volume.
 
-`runtime.py` creates an empty project once or opens the existing project, then starts Uvicorn. Development reload uses an import-string factory and inherits the same bearer token across child restarts. The externally visible origin is configured separately from the container bind address. Compose binds Python to `0.0.0.0` inside the container and publishes only the host loopback address. Native agent CLI processes still need installation and authentication in the environment hosting the backend.
+`workbench/runtime.py` creates an empty project once or opens the existing project, then starts Uvicorn. Development reload uses an import-string factory and inherits the same bearer token across child restarts. The externally visible origin is configured separately from the container bind address. Compose binds Python to `0.0.0.0` inside the container and publishes only the host loopback address. Native agent CLI processes still need installation and authentication in the environment hosting the backend.

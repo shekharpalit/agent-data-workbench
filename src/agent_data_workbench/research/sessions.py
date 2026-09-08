@@ -10,13 +10,19 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import Callable, Literal
 
-from ..backends import BackendError
-from ..identifiers import canonical_uuid, new_id
-from ..project import Project, now, save
-from .artifacts import investigation_directory, investigation_view, load_investigation
-from .contracts import ResearchResult
-from .transport import SessionPaused, stream_session
-from .workspace import ResearchWorkspace
+from agent_data_workbench.research.artifacts import (
+    investigation_directory,
+    investigation_view,
+    load_investigation,
+)
+from agent_data_workbench.research.contracts import ResearchResult
+from agent_data_workbench.research.transport import SessionPaused, stream_session
+from agent_data_workbench.research.workspace import ResearchWorkspace
+from agent_data_workbench.shared.files import save
+from agent_data_workbench.shared.identifiers import canonical_uuid, new_id
+from agent_data_workbench.shared.processes import BackendError
+from agent_data_workbench.shared.time import now
+from agent_data_workbench.workspace.project import Project
 
 
 @contextmanager

@@ -6,29 +6,49 @@ tags: [traces, ingestion, search, clustering, lineage]
 sources:
   - id: openwiki-source-2ee7fba2bd1c703c70f5f285
     resource: repo://src/agent_data_workbench/cli/project.py
-  - id: openwiki-source-5673900c5660ce9e89d18d23
-    resource: repo://src/agent_data_workbench/explore.py
-  - id: openwiki-source-4c04fd9d10dcc0e748ac55cc
-    resource: repo://src/agent_data_workbench/identifiers.py
-  - id: openwiki-source-73ad8573b871e625469a2194
-    resource: repo://src/agent_data_workbench/ingestion.py
-  - id: openwiki-source-069858a5e395202064ced424
-    resource: repo://src/agent_data_workbench/store.py
-  - id: openwiki-source-b9538130baf947854165db93
-    resource: repo://src/agent_data_workbench/traces.py
+  - id: openwiki-source-6e38bbd0a3d0f2e36a07885b
+    resource: repo://src/agent_data_workbench/data/discovery.py
+  - id: openwiki-source-a69866c703779e64969315b7
+    resource: repo://src/agent_data_workbench/data/ingestion.py
+  - id: openwiki-source-18ff944792b5b76d0bbb4838
+    resource: repo://src/agent_data_workbench/data/normalization.py
+  - id: openwiki-source-e52796c0be238f497f99e70a
+    resource: repo://src/agent_data_workbench/data/sources.py
+  - id: openwiki-source-ece138f4d793e07725c336eb
+    resource: repo://src/agent_data_workbench/data/store.py
+  - id: openwiki-source-8968831b9a7a2b5fdc98a34e
+    resource: repo://src/agent_data_workbench/exploration/clustering/components.py
+  - id: openwiki-source-a67878f355761044f6d5fd04
+    resource: repo://src/agent_data_workbench/exploration/clustering/service.py
+  - id: openwiki-source-576495909f5ee2bf8d15af81
+    resource: repo://src/agent_data_workbench/exploration/clustering/tokenization.py
+  - id: openwiki-source-bfac175c50d42008ed9d78c8
+    resource: repo://src/agent_data_workbench/exploration/clustering/vectors.py
+  - id: openwiki-source-1f1b2017c3c167f22bb29f26
+    resource: repo://src/agent_data_workbench/exploration/distributions.py
+  - id: openwiki-source-eab73f261f2dfa06a5a90e74
+    resource: repo://src/agent_data_workbench/exploration/lineage.py
+  - id: openwiki-source-8b95b7fe4c43d79511f093d7
+    resource: repo://src/agent_data_workbench/exploration/schemas.py
+  - id: openwiki-source-8344cc929cc5589dc5383bd2
+    resource: repo://src/agent_data_workbench/exploration/search.py
+  - id: openwiki-source-b9263f82c99973ba337bc796
+    resource: repo://src/agent_data_workbench/shared/identifiers.py
   - id: openwiki-source-66a8a10b0365fc2079585762
     resource: repo://tests/test_explore.py
   - id: openwiki-source-7e7b3478097a461915e85751
     resource: repo://tests/test_ingestion_research.py
-generated: { by: "codex", at: "2026-09-07T23:37:40.020Z" }
+generated: { by: "codex", at: "2026-09-08T00:07:39.310Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T23:37:40.020Z
+    at: 2026-09-08T00:07:39.310Z
 ---
 
 # Import and explore traces
 
 The default ingestion unit is an agent run file. A JSONL file holds that run's ordered events; several files become several traces in the same project. One investigation can inspect and compare the full collection. Ingestion and local exploration require no model call.
+
+The `data/` package separates file discovery (`discovery.py`), run decoding (`ingestion.py`), record normalization (`normalization.py`), source contracts (`sources.py`), archive transport (`transport.py`) and SQLAlchemy storage (`store.py`, `database.py`). Search and visual exploration live separately in `exploration/`.
 
 ## Import multiple run files
 
@@ -125,9 +145,9 @@ Pass `root=Path("./traces")` for a stable logical root across partial selections
 
 ```python
 from pathlib import Path
-from agent_data_workbench.models import Trace
-from agent_data_workbench.project import Project
-from agent_data_workbench.store import TraceStore
+from agent_data_workbench.data.contracts import Trace
+from agent_data_workbench.workspace.project import Project
+from agent_data_workbench.data.store import TraceStore
 
 class MySource:
     def read(self):
@@ -162,9 +182,13 @@ Search pages and distribution charts use the same matching-corpus function. Pagi
 
 Clustering uses TF-IDF cosine similarity and connected components over a chosen text field. It examines up to 200 matching traces in ID order, independently of the search page's current sort or offset. The default field is `/input`; choose `/events` or a specific event field for run-file imports.
 
-A shared 20,000-character text budget applies per selected field value, including nested strings. Results identify omitted records, text truncation, and corpus truncation. Cluster terms and labels are derived from word weights. Cluster IDs are deterministic UUIDv5 values derived from membership.
+The tokenizer visits every scalar value below the selected pointer, including strings under ID or timestamp field names. It retains Unicode word tokens, contractions, identifiers, numeric tokens, negation such as “not,” and single-character words. There is no handpicked English stop-word list. TF-IDF determines term weights from the selected documents; these tokens still do not encode language understanding.
+
+A shared 20,000-character text budget applies per selected field value, including nested values. If the boundary cuts through a word, that partial word is omitted. Results identify omitted records, text truncation, and corpus truncation. Cluster terms and labels are derived from word weights. Cluster IDs are deterministic UUIDv5 values derived from membership.
 
 A cluster indicates lexical similarity. It does not establish a shared failure mode, causal mechanism, or semantic category. Transitive links can put two traces in the same component even when their direct similarity is below the threshold.
+
+To change this pipeline, start with `exploration/clustering/tokenization.py` for selected-value tokens, `vectors.py` for TF-IDF normalization, `components.py` for cosine links and transitive membership, and `service.py` for selection and the response. Typed request validation lives in `exploration/schemas.py`; search, distributions and lineage have their own modules.
 
 ## Follow recorded lineage
 

@@ -4,24 +4,24 @@ title: Experiments and training exports
 description: Execute baseline and candidate agents against reviewed tasks, preserve split boundaries and uncertainty, and export eligible optimization outcomes.
 tags: [experiments, runners, splits, training, provenance]
 sources:
-  - id: openwiki-source-c95f46408a17b56d039755eb
-    resource: repo://src/agent_data_workbench/command_sources.py
-  - id: openwiki-source-fb8bc98ca92f65c4b5c08595
-    resource: repo://src/agent_data_workbench/experiments.py
-  - id: openwiki-source-17fefd32a0fa5ffbd20a3c46
-    resource: repo://src/agent_data_workbench/exports.py
+  - id: openwiki-source-54fdef6566e11f973ec27cd8
+    resource: repo://src/agent_data_workbench/evaluation/experiments.py
+  - id: openwiki-source-b9d6b20204f1bf0dc801535c
+    resource: repo://src/agent_data_workbench/evaluation/statistics.py
+  - id: openwiki-source-089f8cc32a1cbbf08c3ba0df
+    resource: repo://src/agent_data_workbench/evaluation/suites.py
+  - id: openwiki-source-36dca02d2c71dfa05627a7a1
+    resource: repo://src/agent_data_workbench/execution/runners.py
+  - id: openwiki-source-5817a5ac325238a8edd5763a
+    resource: repo://src/agent_data_workbench/integrations/training.py
   - id: openwiki-source-c792213eed7e8f73d739e358
     resource: repo://src/agent_data_workbench/research/artifacts.py
-  - id: openwiki-source-362b588ee7b1871bafaf5b44
-    resource: repo://src/agent_data_workbench/runners.py
-  - id: openwiki-source-1d5897d9fc482596678731c2
-    resource: repo://tests/test_conversation_exports.py
-  - id: openwiki-source-af0e5443d83442c11181e6ce
-    resource: repo://tests/test_workbench_execution.py
-generated: { by: "codex", at: "2026-09-07T22:32:10.726Z" }
+  - id: openwiki-source-ff3fb6d1981d7674fe333637
+    resource: repo://src/agent_data_workbench/shared/commands.py
+generated: { by: "codex", at: "2026-09-08T00:07:39.310Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T22:32:10.726Z
+    at: 2026-09-08T00:07:39.310Z
 ---
 
 # Experiments and training exports
@@ -29,6 +29,8 @@ verified:
 An experiment executes a baseline and candidate against a frozen suite. It records outputs, grader results, artifacts, latency, and available cost data. The result establishes observed behavior on those tasks. It does not establish production generalization or train a model.
 
 Start with [accepted, audited tasks](tasks-and-graders.md). Use [batch evaluation](batch-evaluation.md) when comparing output files that have already been produced.
+
+Suite freezing lives in `evaluation/suites.py`; execution orchestration, grouped statistics and report rendering live in `evaluation/experiments.py`, `evaluation/statistics.py` and `evaluation/reports.py`. Target adapters live in `execution/`. Curated training export is an integration in `integrations/training.py`.
 
 ## Freeze a suite
 

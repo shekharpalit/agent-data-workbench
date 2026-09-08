@@ -4,27 +4,29 @@ title: Batch evaluation and analyzer checks
 description: Prepare a fixed batch for analysis, review assertions against supplied outputs, and separately evaluate the analyzer's evidence localization.
 tags: [batch, evaluation, benchmark, analyzer]
 sources:
-  - id: openwiki-source-a17b46c83fec9ddee5bdd6a4
-    resource: repo://src/agent_data_workbench/benchmark.py
-  - id: openwiki-source-33a2f16f1f5cbf7625be5826
-    resource: repo://src/agent_data_workbench/cli/batch.py
-  - id: openwiki-source-cb831ca27b1153da653ff8dc
-    resource: repo://src/agent_data_workbench/evaluation.py
-  - id: openwiki-source-a25d1495b814c3304c94e096
-    resource: repo://src/agent_data_workbench/models.py
-  - id: openwiki-source-868dd2d0d9ddfabf6e9776f0
-    resource: repo://src/agent_data_workbench/prompt.py
-  - id: openwiki-source-c90a57f259e123cf538cdd9c
-    resource: repo://src/agent_data_workbench/workflow.py
-generated: { by: "codex", at: "2026-09-07T20:56:39.229Z" }
+  - id: openwiki-source-74c7000660abb060631c2158
+    resource: repo://src/agent_data_workbench/analysis/batch.py
+  - id: openwiki-source-3aa799e4f08fc89785082ba1
+    resource: repo://src/agent_data_workbench/analysis/benchmark.py
+  - id: openwiki-source-ba69f8341a55a6c1978dede7
+    resource: repo://src/agent_data_workbench/analysis/contracts.py
+  - id: openwiki-source-b28f9e9c33e4314974e13b82
+    resource: repo://src/agent_data_workbench/analysis/validation.py
+  - id: openwiki-source-38dde378284fb55af06626c5
+    resource: repo://src/agent_data_workbench/data/contracts.py
+  - id: openwiki-source-ef081b330f8da06d18595410
+    resource: repo://src/agent_data_workbench/evaluation/cases.py
+  - id: openwiki-source-36a45bdfad2bf982409bfe6f
+    resource: repo://src/agent_data_workbench/evaluation/contracts.py
+generated: { by: "codex", at: "2026-09-08T00:07:39.310Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T20:56:39.229Z
+    at: 2026-09-08T00:07:39.310Z
 ---
 
 # Batch evaluation and analyzer checks
 
-Batch mode is useful for a small exported dataset and a reviewable report. Its commands live in `cli/batch.py` and call the shared analysis and evaluation modules. Its `evaluate` and `compare` commands check supplied output files; use [experiments](experiments-and-training.md) when the workbench should actually execute target variants.
+Batch mode is useful for a small exported dataset and a reviewable report. Its commands live in `cli/batch.py` and call `analysis/batch.py` for prepared runs and `evaluation/cases.py` for supplied-output checks. Evidence validation and Markdown rendering live separately in `analysis/validation.py` and `analysis/reporting.py`; native batch/judge adapters live in `integrations/analyzers.py`. Its `evaluate` and `compare` commands check supplied output files; use [experiments](experiments-and-training.md) when the workbench should actually execute target variants.
 
 ## Prepare and analyze a batch
 

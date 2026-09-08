@@ -6,8 +6,8 @@ from pathlib import Path
 
 import typer
 
-from ..project import Project
-from .common import emit, errors
+from agent_data_workbench.cli.common import emit, errors
+from agent_data_workbench.workspace.project import Project
 
 app = typer.Typer(no_args_is_help=True)
 

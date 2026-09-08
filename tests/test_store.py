@@ -4,9 +4,9 @@ import pytest
 from sqlalchemy import URL, Column, Index, MetaData, Table, Text, create_engine, insert, select
 from test_workbench_data import Source
 
-from agent_data_workbench.models import json_text
-from agent_data_workbench.project import Project, digest
-from agent_data_workbench.store import TraceStore
+from agent_data_workbench.data.store import TraceStore
+from agent_data_workbench.shared.json import digest, json_text
+from agent_data_workbench.workspace.project import Project
 
 
 def test_existing_six_column_database_keeps_records_hashes_and_import_timestamps(tmp_path):

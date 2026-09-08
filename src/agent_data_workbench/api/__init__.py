@@ -1,5 +1,5 @@
 """Public FastAPI application factory."""
 
-from .application import create_app
+from agent_data_workbench.api.application import create_app
 
 __all__ = ["create_app"]

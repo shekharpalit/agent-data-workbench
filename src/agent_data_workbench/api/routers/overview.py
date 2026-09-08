@@ -2,8 +2,8 @@
 
 from fastapi import APIRouter
 
-from ...store import TraceStore
-from ..dependencies import ProjectDependency
+from agent_data_workbench.api.dependencies import ProjectDependency
+from agent_data_workbench.data.store import TraceStore
 
 router = APIRouter()
 

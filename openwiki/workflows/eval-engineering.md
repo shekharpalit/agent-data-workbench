@@ -4,26 +4,30 @@ title: Worlds, environments and continuous evaluation
 description: Connect reviewed domain knowledge, continuous target sessions, independently observed outcomes, calibrated graders and exact candidate decisions.
 tags: [evals, environments, conversations, calibration, coverage, harbor]
 sources:
-  - id: openwiki-source-ae7ba63e2ef90c1060215164
-    resource: repo://src/agent_data_workbench/calibration.py
-  - id: openwiki-source-9c61fbe9d09d4327fe11fec3
-    resource: repo://src/agent_data_workbench/conversations.py
-  - id: openwiki-source-64b56537daf31ab1409982a2
-    resource: repo://src/agent_data_workbench/coverage.py
-  - id: openwiki-source-2a6ff77541a332e953cb0efa
-    resource: repo://src/agent_data_workbench/environments.py
-  - id: openwiki-source-224bb6fe8cd294c46516bc84
-    resource: repo://src/agent_data_workbench/harbor.py
-  - id: openwiki-source-ed554b753fa6f37387755486
-    resource: repo://src/agent_data_workbench/improvements.py
-  - id: openwiki-source-c20ca7c3c1f89c4195dc51eb
-    resource: repo://src/agent_data_workbench/worlds.py
-  - id: openwiki-source-112a1a63cd2b0ece8abb41df
-    resource: repo://tests/test_environment_sessions.py
-generated: { by: "codex", at: "2026-09-07T23:10:49.194Z" }
+  - id: openwiki-source-c95b71b514c17e3b65b29fd1
+    resource: repo://src/agent_data_workbench/evaluation/calibration.py
+  - id: openwiki-source-d4483bafbf5d610ae3f5cfc2
+    resource: repo://src/agent_data_workbench/evaluation/coverage.py
+  - id: openwiki-source-fbcc81f66a8993d5ee2b7eda
+    resource: repo://src/agent_data_workbench/evaluation/improvements.py
+  - id: openwiki-source-7758acda0a6d0691a2dad9c9
+    resource: repo://src/agent_data_workbench/evaluation/worlds.py
+  - id: openwiki-source-b7193f08a92a18c6a6917985
+    resource: repo://src/agent_data_workbench/execution/conversations.py
+  - id: openwiki-source-e6a38a6cd497fd067e29cc03
+    resource: repo://src/agent_data_workbench/execution/environments.py
+  - id: openwiki-source-7046e6665c8419c969412b37
+    resource: repo://src/agent_data_workbench/execution/sessions.py
+  - id: openwiki-source-5c30eedfd71ee60950d4cac7
+    resource: repo://src/agent_data_workbench/execution/simulators.py
+  - id: openwiki-source-182481ca857ecaa14236517f
+    resource: repo://src/agent_data_workbench/integrations/harbor.py
+  - id: openwiki-source-b9e04cc4343208a80c47ef02
+    resource: repo://src/agent_data_workbench/workspace/project.py
+generated: { by: "codex", at: "2026-09-08T00:07:39.310Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T23:10:49.194Z
+    at: 2026-09-08T00:07:39.310Z
 ---
 
 # Worlds, environments and continuous evaluation
@@ -44,6 +48,8 @@ flowchart LR
   Task --> Coverage[Behavior and slice coverage]
   Grade --> Coverage
 ```
+
+Implementation ownership follows this flow: `evaluation/` owns reviewed worlds, grading, calibration, coverage and decisions; `execution/` owns the environment and live target session; `integrations/harbor.py` owns the optional Harbor adapter. Session/environment/runner schemas are collected in `execution/contracts.py`, and process I/O is separated from conversation orchestration. See the [package map](../architecture/system.md#responsibilities) for extension points.
 
 ## Reuse domain knowledge without leaking task answers
 

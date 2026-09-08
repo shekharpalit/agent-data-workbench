@@ -6,10 +6,10 @@ from pathlib import Path
 
 import typer
 
-from ..backends import CliAnalyzer
-from ..benchmark import benchmark as run_benchmark
-from ..benchmark import review_benchmark
-from .common import emit, errors
+from agent_data_workbench.analysis.benchmark import benchmark as run_benchmark
+from agent_data_workbench.analysis.benchmark import review_benchmark
+from agent_data_workbench.cli.common import emit, errors
+from agent_data_workbench.integrations.analyzers import CliAnalyzer
 
 app = typer.Typer(no_args_is_help=True)
 

@@ -12,7 +12,7 @@ import time
 from collections.abc import Callable
 from pathlib import Path
 
-from ..backends import BackendError
+from agent_data_workbench.shared.processes import BackendError
 
 
 class SessionPaused(BackendError):

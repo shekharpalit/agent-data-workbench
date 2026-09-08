@@ -1,29 +1,59 @@
 """Evidence-linked agent analysis, with pluggable analyzer backends."""
 
-from .backends import Analyzer, CliAnalyzer
-from .calibration import (
+from agent_data_workbench.analysis.batch import analyze_traces, complete_run, prepare_run
+from agent_data_workbench.analysis.contracts import Analysis
+from agent_data_workbench.data.contracts import Trace
+from agent_data_workbench.data.discovery import SourceFile, discover_files
+from agent_data_workbench.data.ingestion import FilesSource
+from agent_data_workbench.data.normalization import load_traces, normalize
+from agent_data_workbench.data.sources import JsonSource, TraceSource
+from agent_data_workbench.data.store import TraceStore
+from agent_data_workbench.evaluation.calibration import (
     AttemptLabel,
     adjudicate_attempt,
     calibration_summary,
     create_calibration,
     label_attempt,
 )
-from .conversations import ConversationSpec, UserTurn
-from .coverage import CoverageMapping, TaxonomySpec, coverage_report, create_taxonomy, map_coverage
-from .environments import EnvironmentConfig
-from .experiments import make_suite, run_experiment
-from .harbor import HarborExportConfig, export_harbor, run_harbor_export
-from .improvements import create_improvement, decide_improvement
-from .ingestion import FilesSource, SourceFile, discover_files
-from .models import Analysis, Trace
-from .project import Project
-from .research import NativeSession, ResearchWorkspace, investigate, start_investigation
-from .runners import ConfiguredRunner, TargetRunner
-from .store import JsonSource, TraceSource, TraceStore
-from .tasks import TaskSpec, audit_task, design_tasks, grade
-from .traces import load_traces, normalize
-from .workflow import analyze_traces, complete_run, prepare_run
-from .worlds import WorldReference, WorldSpec, create_world, review_world
+from agent_data_workbench.evaluation.coverage import (
+    CoverageMapping,
+    TaxonomySpec,
+    coverage_report,
+    create_taxonomy,
+    map_coverage,
+)
+from agent_data_workbench.evaluation.experiments import run_experiment
+from agent_data_workbench.evaluation.improvements import create_improvement, decide_improvement
+from agent_data_workbench.evaluation.suites import make_suite
+from agent_data_workbench.evaluation.tasks.contracts import TaskSpec
+from agent_data_workbench.evaluation.tasks.design import design_tasks
+from agent_data_workbench.evaluation.tasks.grading import audit_task, grade
+from agent_data_workbench.evaluation.worlds import (
+    WorldReference,
+    WorldSpec,
+    create_world,
+    review_world,
+)
+from agent_data_workbench.execution.contracts import (
+    ConversationSpec,
+    EnvironmentConfig,
+    TargetRunner,
+    UserTurn,
+)
+from agent_data_workbench.execution.runners import ConfiguredRunner
+from agent_data_workbench.integrations.analyzers import Analyzer, CliAnalyzer
+from agent_data_workbench.integrations.harbor import (
+    HarborExportConfig,
+    export_harbor,
+    run_harbor_export,
+)
+from agent_data_workbench.research import (
+    NativeSession,
+    ResearchWorkspace,
+    investigate,
+    start_investigation,
+)
+from agent_data_workbench.workspace.project import Project
 
 __version__ = "0.5.0"
 __all__ = [

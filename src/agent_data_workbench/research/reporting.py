@@ -2,7 +2,7 @@
 
 
 def research_report(value: dict) -> str:
-    from ..reports import md
+    from agent_data_workbench.shared.markdown import md
 
     result = value["result"]
     analysis = result["analysis"]

@@ -3,8 +3,8 @@ from pathlib import Path
 
 import pytest
 
-from agent_data_workbench.models import Analysis
-from agent_data_workbench.traces import load_traces
+from agent_data_workbench.analysis.contracts import Analysis
+from agent_data_workbench.data.normalization import load_traces
 
 
 @pytest.fixture

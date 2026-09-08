@@ -1,9 +1,9 @@
 import json
 
-from agent_data_workbench.ingestion import FilesSource
-from agent_data_workbench.project import Project
+from agent_data_workbench.data.ingestion import FilesSource
+from agent_data_workbench.data.store import TraceStore
 from agent_data_workbench.research import ResearchWorkspace, start_investigation
-from agent_data_workbench.store import TraceStore
+from agent_data_workbench.workspace.project import Project
 
 
 def test_many_run_files_are_researched_together_without_losing_event_order(tmp_path):

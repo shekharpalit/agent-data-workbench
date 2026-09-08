@@ -11,9 +11,10 @@ from fastapi.testclient import TestClient
 from identities import uid
 from test_workbench_data import make_project
 
-from agent_data_workbench import api, server
+from agent_data_workbench import api
 from agent_data_workbench.api.middleware import MAX_BODY_BYTES, RESPONSE_HEADERS
 from agent_data_workbench.api.routers import investigations, tasks
+from agent_data_workbench.workbench import server
 
 ORIGIN = "http://127.0.0.1:8765"
 TOKEN = "synthetic-session-token"
@@ -378,8 +379,8 @@ def test_failed_background_job_returns_a_recoverable_error_without_provider_text
 
 def test_native_research_api_serves_coverage_pages_and_authenticated_artifacts(client, project):
     # Given
-    from agent_data_workbench.project import save
     from agent_data_workbench.research import ResearchWorkspace, start_investigation
+    from agent_data_workbench.shared.files import save
 
     value = start_investigation(project, "Inspect progress", mode="complete")
     workspace = ResearchWorkspace(project, value["id"])

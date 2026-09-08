@@ -4,13 +4,13 @@ from typing import Annotated
 
 from fastapi import APIRouter, Query
 
-from ...explore import ClusterQuery, SearchQuery, cluster, distribution, search
-from ...store import TraceStore
-from ..dependencies import ProjectDependency
-from ..schemas import (
-    DistributionRequest,
-    TraceQuery,
-)
+from agent_data_workbench.api.dependencies import ProjectDependency
+from agent_data_workbench.api.schemas import DistributionRequest, TraceQuery
+from agent_data_workbench.data.store import TraceStore
+from agent_data_workbench.exploration.clustering.service import cluster
+from agent_data_workbench.exploration.distributions import distribution
+from agent_data_workbench.exploration.schemas import ClusterQuery, SearchQuery
+from agent_data_workbench.exploration.search import search
 
 router = APIRouter()
 

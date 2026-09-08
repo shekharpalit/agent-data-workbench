@@ -8,8 +8,8 @@ sources:
     resource: repo://src/agent_data_workbench/cli/knowledge.py
   - id: openwiki-source-25b71218f03a1e216debf67e
     resource: repo://src/agent_data_workbench/cli/research.py
-  - id: openwiki-source-b5025a250cbf9f845fc9224a
-    resource: repo://src/agent_data_workbench/project.py
+  - id: openwiki-source-7758acda0a6d0691a2dad9c9
+    resource: repo://src/agent_data_workbench/evaluation/worlds.py
   - id: openwiki-source-c792213eed7e8f73d739e358
     resource: repo://src/agent_data_workbench/research/artifacts.py
   - id: openwiki-source-219194215a29797e5e6ef5bf
@@ -26,8 +26,10 @@ sources:
     resource: repo://src/agent_data_workbench/research/validation.py
   - id: openwiki-source-2dbe8753da4267ce652f414e
     resource: repo://src/agent_data_workbench/research/workspace.py
-  - id: openwiki-source-c20ca7c3c1f89c4195dc51eb
-    resource: repo://src/agent_data_workbench/worlds.py
+  - id: openwiki-source-b9263f82c99973ba337bc796
+    resource: repo://src/agent_data_workbench/shared/identifiers.py
+  - id: openwiki-source-b9e04cc4343208a80c47ef02
+    resource: repo://src/agent_data_workbench/workspace/project.py
   - id: openwiki-source-3e6ae5cbfb3aa3af0850499a
     resource: repo://tests/test_manual_research_api.py
   - id: openwiki-source-3589dc1fc29ba0bfe0e2a50c
@@ -40,10 +42,10 @@ sources:
     resource: repo://ui/src/views/ResearchControls.tsx
   - id: openwiki-source-14a72935f36008706a0aa989
     resource: repo://ui/src/views/ResearchSnapshot.tsx
-generated: { by: "codex", at: "2026-09-07T22:32:10.726Z" }
+generated: { by: "codex", at: "2026-09-08T00:07:39.310Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T22:32:10.726Z
+    at: 2026-09-08T00:07:39.310Z
 ---
 
 # Investigations and reviewed knowledge
@@ -51,6 +53,8 @@ verified:
 An investigation is a complete local data workspace for a human researcher, a native Codex or Claude Code session, or both in turn. Humans can research directly in the UI without a model. When invited, the coding agent decides how to explore, writes and runs analysis code, manages its own context, and publishes findings and useful outputs. The workbench stores inputs, progress, evidence and outcomes. It does not implement another model-call loop.
 
 Import a corpus using [trace ingestion](traces.md). The question and reviewed project knowledge define what matters for your agent.
+
+The `research/` package owns this investigation lifecycle. `workspace/project.py` owns live project configuration and reviewed knowledge; `research/dataset.py` owns each frozen dataset. Evidence models and batch validation live in `analysis/`, while shared JSON/pointer and persistence operations live in `shared/`.
 
 ## Supply context deliberately
 

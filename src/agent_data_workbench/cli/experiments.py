@@ -7,10 +7,11 @@ from typing import Annotated
 
 import typer
 
-from ..backends import CliAnalyzer
-from ..experiments import make_suite, run_experiment
-from ..project import Project
-from .common import emit, errors, runner
+from agent_data_workbench.cli.common import emit, errors, runner
+from agent_data_workbench.evaluation.experiments import run_experiment
+from agent_data_workbench.evaluation.suites import make_suite
+from agent_data_workbench.integrations.analyzers import CliAnalyzer
+from agent_data_workbench.workspace.project import Project
 
 app = typer.Typer(no_args_is_help=True)
 

@@ -1,3 +1,3 @@
-from .cli import app
+from agent_data_workbench.cli import app
 
 app()

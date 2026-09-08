@@ -4,12 +4,13 @@ from typing import Literal
 
 from pydantic import Field, model_validator
 
-from ..explore import SearchQuery
-from ..identifiers import UUIDString
-from ..models import Contract, pointer_parts
-from ..research.contracts import ResearchResult
-from ..research.workspace import Chart, RecordOutcome
-from ..tasks import TaskSpec
+from agent_data_workbench.evaluation.tasks.contracts import TaskSpec
+from agent_data_workbench.exploration.schemas import SearchQuery
+from agent_data_workbench.research.contracts import ResearchResult
+from agent_data_workbench.research.workspace import Chart, RecordOutcome
+from agent_data_workbench.shared.contracts import Contract
+from agent_data_workbench.shared.identifiers import UUIDString
+from agent_data_workbench.shared.json import pointer_parts
 
 ArtifactKind = Literal[
     "knowledge",

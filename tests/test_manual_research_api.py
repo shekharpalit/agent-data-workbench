@@ -9,12 +9,12 @@ from test_workbench_data import Source, make_project, result
 
 from agent_data_workbench import api
 from agent_data_workbench.api.routers import investigations
-from agent_data_workbench.models import json_text
-from agent_data_workbench.project import save
+from agent_data_workbench.data.store import TraceStore
 from agent_data_workbench.research import ResearchWorkspace, load_investigation
 from agent_data_workbench.research.sessions import session_lock
 from agent_data_workbench.research.workspace import RecordOutcome
-from agent_data_workbench.store import TraceStore
+from agent_data_workbench.shared.files import save
+from agent_data_workbench.shared.json import json_text
 
 ORIGIN = "http://127.0.0.1:8765"
 AUTH = {"Authorization": "Bearer synthetic-manual-session", "Origin": ORIGIN}

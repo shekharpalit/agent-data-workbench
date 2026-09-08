@@ -4,14 +4,16 @@ from pathlib import Path
 
 import pytest
 
-from agent_data_workbench.conversations import (
+from agent_data_workbench.execution.artifacts import read_artifacts
+from agent_data_workbench.execution.contracts import (
     ConversationSpec,
+    EnvironmentConfig,
+    RunnerConfig,
     SimulatorConfig,
     UserTurn,
 )
-from agent_data_workbench.environments import EnvironmentConfig
-from agent_data_workbench.project import digest
-from agent_data_workbench.runners import ConfiguredRunner, RunnerConfig, read_artifacts
+from agent_data_workbench.execution.runners import ConfiguredRunner
+from agent_data_workbench.shared.json import digest
 
 ENVIRONMENT_SCRIPT = """
 import json,sys

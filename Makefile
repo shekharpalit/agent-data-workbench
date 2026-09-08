@@ -27,7 +27,7 @@ check-docker:
 
 init: check-docker
 	$(COMPOSE) build backend
-	$(COMPOSE) run --rm --no-deps backend python -m agent_data_workbench.runtime --initialize-only
+	$(COMPOSE) run --rm --no-deps backend python -m agent_data_workbench.workbench.runtime --initialize-only
 
 # Compose forwards Ctrl-C and stops both processes together.
 dev: check-docker

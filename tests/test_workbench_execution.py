@@ -9,14 +9,18 @@ import pytest
 from identities import uid
 from test_workbench_data import Scripted, accept, make_project, result, spec
 
-from agent_data_workbench.benchmark import benchmark, review_benchmark
-from agent_data_workbench.experiments import make_suite, run_experiment, summarize
-from agent_data_workbench.exports import export_training
-from agent_data_workbench.project import save
-from agent_data_workbench.runners import ConfiguredRunner, Execution, RunnerConfig, read_artifacts
-from agent_data_workbench.server import WorkbenchServer
-from agent_data_workbench.tasks import load_task, replace_task
-from agent_data_workbench.traces import read_json
+from agent_data_workbench.analysis.benchmark import benchmark, review_benchmark
+from agent_data_workbench.evaluation.experiments import run_experiment
+from agent_data_workbench.evaluation.statistics import summarize
+from agent_data_workbench.evaluation.suites import make_suite
+from agent_data_workbench.evaluation.tasks.repository import load_task, replace_task
+from agent_data_workbench.execution.artifacts import read_artifacts
+from agent_data_workbench.execution.contracts import Execution, RunnerConfig
+from agent_data_workbench.execution.runners import ConfiguredRunner
+from agent_data_workbench.integrations.training import export_training
+from agent_data_workbench.shared.files import save
+from agent_data_workbench.shared.json import read_json
+from agent_data_workbench.workbench.server import WorkbenchServer
 
 
 @pytest.fixture

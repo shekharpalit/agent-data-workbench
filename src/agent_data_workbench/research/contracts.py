@@ -4,8 +4,9 @@ from typing import Literal
 
 from pydantic import Field
 
-from ..identifiers import UUIDString
-from ..models import Analysis, Contract, Evidence
+from agent_data_workbench.analysis.contracts import Analysis, Evidence
+from agent_data_workbench.shared.contracts import Contract
+from agent_data_workbench.shared.identifiers import UUIDString
 
 
 class Signal(Contract):

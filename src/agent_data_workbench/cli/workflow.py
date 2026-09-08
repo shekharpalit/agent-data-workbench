@@ -4,7 +4,8 @@ from pathlib import Path
 
 import typer
 
-from ..calibration import (
+from agent_data_workbench.cli.common import emit, errors, runner
+from agent_data_workbench.evaluation.calibration import (
     AttemptAdjudication,
     AttemptLabel,
     adjudicate_attempt,
@@ -12,7 +13,7 @@ from ..calibration import (
     create_calibration,
     label_attempt,
 )
-from ..coverage import (
+from agent_data_workbench.evaluation.coverage import (
     CoverageMapping,
     TaxonomySpec,
     coverage_report,
@@ -20,11 +21,10 @@ from ..coverage import (
     map_coverage,
     review_taxonomy,
 )
-from ..improvements import create_improvement, decide_improvement
-from ..project import Project
-from ..traces import read_json
-from ..worlds import WorldSpec, create_world, review_world
-from .common import emit, errors, runner
+from agent_data_workbench.evaluation.improvements import create_improvement, decide_improvement
+from agent_data_workbench.evaluation.worlds import WorldSpec, create_world, review_world
+from agent_data_workbench.shared.json import read_json
+from agent_data_workbench.workspace.project import Project
 
 app = typer.Typer(no_args_is_help=True)
 
@@ -156,7 +156,7 @@ def coverage(project: Path, taxonomy_id: str):
 @errors
 def harbor_export(project: Path, task_id: str, configuration: Path):
     """Bundle a reviewed task with developer-supplied Harbor environment/verifier code."""
-    from ..harbor import HarborExportConfig, export_harbor
+    from agent_data_workbench.integrations.harbor import HarborExportConfig, export_harbor
 
     emit(
         export_harbor(
@@ -169,6 +169,6 @@ def harbor_export(project: Path, task_id: str, configuration: Path):
 @errors
 def harbor_run(project: Path, export_id: str, timeout: int | None = None):
     """Execute an exported bundle using the optional installed Harbor CLI."""
-    from ..harbor import run_harbor_export
+    from agent_data_workbench.integrations.harbor import run_harbor_export
 
     emit(run_harbor_export(Project(project), export_id, timeout=timeout))

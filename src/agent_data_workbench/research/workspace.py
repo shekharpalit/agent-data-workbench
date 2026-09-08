@@ -11,17 +11,22 @@ from typing import Literal
 
 from pydantic import Field
 
-from ..identifiers import new_id
-from ..models import Contract
-from ..persistence import atomic_text
-from ..project import Project, save
-from ..tasks import TaskSpec, relative_path, write_task
-from ..traces import read_json
-from .artifacts import investigation_directory, investigation_view, load_investigation
-from .contracts import ResearchResult
-from .dataset import Dataset
-from .reporting import research_report
-from .validation import validate_result
+from agent_data_workbench.evaluation.tasks.contracts import TaskSpec
+from agent_data_workbench.evaluation.tasks.repository import write_task
+from agent_data_workbench.research.artifacts import (
+    investigation_directory,
+    investigation_view,
+    load_investigation,
+)
+from agent_data_workbench.research.contracts import ResearchResult
+from agent_data_workbench.research.dataset import Dataset
+from agent_data_workbench.research.reporting import research_report
+from agent_data_workbench.research.validation import validate_result
+from agent_data_workbench.shared.contracts import Contract
+from agent_data_workbench.shared.files import atomic_text, relative_path, save
+from agent_data_workbench.shared.identifiers import new_id
+from agent_data_workbench.shared.json import read_json
+from agent_data_workbench.workspace.project import Project
 
 
 class ChartValue(Contract):
@@ -112,7 +117,7 @@ class ResearchWorkspace:
     def read(
         self, trace_id: str, *, pointer: str = "", offset: int = 0, max_chars: int | None = 16000
     ) -> dict:
-        from ..models import json_text, pointer_value
+        from agent_data_workbench.shared.json import json_text, pointer_value
 
         if offset < 0 or max_chars is not None and max_chars < 1:
             raise ValueError(
@@ -245,7 +250,7 @@ class ResearchWorkspace:
             path.unlink(missing_ok=True)
 
     def artifact_path(self, key: str) -> tuple[Path, dict]:
-        from ..identifiers import canonical_uuid
+        from agent_data_workbench.shared.identifiers import canonical_uuid
 
         key = canonical_uuid(key)
         value = load_investigation(self.project, self.id)

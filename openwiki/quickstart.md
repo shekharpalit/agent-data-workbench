@@ -24,28 +24,26 @@ sources:
     resource: repo://src/agent_data_workbench/cli/research.py
   - id: openwiki-source-758da06aa8f472c43add8d88
     resource: repo://src/agent_data_workbench/cli/workflow.py
-  - id: openwiki-source-73ad8573b871e625469a2194
-    resource: repo://src/agent_data_workbench/ingestion.py
-  - id: openwiki-source-b5025a250cbf9f845fc9224a
-    resource: repo://src/agent_data_workbench/project.py
+  - id: openwiki-source-a69866c703779e64969315b7
+    resource: repo://src/agent_data_workbench/data/ingestion.py
   - id: openwiki-source-2dbe8753da4267ce652f414e
     resource: repo://src/agent_data_workbench/research/workspace.py
-  - id: openwiki-source-cda43c2246a0f3e6a5e89dce
-    resource: repo://src/agent_data_workbench/runtime.py
-  - id: openwiki-source-013c413ca45af5e0569b46e0
-    resource: repo://src/agent_data_workbench/server.py
-  - id: openwiki-source-9c58a0b0672b6bdbd523d5ee
-    resource: repo://tests/test_identifiers.py
+  - id: openwiki-source-56b68af7c871c44d9ba4d64d
+    resource: repo://src/agent_data_workbench/workbench/runtime.py
+  - id: openwiki-source-759b532db0b0156398d95b24
+    resource: repo://src/agent_data_workbench/workbench/server.py
+  - id: openwiki-source-b9e04cc4343208a80c47ef02
+    resource: repo://src/agent_data_workbench/workspace/project.py
   - id: openwiki-source-7e7b3478097a461915e85751
     resource: repo://tests/test_ingestion_research.py
   - id: openwiki-source-2d1b137901c9e38ec418fdad
     resource: repo://ui/src/views/ManualResearchEditor.tsx
   - id: openwiki-source-a6ff0ad9c45aedc12177eaec
     resource: repo://ui/src/views/ResearchControls.tsx
-generated: { by: "codex", at: "2026-09-07T23:37:40.020Z" }
+generated: { by: "codex", at: "2026-09-08T00:07:39.310Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T23:37:40.020Z
+    at: 2026-09-08T00:07:39.310Z
 ---
 
 # Quickstart
@@ -156,9 +154,11 @@ Start with one important failure: capture its evidence, review the relevant doma
 | Analyze a small batch or grade output files already produced | [Batch analysis and evaluation](workflows/batch-evaluation.md) |
 | Set up containers, import host files, or manage persistent data | [Docker and Make workflow](operations/containers.md) |
 | Run or troubleshoot the local trace workbench | [Local workbench](operations/local-workbench.md) |
-| Understand the SDK, storage, CLI, and server boundaries | [System architecture](architecture/system.md) |
+| Find the owning domain package, shared helpers, or SDK/server boundary | [System architecture](architecture/system.md) |
 | Change code and run the relevant checks | [Development and verification](development/contributing.md) |
 | Refresh this documentation through Codex or Claude | [Maintain the OpenWiki](operations/documentation.md) |
+
+The Python implementation is grouped by responsibility, with shared infrastructure in `shared/` and a root SDK facade for public imports. Start at the [package ownership map](architecture/system.md#responsibilities) when changing ingestion, analysis, evaluation, execution or exploration.
 
 For implementation conventions, read the root [AGENTS.md](../AGENTS.md). [CLAUDE.md](../CLAUDE.md) points to the same project guidance.
 

@@ -2,7 +2,7 @@
 
 from fastapi import APIRouter
 
-from ..dependencies import JobsDependency
+from agent_data_workbench.api.dependencies import JobsDependency
 
 router = APIRouter()
 

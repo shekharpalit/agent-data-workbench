@@ -1,9 +1,11 @@
 """Validate citations and lineage against the investigation snapshot."""
 
-from ..identifiers import new_id
-from ..models import Analysis, Trace, validate_evidence
-from ..tasks import relative_path
-from .contracts import ResearchResult
+from agent_data_workbench.analysis.contracts import Analysis
+from agent_data_workbench.analysis.validation import validate_evidence
+from agent_data_workbench.data.contracts import Trace
+from agent_data_workbench.research.contracts import ResearchResult
+from agent_data_workbench.shared.files import relative_path
+from agent_data_workbench.shared.identifiers import new_id
 
 
 def validate_result(result: ResearchResult, traces: list[Trace]) -> None:
@@ -12,7 +14,7 @@ def validate_result(result: ResearchResult, traces: list[Trace]) -> None:
     for signal in result.signals:
         if signal.finding_id not in findings:
             raise ValueError("Signal references an unknown finding")
-        from ..models import Finding
+        from agent_data_workbench.analysis.contracts import Finding
 
         probe = Finding(
             id=new_id(),

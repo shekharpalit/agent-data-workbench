@@ -2,11 +2,13 @@
 
 from pathlib import Path
 
-from ..identifiers import canonical_uuid
-from ..project import Project, digest, now, save
-from ..tasks import relative_path
-from .artifacts import load_investigation
-from .contracts import ResearchResult
+from agent_data_workbench.research.artifacts import load_investigation
+from agent_data_workbench.research.contracts import ResearchResult
+from agent_data_workbench.shared.files import relative_path, save
+from agent_data_workbench.shared.identifiers import canonical_uuid
+from agent_data_workbench.shared.json import digest
+from agent_data_workbench.shared.time import now
+from agent_data_workbench.workspace.project import Project
 
 
 def export_proposal(

@@ -1,17 +1,17 @@
 import pytest
 from identities import uid
 
-from agent_data_workbench.evaluation import (
+from agent_data_workbench.analysis.batch import complete_run, prepare_run
+from agent_data_workbench.evaluation.cases import (
     check_assertion,
     compare,
     evaluate,
-    json_equal,
     load_cases,
     load_outputs,
     review_cases,
 )
-from agent_data_workbench.models import Assertion, ReviewedCase
-from agent_data_workbench.workflow import complete_run, prepare_run
+from agent_data_workbench.evaluation.contracts import Assertion, ReviewedCase
+from agent_data_workbench.shared.json import json_equal
 
 
 def accepted_cases(analysis):

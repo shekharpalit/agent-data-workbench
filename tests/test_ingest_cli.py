@@ -8,8 +8,9 @@ import pytest
 from typer.testing import CliRunner
 
 from agent_data_workbench.cli import app
-from agent_data_workbench.project import Project, digest
-from agent_data_workbench.store import TraceStore
+from agent_data_workbench.data.store import TraceStore
+from agent_data_workbench.shared.json import digest
+from agent_data_workbench.workspace.project import Project
 
 runner = CliRunner()
 

@@ -5,18 +5,8 @@ from typing import Annotated
 from fastapi import APIRouter, Query
 from fastapi.responses import FileResponse
 
-from ...identifiers import UUIDString
-from ...research import (
-    NativeSession,
-    ResearchWorkspace,
-    investigate,
-    pause_investigation,
-    start_investigation,
-)
-from ...research.artifacts import investigation_view, load_investigation
-from ...research.sessions import session_lock
-from ..dependencies import JobsDependency, ProjectDependency
-from ..schemas import (
+from agent_data_workbench.api.dependencies import JobsDependency, ProjectDependency
+from agent_data_workbench.api.schemas import (
     ArtifactRequest,
     InvestigationChartRequest,
     InvestigationCheckpointRequest,
@@ -25,6 +15,16 @@ from ..schemas import (
     InvestigationRequest,
     ManualInvestigationRequest,
 )
+from agent_data_workbench.research import (
+    NativeSession,
+    ResearchWorkspace,
+    investigate,
+    pause_investigation,
+    start_investigation,
+)
+from agent_data_workbench.research.artifacts import investigation_view, load_investigation
+from agent_data_workbench.research.sessions import session_lock
+from agent_data_workbench.shared.identifiers import UUIDString
 
 router = APIRouter()
 

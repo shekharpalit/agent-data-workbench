@@ -8,11 +8,11 @@ from pydantic import TypeAdapter
 from test_workbench_data import make_project
 
 from agent_data_workbench.api import create_app
-from agent_data_workbench.identifiers import UUIDString, canonical_uuid
-from agent_data_workbench.project import Project
+from agent_data_workbench.data.normalization import normalize
+from agent_data_workbench.evaluation.tasks.replay import replay_task
 from agent_data_workbench.research import start_investigation
-from agent_data_workbench.tasks import replay_task
-from agent_data_workbench.traces import normalize
+from agent_data_workbench.shared.identifiers import UUIDString, canonical_uuid
+from agent_data_workbench.workspace.project import Project
 
 
 def test_uuid_artifacts_roundtrip_through_json_and_canonical_paths(tmp_path):

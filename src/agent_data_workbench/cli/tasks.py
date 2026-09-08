@@ -6,19 +6,15 @@ from pathlib import Path
 
 import typer
 
-from ..backends import CliAnalyzer
-from ..project import Project
-from ..tasks import (
-    TaskSpec,
-    audit_task,
-    design_tasks,
-    replace_task,
-    replay_task,
-    review_task,
-    write_task,
-)
-from ..traces import read_json
-from .common import emit, errors
+from agent_data_workbench.cli.common import emit, errors
+from agent_data_workbench.evaluation.tasks.contracts import TaskSpec
+from agent_data_workbench.evaluation.tasks.design import design_tasks
+from agent_data_workbench.evaluation.tasks.grading import audit_task
+from agent_data_workbench.evaluation.tasks.replay import replay_task
+from agent_data_workbench.evaluation.tasks.repository import replace_task, review_task, write_task
+from agent_data_workbench.integrations.analyzers import CliAnalyzer
+from agent_data_workbench.shared.json import read_json
+from agent_data_workbench.workspace.project import Project
 
 app = typer.Typer(no_args_is_help=True)
 

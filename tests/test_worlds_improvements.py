@@ -5,22 +5,25 @@ import sys
 import pytest
 from test_workbench_data import accept, make_project, spec
 
-from agent_data_workbench.experiments import make_suite, run_experiment
-from agent_data_workbench.improvements import (
+from agent_data_workbench.evaluation.experiments import run_experiment
+from agent_data_workbench.evaluation.improvements import (
     create_improvement,
     decide_improvement,
     verify_candidate,
 )
-from agent_data_workbench.project import digest, save
-from agent_data_workbench.runners import ConfiguredRunner, RunnerConfig
-from agent_data_workbench.tasks import load_task, task_digest
-from agent_data_workbench.worlds import (
+from agent_data_workbench.evaluation.suites import make_suite
+from agent_data_workbench.evaluation.tasks.repository import load_task, task_digest
+from agent_data_workbench.evaluation.worlds import (
     WorldReference,
     WorldSpec,
     create_world,
     resolve_world,
     review_world,
 )
+from agent_data_workbench.execution.contracts import RunnerConfig
+from agent_data_workbench.execution.runners import ConfiguredRunner
+from agent_data_workbench.shared.files import save
+from agent_data_workbench.shared.json import digest
 
 
 def test_world_versions_pin_reviewed_domain_truth_and_reject_unresolved_context(tmp_path):
@@ -185,7 +188,7 @@ def test_research_uses_accepted_world_heads_without_rewriting_historical_referen
 
 
 def test_one_suite_runs_distinct_reviewed_conversations_with_same_target_version(tmp_path):
-    from agent_data_workbench.conversations import ConversationSpec, UserTurn
+    from agent_data_workbench.execution.contracts import ConversationSpec, UserTurn
 
     # Given one target harness and nine separately reviewed conversation scenarios.
     project = make_project(tmp_path)

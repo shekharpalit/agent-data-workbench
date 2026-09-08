@@ -55,10 +55,10 @@ COPY --from=frontend --chown=workbench:workbench /app/src/agent_data_workbench/w
 RUN --mount=type=cache,target=/root/.cache/uv uv sync --locked
 USER workbench
 EXPOSE 8765
-CMD ["python", "-m", "agent_data_workbench.runtime", "--reload"]
+CMD ["python", "-m", "agent_data_workbench.workbench.runtime", "--reload"]
 
 FROM python-base AS runtime
 COPY --from=production-dependencies /opt/venv /opt/venv
 USER workbench
 EXPOSE 8765
-CMD ["python", "-m", "agent_data_workbench.runtime"]
+CMD ["python", "-m", "agent_data_workbench.workbench.runtime"]

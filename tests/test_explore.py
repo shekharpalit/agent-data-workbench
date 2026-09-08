@@ -4,7 +4,8 @@ import pytest
 from identities import uid
 from test_workbench_data import Source, make_project
 
-from agent_data_workbench.explore import (
+from agent_data_workbench.data.store import TraceStore
+from agent_data_workbench.exploration import (
     CLUSTER_TEXT_LIMIT,
     ClusterQuery,
     FieldFilter,
@@ -14,8 +15,7 @@ from agent_data_workbench.explore import (
     lineage,
     search,
 )
-from agent_data_workbench.project import save
-from agent_data_workbench.store import TraceStore
+from agent_data_workbench.shared.files import save
 
 
 @pytest.fixture
@@ -344,3 +344,106 @@ def test_invalid_queries_fail_before_storage_access(payload):
     # When / Then
     with pytest.raises(ValueError):
         SearchQuery.model_validate_json(encoded)
+
+
+def test_clustering_keeps_negation_numbers_and_short_words_as_distinguishing_evidence(project):
+    # Given
+    store = TraceStore(project)
+    store.ingest(
+        Source(
+            [
+                {"trace_id": "approved", "input": "refund approved"},
+                {"trace_id": "denied1", "input": "refund not approved"},
+                {"trace_id": "denied2", "input": "not approved refund"},
+                {"trace_id": "not_found", "input": "404"},
+                {"trace_id": "server_error", "input": "500"},
+                {"trace_id": "choice_a", "input": "A"},
+                {"trace_id": "choice_b", "input": "B"},
+            ]
+        )
+    )
+    query = ClusterQuery(
+        query=SearchQuery(
+            trace_ids=[
+                "approved",
+                "denied1",
+                "denied2",
+                "not_found",
+                "server_error",
+                "choice_a",
+                "choice_b",
+            ]
+        ),
+        threshold=1,
+    )
+
+    # When
+    result = cluster(store, query)
+    actual = {
+        "memberships": [group["trace_ids"] for group in result["clusters"]],
+        "eligible": result["eligible"],
+        "clustered": result["clustered"],
+        "omitted_ids": result["omitted_ids"],
+        "text_truncated_ids": result["text_truncated_ids"],
+    }
+
+    # Then
+    assert actual == {
+        "memberships": [
+            ["denied1", "denied2"],
+            ["approved"],
+            ["choice_a"],
+            ["choice_b"],
+            ["not_found"],
+            ["server_error"],
+        ],
+        "eligible": 7,
+        "clustered": 7,
+        "omitted_ids": [],
+        "text_truncated_ids": [],
+    }
+
+
+def test_selected_values_are_not_discarded_by_metadata_field_names():
+    # Given
+    from agent_data_workbench.exploration.clustering.tokenization import words
+
+    selected = {
+        "id": "not",
+        "trace_id": "0",
+        "thread_id": "A",
+        "timestamp": "404",
+        "created_at": "no",
+        "nested": [{"value": "can't deny"}, 42, False, None],
+    }
+
+    # When
+    tokens, truncated = words(selected)
+
+    # Then
+    assert {"tokens": tokens, "truncated": truncated} == {
+        "tokens": ["not", "0", "a", "404", "no", "can't", "deny", "42", "false", "null"],
+        "truncated": False,
+    }
+
+
+@pytest.mark.parametrize(
+    "text,remaining,expected_tokens",
+    [("refunded", 3, []), ("can't", 3, []), ("can go", 3, ["can"])],
+)
+def test_clustering_does_not_turn_a_truncated_word_into_an_invented_token(
+    text, remaining, expected_tokens
+):
+    # Given
+    from agent_data_workbench.exploration.clustering.tokenization import words
+
+    selected = [" " * (CLUSTER_TEXT_LIMIT - remaining), text]
+
+    # When
+    tokens, truncated = words(selected)
+
+    # Then
+    assert {"tokens": tokens, "truncated": truncated} == {
+        "tokens": expected_tokens,
+        "truncated": True,
+    }

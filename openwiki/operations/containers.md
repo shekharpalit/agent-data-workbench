@@ -18,18 +18,20 @@ sources:
     resource: repo://src/agent_data_workbench/api/middleware.py
   - id: openwiki-source-2ee7fba2bd1c703c70f5f285
     resource: repo://src/agent_data_workbench/cli/project.py
-  - id: openwiki-source-2105ec13910fc5b1b0e193d1
-    resource: repo://src/agent_data_workbench/ingest_transport.py
-  - id: openwiki-source-73ad8573b871e625469a2194
-    resource: repo://src/agent_data_workbench/ingestion.py
-  - id: openwiki-source-cda43c2246a0f3e6a5e89dce
-    resource: repo://src/agent_data_workbench/runtime.py
+  - id: openwiki-source-6e38bbd0a3d0f2e36a07885b
+    resource: repo://src/agent_data_workbench/data/discovery.py
+  - id: openwiki-source-a69866c703779e64969315b7
+    resource: repo://src/agent_data_workbench/data/ingestion.py
+  - id: openwiki-source-839952c20325a7e79d15333e
+    resource: repo://src/agent_data_workbench/data/transport.py
+  - id: openwiki-source-56b68af7c871c44d9ba4d64d
+    resource: repo://src/agent_data_workbench/workbench/runtime.py
   - id: openwiki-source-a741d432f952c0dbfb4fb35d
     resource: repo://ui/vite.config.ts
-generated: { by: "codex", at: "2026-09-07T23:37:40.020Z" }
+generated: { by: "codex", at: "2026-09-08T00:07:39.310Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-07T23:37:40.020Z
+    at: 2026-09-08T00:07:39.310Z
 ---
 
 # Docker and Make workflow
@@ -101,7 +103,7 @@ The Dockerfile pins Python 3.14.7, Node 24.20.0 and uv 0.12.10. It builds produc
 
 ## Runtime configuration and agent integrations
 
-The Python entrypoint is `python -m agent_data_workbench.runtime`. It accepts `--initialize-only` and `--reload`. `WORKBENCH_PROJECT`, `WORKBENCH_HOST`, `WORKBENCH_PORT` and `WORKBENCH_ORIGIN` configure storage and serving. `WORKBENCH_NAME` and `WORKBENCH_OBJECTIVE` set metadata only when creating a new project. Custom runtime environment variables can be passed through a Compose override or a direct container invocation; the standard Compose file sets its own storage and network values.
+The Python entrypoint is `python -m agent_data_workbench.workbench.runtime`. It accepts `--initialize-only` and `--reload`. `WORKBENCH_PROJECT`, `WORKBENCH_HOST`, `WORKBENCH_PORT` and `WORKBENCH_ORIGIN` configure storage and serving. `WORKBENCH_NAME` and `WORKBENCH_OBJECTIVE` set metadata only when creating a new project. Custom runtime environment variables can be passed through a Compose override or a direct container invocation; the standard Compose file sets its own storage and network values.
 
 The standard configuration binds the backend to `0.0.0.0` inside Docker and publishes only `127.0.0.1` on the host. The browser origin is independent of the bind address; healthchecks use its normalized host, and the existing bearer, Host and Origin checks apply. This configuration does not add TLS or a remote multiuser login system.
 

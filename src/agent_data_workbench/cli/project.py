@@ -9,14 +9,12 @@ from typing import Annotated
 
 import typer
 
-from ..ingestion import FilesSource
-from ..project import Project
-from ..runners import RunnerConfig
-from ..store import TraceStore
-from ..tasks import (
-    TaskSpec,
-)
-from .common import emit, errors
+from agent_data_workbench.cli.common import emit, errors
+from agent_data_workbench.data.ingestion import FilesSource
+from agent_data_workbench.data.store import TraceStore
+from agent_data_workbench.evaluation.tasks.contracts import TaskSpec
+from agent_data_workbench.execution.contracts import RunnerConfig
+from agent_data_workbench.workspace.project import Project
 
 app = typer.Typer(no_args_is_help=True)
 
@@ -30,8 +28,8 @@ class IngestLayout(StrEnum):
 @errors
 def schema(kind: str = "task"):
     """Print a JSON Schema for an import or extension contract."""
-    from ..benchmark import GoldCase, HumanAssessment
-    from ..research import ResearchResult
+    from agent_data_workbench.analysis.benchmark import GoldCase, HumanAssessment
+    from agent_data_workbench.research import ResearchResult
 
     contracts = {
         "task": TaskSpec,
@@ -102,7 +100,7 @@ def ingest(
         emit({"files": len(source.files), "layout": layout.value, **result})
 
     if archive_stdin:
-        from ..ingest_transport import archive_files
+        from agent_data_workbench.data.transport import archive_files
 
         with archive_files(sys.stdin.buffer) as files:
             import_source(FilesSource(files, layout=layout.value))
@@ -137,6 +135,6 @@ def query(
 @errors
 def ui(project: Path, port: int = 0, open_browser: bool = False):
     """Serve the local workbench on loopback with a per-session access token."""
-    from ..server import serve
+    from agent_data_workbench.workbench.server import serve
 
     serve(Project(project), port=port, open_browser=open_browser)

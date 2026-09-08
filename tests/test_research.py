@@ -9,9 +9,11 @@ from identities import uid
 from test_workbench_data import NativeFixture, Source, make_project, result, spec
 from typer.testing import CliRunner
 
-from agent_data_workbench.backends import BackendError
+from agent_data_workbench.analysis.batch import load_request, prepare_run
 from agent_data_workbench.cli import app
-from agent_data_workbench.project import Project, save
+from agent_data_workbench.data.sources import JsonSource
+from agent_data_workbench.data.store import TraceStore
+from agent_data_workbench.evaluation.tasks.repository import load_task
 from agent_data_workbench.research import (
     NativeSession,
     ResearchWorkspace,
@@ -20,9 +22,9 @@ from agent_data_workbench.research import (
 )
 from agent_data_workbench.research.artifacts import investigation_view
 from agent_data_workbench.research.sessions import session_lock
-from agent_data_workbench.store import JsonSource, TraceStore
-from agent_data_workbench.tasks import load_task
-from agent_data_workbench.workflow import load_request, prepare_run
+from agent_data_workbench.shared.files import save
+from agent_data_workbench.shared.processes import BackendError
+from agent_data_workbench.workspace.project import Project
 
 
 @pytest.fixture

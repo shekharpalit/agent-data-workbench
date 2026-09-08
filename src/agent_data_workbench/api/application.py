@@ -6,12 +6,21 @@ from fastapi import APIRouter, Depends, FastAPI, Request
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
-from ..jobs import JobQueue
-from ..project import Project
-from .dependencies import require_session
-from .errors import register_error_handlers
-from .middleware import RequestBoundaryMiddleware
-from .routers import artifacts, investigations, jobs, knowledge, overview, tasks, traces, workflow
+from agent_data_workbench.api.dependencies import require_session
+from agent_data_workbench.api.errors import register_error_handlers
+from agent_data_workbench.api.middleware import RequestBoundaryMiddleware
+from agent_data_workbench.api.routers import (
+    artifacts,
+    investigations,
+    jobs,
+    knowledge,
+    overview,
+    tasks,
+    traces,
+    workflow,
+)
+from agent_data_workbench.workbench.jobs import JobQueue
+from agent_data_workbench.workspace.project import Project
 
 
 def create_app(project: Project, *, origin: str, token: str) -> FastAPI:

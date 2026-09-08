@@ -2,11 +2,8 @@
 
 from fastapi import APIRouter
 
-from ..dependencies import ProjectDependency
-from ..schemas import (
-    KnowledgeRequest,
-    ReviewRequest,
-)
+from agent_data_workbench.api.dependencies import ProjectDependency
+from agent_data_workbench.api.schemas import KnowledgeRequest, ReviewRequest
 
 router = APIRouter()
 

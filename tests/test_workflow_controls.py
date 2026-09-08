@@ -13,16 +13,17 @@ from test_workbench_execution import suite
 from typer.testing import CliRunner
 
 from agent_data_workbench import api
-from agent_data_workbench.calibration import calibration_summary, load_calibration
 from agent_data_workbench.cli import app as cli_app
-from agent_data_workbench.coverage import coverage_report, load_taxonomy
-from agent_data_workbench.experiments import run_experiment
-from agent_data_workbench.improvements import load_improvement
-from agent_data_workbench.project import digest, save
-from agent_data_workbench.runners import ConfiguredRunner, RunnerConfig
-from agent_data_workbench.store import TraceStore
-from agent_data_workbench.traces import read_json
-from agent_data_workbench.worlds import WorldSpec, load_world
+from agent_data_workbench.data.store import TraceStore
+from agent_data_workbench.evaluation.calibration import calibration_summary, load_calibration
+from agent_data_workbench.evaluation.coverage import coverage_report, load_taxonomy
+from agent_data_workbench.evaluation.experiments import run_experiment
+from agent_data_workbench.evaluation.improvements import load_improvement
+from agent_data_workbench.evaluation.worlds import WorldSpec, load_world
+from agent_data_workbench.execution.contracts import RunnerConfig
+from agent_data_workbench.execution.runners import ConfiguredRunner
+from agent_data_workbench.shared.files import save
+from agent_data_workbench.shared.json import digest, read_json
 
 ORIGIN = "http://127.0.0.1:8765"
 TOKEN = "synthetic-workflow-session"
@@ -66,12 +67,14 @@ def project(tmp_path, monkeypatch):
     def forbidden_provider(*args, **kwargs):
         raise AssertionError("Human workflow controls must not invoke a model or native session")
 
-    monkeypatch.setattr("agent_data_workbench.backends.CliAnalyzer.__init__", forbidden_provider)
+    monkeypatch.setattr(
+        "agent_data_workbench.integrations.analyzers.CliAnalyzer.__init__", forbidden_provider
+    )
     monkeypatch.setattr(
         "agent_data_workbench.research.sessions.NativeSession.__init__", forbidden_provider
     )
     for module in ("worlds", "calibration", "coverage", "improvements"):
-        monkeypatch.setattr(f"agent_data_workbench.{module}.now", lambda: STAMP)
+        monkeypatch.setattr(f"agent_data_workbench.evaluation.{module}.now", lambda: STAMP)
     return make_project(tmp_path)
 
 

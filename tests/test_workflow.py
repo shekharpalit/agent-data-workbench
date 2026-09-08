@@ -3,9 +3,11 @@ import json
 import pytest
 from pydantic import ValidationError
 
-from agent_data_workbench.models import Analysis, pointer_value, validate_evidence
-from agent_data_workbench.traces import load_traces, normalize
-from agent_data_workbench.workflow import analyze_traces, complete_run, prepare_run
+from agent_data_workbench.analysis.batch import analyze_traces, complete_run, prepare_run
+from agent_data_workbench.analysis.contracts import Analysis
+from agent_data_workbench.analysis.validation import validate_evidence
+from agent_data_workbench.data.normalization import load_traces, normalize
+from agent_data_workbench.shared.json import pointer_value
 
 
 @pytest.mark.parametrize("style", ["jsonl", "array", "wrapper", "single"])

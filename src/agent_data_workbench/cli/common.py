@@ -7,9 +7,10 @@ from pathlib import Path
 import typer
 from pydantic import ValidationError
 
-from ..backends import BackendError
-from ..runners import ConfiguredRunner, RunnerConfig
-from ..traces import read_json
+from agent_data_workbench.execution.contracts import RunnerConfig
+from agent_data_workbench.execution.runners import ConfiguredRunner
+from agent_data_workbench.shared.json import read_json
+from agent_data_workbench.shared.processes import BackendError
 
 
 def errors(function):

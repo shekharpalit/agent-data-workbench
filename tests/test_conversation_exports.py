@@ -8,12 +8,19 @@ import pytest
 from identities import uid
 from test_workbench_data import accept, make_project, spec
 
-from agent_data_workbench.conversations import ConversationSpec, UserTurn
-from agent_data_workbench.experiments import make_suite, run_experiment
-from agent_data_workbench.exports import export_training
-from agent_data_workbench.project import digest, save
-from agent_data_workbench.runners import ConfiguredRunner, RunnerConfig
-from agent_data_workbench.worlds import WorldReference, WorldSpec, create_world, review_world
+from agent_data_workbench.evaluation.experiments import run_experiment
+from agent_data_workbench.evaluation.suites import make_suite
+from agent_data_workbench.evaluation.worlds import (
+    WorldReference,
+    WorldSpec,
+    create_world,
+    review_world,
+)
+from agent_data_workbench.execution.contracts import ConversationSpec, RunnerConfig, UserTurn
+from agent_data_workbench.execution.runners import ConfiguredRunner
+from agent_data_workbench.integrations.training import export_training
+from agent_data_workbench.shared.files import save
+from agent_data_workbench.shared.json import digest
 
 
 @pytest.fixture

@@ -175,7 +175,7 @@ def test_modular_project_cli_imports_reviews_executes_and_exports(tmp_path, samp
 
     from test_workbench_data import spec
 
-    from agent_data_workbench.project import Project
+    from agent_data_workbench.workspace.project import Project
 
     directory = tmp_path / "project"
     baseline, candidate = tmp_path / "baseline.json", tmp_path / "candidate.json"

@@ -6,11 +6,15 @@ from pathlib import Path
 import pytest
 from test_workbench_data import accept, make_project, spec
 
-from agent_data_workbench.command_sources import file_sha256
-from agent_data_workbench.conversations import ConversationSpec, SimulatorConfig, UserTurn
-from agent_data_workbench.harbor import HarborExportConfig, export_harbor, run_harbor_export
-from agent_data_workbench.project import digest
-from agent_data_workbench.tasks import task_digest, write_task
+from agent_data_workbench.evaluation.tasks.repository import task_digest, write_task
+from agent_data_workbench.execution.contracts import ConversationSpec, SimulatorConfig, UserTurn
+from agent_data_workbench.integrations.harbor import (
+    HarborExportConfig,
+    export_harbor,
+    run_harbor_export,
+)
+from agent_data_workbench.shared.commands import file_sha256
+from agent_data_workbench.shared.json import digest
 
 
 def template_at(tmp_path, *, steps=0):
@@ -146,7 +150,8 @@ def test_harbor_export_requires_review_and_real_verifier(tmp_path):
     with pytest.raises(ValueError, match="needs review"):
         export_harbor(project, task.id, config)
     # Given
-    from agent_data_workbench.tasks import audit_task, review_task
+    from agent_data_workbench.evaluation.tasks.grading import audit_task
+    from agent_data_workbench.evaluation.tasks.repository import review_task
 
     audit_task(project, task.id)
     review_task(project, task.id, "accepted", "Synthetic fixture")
@@ -228,8 +233,8 @@ else:
 
 def test_harbor_export_records_final_source_exposure_before_materialization(tmp_path):
     # Given
-    from agent_data_workbench.experiments import make_suite
-    from agent_data_workbench.traces import read_json
+    from agent_data_workbench.evaluation.suites import make_suite
+    from agent_data_workbench.shared.json import read_json
 
     project = make_project(tmp_path)
     tasks = [accept(project, spec(project, key=f"T{i}", trace_ids=[f"r{i}"])) for i in range(3)]
@@ -260,7 +265,7 @@ def test_harbor_export_records_final_source_exposure_before_materialization(tmp_
 
 def test_harbor_manifest_edits_cannot_silently_change_the_executed_command(tmp_path):
     # Given
-    from agent_data_workbench.project import save
+    from agent_data_workbench.shared.files import save
 
     project = make_project(tmp_path)
     task = accept(project, spec(project))

@@ -2,7 +2,17 @@
 
 import typer
 
-from . import batch, benchmark, experiments, exports, knowledge, project, research, tasks, workflow
+from agent_data_workbench.cli import (
+    batch,
+    benchmark,
+    experiments,
+    exports,
+    knowledge,
+    project,
+    research,
+    tasks,
+    workflow,
+)
 
 app = typer.Typer(
     no_args_is_help=True,

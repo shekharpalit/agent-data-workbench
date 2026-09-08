@@ -12,9 +12,9 @@ from http.client import HTTPConnection
 import pytest
 from fastapi.testclient import TestClient
 
-from agent_data_workbench import runtime
-from agent_data_workbench.project import ARTIFACT_KINDS
-from agent_data_workbench.server import WorkbenchServer, validate_origin
+from agent_data_workbench.workbench import runtime
+from agent_data_workbench.workbench.server import WorkbenchServer, validate_origin
+from agent_data_workbench.workspace.project import ARTIFACT_KINDS
 
 
 def test_initialization_is_idempotent_and_preserves_existing_project_data(tmp_path):
@@ -223,7 +223,7 @@ def test_runtime_serves_and_stops_cleanly_on_process_signals(tmp_path, stop_sign
     }
     with log_path.open("w") as log:
         process = subprocess.Popen(
-            [sys.executable, "-m", "agent_data_workbench.runtime"],
+            [sys.executable, "-m", "agent_data_workbench.workbench.runtime"],
             stdout=log,
             stderr=subprocess.STDOUT,
             env=environment,

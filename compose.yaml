@@ -13,7 +13,7 @@ x-workbench-health: &workbench-health
     - -c
     - >-
       import urllib.request, urllib.parse;
-      from agent_data_workbench.runtime import RuntimeSettings;
+      from agent_data_workbench.workbench.runtime import RuntimeSettings;
       origin = RuntimeSettings.from_env().origin;
       request = urllib.request.Request("http://127.0.0.1:8765/", headers={"Host": urllib.parse.urlsplit(origin).netloc});
       urllib.request.urlopen(request, timeout=3).read()
@@ -41,7 +41,7 @@ services:
     depends_on:
       ui:
         condition: service_healthy
-    command: ["python", "-m", "agent_data_workbench.runtime", "--reload"]
+    command: ["python", "-m", "agent_data_workbench.workbench.runtime", "--reload"]
 
   ui:
     image: agent-data-workbench:dev
