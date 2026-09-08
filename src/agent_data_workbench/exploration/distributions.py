@@ -37,7 +37,7 @@ def distribution(store: TraceStore, query: SearchQuery, pointer: str) -> dict:
         "missing_or_non_scalar": missing,
         "counts": [
             {"value": json.loads(key), "count": count}
-            for key, count in sorted(counts.items(), key=lambda x: (-x[1], x[0]))[:50]
+            for key, count in sorted(counts.items(), key=lambda x: (-x[1], x[0]))
         ],
         "distinct": len(counts),
         "numeric_count": numeric,

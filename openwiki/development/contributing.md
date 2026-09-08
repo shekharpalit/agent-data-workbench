@@ -4,6 +4,8 @@ title: Development and verification
 description: Set up Python and TypeScript development, preserve the shared contracts, and verify changes with behavioral tests and reproducible builds.
 tags: [development, testing, packaging]
 sources:
+  - id: openwiki-source-ea70eb6c045047448e446296
+    resource: repo://.gitignore
   - id: openwiki-source-868b3402493aef58bb5db066
     resource: repo://.python-version
   - id: openwiki-source-8037e2358a2c4f9b2c722a11
@@ -66,10 +68,10 @@ sources:
     resource: repo://ui/tests/research.test.tsx
   - id: openwiki-source-a741d432f952c0dbfb4fb35d
     resource: repo://ui/vite.config.ts
-generated: { by: "codex", at: "2026-09-08T02:26:18.735Z" }
+generated: { by: "codex", at: "2026-09-08T02:47:35.721Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T02:26:18.735Z
+    at: 2026-09-08T02:57:07.074Z
 ---
 
 # Development and verification
@@ -177,3 +179,7 @@ The root SDK imports remain stable; former internal imports such as `agent_data_
 Clustering has separate tokenization, TF-IDF vectorization, connected-components and response modules under `exploration/clustering/`. Its regression cases preserve negation, numeric tokens, single-character words and values under metadata-like field names, and read late events beyond long prefixes without truncating text. Regression cases include 201 event traces without `/input`, search-page independence, membership drill-down beyond 200 IDs, explicit trace limits and imported trace nodes before findings exist. Search, aggregation and lineage remain separate operations.
 
 Both graph views use `ui/src/components/graphs/NetworkCanvas.tsx`. Cluster membership layout is separate from evidence lineage layout. `ui/tests/exploration.test.tsx` verifies automatic full-record grouping, optional maximum requests, missing-field recovery, cluster selection, trace navigation and graph membership. These component tests substitute the canvas transport; check the actual React Flow rendering and node controls in a browser when changing the visualization surface.
+
+Data-preservation regressions cover all graph nodes beyond 300, all distribution categories beyond 50, record navigation beyond offset 10,000, complete serialized search results, default full-field reads over SDK/MCP/HTTP, and valid command outputs and JSON artifacts over 2 MB. Optional caller-selected limits and resumable pages remain explicit. `ui/tests/exploration.test.tsx` also opens long structured inputs without slicing their content.
+
+Keep private exports and any validation reports outside the repository or in ignored local data directories. Git excludes JSONL/NDJSON and database files by default; `tests/fixtures/` is reserved for independently synthetic trace fixtures. Do not copy customer content or identifying metadata into tests, docs or commit messages.

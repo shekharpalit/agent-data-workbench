@@ -4,6 +4,8 @@ title: Import and explore traces
 description: Bring JSON or JSONL execution data into the SQLAlchemy-backed local store, then search, sample, aggregate, cluster, and follow recorded lineage.
 tags: [traces, ingestion, search, clustering, lineage]
 sources:
+  - id: openwiki-source-2698786dc1c73188d557cbbf
+    resource: repo://src/agent_data_workbench/api/routers/artifacts.py
   - id: openwiki-source-2ee7fba2bd1c703c70f5f285
     resource: repo://src/agent_data_workbench/cli/project.py
   - id: openwiki-source-6e38bbd0a3d0f2e36a07885b
@@ -46,10 +48,14 @@ sources:
     resource: repo://ui/src/components/graphs/NetworkCanvas.tsx
   - id: openwiki-source-13a35988ca651da931d9ecce
     resource: repo://ui/src/views/Clusters.tsx
-generated: { by: "codex", at: "2026-09-08T02:26:18.735Z" }
+  - id: openwiki-source-e2b9808e897a9a7a52014721
+    resource: repo://ui/src/views/Search.tsx
+  - id: openwiki-source-596cdb28df7c16b7e6d5931b
+    resource: repo://ui/tests/exploration.test.tsx
+generated: { by: "codex", at: "2026-09-08T02:47:35.721Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T02:26:18.735Z
+    at: 2026-09-08T02:57:07.074Z
 ---
 
 # Import and explore traces
@@ -180,11 +186,11 @@ uv run agent-data-workbench query runs/my-agent --aggregate /events/1/status
 
 CLI search uses case-insensitive substring matching and stable ID ordering. Sampling shuffles within strata using the seed, then takes turns across strata. It deliberately favors coverage across categories and should not be used as a prevalence estimate.
 
-Aggregates describe the matched corpus, including the eligible count, missing or non-scalar values, distinct values, and numeric summaries. The displayed value counts are capped at the top 50. Read totals alongside those counts.
+Aggregates describe the matched corpus, including the eligible count, missing or non-scalar values, distinct values, and numeric summaries. The CLI aggregate and explorer distribution return every distinct scalar value and its count; no top-category cutoff is applied.
 
 The [local workbench](../operations/local-workbench.md) provides typed field search and distributions. Its shared `SearchQuery` supports up to eight AND-combined JSON-pointer filters: equality, text containment, numeric bounds, existence, and missing fields. Numeric comparison rejects booleans and nonnumeric values. Sorting supports trace ID, stratum, or a field pointer, keeping missing values last and using trace IDs to break ties.
 
-Search pages and distribution charts use the same matching-corpus function. Pagination changes the displayed records, not the population summarized by the distribution. These scans are local operations; a bounded result page does not imply indexed query performance on an arbitrarily large corpus.
+Search pages and distribution charts use the same matching-corpus function. Pagination changes the displayed records, not the population summarized by the distribution. Offsets have no total ceiling, so later records remain reachable. Input/request values expand as complete structured JSON rather than sliced strings. These scans are local operations; a bounded result page does not imply indexed query performance on an arbitrarily large corpus.
 
 ## Explore lexical clusters
 
@@ -206,11 +212,11 @@ To change this pipeline, start with `exploration/clustering/tokenization.py` for
 
 The lineage graph starts with every imported trace, including runs with no findings or tasks. When a source path exists it labels the trace node; the original trace ID still controls navigation. The UI arranges raw trace nodes in a grid and lets developers open the original events immediately after import. Saved artifact references add trace-to-finding, trace-to-task, finding-to-task and task-to-experiment relationships. Focusing on a trace follows downstream edges; it does not add unrelated sibling tasks merely because they share an experiment. An imported but unlinked trace has a one-node focused graph.
 
-The graph reports truncation and supports a 10–300-node limit. Task nodes link identities; experiment artifacts preserve the exact evaluated specification snapshots. Use the graph to navigate evidence, and the saved experiment to inspect what actually ran. Edges represent recorded relationships, not inferred causality. Edge IDs are deterministic UUIDv5 values; node keys include their kind and source or artifact identity so different kinds remain distinct.
+The graph returns all nodes by default. An optional positive `limit` explicitly selects a smaller view, taking turns across evidence layers and reporting truncation; omit the limit to retrieve every node and saved edge. Task nodes link identities; experiment artifacts preserve the exact evaluated specification snapshots. Use the graph to navigate evidence, and the saved experiment to inspect what actually ran. Edges represent recorded relationships, not inferred causality. Edge IDs are deterministic UUIDv5 values; node keys include their kind and source or artifact identity so different kinds remain distinct.
 
 Native investigations capture the full project store by default. Pass `--exclude-final` when creating an investigation to leave reserved final groups out of that snapshot. Ordinary CLI queries still use the full project store. Exposure is recorded for research; these local tools are not a hidden-data access boundary.
 
-Search pagination and the displayed graph limit bound those views; clustering includes every match unless the developer sets its explicit maximum. They do not limit the native research corpus. `ResearchWorkspace.dataset.records()` iterates the full snapshot and native scripts can implement analyses beyond the built-in lexical clustering. Its aggregate API paginates distinct values instead of discarding all values beyond the top 50.
+Search uses resumable pages; clustering and graphs include every match by default. Only developer-selected filters and explicit limits narrow the requested population. `ResearchWorkspace.dataset.records()` iterates the full snapshot and native scripts can implement analyses beyond the built-in lexical clustering. Its aggregate API provides continuation offsets for distinct values, preserving access to every category.
 
 ## Verification and next steps
 

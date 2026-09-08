@@ -125,7 +125,7 @@ def read_snapshot_trace(
     trace_id: str,
     pointer: str = "",
     offset: Annotated[int, Query(ge=0)] = 0,
-    max_chars: Annotated[int | None, Query(gt=0)] = 16000,
+    max_chars: Annotated[int | None, Query(gt=0)] = None,
 ) -> dict:
     return ResearchWorkspace(project, id).read(
         trace_id, pointer=pointer, offset=offset, max_chars=max_chars

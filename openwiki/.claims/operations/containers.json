@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:104249ac3015302ce36fc1ddae4e5af3b751b10134721d2131f840821203403a",
+  "pageVersion": "sha256:4040b6be35190e9a04fcae619b3e3ceb794dca067e3b2ce961fa558f4c465f1f",
   "claims": [
     {
       "id": "claim_0214ec89ef294dfaaad35ee54cb09813",
@@ -74,15 +74,15 @@
     },
     {
       "id": "claim_0204019f39c744a4b37a214cbc4ae4f6",
-      "statement": "The Dockerfile pins Python, Node and uv, compiles TypeScript into ui/dist, installs a production wheel containing package-only _ui assets and runs both final targets as the non-root workbench user.",
+      "statement": "The Dockerfile pins Python, Node and uv, compiles TypeScript into ui/dist, forces a fresh local production wheel containing package-only _ui assets when packaging runs, and runs both final targets as the non-root workbench user.",
       "evidence": [
         {
           "resource": "repo://Dockerfile",
-          "version": "repo-file-v1:sha256:664294a887ba1cfef14e42c390f7f7c187b2ceaebf6f66f94e995ff17f222190"
+          "version": "repo-file-v1:sha256:9f1521aa7211e72b8641ab975f1ac375085d51cd376a59fc6fd7d54b4e9d140c"
         },
         {
-          "resource": "repo://pyproject.toml#L31-L42",
-          "version": "repo-lines-v1:sha256:6d34248a438dc01995f2affc3d901145b409b7105344c0d0cceebd536f589154:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAzYzBlNzIzOGYwYjE4Y2JlNmE0NjY2NDFmZGNkNTk0ODUyNDQ4ZGRmN2ZmODhkMGE5ZjQ5NTBlYWRlYzM5M2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg0N2FiMDc1M2NkZjg5MzMyYmQ2ZDU2YzY3OTVlMDM5MmE2M2FkMmU5ZTBhODNjMWNmNDgzMTg5NzgwNDFiNGIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM2N2M1YzE0MmM4YzE1MTFjNDgxMTI1MThhMWQ5MGE5OTJmYjkzM2ZlYmY1NmE3ODk5MGZhYjAyYWU3Mjg3ZWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIzMjg3NjM1YTBiZGJlZjliNGM1N2FlOTU5NGQwZWE5M2Y4ZGRmMWJmM2Y3MDA2MzVhZGRlMmUzNjhlMTI4MGIifQ"
+          "resource": "repo://pyproject.toml",
+          "version": "repo-file-v1:sha256:2d0d367cab5a77ce9b4ab1961585d4f91424817388848229a358f038fc7df10f"
         }
       ]
     },
@@ -138,7 +138,7 @@
       "evidence": [
         {
           "resource": "repo://Dockerfile",
-          "version": "repo-file-v1:sha256:664294a887ba1cfef14e42c390f7f7c187b2ceaebf6f66f94e995ff17f222190"
+          "version": "repo-file-v1:sha256:9f1521aa7211e72b8641ab975f1ac375085d51cd376a59fc6fd7d54b4e9d140c"
         },
         {
           "resource": "repo://compose.yaml",
@@ -181,6 +181,6 @@
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T00:51:51.689Z"
+    "at": "2026-09-08T03:02:55.250Z"
   }
 }

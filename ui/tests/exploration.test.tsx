@@ -7,6 +7,7 @@ import type { ClusterResult, LineageGraph } from "../src/contracts";
 import { initialSearch, graphLayout } from "../src/state";
 import { ClustersView } from "../src/views/Clusters";
 import GraphView from "../src/views/Graph";
+import { SearchView } from "../src/views/Search";
 import { clusterLayout } from "../src/components/graphs/cluster-layout";
 
 vi.mock("../src/components/graphs/NetworkCanvas", () => ({
@@ -281,3 +282,50 @@ describe("trace exploration", () => {
     });
   });
 });
+
+it.each([
+  { text: "evidence ".repeat(1000) + "final event", enabled: true },
+  null,
+])(
+  "Given a complete input beyond page 10000, When expanding and paging, Then preserves its content and type and reaches later records",
+  async (input) => {
+    // Given
+    const query = { ...initialSearch, offset: 10000 };
+    vi.spyOn(api, "search").mockResolvedValue({
+      query,
+      eligible: 10021,
+      selected: 1,
+      ids: ["long-record"],
+      records: [{ trace_id: "long-record", data: { input } }],
+      strata: {},
+      source_sha256: "fixture",
+    });
+    vi.spyOn(api, "distribution").mockResolvedValue({
+      pointer: "/tool_result/status",
+      eligible: 10021,
+      missing_or_non_scalar: 10021,
+      counts: [],
+      distinct: 0,
+      numeric_count: 0,
+      mean: null,
+      minimum: null,
+      maximum: null,
+    });
+    const onQuery = vi.fn();
+    const user = userEvent.setup();
+    renderQuery(
+      <SearchView query={query} onQuery={onQuery} navigate={vi.fn()} />,
+    );
+    // When
+    await user.click(await screen.findByText("Read input / request"));
+    const complete = screen.getByText(JSON.stringify(input, null, 2), {
+      normalizer: (text) => text,
+    }).textContent;
+    await user.click(screen.getByRole("button", { name: /^Next$/ }));
+    // Then
+    expect({ content: complete, queries: onQuery.mock.calls }).toStrictEqual({
+      content: JSON.stringify(input, null, 2),
+      queries: [[{ ...query, offset: 10020 }]],
+    });
+  },
+);

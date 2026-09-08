@@ -134,10 +134,9 @@ export function ClustersView({
                     </span>
                   ))}
                 </div>
-                <p className="muted mono">
-                  {group.trace_ids.slice(0, 3).join(", ")}
-                  {group.count > 3 ? "…" : ""}
-                </p>
+                <Details title={`All ${group.count} trace IDs`}>
+                  <JsonView value={group.trace_ids} />
+                </Details>
                 <button
                   className="secondary"
                   onClick={() => onMembers(group.trace_ids)}

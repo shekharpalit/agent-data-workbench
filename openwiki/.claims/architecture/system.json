@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:ef976e5bb81a81a619899661fbd34750dc31e0d35c9391d38d1fa95b8c034818",
+  "pageVersion": "sha256:8b83f8836e1b2a06478d6ca8ab66c5017023adbb034af36dd9e27a777b3ff784",
   "claims": [
     {
       "id": "claim_d9a6c98de02d49279a29adf7c1ea2d00",
@@ -132,7 +132,7 @@
       "evidence": [
         {
           "resource": "repo://src/agent_data_workbench/research/mcp.py#L27-L117",
-          "version": "repo-lines-v1:sha256:9fb9381ef5cd9a13e22b1a7fe0c74efe6da2a0e49a174c1acfe596d66d53b07c:eyJzZWxlY3RlZExpbmVDb3VudCI6OTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMyOTZjMWM0NTA2YzE5OTBiNjU5YTI5MTA4MDQ2YzViY2VlN2Q5ZjYwMGMzMmI3NzRiMDE1ZmQ1ZDczMWY1Y2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY0MjZjNWViOGFiYTNhODliODAyYTVmOTYyNGM3NDNhZDM5MDMyMWU0MDZjMTNkODMzNjQ5MDEyZmRkYjNjM2YiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFlOTYyNTE1M2NmNTE5MzU5NDdmZWExM2Q3OTJkODI3ZmMzNTI4Njc5YmQzYTgyOWQ3ZmZhYWEwNjdmZGVhZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "version": "repo-lines-v1:sha256:632f0bdcbe326fa4c071658f9363d3d76517e4fdd222837ec82047cc6c368dcf:eyJzZWxlY3RlZExpbmVDb3VudCI6OTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMyOTZjMWM0NTA2YzE5OTBiNjU5YTI5MTA4MDQ2YzViY2VlN2Q5ZjYwMGMzMmI3NzRiMDE1ZmQ1ZDczMWY1Y2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY0MjZjNWViOGFiYTNhODliODAyYTVmOTYyNGM3NDNhZDM5MDMyMWU0MDZjMTNkODMzNjQ5MDEyZmRkYjNjM2YiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFlOTYyNTE1M2NmNTE5MzU5NDdmZWExM2Q3OTJkODI3ZmMzNTI4Njc5YmQzYTgyOWQ3ZmZhYWEwNjdmZGVhZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
           "resource": "repo://src/agent_data_workbench/research/sessions.py#L188-L295",
@@ -168,7 +168,7 @@
       "evidence": [
         {
           "resource": "repo://src/agent_data_workbench/api/routers/investigations.py#L93-L157",
-          "version": "repo-lines-v1:sha256:80015c578050764b5feeacb9f5e69683afeaa217828436b7f90d2b962bbaeaad:eyJzZWxlY3RlZExpbmVDb3VudCI6NjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyNmZjYTI5ZWMwNGQ3YWRmMzBmNzc5NTk4NTY4OTkxZmRmNGZkMGEzNjVmZjJjY2I0MzliOTIwMGU2YjQ1MmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJhZmJmOWFhMjBlZjkxMjE2YWNmZjhhMTM2ZjI3NzAzNzRiMTRiYWJmNmU2YjQ3Nzg0ZDZlMjZhZDkyN2Q2NzUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM5ODNiNDA3NWYxMDJhNDJiNmM0MTViMjU2Njk1YWExYWNmZDU3ZGFhOTc1YTE4NjFkNWU0ZGM4NjEyM2Q2MDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "version": "repo-lines-v1:sha256:5b5aaff4fe9ad3a424f7511faae5c7ef09395f80790172c6bb5339c3a9704892:eyJzZWxlY3RlZExpbmVDb3VudCI6NjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyNmZjYTI5ZWMwNGQ3YWRmMzBmNzc5NTk4NTY4OTkxZmRmNGZkMGEzNjVmZjJjY2I0MzliOTIwMGU2YjQ1MmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJhZmJmOWFhMjBlZjkxMjE2YWNmZjhhMTM2ZjI3NzAzNzRiMTRiYWJmNmU2YjQ3Nzg0ZDZlMjZhZDkyN2Q2NzUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM5ODNiNDA3NWYxMDJhNDJiNmM0MTViMjU2Njk1YWExYWNmZDU3ZGFhOTc1YTE4NjFkNWU0ZGM4NjEyM2Q2MDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
     },
@@ -182,7 +182,7 @@
         },
         {
           "resource": "repo://tests/test_manual_research_api.py",
-          "version": "repo-file-v1:sha256:c9e6742f01a471f8ed420cbcd71a5738b736c6ee1ef7d8adc6218b1a48b35710"
+          "version": "repo-file-v1:sha256:0577dc8ef08e50527df172bf9ef2d6bfedfbf6659986cd693d0cd043d914bc83"
         }
       ]
     },
@@ -220,7 +220,7 @@
       "evidence": [
         {
           "resource": "repo://Dockerfile",
-          "version": "repo-file-v1:sha256:664294a887ba1cfef14e42c390f7f7c187b2ceaebf6f66f94e995ff17f222190"
+          "version": "repo-file-v1:sha256:9f1521aa7211e72b8641ab975f1ac375085d51cd376a59fc6fd7d54b4e9d140c"
         },
         {
           "resource": "repo://compose.yaml",
@@ -252,7 +252,7 @@
       "evidence": [
         {
           "resource": "repo://Dockerfile",
-          "version": "repo-file-v1:sha256:664294a887ba1cfef14e42c390f7f7c187b2ceaebf6f66f94e995ff17f222190"
+          "version": "repo-file-v1:sha256:9f1521aa7211e72b8641ab975f1ac375085d51cd376a59fc6fd7d54b4e9d140c"
         },
         {
           "resource": "repo://compose.yaml",
@@ -266,7 +266,7 @@
       "evidence": [
         {
           "resource": "repo://AGENTS.md",
-          "version": "repo-file-v1:sha256:b2ca85dd59f7b28dbd76813b6851ad7fc941b641f64e8bfebac351518e21b46a"
+          "version": "repo-file-v1:sha256:dfb1156385086e9c69526dcc3ef090a1275dc62a4e86d56f14a521bb4dadf382"
         },
         {
           "resource": "repo://src/agent_data_workbench/__init__.py",
@@ -314,7 +314,7 @@
       "evidence": [
         {
           "resource": "repo://.gitignore",
-          "version": "repo-file-v1:sha256:507be25e69987ca181205dedcdd09962930dce6068bdc28e60cd809a0a6d30a9"
+          "version": "repo-file-v1:sha256:a4c31b8a6546c5c0eddf88ee9a15db99f9f3daac23429bae49c5170df8c80cdb"
         },
         {
           "resource": "repo://pyproject.toml",
@@ -329,10 +329,24 @@
           "version": "repo-file-v1:sha256:9d4e6da24291ffabaa1ad8ee15abd188d87f4f49a5762e5c2c50460795cbe667"
         }
       ]
+    },
+    {
+      "id": "claim_99455ae853bb41d181fe976d6311e7bc",
+      "statement": "Git excludes private-data directories, JSONL/NDJSON exports and runtime databases while allowing synthetic fixtures; contributor guidance forbids committing private customer content or derived identifiers and reports.",
+      "evidence": [
+        {
+          "resource": "repo://.gitignore",
+          "version": "repo-file-v1:sha256:a4c31b8a6546c5c0eddf88ee9a15db99f9f3daac23429bae49c5170df8c80cdb"
+        },
+        {
+          "resource": "repo://AGENTS.md",
+          "version": "repo-file-v1:sha256:dfb1156385086e9c69526dcc3ef090a1275dc62a4e86d56f14a521bb4dadf382"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T00:58:07.648Z"
+    "at": "2026-09-08T03:02:55.250Z"
   }
 }

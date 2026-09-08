@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:2c5e542a9c4bc79817a44df61baa21b54020b59c3a897ecb3ba1d7d2623f9cb9",
+  "pageVersion": "sha256:6c70c51a2b7fc4b41d0bdf1496f0ff86af5e7f5c5966e1935fa8862b4b726e03",
   "claims": [
     {
       "id": "claim_80e3a5075dd34ed7b7f0393a15e92a9a",
@@ -214,11 +214,11 @@
       "evidence": [
         {
           "resource": "repo://AGENTS.md#L7-L23",
-          "version": "repo-lines-v1:sha256:0c977040451f80ba7675a4968449f706cfba91f1f6510067772e5f4df445505f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRiMmY1NTBlMTA2MGU3NmIyZTQ2ODM3YjU4NDAxYjY4YjY5MTUzZWE3N2NiOTIzY2EyZTU0ZjdmYzM2MTM4MWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ5NWIyZWUxYTc2MGMxYzBhMDZlYzQ3YmFiNjE5YmZkNGFlMzRlMzg0NzZlMTYwY2IzMDZlMmM0OTA1MDhkZTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjllMWFmYzRiZjM5ZjEzNDRkMjk2MjdlYWM4NTI5MzNiZjI3ZWIwYzA3NzU0Y2UyZTEwNWU2MmFmZjRkNGJjZDEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImViMWJjNWJjNGEyMzdmNTc4ZTZhZjRhNDE1ZDA2NDdmOTkxMGIwM2IzNjRlMWUyN2MxZjFkYmFhNzQzZDAzYmEifQ"
+          "version": "repo-lines-v1:sha256:3be20824801394e7259268763b0027e44e31b4d0426643423ead1ade12388bf7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRiMmY1NTBlMTA2MGU3NmIyZTQ2ODM3YjU4NDAxYjY4YjY5MTUzZWE3N2NiOTIzY2EyZTU0ZjdmYzM2MTM4MWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ5NWIyZWUxYTc2MGMxYzBhMDZlYzQ3YmFiNjE5YmZkNGFlMzRlMzg0NzZlMTYwY2IzMDZlMmM0OTA1MDhkZTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjllMWFmYzRiZjM5ZjEzNDRkMjk2MjdlYWM4NTI5MzNiZjI3ZWIwYzA3NzU0Y2UyZTEwNWU2MmFmZjRkNGJjZDEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImViMWJjNWJjNGEyMzdmNTc4ZTZhZjRhNDE1ZDA2NDdmOTkxMGIwM2IzNjRlMWUyN2MxZjFkYmFhNzQzZDAzYmEifQ"
         },
         {
           "resource": "repo://tests/test_explore.py",
-          "version": "repo-file-v1:sha256:812027fa036769ff6816c5a00cc9ecfb14c95585269a2da46e98d0923bedc123"
+          "version": "repo-file-v1:sha256:25dbedb16699bad964f895ab31f1fc96f5a154358077ffd0af1e456fc383c590"
         }
       ]
     },
@@ -242,7 +242,7 @@
       "evidence": [
         {
           "resource": "repo://AGENTS.md",
-          "version": "repo-file-v1:sha256:b2ca85dd59f7b28dbd76813b6851ad7fc941b641f64e8bfebac351518e21b46a"
+          "version": "repo-file-v1:sha256:dfb1156385086e9c69526dcc3ef090a1275dc62a4e86d56f14a521bb4dadf382"
         },
         {
           "resource": "repo://README.md",
@@ -268,17 +268,65 @@
         },
         {
           "resource": "repo://ui/src/views/Graph.tsx",
-          "version": "repo-file-v1:sha256:b650a813f9fd233a6313ad71d9c87c215742d02b19f96030ae852aea40422e1a"
+          "version": "repo-file-v1:sha256:cf05666f79423ff498f10a89e85339703d1fbeb07ea55fcfa42084e82a631588"
         },
         {
           "resource": "repo://ui/tests/exploration.test.tsx",
-          "version": "repo-file-v1:sha256:1304173bbdc9e984a88d0122cb3b45f763807f5fcf45f496cb7d5ae8df0848fb"
+          "version": "repo-file-v1:sha256:9ba35e8fdfc221126662d3ebe22a96164f03799d6fea4291bd117c591a439413"
+        }
+      ]
+    },
+    {
+      "id": "claim_b4ee29a1047b47b6970d18f89d363342",
+      "statement": "Regression tests verify complete category and graph results, pagination beyond the former offset bound, full default SDK/MCP/HTTP research content and large command outputs and artifacts.",
+      "evidence": [
+        {
+          "resource": "repo://tests/test_api.py#L484-L507",
+          "version": "repo-lines-v1:sha256:74182cac882653281c350df0eeeb9431613d80313cce0a3eae5765daec7edf70:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEyNDRiNDMwNTg2YThhMjQzNjI0YzA3NWEzNzg3NmUzZGJjZDlkOTRhNzdkMTIzZTNkNjAwNTNmZDE5NjI5MjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmYmQwMDkzMTRiYzI3MDg0MTY3MzRhMDJhZTVmZjM5YTFlNDhhMDUwYmU5MWY0M2IyZmFhOTIwMDJjNjJiZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/test_explore.py#L532-L564",
+          "version": "repo-lines-v1:sha256:9fe7f88148e43ad51215b91bea24a69532e71d8ccab1dab9e829470f38760fb2:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIxNDg1NjdlOGIwMTk0ODJjMjNmZGQwYTE1NWE5MWNkZWY1Njg3NjRiNWI4NzY3MjVlY2RkMjk4OTI4YzkyMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmYmQwMDkzMTRiYzI3MDg0MTY3MzRhMDJhZTVmZjM5YTFlNDhhMDUwYmU5MWY0M2IyZmFhOTIwMDJjNjJiZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNiNmFhNjMzMzE1MDVjNTZmYmViOWQ2NmViYTlhZjUwNzgwY2QzNmUyZTU2NTYzN2NhYzdhYzQ3ODIxMTgxMzEifQ"
+        },
+        {
+          "resource": "repo://tests/test_explore.py#L567-L597",
+          "version": "repo-lines-v1:sha256:c549df6dd0cebce77a2d746c2ee9d047272eab546fcb67626f123c372166b04b:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJmYjNlODMwNTdmYjlhODRhNTcwYjIyZjMyOGMzYTI0YzQwMGMwNWZlYWU3Y2EwZTA3MmFiM2IzZGJjZDk2YmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmYmQwMDkzMTRiYzI3MDg0MTY3MzRhMDJhZTVmZjM5YTFlNDhhMDUwYmU5MWY0M2IyZmFhOTIwMDJjNjJiZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/test_manual_research_api.py#L508-L542",
+          "version": "repo-lines-v1:sha256:7502cb3bb9648c741abd284f9db6521c0c21a81f7d3b39745b2ca48f0ea3aa45:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg4ODkzNTdmZTg2ZjdiNDFjYmE1MTRhZDM5MjliMDQ5YmYxY2VjMjc0MTRkYjFhMmJiOGUxYzVjNGJiZDk2OWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmYmQwMDkzMTRiYzI3MDg0MTY3MzRhMDJhZTVmZjM5YTFlNDhhMDUwYmU5MWY0M2IyZmFhOTIwMDJjNjJiZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/test_research.py#L125-L160",
+          "version": "repo-lines-v1:sha256:85ae58270325d0799b698fa6274178b6e0e0425adee1a970087c1dc3e4820cdd:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRiYmY5NzU5YjFlMjkxZTZmMWQ5OTg0MmU2OGQyODQwODczYzg1YzZmOWQ2ZDViNTMyZmYwYWEzMzdhZTViZTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmYmQwMDkzMTRiYzI3MDg0MTY3MzRhMDJhZTVmZjM5YTFlNDhhMDUwYmU5MWY0M2IyZmFhOTIwMDJjNjJiZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVmNDZlMTA5OWExNjY2MDU4NzBlZjMxMzE3YzdjYTliNjVkMzkzOTQxODY1MGFkYzNhMTE4M2U1NzNlOWExMTYifQ"
+        },
+        {
+          "resource": "repo://tests/test_research.py#L459-L508",
+          "version": "repo-lines-v1:sha256:2c68ef60df958643aa91b4b16c91662c5db87b5a9ff783ccf1f6e6c8a3e23786:eyJzZWxlY3RlZExpbmVDb3VudCI6NTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImExNDI4NzU0NTU0ODAyMmY3OTA0MjZlODE5ZGM5OTBmOTRjMjI5YzgwYTcyNWNjM2M2Mzg3MzViOWUzNWMxZDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmYmQwMDkzMTRiYzI3MDg0MTY3MzRhMDJhZTVmZjM5YTFlNDhhMDUwYmU5MWY0M2IyZmFhOTIwMDJjNjJiZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/test_workbench_execution.py#L578-L600",
+          "version": "repo-lines-v1:sha256:e9f2f09e6de9f4b6ba8a73d9b26899941bf5efdc1dbdb9a71f22eb7cca695ff0:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgxODEyZGMyZTJjZjk2OTMyNGExZTE4YzMyYWU0NWU2ZGM2N2MxZGVmMWRmMzgzZTQ5NTRiYTQyNTgxZDBhZDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFhZDU1OTdjMjA1ZWFjMzZmNTkwM2M1NWRjOGFhMTVlOTE4N2Y0NTMyZTY4NjE1MWFiYWNhYTQyY2JmOGM3NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_66509f6f178a45d0b7578efd7e67a239",
+      "statement": "Contributor guidance requires complete content by default and independently synthetic fixtures, while Git excludes private exports and runtime databases.",
+      "evidence": [
+        {
+          "resource": "repo://.gitignore",
+          "version": "repo-file-v1:sha256:a4c31b8a6546c5c0eddf88ee9a15db99f9f3daac23429bae49c5170df8c80cdb"
+        },
+        {
+          "resource": "repo://AGENTS.md",
+          "version": "repo-file-v1:sha256:dfb1156385086e9c69526dcc3ef090a1275dc62a4e86d56f14a521bb4dadf382"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T02:26:18.735Z"
+    "at": "2026-09-08T02:57:07.074Z"
   }
 }

@@ -573,3 +573,28 @@ def test_native_snapshot_exposure_is_recorded_without_changing_suite_definition(
     }
     with pytest.raises(ValueError, match="exposed"):
         run_experiment(project, manifest["id"], FixedRunner(), FixedRunner(), split="final")
+
+
+def test_large_command_output_and_artifacts_are_preserved_in_full(tmp_path):
+    # Given
+    payload = {"text": "x" * 2_000_001 + "final evidence"}
+    runner, _ = command_runner(
+        tmp_path,
+        "import json,sys\nfrom pathlib import Path\n"
+        "request=json.load(sys.stdin)\n"
+        'Path("state.json").write_text(json.dumps(request["input"]))\n'
+        'print(json.dumps({"output":request["input"]}))\n',
+    )
+    trial = tmp_path / "trial"
+    trial.mkdir()
+
+    # When
+    execution = runner.run(payload, trial, 42)
+    artifacts = read_artifacts(trial, ["state.json"])
+
+    # Then
+    assert {"status": execution.status, "output": execution.output, "artifacts": artifacts} == {
+        "status": "completed",
+        "output": payload,
+        "artifacts": {"state.json": payload},
+    }

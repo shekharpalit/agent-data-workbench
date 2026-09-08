@@ -254,9 +254,20 @@ export function SearchView({
               cells: [
                 trace.trace_id,
                 trace.stratum,
-                String(
-                  trace.data.input ?? trace.data.request ?? "Inspect trace",
-                ).slice(0, 130),
+                trace.data.input !== undefined ||
+                trace.data.request !== undefined ? (
+                  <Details title="Read input / request" key="input">
+                    <JsonView
+                      value={
+                        trace.data.input !== undefined
+                          ? trace.data.input
+                          : trace.data.request
+                      }
+                    />
+                  </Details>
+                ) : (
+                  "Inspect trace"
+                ),
                 <div className="row" key="actions">
                   <button
                     className="ghost"
@@ -297,10 +308,7 @@ export function SearchView({
             </button>
             <button
               className="secondary"
-              disabled={
-                query.offset + query.limit >= data.eligible ||
-                query.offset + query.limit > 10000
-              }
+              disabled={query.offset + query.limit >= data.eligible}
               onClick={() =>
                 onQuery({ ...query, offset: query.offset + query.limit })
               }

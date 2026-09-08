@@ -138,7 +138,7 @@ class Project:
             value["worlds"] = worlds
         return {**value, "sha256": digest(value)}
 
-    def history(self, limit: int = 10) -> list[dict]:
+    def history(self, limit: int | None = None) -> list[dict]:
         return [
             {k: e.get(k) for k in ("id", "created_at", "proposal", "conclusion", "summary")}
             for e in sorted(

@@ -1,6 +1,7 @@
 """Build graphs from recorded trace, finding, task and experiment references."""
 
 import json
+from collections import deque
 
 from agent_data_workbench.data.store import TraceStore
 from agent_data_workbench.shared.identifiers import stable_id
@@ -8,9 +9,9 @@ from agent_data_workbench.shared.json import json_text
 from agent_data_workbench.workspace.project import Project
 
 
-def lineage(project: Project, *, trace_id: str = "", limit: int = 200) -> dict:
-    if not 10 <= limit <= 300:
-        raise ValueError("Graph limit must be 10–300 nodes")
+def lineage(project: Project, *, trace_id: str = "", limit: int | None = None) -> dict:
+    if limit is not None and limit < 1:
+        raise ValueError("Graph limit must be positive, or null for all nodes")
     nodes, edges = {}, set()
 
     def node(kind, key, label, **metadata):
@@ -85,13 +86,15 @@ def lineage(project: Project, *, trace_id: str = "", limit: int = 200) -> dict:
     total = len(nodes)
     kinds = {"trace": 0, "finding": 1, "task": 2, "experiment": 3}
     ordered = sorted(nodes.values(), key=lambda n: (kinds[n["kind"]], n["id"]))
-    # Include all layers before adding more nodes to each layer when the graph is large.
-    buckets = [[n for n in ordered if n["kind"] == kind] for kind in kinds]
-    selected = []
-    while any(buckets) and len(selected) < limit:
-        for bucket in buckets:
-            if bucket and len(selected) < limit:
-                selected.append(bucket.pop(0))
+    selected = ordered
+    if limit is not None:
+        # An explicitly limited view takes turns across evidence layers.
+        buckets = [deque(n for n in ordered if n["kind"] == kind) for kind in kinds]
+        selected = []
+        while any(buckets) and len(selected) < limit:
+            for bucket in buckets:
+                if bucket and len(selected) < limit:
+                    selected.append(bucket.popleft())
     keys = {n["id"] for n in selected}
     return {
         "nodes": selected,

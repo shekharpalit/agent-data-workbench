@@ -39,7 +39,8 @@ FROM python-base AS production-dependencies
 RUN --mount=type=cache,target=/root/.cache/uv uv sync --locked --no-dev --no-install-project
 COPY src/ ./src/
 COPY --from=frontend /app/ui/dist/ ./ui/dist/
-RUN --mount=type=cache,target=/root/.cache/uv uv sync --locked --no-dev --no-editable
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv sync --locked --no-dev --no-editable --reinstall-package agent-data-workbench
 
 FROM python-base AS development
 COPY --from=node /usr/local/bin/node /usr/local/bin/node

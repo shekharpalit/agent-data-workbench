@@ -40,6 +40,6 @@ def artifact(
 def graph(
     project: ProjectDependency,
     trace_id: Annotated[str, Query(max_length=1000)] = "",
-    limit: Annotated[int, Query(ge=10, le=300)] = 200,
+    limit: Annotated[int | None, Query(ge=1)] = None,
 ):
     return lineage(project, trace_id=trace_id, limit=limit)

@@ -105,9 +105,9 @@ class ResearchWorkspace:
                     "trace_id": row["trace_id"],
                     "stratum": row["stratum"],
                     "group_id": row["group_id"],
-                    "preview": raw[:1000],
+                    "preview": raw,
                     "total_chars": len(raw),
-                    "truncated": len(raw) > 1000,
+                    "truncated": False,
                     "status": row["status"],
                 }
             )
@@ -115,7 +115,7 @@ class ResearchWorkspace:
         return {"records": records, "next_cursor": cursor, "coverage": self.dataset.coverage()}
 
     def read(
-        self, trace_id: str, *, pointer: str = "", offset: int = 0, max_chars: int | None = 16000
+        self, trace_id: str, *, pointer: str = "", offset: int = 0, max_chars: int | None = None
     ) -> dict:
         from agent_data_workbench.shared.json import json_text, pointer_value
 

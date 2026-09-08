@@ -53,7 +53,7 @@ sources:
 generated: { by: "codex", at: "2026-09-08T00:58:07.648Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T00:58:07.648Z
+    at: 2026-09-08T03:02:55.250Z
 ---
 
 # Quickstart

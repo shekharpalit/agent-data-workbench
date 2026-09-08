@@ -67,7 +67,7 @@ def test_openapi_describes_typed_operations_and_requires_the_local_session(clien
         ("GET", "/api/trace", None),
         ("GET", "/api/traces?offset=invalid", None),
         ("GET", "/api/artifacts?kind=unknown", None),
-        ("GET", "/api/graph?limit=999", None),
+        ("GET", "/api/graph?limit=0", None),
         (
             "POST",
             "/api/task/review",
@@ -478,4 +478,30 @@ def test_imported_event_trace_is_clustered_and_graphed_without_analysis(client, 
         "members": [["scan"]],
         "nodes": [{"id": "trace:scan", "kind": "trace", "label": "scan", "trace_id": "scan"}],
         "edges": [],
+    }
+
+
+def test_graph_defaults_and_search_offsets_do_not_hide_later_traces(client, project):
+    # Given
+    TraceStore(project).ingest(Source([{"trace_id": f"scan-{i:03}"} for i in range(301)]))
+
+    # When
+    graph = client.get("/api/graph")
+    explicit = client.get("/api/graph?limit=999")
+    search = client.post("/api/search", json={"offset": 10020})
+    legacy = client.get("/api/traces?offset=10020")
+
+    # Then
+    assert {
+        "statuses": [r.status_code for r in [graph, explicit, search, legacy]],
+        "graph": {k: graph.json()[k] for k in ["total_nodes", "shown_nodes", "truncated"]},
+        "same_graph": explicit.json() == graph.json(),
+        "search": {k: search.json()[k] for k in ["eligible", "selected", "ids"]},
+        "legacy": {k: legacy.json()[k] for k in ["eligible", "selected", "ids"]},
+    } == {
+        "statuses": [200, 200, 200, 200],
+        "graph": {"total_nodes": 310, "shown_nodes": 310, "truncated": False},
+        "same_graph": True,
+        "search": {"eligible": 310, "selected": 0, "ids": []},
+        "legacy": {"eligible": 310, "selected": 0, "ids": []},
     }

@@ -503,3 +503,40 @@ def test_manual_mutations_wait_for_native_session_ownership_to_be_released(clien
         "publish": {"status": 200, "body": {"id": key, "status": "complete", "coverage": coverage}},
         "saved": {"status": "complete", "result": result()},
     }
+
+
+def test_default_research_http_reads_preserve_long_fields_and_search_records(client, project):
+    # Given
+    data = {"trace_id": "long-record", "text": "content " * 3000 + "final evidence"}
+    TraceStore(project).ingest(Source([data]))
+    key = client.post(
+        "/api/investigation/create", json={"question": "Read complete evidence"}
+    ).json()["id"]
+
+    # When
+    read = client.get(
+        "/api/investigation/trace",
+        params={"id": key, "trace_id": "long-record", "pointer": "/text"},
+    )
+    search = client.get("/api/investigation/search", params={"id": key, "text": "long-record"})
+    record = search.json()["records"][0]
+
+    # Then
+    assert {
+        "statuses": [read.status_code, search.status_code],
+        "read": read.json(),
+        "search_content": record["preview"],
+        "search_truncated": record["truncated"],
+    } == {
+        "statuses": [200, 200],
+        "read": {
+            "trace_id": "long-record",
+            "pointer": "/text",
+            "content": data["text"],
+            "offset": 0,
+            "total_chars": len(data["text"]),
+            "next_offset": None,
+        },
+        "search_content": json_text(data),
+        "search_truncated": False,
+    }

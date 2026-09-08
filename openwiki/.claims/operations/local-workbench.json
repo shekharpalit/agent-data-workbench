@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:014c8c753a33747dc4f22b86417e794a2cc6b19db7388d63f3e440ff5ba622c9",
+  "pageVersion": "sha256:79fd9f0939f4e18ab3a7c080cacf6dd546c960dce71c83f0e215fabec6a16945",
   "claims": [
     {
       "id": "claim_25574e40cfb048b39464c4e95bba596d",
@@ -122,7 +122,7 @@
       "evidence": [
         {
           "resource": "repo://src/agent_data_workbench/api/routers/investigations.py#L93-L157",
-          "version": "repo-lines-v1:sha256:80015c578050764b5feeacb9f5e69683afeaa217828436b7f90d2b962bbaeaad:eyJzZWxlY3RlZExpbmVDb3VudCI6NjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyNmZjYTI5ZWMwNGQ3YWRmMzBmNzc5NTk4NTY4OTkxZmRmNGZkMGEzNjVmZjJjY2I0MzliOTIwMGU2YjQ1MmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJhZmJmOWFhMjBlZjkxMjE2YWNmZjhhMTM2ZjI3NzAzNzRiMTRiYWJmNmU2YjQ3Nzg0ZDZlMjZhZDkyN2Q2NzUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM5ODNiNDA3NWYxMDJhNDJiNmM0MTViMjU2Njk1YWExYWNmZDU3ZGFhOTc1YTE4NjFkNWU0ZGM4NjEyM2Q2MDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "version": "repo-lines-v1:sha256:5b5aaff4fe9ad3a424f7511faae5c7ef09395f80790172c6bb5339c3a9704892:eyJzZWxlY3RlZExpbmVDb3VudCI6NjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyNmZjYTI5ZWMwNGQ3YWRmMzBmNzc5NTk4NTY4OTkxZmRmNGZkMGEzNjVmZjJjY2I0MzliOTIwMGU2YjQ1MmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJhZmJmOWFhMjBlZjkxMjE2YWNmZjhhMTM2ZjI3NzAzNzRiMTRiYWJmNmU2YjQ3Nzg0ZDZlMjZhZDkyN2Q2NzUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM5ODNiNDA3NWYxMDJhNDJiNmM0MTViMjU2Njk1YWExYWNmZDU3ZGFhOTc1YTE4NjFkNWU0ZGM4NjEyM2Q2MDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
           "resource": "repo://ui/src/views/ManualResearchEditor.tsx#L170-L454",
@@ -210,7 +210,7 @@
         },
         {
           "resource": "repo://ui/src/views/Clusters.tsx",
-          "version": "repo-file-v1:sha256:3434fd0ddae26d917a5e95b0446a700f52fa4905bd5c8c624c2dcd60a05ab20f"
+          "version": "repo-file-v1:sha256:1853729d54faf88308d44bc31c8dff1c5502ad2b2794ccab58f08aae6008b991"
         }
       ]
     },
@@ -232,17 +232,61 @@
         },
         {
           "resource": "repo://ui/src/views/Graph.tsx",
-          "version": "repo-file-v1:sha256:b650a813f9fd233a6313ad71d9c87c215742d02b19f96030ae852aea40422e1a"
+          "version": "repo-file-v1:sha256:cf05666f79423ff498f10a89e85339703d1fbeb07ea55fcfa42084e82a631588"
         },
         {
           "resource": "repo://ui/tests/exploration.test.tsx",
-          "version": "repo-file-v1:sha256:1304173bbdc9e984a88d0122cb3b45f763807f5fcf45f496cb7d5ae8df0848fb"
+          "version": "repo-file-v1:sha256:9ba35e8fdfc221126662d3ebe22a96164f03799d6fea4291bd117c591a439413"
+        }
+      ]
+    },
+    {
+      "id": "claim_94c697a1d76b4652be08091cfbf95a10",
+      "statement": "Workbench graph requests return all nodes by default, distributions return all categories, and search pagination permits offsets beyond 10,000 while structured input display retains its full content.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/api/routers/artifacts.py#L39-L45",
+          "version": "repo-lines-v1:sha256:52800bae69c730c6fe9fda2831dd79b67b153363f55c5dc372125d0baa36c2e6:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODhiMTIzODQ2NDJlZmUzZTBhMjU3YTkxOGU0YWNiNWViN2M2ODJkZDIxMTljOTQ2NGE4YTI5MmQ0YzM5MWM1OCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTllZjI1NThlYjM0NjU2YWYyNjJjODljOGFhODMzNGMwNWMxNjVhMTQxYTM1ZmRiZjU2YTc0OGNiMDFlNDMxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGNjNGE3ZDFjYzc5NmFiYTNlNDY3MjMzMjdmNTE3ZTlmODExOTgyZDI1MGYwNzAyOTg2ZTRiNTc2NGFkOTU4OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/exploration/distributions.py#L12-L47",
+          "version": "repo-lines-v1:sha256:b309ccc51bfc911adde6f2ffdc6df63e5597ee3f180fb3893999b7eb6733d0ea:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjljOTZjNTZhNTg4ZjEyMzExMjI1ZmNiMTBkY2EzMzQwMzhjNjczYTM0ZjMxOWFkMmUwZDI1Yzg4YWIyZmUwNmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA0ZDZlYjgwMjMyNzVmNmQzYjUxY2Y1YmI0Y2ZhNjNmNzdiNTBlN2VlMWZlMmEzZmJhY2VhNGYzZTJlNTNiMWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/exploration/lineage.py#L12-L118",
+          "version": "repo-lines-v1:sha256:44e1d2072b0f4902ced5a123e54a3f40c715bbd3a694ee9c4ae3df00df73dab9:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA3LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI3MWNlY2ZhOTEwZTg5OTg1MTViM2I0MzBjYWJlZTU2MzZmNmMwZDVlNGE5M2VhMmE2MDkyMTcwNTNlMzA4ZmNmIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0ODkzZjQwZTM3ODFlYjg5NmM4MmQwNDZhMDgwNjdhMTFlMzVjZGYyZjFkZmFmMjZmZWE5MGI4ZGI2Njc2NDEzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlYWIzNTgzMWY5NjVkODNkMTA4NDg0ZDM5MGQwNTBhYWM1MDliYjBkOWZiNDQ0OWE1NDMwODQ1MWJmNjFjYjUzIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/exploration/schemas.py#L31-L45",
+          "version": "repo-lines-v1:sha256:7f2c4169730851d345f72d10280887455490cb5f390c77252a2522d522a9a734:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliMjMyNjcyZDRhZGVhOGUxNWJmZmUwN2MwNTMwMjE4NTBhOTgzZWQ4Nzc0ZDAwOGVlMTBjNmQzY2QxMTQ1ODMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEyYWIwOTBiY2QxNjIwZmE2MmVhZWUxNTdhNzRmY2E2MzVhYTI5ZTEyY2JmZmQ2MThiNTc5MmQ4N2JjMDNhM2YiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRiNTMwZWRlNGYzZTg4MmQ2ZTg1ZTllNmE3N2JiYTI5NTk5OTk3MWU2NTk5NGU0ZTA0MWJjMDAzYjE1NzhkMmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjlkN2I1NWQ1NmFiNGUzYzFlN2VhNjRkMTViZWEwNmU1Y2E1NzJiYTAyNTc3MDBjYjYyNzk0M2VjZjAwMTI5NWUifQ"
+        },
+        {
+          "resource": "repo://ui/src/views/Search.tsx",
+          "version": "repo-file-v1:sha256:148181817a435e34b7b0cb1d2f294f10292dcb91dd96f424fabf7a11399dc8a7"
+        }
+      ]
+    },
+    {
+      "id": "claim_90a4eb0fcbf248e09e795f653c21da03",
+      "statement": "Research HTTP and MCP field reads return complete content by default, with optional explicit character pages and continuation offsets.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/api/routers/investigations.py#L121-L132",
+          "version": "repo-lines-v1:sha256:bfd7a809902a2e24a64f66e7ea5673ed638ff6288aa366bbd8adfd69d6bf3ca5:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY4NTVjODMyYmYzNmY2Y2M2MDRiNzU0MjE2ODcwNGVlN2JjMmQ2Y2U3M2Q0ZTE3MjkzMzRlYmQzZDE4ZDIyOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhjYzRhN2QxY2M3OTZhYmEzZTQ2NzIzMzI3ZjUxN2U5ZjgxMTk4MmQyNTBmMDcwMjk4NmU0YjU3NjRhZDk1ODkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc3MmQ2YWEyNzFiMzIyMWViMDU5ODEyZjU2ZjdmMDk2MjA3MjExYzM4MzUyMzQ5NzRiYjQwYjMyYzg2NjdhMDIifQ"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/research/mcp.py",
+          "version": "repo-file-v1:sha256:5cf6471f9a67258d0c44f514dcbdbe497abce1def752507ec8ea9ea8c9154b0b"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/research/workspace.py#L117-L137",
+          "version": "repo-lines-v1:sha256:7234f52bf7752a62b5b5fc3c824bec2fb1acce83f8c24e9a4d8b5c1d37bc3c94:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdkMGZiODkzMmE3NWIyNTFiZThjM2RiMWFhYTljMzQzMmE4NDU4OGUyZmQ2MGFlZDg4YmMwZGFiZTRjM2IwNzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZlMWEyMmU5OTA5MTMyNDRhYjI4ZmE2MDc2YzM0YzQ0MGY2MGMzODczNmE3OTc5YjY4OGE1ZDJkY2FmNGY1NTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJmZTcxMWFkMWQ1OTEzZTM5NzdlM2RhMDUzNDAwZTM4MTk3ZDdlMWE4MjI0YTlmMDlkNTk3OTlhYzM5YjcxODEifQ"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T02:26:18.735Z"
+    "at": "2026-09-08T02:57:07.074Z"
   }
 }

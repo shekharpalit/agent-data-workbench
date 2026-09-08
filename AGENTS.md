@@ -16,7 +16,8 @@ Use source code and tests as the authority. Documentation lives in `openwiki/`; 
 - Generate internal artifact IDs with UUIDs and validate them through the shared UUID type. Preserve external trace IDs verbatim.
 - Preserve canonical trace data, import rollback, accepted-task audit gates, source-group separation, invalid outcomes, and final-split exposure bookkeeping.
 - State what experiments actually establish. Synthetic test results do not establish model improvement; captured target files are not independent ground truth. Command runners execute trusted code with host access.
-- Keep credentials, private traces, local runs, virtual environments, and dependency installations out of Git.
+- Keep credentials, private traces, local runs, virtual environments, and dependency installations out of Git. Use independently synthetic fixtures; never commit customer trace content, identifiers, bucket names, or reports derived from private datasets.
+- Preserve complete input and output content by default. Pagination must allow retrieval of every record or category; only explicit caller limits may select a subset. Do not silently clip trace text or skip large valid artifacts.
 
 ## Documentation
 

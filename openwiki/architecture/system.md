@@ -5,7 +5,7 @@ description: How the CLI, Python SDK, FastAPI service, React workbench, and loca
 tags: [architecture, sdk, persistence, provenance]
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T00:58:07.648Z
+    at: 2026-09-08T03:02:55.250Z
 sources:
   - id: openwiki-source-ea70eb6c045047448e446296
     resource: repo://.gitignore
@@ -77,7 +77,7 @@ sources:
     resource: repo://tests/test_manual_research_api.py
   - id: openwiki-source-a741d432f952c0dbfb4fb35d
     resource: repo://ui/vite.config.ts
-generated: { by: "codex", at: "2026-09-08T00:51:51.689Z" }
+generated: { by: "codex", at: "2026-09-08T02:47:35.721Z" }
 ---
 
 # System architecture
@@ -132,7 +132,7 @@ The service layer translates requests into SDK operations. It does not contain a
 
 ## Local state and consistency
 
-`Project.create` requires a new or empty directory. It writes `project.json` and creates `knowledge/`, `investigations/`, `tasks/`, `suites/`, `experiments/`, `exports/`, `worlds/`, `improvements/`, `calibrations/`, `taxonomies/`, and `coverage/`. A project-local `.gitignore` excludes its contents. Use a directory under `runs/` for private working data.
+`Project.create` requires a new or empty directory. It writes `project.json` and creates `knowledge/`, `investigations/`, `tasks/`, `suites/`, `experiments/`, `exports/`, `worlds/`, `improvements/`, `calibrations/`, `taxonomies/`, and `coverage/`. A project-local `.gitignore` excludes its contents. Use a directory under `runs/` or outside the repository for private working data. Git also ignores `private-data/`, JSONL/NDJSON exports and runtime database files; only synthetic trace fixtures under `tests/fixtures/` are explicitly versionable. Contributor guidance forbids committing customer content, identifiers, bucket names or reports derived from private datasets.
 
 `TraceStore` uses `traces.sqlite3`. SQLAlchemy maps the original six-column trace layout: ID, source group, stratum, canonical JSON, content hash, and import time. A session transaction wraps each operation; an import conflict rolls back its batch. The engine uses `NullPool`, and first-use schema creation is serialized inside the process. Worker threads obtain their own sessions.
 

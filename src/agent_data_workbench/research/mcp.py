@@ -50,7 +50,7 @@ def create_mcp(workspace: ResearchWorkspace) -> MCPServer:
         page_size: int = 20,
         pending_only: bool = False,
     ) -> dict[str, Any]:
-        """Search all inputs with cursor pagination. Previews can be expanded with read_trace."""
+        """Search all inputs with cursor pagination and complete serialized records."""
         return workspace.search(
             text=text, stratum=stratum, after=after, page_size=page_size, pending_only=pending_only
         )
@@ -58,9 +58,9 @@ def create_mcp(workspace: ResearchWorkspace) -> MCPServer:
     @server.tool(structured_output=True)
     @tool_errors
     def read_trace(
-        trace_id: str, pointer: str = "", offset: int = 0, max_chars: int | None = 16000
+        trace_id: str, pointer: str = "", offset: int = 0, max_chars: int | None = None
     ) -> dict[str, Any]:
-        """Read an original field; use next_offset to continue, or null max_chars for all text."""
+        """Read a complete original field. Set max_chars explicitly for resumable text pages."""
         return workspace.read(trace_id, pointer=pointer, offset=offset, max_chars=max_chars)
 
     @server.tool(structured_output=True)

@@ -16,6 +16,8 @@ sources:
     resource: repo://src/agent_data_workbench/api/errors.py
   - id: openwiki-source-1848987f753961721cee2571
     resource: repo://src/agent_data_workbench/api/middleware.py
+  - id: openwiki-source-2698786dc1c73188d557cbbf
+    resource: repo://src/agent_data_workbench/api/routers/artifacts.py
   - id: openwiki-source-e6d7f541d0e16503af405c8b
     resource: repo://src/agent_data_workbench/api/routers/investigations.py
   - id: openwiki-source-98bfc373ed8e75b28dcf239e
@@ -28,10 +30,16 @@ sources:
     resource: repo://src/agent_data_workbench/cli/project.py
   - id: openwiki-source-a69866c703779e64969315b7
     resource: repo://src/agent_data_workbench/data/ingestion.py
+  - id: openwiki-source-1f1b2017c3c167f22bb29f26
+    resource: repo://src/agent_data_workbench/exploration/distributions.py
   - id: openwiki-source-eab73f261f2dfa06a5a90e74
     resource: repo://src/agent_data_workbench/exploration/lineage.py
   - id: openwiki-source-8b95b7fe4c43d79511f093d7
     resource: repo://src/agent_data_workbench/exploration/schemas.py
+  - id: openwiki-source-1c842561c46278adab40a06d
+    resource: repo://src/agent_data_workbench/research/mcp.py
+  - id: openwiki-source-2dbe8753da4267ce652f414e
+    resource: repo://src/agent_data_workbench/research/workspace.py
   - id: openwiki-source-c8c7945f688b6b620d3800cf
     resource: repo://src/agent_data_workbench/workbench/jobs.py
   - id: openwiki-source-56b68af7c871c44d9ba4d64d
@@ -62,14 +70,16 @@ sources:
     resource: repo://ui/src/views/ResearchOutputs.tsx
   - id: openwiki-source-14a72935f36008706a0aa989
     resource: repo://ui/src/views/ResearchSnapshot.tsx
+  - id: openwiki-source-e2b9808e897a9a7a52014721
+    resource: repo://ui/src/views/Search.tsx
   - id: openwiki-source-596cdb28df7c16b7e6d5931b
     resource: repo://ui/tests/exploration.test.tsx
   - id: openwiki-source-826d1e88c728d7cfae868e97
     resource: repo://ui/tests/workflow.test.tsx
-generated: { by: "codex", at: "2026-09-08T02:26:18.735Z" }
+generated: { by: "codex", at: "2026-09-08T02:47:35.721Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T02:26:18.735Z
+    at: 2026-09-08T02:57:07.074Z
 ---
 
 # Run the local workbench
@@ -121,13 +131,13 @@ Open **Clusters** after ingestion. It runs automatically using complete records 
 
 The **Cluster map** selector switches between groups. Its edges mean group membership, not causality. Select a trace node and click **Open selected trace**, or use **Inspect all members** to view the group in the filtered explorer. Pan, zoom or fit the canvas with its controls. Missing selected fields produce an explicit empty state: clear the text field or choose a pointer present in the imported records.
 
-**Evidence graph** displays imported traces immediately, using source paths as labels when available. Traces without saved links are arranged in a grid. Select a node and open its source artifact to inspect the original events. Findings and tasks add recorded relationships later; the graph does not invent relationships between raw runs. Use Clusters to explore shared language. The graph reports how many nodes are shown and supports focusing on a trace ID when the displayed graph is bounded.
+**Evidence graph** displays imported traces immediately, using source paths as labels when available. Traces without saved links are arranged in a grid. Select a node and open its source artifact to inspect the original events. Findings and tasks add recorded relationships later; the graph does not invent relationships between raw runs. Use Clusters to explore shared language. The graph returns every node by default and supports focusing on a trace ID. Only an explicit API `limit` reduces its node count. Trace explorer distributions return every category, record pagination has no total offset ceiling, and Read input / request expands the complete structured value.
 
 ## Research manually
 
 Open Investigations, leave **Research myself** selected, enter a question, choose research or complete mode, and click **Start manual research**. The request captures the dataset and opens its workspace without starting a native CLI or a model job. No provider account is required. Final evaluation inputs are included unless you select their explicit exclusion.
 
-Use **Research dataset** to search the frozen snapshot by text or stratum, optionally narrowing to unfinished records. Select a record to inspect its original JSON, read a field by JSON pointer, and page through long content. Record a human observation or structured JSON object with a method; select failed when missing context prevents review. Notes go into the journal. **Write findings** opens summary, finding and exact citation fields; **Save findings draft** preserves unfinished research and **Publish final findings** completes it. **Create a chart** accepts labels and numeric values for a local bar chart. Citation links reopen the original snapshot field.
+Use **Research dataset** to search the frozen snapshot by text or stratum, optionally narrowing to unfinished records. Select a record to inspect its original JSON, read a complete field by JSON pointer, and inspect long content without a default prefix cutoff. API and MCP callers can explicitly request resumable text pages with `max_chars` and `offset`. Record a human observation or structured JSON object with a method; select failed when missing context prevents review. Notes go into the journal. **Write findings** opens summary, finding and exact citation fields; **Save findings draft** preserves unfinished research and **Publish final findings** completes it. **Create a chart** accepts labels and numeric values for a local bar chart. Citation links reopen the original snapshot field.
 
 Draft editing retains existing cases, signals, proposals, limitations and open questions. Edits survive polling. Saved drafts survive reopening the investigation; unsaved form values remain local to the mounted view, so save before navigating away or refreshing the browser.
 

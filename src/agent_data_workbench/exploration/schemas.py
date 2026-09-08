@@ -35,7 +35,7 @@ class SearchQuery(Contract):
     sort: str = Field(default="trace_id", max_length=300)
     direction: Literal["asc", "desc"] = "asc"
     limit: int = Field(default=20, ge=1, le=200)
-    offset: int = Field(default=0, ge=0, le=10000)
+    offset: int = Field(default=0, ge=0)
     trace_ids: list[str] | None = None
 
     @model_validator(mode="after")

@@ -217,7 +217,7 @@ class TraceStore:
             "pointer": pointer,
             "eligible": total,
             "missing_or_non_scalar": missing,
-            "counts": [{"value": json.loads(k), "count": v} for k, v in counts.most_common(50)],
+            "counts": [{"value": json.loads(k), "count": v} for k, v in counts.most_common()],
             "distinct": len(counts),
             "numeric_count": len(numeric),
             "mean": sum(numeric) / len(numeric) if numeric else None,

@@ -131,14 +131,33 @@ def test_large_record_is_preserved_and_can_be_read_without_truncation(workspace,
     TraceStore(workspace.project).ingest(JsonSource(path))
     value = start_investigation(workspace.project, "Read the full input")
     large = ResearchWorkspace(workspace.project, value["id"])
+    complete = large.read("large", pointer="/text")
+    found = large.search(text="large")["records"][0]
     first = large.read("large", pointer="/text", max_chars=23)
     rest = large.read("large", pointer="/text", offset=first["next_offset"], max_chars=None)
     # Then
     assert {
+        "complete": complete,
+        "search_record": json.loads(found["preview"]),
+        "search_truncated": found["truncated"],
         "joined": first["content"] + rest["content"],
         "total": rest["total_chars"],
         "next": rest["next_offset"],
-    } == {"joined": text, "total": len(text), "next": None}
+    } == {
+        "complete": {
+            "trace_id": "large",
+            "pointer": "/text",
+            "content": text,
+            "offset": 0,
+            "total_chars": len(text),
+            "next_offset": None,
+        },
+        "search_record": {"trace_id": "large", "text": text},
+        "search_truncated": False,
+        "joined": text,
+        "total": len(text),
+        "next": None,
+    }
 
 
 def test_artifacts_and_tasks_retain_snapshot_lineage(workspace):
@@ -434,4 +453,56 @@ def test_large_knowledge_file_reaches_native_context_intact(tmp_path, revise):
     assert {"exit": added.exit_code, "content": value["context"]["knowledge"][0]["content"]} == {
         "exit": 0,
         "content": expected,
+    }
+
+
+def test_mcp_default_reads_and_search_preserve_complete_long_records(tmp_path):
+    # Given
+    from mcp.client.session import ClientSession
+    from mcp.client.stdio import StdioServerParameters, stdio_client
+
+    data = {"trace_id": "long-record", "text": "evidence " * 3000 + "final event"}
+    project = Project.create(tmp_path / "project", "Test agent", "Full evidence", [])
+    TraceStore(project).ingest(Source([data]))
+    value = start_investigation(project, "Read the complete field")
+
+    async def exercise():
+        server = StdioServerParameters(
+            command=sys.executable,
+            args=[
+                "-m",
+                "agent_data_workbench",
+                "mcp",
+                str(project.root),
+                value["id"],
+            ],
+        )
+        async with stdio_client(server) as (read, write), ClientSession(read, write) as session:
+            await session.initialize()
+            field = await session.call_tool(
+                "read_trace", {"trace_id": "long-record", "pointer": "/text"}
+            )
+            found = await session.call_tool("search_traces", {})
+            record = found.structured_content["records"][0]
+            return {
+                "field": field.structured_content,
+                "record": json.loads(record["preview"]),
+                "truncated": record["truncated"],
+            }
+
+    # When
+    actual = asyncio.run(exercise())
+
+    # Then
+    assert actual == {
+        "field": {
+            "trace_id": "long-record",
+            "pointer": "/text",
+            "content": data["text"],
+            "offset": 0,
+            "total_chars": len(data["text"]),
+            "next_offset": None,
+        },
+        "record": data,
+        "truncated": False,
     }

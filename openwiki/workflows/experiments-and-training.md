@@ -10,6 +10,8 @@ sources:
     resource: repo://src/agent_data_workbench/evaluation/statistics.py
   - id: openwiki-source-089f8cc32a1cbbf08c3ba0df
     resource: repo://src/agent_data_workbench/evaluation/suites.py
+  - id: openwiki-source-5713c60f5b9a71216ca7a47c
+    resource: repo://src/agent_data_workbench/execution/artifacts.py
   - id: openwiki-source-36dca02d2c71dfa05627a7a1
     resource: repo://src/agent_data_workbench/execution/runners.py
   - id: openwiki-source-5817a5ac325238a8edd5763a
@@ -18,10 +20,12 @@ sources:
     resource: repo://src/agent_data_workbench/research/artifacts.py
   - id: openwiki-source-ff3fb6d1981d7674fe333637
     resource: repo://src/agent_data_workbench/shared/commands.py
-generated: { by: "codex", at: "2026-09-08T00:07:39.310Z" }
+  - id: openwiki-source-af0e5443d83442c11181e6ce
+    resource: repo://tests/test_workbench_execution.py
+generated: { by: "codex", at: "2026-09-08T02:47:35.721Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T00:07:39.310Z
+    at: 2026-09-08T02:47:35.721Z
 ---
 
 # Experiments and training exports
@@ -46,6 +50,9 @@ The suite groups tasks that share source groups, including transitive relationsh
 The manifest freezes task hashes, group membership, split roles, and source inventory. Existing group assignments cannot change in a later suite. Every manifest receives a new UUID independent of its name. Names can repeat; use the returned `id` for execution. Obtain fresh source groups when existing assignments conflict. Traces present in any native investigation snapshot are conservatively marked as previously investigated, even if no MCP read was recorded: native agents can read the snapshot directly. Legacy investigations use their recorded visited IDs. Allocating these examples to a final split does not make them unseen.
 
 ## Configure the targets
+
+Command runners parse the complete returned JSON envelope; valid outputs are not rejected because they exceed a fixed character count. Artifact capture reads each explicitly named valid JSON file in full without a file-size cutoff. Invalid JSON, missing files and paths outside the trial directory still cannot supply grading evidence. `tests/test_workbench_execution.py` verifies complete outputs and artifacts larger than 2 MB using synthetic content.
+
 
 A command runner configuration is a JSON file alongside the target code:
 

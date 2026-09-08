@@ -121,7 +121,7 @@ export default function GraphView({
             {request.data.scope} {request.data.shown_nodes} /{" "}
             {request.data.total_nodes} nodes shown.
             {request.data.truncated
-              ? " The graph has been bounded; focus on a trace to inspect a smaller neighborhood."
+              ? " An explicit maximum limited this response; omit it to retrieve every node."
               : ""}
           </p>
           {request.data.nodes.length > 0 && request.data.edges.length === 0 && (

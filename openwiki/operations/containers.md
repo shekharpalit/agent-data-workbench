@@ -32,10 +32,10 @@ sources:
     resource: repo://src/agent_data_workbench/workbench/settings.py
   - id: openwiki-source-a741d432f952c0dbfb4fb35d
     resource: repo://ui/vite.config.ts
-generated: { by: "codex", at: "2026-09-08T00:51:51.689Z" }
+generated: { by: "codex", at: "2026-09-08T03:02:55.250Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T00:51:51.689Z
+    at: 2026-09-08T03:02:55.250Z
 ---
 
 # Docker and Make workflow
@@ -103,7 +103,7 @@ Both development and packaged services use the same `project-data` volume at `/d
 
 Development binds Python source and tests read-only, mounts UI source for editing, and keeps `node_modules` in `ui-dependencies`. Compiled assets live in `ui-build`, mounted at `/app/ui/dist` in both services. The UI watcher writes that volume and FastAPI reads it; generated output is not written into the Python source tree. Python dependencies remain inside the image at `/opt/venv`. Run `make init` or restart `make dev` after changing Python dependencies; the UI service runs `npm ci` on startup to refresh its locked dependencies.
 
-The Dockerfile pins Python 3.14.7, Node 24.20.0 and uv 0.12.10. Its Node stage builds the TypeScript source into `/app/ui/dist`. Standard Hatch packaging includes that output under package-only `_ui/` in the runtime wheel; the production container serves those installed assets without a UI source mount. Host `ui/dist` output is excluded from the build context so the image compiles its own frontend. The development image includes test and UI tooling; the packaged runtime uses production Python dependencies. Both run as the non-root workbench user. The build context excludes private runs, Git metadata, provider login files and host dependency installations through an explicit allowlist.
+The Dockerfile pins Python 3.14.7, Node 24.20.0 and uv 0.12.10. Its Node stage builds the TypeScript source into `/app/ui/dist`. Standard Hatch packaging includes that output under package-only `_ui/` in the runtime wheel; the production container serves those installed assets without a UI source mount. The production install explicitly rebuilds the local application package with `--reinstall-package agent-data-workbench`, so changes to UI assets enter the wheel even when Python source and dependency metadata are unchanged. Dependency downloads remain cached. Host `ui/dist` output is excluded from the build context so the image compiles its own frontend. The development image includes test and UI tooling; the packaged runtime uses production Python dependencies. Both run as the non-root workbench user. The build context excludes private runs, Git metadata, provider login files and host dependency installations through an explicit allowlist.
 
 ## Runtime configuration and agent integrations
 

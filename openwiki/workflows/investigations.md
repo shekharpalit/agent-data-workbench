@@ -6,6 +6,8 @@ tags: [research, evidence, knowledge, codex, claude]
 sources:
   - id: openwiki-source-1848987f753961721cee2571
     resource: repo://src/agent_data_workbench/api/middleware.py
+  - id: openwiki-source-e6d7f541d0e16503af405c8b
+    resource: repo://src/agent_data_workbench/api/routers/investigations.py
   - id: openwiki-source-0556adefe8908fe3f0817112
     resource: repo://src/agent_data_workbench/api/routers/knowledge.py
   - id: openwiki-source-4105c547b3781d406b01e383
@@ -48,10 +50,10 @@ sources:
     resource: repo://ui/src/views/ResearchControls.tsx
   - id: openwiki-source-14a72935f36008706a0aa989
     resource: repo://ui/src/views/ResearchSnapshot.tsx
-generated: { by: "codex", at: "2026-09-08T00:33:25.897Z" }
+generated: { by: "codex", at: "2026-09-08T02:47:35.721Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T00:33:25.897Z
+    at: 2026-09-08T02:47:35.721Z
 ---
 
 # Investigations and reviewed knowledge
@@ -127,7 +129,7 @@ The agent can use three equivalent entry points:
 - **Python:** `ResearchWorkspace` and its `dataset` methods for streaming records, arbitrary analysis code, aggregation and export.
 - **CLI:** `research info`, `records`, `record`, `publish`, `attach`, `export`, and `pause`.
 
-MCP runs through the official Python SDK over stdio. This workbench data server is separate from the repository's OpenWiki documentation integration. Search returns previews with a continuation cursor; `read_trace` follows JSON pointers and ranges, with `max_chars: null` available for full text. Page size controls each response, not total available data. Aggregation processes every matching record or saved outcome; distinct values are paginated.
+MCP runs through the official Python SDK over stdio. This workbench data server is separate from the repository's OpenWiki documentation integration. Search returns complete serialized records with a continuation cursor. The response field remains named `preview`, but contains the complete record and reports `truncated: false`. `read_trace`, the Python SDK and the HTTP field endpoint return the full selected value by default. Set `max_chars` explicitly to request a character page and follow `next_offset` to retrieve the remainder; omitting it or passing null in MCP/Python reads all remaining text. Page size controls each response, not total available data. Aggregation processes every matching record or saved outcome; distinct values are paginated.
 
 ## Use an existing coding-agent session
 

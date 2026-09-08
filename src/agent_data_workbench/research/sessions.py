@@ -154,7 +154,7 @@ for trace in w.dataset.records():
 # w.dataset.export(w.directory / "outcomes.jsonl")
 ```
 
-MCP search_traces provides paginated previews, read_trace expands any field, and
+MCP search_traces returns complete records in pages, read_trace reads a full field, and
 aggregate_traces computes across the complete matching corpus or saved outcomes.
 Use native Python to compute analyses and visualizations beyond these convenience tools.
 workspace_info shows coverage and saved results. Access is not proof of semantic review.

@@ -104,8 +104,6 @@ class ConfiguredRunner:
             if self.config.kind == "command":
                 request = json_text({"input": visible_input, "seed": seed})
                 raw = run_process(self.args, request, trial_dir, self.config.timeout)
-                if len(raw) > 2_000_000:
-                    raise ValueError("Runner output exceeds 2 million characters")
                 envelope = parse_object(raw)
                 if not isinstance(envelope.get("output"), dict):
                     raise ValueError("Runner must return an envelope with an output object")

@@ -30,7 +30,7 @@ ArtifactKind = Literal[
 class TraceQuery(Contract):
     text: str = Field(default="", max_length=1000)
     stratum: str = Field(default="", max_length=200)
-    offset: int = Field(default=0, ge=0, le=10000)
+    offset: int = Field(default=0, ge=0)
     equals_pointer: str | None = Field(default=None, max_length=300)
     equals_json: str | None = Field(default=None, max_length=2000)
 

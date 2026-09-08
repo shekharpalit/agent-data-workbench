@@ -527,3 +527,71 @@ def test_clustering_preserves_complete_words_after_long_prefixes(text, expected_
     assert {"tokens": tokens} == {
         "tokens": expected_tokens,
     }
+
+
+def test_distributions_and_store_aggregates_return_every_category(project):
+    # Given
+    store = TraceStore(project)
+    store.ingest(
+        Source(
+            [
+                {"trace_id": f"category-fixture-{i:03}", "category": f"value-{i:03}"}
+                for i in range(60)
+            ]
+        )
+    )
+    query = SearchQuery(text="category-fixture")
+
+    # When
+    aggregate = store.aggregate("/category", text=query.text)
+    distribution_result = distribution(store, query, "/category")
+
+    # Then
+    expected = {
+        "pointer": "/category",
+        "eligible": 60,
+        "missing_or_non_scalar": 0,
+        "counts": [{"value": f"value-{i:03}", "count": 1} for i in range(60)],
+        "distinct": 60,
+        "numeric_count": 0,
+        "mean": None,
+        "minimum": None,
+        "maximum": None,
+    }
+    assert {"distribution": distribution_result, "aggregate": aggregate} == {
+        "distribution": expected,
+        "aggregate": expected | {"filter": {"text": query.text, "stratum": ""}},
+    }
+
+
+def test_lineage_returns_all_nodes_unless_a_maximum_is_explicit(project):
+    # Given
+    store = TraceStore(project)
+    ids = [f"r{i}" for i in range(9)] + [f"scan-{i:03}" for i in range(301)]
+    store.ingest(Source([{"trace_id": key} for key in ids[9:]]))
+    expected = [
+        {"id": "trace:" + key, "kind": "trace", "label": key, "trace_id": key} for key in ids
+    ]
+
+    # When
+    complete = lineage(project)
+    explicit = lineage(project, limit=10)
+
+    # Then
+    assert {
+        "nodes": complete["nodes"],
+        "total": complete["total_nodes"],
+        "shown": complete["shown_nodes"],
+        "truncated": complete["truncated"],
+        "limited_nodes": explicit["nodes"],
+        "limited_total": explicit["total_nodes"],
+        "limited_truncated": explicit["truncated"],
+    } == {
+        "nodes": expected,
+        "total": 310,
+        "shown": 310,
+        "truncated": False,
+        "limited_nodes": expected[:10],
+        "limited_total": 310,
+        "limited_truncated": True,
+    }

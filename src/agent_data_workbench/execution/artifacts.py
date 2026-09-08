@@ -15,8 +15,6 @@ def read_artifacts(trial_dir: Path, names: list[str]) -> dict:
         path = (trial_dir / name).resolve()
         if not path.is_relative_to(trial_dir.resolve()) or not path.is_file():
             continue
-        if path.stat().st_size > 2_000_000:
-            continue
         try:
             from agent_data_workbench.shared.json import _reject_constant
 
