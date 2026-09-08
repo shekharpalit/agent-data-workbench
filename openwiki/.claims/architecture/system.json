@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:64b849b9219d0e145c13b1ed6638bd4d92a7bc550a2fe7a73c8495f26335b8e3",
+  "pageVersion": "sha256:ef976e5bb81a81a619899661fbd34750dc31e0d35c9391d38d1fa95b8c034818",
   "claims": [
     {
       "id": "claim_d9a6c98de02d49279a29adf7c1ea2d00",
@@ -74,7 +74,7 @@
       "evidence": [
         {
           "resource": "repo://src/agent_data_workbench/api/application.py#L26-L56",
-          "version": "repo-lines-v1:sha256:4d03575d2db729e48a9a177ce77e12eb2d06b5ef709fc0ef60960eaf6d68419f:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwN2I0OWI3OTcyZDI0NTc0MzJkODRmNjZjOThjODhmMzJlODM3NDEwOGFmOTdkYjg3YjdlZDRiOTllZGE0NmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkNjdiNDY2Mzc4NzVjM2JiN2Y5MDNiMWRiODczNGI0YTI5NjY4NWRmNGRiZTY2YTRmNmNlZjdmZGM0MTE2M2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVhYjM1ODMxZjk2NWQ4M2QxMDg0ODRkMzkwZDA1MGFhYzUwOWJiMGQ5ZmI0NDQ5YTU0MzA4NDUxYmY2MWNiNTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "version": "repo-lines-v1:sha256:02adb0cba913ea2e509f3ec8cecec137118deeda7e0f62b6ad5c364503e2a561:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwN2I0OWI3OTcyZDI0NTc0MzJkODRmNjZjOThjODhmMzJlODM3NDEwOGFmOTdkYjg3YjdlZDRiOTllZGE0NmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkNjdiNDY2Mzc4NzVjM2JiN2Y5MDNiMWRiODczNGI0YTI5NjY4NWRmNGRiZTY2YTRmNmNlZjdmZGM0MTE2M2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVhYjM1ODMxZjk2NWQ4M2QxMDg0ODRkMzkwZDA1MGFhYzUwOWJiMGQ5ZmI0NDQ5YTU0MzA4NDUxYmY2MWNiNTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
           "resource": "repo://src/agent_data_workbench/api/dependencies.py",
@@ -270,7 +270,7 @@
         },
         {
           "resource": "repo://src/agent_data_workbench/__init__.py",
-          "version": "repo-file-v1:sha256:c7d9d08b982879f7a1deee40a921aa35dad584ac64d2b4bfae9bdfe4ccd4388e"
+          "version": "repo-file-v1:sha256:fec9cd36504e3cde2f9a3176e295cda7a2f65c95025972389bfd1c117a7106ee"
         },
         {
           "resource": "repo://src/agent_data_workbench/__main__.py",
@@ -318,11 +318,11 @@
         },
         {
           "resource": "repo://pyproject.toml",
-          "version": "repo-file-v1:sha256:262ae498da985ecea5916206333451473ec6023214750374f436ad16558c2ced"
+          "version": "repo-file-v1:sha256:2d0d367cab5a77ce9b4ab1961585d4f91424817388848229a358f038fc7df10f"
         },
         {
           "resource": "repo://src/agent_data_workbench/api/application.py#L27-L60",
-          "version": "repo-lines-v1:sha256:4d03575d2db729e48a9a177ce77e12eb2d06b5ef709fc0ef60960eaf6d68419f:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwN2I0OWI3OTcyZDI0NTc0MzJkODRmNjZjOThjODhmMzJlODM3NDEwOGFmOTdkYjg3YjdlZDRiOTllZGE0NmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkNjdiNDY2Mzc4NzVjM2JiN2Y5MDNiMWRiODczNGI0YTI5NjY4NWRmNGRiZTY2YTRmNmNlZjdmZGM0MTE2M2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVhYjM1ODMxZjk2NWQ4M2QxMDg0ODRkMzkwZDA1MGFhYzUwOWJiMGQ5ZmI0NDQ5YTU0MzA4NDUxYmY2MWNiNTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "version": "repo-lines-v1:sha256:02adb0cba913ea2e509f3ec8cecec137118deeda7e0f62b6ad5c364503e2a561:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwN2I0OWI3OTcyZDI0NTc0MzJkODRmNjZjOThjODhmMzJlODM3NDEwOGFmOTdkYjg3YjdlZDRiOTllZGE0NmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkNjdiNDY2Mzc4NzVjM2JiN2Y5MDNiMWRiODczNGI0YTI5NjY4NWRmNGRiZTY2YTRmNmNlZjdmZGM0MTE2M2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVhYjM1ODMxZjk2NWQ4M2QxMDg0ODRkMzkwZDA1MGFhYzUwOWJiMGQ5ZmI0NDQ5YTU0MzA4NDUxYmY2MWNiNTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
           "resource": "repo://ui/vite.config.ts",
@@ -333,6 +333,6 @@
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T00:51:51.689Z"
+    "at": "2026-09-08T00:58:07.648Z"
   }
 }

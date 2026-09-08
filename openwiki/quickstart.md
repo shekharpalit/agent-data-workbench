@@ -16,6 +16,10 @@ sources:
     resource: repo://pyproject.toml
   - id: openwiki-source-23775c3de52f3ab95a13cb8b
     resource: repo://README.md
+  - id: openwiki-source-a06d79006637fc11757f605b
+    resource: repo://src/agent_data_workbench/__init__.py
+  - id: openwiki-source-896da76531d8a33d2c9e76b8
+    resource: repo://src/agent_data_workbench/api/application.py
   - id: openwiki-source-e6d7f541d0e16503af405c8b
     resource: repo://src/agent_data_workbench/api/routers/investigations.py
   - id: openwiki-source-732d0f8c004bbddbd6363fdf
@@ -30,22 +34,26 @@ sources:
     resource: repo://src/agent_data_workbench/data/ingestion.py
   - id: openwiki-source-2dbe8753da4267ce652f414e
     resource: repo://src/agent_data_workbench/research/workspace.py
+  - id: openwiki-source-10d0a7c9280c304f0e5afe28
+    resource: repo://src/agent_data_workbench/shared/environment.py
   - id: openwiki-source-56b68af7c871c44d9ba4d64d
     resource: repo://src/agent_data_workbench/workbench/runtime.py
   - id: openwiki-source-b9e04cc4343208a80c47ef02
     resource: repo://src/agent_data_workbench/workspace/project.py
   - id: openwiki-source-7e7b3478097a461915e85751
     resource: repo://tests/test_ingestion_research.py
+  - id: openwiki-source-436f4179fe22abf615d2f7d0
+    resource: repo://ui/package.json
   - id: openwiki-source-2d1b137901c9e38ec418fdad
     resource: repo://ui/src/views/ManualResearchEditor.tsx
   - id: openwiki-source-a6ff0ad9c45aedc12177eaec
     resource: repo://ui/src/views/ResearchControls.tsx
   - id: openwiki-source-a741d432f952c0dbfb4fb35d
     resource: repo://ui/vite.config.ts
-generated: { by: "codex", at: "2026-09-08T00:51:51.689Z" }
+generated: { by: "codex", at: "2026-09-08T00:58:07.648Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T00:51:51.689Z
+    at: 2026-09-08T00:58:07.648Z
 ---
 
 # Quickstart
@@ -105,7 +113,7 @@ The project starts empty. You can also pass several files (`ingest runs/my-agent
 
 The UI starts on `127.0.0.1:8765` with a per-session access token; add `--port 9000` to use another port. Open the printed URL after Uvicorn reports startup. Ctrl-C initiates graceful shutdown, which waits for active response background jobs; pause long native research first if it should resume later. Search traces and field distributions first; investigations, tasks, and experiments appear as you create them. Read [local operation](operations/local-workbench.md) for details.
 
-Version 0.3 uses UUIDs for internal artifacts and keeps external trace IDs unchanged. Older project formats are rejected without rewriting their files. Create a new project directory and reimport the original traces; prior derived artifacts remain in the old directory. Suite names are friendly labels, and execution uses the suite UUID returned at creation.
+Project format 0.3 uses UUIDs for internal artifacts and keeps external trace IDs unchanged. Older project formats are rejected without rewriting their files. Create a new project directory and reimport the original traces; prior derived artifacts remain in the old directory. Suite names are friendly labels, and execution uses the suite UUID returned at creation.
 
 Import the corpus needed for your question; native research makes the full snapshot available. Preserve source groups such as conversation IDs so related tasks stay together in later splits. Add reviewed policies and tool contracts before asking an analyzer to judge behavior that depends on them.
 
@@ -136,11 +144,11 @@ uv run agent-data-workbench investigate runs/my-agent --resume INVESTIGATION_ID
 
 To use your current coding-agent session instead of launching another process, run `research create runs/my-agent "Your question"`. It prints a workspace and MCP command without making a provider call. [The research guide](workflows/investigations.md) explains tools, progress, complete processing and publication.
 
-Version 0.3 projects remain compatible. Native investigations use protocol 0.4; old completed investigations are readable, while paused legacy investigations need a new native investigation.
+Project format 0.3 remains compatible. Native investigations use protocol 0.4; old completed investigations are readable, while paused legacy investigations need a new native investigation.
 
 ## Complete the improvement loop
 
-Version 0.5 adds reviewed world specifications, reproducible environment commands, continuous target sessions, human grader calibration, behavioral coverage and candidate decisions. Project format 0.3 and native research protocol 0.4 remain compatible.
+Product version 0.1.0 includes reviewed world specifications, reproducible environment commands, continuous target sessions, human grader calibration, behavioral coverage and candidate decisions. The product, SDK, API and UI all report 0.1.0. Project format 0.3 and native research protocol 0.4 are independent saved-data contracts and remain unchanged.
 
 Start with one important failure: capture its evidence, review the relevant domain rules, and author an audited task. Configure your real target and the environment observer; run a baseline/candidate pair on a reserved execution split. In the UI, use **Grader calibration** to label the actual attempts, **Behavioral coverage** to inspect missing cases, and **Improvements** to capture and decide on an exact source change. Human decisions retain evidence without applying or deploying code.
 

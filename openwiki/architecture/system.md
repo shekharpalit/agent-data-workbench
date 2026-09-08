@@ -5,7 +5,7 @@ description: How the CLI, Python SDK, FastAPI service, React workbench, and loca
 tags: [architecture, sdk, persistence, provenance]
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T00:51:51.689Z
+    at: 2026-09-08T00:58:07.648Z
 sources:
   - id: openwiki-source-ea70eb6c045047448e446296
     resource: repo://.gitignore

@@ -55,7 +55,7 @@ from agent_data_workbench.research import (
 )
 from agent_data_workbench.workspace.project import Project
 
-__version__ = "0.5.0"
+__version__ = "0.1.0"
 __all__ = [
     "FilesSource",
     "SourceFile",

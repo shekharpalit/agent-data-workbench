@@ -7,7 +7,7 @@ prerelease-mode = "disallow"
 
 [[package]]
 name = "agent-data-workbench"
-version = "0.5.0"
+version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "fastapi" },

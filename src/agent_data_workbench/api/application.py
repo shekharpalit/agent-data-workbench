@@ -27,7 +27,7 @@ from agent_data_workbench.workspace.project import Project
 def create_app(project: Project, *, origin: str, token: str) -> FastAPI:
     app = FastAPI(
         title="Agent Data Workbench Local API",
-        version="0.5.0",
+        version="0.1.0",
         docs_url=None,
         redoc_url=None,
         openapi_url=None,

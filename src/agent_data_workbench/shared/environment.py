@@ -12,6 +12,6 @@ def environment_identity() -> dict:
     return {
         "python": sys.version.split()[0],
         "platform": platform.platform(),
-        "package": "0.5.0",
+        "package": "0.1.0",
         "pid": os.getpid(),
     }

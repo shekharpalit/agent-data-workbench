@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:26faab905a5b02238db189f3bec64386270e018b5b700ab0f27d3b4eb008a336",
+  "pageVersion": "sha256:bb9a6c69b5755166aa49a9810b27cd3bf0da4d319145db8abe5f5ab36a35e573",
   "claims": [
     {
       "id": "claim_80e3a5075dd34ed7b7f0393a15e92a9a",
@@ -26,7 +26,7 @@
       "evidence": [
         {
           "resource": "repo://ui/package.json",
-          "version": "repo-file-v1:sha256:aac723d9f52b969a8ab8d7a4d36bd94b0a0f0c5c1e5be54280e12c661d4e1c3f"
+          "version": "repo-file-v1:sha256:c441db7bc81b49933310af992f96392270e356a7377aae3432323abf17abf73c"
         },
         {
           "resource": "repo://ui/vite.config.ts",
@@ -261,6 +261,6 @@
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T00:51:51.689Z"
+    "at": "2026-09-08T00:58:07.648Z"
   }
 }
