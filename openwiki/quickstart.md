@@ -36,6 +36,8 @@ sources:
     resource: repo://src/agent_data_workbench/integrations/harbor/comparison.py
   - id: openwiki-source-047935dc3e143c02a13e4031
     resource: repo://src/agent_data_workbench/integrations/harbor/results.py
+  - id: openwiki-source-e5f659ea5e57c342ab8bc379
+    resource: repo://src/agent_data_workbench/research/sessions.py
   - id: openwiki-source-2dbe8753da4267ce652f414e
     resource: repo://src/agent_data_workbench/research/workspace.py
   - id: openwiki-source-10d0a7c9280c304f0e5afe28
@@ -60,10 +62,10 @@ sources:
     resource: repo://ui/src/views/ResearchControls.tsx
   - id: openwiki-source-a741d432f952c0dbfb4fb35d
     resource: repo://ui/vite.config.ts
-generated: { by: "codex", at: "2026-09-08T04:50:29.215Z" }
+generated: { by: "codex", at: "2026-09-08T14:06:39.851Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T04:50:29.215Z
+    at: 2026-09-08T14:06:39.851Z
 ---
 
 # Quickstart
@@ -150,10 +152,11 @@ Use an installed, authenticated Codex or Claude Code CLI. Ingestion and local ex
 
 ```sh
 uv run agent-data-workbench investigate runs/my-agent --backend codex \
+  --model gpt-5.6-sol --reasoning-effort xhigh \
   --question "Which recurring failures should we improve?"
 ```
 
-Use `--backend claude` for Claude Code. Add `--mode complete` to require an outcome for every input; the default `research` mode explores adaptively. The agent can query the snapshot, run analysis scripts and publish findings, charts, reports and draft tasks. No default model-call count or total trace limit is imposed by native research. Provider context and account limits still apply.
+The example selects Codex Sol with `xhigh` reasoning for this investigation. The UI exposes the same model and **Reasoning effort** settings. Omit both options to use the native CLI defaults; explicit settings are saved for resume and do not modify global CLI configuration. Use `--backend claude` for Claude Code without the Codex-only effort option. A successful login does not establish access to every model; the native CLI checks model availability and account limits. Add `--mode complete` to require an outcome for every input; the default `research` mode explores adaptively. The agent can query the snapshot, run analysis scripts and publish findings, charts, reports and draft tasks. No default model-call count or total trace limit is imposed by native research. Provider context and account limits still apply.
 
 If interrupted, resume using the printed investigation UUID:
 

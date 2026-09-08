@@ -92,7 +92,13 @@ export function ResearchProgress({ item }: { item: Investigation }) {
                 cells: [
                   r.trace_id,
                   <Badge value={r.status} />,
-                  r.method || "—",
+                  r.method ? (
+                    <Details title="Review method">
+                      <p>{r.method}</p>
+                    </Details>
+                  ) : (
+                    "—"
+                  ),
                   <Details title="Inspect">
                     <JsonView
                       value={r.error === null ? r.output : { error: r.error }}

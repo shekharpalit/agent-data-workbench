@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:c90d93c0433bd908a783b39fcd13e16f1fc767392eeb61bc6fdacaa7781c17de",
+  "pageVersion": "sha256:9cfe556f0fe3fd3ced3bd9997841b48cfb39e598784cfa4c343e0a59b5865744",
   "claims": [
     {
       "id": "claim_25574e40cfb048b39464c4e95bba596d",
@@ -61,16 +61,16 @@
       "statement": "Native investigation and task-design routes use FastAPI BackgroundTasks with a process-local job registry; capacity is reserved before investigation creation, and API task audit has no configured semantic judge.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/api/routers/investigations.py#L32-L56",
-          "version": "repo-lines-v1:sha256:11a02dbedcbf80ea0574fa6c4eb6737fd35f96742e36f688eefb5c5e0138fe66:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2MzJkNjMxZTc3ZTY2NTZjNGVkMTkxNmU3ZGU0NzcyYjQ4M2U0MTBkMzg2N2ZhOTBhNTBkMDdmYTAwN2I2MzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2NjhmMzRlNjAzMGM5M2YxNTZkMmM2ZTEwZmU5ZGU2ZjM4YWUxOTZiNDI4OTM1ZjZkZmU3ZGZjM2RiYjFkYjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA0OGY4ZTBmZjEyYWE3ZTAyNmIyYWJlZjllMzJmZmU2MmZlNTE4OThkMDlhNjRlODZmNzk5NDNiOTZhY2QyMmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgwZmJkNDBkMTcwODU1NDIwODNlOTA5NjQ0NTk4ZjZiM2Y0MjI3NDhiN2EzNjFiZDIyNGNjYTVhMDQ1NTRhOTkifQ"
+          "resource": "repo://src/agent_data_workbench/api/routers/investigations.py",
+          "version": "repo-file-v1:sha256:bceccff9e4c0c7c72f3d54bbddc3791a564c1aeb6aad1c88c251393294075f15"
         },
         {
           "resource": "repo://src/agent_data_workbench/api/routers/tasks.py",
           "version": "repo-file-v1:sha256:33c0a66cdccb6dc417f45d3eb507d75da2172a7c615661d4df8b3ff384ee450b"
         },
         {
-          "resource": "repo://src/agent_data_workbench/workbench/jobs.py#L12-L49",
-          "version": "repo-lines-v1:sha256:114a4ee09460f760ba8179449e76836ddd2aa637682208925cc39fdf7a5df087:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdmNzI1MTU2NjIwMDdlMTljMTkwZDg5ZDg2N2MxMzk5ZjBlMmY2Mzk5MGIwNzNkM2QwNDE5ODY0ODE2YTUwZTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxMDM0ODFjNTdkMGYwZGMwZjc2Y2QyY2M4YjM2MDRjNGU4Mjk2ZGE0MTIyYWRkMTllODE3NDVkYzdlMzMxYTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk2NTMzYTc2MDhmNjZhYjMyMGFjY2IwOGYxZWFmZmE3MjZkOTIzYTdhZTBhNTUyYmJjZDVlMmZkNjJjNmUxNDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://src/agent_data_workbench/workbench/jobs.py",
+          "version": "repo-file-v1:sha256:c907dcf640e2727169fdef09b645f23d47e6a781915e7a5685e2424d0b8a3963"
         }
       ]
     },
@@ -104,15 +104,15 @@
       "evidence": [
         {
           "resource": "repo://src/agent_data_workbench/api/routers/investigations.py",
-          "version": "repo-file-v1:sha256:dd85f5c7d11650dd30e23eac41bfe403c2895cee97286e48d18373bfdcd2834b"
+          "version": "repo-file-v1:sha256:bceccff9e4c0c7c72f3d54bbddc3791a564c1aeb6aad1c88c251393294075f15"
         },
         {
           "resource": "repo://ui/src/views/ResearchControls.tsx",
-          "version": "repo-file-v1:sha256:f1bc0139b0da96da680e4e8178f4ff4a3a017db62d4ca8836065c4386b44c91a"
+          "version": "repo-file-v1:sha256:72ba68b3e706ee129a7edb7261b90e8538c61f941f6cee4dbeb4181d35068dd2"
         },
         {
           "resource": "repo://ui/src/views/ResearchOutputs.tsx",
-          "version": "repo-file-v1:sha256:8c71e35afad81737369fb22bf861e52a4b1fc7f19c37d4d2e4fbf12038924726"
+          "version": "repo-file-v1:sha256:ab8141375c2b7ff4fb3662bd06140788063f411d5c7ead717c548b7cc795d228"
         }
       ]
     },
@@ -307,10 +307,50 @@
           "version": "repo-file-v1:sha256:0ea8b8cca9b6dc18b11857c118380d2c7e9541a50a4830129061ffd639ffe95d"
         }
       ]
+    },
+    {
+      "id": "claim_baa961ab36d64675bfe8fd1b1921124d",
+      "statement": "The research UI offers an optional Codex reasoning effort, submits it with the selected model, restores saved settings on resume, and shows session configuration and progress while retaining the complete question in a disclosure.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/api/routers/investigations.py#L32-L57",
+          "version": "repo-lines-v1:sha256:ac44c4374cbab6097eceef7e026bc06da86dc28159dead274eab7c0f09bc3d7f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2MzJkNjMxZTc3ZTY2NTZjNGVkMTkxNmU3ZGU0NzcyYjQ4M2U0MTBkMzg2N2ZhOTBhNTBkMDdmYTAwN2I2MzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2NjhmMzRlNjAzMGM5M2YxNTZkMmM2ZTEwZmU5ZGU2ZjM4YWUxOTZiNDI4OTM1ZjZkZmU3ZGZjM2RiYjFkYjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA0OGY4ZTBmZjEyYWE3ZTAyNmIyYWJlZjllMzJmZmU2MmZlNTE4OThkMDlhNjRlODZmNzk5NDNiOTZhY2QyMmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgwZmJkNDBkMTcwODU1NDIwODNlOTA5NjQ0NTk4ZjZiM2Y0MjI3NDhiN2EzNjFiZDIyNGNjYTVhMDQ1NTRhOTkifQ"
+        },
+        {
+          "resource": "repo://ui/src/views/Investigations.tsx",
+          "version": "repo-file-v1:sha256:481743bdf92c08665a02b21dad5e80071615cd5794bfa481fd586c81a7be33f5"
+        },
+        {
+          "resource": "repo://ui/src/views/ResearchControls.tsx",
+          "version": "repo-file-v1:sha256:72ba68b3e706ee129a7edb7261b90e8538c61f941f6cee4dbeb4181d35068dd2"
+        }
+      ]
+    },
+    {
+      "id": "claim_b83e0a3c29794596b8ebe9965f703367",
+      "statement": "Research detail presents available outputs and findings before the dataset editor, refreshes snapshot statuses when processing counts change without resetting typed filters, and retains full per-record methods in disclosures.",
+      "evidence": [
+        {
+          "resource": "repo://ui/src/views/Investigations.tsx",
+          "version": "repo-file-v1:sha256:481743bdf92c08665a02b21dad5e80071615cd5794bfa481fd586c81a7be33f5"
+        },
+        {
+          "resource": "repo://ui/src/views/ResearchOutputs.tsx",
+          "version": "repo-file-v1:sha256:ab8141375c2b7ff4fb3662bd06140788063f411d5c7ead717c548b7cc795d228"
+        },
+        {
+          "resource": "repo://ui/src/views/ResearchSnapshot.tsx",
+          "version": "repo-file-v1:sha256:88e95c64490541f49af4a553f00df3e6870dbc35f20cc5d30134de924ae90af4"
+        },
+        {
+          "resource": "repo://ui/tests/research.test.tsx",
+          "version": "repo-file-v1:sha256:02653d589d46d199b8e951dd9e5761e5a9a2d9cefd007d552592ee596b3d5272"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T04:50:29.215Z"
+    "at": "2026-09-08T14:16:43.946Z"
   }
 }

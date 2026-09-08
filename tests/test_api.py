@@ -274,7 +274,12 @@ def test_investigation_jobs_remain_nonblocking_and_reject_concurrent_artifacts(
     monkeypatch.setattr(
         investigations,
         "NativeSession",
-        lambda backend, model, timeout: {"backend": backend, "model": model, "timeout": timeout},
+        lambda backend, model, timeout, **options: {
+            "backend": backend,
+            "model": model,
+            "timeout": timeout,
+            **options,
+        },
     )
 
     def investigate(project, key, analyzer):
@@ -291,8 +296,9 @@ def test_investigation_jobs_remain_nonblocking_and_reject_concurrent_artifacts(
             "/api/investigate",
             json={
                 "question": "Find outcomes",
-                "backend": "claude",
-                "model": "fixture",
+                "backend": "codex",
+                "model": "gpt-5.6-sol",
+                "reasoning_effort": "xhigh",
                 "mode": "complete",
             },
         )
@@ -315,7 +321,12 @@ def test_investigation_jobs_remain_nonblocking_and_reject_concurrent_artifacts(
                 "investigations_created": 1,
                 "calls": [
                     {
-                        "analyzer": {"backend": "claude", "model": "fixture", "timeout": None},
+                        "analyzer": {
+                            "backend": "codex",
+                            "model": "gpt-5.6-sol",
+                            "timeout": None,
+                            "reasoning_effort": "xhigh",
+                        },
                     }
                 ],
             }

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:6c4f19f0097d4ee147b54e9677da27ffa5d3b1c361d33c0bb1c8aee977bbdc79",
+  "pageVersion": "sha256:be18ad402b9e13f6bb1b4d903f81be0738ad4f736476c16651ffb27bcbdd8121",
   "claims": [
     {
       "id": "claim_b88dee80e2334471a6a24e3675d10bd3",
@@ -59,12 +59,12 @@
       "statement": "The research CLI can start a native session, resume its saved backend by investigation UUID, or prepare a workspace and MCP command without starting a provider process; native complete mode requires an outcome for every input.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/cli/research.py#L24-L77",
-          "version": "repo-lines-v1:sha256:90408e5e2fe3c89d296b16d7f65ff023a9ce5f1f0bcc888b3c4b304de9393095:eyJzZWxlY3RlZExpbmVDb3VudCI6NTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFjYWZkM2YzZmYwYWQ4NmNiOTU2ODQyNDY5NDY0YWQyYzg3MzFmOGY3ZjhiNGMxMDA5NjZiOWRiZmM2NWY5ZDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZhN2Y4ODc0NjgzYmJhNmZlZjMzZDAxY2UyMjc4NzY0OTc4ZmE1ZmM4NTRjOWVkOGJmMjQ3YzIwMjFlNDM0NjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU0ZGM4NWY1OWU4MWJiM2ZjYzgzMTBhNzk5Y2QyYzFiN2I0MTAzM2E3NTBjZTliYzJiZWM0ZDQ4N2UzYWJjZTEifQ"
+          "resource": "repo://src/agent_data_workbench/cli/research.py",
+          "version": "repo-file-v1:sha256:38690d82798f27420444cfb012bb220974fb1aeca8b080a00cc24c94d1a3c9d8"
         },
         {
-          "resource": "repo://src/agent_data_workbench/research/workspace.py#L145-L179",
-          "version": "repo-lines-v1:sha256:f8074d8ac6460d8abe1a8f7b846c97e5806a6747602da7792f516bbf22deb555:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ3YzIzMTE1MDZmMzJkOTgwMjY2MjAwYmQ4ZWVjOGEyZmI5ODg1NTI3YmZjNjY4NTNiNTVmNmIyYjhhMzg3Y2MiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg0MjMwYWI2MzJkOTBhNmU2MGExODkzODRjNjg3MGY3Zjk3MmRlYzBmN2Q5YzhlMmY0NTQ4YmQ1YmVjOWMxODkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk3ZWI2YTU4N2Y4MjM4NTVlZDAwMGQ4NGQyYzIwY2UzMmNhMjk4MjBiYjBhZTM4NzI4ZmUzZDRlN2FhZTI3ZDAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIxNTVhZGFhYWMyZmJmZmZlMTI5MzI4MGU5NTM2M2MwMDEyMmRlZjgxZTdmOGI2OWY0MWQ4Y2IxOTdkN2NlZjQifQ"
+          "resource": "repo://src/agent_data_workbench/research/workspace.py",
+          "version": "repo-file-v1:sha256:2e72e392353cb71ee69ad0c98cf9571f26e55bc8c22e49decd116da876b8d764"
         }
       ]
     },
@@ -74,7 +74,7 @@
       "evidence": [
         {
           "resource": "repo://src/agent_data_workbench/api/routers/investigations.py",
-          "version": "repo-file-v1:sha256:dd85f5c7d11650dd30e23eac41bfe403c2895cee97286e48d18373bfdcd2834b"
+          "version": "repo-file-v1:sha256:bceccff9e4c0c7c72f3d54bbddc3791a564c1aeb6aad1c88c251393294075f15"
         },
         {
           "resource": "repo://ui/src/views/ManualResearchEditor.tsx",
@@ -82,7 +82,7 @@
         },
         {
           "resource": "repo://ui/src/views/ResearchControls.tsx",
-          "version": "repo-file-v1:sha256:f1bc0139b0da96da680e4e8178f4ff4a3a017db62d4ca8836065c4386b44c91a"
+          "version": "repo-file-v1:sha256:72ba68b3e706ee129a7edb7261b90e8538c61f941f6cee4dbeb4181d35068dd2"
         }
       ]
     },
@@ -231,10 +231,28 @@
           "version": "repo-file-v1:sha256:0ea8b8cca9b6dc18b11857c118380d2c7e9541a50a4830129061ffd639ffe95d"
         }
       ]
+    },
+    {
+      "id": "claim_61b09593359a432e8e6d09402957e08e",
+      "statement": "Native Codex research can select a model and reasoning effort for one investigation through the CLI or UI, while omitted settings inherit native defaults and explicit settings persist for resume.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/cli/research.py#L24-L56",
+          "version": "repo-lines-v1:sha256:e6aa4374fbd6996497de1fc00009005aa11d33204a649d3692fdf3a779aad4a7:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFjYWZkM2YzZmYwYWQ4NmNiOTU2ODQyNDY5NDY0YWQyYzg3MzFmOGY3ZjhiNGMxMDA5NjZiOWRiZmM2NWY5ZDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4ZjU3MTFkMzI1YzNmYjM2YjE2ZmNjZWJjNGYxYzUxOTFmYjRlZDE3NDk3ZDIxNTY3YjQ1YTM3OWRiNjMwZTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZhN2Y4ODc0NjgzYmJhNmZlZjMzZDAxY2UyMjc4NzY0OTc4ZmE1ZmM4NTRjOWVkOGJmMjQ3YzIwMjFlNDM0NjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFmZDdlZDI0OGY3MmY1YTY5MjIxNjcxM2IyNTFhMjUzMzRiNDc1MjJlYzVkYzc0OTc5YmQyMWU2OTNmNDdhNWEifQ"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/research/sessions.py#L43-L136",
+          "version": "repo-lines-v1:sha256:113d23134b0d599ca1dbc912f59ad5097896a4eff35f322ad972394147c3e6bc:eyJzZWxlY3RlZExpbmVDb3VudCI6OTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMzYjdjM2RiNTBhZmFkODc4ZGRiOGNjYWE4N2NhOWZjZDE4MmE2YmI3NmY2MzIyOWY5NjZiMzMyMjJjZmFjMGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5MDlhNTNhNjE4ZDAyOGUxZDMwMDBjMGE3YWJjZWVjYmU1ZmIzN2Y0ZTUxMWVmZTQ2NjQzZmFkNmU2Njg3MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhiNGI0NDVmMzVhY2QxNDFlZDU0YWQwMjE1MGYyZjJlMTRkMjI1NjZlYTAzM2E1NjVhY2ZmYmVhNTk5MjhlMWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM3ZDgyMThhOTRjNzE0NDI5ZGE5Zjk3OWI2YTIyNGMyNWVhNjMyNTdiYzdkNTYwYjE1YmIxMDUxM2FiYjFlYWYifQ"
+        },
+        {
+          "resource": "repo://ui/src/views/ResearchControls.tsx",
+          "version": "repo-file-v1:sha256:72ba68b3e706ee129a7edb7261b90e8538c61f941f6cee4dbeb4181d35068dd2"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T04:50:29.215Z"
+    "at": "2026-09-08T14:06:39.851Z"
   }
 }

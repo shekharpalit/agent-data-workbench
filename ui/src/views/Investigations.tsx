@@ -39,9 +39,19 @@ export function InvestigationsView({
             .map((item) => (
               <div className="item" key={item.id}>
                 <div className="item-head">
-                  <h3>{item.question}</h3>
+                  <h3>
+                    {item.session
+                      ? `${item.session.backend} research`
+                      : "Manual research"}
+                  </h3>
                   <Badge value={item.status} />
                 </div>
+                <p className="muted">
+                  {new Date(item.created_at).toLocaleString()}
+                </p>
+                <Details title="Research question">
+                  <p>{item.question}</p>
+                </Details>
                 <p className="muted">
                   {item.mode === "complete" ? "Complete pass" : "Research"} ·{" "}
                   {item.coverage.completed} / {item.coverage.total} records
@@ -97,8 +107,19 @@ export function InvestigationDetail({
       >
         ← Investigations
       </button>
-      <Card title={item.question}>
+      <Card title="Research session">
         <Badge value={item.status} />
+        {item.session && (
+          <p className="muted">
+            {item.session.backend} · {item.session.model || "CLI default model"}
+            {item.session.reasoning_effort
+              ? ` · ${item.session.reasoning_effort} effort`
+              : ""}
+          </p>
+        )}
+        <Details title="Research question">
+          <p>{item.question}</p>
+        </Details>
         <p className="muted">
           {item.coverage.completed.toLocaleString()} /{" "}
           {item.coverage.total.toLocaleString()} records processed ·{" "}
@@ -151,12 +172,6 @@ export function InvestigationDetail({
             investigation to use native sessions.
           </p>
         ))}
-      {item.protocol_version === "0.4" && (
-        <>
-          <ResearchSnapshot key={id} item={item} />
-          <ManualResearchEditor key={id} item={item} />
-        </>
-      )}
       <ResearchFiles item={item} />
       {result ? (
         <>
@@ -233,6 +248,12 @@ export function InvestigationDetail({
           </Details>
         </>
       ) : null}
+      {item.protocol_version === "0.4" && (
+        <>
+          <ResearchSnapshot key={id} item={item} />
+          <ManualResearchEditor key={id} item={item} />
+        </>
+      )}
       {item.protocol_version === "0.4" ? (
         <ResearchProgress key={id} item={item} />
       ) : (

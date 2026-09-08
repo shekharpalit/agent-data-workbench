@@ -5,7 +5,7 @@ description: How the CLI, Python SDK, FastAPI service, React workbench, and loca
 tags: [architecture, sdk, persistence, provenance]
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T04:50:29.215Z
+    at: 2026-09-08T14:06:39.851Z
 sources:
   - id: openwiki-source-ea70eb6c045047448e446296
     resource: repo://.gitignore
@@ -33,6 +33,8 @@ sources:
     resource: repo://src/agent_data_workbench/api/routers/investigations.py
   - id: openwiki-source-98bfc373ed8e75b28dcf239e
     resource: repo://src/agent_data_workbench/api/routers/tasks.py
+  - id: openwiki-source-25b71218f03a1e216debf67e
+    resource: repo://src/agent_data_workbench/cli/research.py
   - id: openwiki-source-fd74f7907459785462506ae7
     resource: repo://src/agent_data_workbench/cli/tasks.py
   - id: openwiki-source-cdad3fe88d744628d97a2fa6
@@ -89,7 +91,7 @@ sources:
     resource: repo://ui/src/views/Graph.tsx
   - id: openwiki-source-a741d432f952c0dbfb4fb35d
     resource: repo://ui/vite.config.ts
-generated: { by: "codex", at: "2026-09-08T04:50:29.215Z" }
+generated: { by: "codex", at: "2026-09-08T14:06:39.851Z" }
 ---
 
 # System architecture
@@ -165,6 +167,8 @@ Manual UI research creates a snapshot through the same SDK without invoking a na
 The manual HTTP mutation routes acquire the same nonblocking session lock as native research. This prevents a stale browser tab from publishing final findings or changing outcomes underneath a running native session. The native session's own SDK and MCP tools remain available while it owns that lock. Pausing the native session returns manual write access; the UI keeps unsaved findings, note and chart forms mounted but hidden and disabled during active sessions.
 
 `research/sessions.py` launches one native Codex or Claude Code session per invocation. The native agent owns planning, tools, code execution, context management, and session continuation. The workbench supplies `ResearchWorkspace`, exposed through Python, the CLI, and the official MCP SDK. It does not drive another model-call loop. Existing `Analyzer` integrations remain available for batch analysis, task design and semantic judging.
+
+Codex investigations accept an optional per-session reasoning effort through the UI, API and CLI. `NativeSession` sends an explicit `model_reasoning_effort` override to Codex, records it with the model and native session ID, and restores it on resume. Leaving it unset preserves the CLI default; it does not change global CLI configuration. Supported effort/model combinations remain the native provider's responsibility.
 
 Each investigation captures all selected inputs into its own SQLAlchemy-backed `dataset.sqlite3`, alongside frozen context, workspace instructions, scripts and outputs. New imports or knowledge changes do not invalidate this snapshot. All imported records are included by default; excluding reserved final groups is explicit and exposure is recorded conservatively.
 

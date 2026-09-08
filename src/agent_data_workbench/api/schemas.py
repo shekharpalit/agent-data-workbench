@@ -6,7 +6,7 @@ from pydantic import Field, model_validator
 
 from agent_data_workbench.evaluation.tasks.contracts import TaskSpec
 from agent_data_workbench.exploration.schemas import SearchQuery
-from agent_data_workbench.research.contracts import ResearchResult
+from agent_data_workbench.research.contracts import ReasoningEffort, ResearchResult
 from agent_data_workbench.research.workspace import Chart, RecordOutcome
 from agent_data_workbench.shared.contracts import Contract
 from agent_data_workbench.shared.identifiers import UUIDString
@@ -73,6 +73,7 @@ class AnalyzerRequest(Contract):
 class InvestigationRequest(Contract):
     backend: Literal["codex", "claude"] | None = None
     model: str | None = None
+    reasoning_effort: ReasoningEffort | None = None
     question: str | None = None
     resume: UUIDString | None = None
     mode: Literal["research", "complete"] = "research"
@@ -81,6 +82,8 @@ class InvestigationRequest(Contract):
 
     @model_validator(mode="after")
     def valid(self):
+        if self.backend == "claude" and self.reasoning_effort is not None:
+            raise ValueError("Reasoning effort is currently supported for Codex investigations")
         if not self.resume and not (self.question and self.question.strip()):
             raise ValueError("Supply a question or an investigation to resume")
         return self

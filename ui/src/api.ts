@@ -31,6 +31,7 @@ import type {
   ResearchArtifact,
   ResearchChart,
   ResearchResult,
+  ReasoningEffort,
   ResearchSearch,
   ResearchSearchPage,
   ResearchTracePage,
@@ -172,6 +173,7 @@ export class ApiClient {
     resume?: string;
     backend?: Backend;
     model?: string;
+    reasoning_effort?: ReasoningEffort;
     mode?: "research" | "complete";
     exclude_final?: boolean;
   }) => this.request<{ job_id: string }>("/api/investigate", request);

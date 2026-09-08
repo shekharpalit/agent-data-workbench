@@ -70,6 +70,8 @@ sources:
     resource: repo://ui/src/views/HarborComparison.tsx
   - id: openwiki-source-e4f18d5ce9c7fd05cc0d3b37
     resource: repo://ui/src/views/Imports.tsx
+  - id: openwiki-source-c8b556ab186c9fffbf3d4122
+    resource: repo://ui/src/views/Investigations.tsx
   - id: openwiki-source-2d1b137901c9e38ec418fdad
     resource: repo://ui/src/views/ManualResearchEditor.tsx
   - id: openwiki-source-a6ff0ad9c45aedc12177eaec
@@ -80,12 +82,14 @@ sources:
     resource: repo://ui/src/views/ResearchSnapshot.tsx
   - id: openwiki-source-e2b9808e897a9a7a52014721
     resource: repo://ui/src/views/Search.tsx
+  - id: openwiki-source-6c2199ef844fc5690d6362d0
+    resource: repo://ui/tests/research.test.tsx
   - id: openwiki-source-826d1e88c728d7cfae868e97
     resource: repo://ui/tests/workflow.test.tsx
-generated: { by: "codex", at: "2026-09-08T04:50:29.215Z" }
+generated: { by: "codex", at: "2026-09-08T14:16:43.946Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T04:50:29.215Z
+    at: 2026-09-08T14:16:43.946Z
 ---
 
 # Run the local workbench
@@ -166,9 +170,9 @@ Uvicorn graceful shutdown waits for active response background tasks by default.
 
 Research controls report the actual backend runtime, installed CLI and login status. Use `make init MODE=native` and `make dev MODE=native` for host CLI logins; stock containers do not inherit them. A ready login does not guarantee access to every model or account quota.
 
-Selecting **Use an agent** exposes a native backend and either adaptive `research` or per-record `complete` mode. Final evaluation inputs are included unless the developer selects their explicit exclusion. There is no maximum-call input. A saved session resumes with its original backend and model settings; partial findings remain visible while work is unfinished. A live session exposes Pause, and a released session lock allows recovery after a process crash.
+Selecting **Use an agent** exposes a native backend and either adaptive `research` or per-record `complete` mode. Final evaluation inputs are included unless the developer selects their explicit exclusion. There is no maximum-call input. For Codex, choose **Reasoning effort** alongside the model, for example `gpt-5.6-sol` with `xhigh`. Leaving it at **Use CLI default** inherits native configuration. The explicit value is saved with the session and does not change the global CLI settings. Model support and account access are checked by the native CLI. A saved session resumes with its original backend, model and explicit effort settings; partial findings remain visible while work is unfinished. A live session exposes Pause, and a released session lock allows recovery after a process crash.
 
-Both research paths share the detail view, which shows successful, failed and pending record counts separately from SDK retrieval. It polls active progress, paginates record outcomes and journal entries, and displays each recorded analysis method. Registered chart JSON renders as bars; other files are downloads authenticated with the local bearer token and checked against their recorded digest. Generated HTML is downloaded as a file rather than embedded in the workbench.
+Both research paths share the detail view, which shows the native model and explicit effort with successful, failed and pending record counts separately from SDK retrieval. The complete question is retained under **Research question**, so a long brief does not displace progress. History entries include creation time and an expandable full question. Published outputs and findings appear before the research dataset editor. Snapshot record statuses reload when completed, failed or pending counts change, while typed filters stay intact. The outcome table keeps each full review method in an expandable disclosure. It polls active progress, paginates record outcomes and journal entries, and displays each recorded analysis method. Registered chart JSON renders as bars; other files are downloads authenticated with the local bearer token and checked against their recorded digest. Generated HTML is downloaded as a file rather than embedded in the workbench.
 
 Task audits in the UI are deterministic. A semantic rubric needs an explicitly configured judge through the [task CLI](../workflows/tasks-and-graders.md). Suite creation and training export use the [experiment CLI or SDK](../workflows/experiments-and-training.md). The Improvements view can launch paired comparisons from an existing suite and local runner configuration paths; it offers an explicit semantic judge when needed.
 

@@ -175,6 +175,9 @@ export interface ResearchArtifact {
     values: { label: string; value: number }[];
   } | null;
 }
+export type ReasoningEffort =
+  "none" | "minimal" | "low" | "medium" | "high" | "xhigh" | "max" | "ultra";
+
 export interface Investigation {
   id: string;
   created_at: string;
@@ -188,6 +191,7 @@ export interface Investigation {
   session?: {
     backend: Backend;
     model: string | null;
+    reasoning_effort?: ReasoningEffort | null;
     id: string | null;
   } | null;
   attempts?: {

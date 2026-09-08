@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:d37a2ef750caf73b5cd91c9c5312f0332be9c542d91da146e36afbcdda014011",
+  "pageVersion": "sha256:2e99cbbc05801678088b3abc24634a05e93abeed5940a89b1ce195e0ae2d361a",
   "claims": [
     {
       "id": "claim_d9a6c98de02d49279a29adf7c1ea2d00",
@@ -127,16 +127,16 @@
       "statement": "Native investigations invoke one persistent Codex or Claude Code session, expose workspace data tools through MCP and Python, and persist the native session ID for resume instead of implementing a model-call loop.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/research/mcp.py#L27-L117",
-          "version": "repo-lines-v1:sha256:632f0bdcbe326fa4c071658f9363d3d76517e4fdd222837ec82047cc6c368dcf:eyJzZWxlY3RlZExpbmVDb3VudCI6OTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMyOTZjMWM0NTA2YzE5OTBiNjU5YTI5MTA4MDQ2YzViY2VlN2Q5ZjYwMGMzMmI3NzRiMDE1ZmQ1ZDczMWY1Y2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY0MjZjNWViOGFiYTNhODliODAyYTVmOTYyNGM3NDNhZDM5MDMyMWU0MDZjMTNkODMzNjQ5MDEyZmRkYjNjM2YiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFlOTYyNTE1M2NmNTE5MzU5NDdmZWExM2Q3OTJkODI3ZmMzNTI4Njc5YmQzYTgyOWQ3ZmZhYWEwNjdmZGVhZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://src/agent_data_workbench/research/mcp.py#L25-L117",
+          "version": "repo-lines-v1:sha256:4e1ae2fbc984e297456e6a92a9755e85c6f108d61f11c695836e5721e509f750:eyJzZWxlY3RlZExpbmVDb3VudCI6OTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQzNzIwYjdkNjRlYjdkOTQ5NTA2ZTg2ZGFkYjk2ZWZhODM0ODM3ZGJjYWUyMDdmMzlkYWIwYjkxZWM2MGY3NjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY0MjZjNWViOGFiYTNhODliODAyYTVmOTYyNGM3NDNhZDM5MDMyMWU0MDZjMTNkODMzNjQ5MDEyZmRkYjNjM2YiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjliMTRjMGQ2MWJhZTVjZDZjYzNhZjhjNmU5MzUwYzQ0YTc1YTEyMDQ5YTMyM2NhYWE4ODIzZjIzOWVmOGRmNjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
-          "resource": "repo://src/agent_data_workbench/research/sessions.py#L188-L295",
-          "version": "repo-lines-v1:sha256:b340ddc4c3897b6582c53d58e294f489cc1702d62d28c10f823763f05a710792:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA4LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI2Yzc3MWMzNTA3MTk2YmQxOGZmNTcyOGJmOGMyOWY4OGQ1ZmYyNzM4OGJiZTQ0ZTBlZTNhOTM5ZGZmZjMxMTdlIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI3ZTlmZWQzY2MxMDg1OGViYWIyM2E4YzUzN2I4OWExYjg5OTI1MzU1Nzk5NmE2YzMxZjI2YjhjZmFjNzk1NWM3IiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJkNzAxNDllMDY5YWQ2N2VjY2Y0NzM2NDZmZjFjNzUwMDUwZDMyOWQxMTAwMThkYzU3NjY4NzhlYWZhMWQ2MDdkIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI4MTg2ZmYzYzJlMjRlZDA0OWY0Y2ZiMGNlYTk4NmQzNzE4YjU0YjJiMWIxODljNjhkNmNiMzIzMDJlMDgwZjUyIn0"
+          "resource": "repo://src/agent_data_workbench/research/sessions.py#L203-L316",
+          "version": "repo-lines-v1:sha256:c149faaeed23507e1dc205499acf9a90ff53fc908b0430a567a0ffb0cc6ff7a4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTE0LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI2Yzc3MWMzNTA3MTk2YmQxOGZmNTcyOGJmOGMyOWY4OGQ1ZmYyNzM4OGJiZTQ0ZTBlZTNhOTM5ZGZmZjMxMTdlIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI3ZTlmZWQzY2MxMDg1OGViYWIyM2E4YzUzN2I4OWExYjg5OTI1MzU1Nzk5NmE2YzMxZjI2YjhjZmFjNzk1NWM3IiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJkNzAxNDllMDY5YWQ2N2VjY2Y0NzM2NDZmZjFjNzUwMDUwZDMyOWQxMTAwMThkYzU3NjY4NzhlYWZhMWQ2MDdkIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI4MTg2ZmYzYzJlMjRlZDA0OWY0Y2ZiMGNlYTk4NmQzNzE4YjU0YjJiMWIxODljNjhkNmNiMzIzMDJlMDgwZjUyIn0"
         },
         {
-          "resource": "repo://src/agent_data_workbench/research/sessions.py#L38-L121",
-          "version": "repo-lines-v1:sha256:0578ed29bea6a1e63a3f431782e3272bdf10e12815d3f1422f710691a6f83258:eyJzZWxlY3RlZExpbmVDb3VudCI6ODQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlmZDdhMDdhODNkZDE5OTZmYjUxNjg0YjQyYWVjYWY0ZTkwZmI3OGJhNzIzMGU1NDJlZDdiZDAxZDQyMzAxYmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5MDlhNTNhNjE4ZDAyOGUxZDMwMDBjMGE3YWJjZWVjYmU1ZmIzN2Y0ZTUxMWVmZTQ2NjQzZmFkNmU2Njg3MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhjZTBkOTE2ODcxMTc2Nzg2MGZmMDE3ZjM1YzJhYWQ4MzliZGJiNTIyYzZkZDZmY2I1NGMzNmU4ODhmNTgwOTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM3ZDgyMThhOTRjNzE0NDI5ZGE5Zjk3OWI2YTIyNGMyNWVhNjMyNTdiYzdkNTYwYjE1YmIxMDUxM2FiYjFlYWYifQ"
+          "resource": "repo://src/agent_data_workbench/research/sessions.py#L43-L136",
+          "version": "repo-lines-v1:sha256:113d23134b0d599ca1dbc912f59ad5097896a4eff35f322ad972394147c3e6bc:eyJzZWxlY3RlZExpbmVDb3VudCI6OTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMzYjdjM2RiNTBhZmFkODc4ZGRiOGNjYWE4N2NhOWZjZDE4MmE2YmI3NmY2MzIyOWY5NjZiMzMyMjJjZmFjMGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5MDlhNTNhNjE4ZDAyOGUxZDMwMDBjMGE3YWJjZWVjYmU1ZmIzN2Y0ZTUxMWVmZTQ2NjQzZmFkNmU2Njg3MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhiNGI0NDVmMzVhY2QxNDFlZDU0YWQwMjE1MGYyZjJlMTRkMjI1NjZlYTAzM2E1NjVhY2ZmYmVhNTk5MjhlMWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM3ZDgyMThhOTRjNzE0NDI5ZGE5Zjk3OWI2YTIyNGMyNWVhNjMyNTdiYzdkNTYwYjE1YmIxMDUxM2FiYjFlYWYifQ"
         }
       ]
     },
@@ -381,10 +381,32 @@
           "version": "repo-file-v1:sha256:1061cbe59ac358753fe44559bb60d53ea92b100ac61bec5e63bc11bd670d1991"
         }
       ]
+    },
+    {
+      "id": "claim_d2196826127a497f8a95f98529bb8402",
+      "statement": "Explicit Codex reasoning effort is passed as a per-invocation config override, persisted in investigation session metadata, and restored by native, API and CLI resume paths without changing user-level configuration.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/api/routers/investigations.py#L32-L57",
+          "version": "repo-lines-v1:sha256:ac44c4374cbab6097eceef7e026bc06da86dc28159dead274eab7c0f09bc3d7f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2MzJkNjMxZTc3ZTY2NTZjNGVkMTkxNmU3ZGU0NzcyYjQ4M2U0MTBkMzg2N2ZhOTBhNTBkMDdmYTAwN2I2MzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2NjhmMzRlNjAzMGM5M2YxNTZkMmM2ZTEwZmU5ZGU2ZjM4YWUxOTZiNDI4OTM1ZjZkZmU3ZGZjM2RiYjFkYjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA0OGY4ZTBmZjEyYWE3ZTAyNmIyYWJlZjllMzJmZmU2MmZlNTE4OThkMDlhNjRlODZmNzk5NDNiOTZhY2QyMmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgwZmJkNDBkMTcwODU1NDIwODNlOTA5NjQ0NTk4ZjZiM2Y0MjI3NDhiN2EzNjFiZDIyNGNjYTVhMDQ1NTRhOTkifQ"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/cli/research.py#L24-L56",
+          "version": "repo-lines-v1:sha256:e6aa4374fbd6996497de1fc00009005aa11d33204a649d3692fdf3a779aad4a7:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFjYWZkM2YzZmYwYWQ4NmNiOTU2ODQyNDY5NDY0YWQyYzg3MzFmOGY3ZjhiNGMxMDA5NjZiOWRiZmM2NWY5ZDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4ZjU3MTFkMzI1YzNmYjM2YjE2ZmNjZWJjNGYxYzUxOTFmYjRlZDE3NDk3ZDIxNTY3YjQ1YTM3OWRiNjMwZTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZhN2Y4ODc0NjgzYmJhNmZlZjMzZDAxY2UyMjc4NzY0OTc4ZmE1ZmM4NTRjOWVkOGJmMjQ3YzIwMjFlNDM0NjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFmZDdlZDI0OGY3MmY1YTY5MjIxNjcxM2IyNTFhMjUzMzRiNDc1MjJlYzVkYzc0OTc5YmQyMWU2OTNmNDdhNWEifQ"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/research/sessions.py#L203-L316",
+          "version": "repo-lines-v1:sha256:c149faaeed23507e1dc205499acf9a90ff53fc908b0430a567a0ffb0cc6ff7a4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTE0LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI2Yzc3MWMzNTA3MTk2YmQxOGZmNTcyOGJmOGMyOWY4OGQ1ZmYyNzM4OGJiZTQ0ZTBlZTNhOTM5ZGZmZjMxMTdlIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI3ZTlmZWQzY2MxMDg1OGViYWIyM2E4YzUzN2I4OWExYjg5OTI1MzU1Nzk5NmE2YzMxZjI2YjhjZmFjNzk1NWM3IiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJkNzAxNDllMDY5YWQ2N2VjY2Y0NzM2NDZmZjFjNzUwMDUwZDMyOWQxMTAwMThkYzU3NjY4NzhlYWZhMWQ2MDdkIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI4MTg2ZmYzYzJlMjRlZDA0OWY0Y2ZiMGNlYTk4NmQzNzE4YjU0YjJiMWIxODljNjhkNmNiMzIzMDJlMDgwZjUyIn0"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/research/sessions.py#L61-L116",
+          "version": "repo-lines-v1:sha256:ea4107f2242fe5bbbbf7a34cb5071795062da2533fe89b56756829c421c7d4ce:eyJzZWxlY3RlZExpbmVDb3VudCI6NTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYyMzM4MmMxMGE5ZjFkNDFiNDhjOTQyZDEyZmZmMGI0ZTRkMWY4MGNiMDM0MDk5NjMxNTllZWNmYWNkNDc2MWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkwMmNmZWE4YTE5ZmY3Y2FiZjM1ZWFlMzgzOTFjZDhkZWYyNjlmNGFjOTFmZWExMjZmM2ZiZTRiMzlmYTQ3MzIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFiODUxNzRhM2RlYTg4ZjY3MTBlZDNmYzliY2U3YTEzOGM0MzM4YTUyNTVjNDUzZDg3NGQxNDVhYjczMGI4ODMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU2OTcyMTY0NTY2Yzk5NWU3ZTA0MTZhNWY2NGE5NWUxMWRmODA1MDQ5MDQ2OGEzNTBmYzIxOWEwNWE2NDBhMDAifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T04:50:29.215Z"
+    "at": "2026-09-08T14:06:39.851Z"
   }
 }

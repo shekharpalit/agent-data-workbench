@@ -49,6 +49,7 @@ def run_investigation(
             payload.backend or previous.get("backend", "codex"),
             payload.model or previous.get("model"),
             payload.timeout,
+            reasoning_effort=payload.reasoning_effort or previous.get("reasoning_effort"),
         )
         result = investigate(project, value["id"], agent)
         return {"id": value["id"], "status": result["status"]}

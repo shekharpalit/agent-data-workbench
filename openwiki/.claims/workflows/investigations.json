@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:e22dd970714af27ae36b7ba905a94e76424f58219f1e76ee239fe5e6613d1f97",
+  "pageVersion": "sha256:32b9faffa74c6f9e5b189e4f436195a7e7929d35700480a51a782a8e7fb62df6",
   "claims": [
     {
       "id": "claim_399da148ea9d4659a1c1f01b3f13a8a8",
@@ -35,20 +35,20 @@
       "statement": "Investigations and knowledge records receive generated UUIDs; proposal IDs and finding references use the shared UUID schema while trace IDs remain source identifiers.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/research/artifacts.py#L27-L84",
-          "version": "repo-lines-v1:sha256:d3c2320e8d969f4213af3ae1fa51dba8a7d0c94cf3e0a785f0bad976bf273781:eyJzZWxlY3RlZExpbmVDb3VudCI6NTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIxMGY0ZDYyNWE4M2Y4ZWVkMTYzNGU3MDI1NTYwOGEwZjUyOWYyODdjN2IyZGRiMWQzNzdiYmIxN2MxYWEzMDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk5M2ExMzA2MmYxMGVlNGYxMjE4ZDkzZTM3YTZmODFkMzQ2ZmYxMWVjN2U1NWRkNTQyZTJkMmQyZWYwNzExZjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJiZWVkZjNiYTM5NDM1MWY5NDUzNWFkMThhM2RkY2FlODU1MzUyYmVlZDc2YTExZGIwYTkxZWFmNDhlMjRlNGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJkMWZjMjNmZWYxMDE3NTEyNWM3NTI3NWZhNDU5MDJjYmUwNjM1ZTcxNGU0MmNiMTQ1ZTI4MTg0YmJjMGM5ZGYifQ"
+          "resource": "repo://src/agent_data_workbench/research/artifacts.py",
+          "version": "repo-file-v1:sha256:35c32ee13561191d3e826f285a9a94e0e3e25270c4e5451dc156feb42f960b2e"
         },
         {
           "resource": "repo://src/agent_data_workbench/research/contracts.py",
-          "version": "repo-file-v1:sha256:3fdd63c5db3541d440d6834dfe07bc8235aef5f9491cd7a80eefe7f548f7e624"
+          "version": "repo-file-v1:sha256:5cb2646f870e21da7e5b925dd9b55cd0f56791349685e9ed82ce4bdac234ae98"
         },
         {
           "resource": "repo://src/agent_data_workbench/shared/identifiers.py",
           "version": "repo-file-v1:sha256:84c226e3810161043a58f6d7861ead48d75182bb2ce290bafbc127e52b52def0"
         },
         {
-          "resource": "repo://src/agent_data_workbench/workspace/project.py#L96-L111",
-          "version": "repo-lines-v1:sha256:c98be326145c77f9afb4ea41e0000f6c89c67470370be3ae87c325079bf49449:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyZGJmOWI5ZDU4M2NmZWM0MjhmZTlkYTliNzFkMzYzZDY3YWI2ZmQ4ZTA1ZGNmMjZjNTkwNTI4ZmQyZmZhMDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1ZWVmZjNjNDc3NmY1ZmI5Yzk1OTg0ZDFhMTc0NmIxZTU2OGRkNjhkNWVkZTZlNDQ4NWFhNzM1ODhhNDM3ZWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ5ZTY4OWQ4MWY2OTVkYzU1NGRlZWNhYjZmN2IyZDdlMjUxNWU4Zjc5MGMyZWY2ZWI1Y2RkYmVmM2JjNGUwMjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZkZWIyMDlhNDBhYjRiNmVkZWU1YTdlMWM3YjcxNzUwZjUwNjVlYTExMjgyOTBiNTgxYmMyM2UxY2E2ZDNlYTYifQ"
+          "resource": "repo://src/agent_data_workbench/workspace/project.py",
+          "version": "repo-file-v1:sha256:63c8485e467d2be037b276e457392a1077253dd814e16949e6be001542f46a41"
         }
       ]
     },
@@ -57,16 +57,12 @@
       "statement": "Native investigations retain coding tools and provider session persistence, save native IDs from streamed events, and resume the saved backend without a custom model-call loop or default time budget.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/research/sessions.py#L188-L295",
-          "version": "repo-lines-v1:sha256:b340ddc4c3897b6582c53d58e294f489cc1702d62d28c10f823763f05a710792:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA4LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI2Yzc3MWMzNTA3MTk2YmQxOGZmNTcyOGJmOGMyOWY4OGQ1ZmYyNzM4OGJiZTQ0ZTBlZTNhOTM5ZGZmZjMxMTdlIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI3ZTlmZWQzY2MxMDg1OGViYWIyM2E4YzUzN2I4OWExYjg5OTI1MzU1Nzk5NmE2YzMxZjI2YjhjZmFjNzk1NWM3IiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJkNzAxNDllMDY5YWQ2N2VjY2Y0NzM2NDZmZjFjNzUwMDUwZDMyOWQxMTAwMThkYzU3NjY4NzhlYWZhMWQ2MDdkIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI4MTg2ZmYzYzJlMjRlZDA0OWY0Y2ZiMGNlYTk4NmQzNzE4YjU0YjJiMWIxODljNjhkNmNiMzIzMDJlMDgwZjUyIn0"
+          "resource": "repo://src/agent_data_workbench/research/sessions.py",
+          "version": "repo-file-v1:sha256:9c608f29e24abfe4827ce4e4cf821a0e13b2ea841d012ff5794c2f3fe610cab8"
         },
         {
-          "resource": "repo://src/agent_data_workbench/research/sessions.py#L38-L121",
-          "version": "repo-lines-v1:sha256:0578ed29bea6a1e63a3f431782e3272bdf10e12815d3f1422f710691a6f83258:eyJzZWxlY3RlZExpbmVDb3VudCI6ODQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlmZDdhMDdhODNkZDE5OTZmYjUxNjg0YjQyYWVjYWY0ZTkwZmI3OGJhNzIzMGU1NDJlZDdiZDAxZDQyMzAxYmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5MDlhNTNhNjE4ZDAyOGUxZDMwMDBjMGE3YWJjZWVjYmU1ZmIzN2Y0ZTUxMWVmZTQ2NjQzZmFkNmU2Njg3MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhjZTBkOTE2ODcxMTc2Nzg2MGZmMDE3ZjM1YzJhYWQ4MzliZGJiNTIyYzZkZDZmY2I1NGMzNmU4ODhmNTgwOTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM3ZDgyMThhOTRjNzE0NDI5ZGE5Zjk3OWI2YTIyNGMyNWVhNjMyNTdiYzdkNTYwYjE1YmIxMDUxM2FiYjFlYWYifQ"
-        },
-        {
-          "resource": "repo://tests/test_research.py#L200-L306",
-          "version": "repo-lines-v1:sha256:bd55db55f3dac2791b1b33ca9daabeb0ffe3394b824bd8b374dd7e88ee5f21e6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA3LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIxZjNkMDIzZTRkZWQ3ODAzNjVlYWI3NGJlMWE3OTIzMjI3YTBkNGFlMmMxZWMzNzUxNmM2OTU3Y2JiZTAxNjBjIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0ODkzZjQwZTM3ODFlYjg5NmM4MmQwNDZhMDgwNjdhMTFlMzVjZGYyZjFkZmFmMjZmZWE5MGI4ZGI2Njc2NDEzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI3YmE1YjE4OWRhYzYwNDMxMjU2OGViMGVjODhkNTNjMmM0ZDYzNDA2Y2FlODIzNWFhNzE3OWE1MTk5ZjU2NjE0IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIxNjNmNjEwNTRiMTMzODMzNjI0MGI3M2U4YTUxNTZhMTZkMzRhOWIyZDEwZjhhMWFjM2ZhOTA0MTFhOGI5YzlmIn0"
+          "resource": "repo://tests/test_research.py",
+          "version": "repo-file-v1:sha256:3ab530157f78c575c5a9009d36ed3ad01f642920d36f31320f55cca2d30869a1"
         }
       ]
     },
@@ -169,20 +165,20 @@
       "statement": "The manual UI creates and opens the shared research snapshot without provider calls, allowing human record outcomes, notes, evidence findings and chart publication.",
       "evidence": [
         {
-          "resource": "repo://tests/test_manual_research_api.py#L44-L155",
-          "version": "repo-lines-v1:sha256:800d363ec5b9d2d845176c35227060fffc07dc4a30eb976fffac66fee826802d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEyLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI1NTcxZTdlODhlMmUyYWNkMDYwOTk4MGVlN2EzZmE1ZmE5NjZlYmFiZjRkZDk3NjljMDZhYWM1NTU1OTk2MTBmIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0ODkzZjQwZTM3ODFlYjg5NmM4MmQwNDZhMDgwNjdhMTFlMzVjZGYyZjFkZmFmMjZmZWE5MGI4ZGI2Njc2NDEzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIwNGE5ZDhhYzE3ZjU0YWJjZTZjMDdlZGE1NjZiYjY2ODJlNjg3OTMxNmFmMTg0NWM2NGFiOTA1OGFhMDgyMjk5IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI2YTZmNWZlMWY4ZDc0ZDJmOGUzZTM5ODBkM2Q0YTk0YzlkZGZiZTRhOGVjOTcwZTllNDI0MWQ0M2VmZDMzZGIwIn0"
+          "resource": "repo://tests/test_manual_research_api.py",
+          "version": "repo-file-v1:sha256:0577dc8ef08e50527df172bf9ef2d6bfedfbf6659986cd693d0cd043d914bc83"
         },
         {
-          "resource": "repo://ui/src/views/ManualResearchEditor.tsx#L170-L454",
-          "version": "repo-lines-v1:sha256:aacda49f775d61c9a5857b9944a3784b8657b3e95cd868baccdfd8d18b44e7d4:eyJzZWxlY3RlZExpbmVDb3VudCI6Mjg1LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJlZTE4ZWVkNmQ3N2RmZjg3MGQ5NjcxODljNzMwNTYxZmVhNjFhODQ1OTljZTU3Yzc1Yzk3OGZkOGU4YjYyMzM0IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIwOTRmYzBjMTczZDFlYzNmYzUwMWQ3ZGZhOTI4NTUwMWM1MjdjZmI0NzEyNTgzZGEzY2MzNjE4MDU2NmI0YmUzIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIwYmZkZjM2NDU4ZmUyYzFlZmQ4MjI2ZjZhYmQ4Yzk4ZDYxNzg3YmRhMmY1MGM5ZmIzMjI0YmI3Zjk1NDNmMzhkIn0"
+          "resource": "repo://ui/src/views/ManualResearchEditor.tsx",
+          "version": "repo-file-v1:sha256:92dc25e0439e1556883d763f626394d57eed0e60e961aa4bf9f8eb8206257c0c"
         },
         {
-          "resource": "repo://ui/src/views/ResearchControls.tsx#L113-L150",
-          "version": "repo-lines-v1:sha256:03f0e0a76e18759d21d8ad83c1093d7fb0c7d5a6a0748c8b94283cb97429d0b5:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMwNGQwZDAzNTNiOWFjMmQyZGY0ZjEyZWEyMjgxMDkyNmQ5OWU4NDg3OTRmNGEzY2ViZDlhZDU3NWM4MjY3MjgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZhNjgzNjVlMzFjNWNiYWRhYTk2MjhkM2IxZTFkZGJlM2Q5MTNhZGQ4MTE1MzMxNzRlOGE3MWQyYzFkNzBhMTgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU0YzMzMWUxN2RmZTgxYjFjZTA3ZWJjOTcwNjFlZmZhNzc2ZWVlNDRiZjBiZjVmNWU3ZTI5MDNkMWI3MzYxOGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY2NmU0YTBjOGJiZWI1NDQ3MzFhNDRiOTE5ZDI4Zjg1MWQzMGMyZWY0NWJlNWNiNmQyY2ZiMWE2NDQ4NzAyM2MifQ"
+          "resource": "repo://ui/src/views/ResearchControls.tsx",
+          "version": "repo-file-v1:sha256:72ba68b3e706ee129a7edb7261b90e8538c61f941f6cee4dbeb4181d35068dd2"
         },
         {
-          "resource": "repo://ui/src/views/ResearchSnapshot.tsx#L1-L197",
-          "version": "repo-lines-v1:sha256:30f8c8a3a260b2c7d9b4e3a6768a030d252b0ff53db305335420c9d293437746:eyJzZWxlY3RlZExpbmVDb3VudCI6MTk3LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI2MTBmMjU2ZjQ3YTU5ZWJjNTBjYmY4NjlkNThjYmNiMzRmZWRjMmY3ODMyOWQ3YTgyZjJhNWY5MzU1ZmRjNDQyIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI5NWVmMDFiYzA4ZGJjM2I2M2U0ZTc1ZWEzZDI2YTViOTQxODkxODc3ZTI3YWQ4OTEzMjljODQxMWQ3ZDhkYzRkIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MCwicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI0M2JhZWU0NjJjOTNkYjdjODk3MTljN2IyYWZjOGVlZDQyZjZmMDRhOGZhZWJmNzU2MmZkYzgxM2MxOWQ0OWU5In0"
+          "resource": "repo://ui/src/views/ResearchSnapshot.tsx",
+          "version": "repo-file-v1:sha256:88e95c64490541f49af4a553f00df3e6870dbc35f20cc5d30134de924ae90af4"
         }
       ]
     },
@@ -279,10 +275,58 @@
           "version": "repo-lines-v1:sha256:2c68ef60df958643aa91b4b16c91662c5db87b5a9ff783ccf1f6e6c8a3e23786:eyJzZWxlY3RlZExpbmVDb3VudCI6NTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImExNDI4NzU0NTU0ODAyMmY3OTA0MjZlODE5ZGM5OTBmOTRjMjI5YzgwYTcyNWNjM2M2Mzg3MzViOWUzNWMxZDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmYmQwMDkzMTRiYzI3MDg0MTY3MzRhMDJhZTVmZjM5YTFlNDhhMDUwYmU5MWY0M2IyZmFhOTIwMDJjNjJiZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
+    },
+    {
+      "id": "claim_0b5a2d846e7d4c6686dafd1451f98883",
+      "statement": "Codex investigations accept an optional per-session reasoning effort through the CLI and UI/API, pass it as a native configuration override, and persist it for resume without changing global configuration.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/cli/research.py",
+          "version": "repo-file-v1:sha256:38690d82798f27420444cfb012bb220974fb1aeca8b080a00cc24c94d1a3c9d8"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/research/sessions.py#L203-L316",
+          "version": "repo-lines-v1:sha256:c149faaeed23507e1dc205499acf9a90ff53fc908b0430a567a0ffb0cc6ff7a4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTE0LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI2Yzc3MWMzNTA3MTk2YmQxOGZmNTcyOGJmOGMyOWY4OGQ1ZmYyNzM4OGJiZTQ0ZTBlZTNhOTM5ZGZmZjMxMTdlIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI3ZTlmZWQzY2MxMDg1OGViYWIyM2E4YzUzN2I4OWExYjg5OTI1MzU1Nzk5NmE2YzMxZjI2YjhjZmFjNzk1NWM3IiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJkNzAxNDllMDY5YWQ2N2VjY2Y0NzM2NDZmZjFjNzUwMDUwZDMyOWQxMTAwMThkYzU3NjY4NzhlYWZhMWQ2MDdkIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI4MTg2ZmYzYzJlMjRlZDA0OWY0Y2ZiMGNlYTk4NmQzNzE4YjU0YjJiMWIxODljNjhkNmNiMzIzMDJlMDgwZjUyIn0"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/research/sessions.py#L43-L136",
+          "version": "repo-lines-v1:sha256:113d23134b0d599ca1dbc912f59ad5097896a4eff35f322ad972394147c3e6bc:eyJzZWxlY3RlZExpbmVDb3VudCI6OTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMzYjdjM2RiNTBhZmFkODc4ZGRiOGNjYWE4N2NhOWZjZDE4MmE2YmI3NmY2MzIyOWY5NjZiMzMyMjJjZmFjMGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5MDlhNTNhNjE4ZDAyOGUxZDMwMDBjMGE3YWJjZWVjYmU1ZmIzN2Y0ZTUxMWVmZTQ2NjQzZmFkNmU2Njg3MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhiNGI0NDVmMzVhY2QxNDFlZDU0YWQwMjE1MGYyZjJlMTRkMjI1NjZlYTAzM2E1NjVhY2ZmYmVhNTk5MjhlMWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM3ZDgyMThhOTRjNzE0NDI5ZGE5Zjk3OWI2YTIyNGMyNWVhNjMyNTdiYzdkNTYwYjE1YmIxMDUxM2FiYjFlYWYifQ"
+        },
+        {
+          "resource": "repo://tests/test_research.py",
+          "version": "repo-file-v1:sha256:3ab530157f78c575c5a9009d36ed3ad01f642920d36f31320f55cca2d30869a1"
+        },
+        {
+          "resource": "repo://ui/src/views/ResearchControls.tsx",
+          "version": "repo-file-v1:sha256:72ba68b3e706ee129a7edb7261b90e8538c61f941f6cee4dbeb4181d35068dd2"
+        }
+      ]
+    },
+    {
+      "id": "claim_3a8749d77e7e4308bddc7f5cb44342ed",
+      "statement": "The snapshot search refreshes on changed completion/failure/pending counts while retaining local filter inputs; research detail presents results before the dataset editor and preserves full outcome methods in disclosures.",
+      "evidence": [
+        {
+          "resource": "repo://ui/src/views/Investigations.tsx",
+          "version": "repo-file-v1:sha256:481743bdf92c08665a02b21dad5e80071615cd5794bfa481fd586c81a7be33f5"
+        },
+        {
+          "resource": "repo://ui/src/views/ResearchOutputs.tsx",
+          "version": "repo-file-v1:sha256:ab8141375c2b7ff4fb3662bd06140788063f411d5c7ead717c548b7cc795d228"
+        },
+        {
+          "resource": "repo://ui/src/views/ResearchSnapshot.tsx",
+          "version": "repo-file-v1:sha256:88e95c64490541f49af4a553f00df3e6870dbc35f20cc5d30134de924ae90af4"
+        },
+        {
+          "resource": "repo://ui/tests/research.test.tsx",
+          "version": "repo-file-v1:sha256:02653d589d46d199b8e951dd9e5761e5a9a2d9cefd007d552592ee596b3d5272"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T02:47:35.721Z"
+    "at": "2026-09-08T14:16:43.946Z"
   }
 }

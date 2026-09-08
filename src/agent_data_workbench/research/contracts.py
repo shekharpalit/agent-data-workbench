@@ -8,6 +8,8 @@ from agent_data_workbench.analysis.contracts import Analysis, Evidence
 from agent_data_workbench.shared.contracts import Contract
 from agent_data_workbench.shared.identifiers import UUIDString
 
+ReasoningEffort = Literal["none", "minimal", "low", "medium", "high", "xhigh", "max", "ultra"]
+
 
 class Signal(Contract):
     finding_id: UUIDString
