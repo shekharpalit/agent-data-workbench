@@ -54,6 +54,22 @@ export function ClustersView({
           )}
         >
           <div className="row">
+            <label className="field">
+              <span>Common trace fields</span>
+              <select
+                value=""
+                onChange={(event) => setPointer(event.target.value)}
+              >
+                <option value="">Choose a field…</option>
+                <option value="/trajectory">OpenHands trajectory</option>
+                <option value="/trajectory/1/content">
+                  OpenHands initial user request (verify schema)
+                </option>
+                <option value="/messages">Chat messages</option>
+                <option value="/events">Agent events</option>
+                <option value="/input">Task input</option>
+              </select>
+            </label>
             <Field
               label="Text field (JSON pointer; empty uses the record)"
               value={pointer}
@@ -80,10 +96,14 @@ export function ClustersView({
           </div>
         </form>
         <p className="muted">
-          Uses current search filters and complete selected text. Higher
-          thresholds create tighter groups. Computed locally without a model
-          call.
+          Select a meaningful content field when records share large prompts or
+          metadata. Uses current search filters and complete selected text.
+          Higher thresholds create tighter groups. Computed locally without a
+          model call.
         </p>
+        <button className="ghost" onClick={() => navigate({ view: "graph" })}>
+          Compare task outcomes →
+        </button>
         <Details title="Current search filters">
           <JsonView value={query} />
         </Details>
@@ -116,7 +136,6 @@ export function ClustersView({
                 key={`${JSON.stringify(active)}:${data.source_sha256}`}
                 clusters={data.clusters}
                 onMembers={onMembers}
-                navigate={navigate}
               />
             </Suspense>
           )}

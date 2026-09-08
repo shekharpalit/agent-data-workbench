@@ -101,7 +101,8 @@ export function OverviewView({
           ))}
         {!data.experiments.length && (
           <p className="muted">
-            Execute a reviewed suite from the CLI. Results will appear here.
+            Run a Harbor comparison from an accepted task or a reviewed suite
+            from Improvements. Results will appear here.
           </p>
         )}
       </Card>

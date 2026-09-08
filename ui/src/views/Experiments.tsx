@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { TrialEvidence } from "./TrialEvidence";
 import { api } from "../api";
-import type { Route, Trial } from "../contracts";
+import type { Experiment, Route, Trial } from "../contracts";
 import {
   Badge,
   Bars,
@@ -26,8 +26,9 @@ export function ExperimentsView({
   return (
     <Card title="Measure a change">
       <p className="muted">
-        Configure target runners and execute reviewed suites from the CLI.
-        Inspect paired outcomes, grading evidence and regressions here.
+        Run a Harbor comparison from an accepted task, or run a reviewed suite
+        from Improvements. Inspect paired outcomes, verifier evidence and
+        regressions here.
       </p>
       {[...request.data]
         .sort((a, b) => b.created_at.localeCompare(a.created_at))
@@ -38,8 +39,8 @@ export function ExperimentsView({
               <Badge value={experiment.split} />
             </div>
             <p className="muted">
-              {experiment.suite_id} · {experiment.repeats} repeats ·{" "}
-              {experiment.status}
+              {experiment.suite_id || "Reviewed Harbor task"} ·{" "}
+              {experiment.repeats} repeats · {experiment.status}
             </p>
             <button
               className="ghost"
@@ -67,8 +68,10 @@ export function ExperimentDetail({
   id: string;
   navigate: (route: Route) => void;
 }) {
-  const request = useQuery({
+  const request = useQuery<Experiment>({
     queryKey: ["experiment", id],
+    refetchInterval: (query) =>
+      query.state.data?.status === "running" ? 2000 : false,
     queryFn: ({ signal }) => api.artifact("experiments", id, signal),
   });
   const [selected, setSelected] = useState<Trial | null>(null);
@@ -84,12 +87,14 @@ export function ExperimentDetail({
         ← Experiments
       </button>
       <Card title={experiment.conclusion}>
+        {experiment.scope && <p className="scope-note">{experiment.scope}</p>}
         <div className="pill-group">
           <Badge value={experiment.split} />
           <Badge value={experiment.status} />
         </div>
         <p>
-          {experiment.suite_id} · {experiment.repeats} paired repeats
+          {experiment.suite_id || "Reviewed Harbor task"} · {experiment.repeats}{" "}
+          paired repeats
         </p>
       </Card>
       {summary.baseline && summary.candidate ? (
@@ -130,8 +135,10 @@ export function ExperimentDetail({
           <Card title="Paired outcomes">
             <p>
               {summary.improved.length} improvements ·{" "}
-              {summary.regressed.length} regressions ·{" "}
-              {summary.invalid_pairs.length} invalid pairs
+              {summary.regressed.length} regressions
+              {experiment.status === "running"
+                ? " · pair counts are provisional until both variants finish"
+                : ` · ${summary.invalid_pairs.length} invalid pairs`}
             </p>
             <Table
               headings={["Task", "Trial", "Variant", "Outcome", "Evidence"]}
@@ -145,7 +152,7 @@ export function ExperimentDetail({
                       navigate({ view: "tasks", id: trial.task_id })
                     }
                   >
-                    {trial.task_id}
+                    {trial.task_title || trial.task_id}
                   </button>,
                   trial.trial + 1,
                   trial.variant,
@@ -175,7 +182,18 @@ export function ExperimentDetail({
           >
             <div id="trial-evidence">
               {selected ? (
-                <TrialEvidence trial={selected} />
+                <>
+                  <TrialEvidence trial={selected} />
+                  {selected.trace_ids?.map((traceId) => (
+                    <button
+                      key={traceId}
+                      className="secondary"
+                      onClick={() => navigate({ view: "traces", id: traceId })}
+                    >
+                      Inspect generated trace →
+                    </button>
+                  ))}
+                </>
               ) : (
                 <p className="muted">
                   Select a trial to inspect actual output, captured artifacts

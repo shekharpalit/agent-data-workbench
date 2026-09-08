@@ -10,5 +10,6 @@ okf_version: "0.2"
 
 - [architecture](architecture/)
 - [development](development/)
+- [integrations](integrations/)
 - [operations](operations/)
 - [workflows](workflows/)

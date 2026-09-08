@@ -28,6 +28,7 @@ def investigate_command(
     question: str = "What should we improve next?",
     backend: str | None = None,
     model: str | None = None,
+    reasoning_effort: str | None = None,
     mode: str = "research",
     exclude_final: bool = False,
     timeout: float | None = None,
@@ -42,7 +43,12 @@ def investigate_command(
     )
     previous = value.get("session") or {}
     selected = backend or previous.get("backend", "codex")
-    agent = NativeSession(selected, model or previous.get("model"), timeout)
+    agent = NativeSession(
+        selected,
+        model or previous.get("model"),
+        timeout,
+        reasoning_effort=reasoning_effort or previous.get("reasoning_effort"),
+    )
     typer.echo(f"Investigation: {value['id']}. Using {selected}'s native session and account.")
     completed = investigate(p, value["id"], agent)
     emit({k: completed.get(k) for k in ("id", "status", "session", "coverage", "error")})

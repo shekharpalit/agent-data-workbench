@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:623316a51bd99d838ed314f431c1c38a5f11f6cf6f7700a2307e2e3286b76457",
+  "claims": [
+    {
+      "id": "claim_c47d985339b244d7bf2c9d029b6d1b84",
+      "statement": "The Hugging Face adapter pins source revision and preserves complete JSON-compatible rows, using configured external IDs or stable source-position UUIDs with only explicit optional row selection.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/integrations/huggingface.py",
+          "version": "repo-file-v1:sha256:fb2d88ef7929f0374389848df0a40e0bcded58ea1c593bc4265f7c98221d0677"
+        }
+      ]
+    },
+    {
+      "id": "claim_4e1474e25ad44a9b851447bc7247cecf",
+      "statement": "Parquet imports use synchronous fsspec/PyArrow batches while other supported datasets use a streaming iterator; non-JSON row values are rejected explicitly.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/integrations/huggingface.py",
+          "version": "repo-file-v1:sha256:fb2d88ef7929f0374389848df0a40e0bcded58ea1c593bc4265f7c98221d0677"
+        }
+      ]
+    },
+    {
+      "id": "claim_a96aa63abc38446496efbe134ae7d0f5",
+      "statement": "Dataset receipts persist before source access and record success or failure separately from atomic trace ingestion, which rejects content and group/category mapping conflicts.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/data/imports.py",
+          "version": "repo-file-v1:sha256:b4c9dc1589219d81fc555312e720b8028f2abf8a672a9c6a0af7f80fe2e0e7f8"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/data/store.py",
+          "version": "repo-file-v1:sha256:3a63dc624b016d75ef76428a91b192676b4b713a8e69382be03da2a3863280c8"
+        }
+      ]
+    },
+    {
+      "id": "claim_46ca01cb8929491c9e08a1d5d2d002ad",
+      "statement": "The UI provides source inspection, a SWE-rebench mapping preset, explicit row selection, durable import history and navigation to dataset and trace views.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/api/routers/imports.py",
+          "version": "repo-file-v1:sha256:5cf63600afd6fc82284ffb18ee576b0d22d4bef849d0c73218acc178a465df2d"
+        },
+        {
+          "resource": "repo://ui/src/views/Imports.tsx",
+          "version": "repo-file-v1:sha256:956becb2989d7df2a8cf96e57016e2bf6f516b4299e56bcb8fcc3d68b9b28c19"
+        }
+      ]
+    },
+    {
+      "id": "claim_c3b16aa33f1644979ab740d801904a63",
+      "statement": "Dataset profiles describe all matching local records using explicit binary source outcomes and actual source-group membership rather than text-inferred failures.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/exploration/dataset.py",
+          "version": "repo-file-v1:sha256:fcbdb93ed359be2dc56bc89a5b829d7b9258a8db66ec45a36dcfbf4417d5ec90"
+        },
+        {
+          "resource": "repo://ui/src/views/Dataset.tsx",
+          "version": "repo-file-v1:sha256:b5da4a4f633d555b185bdb47592463eb049f699f81bf919261c8373643eb4a91"
+        }
+      ]
+    },
+    {
+      "id": "claim_f77ad498a7394d7db79c12b15a9df474",
+      "statement": "The conversation reader recognizes common event arrays and Harbor trajectories while retaining full event metadata and raw data access.",
+      "evidence": [
+        {
+          "resource": "repo://ui/src/components/traces/Conversation.tsx",
+          "version": "repo-file-v1:sha256:60ea3123186e54f232a1e7df2b49429d2a470dd58112b01f2c1131e2852a058d"
+        },
+        {
+          "resource": "repo://ui/src/components/traces/presentation.ts",
+          "version": "repo-file-v1:sha256:2e1d9f8881d830ef72482aad7dcc4eca4c2e7c389726e7e93206001a1005eca2"
+        },
+        {
+          "resource": "repo://ui/src/views/Search.tsx",
+          "version": "repo-file-v1:sha256:4decacdbd7fd993cff8e2dc78b0044ac19923495af19be721190fc5343accd18"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-08T04:50:29.215Z"
+  }
+}

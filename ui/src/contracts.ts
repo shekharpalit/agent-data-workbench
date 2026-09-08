@@ -1,6 +1,7 @@
 export type Json =
   null | boolean | number | string | Json[] | { [key: string]: Json };
 export type View =
+  | "imports"
   | "overview"
   | "traces"
   | "clusters"
@@ -174,6 +175,9 @@ export interface ResearchArtifact {
     values: { label: string; value: number }[];
   } | null;
 }
+export type ReasoningEffort =
+  "none" | "minimal" | "low" | "medium" | "high" | "xhigh" | "max" | "ultra";
+
 export interface Investigation {
   id: string;
   created_at: string;
@@ -187,6 +191,7 @@ export interface Investigation {
   session?: {
     backend: Backend;
     model: string | null;
+    reasoning_effort?: ReasoningEffort | null;
     id: string | null;
   } | null;
   attempts?: {
@@ -313,6 +318,8 @@ export interface ExperimentSummary {
   uncertainty_note: string;
 }
 export interface Trial {
+  task_title?: string;
+  trace_ids?: string[];
   task_id: string;
   trial: number;
   variant: "baseline" | "candidate";
@@ -358,9 +365,11 @@ export interface Trial {
   };
 }
 export interface Experiment {
+  kind?: string;
+  scope?: string;
   id: string;
   created_at: string;
-  suite_id: string;
+  suite_id: string | null;
   split: string;
   repeats: number;
   status: string;
@@ -371,7 +380,7 @@ export interface Experiment {
   candidate: Json;
   judge: Json;
   context_sha256: string;
-  suite_sha256: string;
+  suite_sha256: string | null;
   host: Json;
   previously_investigated_tasks?: string[];
 }
@@ -391,6 +400,7 @@ export interface Overview {
   >[];
 }
 export interface Job {
+  result?: Record<string, unknown> | null;
   id: string;
   name: string;
   status: "running" | "complete" | "error";

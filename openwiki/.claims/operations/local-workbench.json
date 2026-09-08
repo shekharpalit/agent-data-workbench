@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:79fd9f0939f4e18ab3a7c080cacf6dd546c960dce71c83f0e215fabec6a16945",
+  "pageVersion": "sha256:aed59ed0ea47433201145fbe66e223797f4027011745515c4b270a86507a22c6",
   "claims": [
     {
       "id": "claim_25574e40cfb048b39464c4e95bba596d",
@@ -43,12 +43,12 @@
       "statement": "FastAPI serves ui/dist in editable checkouts or package-only _ui assets in installed wheels, disables default interactive API documentation routes, and returns a bounded 400 error envelope for structured validation failures.",
       "evidence": [
         {
-          "resource": "repo://pyproject.toml#L31-L42",
-          "version": "repo-lines-v1:sha256:6d34248a438dc01995f2affc3d901145b409b7105344c0d0cceebd536f589154:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAzYzBlNzIzOGYwYjE4Y2JlNmE0NjY2NDFmZGNkNTk0ODUyNDQ4ZGRmN2ZmODhkMGE5ZjQ5NTBlYWRlYzM5M2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg0N2FiMDc1M2NkZjg5MzMyYmQ2ZDU2YzY3OTVlMDM5MmE2M2FkMmU5ZTBhODNjMWNmNDgzMTg5NzgwNDFiNGIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM2N2M1YzE0MmM4YzE1MTFjNDgxMTI1MThhMWQ5MGE5OTJmYjkzM2ZlYmY1NmE3ODk5MGZhYjAyYWU3Mjg3ZWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIzMjg3NjM1YTBiZGJlZjliNGM1N2FlOTU5NGQwZWE5M2Y4ZGRmMWJmM2Y3MDA2MzVhZGRlMmUzNjhlMTI4MGIifQ"
+          "resource": "repo://pyproject.toml",
+          "version": "repo-file-v1:sha256:52e802017fae5d05fd075ae91783747491729f0b0a9bb79491ba8aa54eee2497"
         },
         {
-          "resource": "repo://src/agent_data_workbench/api/application.py#L27-L60",
-          "version": "repo-lines-v1:sha256:02adb0cba913ea2e509f3ec8cecec137118deeda7e0f62b6ad5c364503e2a561:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwN2I0OWI3OTcyZDI0NTc0MzJkODRmNjZjOThjODhmMzJlODM3NDEwOGFmOTdkYjg3YjdlZDRiOTllZGE0NmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkNjdiNDY2Mzc4NzVjM2JiN2Y5MDNiMWRiODczNGI0YTI5NjY4NWRmNGRiZTY2YTRmNmNlZjdmZGM0MTE2M2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVhYjM1ODMxZjk2NWQ4M2QxMDg0ODRkMzkwZDA1MGFhYzUwOWJiMGQ5ZmI0NDQ5YTU0MzA4NDUxYmY2MWNiNTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://src/agent_data_workbench/api/application.py",
+          "version": "repo-file-v1:sha256:8b7ebffaa6773410a0de73e93a8d44a92691c6a2fa66827f74851238c3ca9ec2"
         },
         {
           "resource": "repo://src/agent_data_workbench/api/errors.py",
@@ -61,16 +61,16 @@
       "statement": "Native investigation and task-design routes use FastAPI BackgroundTasks with a process-local job registry; capacity is reserved before investigation creation, and API task audit has no configured semantic judge.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/api/routers/investigations.py#L32-L56",
-          "version": "repo-lines-v1:sha256:11a02dbedcbf80ea0574fa6c4eb6737fd35f96742e36f688eefb5c5e0138fe66:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2MzJkNjMxZTc3ZTY2NTZjNGVkMTkxNmU3ZGU0NzcyYjQ4M2U0MTBkMzg2N2ZhOTBhNTBkMDdmYTAwN2I2MzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2NjhmMzRlNjAzMGM5M2YxNTZkMmM2ZTEwZmU5ZGU2ZjM4YWUxOTZiNDI4OTM1ZjZkZmU3ZGZjM2RiYjFkYjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA0OGY4ZTBmZjEyYWE3ZTAyNmIyYWJlZjllMzJmZmU2MmZlNTE4OThkMDlhNjRlODZmNzk5NDNiOTZhY2QyMmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgwZmJkNDBkMTcwODU1NDIwODNlOTA5NjQ0NTk4ZjZiM2Y0MjI3NDhiN2EzNjFiZDIyNGNjYTVhMDQ1NTRhOTkifQ"
+          "resource": "repo://src/agent_data_workbench/api/routers/investigations.py",
+          "version": "repo-file-v1:sha256:bceccff9e4c0c7c72f3d54bbddc3791a564c1aeb6aad1c88c251393294075f15"
         },
         {
           "resource": "repo://src/agent_data_workbench/api/routers/tasks.py",
           "version": "repo-file-v1:sha256:33c0a66cdccb6dc417f45d3eb507d75da2172a7c615661d4df8b3ff384ee450b"
         },
         {
-          "resource": "repo://src/agent_data_workbench/workbench/jobs.py#L12-L49",
-          "version": "repo-lines-v1:sha256:114a4ee09460f760ba8179449e76836ddd2aa637682208925cc39fdf7a5df087:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdmNzI1MTU2NjIwMDdlMTljMTkwZDg5ZDg2N2MxMzk5ZjBlMmY2Mzk5MGIwNzNkM2QwNDE5ODY0ODE2YTUwZTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxMDM0ODFjNTdkMGYwZGMwZjc2Y2QyY2M4YjM2MDRjNGU4Mjk2ZGE0MTIyYWRkMTllODE3NDVkYzdlMzMxYTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk2NTMzYTc2MDhmNjZhYjMyMGFjY2IwOGYxZWFmZmE3MjZkOTIzYTdhZTBhNTUyYmJjZDVlMmZkNjJjNmUxNDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://src/agent_data_workbench/workbench/jobs.py",
+          "version": "repo-file-v1:sha256:c907dcf640e2727169fdef09b645f23d47e6a781915e7a5685e2424d0b8a3963"
         }
       ]
     },
@@ -79,8 +79,8 @@
       "statement": "The UI includes world, calibration, behavioral coverage and improvement views alongside existing research views, lazy-loads the graph, and polls running background jobs.",
       "evidence": [
         {
-          "resource": "repo://ui/src/App.tsx#L18-L66",
-          "version": "repo-lines-v1:sha256:a9981556041517ca79a66a7665d40605ff4157e9273b8cf50e626e7b7f2124fa:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNmMjM5ZTk1YTg4ZDVmM2NiMmIxNTdlZmMzYTJhNGQ2MGMyNzE5MTI1M2FkODU4NTk1MDAzZTdkMGQ1NjUxODEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBjZTVkODE4YjZhY2RhZTU0OGFlMDdlNzA2YmNjNzMwMjY0MjRiMmNmOWU0YTQ4OGUyMjRkOTQ1MGIxMThlZWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ2NTA0YmQzZTY3MDFjYWM2YmVlMzE0MzFkZGQ1Y2U0NzJjZDhiYjU2YmMyMmI1NGZjOWNhN2I0OGIxYjMwNjgifQ"
+          "resource": "repo://ui/src/App.tsx",
+          "version": "repo-file-v1:sha256:e3a80a25e2a880673be3651cfb3b6062ce8ce098be368da18011f599641b1c26"
         }
       ]
     },
@@ -103,16 +103,16 @@
       "statement": "The research UI offers manual or native research, research or complete mode, explicit final-data exclusion, saved-session resume, coverage, paginated outcomes and journals, inline bar charts and authenticated downloads.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/api/routers/investigations.py#L61-L100",
-          "version": "repo-lines-v1:sha256:04f23849f811f9118dc78e9a2c672b792e1ac0856f95d3b18d81355d20ba926d:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJlOWQ3NzMzOTNmNjg2NzA4NDU0YzYwOTRjMGQzMDU3NmY2MWFlYTVhMjg5MzM0YjU1ZTdjNGIwOTM0N2M2OWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkxN2U1NzZjZTM3OWU1ZTFmNDU5N2FjYmJiMzAxMjBhM2ZkMDMwZjJmNjA1YTdhNDkyNmMyMWM4NzhhYWZhMWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjllYjg4NWNhZjZkYjY2MzJiOGU3Y2RkNjJlMzgxZTNlZWMyYmNiMWEzOGRmMzBiZjlkNzE3MGY0YWY0YTc1YTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE4OTgxZWI5ODI0ZjIzOWJjYjEwMzg5YmM5MWQ4MGQ2ZTgzZDhkZmMyNTI3MTYzZjhlYzZhZDBhNjZkYjljYjMifQ"
+          "resource": "repo://src/agent_data_workbench/api/routers/investigations.py",
+          "version": "repo-file-v1:sha256:bceccff9e4c0c7c72f3d54bbddc3791a564c1aeb6aad1c88c251393294075f15"
         },
         {
-          "resource": "repo://ui/src/views/ResearchControls.tsx#L12-L154",
-          "version": "repo-lines-v1:sha256:26704597433a4c2c455be3ace187c3502161057626a5e59ad548a11a240e3cf1:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQzLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI3NDFjZWRiZmQ1MzFlMzg1NGEwZmViZTRkMGY3ZGIzNjVmYjA3MTBlZjQ0MWVmMmFmNGM0NDE1ZTg0ODczYTk2IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI0YTdjMThjOWE5MTFlYzNhY2M4MTJhN2VlZmU5M2E3YjJkYmM5YzQzYzNjNTIyMDcwZjAyMzc5MGVkMDZlYWUxIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+          "resource": "repo://ui/src/views/ResearchControls.tsx",
+          "version": "repo-file-v1:sha256:72ba68b3e706ee129a7edb7261b90e8538c61f941f6cee4dbeb4181d35068dd2"
         },
         {
           "resource": "repo://ui/src/views/ResearchOutputs.tsx",
-          "version": "repo-file-v1:sha256:8c71e35afad81737369fb22bf861e52a4b1fc7f19c37d4d2e4fbf12038924726"
+          "version": "repo-file-v1:sha256:d4024d41103d19c220a960a6e5180e02eca3be270aef67178b31774b3b5c3fd5"
         }
       ]
     },
@@ -154,7 +154,7 @@
       "evidence": [
         {
           "resource": "repo://src/agent_data_workbench/api/routers/workflow.py",
-          "version": "repo-file-v1:sha256:522f51ef401d80c7181ce0b8ffc094f461f984c0ba5af7f528343d156a5ea28d"
+          "version": "repo-file-v1:sha256:7d9d21ea407f6623dbafbb91a3c14d1ee6f48dcf1724df97894b64bdc106b2cc"
         }
       ]
     },
@@ -178,7 +178,7 @@
       "evidence": [
         {
           "resource": "repo://Makefile",
-          "version": "repo-file-v1:sha256:744a80d95a8419e0113d85d0d334ccafdfbf2d2fd1be97548c95b0e899e7e6ed"
+          "version": "repo-file-v1:sha256:2527e6d3d1c9132edaa6f59355a975fb07fde47d58e6b06312482a6634e7c8cb"
         },
         {
           "resource": "repo://src/agent_data_workbench/workbench/runtime.py#L35-L60",
@@ -210,33 +210,7 @@
         },
         {
           "resource": "repo://ui/src/views/Clusters.tsx",
-          "version": "repo-file-v1:sha256:1853729d54faf88308d44bc31c8dff1c5502ad2b2794ccab58f08aae6008b991"
-        }
-      ]
-    },
-    {
-      "id": "claim_68c543e175a642f9b0775cd7b0b3c289",
-      "statement": "The cluster map renders membership edges and opens individual traces or the selected group in the explorer; the evidence graph renders imported trace nodes before findings exist and opens their source records.",
-      "evidence": [
-        {
-          "resource": "repo://src/agent_data_workbench/exploration/lineage.py#L22-L31",
-          "version": "repo-lines-v1:sha256:8e55acdc4298439b25666a5b6d32050599aeff8e9b7f2cbf4281ccabb4f0f43a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZmMWM5N2E0OGJmY2UzNTAxNjliYWUwYmFhZmYxYWI2MDUwZjllNmQ4ZDk5YTYzNjI5ODBlYjI0YjhiMDRkYTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY0ZjZhZTU0MjM1NDE5OTNmM2EzOGZmYmUyMGE0YThiMTdmZTBjOTUwNTgxYTA3ZDE0MTBjZWM4ZjJhZGUyMzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJiM2VhOGMwZDJmZmZjZGM1NDg2MjY2YzY2OGVlYzVlMTU3MGY4ZjY1YTBmNjkwZDdmNjA4NGMyNmEzNmI5MmMifQ"
-        },
-        {
-          "resource": "repo://ui/src/components/graphs/ClusterGraph.tsx",
-          "version": "repo-file-v1:sha256:6a3fa43d799d7a91af997a3d6d7cf6700dddbf2abccc9a7f1df60457d00e966d"
-        },
-        {
-          "resource": "repo://ui/src/components/graphs/cluster-layout.ts",
-          "version": "repo-file-v1:sha256:8c0d43076fb1580bc1fe80e025101912094ee7c76c5b7d998300852ff6e7478a"
-        },
-        {
-          "resource": "repo://ui/src/views/Graph.tsx",
-          "version": "repo-file-v1:sha256:cf05666f79423ff498f10a89e85339703d1fbeb07ea55fcfa42084e82a631588"
-        },
-        {
-          "resource": "repo://ui/tests/exploration.test.tsx",
-          "version": "repo-file-v1:sha256:9ba35e8fdfc221126662d3ebe22a96164f03799d6fea4291bd117c591a439413"
+          "version": "repo-file-v1:sha256:8da388a245b3616df96648ca8f521264a7950152650e69ca129f1fec5ee63717"
         }
       ]
     },
@@ -245,24 +219,24 @@
       "statement": "Workbench graph requests return all nodes by default, distributions return all categories, and search pagination permits offsets beyond 10,000 while structured input display retains its full content.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/api/routers/artifacts.py#L39-L45",
-          "version": "repo-lines-v1:sha256:52800bae69c730c6fe9fda2831dd79b67b153363f55c5dc372125d0baa36c2e6:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODhiMTIzODQ2NDJlZmUzZTBhMjU3YTkxOGU0YWNiNWViN2M2ODJkZDIxMTljOTQ2NGE4YTI5MmQ0YzM5MWM1OCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTllZjI1NThlYjM0NjU2YWYyNjJjODljOGFhODMzNGMwNWMxNjVhMTQxYTM1ZmRiZjU2YTc0OGNiMDFlNDMxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGNjNGE3ZDFjYzc5NmFiYTNlNDY3MjMzMjdmNTE3ZTlmODExOTgyZDI1MGYwNzAyOTg2ZTRiNTc2NGFkOTU4OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+          "resource": "repo://src/agent_data_workbench/api/routers/artifacts.py",
+          "version": "repo-file-v1:sha256:0095ced3198ff77fe429da3c870b19515babfb51d4cd96729fef637cc3c8e173"
         },
         {
-          "resource": "repo://src/agent_data_workbench/exploration/distributions.py#L12-L47",
-          "version": "repo-lines-v1:sha256:b309ccc51bfc911adde6f2ffdc6df63e5597ee3f180fb3893999b7eb6733d0ea:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjljOTZjNTZhNTg4ZjEyMzExMjI1ZmNiMTBkY2EzMzQwMzhjNjczYTM0ZjMxOWFkMmUwZDI1Yzg4YWIyZmUwNmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA0ZDZlYjgwMjMyNzVmNmQzYjUxY2Y1YmI0Y2ZhNjNmNzdiNTBlN2VlMWZlMmEzZmJhY2VhNGYzZTJlNTNiMWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://src/agent_data_workbench/exploration/distributions.py",
+          "version": "repo-file-v1:sha256:544000bd714e5a90580154ae4aecd035da3480126bd02d20e091718d989c95a0"
         },
         {
-          "resource": "repo://src/agent_data_workbench/exploration/lineage.py#L12-L118",
-          "version": "repo-lines-v1:sha256:44e1d2072b0f4902ced5a123e54a3f40c715bbd3a694ee9c4ae3df00df73dab9:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA3LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI3MWNlY2ZhOTEwZTg5OTg1MTViM2I0MzBjYWJlZTU2MzZmNmMwZDVlNGE5M2VhMmE2MDkyMTcwNTNlMzA4ZmNmIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0ODkzZjQwZTM3ODFlYjg5NmM4MmQwNDZhMDgwNjdhMTFlMzVjZGYyZjFkZmFmMjZmZWE5MGI4ZGI2Njc2NDEzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlYWIzNTgzMWY5NjVkODNkMTA4NDg0ZDM5MGQwNTBhYWM1MDliYjBkOWZiNDQ0OWE1NDMwODQ1MWJmNjFjYjUzIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+          "resource": "repo://src/agent_data_workbench/exploration/lineage.py",
+          "version": "repo-file-v1:sha256:0087f8a361e962c8d9600f1ff62f5e5e899d8384d2900403814e09dc3485d7a5"
         },
         {
-          "resource": "repo://src/agent_data_workbench/exploration/schemas.py#L31-L45",
-          "version": "repo-lines-v1:sha256:7f2c4169730851d345f72d10280887455490cb5f390c77252a2522d522a9a734:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliMjMyNjcyZDRhZGVhOGUxNWJmZmUwN2MwNTMwMjE4NTBhOTgzZWQ4Nzc0ZDAwOGVlMTBjNmQzY2QxMTQ1ODMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEyYWIwOTBiY2QxNjIwZmE2MmVhZWUxNTdhNzRmY2E2MzVhYTI5ZTEyY2JmZmQ2MThiNTc5MmQ4N2JjMDNhM2YiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRiNTMwZWRlNGYzZTg4MmQ2ZTg1ZTllNmE3N2JiYTI5NTk5OTk3MWU2NTk5NGU0ZTA0MWJjMDAzYjE1NzhkMmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjlkN2I1NWQ1NmFiNGUzYzFlN2VhNjRkMTViZWEwNmU1Y2E1NzJiYTAyNTc3MDBjYjYyNzk0M2VjZjAwMTI5NWUifQ"
+          "resource": "repo://src/agent_data_workbench/exploration/schemas.py",
+          "version": "repo-file-v1:sha256:1ef7bd9077addea2cdcc6a5848a9e1c7a2f78bbe0a7f4511acb469f47b90b89b"
         },
         {
           "resource": "repo://ui/src/views/Search.tsx",
-          "version": "repo-file-v1:sha256:148181817a435e34b7b0cb1d2f294f10292dcb91dd96f424fabf7a11399dc8a7"
+          "version": "repo-file-v1:sha256:4decacdbd7fd993cff8e2dc78b0044ac19923495af19be721190fc5343accd18"
         }
       ]
     },
@@ -283,10 +257,132 @@
           "version": "repo-lines-v1:sha256:7234f52bf7752a62b5b5fc3c824bec2fb1acce83f8c24e9a4d8b5c1d37bc3c94:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdkMGZiODkzMmE3NWIyNTFiZThjM2RiMWFhYTljMzQzMmE4NDU4OGUyZmQ2MGFlZDg4YmMwZGFiZTRjM2IwNzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZlMWEyMmU5OTA5MTMyNDRhYjI4ZmE2MDc2YzM0YzQ0MGY2MGMzODczNmE3OTc5YjY4OGE1ZDJkY2FmNGY1NTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJmZTcxMWFkMWQ1OTEzZTM5NzdlM2RhMDUzNDAwZTM4MTk3ZDdlMWE4MjI0YTlmMDlkNTk3OTlhYzM5YjcxODEifQ"
         }
       ]
+    },
+    {
+      "id": "claim_81842d92a2304fa98483d8c1dc09f98e",
+      "statement": "The dataset view reports explicit source-label counts and actual same-task groups over all matching local traces; lexical groups use count bars and lineage draws only saved relationships.",
+      "evidence": [
+        {
+          "resource": "repo://ui/src/components/graphs/ClusterGraph.tsx",
+          "version": "repo-file-v1:sha256:91a88674b566a554259c89c402201cd63b638612e849e24eb46f9b3bf212f0b4"
+        },
+        {
+          "resource": "repo://ui/src/views/Dataset.tsx",
+          "version": "repo-file-v1:sha256:b5da4a4f633d555b185bdb47592463eb049f699f81bf919261c8373643eb4a91"
+        },
+        {
+          "resource": "repo://ui/src/views/Graph.tsx",
+          "version": "repo-file-v1:sha256:1061cbe59ac358753fe44559bb60d53ea92b100ac61bec5e63bc11bd670d1991"
+        }
+      ]
+    },
+    {
+      "id": "claim_642b8d2235874023aac652374f23b947",
+      "statement": "The UI inspects and imports Hugging Face sources with explicit mappings and row selections, retains receipts and refreshes completed background job results.",
+      "evidence": [
+        {
+          "resource": "repo://ui/src/App.tsx",
+          "version": "repo-file-v1:sha256:e3a80a25e2a880673be3651cfb3b6062ce8ce098be368da18011f599641b1c26"
+        },
+        {
+          "resource": "repo://ui/src/views/Imports.tsx",
+          "version": "repo-file-v1:sha256:956becb2989d7df2a8cf96e57016e2bf6f516b4299e56bcb8fcc3d68b9b28c19"
+        }
+      ]
+    },
+    {
+      "id": "claim_874454878515485fb447502aa5a17b11",
+      "statement": "Accepted tasks can launch Harbor comparisons from the UI, and experiment trials link to generated full trajectory records.",
+      "evidence": [
+        {
+          "resource": "repo://ui/src/components/traces/Conversation.tsx",
+          "version": "repo-file-v1:sha256:60ea3123186e54f232a1e7df2b49429d2a470dd58112b01f2c1131e2852a058d"
+        },
+        {
+          "resource": "repo://ui/src/views/Experiments.tsx",
+          "version": "repo-file-v1:sha256:e650fb93692fa942c1992a8db8ec40b5c6af932f23bdcf26b8b8c128cab5dab0"
+        },
+        {
+          "resource": "repo://ui/src/views/HarborComparison.tsx",
+          "version": "repo-file-v1:sha256:71adaa46b09d0d9f698e80a1ab72420f89128b28d34457f54264dbaa97427e1a"
+        }
+      ]
+    },
+    {
+      "id": "claim_baa961ab36d64675bfe8fd1b1921124d",
+      "statement": "The research UI offers an optional Codex reasoning effort, submits it with the selected model, restores saved settings on resume, and shows session configuration and progress while retaining the complete question in a disclosure.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/api/routers/investigations.py#L32-L57",
+          "version": "repo-lines-v1:sha256:ac44c4374cbab6097eceef7e026bc06da86dc28159dead274eab7c0f09bc3d7f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2MzJkNjMxZTc3ZTY2NTZjNGVkMTkxNmU3ZGU0NzcyYjQ4M2U0MTBkMzg2N2ZhOTBhNTBkMDdmYTAwN2I2MzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2NjhmMzRlNjAzMGM5M2YxNTZkMmM2ZTEwZmU5ZGU2ZjM4YWUxOTZiNDI4OTM1ZjZkZmU3ZGZjM2RiYjFkYjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA0OGY4ZTBmZjEyYWE3ZTAyNmIyYWJlZjllMzJmZmU2MmZlNTE4OThkMDlhNjRlODZmNzk5NDNiOTZhY2QyMmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgwZmJkNDBkMTcwODU1NDIwODNlOTA5NjQ0NTk4ZjZiM2Y0MjI3NDhiN2EzNjFiZDIyNGNjYTVhMDQ1NTRhOTkifQ"
+        },
+        {
+          "resource": "repo://ui/src/views/Investigations.tsx",
+          "version": "repo-file-v1:sha256:f0a5f7465f8a0005eedd4338e686de75060cbe8a8def4615f63c93ff79f3187d"
+        },
+        {
+          "resource": "repo://ui/src/views/ResearchControls.tsx",
+          "version": "repo-file-v1:sha256:72ba68b3e706ee129a7edb7261b90e8538c61f941f6cee4dbeb4181d35068dd2"
+        }
+      ]
+    },
+    {
+      "id": "claim_b83e0a3c29794596b8ebe9965f703367",
+      "statement": "Research detail presents available outputs and findings before the dataset editor, refreshes snapshot statuses when processing counts change without resetting typed filters, and retains full per-record methods in disclosures.",
+      "evidence": [
+        {
+          "resource": "repo://ui/src/views/Investigations.tsx",
+          "version": "repo-file-v1:sha256:f0a5f7465f8a0005eedd4338e686de75060cbe8a8def4615f63c93ff79f3187d"
+        },
+        {
+          "resource": "repo://ui/src/views/ResearchOutputs.tsx",
+          "version": "repo-file-v1:sha256:d4024d41103d19c220a960a6e5180e02eca3be270aef67178b31774b3b5c3fd5"
+        },
+        {
+          "resource": "repo://ui/src/views/ResearchSnapshot.tsx",
+          "version": "repo-file-v1:sha256:88e95c64490541f49af4a553f00df3e6870dbc35f20cc5d30134de924ae90af4"
+        },
+        {
+          "resource": "repo://ui/tests/research.test.tsx",
+          "version": "repo-file-v1:sha256:02653d589d46d199b8e951dd9e5761e5a9a2d9cefd007d552592ee596b3d5272"
+        }
+      ]
+    },
+    {
+      "id": "claim_efd949954d86410caa58888fb8c27211",
+      "statement": "Published research shows its summary before charts and findings, groups non-chart artifact downloads in a disclosure, and exposes full generated case objects as evaluation blueprints requiring review before task execution.",
+      "evidence": [
+        {
+          "resource": "repo://ui/src/views/Investigations.tsx",
+          "version": "repo-file-v1:sha256:f0a5f7465f8a0005eedd4338e686de75060cbe8a8def4615f63c93ff79f3187d"
+        },
+        {
+          "resource": "repo://ui/src/views/ResearchOutputs.tsx",
+          "version": "repo-file-v1:sha256:d4024d41103d19c220a960a6e5180e02eca3be270aef67178b31774b3b5c3fd5"
+        }
+      ]
+    },
+    {
+      "id": "claim_4755c6566c6f428f9e88cae1748c54a2",
+      "statement": "Accepted-task Harbor controls expose an explicit host Codex login option for built-in Codex targets; configuration stores the opt-in, not credential contents.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/integrations/harbor/contracts.py#L8-L18",
+          "version": "repo-lines-v1:sha256:d8a978096f7fc3a702d9699a8d885cba045b21db461f4d616cbacd96064c7414:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhZmRkYWQxYjQxNDBhZDY2N2M4ZWQ1ZDIyM2NkMWZlYmUxYmU0MGVmMmM1YTFhNjY5MDM3OWUwZmQ1ZWQ3ZjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEyYWIwOTBiY2QxNjIwZmE2MmVhZWUxNTdhNzRmY2E2MzVhYTI5ZTEyY2JmZmQ2MThiNTc5MmQ4N2JjMDNhM2YiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMxOGE0YzI1YjhkMGEwMWM2MjY0ZjBhZjM3NWMxZTEyMzE0MTcwZjdjOTkwZDBjNmJlMzMxNGNkMDI3ODdkNmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM4ZDJhY2NmN2I3MmIyMTVjMjdlZDk5OTc1NTc4ZTcwNGE0MjczNTJjZWMyMzQwODhmMzM3MTI0ZDUxOGU2NGEifQ"
+        },
+        {
+          "resource": "repo://ui/src/components/HarborCodexLogin.tsx",
+          "version": "repo-file-v1:sha256:4a41c8c0bd24de0c4e1f7f0da5e7a862c68c1e317bd1bcbae9dc17c4b2a04d05"
+        },
+        {
+          "resource": "repo://ui/src/views/HarborComparison.tsx",
+          "version": "repo-file-v1:sha256:71adaa46b09d0d9f698e80a1ab72420f89128b28d34457f54264dbaa97427e1a"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T02:57:07.074Z"
+    "at": "2026-09-08T15:20:02.026Z"
   }
 }

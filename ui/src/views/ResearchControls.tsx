@@ -1,6 +1,7 @@
+import { RuntimeStatus } from "../components/RuntimeStatus";
 import { useState } from "react";
 import { api } from "../api";
-import type { Backend, Investigation } from "../contracts";
+import type { Backend, Investigation, ReasoningEffort } from "../contracts";
 import {
   ActionButton,
   Card,
@@ -21,6 +22,9 @@ export function ResearchControls({
   const [researcher, setResearcher] = useState<"manual" | "agent">("manual");
   const [backend, setBackend] = useState<Backend>("codex");
   const [model, setModel] = useState("");
+  const [effort, setEffort] = useState<ReasoningEffort | "">("");
+  const selectedEffort =
+    backend === "codex" && effort ? { reasoning_effort: effort } : {};
   const [question, setQuestion] = useState(
     "Which failures and successful recoveries should we learn from?",
   );
@@ -92,8 +96,11 @@ export function ResearchControls({
         (resume?.session ? (
           <p>
             Resume {resume.session.backend} ·{" "}
-            {resume.session.model || "CLI default model"}. The native session
-            retains its context.
+            {resume.session.model || "CLI default model"}
+            {resume.session.reasoning_effort
+              ? ` · ${resume.session.reasoning_effort} effort`
+              : ""}
+            . The native session retains its context.
           </p>
         ) : (
           <ProviderFields
@@ -103,6 +110,38 @@ export function ResearchControls({
             onModel={setModel}
           />
         ))}
+      {!manual && !investigation && !resume?.session && backend === "codex" && (
+        <label className="field">
+          <span>Reasoning effort</span>
+          <select
+            aria-label="Reasoning effort"
+            value={effort}
+            onChange={(event) =>
+              setEffort(event.target.value as ReasoningEffort | "")
+            }
+          >
+            <option value="">Use CLI default</option>
+            {[
+              "none",
+              "minimal",
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max",
+              "ultra",
+            ].map((value) => (
+              <option key={value} value={value}>
+                {value}
+              </option>
+            ))}
+          </select>
+          <small>
+            Availability depends on the selected model. The effort is saved for
+            resume.
+          </small>
+        </label>
+      )}
       <p className="muted">
         {manual
           ? "Open a workspace to inspect records, save notes and outcomes, and publish your findings and charts. No model is called."
@@ -110,6 +149,9 @@ export function ResearchControls({
             ? "The selected CLI creates drafts for review."
             : "Your native coding agent can query the full snapshot, write analysis code, and save reports and charts. Your CLI account and model limits apply."}
       </p>
+      {!manual && (
+        <RuntimeStatus tools={[resume?.session?.backend || backend]} />
+      )}
       <ActionButton
         action={async () => {
           if (manual) {
@@ -127,12 +169,15 @@ export function ResearchControls({
                 resume
                   ? {
                       resume: resume.id,
-                      ...(resume.session ? {} : { backend, model }),
+                      ...(resume.session
+                        ? {}
+                        : { backend, model, ...selectedEffort }),
                     }
                   : {
                       question,
                       backend,
                       model,
+                      ...selectedEffort,
                       mode,
                       exclude_final: excludeFinal,
                     },

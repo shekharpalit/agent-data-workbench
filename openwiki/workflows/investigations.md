@@ -44,16 +44,22 @@ sources:
     resource: repo://tests/test_research.py
   - id: openwiki-source-9dba1709c16fd704c45276e9
     resource: repo://tests/test_workbench_data.py
+  - id: openwiki-source-c8b556ab186c9fffbf3d4122
+    resource: repo://ui/src/views/Investigations.tsx
   - id: openwiki-source-2d1b137901c9e38ec418fdad
     resource: repo://ui/src/views/ManualResearchEditor.tsx
   - id: openwiki-source-a6ff0ad9c45aedc12177eaec
     resource: repo://ui/src/views/ResearchControls.tsx
+  - id: openwiki-source-e1d27805221c9fa6fa8b7e3a
+    resource: repo://ui/src/views/ResearchOutputs.tsx
   - id: openwiki-source-14a72935f36008706a0aa989
     resource: repo://ui/src/views/ResearchSnapshot.tsx
-generated: { by: "codex", at: "2026-09-08T02:47:35.721Z" }
+  - id: openwiki-source-6c2199ef844fc5690d6362d0
+    resource: repo://ui/tests/research.test.tsx
+generated: { by: "codex", at: "2026-09-08T14:40:31.067Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T02:47:35.721Z
+    at: 2026-09-08T14:40:31.067Z
 ---
 
 # Investigations and reviewed knowledge
@@ -92,7 +98,7 @@ Start the local workbench with `uv run agent-data-workbench ui runs/my-agent`, t
 
 Citation links inspect the original snapshot field. Saving a record outcome counts recorded processing, not proof that the observation is correct. Research mode can finish with unreviewed records; its displayed coverage makes that scope visible.
 
-Save drafts before leaving the view or refreshing the browser. Polling does not replace local edits. To collaborate with an agent, open **Bring in an agent**, choose the backend and start the session. A previous native session appears under **Continue with an agent**. Unsaved finding, note and chart forms stay mounted but hidden and disabled while that session is active, and return after pause. Manual API writes acquire the session lock so a stale browser tab cannot alter the active native investigation. SDK and MCP tools remain available to the agent that owns the session. Completed investigations retain their results and hide manual mutation controls.
+Save drafts before leaving the view or refreshing the browser. Polling does not replace local edits. Snapshot status queries refresh when completed, failed or pending counts change, without discarding typed search filters. The published summary appears before inline charts and findings. Non-chart reports, data and scripts are grouped under a counted download disclosure. **Evaluation blueprints** exposes complete generated cases, including their inputs, context, source references and assertions; these proposals require review and an executable environment before task execution. Results appear before the dataset editor; full recorded review methods remain expandable in the outcomes table. To collaborate with an agent, open **Bring in an agent**, choose the backend and start the session. A previous native session appears under **Continue with an agent**. Unsaved finding, note and chart forms stay mounted but hidden and disabled while that session is active, and return after pause. Manual API writes acquire the session lock so a stale browser tab cannot alter the active native investigation. SDK and MCP tools remain available to the agent that owns the session. Completed investigations retain their results and hide manual mutation controls.
 
 See [local workbench operations](../operations/local-workbench.md) for authentication and API behavior.
 
@@ -103,10 +109,10 @@ Install and authenticate your chosen native CLI separately, and make it availabl
 ```sh
 uv run agent-data-workbench investigate runs/my-agent \
   --question "When does the agent claim completion without evidence?" \
-  --backend codex
+  --backend codex --model gpt-5.6-sol --reasoning-effort xhigh
 ```
 
-Use `--backend claude` for Claude Code and `--model MODEL` for an explicit model. Otherwise the CLI's model selection applies. The installed CLI uses its existing authentication; the workbench makes no fallback API call. Provider eligibility, account limits, context constraints and billing still apply.
+Use `--backend claude` for Claude Code and `--model MODEL` for an explicit model. Otherwise the CLI's model selection applies. For Codex, the optional `--reasoning-effort` sets a per-session native configuration override; the UI exposes the same **Reasoning effort** selection. Omitting it preserves the CLI default. Claude does not accept this Codex setting. Supported model/effort combinations depend on the installed native CLI and account access; the workbench does not change global CLI configuration. The installed CLI uses its existing authentication; the workbench makes no fallback API call. Provider eligibility, account limits, context constraints and billing still apply.
 
 | Mode | Work and completion |
 | --- | --- |
@@ -175,7 +181,7 @@ uv run agent-data-workbench research pause runs/my-agent INVESTIGATION_ID
 uv run agent-data-workbench investigate runs/my-agent --resume INVESTIGATION_ID
 ```
 
-Resume uses the original backend and saved model setting. A separate process lock prevents two native sessions from owning one investigation; short project locks protect artifact updates. If the process crashes, its lock releases and the investigation can resume even if its last saved status was running. Native provider session files must remain available for native continuation. Local checkpoints and input snapshots remain in the project independently.
+Resume uses the original backend, saved model and any explicit Codex reasoning effort. A separate process lock prevents two native sessions from owning one investigation; short project locks protect artifact updates. If the process crashes, its lock releases and the investigation can resume even if its last saved status was running. Native provider session files must remain available for native continuation. Local checkpoints and input snapshots remain in the project independently.
 
 Cancellation, an explicit timeout or an unfinished native response leaves paused research. Failures preserve saved progress; inspect local logs for diagnostics. Draft findings remain visible and do not prevent resume. A completed investigation requires a new investigation for further record processing. Existing project format 0.3 remains supported; old completed investigations can be viewed, but paused investigations from the earlier step protocol require a new native investigation.
 
@@ -206,6 +212,6 @@ Export requires completed research. Each edit is one complete before/after pair 
 
 ## Verification and next steps
 
-`tests/test_research.py` exercises native-shaped subprocesses, interruption and retry behavior, a complete corpus larger than one page, official MCP stdio, workspace CLI operations, tasks and artifacts. `tests/test_workbench_data.py` checks exact evidence, stable snapshots after project changes and proposal export. Manual research API and UI tests cover creation through publication, exact snapshot reads, typed outcomes, chart creation, draft preservation and human/native session ownership. Tests use synthetic inputs without live provider inference.
+`tests/test_research.py` exercises native-shaped subprocesses, interruption and retry behavior, a complete corpus larger than one page, official MCP stdio, workspace CLI operations, tasks and artifacts. `tests/test_workbench_data.py` checks exact evidence, stable snapshots after project changes and proposal export. Manual research API and UI tests cover creation through publication, exact snapshot reads, typed outcomes, chart creation, draft preservation and human/native session ownership. Tests also check the exact Codex model/effort command on first execution and native resume, saved session metadata, and UI/API forwarding. Tests use synthetic inputs without live provider inference.
 
 Next: [design tasks and audit graders](tasks-and-graders.md), [inspect the local UI](../operations/local-workbench.md), then [execute an experiment](experiments-and-training.md).

@@ -1,4 +1,11 @@
 import type {
+  DatasetImport,
+  DatasetSource,
+  ImportReceipt,
+  DatasetProfile,
+} from "./data-contracts";
+import type {
+  HarborComparisonConfig,
   HarborExport,
   HarborExportConfig,
   AttemptAdjudication,
@@ -24,6 +31,7 @@ import type {
   ResearchArtifact,
   ResearchChart,
   ResearchResult,
+  ReasoningEffort,
   ResearchSearch,
   ResearchSearchPage,
   ResearchTracePage,
@@ -86,6 +94,42 @@ export class ApiClient {
     return data as T;
   }
 
+  runtime = (signal?: AbortSignal) =>
+    this.request<{
+      environment: string;
+      tools: {
+        name: string;
+        installed: boolean;
+        executable: string | null;
+        version: string | null;
+        authentication: string;
+        ready: boolean;
+      }[];
+    }>("/api/runtime", undefined, signal);
+  compareHarbor = (task_id: string, config: HarborComparisonConfig) =>
+    this.request<{ job_id: string }>("/api/workflow/harbor/compare", {
+      task_id,
+      config,
+    });
+  imports = (signal?: AbortSignal) =>
+    this.request<ImportReceipt[]>("/api/imports", undefined, signal);
+  inspectDataset = (config: DatasetImport) =>
+    this.request<{ source: DatasetSource; config: DatasetImport }>(
+      "/api/imports/huggingface/inspect",
+      config,
+    );
+  importDataset = (config: DatasetImport) =>
+    this.request<{ job_id: string }>("/api/imports/huggingface", config);
+  datasetProfile = (
+    query: SearchQuery,
+    pointer: string,
+    signal?: AbortSignal,
+  ) =>
+    this.request<DatasetProfile>(
+      "/api/dataset-profile",
+      { query, pointer },
+      signal,
+    );
   overview = (signal?: AbortSignal) =>
     this.request<Overview>("/api/overview", undefined, signal);
   search = (query: SearchQuery, signal?: AbortSignal) =>
@@ -129,6 +173,7 @@ export class ApiClient {
     resume?: string;
     backend?: Backend;
     model?: string;
+    reasoning_effort?: ReasoningEffort;
     mode?: "research" | "complete";
     exclude_final?: boolean;
   }) => this.request<{ job_id: string }>("/api/investigate", request);

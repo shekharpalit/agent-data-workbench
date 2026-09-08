@@ -14,6 +14,7 @@ from agent_data_workbench.shared.json import digest, read_json
 from agent_data_workbench.shared.time import now
 
 ARTIFACT_KINDS = {
+    "imports",
     "knowledge",
     "investigations",
     "tasks",

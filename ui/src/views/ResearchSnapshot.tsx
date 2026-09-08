@@ -209,7 +209,14 @@ export function ResearchSnapshot({ item }: { item: Investigation }) {
   });
   const [selected, setSelected] = useState<string | null>(null);
   const request = useQuery({
-    queryKey: ["research-search", item.id, query],
+    queryKey: [
+      "research-search",
+      item.id,
+      query,
+      item.coverage.completed,
+      item.coverage.failed,
+      item.coverage.pending,
+    ],
     queryFn: ({ signal }) => api.searchResearch(item.id, query, signal),
   });
   return (

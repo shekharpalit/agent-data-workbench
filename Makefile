@@ -1,5 +1,10 @@
 .DEFAULT_GOAL := help
 
+MODE ?= docker
+UV ?= uv
+WORKBENCH_PROJECT ?= runs/workbench
+export WORKBENCH_PROJECT
+
 COMPOSE ?= docker compose
 PORT ?= 8765
 LAYOUT ?= runs
@@ -19,12 +24,28 @@ help:
 	  'make test   Run Python and TypeScript checks inside Docker' \
 	  'make build  Build development and packaged application images' \
 	  '' \
-	  'Requires Docker with Compose v2. Override the port: make dev PORT=9000'
+	  'Default: Docker Compose v2. Override the port: make dev PORT=9000' \
+	  'Native CLI logins + Harbor: make init MODE=native; make dev MODE=native' \
+	  'Native mode needs uv, Node 24.15+, and Docker for Harbor environments.'
 
 check-docker:
 	@$(COMPOSE) version >/dev/null
 	@docker info >/dev/null
 
+ifeq ($(MODE),native)
+init:
+	npm ci --prefix ui
+	npm --prefix ui run build
+	$(UV) sync --locked
+	$(UV) tool install harbor
+	$(UV) run python -m agent_data_workbench.workbench.runtime --initialize-only
+
+dev:
+	@set -eu; \
+	npm --prefix ui run dev & ui_pid=$$!; \
+	trap 'kill "$$ui_pid" 2>/dev/null || true' EXIT INT TERM; \
+	WORKBENCH_PORT=$(PORT) $(UV) run python -m agent_data_workbench.workbench.runtime --reload
+else
 init: check-docker
 	$(COMPOSE) build backend
 	$(COMPOSE) run --rm --no-deps backend python -m agent_data_workbench.workbench.runtime --initialize-only
@@ -33,6 +54,8 @@ init: check-docker
 dev: check-docker
 	$(COMPOSE) --profile production stop app
 	$(COMPOSE) up --build --remove-orphans --abort-on-container-exit backend ui
+
+endif
 
 up: check-docker
 	$(COMPOSE) stop backend ui

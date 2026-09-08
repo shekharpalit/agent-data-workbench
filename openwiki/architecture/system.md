@@ -5,7 +5,7 @@ description: How the CLI, Python SDK, FastAPI service, React workbench, and loca
 tags: [architecture, sdk, persistence, provenance]
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T03:02:55.250Z
+    at: 2026-09-08T15:20:02.026Z
 sources:
   - id: openwiki-source-ea70eb6c045047448e446296
     resource: repo://.gitignore
@@ -33,10 +33,14 @@ sources:
     resource: repo://src/agent_data_workbench/api/routers/investigations.py
   - id: openwiki-source-98bfc373ed8e75b28dcf239e
     resource: repo://src/agent_data_workbench/api/routers/tasks.py
+  - id: openwiki-source-25b71218f03a1e216debf67e
+    resource: repo://src/agent_data_workbench/cli/research.py
   - id: openwiki-source-fd74f7907459785462506ae7
     resource: repo://src/agent_data_workbench/cli/tasks.py
   - id: openwiki-source-cdad3fe88d744628d97a2fa6
     resource: repo://src/agent_data_workbench/data/database.py
+  - id: openwiki-source-cbe654a115c60aa5ace28238
+    resource: repo://src/agent_data_workbench/data/imports.py
   - id: openwiki-source-ece138f4d793e07725c336eb
     resource: repo://src/agent_data_workbench/data/store.py
   - id: openwiki-source-fbcc81f66a8993d5ee2b7eda
@@ -47,6 +51,12 @@ sources:
     resource: repo://src/agent_data_workbench/evaluation/tasks/repository.py
   - id: openwiki-source-7758acda0a6d0691a2dad9c9
     resource: repo://src/agent_data_workbench/evaluation/worlds.py
+  - id: openwiki-source-498ca0018399fc2b28c0ee7e
+    resource: repo://src/agent_data_workbench/exploration/dataset.py
+  - id: openwiki-source-c773d92eb0c24f4c729a0408
+    resource: repo://src/agent_data_workbench/integrations/harbor/comparison.py
+  - id: openwiki-source-047935dc3e143c02a13e4031
+    resource: repo://src/agent_data_workbench/integrations/harbor/results.py
   - id: openwiki-source-c792213eed7e8f73d739e358
     resource: repo://src/agent_data_workbench/research/artifacts.py
   - id: openwiki-source-19e7dd6c7eb0091ce3762537
@@ -75,9 +85,13 @@ sources:
     resource: repo://src/agent_data_workbench/workspace/project.py
   - id: openwiki-source-3e6ae5cbfb3aa3af0850499a
     resource: repo://tests/test_manual_research_api.py
+  - id: openwiki-source-5f365ba0fbb9be69c5df3dda
+    resource: repo://ui/src/views/Dataset.tsx
+  - id: openwiki-source-2142689a6a1eb395600ecd87
+    resource: repo://ui/src/views/Graph.tsx
   - id: openwiki-source-a741d432f952c0dbfb4fb35d
     resource: repo://ui/vite.config.ts
-generated: { by: "codex", at: "2026-09-08T02:47:35.721Z" }
+generated: { by: "codex", at: "2026-09-08T14:06:39.851Z" }
 ---
 
 # System architecture
@@ -116,7 +130,7 @@ All Python paths below are relative to `src/agent_data_workbench/`. The package 
 | `evaluation/` | Tasks, grading, suites, paired experiments, worlds, calibration and improvement decisions | `tasks/`, `suites.py`, `experiments.py` |
 | `execution/` | Target contracts, persistent sessions, user simulators, environments and artifact capture | `contracts.py`, `sessions.py`, `environments.py`, `runners.py` |
 | `exploration/` | Typed search, distributions, lexical clusters and evidence lineage | `schemas.py`, `search.py`, `clustering/`, `lineage.py` |
-| `integrations/` | Native CLI analyzer adapters, Harbor and training exports | `analyzers.py`, `harbor.py`, `training.py` |
+| `integrations/` | Native CLI analyzer adapters, Harbor and training exports | `analyzers.py`, `huggingface.py`, `harbor/`, `training.py` |
 | `workspace/` | Project configuration, artifact directories, reviewed knowledge and locks | `project.py` |
 | `shared/` | Domain-independent JSON/pointers/equality, UUIDs, persistence, Markdown and process helpers | `json.py`, `files.py`, `identifiers.py`, `processes.py` |
 | `workbench/` | Typed startup configuration, session token and job status | `settings.py`, `runtime.py`, `jobs.py` |
@@ -132,13 +146,19 @@ The service layer translates requests into SDK operations. It does not contain a
 
 ## Local state and consistency
 
-`Project.create` requires a new or empty directory. It writes `project.json` and creates `knowledge/`, `investigations/`, `tasks/`, `suites/`, `experiments/`, `exports/`, `worlds/`, `improvements/`, `calibrations/`, `taxonomies/`, and `coverage/`. A project-local `.gitignore` excludes its contents. Use a directory under `runs/` or outside the repository for private working data. Git also ignores `private-data/`, JSONL/NDJSON exports and runtime database files; only synthetic trace fixtures under `tests/fixtures/` are explicitly versionable. Contributor guidance forbids committing customer content, identifiers, bucket names or reports derived from private datasets.
+`Project.create` requires a new or empty directory. It writes `project.json` and creates `knowledge/`, `investigations/`, `tasks/`, `suites/`, `experiments/`, `exports/`, `worlds/`, `improvements/`, `calibrations/`, `taxonomies/`, `coverage/`, and `imports/`. A project-local `.gitignore` excludes its contents. Use a directory under `runs/` or outside the repository for private working data. Git also ignores `private-data/`, JSONL/NDJSON exports and runtime database files; only synthetic trace fixtures under `tests/fixtures/` are explicitly versionable. Contributor guidance forbids committing customer content, identifiers, bucket names or reports derived from private datasets.
 
-`TraceStore` uses `traces.sqlite3`. SQLAlchemy maps the original six-column trace layout: ID, source group, stratum, canonical JSON, content hash, and import time. A session transaction wraps each operation; an import conflict rolls back its batch. The engine uses `NullPool`, and first-use schema creation is serialized inside the process. Worker threads obtain their own sessions.
+`TraceStore` uses `traces.sqlite3`. SQLAlchemy maps the original six-column trace layout: ID, source group, stratum, canonical JSON, content hash, and import time. A session transaction wraps each operation; a content or group/category mapping conflict rolls back its entire batch. The engine uses `NullPool`, and first-use schema creation is serialized inside the process. Worker threads obtain their own sessions.
 
 Internal artifact IDs are canonical UUID strings validated with Python UUID/Pydantic types. Generated records use UUIDv4; content-derived identities use UUIDv5. Imported trace IDs remain unchanged. Suite names are friendly labels separate from their UUIDs. Project format 0.3 rejects older project formats before rewriting any files; create a new project and reimport the traces.
 
-Structured artifacts are written through `shared.files.atomic_text`; Markdown escaping is shared through `shared.markdown.md`. Mutating workflows use a nonblocking POSIX project lock; a concurrent mutation returns a busy error. The HTTP job registry separately reserves one model operation at a time and records its result or error. Routes schedule that operation with FastAPI `BackgroundTasks`, which runs after the response through the framework thread pool. These mechanisms serve a local process-and-files workflow, not a distributed job system.
+Structured artifacts are written through `shared.files.atomic_text`; Markdown escaping is shared through `shared.markdown.md`. Mutating workflows use a nonblocking POSIX project lock; a concurrent mutation returns a busy error. The HTTP job registry separately reserves one background operation at a time and records its result or error. Routes schedule that operation with FastAPI `BackgroundTasks`, which runs after the response through the framework thread pool. These mechanisms serve a local process-and-files workflow, not a distributed job system.
+
+## Dataset import and readable exploration
+
+[Hugging Face imports](../integrations/huggingface.md) resolve a dataset revision before reading rows and preserve source provenance in an `imports/` receipt outside each original trace object. Source access, streaming and SQLAlchemy ingestion complete in one background operation; the receipt records completion or error, and trace conflicts roll back the batch. The adapter keeps complete JSON-compatible rows; optional row selection is explicit.
+
+Dataset profiles aggregate the entire matching local corpus, independently of search pagination. The UI renders explicit binary source labels and repeated source-group counts, with exact member drill-down. Lexical clusters remain language-similarity groups. Evidence graphs draw only recorded relationships and allow unlinked traces to be inspected through the explorer. These separate views avoid inventing semantic or causal edges from imported text.
 
 ## Shared human and agent research workspace
 
@@ -147,6 +167,8 @@ Manual UI research creates a snapshot through the same SDK without invoking a na
 The manual HTTP mutation routes acquire the same nonblocking session lock as native research. This prevents a stale browser tab from publishing final findings or changing outcomes underneath a running native session. The native session's own SDK and MCP tools remain available while it owns that lock. Pausing the native session returns manual write access; the UI keeps unsaved findings, note and chart forms mounted but hidden and disabled during active sessions.
 
 `research/sessions.py` launches one native Codex or Claude Code session per invocation. The native agent owns planning, tools, code execution, context management, and session continuation. The workbench supplies `ResearchWorkspace`, exposed through Python, the CLI, and the official MCP SDK. It does not drive another model-call loop. Existing `Analyzer` integrations remain available for batch analysis, task design and semantic judging.
+
+Codex investigations accept an optional per-session reasoning effort through the UI, API and CLI. `NativeSession` sends an explicit `model_reasoning_effort` override to Codex, records it with the model and native session ID, and restores it on resume. Leaving it unset preserves the CLI default; it does not change global CLI configuration. Supported effort/model combinations remain the native provider's responsibility.
 
 Each investigation captures all selected inputs into its own SQLAlchemy-backed `dataset.sqlite3`, alongside frozen context, workspace instructions, scripts and outputs. New imports or knowledge changes do not invalidate this snapshot. All imported records are included by default; excluding reserved final groups is explicit and exposure is recorded conservatively.
 
@@ -160,7 +182,7 @@ These records provide provenance and detect accidental drift. They do not isolat
 
 ## Extension seams
 
-Implement `TraceSource.read()` to import another export format, `Analyzer.analyze(prompt, schema)` for another batch/judge backend, or `TargetRunner.identity()` and `run(visible_input, trial_dir, seed)` for another execution harness. Native research can also use the shared `ResearchWorkspace` directly from an existing coding-agent session or a custom `NativeSession` adapter. `EnvironmentRunner` supplies a setup/reset/readiness/observer/teardown lifecycle, while `ConversationRunner` owns one continuous command target session. Each reviewed task supplies its scenario; experiments record the effective runner identity. The optional Harbor adapter exports a supplied real template and invokes the installed Harbor CLI. Direct service connectors, distributed workbench execution, and training-job execution remain extension work. See [eval engineering](../workflows/eval-engineering.md).
+Implement `TraceSource.read()` to import another export format, `Analyzer.analyze(prompt, schema)` for another batch/judge backend, or `TargetRunner.identity()` and `run(visible_input, trial_dir, seed)` for another execution harness. Native research can also use the shared `ResearchWorkspace` directly from an existing coding-agent session or a custom `NativeSession` adapter. `EnvironmentRunner` supplies a setup/reset/readiness/observer/teardown lifecycle, while `ConversationRunner` owns one continuous command target session. Each reviewed task supplies its scenario; experiments record the effective runner identity. The optional Harbor adapter exports a supplied real template, invokes the installed Harbor CLI for two targets, and imports verifier results and generated trajectories as a paired exploratory experiment. Its contracts, export, command, runtime, result parsing and comparison orchestration have separate modules under `integrations/harbor/`. See [Harbor comparisons](../integrations/harbor.md). Direct service connectors, distributed workbench execution, and training-job execution remain extension work. See [eval engineering](../workflows/eval-engineering.md).
 
 Next: [import and explore traces](../workflows/traces.md), [run the local workbench](../operations/local-workbench.md), or [development](../development/contributing.md).
 

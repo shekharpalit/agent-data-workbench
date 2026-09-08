@@ -30,7 +30,9 @@ from agent_data_workbench.evaluation.worlds import WorldSpec, create_world, revi
 from agent_data_workbench.execution.contracts import RunnerConfig
 from agent_data_workbench.execution.runners import ConfiguredRunner
 from agent_data_workbench.integrations.harbor import (
+    HarborComparisonConfig,
     HarborExportConfig,
+    compare_harbor,
     export_harbor,
     run_harbor_export,
 )
@@ -260,4 +262,23 @@ def harbor_run(
             payload.export_id,
             timeout=payload.timeout,
         ),
+    )
+
+
+class HarborComparisonRequest(Contract):
+    task_id: UUIDString
+    config: HarborComparisonConfig
+
+
+@router.post("/harbor/compare")
+def harbor_compare(
+    project: ProjectDependency,
+    jobs: JobsDependency,
+    payload: HarborComparisonRequest,
+    background_tasks: BackgroundTasks,
+):
+    return jobs.launch(
+        background_tasks,
+        "Run Harbor comparison",
+        lambda: compare_harbor(project, payload.task_id, payload.config),
     )

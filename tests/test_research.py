@@ -506,3 +506,54 @@ def test_mcp_default_reads_and_search_preserve_complete_long_records(tmp_path):
         "record": data,
         "truncated": False,
     }
+
+
+def test_requested_codex_effort_overrides_cli_default_and_survives_native_resume(
+    workspace, monkeypatch
+):
+    # Given
+    monkeypatch.setattr(
+        "agent_data_workbench.research.sessions.shutil.which", lambda name: "/installed/codex"
+    )
+    calls = []
+    native_id = uid("effort-session")
+
+    def run(agent, research, *, session_id, on_event, **kwargs):
+        command = agent.command(research, session_id)
+        calls.append(
+            {
+                "model": command[command.index("--model") + 1],
+                "effort": [v for v in command if v.startswith("model_reasoning_effort=")],
+                "resume": session_id,
+            }
+        )
+        on_event({"type": "thread.started", "thread_id": native_id})
+        research.checkpoint("Saved research progress")
+
+    monkeypatch.setattr(NativeSession, "run", run)
+    # When
+    first = investigate(
+        workspace.project,
+        workspace.id,
+        NativeSession("codex", "gpt-5.6-sol", reasoning_effort="xhigh"),
+    )
+    resumed = investigate(workspace.project, workspace.id)
+    # Then
+    expected_session = {
+        "backend": "codex",
+        "model": "gpt-5.6-sol",
+        "reasoning_effort": "xhigh",
+        "id": native_id,
+    }
+    assert {"first": first["session"], "resumed": resumed["session"], "calls": calls} == {
+        "first": expected_session,
+        "resumed": expected_session,
+        "calls": [
+            {"model": "gpt-5.6-sol", "effort": ['model_reasoning_effort="xhigh"'], "resume": None},
+            {
+                "model": "gpt-5.6-sol",
+                "effort": ['model_reasoning_effort="xhigh"'],
+                "resume": native_id,
+            },
+        ],
+    }

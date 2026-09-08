@@ -26,16 +26,18 @@ sources:
     resource: repo://src/agent_data_workbench/data/ingestion.py
   - id: openwiki-source-839952c20325a7e79d15333e
     resource: repo://src/agent_data_workbench/data/transport.py
+  - id: openwiki-source-fa49503ca8957c1fd1a98b27
+    resource: repo://src/agent_data_workbench/workbench/capabilities.py
   - id: openwiki-source-56b68af7c871c44d9ba4d64d
     resource: repo://src/agent_data_workbench/workbench/runtime.py
   - id: openwiki-source-4a774cace930992dc66c0bda
     resource: repo://src/agent_data_workbench/workbench/settings.py
   - id: openwiki-source-a741d432f952c0dbfb4fb35d
     resource: repo://ui/vite.config.ts
-generated: { by: "codex", at: "2026-09-08T03:02:55.250Z" }
+generated: { by: "codex", at: "2026-09-08T04:50:29.215Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T03:02:55.250Z
+    at: 2026-09-08T04:50:29.215Z
 ---
 
 # Docker and Make workflow
@@ -56,6 +58,26 @@ make dev
 `make dev` builds and starts the UI watcher and FastAPI backend together. It stops the packaged app first so they do not compete for the published port. Open the private URL printed by the backend. Python source changes restart Uvicorn while retaining the current browser token. UI changes rebuild the assets; refresh the browser to see them. Ctrl-C initiates shutdown of both services. Uvicorn waits for active response background tasks by default; pause long native research first when you want to resume it later. Docker can still force termination after its external stop deadline, which is separate from workbench analysis limits.
 
 The UI healthcheck verifies its index and referenced script/style files before Compose starts the backend. Development retains previous assets during rebuilds and polls source changes while excluding generated output and dependencies. FastAPI serves the resulting files and API on one origin.
+
+## Native backend for host CLI logins and Harbor
+
+`MODE=docker` is the default. With uv and a supported Node version installed, native mode keeps research CLI authentication and the Harbor executable in the host backend's environment:
+
+```sh
+make init MODE=native
+make dev MODE=native
+```
+
+Native initialization installs Node dependencies, builds the UI before syncing the editable Python package, installs Harbor as a separate uv tool and initializes `runs/workbench`. Put uv's tool executable directory on PATH. Select another local project and port consistently:
+
+```sh
+make init MODE=native WORKBENCH_PROJECT=/path/to/project
+make dev MODE=native WORKBENCH_PROJECT=/path/to/project PORT=9000
+```
+
+The native development target starts the TypeScript build watcher beside standard Uvicorn reload and stops the watcher when the backend exits. Docker is still required when a Harbor task uses the Docker environment. The remaining Make lifecycle, test and archive-ingestion targets are Docker commands; for native file ingestion use `uv run agent-data-workbench ingest /path/to/project /path/to/traces`.
+
+Research and Harbor UI controls expose runtime status for the backend's actual PATH. The checks report installed versions, researcher CLI login state and Docker daemon readiness, without returning credentials. Readiness is a setup check, not a test of model access, account quota or a supplied agent's verifier. See [Harbor comparisons](../integrations/harbor.md).
 
 ## Import your traces
 
@@ -82,6 +104,8 @@ make ingest FILE="./traces/nested/run 1.jsonl" SOURCE_ROOT=./traces
 The native equivalent is `--source-root ./traces`. Keep this root and filenames stable across imports: they are recorded in run provenance and participate in generated identities. Changing a source name can create a different generated run or conflict with an existing native run ID.
 
 Make stages a complete tar archive on the host, then streams it to the container. The importer materializes its regular files before starting the database transaction, preserving relative names and deduplicating internal hardlink aliases. Temporary host and container files are removed on completion or failure. Plan for temporary disk space for the archive and extracted inputs in addition to project storage; a run file's parsed events are held in memory one file at a time. There is no fixed file-count or event-count cap, and no browser upload endpoint is needed.
+
+[Hugging Face import](../integrations/huggingface.md) is available directly in the UI in either runtime. It downloads into the backend project and uses its Hugging Face access configuration.
 
 ## Lifecycle commands
 

@@ -12,10 +12,12 @@ from agent_data_workbench.api.errors import register_error_handlers
 from agent_data_workbench.api.middleware import register_middleware
 from agent_data_workbench.api.routers import (
     artifacts,
+    imports,
     investigations,
     jobs,
     knowledge,
     overview,
+    runtime,
     tasks,
     traces,
     workflow,
@@ -39,7 +41,18 @@ def create_app(project: Project, *, origin: str, token: str) -> FastAPI:
     register_middleware(app, origin=origin)
     register_error_handlers(app)
     api = APIRouter(prefix="/api", dependencies=[Depends(require_session)])
-    for module in (overview, traces, artifacts, knowledge, tasks, investigations, jobs, workflow):
+    for module in (
+        overview,
+        traces,
+        artifacts,
+        knowledge,
+        tasks,
+        investigations,
+        jobs,
+        workflow,
+        imports,
+        runtime,
+    ):
         api.include_router(module.router, tags=[module.__name__.rsplit(".", 1)[-1]])
 
     @api.get("/openapi.json", include_in_schema=False)

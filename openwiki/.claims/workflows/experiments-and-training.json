@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:5a9fc5818c6caf9e33c2e78eaecac6486709589f9e70736fbc37a7abe0150bb5",
+  "pageVersion": "sha256:5aaba05c238c368c8dcc64b8452724943fb5db286c4d8e816f0427afe83d825f",
   "claims": [
     {
       "id": "claim_6b153675d8c742159eedf08fe4a2b250",
@@ -119,10 +119,28 @@
           "version": "repo-lines-v1:sha256:e9f2f09e6de9f4b6ba8a73d9b26899941bf5efdc1dbdb9a71f22eb7cca695ff0:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgxODEyZGMyZTJjZjk2OTMyNGExZTE4YzMyYWU0NWU2ZGM2N2MxZGVmMWRmMzgzZTQ5NTRiYTQyNTgxZDBhZDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFhZDU1OTdjMjA1ZWFjMzZmNTkwM2M1NWRjOGFhMTVlOTE4N2Y0NTMyZTY4NjE1MWFiYWNhYTQyY2JmOGM3NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
+    },
+    {
+      "id": "claim_a2d97ca5289c4a7b8bc26bdd6b11372a",
+      "statement": "The Harbor path records an exploratory single-task paired experiment without a suite or controlled model seed and imports available complete trajectories for result inspection.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/integrations/harbor/comparison.py",
+          "version": "repo-file-v1:sha256:796e44cd651bf6768a16a47ef731ab9aeca2f8c7c30d4a2459f0fe7c66163049"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/integrations/harbor/results.py",
+          "version": "repo-file-v1:sha256:ffdd044f2f7054a4d3d3af65e58e1bccb5bfbb9ae9cde1ebaea17da84ab1f86d"
+        },
+        {
+          "resource": "repo://ui/src/views/Experiments.tsx",
+          "version": "repo-file-v1:sha256:e650fb93692fa942c1992a8db8ec40b5c6af932f23bdcf26b8b8c128cab5dab0"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T02:47:35.721Z"
+    "at": "2026-09-08T15:20:02.026Z"
   }
 }

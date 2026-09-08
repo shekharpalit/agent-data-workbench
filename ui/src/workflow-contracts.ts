@@ -216,6 +216,7 @@ export interface WorkflowExperiment {
 }
 
 export interface HarborExportConfig {
+  use_host_codex_login: boolean;
   template_directory: string;
   agent: string;
   model: string;
@@ -228,6 +229,24 @@ export interface HarborExport {
   task_id: string;
   bundle_directory: string;
   command: string[];
+  environment?: Record<string, string>;
   validation: string;
   [key: string]: unknown;
+}
+
+export interface HarborAgentConfig {
+  agent: string;
+  model: string;
+  agent_kwargs: Record<string, string | number | boolean>;
+  use_host_codex_login: boolean;
+}
+export interface HarborComparisonConfig {
+  template_directory: string;
+  baseline: HarborAgentConfig;
+  candidate: HarborAgentConfig;
+  environment_type: string;
+  repetitions: number;
+  reward_key: string;
+  pass_threshold: number;
+  timeout: number | null;
 }

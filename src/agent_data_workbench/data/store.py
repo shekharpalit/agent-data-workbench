@@ -60,14 +60,6 @@ class TraceStore:
             for trace in source.read():
                 encoded = json_text(trace.data)
                 sha = digest(trace.data)
-                old = db.scalar(select(TraceRow.sha256).where(TraceRow.id == trace.trace_id))
-                if old is not None:
-                    if old != sha:
-                        raise ValueError(
-                            f"Trace ID {trace.trace_id!r} already has different content"
-                        )
-                    unchanged += 1
-                    continue
 
                 def label(pointer, fallback):
                     try:
@@ -80,11 +72,36 @@ class TraceStore:
                     except ValueError:
                         return fallback
 
+                group = label(group_pointer, trace.trace_id)
+                stratum = label(stratum_pointer, "unclassified")
+                old = (
+                    db.execute(
+                        select(TraceRow.sha256, TraceRow.group_id, TraceRow.stratum).where(
+                            TraceRow.id == trace.trace_id
+                        )
+                    )
+                    .mappings()
+                    .first()
+                )
+                if old is not None:
+                    if old["sha256"] != sha:
+                        raise ValueError(
+                            f"Trace ID {trace.trace_id!r} already has different content"
+                        )
+                    if (old["group_id"], old["stratum"]) != (group, stratum):
+                        raise ValueError(
+                            f"Trace ID {trace.trace_id!r} already has "
+                            "different group/category mapping; "
+                            "reuse the original import fields"
+                        )
+                    unchanged += 1
+                    continue
+
                 db.add(
                     TraceRow(
                         id=trace.trace_id,
-                        group_id=label(group_pointer, trace.trace_id),
-                        stratum=label(stratum_pointer, "unclassified"),
+                        group_id=group,
+                        stratum=stratum,
                         data=encoded,
                         sha256=sha,
                         imported_at=now(),

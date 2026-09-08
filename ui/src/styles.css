@@ -804,3 +804,99 @@ aside {
 .conversation-reply {
   background: #f3f6f4;
 }
+
+/* Counts and source order provide the spatial meaning in dataset views. */
+.attempt-chart {
+  margin: 20px 0;
+}
+.attempt-row {
+  display: grid;
+  grid-template-columns: minmax(130px, 1fr) 2fr 36px;
+  gap: 16px;
+  align-items: center;
+  width: 100%;
+  background: transparent;
+  color: var(--ink, #203e32);
+  text-align: left;
+  padding: 10px 4px;
+  border: 0;
+}
+.attempt-row:hover {
+  background: #eff4ef;
+}
+.attempt-label {
+  overflow-wrap: anywhere;
+  font-size: 13px;
+}
+.attempt-track {
+  height: 18px;
+  background: #edf0ec;
+  border-radius: 4px;
+}
+.attempt-bar {
+  display: flex;
+  height: 18px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.outcome-pass {
+  background: #36785b;
+}
+.outcome-fail {
+  background: #bf654b;
+}
+.outcome-unknown {
+  background: #8e98a0;
+}
+.trace-event {
+  border-left: 2px solid #bdcec3;
+  margin: 0 0 10px 16px;
+  padding: 8px 16px;
+}
+.trace-event summary {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  cursor: pointer;
+  flex-wrap: wrap;
+}
+.trace-event summary code {
+  margin-left: auto;
+  font-size: 12px;
+}
+.event-number {
+  color: #67776c;
+  font-variant-numeric: tabular-nums;
+}
+.event-body {
+  margin-top: 16px;
+}
+.event-body pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 640px) {
+  .attempt-row {
+    grid-template-columns: 1fr 1fr 24px;
+    gap: 8px;
+  }
+}
+
+.jobs p {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+progress::-webkit-progress-value {
+  background: var(--bar-color, var(--accent));
+}
+progress::-moz-progress-bar {
+  background: var(--bar-color, var(--accent));
+}
+.view-tabs {
+  display: flex;
+  justify-content: flex-start;
+  gap: 8px;
+  margin-bottom: 18px;
+}

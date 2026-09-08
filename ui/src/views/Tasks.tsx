@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { HarborComparisonForm } from "./HarborComparison";
 import { HarborExportForm } from "./HarborExport";
 import { api } from "../api";
 import type { Route, Task, TaskSpec } from "../contracts";
@@ -279,7 +280,12 @@ export function TaskDetail({
           <JsonView value={spec.verifier_examples} />
         </Details>
       </Card>
-      {task.review.status === "accepted" && <HarborExportForm taskId={id} />}
+      {task.review.status === "accepted" && (
+        <>
+          <HarborComparisonForm taskId={id} navigate={navigate} />
+          <HarborExportForm taskId={id} />
+        </>
+      )}
       <TaskReview key={`${id}-${JSON.stringify(spec)}`} task={task} />
     </>
   );

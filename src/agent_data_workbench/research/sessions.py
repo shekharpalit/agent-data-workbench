@@ -8,14 +8,14 @@ import shutil
 import sys
 from contextlib import contextmanager
 from pathlib import Path
-from typing import Callable, Literal
+from typing import Callable, Literal, get_args
 
 from agent_data_workbench.research.artifacts import (
     investigation_directory,
     investigation_view,
     load_investigation,
 )
-from agent_data_workbench.research.contracts import ResearchResult
+from agent_data_workbench.research.contracts import ReasoningEffort, ResearchResult
 from agent_data_workbench.research.transport import SessionPaused, stream_session
 from agent_data_workbench.research.workspace import ResearchWorkspace
 from agent_data_workbench.shared.files import save
@@ -46,10 +46,17 @@ class NativeSession:
         backend: Literal["codex", "claude"] = "codex",
         model: str | None = None,
         timeout: float | None = None,
+        *,
+        reasoning_effort: ReasoningEffort | None = None,
     ):
         if backend not in {"codex", "claude"} or timeout is not None and timeout <= 0:
             raise ValueError("Choose codex or claude and an optional positive time budget")
+        if reasoning_effort is not None and (
+            backend != "codex" or reasoning_effort not in get_args(ReasoningEffort)
+        ):
+            raise ValueError("Choose a supported Codex reasoning effort")
         self.name, self.model, self.timeout = backend, model, timeout
+        self.reasoning_effort = reasoning_effort
 
     def command(self, workspace: ResearchWorkspace, session_id: str | None) -> list[str]:
         executable = shutil.which(self.name)
@@ -75,6 +82,8 @@ class NativeSession:
             ]
             if self.model:
                 args.extend(["--model", self.model])
+            if self.reasoning_effort:
+                args.extend(["-c", f"model_reasoning_effort={json.dumps(self.reasoning_effort)}"])
             if session_id:
                 args.extend(["resume", canonical_uuid(session_id)])
             args.append("-")
@@ -205,6 +214,7 @@ def investigate(
         agent = agent or NativeSession(
             previous["backend"] if previous else "codex",
             previous.get("model") if previous else None,
+            reasoning_effort=previous.get("reasoning_effort") if previous else None,
         )
         if previous and previous["backend"] != agent.name:
             raise ValueError(
@@ -246,6 +256,11 @@ def investigate(
                 session={
                     "backend": agent.name,
                     "model": agent.model,
+                    **(
+                        {"reasoning_effort": agent.reasoning_effort}
+                        if getattr(agent, "reasoning_effort", None) is not None
+                        else {}
+                    ),
                     "id": previous.get("id") if previous else None,
                 },
             )

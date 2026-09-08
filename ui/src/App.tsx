@@ -1,9 +1,11 @@
-import { lazy, Suspense, useReducer, useState } from "react";
+import { lazy, Suspense, useReducer, useState, useEffect, useRef } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { api } from "./api";
+import { jobDestination } from "./jobs";
 import type { Route, SearchQuery, View } from "./contracts";
 import { initialSearch, searchReducer } from "./state";
 import { ResourceState } from "./components/shared";
+import { ImportsView } from "./views/Imports";
 import { OverviewView } from "./views/Overview";
 import { SearchView, TraceDetail } from "./views/Search";
 import { ClustersView } from "./views/Clusters";
@@ -22,10 +24,11 @@ import { ImprovementsView } from "./views/Improvements";
 
 const GraphView = lazy(() => import("./views/Graph"));
 const labels: Record<View, string> = {
+  imports: "Import data",
   overview: "Overview",
   traces: "Trace explorer",
   clusters: "Clusters",
-  graph: "Evidence graph",
+  graph: "Data & evidence",
   investigations: "Investigations",
   knowledge: "Project knowledge",
   tasks: "Tasks & graders",
@@ -37,6 +40,7 @@ const labels: Record<View, string> = {
 };
 const navigation: View[] = [
   "overview",
+  "imports",
   "traces",
   "clusters",
   "graph",
@@ -64,6 +68,20 @@ export default function App() {
     refetchInterval: (state) =>
       state.state.data?.some((job) => job.status === "running") ? 2000 : false,
   });
+  const previousJobs = useRef("");
+  const terminalJobs =
+    jobs.data
+      ?.filter((job) => job.status !== "running")
+      .map((job) => `${job.id}:${job.status}`)
+      .join(",") || "";
+  useEffect(() => {
+    if (terminalJobs && previousJobs.current !== terminalJobs) {
+      void client.invalidateQueries({
+        predicate: (query) => query.queryKey[0] !== "jobs",
+      });
+    }
+    previousJobs.current = terminalJobs;
+  }, [terminalJobs, client]);
   function navigate(next: Route) {
     setRoute(next);
     window.scrollTo(0, 0);
@@ -84,6 +102,8 @@ export default function App() {
   }
   function page() {
     switch (route.view) {
+      case "imports":
+        return <ImportsView navigate={navigate} />;
       case "overview":
         return overview.data ? (
           <OverviewView
@@ -125,6 +145,11 @@ export default function App() {
             <GraphView
               key={route.id || "all"}
               traceId={route.id}
+              query={query}
+              onMembers={(ids) => {
+                dispatch({ type: "cluster", ids });
+                navigate({ view: "traces" });
+              }}
               navigate={navigate}
             />
           </Suspense>
@@ -214,6 +239,21 @@ export default function App() {
               <p key={job.id}>
                 {job.name} · {job.status}
                 {job.error ? ` · ${job.error}` : ""}
+                {jobDestination(job) && (
+                  <button
+                    className="ghost"
+                    onClick={() => {
+                      const next = jobDestination(job);
+                      if (next) navigate(next);
+                    }}
+                  >
+                    Open results →
+                  </button>
+                )}
+                {typeof job.result?.status === "string" &&
+                  !["complete", "completed"].includes(job.result.status) && (
+                    <span>Result: {job.result.status}</span>
+                  )}
               </p>
             ))}
             <button

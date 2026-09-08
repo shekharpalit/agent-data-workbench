@@ -4,6 +4,7 @@ import json
 from collections import deque
 
 from agent_data_workbench.data.store import TraceStore
+from agent_data_workbench.exploration.dataset import trace_label
 from agent_data_workbench.shared.identifiers import stable_id
 from agent_data_workbench.shared.json import json_text
 from agent_data_workbench.workspace.project import Project
@@ -26,9 +27,7 @@ def lineage(project: Project, *, trace_id: str = "", limit: int | None = None) -
     # Imported evidence exists before findings or tasks reference it.
     for row in TraceStore(project).iter_rows():
         data = json.loads(row["data"])
-        source = data.get("source")
-        label = source.get("path") if isinstance(source, dict) else None
-        node("trace", row["id"], label if isinstance(label, str) else row["id"], trace_id=row["id"])
+        node("trace", row["id"], trace_label(data, row["id"]), trace_id=row["id"])
 
     for value in project.artifacts("investigations"):
         if value.get("result") is None:
@@ -53,11 +52,11 @@ def lineage(project: Project, *, trace_id: str = "", limit: int | None = None) -
             status=value["review"]["status"],
         )
         for key in task["trace_ids"]:
-            edges.add((trace(key), tid, "derived from"))
+            edges.add((trace(key), tid, "informs"))
         for key in task["finding_ids"]:
             fid = "finding:" + value["origin"] + ":" + key
             if fid in nodes:
-                edges.add((fid, tid, "tests"))
+                edges.add((fid, tid, "tested by"))
     for value in project.artifacts("experiments"):
         eid = node(
             "experiment",
@@ -66,6 +65,9 @@ def lineage(project: Project, *, trace_id: str = "", limit: int | None = None) -
             artifact_id=value["id"],
             status=value["status"],
         )
+        for trial in value.get("trials", []):
+            for key in trial.get("trace_ids", []):
+                edges.add((trace(key), eid, "recorded in"))
         for task in value["task_snapshots"]:
             tid = "task:" + task["id"]
             if tid not in nodes:

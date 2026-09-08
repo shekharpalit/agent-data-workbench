@@ -278,3 +278,51 @@ def test_harbor_manifest_edits_cannot_silently_change_the_executed_command(tmp_p
     # When / Then
     with pytest.raises(ValueError, match="manifest changed after export"):
         run_harbor_export(project, manifest["id"])
+
+
+@pytest.mark.parametrize("use_login", [False, True])
+def test_harbor_codex_login_maps_to_native_environment_option(tmp_path, use_login):
+    # Given
+    from agent_data_workbench.integrations.harbor.commands import _command, _environment
+
+    config = HarborExportConfig(
+        template_directory=str(tmp_path),
+        agent="codex",
+        model="configured-model",
+        agent_kwargs={"reasoning_effort": "xhigh"},
+        use_host_codex_login=use_login,
+    )
+    bundle = tmp_path / "task"
+    # When
+    actual = _command(bundle, config, "job", False)
+    # Then
+    assert actual == [
+        "harbor",
+        "run",
+        "--path",
+        str(bundle),
+        "--agent",
+        "codex",
+        "-e",
+        "docker",
+        "--n-attempts",
+        "1",
+        "--jobs-dir",
+        str(tmp_path / "jobs"),
+        "--job-name",
+        "job",
+        "--model",
+        "configured-model",
+        "--ak",
+        'reasoning_effort="xhigh"',
+    ]
+    assert _environment(config) == ({"CODEX_FORCE_AUTH_JSON": "1"} if use_login else {})
+
+
+def test_harbor_rejects_codex_login_for_another_agent():
+    # Given
+    from agent_data_workbench.integrations.harbor import HarborAgentConfig
+
+    # When / Then
+    with pytest.raises(ValueError, match="host Codex login option requires the codex agent"):
+        HarborAgentConfig(agent="claude-code", use_host_codex_login=True)

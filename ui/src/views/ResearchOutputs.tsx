@@ -23,42 +23,57 @@ async function download(id: string, artifact: ResearchArtifact) {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
+function ResearchFile({
+  id,
+  artifact,
+}: {
+  id: string;
+  artifact: ResearchArtifact;
+}) {
+  return (
+    <div className="item">
+      <div className="item-head">
+        <h3>{artifact.title}</h3>
+        <Badge value={artifact.kind} />
+      </div>
+      {artifact.chart && (
+        <>
+          <p>{artifact.chart.description}</p>
+          <Bars
+            values={artifact.chart.values.map((v) => ({
+              value: v.label,
+              count: v.value,
+            }))}
+            total={Math.max(0, ...artifact.chart.values.map((v) => v.value))}
+          />
+        </>
+      )}
+      <p className="muted">
+        {artifact.filename} · {artifact.bytes.toLocaleString()} bytes
+      </p>
+      <ActionButton className="ghost" action={() => download(id, artifact)}>
+        Download {artifact.title}
+      </ActionButton>
+    </div>
+  );
+}
+
 export function ResearchFiles({ item }: { item: Investigation }) {
   if (!item.attachments?.length) return null;
+  const charts = item.attachments.filter((artifact) => artifact.chart);
+  const files = item.attachments.filter((artifact) => !artifact.chart);
   return (
     <Card title="Research outputs">
-      {item.attachments.map((artifact) => (
-        <div className="item" key={artifact.id}>
-          <div className="item-head">
-            <h3>{artifact.title}</h3>
-            <Badge value={artifact.kind} />
-          </div>
-          {artifact.chart && (
-            <>
-              <p>{artifact.chart.description}</p>
-              <Bars
-                values={artifact.chart.values.map((v) => ({
-                  value: v.label,
-                  count: v.value,
-                }))}
-                total={Math.max(
-                  0,
-                  ...artifact.chart.values.map((v) => v.value),
-                )}
-              />
-            </>
-          )}
-          <p className="muted">
-            {artifact.filename} · {artifact.bytes.toLocaleString()} bytes
-          </p>
-          <ActionButton
-            className="ghost"
-            action={() => download(item.id, artifact)}
-          >
-            Download {artifact.title}
-          </ActionButton>
-        </div>
+      {charts.map((artifact) => (
+        <ResearchFile key={artifact.id} id={item.id} artifact={artifact} />
       ))}
+      {!!files.length && (
+        <Details title={`Download reports, data and scripts (${files.length})`}>
+          {files.map((artifact) => (
+            <ResearchFile key={artifact.id} id={item.id} artifact={artifact} />
+          ))}
+        </Details>
+      )}
     </Card>
   );
 }
@@ -92,7 +107,13 @@ export function ResearchProgress({ item }: { item: Investigation }) {
                 cells: [
                   r.trace_id,
                   <Badge value={r.status} />,
-                  r.method || "—",
+                  r.method ? (
+                    <Details title="Review method">
+                      <p>{r.method}</p>
+                    </Details>
+                  ) : (
+                    "—"
+                  ),
                   <Details title="Inspect">
                     <JsonView
                       value={r.error === null ? r.output : { error: r.error }}
