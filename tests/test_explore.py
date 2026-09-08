@@ -6,7 +6,6 @@ from test_workbench_data import Source, make_project
 
 from agent_data_workbench.data.store import TraceStore
 from agent_data_workbench.exploration import (
-    CLUSTER_TEXT_LIMIT,
     ClusterQuery,
     FieldFilter,
     SearchQuery,
@@ -184,18 +183,21 @@ def test_clustering_bounds_are_visible_and_excluded_groups_stay_excluded(project
     }
 
 
-def test_cluster_text_budget_is_shared_across_nested_fields_and_disclosed(project):
-    # Given
+def test_clustering_reads_late_events_in_long_nested_traces(project):
+    # Given: the useful event occurs beyond the former 20,000-character cutoff.
     store = TraceStore(project)
     store.ingest(
         Source(
             [
-                {"trace_id": "large", "input": ["refund " * CLUSTER_TEXT_LIMIT, "search"]},
-                {"trace_id": "small", "input": "refund"},
+                {
+                    "trace_id": "large",
+                    "events": [{"text": " " * 25_000}, {"text": "refund declined"}],
+                },
+                {"trace_id": "small", "events": [{"text": "refund declined"}]},
             ]
         )
     )
-    query = ClusterQuery(query=SearchQuery(trace_ids=["large", "small"]))
+    query = ClusterQuery(query=SearchQuery(trace_ids=["large", "small"]), pointer="/events")
 
     # When
     actual = cluster(store, query)
@@ -207,10 +209,91 @@ def test_cluster_text_budget_is_shared_across_nested_fields_and_disclosed(projec
         "groups": [c["trace_ids"] for c in actual["clusters"]],
         "terms": actual["clusters"][0]["terms"],
     } == {
-        "text_limit_chars": CLUSTER_TEXT_LIMIT,
-        "text_truncated_ids": ["large"],
+        "text_limit_chars": None,
+        "text_truncated_ids": [],
         "groups": [["large", "small"]],
-        "terms": ["refund"],
+        "terms": ["declined", "refund"],
+    }
+
+
+def test_default_clustering_includes_all_event_traces_beyond_a_search_page(project):
+    # Given: event records with no /input and more than the old 200-trace ceiling.
+    ids = [f"scan-{i:03}" for i in range(201)]
+    store = TraceStore(project)
+    store.ingest(
+        Source(
+            [
+                {"trace_id": key, "events": [{"type": "turn.failed", "error": "schema rejected"}]}
+                for key in ids
+            ]
+        )
+    )
+    query = SearchQuery(text="turn.failed", offset=20, limit=20)
+
+    # When
+    result = cluster(store, ClusterQuery(query=query))
+    members = sorted(key for group in result["clusters"] for key in group["trace_ids"])
+    selected = search(store, SearchQuery(trace_ids=members))
+
+    # Then
+    assert {
+        "pointer": result["pointer"],
+        "eligible": result["eligible"],
+        "sampled": result["sampled"],
+        "clustered": result["clustered"],
+        "omitted": result["omitted_ids"],
+        "truncated": result["truncated"],
+        "members": members,
+        "member_count": selected["eligible"],
+        "source_sha256": result["source_sha256"],
+    } == {
+        "pointer": "",
+        "eligible": 201,
+        "sampled": 201,
+        "clustered": 201,
+        "omitted": [],
+        "truncated": False,
+        "members": ids,
+        "member_count": 201,
+        "source_sha256": search(store, query)["source_sha256"],
+    }
+
+
+def test_graph_shows_imported_traces_before_findings_exist(project):
+    # Given
+    TraceStore(project).ingest(
+        Source(
+            [
+                {"trace_id": "scan", "source": {"path": "scans/run.jsonl"}, "events": []},
+            ]
+        )
+    )
+
+    # When
+    graph = lineage(project)
+    focused = lineage(project, trace_id="scan")
+    missing = lineage(project, trace_id="unknown")
+    scan = {"id": "trace:scan", "kind": "trace", "label": "scans/run.jsonl", "trace_id": "scan"}
+
+    # Then
+    assert {
+        "nodes": graph["nodes"],
+        "edges": graph["edges"],
+        "total": graph["total_nodes"],
+        "shown": graph["shown_nodes"],
+        "focused": focused["nodes"],
+        "missing": missing["nodes"],
+    } == {
+        "nodes": [
+            {"id": f"trace:r{i}", "kind": "trace", "label": f"r{i}", "trace_id": f"r{i}"}
+            for i in range(9)
+        ]
+        + [scan],
+        "edges": [],
+        "total": 10,
+        "shown": 10,
+        "focused": [scan],
+        "missing": [],
     }
 
 
@@ -374,6 +457,7 @@ def test_clustering_keeps_negation_numbers_and_short_words_as_distinguishing_evi
                 "choice_b",
             ]
         ),
+        pointer="/input",
         threshold=1,
     )
 
@@ -418,32 +502,28 @@ def test_selected_values_are_not_discarded_by_metadata_field_names():
     }
 
     # When
-    tokens, truncated = words(selected)
+    tokens = list(words(selected))
 
     # Then
-    assert {"tokens": tokens, "truncated": truncated} == {
+    assert {"tokens": tokens} == {
         "tokens": ["not", "0", "a", "404", "no", "can't", "deny", "42", "false", "null"],
-        "truncated": False,
     }
 
 
 @pytest.mark.parametrize(
-    "text,remaining,expected_tokens",
-    [("refunded", 3, []), ("can't", 3, []), ("can go", 3, ["can"])],
+    "text,expected_tokens",
+    [("refunded", ["refunded"]), ("can't", ["can't"]), ("can go", ["can", "go"])],
 )
-def test_clustering_does_not_turn_a_truncated_word_into_an_invented_token(
-    text, remaining, expected_tokens
-):
+def test_clustering_preserves_complete_words_after_long_prefixes(text, expected_tokens):
     # Given
     from agent_data_workbench.exploration.clustering.tokenization import words
 
-    selected = [" " * (CLUSTER_TEXT_LIMIT - remaining), text]
+    selected = [" " * 25_000, text]
 
     # When
-    tokens, truncated = words(selected)
+    tokens = list(words(selected))
 
     # Then
-    assert {"tokens": tokens, "truncated": truncated} == {
+    assert {"tokens": tokens} == {
         "tokens": expected_tokens,
-        "truncated": True,
     }

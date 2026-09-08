@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:ca29367b749b5f4eb6ede5b6e66d7a0c8fe988e527a0518cab28150e5a3be706",
+  "pageVersion": "sha256:014c8c753a33747dc4f22b86417e794a2cc6b19db7388d63f3e440ff5ba622c9",
   "claims": [
     {
       "id": "claim_25574e40cfb048b39464c4e95bba596d",
@@ -199,10 +199,50 @@
           "version": "repo-file-v1:sha256:b3fc49ea88b0378dafe933382e631ec2e90e2626135bd7d0b75b59b5ec678e24"
         }
       ]
+    },
+    {
+      "id": "claim_cbb607bb7d9c4d6d93fd03b37a33f7a3",
+      "statement": "Opening Clusters automatically requests whole-record text and all matching traces; developers can choose an existing pointer or an optional explicit maximum, and missing selected fields have a recovery message.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/exploration/schemas.py#L48-L57",
+          "version": "repo-lines-v1:sha256:fcf2af73319bc2f04c33051e62efb8ee5cf80bee2c4957ce1e7073b2b2fcd361:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMzMTljOTc2YmNhYmYzOTY2NmRiYjk0MWY1OTBkODZmODExZTYwZDQ5YjgyYWMwMjY1OTM3YzRkMDU2OGE0MzIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEyYWIwOTBiY2QxNjIwZmE2MmVhZWUxNTdhNzRmY2E2MzVhYTI5ZTEyY2JmZmQ2MThiNTc5MmQ4N2JjMDNhM2YiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRiNTMwZWRlNGYzZTg4MmQ2ZTg1ZTllNmE3N2JiYTI5NTk5OTk3MWU2NTk5NGU0ZTA0MWJjMDAzYjE1NzhkMmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://ui/src/views/Clusters.tsx",
+          "version": "repo-file-v1:sha256:3434fd0ddae26d917a5e95b0446a700f52fa4905bd5c8c624c2dcd60a05ab20f"
+        }
+      ]
+    },
+    {
+      "id": "claim_68c543e175a642f9b0775cd7b0b3c289",
+      "statement": "The cluster map renders membership edges and opens individual traces or the selected group in the explorer; the evidence graph renders imported trace nodes before findings exist and opens their source records.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/exploration/lineage.py#L22-L31",
+          "version": "repo-lines-v1:sha256:8e55acdc4298439b25666a5b6d32050599aeff8e9b7f2cbf4281ccabb4f0f43a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZmMWM5N2E0OGJmY2UzNTAxNjliYWUwYmFhZmYxYWI2MDUwZjllNmQ4ZDk5YTYzNjI5ODBlYjI0YjhiMDRkYTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY0ZjZhZTU0MjM1NDE5OTNmM2EzOGZmYmUyMGE0YThiMTdmZTBjOTUwNTgxYTA3ZDE0MTBjZWM4ZjJhZGUyMzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJiM2VhOGMwZDJmZmZjZGM1NDg2MjY2YzY2OGVlYzVlMTU3MGY4ZjY1YTBmNjkwZDdmNjA4NGMyNmEzNmI5MmMifQ"
+        },
+        {
+          "resource": "repo://ui/src/components/graphs/ClusterGraph.tsx",
+          "version": "repo-file-v1:sha256:6a3fa43d799d7a91af997a3d6d7cf6700dddbf2abccc9a7f1df60457d00e966d"
+        },
+        {
+          "resource": "repo://ui/src/components/graphs/cluster-layout.ts",
+          "version": "repo-file-v1:sha256:8c0d43076fb1580bc1fe80e025101912094ee7c76c5b7d998300852ff6e7478a"
+        },
+        {
+          "resource": "repo://ui/src/views/Graph.tsx",
+          "version": "repo-file-v1:sha256:b650a813f9fd233a6313ad71d9c87c215742d02b19f96030ae852aea40422e1a"
+        },
+        {
+          "resource": "repo://ui/tests/exploration.test.tsx",
+          "version": "repo-file-v1:sha256:1304173bbdc9e984a88d0122cb3b45f763807f5fcf45f496cb7d5ae8df0848fb"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T00:58:07.648Z"
+    "at": "2026-09-08T02:26:18.735Z"
   }
 }

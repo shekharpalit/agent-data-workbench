@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../api";
-import type { ClusterRequest, SearchQuery } from "../contracts";
+import type { ClusterRequest, Route, SearchQuery } from "../contracts";
 import {
   Card,
   Field,
@@ -11,28 +11,37 @@ import {
   submit,
 } from "../components/shared";
 
+const ClusterGraph = lazy(() => import("../components/graphs/ClusterGraph"));
+
 export function ClustersView({
   query,
   onMembers,
+  navigate,
 }: {
   query: SearchQuery;
   onMembers: (ids: string[]) => void;
+  navigate: (route: Route) => void;
 }) {
-  const [pointer, setPointer] = useState("/input");
+  const [pointer, setPointer] = useState("");
   const [threshold, setThreshold] = useState("0.55");
-  const [limit, setLimit] = useState("100");
-  const [active, setActive] = useState<ClusterRequest | null>(null);
+  const [limit, setLimit] = useState("");
+  const [active, setActive] = useState<ClusterRequest>({
+    query,
+    pointer: "",
+    threshold: 0.55,
+    limit: null,
+  });
   const request = useQuery({
     queryKey: ["clusters", active],
-    queryFn: ({ signal }) => api.clusters(active!, signal),
-    enabled: active !== null,
+    queryFn: ({ signal }) => api.clusters(active, signal),
   });
+  const data = request.data;
   return (
     <>
       <Card title="Find recurring patterns">
         <p>
-          Group matching traces by shared language, then inspect the evidence
-          within each group.
+          Group traces by shared language and inspect the events behind each
+          group.
         </p>
         <form
           onSubmit={submit(() =>
@@ -40,7 +49,7 @@ export function ClustersView({
               query,
               pointer,
               threshold: Number(threshold),
-              limit: Number(limit),
+              limit: limit.trim() ? Number(limit) : null,
             }),
           )}
         >
@@ -49,6 +58,7 @@ export function ClustersView({
               label="Text field (JSON pointer; empty uses the record)"
               value={pointer}
               onChange={setPointer}
+              placeholder="All trace content"
             />
             <Field
               label="Similarity threshold (0.1–1)"
@@ -59,91 +69,103 @@ export function ClustersView({
               onChange={setThreshold}
             />
             <Field
-              label="Maximum traces (2–200)"
+              label="Maximum traces (optional)"
               type="number"
               min={2}
-              max={200}
               value={limit}
               onChange={setLimit}
+              placeholder="All matching traces"
             />
             <button disabled={request.isFetching}>Group traces</button>
           </div>
         </form>
         <p className="muted">
-          Uses the current search filters. Higher thresholds create tighter
-          groups. Computed locally without a model call.
+          Uses current search filters and complete selected text. Higher
+          thresholds create tighter groups. Computed locally without a model
+          call.
         </p>
         <Details title="Current search filters">
           <JsonView value={query} />
         </Details>
       </Card>
-      {active &&
-        (request.data ? (
-          <>
+      {data ? (
+        <>
+          <Card
+            title={`${data.clusters.length} groups from ${data.clustered} traces`}
+          >
+            <p>
+              {data.sampled} inspected / {data.eligible} matched ·{" "}
+              {data.omitted_ids.length} without usable text
+            </p>
+            <p className="scope-note">{data.scope}</p>
+            {data.truncated && (
+              <p className="scope-note">
+                Your maximum selected {data.sampled} of {data.eligible} matching
+                traces. Clear the maximum to include all matches.
+              </p>
+            )}
+            {data.omitted_ids.length > 0 && (
+              <Details title="Traces without the selected field or usable text">
+                <JsonView value={data.omitted_ids} />
+              </Details>
+            )}
+          </Card>
+          {data.clusters.length > 0 && (
+            <Suspense fallback={<ResourceState />}>
+              <ClusterGraph
+                key={`${JSON.stringify(active)}:${data.source_sha256}`}
+                clusters={data.clusters}
+                onMembers={onMembers}
+                navigate={navigate}
+              />
+            </Suspense>
+          )}
+          <div className="cluster-grid">
+            {data.clusters.map((group, i) => (
+              <Card key={group.id} title={group.label || `Group ${i + 1}`}>
+                <div className="cluster-number">
+                  {String(i + 1).padStart(2, "0")}
+                  <span>{group.count} traces</span>
+                </div>
+                <div className="pill-group">
+                  {group.terms.map((term) => (
+                    <span className="term" key={term}>
+                      {term}
+                    </span>
+                  ))}
+                </div>
+                <p className="muted mono">
+                  {group.trace_ids.slice(0, 3).join(", ")}
+                  {group.count > 3 ? "…" : ""}
+                </p>
+                <button
+                  className="secondary"
+                  onClick={() => onMembers(group.trace_ids)}
+                >
+                  Inspect members →
+                </button>
+              </Card>
+            ))}
+          </div>
+          {data.clusters.length === 0 && (
             <Card
-              title={`${request.data.clusters.length} groups from ${request.data.clustered} traces`}
+              title={
+                data.eligible
+                  ? "No usable text in the selected field"
+                  : "No matching traces"
+              }
             >
               <p>
-                {request.data.sampled} inspected / {request.data.eligible}{" "}
-                matched · {request.data.omitted_ids.length} without usable text
+                {data.eligible
+                  ? "Clear the text field to use complete records, or choose a JSON pointer present in these traces."
+                  : "Reset the search filters or import traces to start clustering."}
               </p>
-              <p className="scope-note">{request.data.scope}</p>
-              <p className="muted">
-                Text is capped at{" "}
-                {request.data.text_limit_chars.toLocaleString()} characters per
-                trace · {request.data.text_truncated_ids.length} traces clipped.
-              </p>
-              {request.data.text_truncated_ids.length > 0 && (
-                <Details title="Traces with clipped text">
-                  <JsonView value={request.data.text_truncated_ids} />
-                </Details>
-              )}
-              {request.data.truncated && (
-                <p className="scope-note">
-                  This is a bounded selection, not a census of all matching
-                  data.
-                </p>
-              )}
             </Card>
-            <div className="cluster-grid">
-              {request.data.clusters.map((group, i) => (
-                <Card key={group.id} title={group.label || `Group ${i + 1}`}>
-                  <div className="cluster-number">
-                    {String(i + 1).padStart(2, "0")}
-                    <span>{group.count} traces</span>
-                  </div>
-                  <div className="pill-group">
-                    {group.terms.map((term) => (
-                      <span className="term" key={term}>
-                        {term}
-                      </span>
-                    ))}
-                  </div>
-                  <p className="muted mono">
-                    {group.trace_ids.slice(0, 3).join(", ")}
-                    {group.count > 3 ? "…" : ""}
-                  </p>
-                  <button
-                    className="secondary"
-                    onClick={() => onMembers(group.trace_ids)}
-                  >
-                    Inspect members →
-                  </button>
-                </Card>
-              ))}
-            </div>
-            {request.data.clusters.length === 0 && (
-              <Card title="No usable text">
-                <p>
-                  Choose a field containing text or clear the pointer to inspect
-                  the full records.
-                </p>
-              </Card>
-            )}
-          </>
-        ) : (
-          <ResourceState error={request.error} />
-        ))}
+          )}
+        </>
+      ) : (
+        <ResourceState error={request.error} />
+      )}
     </>
   );
 }

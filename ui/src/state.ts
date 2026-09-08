@@ -73,10 +73,17 @@ export function nodeRoute(node: LineageNode): Route | null {
 export function graphLayout(graph: LineageGraph) {
   const columns = { trace: 0, finding: 1, task: 2, experiment: 3 };
   const counts = { trace: 0, finding: 0, task: 0, experiment: 0 };
-  const nodes = graph.nodes.map((node) => ({
+  const onlyTraces = graph.nodes.every((node) => node.kind === "trace");
+  const gridColumns = Math.max(1, Math.ceil(Math.sqrt(graph.nodes.length)));
+  const nodes = graph.nodes.map((node, index) => ({
     id: node.id,
     data: node,
-    position: { x: columns[node.kind] * 330, y: counts[node.kind]++ * 120 },
+    position: onlyTraces
+      ? {
+          x: (index % gridColumns) * 330,
+          y: Math.floor(index / gridColumns) * 140,
+        }
+      : { x: columns[node.kind] * 330, y: counts[node.kind]++ * 120 },
   }));
   const ids = new Set(nodes.map((node) => node.id));
   return {

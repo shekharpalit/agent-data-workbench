@@ -5,11 +5,12 @@ from concurrent.futures import ThreadPoolExecutor
 import pytest
 from fastapi.testclient import TestClient
 from identities import uid
-from test_workbench_data import make_project
+from test_workbench_data import Source, make_project
 
 from agent_data_workbench import api
 from agent_data_workbench.api.middleware import RESPONSE_HEADERS
 from agent_data_workbench.api.routers import investigations, tasks
+from agent_data_workbench.data.store import TraceStore
 
 ORIGIN = "http://127.0.0.1:8765"
 TOKEN = "synthetic-session-token"
@@ -437,4 +438,44 @@ def test_native_research_api_serves_coverage_pages_and_authenticated_artifacts(c
             "disposition": 'attachment; filename="counts.json"',
         },
         "denied": 401,
+    }
+
+
+def test_imported_event_trace_is_clustered_and_graphed_without_analysis(client, project):
+    # Given
+    TraceStore(project).ingest(
+        Source(
+            [
+                {
+                    "trace_id": "scan",
+                    "events": [{"type": "turn.failed", "error": "invalid schema"}],
+                },
+            ]
+        )
+    )
+
+    # When
+    clusters = client.post("/api/clusters", json={"query": {"trace_ids": ["scan"]}})
+    graph = client.get("/api/graph", params={"trace_id": "scan"})
+    data = clusters.json()
+
+    # Then
+    assert {
+        "statuses": [clusters.status_code, graph.status_code],
+        "pointer": data["pointer"],
+        "clustered": data["clustered"],
+        "omitted_ids": data["omitted_ids"],
+        "text_limit_chars": data["text_limit_chars"],
+        "members": [group["trace_ids"] for group in data["clusters"]],
+        "nodes": graph.json()["nodes"],
+        "edges": graph.json()["edges"],
+    } == {
+        "statuses": [200, 200],
+        "pointer": "",
+        "clustered": 1,
+        "omitted_ids": [],
+        "text_limit_chars": None,
+        "members": [["scan"]],
+        "nodes": [{"id": "trace:scan", "kind": "trace", "label": "scan", "trace_id": "scan"}],
+        "edges": [],
     }

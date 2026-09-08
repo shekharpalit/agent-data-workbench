@@ -650,6 +650,7 @@ progress::-moz-progress-bar {
   border-radius: 4px;
 }
 .react-flow__node {
+  overflow-wrap: anywhere;
   font-size: 12px;
   line-height: 1.4;
 }

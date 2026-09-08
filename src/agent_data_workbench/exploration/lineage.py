@@ -1,5 +1,8 @@
 """Build graphs from recorded trace, finding, task and experiment references."""
 
+import json
+
+from agent_data_workbench.data.store import TraceStore
 from agent_data_workbench.shared.identifiers import stable_id
 from agent_data_workbench.shared.json import json_text
 from agent_data_workbench.workspace.project import Project
@@ -16,7 +19,15 @@ def lineage(project: Project, *, trace_id: str = "", limit: int = 200) -> dict:
         return identity
 
     def trace(key):
-        return node("trace", key, key, trace_id=key)
+        identity = "trace:" + key
+        return identity if identity in nodes else node("trace", key, key, trace_id=key)
+
+    # Imported evidence exists before findings or tasks reference it.
+    for row in TraceStore(project).iter_rows():
+        data = json.loads(row["data"])
+        source = data.get("source")
+        label = source.get("path") if isinstance(source, dict) else None
+        node("trace", row["id"], label if isinstance(label, str) else row["id"], trace_id=row["id"])
 
     for value in project.artifacts("investigations"):
         if value.get("result") is None:
@@ -98,6 +109,7 @@ def lineage(project: Project, *, trace_id: str = "", limit: int = 200) -> dict:
         "shown_nodes": len(selected),
         "truncated": total > len(selected),
         "trace_id": trace_id,
-        "scope": "Recorded evidence lineage, not inferred causality. Task nodes link identities; "
+        "scope": "Imported traces and recorded evidence lineage. Edges appear only for saved "
+        "relationships; similarity is shown in Clusters. Task nodes link identities; "
         "experiment artifacts retain the exact evaluated specification snapshots.",
     }

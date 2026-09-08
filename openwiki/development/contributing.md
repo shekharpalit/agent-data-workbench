@@ -14,8 +14,6 @@ sources:
     resource: repo://pyproject.toml
   - id: openwiki-source-23775c3de52f3ab95a13cb8b
     resource: repo://README.md
-  - id: openwiki-source-576495909f5ee2bf8d15af81
-    resource: repo://src/agent_data_workbench/exploration/clustering/tokenization.py
   - id: openwiki-source-f0a6e7dc03522b2682f88655
     resource: repo://tests/conftest.py
   - id: openwiki-source-11519246eac934485315b3cb
@@ -52,6 +50,14 @@ sources:
     resource: repo://tests/test_workbench_execution.py
   - id: openwiki-source-436f4179fe22abf615d2f7d0
     resource: repo://ui/package.json
+  - id: openwiki-source-74100799ff8e26159a68e317
+    resource: repo://ui/src/components/graphs/ClusterGraph.tsx
+  - id: openwiki-source-da534aa7260001f2de3cd1d5
+    resource: repo://ui/src/components/graphs/NetworkCanvas.tsx
+  - id: openwiki-source-2142689a6a1eb395600ecd87
+    resource: repo://ui/src/views/Graph.tsx
+  - id: openwiki-source-596cdb28df7c16b7e6d5931b
+    resource: repo://ui/tests/exploration.test.tsx
   - id: openwiki-source-434ba4f21f543ddea1569be6
     resource: repo://ui/tests/manual-editor.test.tsx
   - id: openwiki-source-85ab1a7a14e4d8d1bcfef689
@@ -60,10 +66,10 @@ sources:
     resource: repo://ui/tests/research.test.tsx
   - id: openwiki-source-a741d432f952c0dbfb4fb35d
     resource: repo://ui/vite.config.ts
-generated: { by: "codex", at: "2026-09-08T00:51:51.689Z" }
+generated: { by: "codex", at: "2026-09-08T02:26:18.735Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T00:58:07.648Z
+    at: 2026-09-08T02:26:18.735Z
 ---
 
 # Development and verification
@@ -119,7 +125,7 @@ For example, trace-store tests check that an ID conflict rolls back the whole ne
 | Change | Relevant evidence and checks |
 | --- | --- |
 | Storage or import | `tests/test_store.py`, import cases in `tests/test_workbench_data.py` |
-| Search, clustering, lineage | `tests/test_explore.py`, `ui/tests/state.test.ts`, `ui/tests/search.test.tsx` |
+| Search, clustering, lineage | `tests/test_explore.py`, `tests/test_api.py`, `ui/tests/exploration.test.tsx`, `ui/tests/state.test.ts`, `ui/tests/search.test.tsx` |
 | HTTP behavior | `tests/test_api.py`, `tests/test_identifiers.py`, `ui/tests/api.test.ts` |
 | UUIDs and project compatibility | `tests/test_identifiers.py` |
 | CLI workflow integration | `tests/test_cli.py` |
@@ -168,4 +174,6 @@ Use the [package responsibility map](../architecture/system.md#responsibilities)
 
 The root SDK imports remain stable; former internal imports such as `agent_data_workbench.store` now use `agent_data_workbench.data.store`. Update module references in Docker, Make, generated commands and consumer-local test patches when moving code. Avoid filling package initializers with unrelated eager imports.
 
-Clustering has separate tokenization, TF-IDF vectorization, connected-components and response modules under `exploration/clustering/`. Its regression cases preserve negation, numeric tokens, single-character words and values under metadata-like field names, and avoid inventing a partial word when a preview is truncated. Search, aggregation and lineage remain separate operations.
+Clustering has separate tokenization, TF-IDF vectorization, connected-components and response modules under `exploration/clustering/`. Its regression cases preserve negation, numeric tokens, single-character words and values under metadata-like field names, and read late events beyond long prefixes without truncating text. Regression cases include 201 event traces without `/input`, search-page independence, membership drill-down beyond 200 IDs, explicit trace limits and imported trace nodes before findings exist. Search, aggregation and lineage remain separate operations.
+
+Both graph views use `ui/src/components/graphs/NetworkCanvas.tsx`. Cluster membership layout is separate from evidence lineage layout. `ui/tests/exploration.test.tsx` verifies automatic full-record grouping, optional maximum requests, missing-field recovery, cluster selection, trace navigation and graph membership. These component tests substitute the canvas transport; check the actual React Flow rendering and node controls in a browser when changing the visualization surface.

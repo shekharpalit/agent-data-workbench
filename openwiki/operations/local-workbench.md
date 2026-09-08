@@ -28,6 +28,10 @@ sources:
     resource: repo://src/agent_data_workbench/cli/project.py
   - id: openwiki-source-a69866c703779e64969315b7
     resource: repo://src/agent_data_workbench/data/ingestion.py
+  - id: openwiki-source-eab73f261f2dfa06a5a90e74
+    resource: repo://src/agent_data_workbench/exploration/lineage.py
+  - id: openwiki-source-8b95b7fe4c43d79511f093d7
+    resource: repo://src/agent_data_workbench/exploration/schemas.py
   - id: openwiki-source-c8c7945f688b6b620d3800cf
     resource: repo://src/agent_data_workbench/workbench/jobs.py
   - id: openwiki-source-56b68af7c871c44d9ba4d64d
@@ -40,8 +44,16 @@ sources:
     resource: repo://tests/test_ingestion_research.py
   - id: openwiki-source-6d94b2e299387b69a79c432d
     resource: repo://ui/src/App.tsx
+  - id: openwiki-source-86285276086db085f9b5f586
+    resource: repo://ui/src/components/graphs/cluster-layout.ts
+  - id: openwiki-source-74100799ff8e26159a68e317
+    resource: repo://ui/src/components/graphs/ClusterGraph.tsx
   - id: openwiki-source-5bdf087920ed404535bafa26
     resource: repo://ui/src/views/Calibration.tsx
+  - id: openwiki-source-13a35988ca651da931d9ecce
+    resource: repo://ui/src/views/Clusters.tsx
+  - id: openwiki-source-2142689a6a1eb395600ecd87
+    resource: repo://ui/src/views/Graph.tsx
   - id: openwiki-source-2d1b137901c9e38ec418fdad
     resource: repo://ui/src/views/ManualResearchEditor.tsx
   - id: openwiki-source-a6ff0ad9c45aedc12177eaec
@@ -50,12 +62,14 @@ sources:
     resource: repo://ui/src/views/ResearchOutputs.tsx
   - id: openwiki-source-14a72935f36008706a0aa989
     resource: repo://ui/src/views/ResearchSnapshot.tsx
+  - id: openwiki-source-596cdb28df7c16b7e6d5931b
+    resource: repo://ui/tests/exploration.test.tsx
   - id: openwiki-source-826d1e88c728d7cfae868e97
     resource: repo://ui/tests/workflow.test.tsx
-generated: { by: "codex", at: "2026-09-08T00:51:51.689Z" }
+generated: { by: "codex", at: "2026-09-08T02:26:18.735Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T00:58:07.648Z
+    at: 2026-09-08T02:26:18.735Z
 ---
 
 # Run the local workbench
@@ -88,8 +102,8 @@ Frontend source lives in `ui/`, and Vite generates ignored `ui/dist/`. FastAPI s
 | --- | --- |
 | Overview | Corpus counts, task review state, recent experiments, and project objectives |
 | Trace explorer | Combined filters, numeric ranges, sorting, pagination, distribution, and record inspection |
-| Clusters | Bounded lexical grouping of the matching traces and membership drill-down |
-| Evidence graph | Recorded trace, finding, task, and experiment relationships |
+| Clusters | Automatic full-record lexical grouping, interactive membership maps and trace drill-down |
+| Evidence graph | Imported traces plus saved finding, task and experiment relationships |
 | Investigations | Research manually or with an agent, inspect snapshot evidence, record outcomes, publish findings/charts, and pause/resume native sessions |
 | Project knowledge | Add and review explicit policy or tool context |
 | Tasks & graders | Inspect/edit specifications, run deterministic audits, and record reviews |
@@ -99,7 +113,15 @@ Frontend source lives in `ui/`, and Vite generates ignored `ui/dist/`. FastAPI s
 | Behavioral coverage | Review capability versions, map traces/tasks, and inspect gaps/duplicates |
 | Improvements | Capture exact candidates, launch paired runs, and record decisions |
 
-The graph bundle loads on demand. Trace filters and cluster membership are shared through application query state; changing filters resets pagination. See [trace exploration](../workflows/traces.md) for query semantics and limits.
+Both graph views share a React Flow canvas that loads on demand. Trace filters and cluster membership are shared through application query state; changing filters resets pagination. See [trace exploration](../workflows/traces.md) for query semantics and limits.
+
+## Explore imported data visually
+
+Open **Clusters** after ingestion. It runs automatically using complete records and all traces matching the current search filters. Leave **Text field** blank for provider-independent event envelopes; choose `/events` or another existing JSON pointer to compare a specific part. There is no text-prefix cutoff. **Maximum traces** is optional; leaving it blank includes every match, independently of search pagination. After changing controls, click **Group traces**. Higher similarity thresholds create tighter lexical groups.
+
+The **Cluster map** selector switches between groups. Its edges mean group membership, not causality. Select a trace node and click **Open selected trace**, or use **Inspect all members** to view the group in the filtered explorer. Pan, zoom or fit the canvas with its controls. Missing selected fields produce an explicit empty state: clear the text field or choose a pointer present in the imported records.
+
+**Evidence graph** displays imported traces immediately, using source paths as labels when available. Traces without saved links are arranged in a grid. Select a node and open its source artifact to inspect the original events. Findings and tasks add recorded relationships later; the graph does not invent relationships between raw runs. Use Clusters to explore shared language. The graph reports how many nodes are shown and supports focusing on a trace ID when the displayed graph is bounded.
 
 ## Research manually
 

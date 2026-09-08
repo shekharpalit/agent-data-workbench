@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:bb9a6c69b5755166aa49a9810b27cd3bf0da4d319145db8abe5f5ab36a35e573",
+  "pageVersion": "sha256:2c5e542a9c4bc79817a44df61baa21b54020b59c3a897ecb3ba1d7d2623f9cb9",
   "claims": [
     {
       "id": "claim_80e3a5075dd34ed7b7f0393a15e92a9a",
@@ -210,19 +210,15 @@
     },
     {
       "id": "claim_5078bc4fdc814f23982ab6d6f9c64a26",
-      "statement": "Contributor guidance requires domain ownership and domain-independent shared helpers, while exploration regression tests retain meaningful lexical values and prevent partial preview words.",
+      "statement": "Contributor guidance requires domain ownership and domain-independent shared helpers, while exploration regression tests preserve lexical values, complete long-record content, all matching event traces beyond search-page bounds, and imported trace visibility before findings exist.",
       "evidence": [
         {
-          "resource": "repo://AGENTS.md",
-          "version": "repo-file-v1:sha256:b2ca85dd59f7b28dbd76813b6851ad7fc941b641f64e8bfebac351518e21b46a"
-        },
-        {
-          "resource": "repo://src/agent_data_workbench/exploration/clustering/tokenization.py",
-          "version": "repo-file-v1:sha256:d5c4f63eff3245395ceb1a6423069031c38be9f5e3683d5a0dd6d5b0b4f31f64"
+          "resource": "repo://AGENTS.md#L7-L23",
+          "version": "repo-lines-v1:sha256:0c977040451f80ba7675a4968449f706cfba91f1f6510067772e5f4df445505f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRiMmY1NTBlMTA2MGU3NmIyZTQ2ODM3YjU4NDAxYjY4YjY5MTUzZWE3N2NiOTIzY2EyZTU0ZjdmYzM2MTM4MWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ5NWIyZWUxYTc2MGMxYzBhMDZlYzQ3YmFiNjE5YmZkNGFlMzRlMzg0NzZlMTYwY2IzMDZlMmM0OTA1MDhkZTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjllMWFmYzRiZjM5ZjEzNDRkMjk2MjdlYWM4NTI5MzNiZjI3ZWIwYzA3NzU0Y2UyZTEwNWU2MmFmZjRkNGJjZDEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImViMWJjNWJjNGEyMzdmNTc4ZTZhZjRhNDE1ZDA2NDdmOTkxMGIwM2IzNjRlMWUyN2MxZjFkYmFhNzQzZDAzYmEifQ"
         },
         {
           "resource": "repo://tests/test_explore.py",
-          "version": "repo-file-v1:sha256:13a8d4cd3a7d4f47f9df035eeeb8157406579180516f6634da9c412bbe5948ce"
+          "version": "repo-file-v1:sha256:812027fa036769ff6816c5a00cc9ecfb14c95585269a2da46e98d0923bedc123"
         }
       ]
     },
@@ -257,10 +253,32 @@
           "version": "repo-lines-v1:sha256:6d34248a438dc01995f2affc3d901145b409b7105344c0d0cceebd536f589154:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAzYzBlNzIzOGYwYjE4Y2JlNmE0NjY2NDFmZGNkNTk0ODUyNDQ4ZGRmN2ZmODhkMGE5ZjQ5NTBlYWRlYzM5M2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg0N2FiMDc1M2NkZjg5MzMyYmQ2ZDU2YzY3OTVlMDM5MmE2M2FkMmU5ZTBhODNjMWNmNDgzMTg5NzgwNDFiNGIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM2N2M1YzE0MmM4YzE1MTFjNDgxMTI1MThhMWQ5MGE5OTJmYjkzM2ZlYmY1NmE3ODk5MGZhYjAyYWU3Mjg3ZWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIzMjg3NjM1YTBiZGJlZjliNGM1N2FlOTU5NGQwZWE5M2Y4ZGRmMWJmM2Y3MDA2MzVhZGRlMmUzNjhlMTI4MGIifQ"
         }
       ]
+    },
+    {
+      "id": "claim_306638dd0b34453dad9d7dffe5dd480e",
+      "statement": "The clustering and evidence graph views share NetworkCanvas, while UI regression tests check automatic full-record clustering, missing-field recovery, explicit maximum selection, cluster membership maps and navigation to source traces.",
+      "evidence": [
+        {
+          "resource": "repo://ui/src/components/graphs/ClusterGraph.tsx",
+          "version": "repo-file-v1:sha256:6a3fa43d799d7a91af997a3d6d7cf6700dddbf2abccc9a7f1df60457d00e966d"
+        },
+        {
+          "resource": "repo://ui/src/components/graphs/NetworkCanvas.tsx",
+          "version": "repo-file-v1:sha256:68eccef96db273361de4c3809e4f585b01fabe7b229470ac971494c3f32ed199"
+        },
+        {
+          "resource": "repo://ui/src/views/Graph.tsx",
+          "version": "repo-file-v1:sha256:b650a813f9fd233a6313ad71d9c87c215742d02b19f96030ae852aea40422e1a"
+        },
+        {
+          "resource": "repo://ui/tests/exploration.test.tsx",
+          "version": "repo-file-v1:sha256:1304173bbdc9e984a88d0122cb3b45f763807f5fcf45f496cb7d5ae8df0848fb"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T00:58:07.648Z"
+    "at": "2026-09-08T02:26:18.735Z"
   }
 }

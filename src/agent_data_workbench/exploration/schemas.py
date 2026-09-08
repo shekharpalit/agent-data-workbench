@@ -36,7 +36,7 @@ class SearchQuery(Contract):
     direction: Literal["asc", "desc"] = "asc"
     limit: int = Field(default=20, ge=1, le=200)
     offset: int = Field(default=0, ge=0, le=10000)
-    trace_ids: list[str] | None = Field(default=None, max_length=200)
+    trace_ids: list[str] | None = None
 
     @model_validator(mode="after")
     def valid(self):
@@ -47,9 +47,9 @@ class SearchQuery(Contract):
 
 class ClusterQuery(Contract):
     query: SearchQuery = Field(default_factory=SearchQuery)
-    pointer: str = Field(default="/input", max_length=300)
+    pointer: str = Field(default="", max_length=300)
     threshold: float = Field(default=0.55, ge=0.1, le=1, allow_inf_nan=False)
-    limit: int = Field(default=100, ge=2, le=200)
+    limit: int | None = Field(default=None, ge=2)
 
     @model_validator(mode="after")
     def valid(self):

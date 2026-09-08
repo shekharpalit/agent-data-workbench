@@ -1,14 +1,7 @@
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import {
-  Background,
-  Controls,
-  MiniMap,
-  Position,
-  ReactFlow,
-  type Node,
-} from "@xyflow/react";
-import "@xyflow/react/dist/style.css";
+import { Position, type Node } from "@xyflow/react";
+import { NetworkCanvas } from "../components/graphs/NetworkCanvas";
 import { api } from "../api";
 import type { LineageGraph, LineageNode, Route } from "../contracts";
 import { graphLayout, nodeRoute } from "../state";
@@ -63,28 +56,12 @@ function GraphCanvas({
           </span>
         ))}
       </div>
-      <div className="graph-canvas" aria-label="Evidence lineage graph">
-        <ReactFlow
-          nodes={nodes}
-          edges={layout.edges}
-          nodesDraggable={false}
-          nodesConnectable={false}
-          edgesFocusable={false}
-          fitView
-          minZoom={0.1}
-          maxZoom={2}
-          onNodeClick={(_, node) => setSelected(node.data)}
-          onPaneClick={() => setSelected(null)}
-        >
-          <Background />
-          <MiniMap
-            pannable
-            zoomable
-            nodeColor={(node) => colors[(node.data as LineageNode).kind]}
-          />
-          <Controls showInteractive={false} />
-        </ReactFlow>
-      </div>
+      <NetworkCanvas
+        label="Evidence lineage graph"
+        nodes={nodes}
+        edges={layout.edges}
+        onSelect={setSelected}
+      />
       <Card title={selected?.label || "Inspect a connection"}>
         {selected ? (
           <>
@@ -125,15 +102,15 @@ export default function GraphView({
     <>
       <Card title="Follow the evidence">
         <p>
-          Explore how observed traces support findings, become tasks, and enter
-          experiments.
+          Explore imported traces and their saved links to findings, tasks and
+          experiments. Select a trace to inspect its original events.
         </p>
         <form className="row" onSubmit={submit(() => setActive(draft))}>
           <Field
             label="Focus on a trace ID (optional)"
             value={draft}
             onChange={setDraft}
-            placeholder="All recorded lineage"
+            placeholder="All imported traces and recorded lineage"
           />
           <button>Explore graph</button>
         </form>
@@ -147,6 +124,18 @@ export default function GraphView({
               ? " The graph has been bounded; focus on a trace to inspect a smaller neighborhood."
               : ""}
           </p>
+          {request.data.nodes.length > 0 && request.data.edges.length === 0 && (
+            <Card title="Imported traces are ready to explore">
+              <p>
+                These traces have no saved findings or task links yet. Select a
+                node to inspect it, or open Clusters to visualize shared
+                language.
+              </p>
+              <button onClick={() => navigate({ view: "clusters" })}>
+                Explore trace clusters →
+              </button>
+            </Card>
+          )}
           {request.data.nodes.length ? (
             <GraphCanvas
               key={JSON.stringify(request.data)}
@@ -154,10 +143,15 @@ export default function GraphView({
               navigate={navigate}
             />
           ) : (
-            <Card title="No recorded lineage">
+            <Card
+              title={
+                active ? "No matching trace or evidence" : "No traces imported"
+              }
+            >
               <p>
-                Complete an investigation or create tasks. Traces without
-                recorded relationships do not appear here.
+                {active
+                  ? "Check the trace ID or clear it to show all imported evidence."
+                  : "Import JSON or JSONL traces to start exploring the graph."}
               </p>
             </Card>
           )}

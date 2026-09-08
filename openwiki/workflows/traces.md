@@ -38,10 +38,18 @@ sources:
     resource: repo://tests/test_explore.py
   - id: openwiki-source-7e7b3478097a461915e85751
     resource: repo://tests/test_ingestion_research.py
-generated: { by: "codex", at: "2026-09-08T00:07:39.310Z" }
+  - id: openwiki-source-86285276086db085f9b5f586
+    resource: repo://ui/src/components/graphs/cluster-layout.ts
+  - id: openwiki-source-74100799ff8e26159a68e317
+    resource: repo://ui/src/components/graphs/ClusterGraph.tsx
+  - id: openwiki-source-da534aa7260001f2de3cd1d5
+    resource: repo://ui/src/components/graphs/NetworkCanvas.tsx
+  - id: openwiki-source-13a35988ca651da931d9ecce
+    resource: repo://ui/src/views/Clusters.tsx
+generated: { by: "codex", at: "2026-09-08T02:26:18.735Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T00:07:39.310Z
+    at: 2026-09-08T02:26:18.735Z
 ---
 
 # Import and explore traces
@@ -180,28 +188,32 @@ Search pages and distribution charts use the same matching-corpus function. Pagi
 
 ## Explore lexical clusters
 
-Clustering uses TF-IDF cosine similarity and connected components over a chosen text field. It examines up to 200 matching traces in ID order, independently of the search page's current sort or offset. The default field is `/input`; choose `/events` or a specific event field for run-file imports.
+Clustering uses TF-IDF cosine similarity and connected components over complete selected values. Opening Clusters automatically groups all matching traces. The default JSON pointer is empty, selecting the whole record, so event envelopes work without an `/input` field. Choose `/events` or another existing pointer to narrow the compared content. Selection follows stable trace-ID order and ignores the search page's sort, offset and page size while preserving its filters and membership selection.
 
 The tokenizer visits every scalar value below the selected pointer, including strings under ID or timestamp field names. It retains Unicode word tokens, contractions, identifiers, numeric tokens, negation such as “not,” and single-character words. There is no handpicked English stop-word list. TF-IDF determines term weights from the selected documents; these tokens still do not encode language understanding.
 
-A shared 20,000-character text budget applies per selected field value, including nested values. If the boundary cuts through a word, that partial word is omitted. Results identify omitted records, text truncation, and corpus truncation. Cluster terms and labels are derived from word weights. Cluster IDs are deterministic UUIDv5 values derived from membership.
+There is no text-prefix cutoff or default trace-count ceiling. Tokens are streamed through a counter across all nested selected values, preserving late events in long runs. An explicit `limit` of at least two selects the first matching IDs; omit it or use null to include every match. The UI's Maximum traces field is blank by default. Results report eligible, inspected and clustered counts, missing or unusable selected values, and any corpus truncation caused by that explicit maximum. Compatibility fields `text_limit_chars` and `text_truncated_ids` return null and an empty list.
+
+Term weights and document vectors remain in memory, and the current implementation compares every pair of documents. Very large batches therefore need more memory and computation; unlimited selection does not establish unlimited throughput. Cluster terms and labels are derived from word weights. Cluster IDs are deterministic UUIDv5 values derived from membership.
 
 A cluster indicates lexical similarity. It does not establish a shared failure mode, causal mechanism, or semantic category. Transitive links can put two traces in the same component even when their direct similarity is below the threshold.
+
+The Cluster map selector displays one group's members at a time. Edges connect the group to its member traces; selecting a trace opens its original evidence, and Inspect all members opens the filtered explorer. Clearing a missing text pointer recovers whole-record grouping. Membership filtering accepts groups larger than a search page. The shared React Flow canvas supplies pan, zoom and fit controls.
 
 To change this pipeline, start with `exploration/clustering/tokenization.py` for selected-value tokens, `vectors.py` for TF-IDF normalization, `components.py` for cosine links and transitive membership, and `service.py` for selection and the response. Typed request validation lives in `exploration/schemas.py`; search, distributions and lineage have their own modules.
 
 ## Follow recorded lineage
 
-The lineage graph connects trace evidence to findings, tasks, and experiments using saved artifact references. Focusing on a trace follows downstream edges; it does not add unrelated sibling tasks merely because they share an experiment.
+The lineage graph starts with every imported trace, including runs with no findings or tasks. When a source path exists it labels the trace node; the original trace ID still controls navigation. The UI arranges raw trace nodes in a grid and lets developers open the original events immediately after import. Saved artifact references add trace-to-finding, trace-to-task, finding-to-task and task-to-experiment relationships. Focusing on a trace follows downstream edges; it does not add unrelated sibling tasks merely because they share an experiment. An imported but unlinked trace has a one-node focused graph.
 
 The graph reports truncation and supports a 10–300-node limit. Task nodes link identities; experiment artifacts preserve the exact evaluated specification snapshots. Use the graph to navigate evidence, and the saved experiment to inspect what actually ran. Edges represent recorded relationships, not inferred causality. Edge IDs are deterministic UUIDv5 values; node keys include their kind and source or artifact identity so different kinds remain distinct.
 
 Native investigations capture the full project store by default. Pass `--exclude-final` when creating an investigation to leave reserved final groups out of that snapshot. Ordinary CLI queries still use the full project store. Exposure is recorded for research; these local tools are not a hidden-data access boundary.
 
-The limits above describe the convenience search, clustering and graph views. They do not limit the native research corpus. `ResearchWorkspace.dataset.records()` iterates the full snapshot and native scripts can implement analyses beyond the built-in lexical clustering. Its aggregate API paginates distinct values instead of discarding all values beyond the top 50.
+Search pagination and the displayed graph limit bound those views; clustering includes every match unless the developer sets its explicit maximum. They do not limit the native research corpus. `ResearchWorkspace.dataset.records()` iterates the full snapshot and native scripts can implement analyses beyond the built-in lexical clustering. Its aggregate API paginates distinct values instead of discarding all values beyond the top 50.
 
 ## Verification and next steps
 
-`tests/test_ingestion.py`, `test_ingest_cli.py` and `test_ingest_transport.py` cover multiple selections, identity, layouts, file boundaries and rollback. `test_ingestion_research.py` verifies two ordered run files in one complete-mode research snapshot. `tests/test_workbench_data.py` covers transactional ingestion, balanced sampling, and excluded groups. `tests/test_explore.py` covers combined filters, stable sorting, corpus-consistent distributions, explicit cluster bounds, and focused lineage.
+`tests/test_ingestion.py`, `test_ingest_cli.py` and `test_ingest_transport.py` cover multiple selections, identity, layouts, file boundaries and rollback. `test_ingestion_research.py` verifies two ordered run files in one complete-mode research snapshot. `tests/test_workbench_data.py` covers transactional ingestion, balanced sampling, and excluded groups. `tests/test_explore.py` covers combined filters, stable sorting, corpus-consistent distributions, late-event tokenization, 201 event traces beyond search-page bounds, explicit cluster limits, imported trace visibility and focused lineage. `tests/test_api.py` verifies default event-trace clustering and graph visibility without analysis; `ui/tests/exploration.test.tsx` covers automatic grouping, missing-field recovery, graph membership and trace navigation.
 
 Next: [investigate the evidence](investigations.md) or [open the local workbench](../operations/local-workbench.md).

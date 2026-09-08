@@ -62,7 +62,7 @@ export interface ClusterRequest {
   query: SearchQuery;
   pointer: string;
   threshold: number;
-  limit: number;
+  limit: number | null;
 }
 export interface Cluster {
   id: string;
@@ -79,7 +79,7 @@ export interface ClusterResult {
   sampled: number;
   clustered: number;
   omitted_ids: string[];
-  text_limit_chars: number;
+  text_limit_chars: number | null;
   text_truncated_ids: string[];
   truncated: boolean;
   source_sha256: string;

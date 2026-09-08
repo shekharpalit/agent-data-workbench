@@ -112,6 +112,7 @@ export default function App() {
           <ClustersView
             key={JSON.stringify(query)}
             query={query}
+            navigate={navigate}
             onMembers={(ids) => {
               dispatch({ type: "cluster", ids });
               navigate({ view: "traces" });

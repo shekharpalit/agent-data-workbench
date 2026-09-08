@@ -531,7 +531,14 @@ def test_ui_analytics_endpoints_share_filters_and_enforce_access_controls(client
         "ids": ["r7", "r8"],
         "groups": [["r7", "r8"]],
         "counts": [{"value": 7, "count": 1}, {"value": 8, "count": 1}],
-        "graph": {"nodes": [], "edges": [], "total_nodes": 0},
+        "graph": {
+            "nodes": [
+                {"id": f"trace:r{i}", "kind": "trace", "label": f"r{i}", "trace_id": f"r{i}"}
+                for i in range(9)
+            ],
+            "edges": [],
+            "total_nodes": 9,
+        },
         "denied": {"/api/search": 401, "/api/clusters": 401, "/api/distribution": 401},
         "invalid_filter": 400,
     }
