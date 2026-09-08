@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:9c9e5e713311c405f5412885076cf34aae437ed394a340f03ed976da12840e1e",
+  "pageVersion": "sha256:3ef16ac7f5e9919a1ad3ba194740dce7e69f41515c269470986d34355868e49b",
   "claims": [
     {
       "id": "claim_69fd6c03ae1f4359840452ae8bb67826",
@@ -113,20 +113,16 @@
       "statement": "Harbor exports use supplied schema-1.4 environment/verifier templates, separate hidden task truth, request trajectory resume for scripted steps, track final exposure and reject changed manifests or bundles before CLI execution.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/integrations/harbor.py#L203-L257",
-          "version": "repo-lines-v1:sha256:3b46462547c70b1c60d7ecb6380b5752eee2d3b5c50887394536c44a2e849194:eyJzZWxlY3RlZExpbmVDb3VudCI6NTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJkZjVhYzU5ZGEyMWMwNTk0M2E3YjlmYTJjZjU0ZmQ3NjIyZTNkYmI4M2NlODkzNzNmNzdhNjZmZDJmYTQwNDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhMTFjMDU2N2QwYTVmOWU5YjEzNWY2NWNkMjUzNzJkZmQ2Mjg3NzVmN2MxZWQyNTNmOGJhZDQyZGQyZDY2NjkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUzZGVhM2NhODMyYTFhYmVlOWY2NTQ0ZDFiNTIzMmZhZTg5Y2E4YjE0OTljNjJkNTNkMTAwZWFhZmU2MmIyZWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://src/agent_data_workbench/integrations/harbor/commands.py",
+          "version": "repo-file-v1:sha256:4103393686a4017b1aff84948879f8e9720c9640d82037e5f159376808ea6c00"
         },
         {
-          "resource": "repo://src/agent_data_workbench/integrations/harbor.py#L47-L60",
-          "version": "repo-lines-v1:sha256:09319de76dee9a6d08eeb030705de44c45d2c5d432de4fd2ff19eb063becfba8:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRhNGNkOTJiYzk0N2Q1OGI1NDhmMmY4MGZkN2Y1OGY2OTEzMjQzYmVmYzQ4YzI4MzgxYTQ5YzljZjM5Yzc0NjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE4ODM1YWIyOGJhZjY0YjQ1ZjkwN2E2NmFjZmU3YmE4ZGJiMmEyMWEzN2M1N2FkNDk5MWNlYWNkOWNhOWFlNTIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ3MjIzMTA2ZmQ4NzQyYjcwZWEyMzNmOWRjMzU5ZjRiMDJiYmIwNjliNzI4M2VlZjc2MjQ5OTUxNmJkN2I5YzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc3MGYzODE4NDUyNDcwOWEyNTA4ZTEzZTc2YzA5ZWFhZDgwZWJmZTc5M2YwNGZkZjdkMmI0Y2VkZjVlZjM5ZDkifQ"
+          "resource": "repo://src/agent_data_workbench/integrations/harbor/exporting.py",
+          "version": "repo-file-v1:sha256:45fc01151eaa86fe60c4d07d44beda6c4492683a403eeb47a40c3ea2a352fb56"
         },
         {
-          "resource": "repo://src/agent_data_workbench/integrations/harbor.py#L63-L86",
-          "version": "repo-lines-v1:sha256:0d10b93dcace4d15055ab890bd13305291bc12e718a36cc2a9be2bdd0067a041:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdhMDc3NzIyNzBjNThiMDY2NTFhMWNiYWQwZWZiYTNmNDgyOWMyODIzNWIxOGI1ZmUxNTI5MzJiZDM4N2M3ODEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkxMTcxNjgwMWIwYjNjOTY3NDI0MGIwMGExZjI4MDAzYTQ2M2JjNGQ3MDg0MDY5MzEyNGQ3NTI0ZWIxZDc2NmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJhMTA4NDA5YmU4N2JiZjFjMzI5ZTZmMWM3MzI3NDAzNjUwNWUzZTc2YzAzNTU2MWMxMTJlOWY5ZDIzMzhlYWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUxMTViMjFkNTExZGM5NTY4NWJhMDNiYTA1N2NkMjAxZDFhZTc3YzQ4NmMwYmZjNjhmNzAyNThjNDY3NWM1ZTMifQ"
-        },
-        {
-          "resource": "repo://src/agent_data_workbench/integrations/harbor.py#L95-L194",
-          "version": "repo-lines-v1:sha256:ea9ba23c6a3bd619922db39e95bb21f9c7bc8549739b98bf90e75ef5f5291c8c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAwLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIwMDI1OGE0MTQ4YTA5YTA2OTQ5NTcxMTAxM2RiZWVkZmJlNjI2NzEwYzYzNzNiMzhhYTFiNmU1MTI0YmY1MjdmIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiIxM2IyMjM0M2U5Yzc1NTkyMzNkYzQ2ZGNlYTU4OTk2NThmNmM4NmE3MzE0ZmE0NjIwOThmMjkyOGFmNmFkM2Y1IiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI4ZDRhY2Y4NjI2YWMyN2UzODQ3OTc3MGVhYTdlYjhlMWJjZGMwMWQ0NmQyYjdlZWNhNThmNjc4MDFkNzA0NDQ3IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIxNDE3YzBiOGMzMGFkZDE4OTE3YTZkY2YyYjg2NDg4NGZmZWFlYjIzNTQzNDlkZjc3MjUyMGYxM2UwNzQ2YTM4In0"
+          "resource": "repo://src/agent_data_workbench/integrations/harbor/runtime.py",
+          "version": "repo-file-v1:sha256:b36436ab1b6b00659f1cb83cbe5d7883a9e64f35455d8671b5854d14d757d83c"
         }
       ]
     },
@@ -139,10 +135,24 @@
           "version": "repo-lines-v1:sha256:b9e5bb766355651f6e4a88fbd4c51eedee05a1fc836363b532370ca51de2f959:eyJzZWxlY3RlZExpbmVDb3VudCI6NjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZkNjQ4OTBkNTYxYjU3MjBlZDc3OGM3NWFmOTQ3ZWVjZjg5YWI2MDY5NWUxMzY1YjcyMDQ3YzM3NGU2ZTk0NWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc3MmY5Njk1Yzc0NjdjNzQ3NzNjOWNlN2ZjNDI5YzVkMGQwZTQ4N2YzYzUxZDE1ZDY2NjhhM2QyNDA3MmJiOTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY2ZDkzZTQ1ZGFlNTEwNmMwYWRlNjIxNmRkZDY1YTVlMTcxMWQ3NDAwNWQwMzBhNTI1YzM0M2U0MWUwOWY3NGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
+    },
+    {
+      "id": "claim_abfd449cc6554e19a5c7f09b3e98ce3c",
+      "statement": "Harbor comparisons run configured baseline and candidate targets on one frozen accepted task and import verifier grades and full available trajectories as an exploratory experiment, keeping invalid outcomes separate.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/integrations/harbor/comparison.py",
+          "version": "repo-file-v1:sha256:796e44cd651bf6768a16a47ef731ab9aeca2f8c7c30d4a2459f0fe7c66163049"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/integrations/harbor/results.py",
+          "version": "repo-file-v1:sha256:182f2c2c90359b014c0a86d0117cb2296e3b911a2ac6c4808d835d144cca9249"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T00:07:39.310Z"
+    "at": "2026-09-08T04:50:29.215Z"
   }
 }

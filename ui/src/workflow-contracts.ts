@@ -231,3 +231,19 @@ export interface HarborExport {
   validation: string;
   [key: string]: unknown;
 }
+
+export interface HarborAgentConfig {
+  agent: string;
+  model: string;
+  agent_kwargs: Record<string, string | number | boolean>;
+}
+export interface HarborComparisonConfig {
+  template_directory: string;
+  baseline: HarborAgentConfig;
+  candidate: HarborAgentConfig;
+  environment_type: string;
+  repetitions: number;
+  reward_key: string;
+  pass_threshold: number;
+  timeout: number | null;
+}

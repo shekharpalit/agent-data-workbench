@@ -20,14 +20,22 @@ sources:
     resource: repo://src/agent_data_workbench/execution/sessions.py
   - id: openwiki-source-5c30eedfd71ee60950d4cac7
     resource: repo://src/agent_data_workbench/execution/simulators.py
-  - id: openwiki-source-182481ca857ecaa14236517f
-    resource: repo://src/agent_data_workbench/integrations/harbor.py
+  - id: openwiki-source-b6b933d24dd8f431b61de5fa
+    resource: repo://src/agent_data_workbench/integrations/harbor/commands.py
+  - id: openwiki-source-c773d92eb0c24f4c729a0408
+    resource: repo://src/agent_data_workbench/integrations/harbor/comparison.py
+  - id: openwiki-source-75e4ee5992e64ed99a4d9be3
+    resource: repo://src/agent_data_workbench/integrations/harbor/exporting.py
+  - id: openwiki-source-047935dc3e143c02a13e4031
+    resource: repo://src/agent_data_workbench/integrations/harbor/results.py
+  - id: openwiki-source-42955c511f8e1b6d5ca11004
+    resource: repo://src/agent_data_workbench/integrations/harbor/runtime.py
   - id: openwiki-source-b9e04cc4343208a80c47ef02
     resource: repo://src/agent_data_workbench/workspace/project.py
-generated: { by: "codex", at: "2026-09-08T00:07:39.310Z" }
+generated: { by: "codex", at: "2026-09-08T04:50:29.215Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T00:07:39.310Z
+    at: 2026-09-08T04:50:29.215Z
 ---
 
 # Worlds, environments and continuous evaluation
@@ -49,7 +57,7 @@ flowchart LR
   Grade --> Coverage
 ```
 
-Implementation ownership follows this flow: `evaluation/` owns reviewed worlds, grading, calibration, coverage and decisions; `execution/` owns the environment and live target session; `integrations/harbor.py` owns the optional Harbor adapter. Session/environment/runner schemas are collected in `execution/contracts.py`, and process I/O is separated from conversation orchestration. See the [package map](../architecture/system.md#responsibilities) for extension points.
+Implementation ownership follows this flow: `evaluation/` owns reviewed worlds, grading, calibration, coverage and decisions; `execution/` owns the environment and live target session; `integrations/harbor/` owns the optional Harbor adapter. Session/environment/runner schemas are collected in `execution/contracts.py`, and process I/O is separated from conversation orchestration. See the [package map](../architecture/system.md#responsibilities) for extension points.
 
 ## Reuse domain knowledge without leaking task answers
 
@@ -162,7 +170,9 @@ agent-data-workbench workflow harbor-export PROJECT TASK_ID harbor-config.json
 agent-data-workbench workflow harbor-run PROJECT EXPORT_ID
 ```
 
-The export manifest supplies the exact launch argv and hashes. Execution verifies its frozen copy, task, bundle and command, then records installed Harbor version and job output. Harbor owns its environment and verifier runtime. Exporting a verifier does not establish that it is correct; inspect and calibrate the supplied verifier. Harbor jobs are retained as export execution records, not imported into paired workbench experiments. The automated tests validate the bundle/CLI transport with synthetic subprocesses; actual Harbor containers and provider models were not exercised.
+The export manifest supplies the exact launch argv and hashes. Execution verifies its frozen copy, task, bundle and command, then records installed Harbor version and job output. Harbor owns its environment and verifier runtime. Exporting a verifier does not establish that it is correct; inspect and calibrate the supplied verifier. Use **Run a Harbor comparison** on an accepted task, or `workflow harbor-compare PROJECT TASK_ID harbor-comparison.json`, to run a baseline and candidate on the same frozen bundle. The configuration supplies both targets, repetitions, a reward key and pass threshold. Each paired result returns to Experiments with available complete trajectories imported as linked traces. Missing rewards and execution errors remain invalid. The comparison is exploratory; it does not create a reserved suite or control model randomness. The workbench task audit does not calibrate the supplied external verifier.
+
+[Harbor comparisons](../integrations/harbor.md) explains native setup, target credentials, the complete config and result navigation. Automated export/comparison tests use synthetic subprocesses and result files; actual environment and provider execution need separate validation.
 
 ## Demonstrate improvement on your agent
 

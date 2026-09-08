@@ -149,3 +149,40 @@ def ui(project: Path, port: Annotated[int, typer.Option(min=1, max=65535)] = 876
             objective=current.config.objective,
         )
     )
+
+
+@app.command("ingest-hf")
+@errors
+def ingest_huggingface(
+    project: Path,
+    dataset: str,
+    configuration: str | None = None,
+    split: str = "train",
+    revision: str = "main",
+    id_pointer: str = "",
+    group_pointer: str = "/thread_id",
+    stratum_pointer: str = "/agent_type",
+    limit: Annotated[
+        int | None,
+        typer.Option(min=1, help="Explicit row selection; omitted imports the entire split."),
+    ] = None,
+):
+    """Stream complete dataset rows from Hugging Face, with a pinned source receipt."""
+    from agent_data_workbench.data.imports import import_dataset
+    from agent_data_workbench.integrations.huggingface import DatasetImport
+
+    emit(
+        import_dataset(
+            Project(project),
+            DatasetImport(
+                dataset=dataset,
+                configuration=configuration,
+                split=split,
+                revision=revision,
+                id_pointer=id_pointer,
+                group_pointer=group_pointer,
+                stratum_pointer=stratum_pointer,
+                limit=limit,
+            ),
+        )
+    )

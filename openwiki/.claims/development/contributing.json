@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:6c70c51a2b7fc4b41d0bdf1496f0ff86af5e7f5c5966e1935fa8862b4b726e03",
+  "pageVersion": "sha256:ba3c2fbe08c29b84f0b2001ea5ab6c4dae63c9324483493bd45ec7411da98358",
   "claims": [
     {
       "id": "claim_80e3a5075dd34ed7b7f0393a15e92a9a",
@@ -162,7 +162,7 @@
       "evidence": [
         {
           "resource": "repo://Makefile",
-          "version": "repo-file-v1:sha256:744a80d95a8419e0113d85d0d334ccafdfbf2d2fd1be97548c95b0e899e7e6ed"
+          "version": "repo-file-v1:sha256:2527e6d3d1c9132edaa6f59355a975fb07fde47d58e6b06312482a6634e7c8cb"
         }
       ]
     },
@@ -218,7 +218,7 @@
         },
         {
           "resource": "repo://tests/test_explore.py",
-          "version": "repo-file-v1:sha256:25dbedb16699bad964f895ab31f1fc96f5a154358077ffd0af1e456fc383c590"
+          "version": "repo-file-v1:sha256:5ce02b80432eada5a89ac54d4ead912430bbb6d8f524e5816f97d2271b7bbcc1"
         }
       ]
     },
@@ -256,23 +256,19 @@
     },
     {
       "id": "claim_306638dd0b34453dad9d7dffe5dd480e",
-      "statement": "The clustering and evidence graph views share NetworkCanvas, while UI regression tests check automatic full-record clustering, missing-field recovery, explicit maximum selection, cluster membership maps and navigation to source traces.",
+      "statement": "Evidence lineage uses NetworkCanvas for actual links; cluster membership uses count bars, while UI tests cover grouping controls and navigation to source traces.",
       "evidence": [
         {
           "resource": "repo://ui/src/components/graphs/ClusterGraph.tsx",
-          "version": "repo-file-v1:sha256:6a3fa43d799d7a91af997a3d6d7cf6700dddbf2abccc9a7f1df60457d00e966d"
-        },
-        {
-          "resource": "repo://ui/src/components/graphs/NetworkCanvas.tsx",
-          "version": "repo-file-v1:sha256:68eccef96db273361de4c3809e4f585b01fabe7b229470ac971494c3f32ed199"
+          "version": "repo-file-v1:sha256:91a88674b566a554259c89c402201cd63b638612e849e24eb46f9b3bf212f0b4"
         },
         {
           "resource": "repo://ui/src/views/Graph.tsx",
-          "version": "repo-file-v1:sha256:cf05666f79423ff498f10a89e85339703d1fbeb07ea55fcfa42084e82a631588"
+          "version": "repo-file-v1:sha256:1061cbe59ac358753fe44559bb60d53ea92b100ac61bec5e63bc11bd670d1991"
         },
         {
           "resource": "repo://ui/tests/exploration.test.tsx",
-          "version": "repo-file-v1:sha256:9ba35e8fdfc221126662d3ebe22a96164f03799d6fea4291bd117c591a439413"
+          "version": "repo-file-v1:sha256:d4f4fa55dcc132a62dbd70161705fc57fc6b718d3a9d1842a702bf045fc5bab6"
         }
       ]
     },
@@ -323,10 +319,44 @@
           "version": "repo-file-v1:sha256:dfb1156385086e9c69526dcc3ef090a1275dc62a4e86d56f14a521bb4dadf382"
         }
       ]
+    },
+    {
+      "id": "claim_105fa3dcd80e489692c2e6a8ec980df3",
+      "statement": "Hugging Face and Harbor regression tests verify full row/trajectory preservation, failed imports and invalid reward handling using synthetic data and transports.",
+      "evidence": [
+        {
+          "resource": "repo://tests/test_harbor_comparison.py",
+          "version": "repo-file-v1:sha256:ef9b6c3d544c98c0e11a406274f9efbcd30b9bc40cdb98290574fa74648e1876"
+        },
+        {
+          "resource": "repo://tests/test_huggingface.py",
+          "version": "repo-file-v1:sha256:f0cc3434b6d007f2041eb8ec24ae3b82bb548f0850f7b6fd0b9876b2473d0aa2"
+        }
+      ]
+    },
+    {
+      "id": "claim_fb21dbae57b54736a2c20b448239fe35",
+      "statement": "Data workflow UI tests verify import mappings and explicit selections, complete conversation access, group pagination and Harbor configuration submission.",
+      "evidence": [
+        {
+          "resource": "repo://ui/tests/data-workflows.test.tsx",
+          "version": "repo-file-v1:sha256:c6c5bf05bd781ee400d357c29e63da5ae7d6784a1c2641d3c9e1bff0189c7efb"
+        }
+      ]
+    },
+    {
+      "id": "claim_fbefe9e5f14c478f9d5739c89268f2a4",
+      "statement": "Native Make initialization builds UI assets before syncing the editable package and installs Harbor as a separate uv tool; native development runs the UI watcher beside Uvicorn.",
+      "evidence": [
+        {
+          "resource": "repo://Makefile",
+          "version": "repo-file-v1:sha256:2527e6d3d1c9132edaa6f59355a975fb07fde47d58e6b06312482a6634e7c8cb"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T02:57:07.074Z"
+    "at": "2026-09-08T04:50:29.215Z"
   }
 }

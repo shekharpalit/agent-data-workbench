@@ -48,3 +48,10 @@ def cluster_traces(project: ProjectDependency, payload: ClusterQuery):
 @router.post("/distribution")
 def trace_distribution(project: ProjectDependency, payload: DistributionRequest):
     return distribution(TraceStore(project), payload.query, payload.pointer)
+
+
+@router.post("/dataset-profile")
+def profile(project: ProjectDependency, payload: DistributionRequest):
+    from agent_data_workbench.exploration.dataset import dataset_profile
+
+    return dataset_profile(TraceStore(project), payload.query, payload.pointer)

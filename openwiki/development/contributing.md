@@ -26,6 +26,10 @@ sources:
     resource: repo://tests/test_conversation_exports.py
   - id: openwiki-source-66a8a10b0365fc2079585762
     resource: repo://tests/test_explore.py
+  - id: openwiki-source-b3100dfc31c7e979d4ee078f
+    resource: repo://tests/test_harbor_comparison.py
+  - id: openwiki-source-14014a160fe3cfefa190b90a
+    resource: repo://tests/test_huggingface.py
   - id: openwiki-source-9c58a0b0672b6bdbd523d5ee
     resource: repo://tests/test_identifiers.py
   - id: openwiki-source-0bb6c35cfc5dfdfa5db20794
@@ -54,10 +58,10 @@ sources:
     resource: repo://ui/package.json
   - id: openwiki-source-74100799ff8e26159a68e317
     resource: repo://ui/src/components/graphs/ClusterGraph.tsx
-  - id: openwiki-source-da534aa7260001f2de3cd1d5
-    resource: repo://ui/src/components/graphs/NetworkCanvas.tsx
   - id: openwiki-source-2142689a6a1eb395600ecd87
     resource: repo://ui/src/views/Graph.tsx
+  - id: openwiki-source-efc8d53ba2826034ba288403
+    resource: repo://ui/tests/data-workflows.test.tsx
   - id: openwiki-source-596cdb28df7c16b7e6d5931b
     resource: repo://ui/tests/exploration.test.tsx
   - id: openwiki-source-434ba4f21f543ddea1569be6
@@ -68,10 +72,10 @@ sources:
     resource: repo://ui/tests/research.test.tsx
   - id: openwiki-source-a741d432f952c0dbfb4fb35d
     resource: repo://ui/vite.config.ts
-generated: { by: "codex", at: "2026-09-08T02:47:35.721Z" }
+generated: { by: "codex", at: "2026-09-08T04:50:29.215Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T02:57:07.074Z
+    at: 2026-09-08T04:50:29.215Z
 ---
 
 # Development and verification
@@ -88,6 +92,8 @@ make dev
 ```
 
 Open the backend's printed private URL. Python source changes restart the backend with the same browser token. The UI watcher rebuilds the bundled assets; refresh the browser after a rebuild. Ctrl-C stops both services. `make test` runs Python tests, Ruff checks, UI tests, formatting and the TypeScript/production build inside containers. `make build` builds both development and packaged images. Use [Docker and Make workflow](../operations/containers.md) for imports, persistent volumes and custom ports.
+
+For a host backend using existing agent CLI logins, `make init MODE=native` builds assets before installing the checkout and installs Harbor as a separate uv tool; `make dev MODE=native` runs the watcher and Uvicorn together. Native mode requires uv and Node, plus Docker when running Harbor environments.
 
 ## Set up and verify Python natively
 
@@ -170,6 +176,14 @@ The ingest CLI now defaults to one file per run; use `--layout records` for prio
 
 `tests/test_ingestion_research.py` imports two event-stream files into one investigation, preserves each run's chronological data, and records separate comparison outcomes across dataset pages. This proves that an investigation can work across multiple complete traces; it does not measure model quality or establish large-corpus throughput. See [trace import](../workflows/traces.md) for the data contract.
 
+## Verify dataset imports and Harbor comparisons
+
+`tests/test_huggingface.py` exercises a real synthetic Parquet file, nested long-row preservation, explicit row selections, stable identities for identical attempts, atomic rollback, failed-access receipts and rejection of changed group mappings. It substitutes the Hub metadata transport and requires no remote dataset. `tests/test_dataset_profile.py` checks exact matching-corpus counts and unknown outcomes without inferring failures from words in a message.
+
+`tests/test_harbor_comparison.py` checks frozen-task pairing, alternating target order, imported trajectories, invalid verifier rewards, generated evidence links and complete failure logs with synthetic commands. Run a supplied real environment separately to validate Docker/provider integration. These deterministic tests do not establish model quality.
+
+`ui/tests/data-workflows.test.tsx` verifies dataset mappings, deliberate row selection, long-message tail access, group pagination and Harbor configuration submission. `ui/tests/jobs.test.ts` checks result destinations. Browser QA should import a public selection, follow a chart to its exact records, launch a deterministic Harbor comparison and inspect its generated trajectory and experiment link. Keep downloaded rows and validation reports outside Git.
+
 ## Change the owning package
 
 Use the [package responsibility map](../architecture/system.md#responsibilities) before adding a module. Keep source adapters and SQLAlchemy storage in `data/`, task definitions and review/grading in `evaluation/tasks/`, persistent target adapters in `execution/`, and provider/export adapters in `integrations/`. `workbench/` owns startup and jobs; `api/` owns typed HTTP translation. Shared JSON, UUID, filesystem, Markdown and process helpers belong in `shared/` and must not depend on domain modules.
@@ -178,7 +192,7 @@ The root SDK imports remain stable; former internal imports such as `agent_data_
 
 Clustering has separate tokenization, TF-IDF vectorization, connected-components and response modules under `exploration/clustering/`. Its regression cases preserve negation, numeric tokens, single-character words and values under metadata-like field names, and read late events beyond long prefixes without truncating text. Regression cases include 201 event traces without `/input`, search-page independence, membership drill-down beyond 200 IDs, explicit trace limits and imported trace nodes before findings exist. Search, aggregation and lineage remain separate operations.
 
-Both graph views use `ui/src/components/graphs/NetworkCanvas.tsx`. Cluster membership layout is separate from evidence lineage layout. `ui/tests/exploration.test.tsx` verifies automatic full-record grouping, optional maximum requests, missing-field recovery, cluster selection, trace navigation and graph membership. These component tests substitute the canvas transport; check the actual React Flow rendering and node controls in a browser when changing the visualization surface.
+Evidence lineage uses `ui/src/components/graphs/NetworkCanvas.tsx` only when recorded links exist. Lexical cluster membership uses count bars and an explicit singleton state; dataset profiles use exact source-label and group counts. `ui/tests/exploration.test.tsx` verifies automatic full-record grouping, optional maximum requests, missing-field recovery, cluster selection, trace navigation and recorded graph relationships. These component tests substitute the canvas transport; check the actual React Flow rendering and node controls in a browser when changing the visualization surface.
 
 Data-preservation regressions cover all graph nodes beyond 300, all distribution categories beyond 50, record navigation beyond offset 10,000, complete serialized search results, default full-field reads over SDK/MCP/HTTP, and valid command outputs and JSON artifacts over 2 MB. Optional caller-selected limits and resumable pages remain explicit. `ui/tests/exploration.test.tsx` also opens long structured inputs without slicing their content.
 

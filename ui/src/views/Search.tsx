@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Conversation } from "../components/traces/Conversation";
+import { traceTitle } from "../components/traces/presentation";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../api";
 import type { FieldFilter, Route, SearchQuery } from "../contracts";
@@ -217,6 +219,12 @@ export function SearchView({
   return (
     <>
       <Card title="Search your trace corpus">
+        <button
+          className="secondary"
+          onClick={() => navigate({ view: "imports" })}
+        >
+          Import data →
+        </button>
         <SearchForm
           key={JSON.stringify(query)}
           query={query}
@@ -224,7 +232,7 @@ export function SearchView({
         />
         {query.trace_ids && (
           <p className="scope-note">
-            Showing members of the selected cluster.{" "}
+            Showing members of the selected trace group.{" "}
             <button
               className="ghost"
               onClick={() => onQuery({ ...query, trace_ids: null, offset: 0 })}
@@ -252,7 +260,7 @@ export function SearchView({
             rows={data.records.map((trace) => ({
               key: trace.trace_id,
               cells: [
-                trace.trace_id,
+                traceTitle(trace),
                 trace.stratum,
                 trace.data.input !== undefined ||
                 trace.data.request !== undefined ? (
@@ -335,6 +343,32 @@ export function SearchView({
           className="row"
           onSubmit={submit(() => setActivePointer(pointer))}
         >
+          <label className="field">
+            <span>Fields found in these results</span>
+            <select
+              value=""
+              onChange={(event) => {
+                setPointer(event.target.value);
+                setActivePointer(event.target.value);
+              }}
+            >
+              <option value="">Choose a field…</option>
+              {Object.keys(data?.records[0]?.data || {})
+                .filter((key) => {
+                  const value = data?.records[0]?.data[key];
+                  return value === null || typeof value !== "object";
+                })
+                .map((key) => {
+                  const path =
+                    "/" + key.replaceAll("~", "~0").replaceAll("/", "~1");
+                  return (
+                    <option key={path} value={path}>
+                      {path}
+                    </option>
+                  );
+                })}
+            </select>
+          </label>
           <Field
             label="Field to aggregate"
             value={pointer}
@@ -411,23 +445,32 @@ export function TraceDetail({
           See evidence graph →
         </button>
       </div>
-      <Card title={id}>
+      <Card title={traceTitle(trace)}>
+        <p className="mono">{id}</p>
+        {typeof trace.data.repo === "string" && (
+          <p>Repository: {trace.data.repo}</p>
+        )}
+        {[true, false, 0, 1].includes(
+          trace.data.resolved as boolean | number,
+        ) && (
+          <p>
+            Recorded outcome: {trace.data.resolved ? "Passed" : "Failed"} ·
+            source field /resolved
+          </p>
+        )}
+        {typeof trace.data.exit_status === "string" && (
+          <p>Agent exit status: {trace.data.exit_status}</p>
+        )}
         <p className="muted">
           Original imported evidence. Finding quotes resolve against this
           record.
         </p>
       </Card>
-      {Array.isArray(trace.data.messages) && (
-        <Card title="Conversation">
-          {trace.data.messages.map((message, i) => (
-            <div className="item" key={i}>
-              <JsonView value={message} />
-            </div>
-          ))}
-        </Card>
-      )}
-      <Card title="Complete trace">
-        <JsonView value={trace.data} />
+      <Conversation key={id} trace={trace} />
+      <Card title="Complete original record">
+        <Details title="All fields and metadata">
+          <JsonView value={trace.data} />
+        </Details>
       </Card>
     </>
   );

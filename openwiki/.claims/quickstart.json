@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:f4abdb7a685a295c943e0ae39b84d1ee7a4e36139cbcdf1b7f06e4f3ae473fa1",
+  "pageVersion": "sha256:6c4f19f0097d4ee147b54e9677da27ffa5d3b1c361d33c0bb1c8aee977bbdc79",
   "claims": [
     {
       "id": "claim_b88dee80e2334471a6a24e3675d10bd3",
@@ -11,8 +11,8 @@
           "version": "repo-file-v1:sha256:922fe0c3de073b01988e23348ea184456161678c5e329e6f34be89be24383f93"
         },
         {
-          "resource": "repo://pyproject.toml#L5-L28",
-          "version": "repo-lines-v1:sha256:bb786d55c6ed5408ecf5fee6892a328948acc98d1f00d3246db7d5944a746c62:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwMmE4MWMzODM2ZWRlZjJkMGJhMTFkMjM1M2ZiNmRhYmM3NzcxNTBhN2NhODNlYTBkOWU5YTcwMzEzZmVhYmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYzNjI0YjE5MTI2ZjAwMWYyZmYzMzY3YjY1ZWU4Y2RhNTZhZTY2MGMwNGE4ZTBmNTE5Nzg1OGRiMDU1OTAzYTkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcyZThkOGQ2YTUzMTM4YmFiNDE1NDQ4NjkzM2YxN2M3YjBkNmQwMTdiMGU2Yzk2N2NiYTA5YTY0YjI3ZTgyMjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNiNTg2MWJlYzAwZTYxNTcyYzY2ZGU5NDc1ZWQ3Nzc5ZWE2YzkxMDIyNWI4NjI2ODgzMjE4ODBkZWE5MWY5ZmIifQ"
+          "resource": "repo://pyproject.toml",
+          "version": "repo-file-v1:sha256:52e802017fae5d05fd075ae91783747491729f0b0a9bb79491ba8aa54eee2497"
         }
       ]
     },
@@ -22,7 +22,7 @@
       "evidence": [
         {
           "resource": "repo://src/agent_data_workbench/cli/project.py",
-          "version": "repo-file-v1:sha256:7fe03c9dae556c6c2e6a2d8ddb627c530b918c8b4cae1227c64b5c28cb13c52c"
+          "version": "repo-file-v1:sha256:4672233c3bbeccdf10b895463ff07d165b1097daf318991aa400f5269f9ab51f"
         }
       ]
     },
@@ -73,16 +73,16 @@
       "statement": "The local UI defaults to manual research and opens a snapshot without provider calls; humans can record outcomes, notes, findings and charts, then optionally invite a native agent.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/api/routers/investigations.py#L93-L157",
-          "version": "repo-lines-v1:sha256:5b5aaff4fe9ad3a424f7511faae5c7ef09395f80790172c6bb5339c3a9704892:eyJzZWxlY3RlZExpbmVDb3VudCI6NjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyNmZjYTI5ZWMwNGQ3YWRmMzBmNzc5NTk4NTY4OTkxZmRmNGZkMGEzNjVmZjJjY2I0MzliOTIwMGU2YjQ1MmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJhZmJmOWFhMjBlZjkxMjE2YWNmZjhhMTM2ZjI3NzAzNzRiMTRiYWJmNmU2YjQ3Nzg0ZDZlMjZhZDkyN2Q2NzUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM5ODNiNDA3NWYxMDJhNDJiNmM0MTViMjU2Njk1YWExYWNmZDU3ZGFhOTc1YTE4NjFkNWU0ZGM4NjEyM2Q2MDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://src/agent_data_workbench/api/routers/investigations.py",
+          "version": "repo-file-v1:sha256:dd85f5c7d11650dd30e23eac41bfe403c2895cee97286e48d18373bfdcd2834b"
         },
         {
-          "resource": "repo://ui/src/views/ManualResearchEditor.tsx#L170-L454",
-          "version": "repo-lines-v1:sha256:aacda49f775d61c9a5857b9944a3784b8657b3e95cd868baccdfd8d18b44e7d4:eyJzZWxlY3RlZExpbmVDb3VudCI6Mjg1LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJlZTE4ZWVkNmQ3N2RmZjg3MGQ5NjcxODljNzMwNTYxZmVhNjFhODQ1OTljZTU3Yzc1Yzk3OGZkOGU4YjYyMzM0IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIwOTRmYzBjMTczZDFlYzNmYzUwMWQ3ZGZhOTI4NTUwMWM1MjdjZmI0NzEyNTgzZGEzY2MzNjE4MDU2NmI0YmUzIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIwYmZkZjM2NDU4ZmUyYzFlZmQ4MjI2ZjZhYmQ4Yzk4ZDYxNzg3YmRhMmY1MGM5ZmIzMjI0YmI3Zjk1NDNmMzhkIn0"
+          "resource": "repo://ui/src/views/ManualResearchEditor.tsx",
+          "version": "repo-file-v1:sha256:92dc25e0439e1556883d763f626394d57eed0e60e961aa4bf9f8eb8206257c0c"
         },
         {
-          "resource": "repo://ui/src/views/ResearchControls.tsx#L12-L154",
-          "version": "repo-lines-v1:sha256:26704597433a4c2c455be3ace187c3502161057626a5e59ad548a11a240e3cf1:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQzLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI3NDFjZWRiZmQ1MzFlMzg1NGEwZmViZTRkMGY3ZGIzNjVmYjA3MTBlZjQ0MWVmMmFmNGM0NDE1ZTg0ODczYTk2IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI0YTdjMThjOWE5MTFlYzNhY2M4MTJhN2VlZmU5M2E3YjJkYmM5YzQzYzNjNTIyMDcwZjAyMzc5MGVkMDZlYWUxIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+          "resource": "repo://ui/src/views/ResearchControls.tsx",
+          "version": "repo-file-v1:sha256:f1bc0139b0da96da680e4e8178f4ff4a3a017db62d4ca8836065c4386b44c91a"
         }
       ]
     },
@@ -92,11 +92,11 @@
       "evidence": [
         {
           "resource": "repo://src/agent_data_workbench/api/routers/workflow.py",
-          "version": "repo-file-v1:sha256:522f51ef401d80c7181ce0b8ffc094f461f984c0ba5af7f528343d156a5ea28d"
+          "version": "repo-file-v1:sha256:7d9d21ea407f6623dbafbb91a3c14d1ee6f48dcf1724df97894b64bdc106b2cc"
         },
         {
           "resource": "repo://src/agent_data_workbench/cli/workflow.py",
-          "version": "repo-file-v1:sha256:8ae39c04f3152265112226f33f000e43a3995f691be439b5541aa6da8eeee278"
+          "version": "repo-file-v1:sha256:edd8393795fe69892de5b91d884a6634055765005a1104736e6658e58488d2f7"
         }
       ]
     },
@@ -105,16 +105,12 @@
       "statement": "The repository supports Docker-first make init/dev setup with persistent data, joint backend/UI startup, recursive directory or single-file ingestion, packaged background startup and a configurable loopback port.",
       "evidence": [
         {
-          "resource": "repo://Makefile#L23-L78",
-          "version": "repo-lines-v1:sha256:dc3ac53df72b6678f5337e84bc48dae289394a9e8987e779d2692974f486bc52:eyJzZWxlY3RlZExpbmVDb3VudCI6NTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUxZjMzNzg2MDA0NTZlNTMyOTQyZDg2YTU1ZWQzMDJjYWY2YzQ2ZDUyMjBiMWM0OTg2NjJiMjRkYmQyMjczYjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY3YWIwYzlhZjc4NGJiNDRiNjIwNWYxM2Q1NTc2M2E2OWEwOGIzNjRjNDRiMzhjZjZkNjZkOWM3OTYwNjllZDYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://Makefile",
+          "version": "repo-file-v1:sha256:2527e6d3d1c9132edaa6f59355a975fb07fde47d58e6b06312482a6634e7c8cb"
         },
         {
-          "resource": "repo://compose.yaml#L26-L57",
-          "version": "repo-lines-v1:sha256:8e80fff37fe932d1c56482d5b2d85ba9e439d1138fefded52415e8db2e76cd7a:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk2YzgyZWI0NzlhN2VlMWRjMmU4Y2QxMjZjZjA4NTg5ODc2ZjM4ZGFkYWI1NjVhYzMwZjQ0YmQ3OGY2YzMyYjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwYWRmYWU2NGZhYmFhODNjMzBjZGE1Y2JkYjE4NTdjYWU4NDY1NzU1MTJmMTg5ZGRkMDVkMWQ5NmY1MjA4NTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM2MTU5MTJlZDhiZTUwNzIzMzEwNDVlNjlmNDVmOWMyNDVlMzNlMmM5Njg5ZjZiYWJmZTdlZDA4ZjNhNjQxZTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBhYTRhNGNmOTZiNzIzN2E2OWJkNDFkOTZkN2QwNmI4MTY0Yzc4ZWYxYTUyMzYwYWZlYTMxMTVhMmU1NGVkMDIifQ"
-        },
-        {
-          "resource": "repo://compose.yaml#L78-L95",
-          "version": "repo-lines-v1:sha256:ce84f5d8973f9d0d829301f059960f5823fb3f638ddf7199a30f1bf890be1a68:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE4ZTFlMDIwM2VlMGIyNTU1MWRhMzdiMWFiYzUwNDU5MjMyYTkwNDhmNjJjM2JhODY1MTczNGNhODExZmUzYjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjljNzQzM2Q3YzkwNzQ4YjIzNjZhZmI0MDM3NTA0YjExYmFhYThlZDg5YjI1ODcyMWIxZGY1ZWM3M2QyMTc2ZWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY5NDZlODE3YzBiODNlZDZhOTc4NmMxM2ZlZjk2M2EyZWVjNmFmOTQ0NzQ1ZjllODhjZWQ0MTBhZGZkNDE0ZmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://compose.yaml",
+          "version": "repo-file-v1:sha256:356fef054e1412606b833a84b869850c556fe9b3ec038589d21c3dee54bc5703"
         }
       ]
     },
@@ -173,30 +169,72 @@
       "statement": "The Python product, SDK, OpenAPI metadata, recorded package provenance and TypeScript package all use version 0.1.0.",
       "evidence": [
         {
-          "resource": "repo://pyproject.toml#L5-L10",
-          "version": "repo-lines-v1:sha256:fa5d817757c2a0d287b551b631954a516ace8a5d93f9f3db9bd3e9c4311a2922:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzAyYTgxYzM4MzZlZGVmMmQwYmExMWQyMzUzZmI2ZGFiYzc3NzE1MGE3Y2E4M2VhMGQ5ZTlhNzAzMTNmZWFiYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGU3Njg3N2U5NDA1MWJmZjBmZGQzMDY1MmE2NzZiNjkyZTNkMmExZTU4MWZjMjE2OTI4MjI1NmQxM2NiMWMyZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzJlOGQ4ZDZhNTMxMzhiYWI0MTU0NDg2OTMzZjE3YzdiMGQ2ZDAxN2IwZTZjOTY3Y2JhMDlhNjRiMjdlODIyOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjVjZjU2MTMwNzE2ZTMzY2M5ZTg4YmFhMGRmODhmNjAyZjNmN2UyMzcxZWJhMDJhYTdkZWU0ZjBiNWFjZmZlYyJ9"
+          "resource": "repo://pyproject.toml",
+          "version": "repo-file-v1:sha256:52e802017fae5d05fd075ae91783747491729f0b0a9bb79491ba8aa54eee2497"
         },
         {
-          "resource": "repo://src/agent_data_workbench/__init__.py#L58-L58",
-          "version": "repo-lines-v1:sha256:91447944015cec709e8aa7655f7e9d64e1e4508e7023a57fe3746911c0fc6fed:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTE0NDc5NDQwMTVjZWM3MDllOGFhNzY1NWY3ZTlkNjRlMWU0NTA4ZTcwMjNhNTdmZTM3NDY5MTFjMGZjNmZlZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTE0NDc5NDQwMTVjZWM3MDllOGFhNzY1NWY3ZTlkNjRlMWU0NTA4ZTcwMjNhNTdmZTM3NDY5MTFjMGZjNmZlZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzRlYjcwYjRkMjY1MzJmMDgwNGJmYmE1MzFkNjRiOGM4ODNhNWJlMjQ1NzllODY2ODE2MjUxOWExYzA4MWZiMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2E3M2FlZWI1Y2Y4NWEyYmI0NzQyYjYyY2RjM2Y2MDcxZWNlNGYwN2UyZDE2OTFjZDNhYjM1MmYwYjU2Mjg5NyJ9"
+          "resource": "repo://src/agent_data_workbench/__init__.py",
+          "version": "repo-file-v1:sha256:9013f41dda6464521df48056716d2cf82cb2cbe8cfe695d705d0a37698837302"
         },
         {
-          "resource": "repo://src/agent_data_workbench/api/application.py#L27-L60",
-          "version": "repo-lines-v1:sha256:02adb0cba913ea2e509f3ec8cecec137118deeda7e0f62b6ad5c364503e2a561:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwN2I0OWI3OTcyZDI0NTc0MzJkODRmNjZjOThjODhmMzJlODM3NDEwOGFmOTdkYjg3YjdlZDRiOTllZGE0NmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkNjdiNDY2Mzc4NzVjM2JiN2Y5MDNiMWRiODczNGI0YTI5NjY4NWRmNGRiZTY2YTRmNmNlZjdmZGM0MTE2M2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVhYjM1ODMxZjk2NWQ4M2QxMDg0ODRkMzkwZDA1MGFhYzUwOWJiMGQ5ZmI0NDQ5YTU0MzA4NDUxYmY2MWNiNTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://src/agent_data_workbench/api/application.py",
+          "version": "repo-file-v1:sha256:8b7ebffaa6773410a0de73e93a8d44a92691c6a2fa66827f74851238c3ca9ec2"
         },
         {
-          "resource": "repo://src/agent_data_workbench/shared/environment.py#L8-L17",
-          "version": "repo-lines-v1:sha256:431c1d83e04f60a12a3e812cef826ae57bc82de5c236cc7f365090a34fced89d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIwNzczZGQyYzU4MmVjNDI2YTRlZWVkY2QwMjM1YWQ0YTM3NTljNTFmM2ZlOGE0MDM5ZjdjOGVkN2EzMjcyMDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNjM2QxYWYzNDhhZTgyYjQzMjBhMmQ5NzcyZGNiYjI4OThiMzgzNjA4ZmMxOWE2OWYzNjNmZTQ5ZDlhMDA0NmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://src/agent_data_workbench/shared/environment.py",
+          "version": "repo-file-v1:sha256:cb2919528f7c54a0c3d45f04a2a1e074c48596f6c979270b739039c318309c33"
         },
         {
-          "resource": "repo://ui/package.json#L1-L5",
-          "version": "repo-lines-v1:sha256:fc8fda710cd907139a7543acb16c08b402ea031e740b8717f0da1b2c66e04cf5:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTZmYjA4ZmRhMWFjYjk1N2I2MTE2YmQzNzgxMWExZmU0MWEwMTYxMWMwNjMxZWRiZjc4NmQ2ODg5YTI3YTU1YyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjU2ZDgzMDkwYzZmYjkzNDYzYWQ0ZjJmODVmOGNhNTU3NmY3ZTg1ZTEyMWQ5NThhNTM3MThlMjFkOWY3NmU2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmZjZGMxZWQzZGFkMGY2ZmVjYjhlMmJhOWQzNzUyM2VkYTYxZTg2YjI1M2NmOGNlZThkYmZjYzJlOTVjYzM1YSJ9"
+          "resource": "repo://ui/package.json",
+          "version": "repo-file-v1:sha256:c441db7bc81b49933310af992f96392270e356a7377aae3432323abf17abf73c"
+        }
+      ]
+    },
+    {
+      "id": "claim_dbd1b49e5da24da3bdb759c4622952fe",
+      "statement": "Native Make initialization builds the UI before syncing Python, installs Harbor as a uv tool and creates the selected project; native development runs the UI watcher and Uvicorn together.",
+      "evidence": [
+        {
+          "resource": "repo://Makefile",
+          "version": "repo-file-v1:sha256:2527e6d3d1c9132edaa6f59355a975fb07fde47d58e6b06312482a6634e7c8cb"
+        }
+      ]
+    },
+    {
+      "id": "claim_a4e322112e284912bc7cea1ce5083848",
+      "statement": "The import UI supports pinned Hugging Face sources, explicit row selections and durable receipts, while dataset charts show explicit local outcomes and real repeated-task groups.",
+      "evidence": [
+        {
+          "resource": "repo://ui/src/views/Dataset.tsx",
+          "version": "repo-file-v1:sha256:b5da4a4f633d555b185bdb47592463eb049f699f81bf919261c8373643eb4a91"
+        },
+        {
+          "resource": "repo://ui/src/views/Imports.tsx",
+          "version": "repo-file-v1:sha256:956becb2989d7df2a8cf96e57016e2bf6f516b4299e56bcb8fcc3d68b9b28c19"
+        }
+      ]
+    },
+    {
+      "id": "claim_e5fe2cf7fee841cea36590b6e6b5d056",
+      "statement": "An accepted task can launch a configured Harbor baseline/candidate comparison, importing verifier grades and available full trajectories into an exploratory experiment.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/integrations/harbor/comparison.py",
+          "version": "repo-file-v1:sha256:796e44cd651bf6768a16a47ef731ab9aeca2f8c7c30d4a2459f0fe7c66163049"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/integrations/harbor/results.py",
+          "version": "repo-file-v1:sha256:182f2c2c90359b014c0a86d0117cb2296e3b911a2ac6c4808d835d144cca9249"
+        },
+        {
+          "resource": "repo://ui/src/views/HarborComparison.tsx",
+          "version": "repo-file-v1:sha256:0ea8b8cca9b6dc18b11857c118380d2c7e9541a50a4830129061ffd639ffe95d"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T03:02:55.250Z"
+    "at": "2026-09-08T04:50:29.215Z"
   }
 }

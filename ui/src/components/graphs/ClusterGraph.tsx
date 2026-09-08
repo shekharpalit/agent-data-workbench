@@ -1,88 +1,55 @@
-import { useMemo, useState } from "react";
-import { Position, type Node } from "@xyflow/react";
-import type { Cluster, Route } from "../../contracts";
-import { clusterLayout, type ClusterNode } from "./cluster-layout";
-import { NetworkCanvas } from "./NetworkCanvas";
-import { Card } from "../shared";
+import type { Cluster } from "../../contracts";
+import { Bars, Card } from "../shared";
 
 export default function ClusterGraph({
   clusters,
-  navigate,
   onMembers,
 }: {
   clusters: Cluster[];
-  navigate: (route: Route) => void;
   onMembers: (ids: string[]) => void;
 }) {
-  const [active, setActive] = useState(clusters[0]?.id || "");
-  const [selected, setSelected] = useState<ClusterNode | null>(null);
-  const cluster = clusters.find((item) => item.id === active) || clusters[0];
-  const layout = useMemo(
-    () => (cluster ? clusterLayout(cluster) : null),
-    [cluster],
-  );
-  if (!cluster || !layout) return null;
-  const nodes: Node<ClusterNode>[] = layout.nodes.map((node) => ({
-    ...node,
-    sourcePosition: Position.Bottom,
-    targetPosition: Position.Top,
-    selected:
-      selected?.trace_id !== undefined &&
-      node.data.kind === "trace" &&
-      selected.trace_id === node.data.trace_id,
-    style: {
-      background: node.data.kind === "cluster" ? "#f7e5be" : "#d9eadf",
-      width: 220,
-      padding: 16,
-      borderRadius: 10,
-      border: "1px solid #b4c2b9",
-    },
-  }));
+  const total = clusters.reduce((count, group) => count + group.count, 0);
+  const recurring = clusters.filter((group) => group.count > 1);
+  const singletons = clusters
+    .filter((group) => group.count === 1)
+    .flatMap((group) => group.trace_ids);
   return (
-    <Card title="Cluster map">
-      <label className="field">
-        <span>Cluster to visualize</span>
-        <select
-          value={cluster.id}
-          onChange={(event) => {
-            setActive(event.target.value);
-            setSelected(null);
-          }}
-        >
-          {clusters.map((item, index) => (
-            <option key={item.id} value={item.id}>
-              Group {index + 1} · {item.count} traces · {item.label}
-            </option>
-          ))}
-        </select>
-      </label>
-      <p className="muted">
-        Edges show membership in a lexical group. Select a trace to inspect its
-        evidence; use the selector to explore another group.
+    <Card
+      title={
+        recurring.length
+          ? "How often does each pattern occur?"
+          : "No recurring groups at this threshold"
+      }
+    >
+      <p>
+        {recurring.length
+          ? "Bar length counts traces in each recurring lexical group. Click a bar label to inspect every member. Shared language suggests a place to investigate; it does not establish the same failure."
+          : "These traces have no close lexical neighbors at the selected threshold. Try a lower threshold or a more focused content field, then inspect the evidence."}
       </p>
-      <NetworkCanvas
-        key={cluster.id}
-        label="Trace cluster graph"
-        nodes={nodes}
-        edges={layout.edges}
-        onSelect={setSelected}
+      <Bars
+        values={recurring.map((group, index) => ({
+          value: `${index + 1}. ${group.label || "Unlabelled group"}`,
+          count: group.count,
+        }))}
+        total={total}
+        onSelect={(value) => {
+          const selected = recurring.find(
+            (group, i) =>
+              `${i + 1}. ${group.label || "Unlabelled group"}` === value,
+          );
+          if (selected) onMembers(selected.trace_ids);
+        }}
       />
-      <div className="row">
-        <button
-          className="secondary"
-          onClick={() => onMembers(cluster.trace_ids)}
-        >
-          Inspect all {cluster.count} members →
+      <p>{singletons.length} traces have no neighbor at this threshold.</p>
+      {!!singletons.length && (
+        <button className="secondary" onClick={() => onMembers(singletons)}>
+          Inspect ungrouped traces →
         </button>
-        {selected?.trace_id && (
-          <button
-            onClick={() => navigate({ view: "traces", id: selected.trace_id })}
-          >
-            Open selected trace →
-          </button>
-        )}
-      </div>
-      {selected?.trace_id && <p className="mono">{selected.trace_id}</p>}
+      )}
+      <small>
+        {total} traces across {clusters.length} lexical components · counts, not
+        semantic distance
+      </small>
     </Card>
   );
 }

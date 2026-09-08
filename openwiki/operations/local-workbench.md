@@ -52,16 +52,24 @@ sources:
     resource: repo://tests/test_ingestion_research.py
   - id: openwiki-source-6d94b2e299387b69a79c432d
     resource: repo://ui/src/App.tsx
-  - id: openwiki-source-86285276086db085f9b5f586
-    resource: repo://ui/src/components/graphs/cluster-layout.ts
   - id: openwiki-source-74100799ff8e26159a68e317
     resource: repo://ui/src/components/graphs/ClusterGraph.tsx
+  - id: openwiki-source-c6d4399e4032ee953ab85f39
+    resource: repo://ui/src/components/traces/Conversation.tsx
   - id: openwiki-source-5bdf087920ed404535bafa26
     resource: repo://ui/src/views/Calibration.tsx
   - id: openwiki-source-13a35988ca651da931d9ecce
     resource: repo://ui/src/views/Clusters.tsx
+  - id: openwiki-source-5f365ba0fbb9be69c5df3dda
+    resource: repo://ui/src/views/Dataset.tsx
+  - id: openwiki-source-3c84d2d1ce8be46519d0db31
+    resource: repo://ui/src/views/Experiments.tsx
   - id: openwiki-source-2142689a6a1eb395600ecd87
     resource: repo://ui/src/views/Graph.tsx
+  - id: openwiki-source-494791e4bac0ec4e13edede5
+    resource: repo://ui/src/views/HarborComparison.tsx
+  - id: openwiki-source-e4f18d5ce9c7fd05cc0d3b37
+    resource: repo://ui/src/views/Imports.tsx
   - id: openwiki-source-2d1b137901c9e38ec418fdad
     resource: repo://ui/src/views/ManualResearchEditor.tsx
   - id: openwiki-source-a6ff0ad9c45aedc12177eaec
@@ -72,14 +80,12 @@ sources:
     resource: repo://ui/src/views/ResearchSnapshot.tsx
   - id: openwiki-source-e2b9808e897a9a7a52014721
     resource: repo://ui/src/views/Search.tsx
-  - id: openwiki-source-596cdb28df7c16b7e6d5931b
-    resource: repo://ui/tests/exploration.test.tsx
   - id: openwiki-source-826d1e88c728d7cfae868e97
     resource: repo://ui/tests/workflow.test.tsx
-generated: { by: "codex", at: "2026-09-08T02:47:35.721Z" }
+generated: { by: "codex", at: "2026-09-08T04:50:29.215Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T02:57:07.074Z
+    at: 2026-09-08T04:50:29.215Z
 ---
 
 # Run the local workbench
@@ -106,14 +112,19 @@ FastAPI parses JSON and Pydantic validates typed bodies. There is no workbench-w
 
 Frontend source lives in `ui/`, and Vite generates ignored `ui/dist/`. FastAPI serves that directory in editable checkouts. Built wheels include the same entry point and hashed assets under package-only `_ui/`, so installed packages work without Node. FastAPI serves the files and typed SDK operations from the same origin. No separate Node server is needed for normal use. `/api/openapi.json` is available with the same session authorization; the default Swagger and ReDoc pages are disabled. Invalid structured requests return HTTP 400 with an `error` field and do not echo the input values. Internal artifact request IDs use the `uuid` format in OpenAPI; imported trace identifiers remain opaque strings. Domain routers under `api/routers/` keep trace, knowledge, task, investigation, and job operations separate.
 
+## Import a Hugging Face dataset
+
+Open **Import data**, choose a dataset and mappings, inspect its pinned source/schema and start the import. An optional maximum selects the first N complete rows; leaving it blank imports the split. Import history retains source revisions, selections, added/unchanged counts and errors. The UI refreshes after a background import completes. Follow [Hugging Face datasets](../integrations/huggingface.md) for the OpenHands preset and exact failure semantics.
+
 ## What each view does
 
 | View | Use it for |
 | --- | --- |
 | Overview | Corpus counts, task review state, recent experiments, and project objectives |
+| Import data | Hugging Face source inspection, mappings, explicit selections and import receipts |
 | Trace explorer | Combined filters, numeric ranges, sorting, pagination, distribution, and record inspection |
-| Clusters | Automatic full-record lexical grouping, interactive membership maps and trace drill-down |
-| Evidence graph | Imported traces plus saved finding, task and experiment relationships |
+| Clusters | Automatic full-record lexical grouping, recurring-group count bars and trace drill-down |
+| Data & evidence | Local source-label counts, repeated-task groups and recorded evidence lineage |
 | Investigations | Research manually or with an agent, inspect snapshot evidence, record outcomes, publish findings/charts, and pause/resume native sessions |
 | Project knowledge | Add and review explicit policy or tool context |
 | Tasks & graders | Inspect/edit specifications, run deterministic audits, and record reviews |
@@ -123,15 +134,19 @@ Frontend source lives in `ui/`, and Vite generates ignored `ui/dist/`. FastAPI s
 | Behavioral coverage | Review capability versions, map traces/tasks, and inspect gaps/duplicates |
 | Improvements | Capture exact candidates, launch paired runs, and record decisions |
 
-Both graph views share a React Flow canvas that loads on demand. Trace filters and cluster membership are shared through application query state; changing filters resets pagination. See [trace exploration](../workflows/traces.md) for query semantics and limits.
+Recorded evidence relationships use a React Flow canvas that loads on demand. Trace filters and cluster membership are shared through application query state; changing filters resets pagination. See [trace exploration](../workflows/traces.md) for query semantics and limits.
 
 ## Explore imported data visually
 
 Open **Clusters** after ingestion. It runs automatically using complete records and all traces matching the current search filters. Leave **Text field** blank for provider-independent event envelopes; choose `/events` or another existing JSON pointer to compare a specific part. There is no text-prefix cutoff. **Maximum traces** is optional; leaving it blank includes every match, independently of search pagination. After changing controls, click **Group traces**. Higher similarity thresholds create tighter lexical groups.
 
-The **Cluster map** selector switches between groups. Its edges mean group membership, not causality. Select a trace node and click **Open selected trace**, or use **Inspect all members** to view the group in the filtered explorer. Pan, zoom or fit the canvas with its controls. Missing selected fields produce an explicit empty state: clear the text field or choose a pointer present in the imported records.
+The cluster count bars show recurring groups and open all member traces in the explorer. A singleton state explains when there are no neighbors at the selected threshold. Missing selected fields offer recovery: clear the text field or choose a pointer present in the records. These are lexical groups, not established failure categories.
 
-**Evidence graph** displays imported traces immediately, using source paths as labels when available. Traces without saved links are arranged in a grid. Select a node and open its source artifact to inspect the original events. Findings and tasks add recorded relationships later; the graph does not invent relationships between raw runs. Use Clusters to explore shared language. The graph returns every node by default and supports focusing on a trace ID. Only an explicit API `limit` reduces its node count. Trace explorer distributions return every category, record pagination has no total offset ceiling, and Read input / request expands the complete structured value.
+**Data & evidence** starts with the dataset overview. It counts all matching local traces independently of explorer pagination. Choose an outcome field: only explicit true/1 and false/0 values are passed/failed; everything else is unknown. The chart labels are source-provided and unverified. Same-task bars and searchable tables show exact source-group membership and whether repeated attempts exist. Pages change what is displayed, not which rows were counted. Open a group to inspect the matching attempts; complete chart data is available in details.
+
+The **Evidence lineage** tab draws a network only for saved relationships among traces, findings, tasks and experiments. Unlinked traces remain available in the explorer and complete graph data; an empty state explains why there are no evidence links yet. Select a linked node to read its actual relationships and open its source. Imported Harbor trajectories link to their recorded experiment. Labels prefer task/issue titles and source paths over opaque IDs.
+
+Graph requests return every node by default and support trace focus; only an explicit API `limit` reduces that returned population. The canvas counts describe the linked nodes actually displayed. Trace distributions return every category and pagination has no total offset ceiling. Trace detail includes an ordered, searchable conversation, complete tool calls and event metadata where the schema is recognized, plus full original JSON for every record.
 
 ## Research manually
 
@@ -145,9 +160,11 @@ Draft editing retains existing cases, signals, proposals, limitations and open q
 
 ## Model jobs and execution
 
-Native investigation, task-design, paired-experiment and Harbor-run routes schedule FastAPI `BackgroundTasks`, so the HTTP response returns before the operation runs through the framework thread pool. The job registry reserves one operation at a time and records status and results; it creates no worker threads. Reservation precedes investigation creation, so a rejected concurrent request does not leave an orphan artifact. Job status is process-local; durable domain artifacts hold completed work.
+Hugging Face import, native investigation, task-design, paired-experiment and Harbor routes schedule FastAPI `BackgroundTasks`, so the HTTP response returns before the operation runs through the framework thread pool. The job registry reserves one operation at a time and records status and results; it creates no worker threads. Reservation precedes investigation creation, so a rejected concurrent request does not leave an orphan artifact. Job status is process-local; durable domain artifacts hold completed work.
 
 Uvicorn graceful shutdown waits for active response background tasks by default. Pause long native research before stopping if it should resume later. An external Docker stop deadline can force termination; the workbench does not add a default analysis timeout.
+
+Research controls report the actual backend runtime, installed CLI and login status. Use `make init MODE=native` and `make dev MODE=native` for host CLI logins; stock containers do not inherit them. A ready login does not guarantee access to every model or account quota.
 
 Selecting **Use an agent** exposes a native backend and either adaptive `research` or per-record `complete` mode. Final evaluation inputs are included unless the developer selects their explicit exclusion. There is no maximum-call input. A saved session resumes with its original backend and model settings; partial findings remain visible while work is unfinished. A live session exposes Pause, and a released session lock allows recovery after a process crash.
 
@@ -165,7 +182,7 @@ For UI changes, [rebuild the TypeScript bundle](../development/contributing.md),
 
 ## Human eval engineering
 
-Start with **World specifications** to capture sourced domain rules, schemas, tool contracts and permissions. Save a draft, resolve outstanding questions in a new immutable version, and record reviewer and reason for acceptance. Task specification JSON can pin that world and define environment commands, state criteria and conversation turns. Accepted task detail offers **Harbor export** with an existing local template directory and target configuration.
+Start with **World specifications** to capture sourced domain rules, schemas, tool contracts and permissions. Save a draft, resolve outstanding questions in a new immutable version, and record reviewer and reason for acceptance. Task specification JSON can pin that world and define environment commands, state criteria and conversation turns. Accepted task detail offers **Run a Harbor comparison** with an existing local template, baseline/candidate targets and verifier settings. The background operation imports paired results and available generated trajectories automatically; the lower-level **Harbor export** remains available. See [Harbor comparisons](../integrations/harbor.md).
 
 In **Grader calibration**, choose a recorded experiment and create a calibration. Review the frozen requirements, chronological turns and observed state. Grader verdicts are hidden before a first assessment until explicitly revealed. Save pass/fail/invalid, a reason and optional cause; adjudication is bound to the exact displayed human label set. Reviewer identity is locally declared, not account authentication.
 

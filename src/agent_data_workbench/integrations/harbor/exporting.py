@@ -11,27 +11,17 @@ import shutil
 import tomllib
 from pathlib import Path
 
-from pydantic import Field
-
 from agent_data_workbench.data.store import TraceStore
-from agent_data_workbench.evaluation.tasks.contracts import TaskSpec
 from agent_data_workbench.evaluation.tasks.repository import load_task, task_digest
-from agent_data_workbench.shared.commands import check_sources, file_sha256, pinned_command
-from agent_data_workbench.shared.contracts import Contract
+from agent_data_workbench.shared.commands import file_sha256
 from agent_data_workbench.shared.files import relative_path, save
 from agent_data_workbench.shared.identifiers import new_id
-from agent_data_workbench.shared.json import digest, json_text, read_json
-from agent_data_workbench.shared.processes import run_process
+from agent_data_workbench.shared.json import digest, json_text
 from agent_data_workbench.shared.time import now
 from agent_data_workbench.workspace.project import Project
 
-
-class HarborExportConfig(Contract):
-    template_directory: str = Field(min_length=1)
-    agent: str = Field(min_length=1)
-    model: str = ""
-    environment_type: str = Field(default="docker", min_length=1)
-    repetitions: int = Field(default=1, ge=1)
+from .commands import _command
+from .contracts import HarborExportConfig
 
 
 def _files(root: Path) -> dict[str, str]:
@@ -58,32 +48,6 @@ def _expose_final_source(project: Project, groups: list[str], export_id: str, ac
                 }
             )
             save(project.path("suites", suite["id"]), suite)
-
-
-def _command(
-    bundle: Path, config: HarborExportConfig, job_name: str, conversation: bool
-) -> list[str]:
-    command = [
-        "harbor",
-        "run",
-        "--path",
-        str(bundle),
-        "--agent",
-        config.agent,
-        "-e",
-        config.environment_type,
-        "--n-attempts",
-        str(config.repetitions),
-        "--jobs-dir",
-        str(bundle.parent / "jobs"),
-        "--job-name",
-        job_name,
-    ]
-    if config.model:
-        command.extend(["--model", config.model])
-    if conversation:
-        command.append("--resume-trajectory")
-    return command
 
 
 def export_harbor(project: Project, task_id: str, config: HarborExportConfig) -> dict:
@@ -192,66 +156,3 @@ def _export_harbor(project: Project, task_id: str, config: HarborExportConfig) -
     except BaseException:
         shutil.rmtree(folder)
         raise
-
-
-def run_harbor_export(project: Project, export_id: str, *, timeout: int | None = None) -> dict:
-    """Run the exact exported bundle. Harbor remains an optional installed dependency."""
-    with project.lock():
-        return _run_harbor_export(project, export_id, timeout=timeout)
-
-
-def _run_harbor_export(project: Project, export_id: str, *, timeout: int | None) -> dict:
-    manifest = read_json(project.path("exports", export_id))
-    if manifest.get("kind") != "harbor":
-        raise ValueError("Expected a Harbor export")
-    if manifest.get("sha256") != digest({k: v for k, v in manifest.items() if k != "sha256"}):
-        raise ValueError("Harbor manifest changed after export")
-    bundle = Path(manifest["bundle_directory"])
-    expected_bundle = project.directory("exports") / manifest["id"] / "task"
-    if (
-        bundle.resolve() != expected_bundle.resolve()
-        or _files(bundle) != manifest["files"]
-        or digest(manifest["files"]) != manifest["bundle_sha256"]
-    ):
-        raise ValueError("Harbor bundle changed after export")
-    if read_json(bundle.parent / "manifest.json") != manifest:
-        raise ValueError("Harbor manifest differs from its frozen export snapshot")
-    frozen_task = read_json(bundle.parent / "reviewed-task.json")
-    if task_digest(TaskSpec.model_validate(frozen_task["spec"])) != manifest["task_sha256"]:
-        raise ValueError("Harbor reviewed task changed after export")
-    config = HarborExportConfig.model_validate(manifest["config"])
-    expected_command = _command(
-        bundle, config, manifest["job_name"], manifest["conversation_continuity"]
-    )
-    if manifest["command"] != expected_command:
-        raise ValueError("Harbor launch command differs from its captured configuration")
-    _expose_final_source(project, manifest["trace_groups"], manifest["id"], "execution")
-    run_id = new_id()
-    command = _command(bundle, config, run_id, manifest["conversation_continuity"])
-    args, sources = pinned_command(command, [], bundle.parent)
-    version = run_process([args[0], "--version"], "", bundle.parent, timeout).strip()
-    result = {
-        "id": run_id,
-        "export_id": export_id,
-        "command": args,
-        "harbor_version": version,
-        "source_sha256": sources,
-        "bundle_sha256": manifest["bundle_sha256"],
-        "started_at": now(),
-        "status": "running",
-        "error": None,
-    }
-    path = bundle.parent / (run_id + ".json")
-    save(path, result)
-    try:
-        output = run_process(args, "", bundle.parent, timeout)
-        check_sources(sources)
-        if _files(bundle) != manifest["files"]:
-            raise ValueError("Harbor bundle changed during execution")
-        (bundle.parent / (run_id + "-stdout.log")).write_text(output, encoding="utf-8")
-        result["status"] = "completed"
-    except ValueError, RuntimeError, OSError:
-        result.update(status="error", error="Harbor failed; inspect its job and configuration")
-    result["finished_at"] = now()
-    save(path, result)
-    return result

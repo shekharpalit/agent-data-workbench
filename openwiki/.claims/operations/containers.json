@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:4040b6be35190e9a04fcae619b3e3ceb794dca067e3b2ce961fa558f4c465f1f",
+  "pageVersion": "sha256:92a7f2c59f4707bbbb8ceff03e2930095ab475abaa7b60d27d19e00869455be4",
   "claims": [
     {
       "id": "claim_0214ec89ef294dfaaad35ee54cb09813",
@@ -8,7 +8,7 @@
       "evidence": [
         {
           "resource": "repo://Makefile",
-          "version": "repo-file-v1:sha256:744a80d95a8419e0113d85d0d334ccafdfbf2d2fd1be97548c95b0e899e7e6ed"
+          "version": "repo-file-v1:sha256:2527e6d3d1c9132edaa6f59355a975fb07fde47d58e6b06312482a6634e7c8cb"
         },
         {
           "resource": "repo://src/agent_data_workbench/workbench/runtime.py#L58-L63",
@@ -22,7 +22,7 @@
       "evidence": [
         {
           "resource": "repo://Makefile",
-          "version": "repo-file-v1:sha256:744a80d95a8419e0113d85d0d334ccafdfbf2d2fd1be97548c95b0e899e7e6ed"
+          "version": "repo-file-v1:sha256:2527e6d3d1c9132edaa6f59355a975fb07fde47d58e6b06312482a6634e7c8cb"
         },
         {
           "resource": "repo://compose.yaml",
@@ -40,11 +40,11 @@
       "evidence": [
         {
           "resource": "repo://Makefile",
-          "version": "repo-file-v1:sha256:744a80d95a8419e0113d85d0d334ccafdfbf2d2fd1be97548c95b0e899e7e6ed"
+          "version": "repo-file-v1:sha256:2527e6d3d1c9132edaa6f59355a975fb07fde47d58e6b06312482a6634e7c8cb"
         },
         {
           "resource": "repo://src/agent_data_workbench/cli/project.py",
-          "version": "repo-file-v1:sha256:7fe03c9dae556c6c2e6a2d8ddb627c530b918c8b4cae1227c64b5c28cb13c52c"
+          "version": "repo-file-v1:sha256:4672233c3bbeccdf10b895463ff07d165b1097daf318991aa400f5269f9ab51f"
         },
         {
           "resource": "repo://src/agent_data_workbench/data/transport.py#L15-L71",
@@ -82,7 +82,7 @@
         },
         {
           "resource": "repo://pyproject.toml",
-          "version": "repo-file-v1:sha256:2d0d367cab5a77ce9b4ab1961585d4f91424817388848229a358f038fc7df10f"
+          "version": "repo-file-v1:sha256:52e802017fae5d05fd075ae91783747491729f0b0a9bb79491ba8aa54eee2497"
         }
       ]
     },
@@ -152,7 +152,7 @@
       "evidence": [
         {
           "resource": "repo://Makefile",
-          "version": "repo-file-v1:sha256:744a80d95a8419e0113d85d0d334ccafdfbf2d2fd1be97548c95b0e899e7e6ed"
+          "version": "repo-file-v1:sha256:2527e6d3d1c9132edaa6f59355a975fb07fde47d58e6b06312482a6634e7c8cb"
         },
         {
           "resource": "repo://src/agent_data_workbench/data/discovery.py#L22-L83",
@@ -177,10 +177,30 @@
           "version": "repo-lines-v1:sha256:bc87c5eb36d199a8ce8107692d8321c1e5a3729a3d25957ce100496dd7941ba0:eyJzZWxlY3RlZExpbmVDb3VudCI6NTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU2MWYzM2MxMzI1NjlhNzQ5NDZiMmZjZjU0NmNhM2M0NDI1ZGEwY2E1Y2Y2YjY4NmMyNjA5MGZhYTlkMTEyYjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5MDlhNTNhNjE4ZDAyOGUxZDMwMDBjMGE3YWJjZWVjYmU1ZmIzN2Y0ZTUxMWVmZTQ2NjQzZmFkNmU2Njg3MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRjNmE5NjBkZWNhNzhiM2YwZTBhMTBlZDU5NjE4YWEzNjM4NWQ3M2UxMzM2NTEzNDYxMmE5ZmQ3ZWZhM2M5ZDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
+    },
+    {
+      "id": "claim_de11eb1f97ac4e7e8f2ddba0079b2f7b",
+      "statement": "Native Make initialization builds assets before editable installation, installs Harbor as a uv tool and initializes the selected local project; native development runs the UI watcher and Uvicorn together.",
+      "evidence": [
+        {
+          "resource": "repo://Makefile",
+          "version": "repo-file-v1:sha256:2527e6d3d1c9132edaa6f59355a975fb07fde47d58e6b06312482a6634e7c8cb"
+        }
+      ]
+    },
+    {
+      "id": "claim_6c4746fb393a4825bf2992115591da0e",
+      "statement": "Runtime status probes the backend PATH for Codex, Claude, Harbor and Docker and reports CLI authentication or daemon readiness without returning credentials.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/workbench/capabilities.py",
+          "version": "repo-file-v1:sha256:a87b33561ac464532c8ad37bd60934b693edc9c5416f26a325fb164c579f0cf8"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T03:02:55.250Z"
+    "at": "2026-09-08T04:50:29.215Z"
   }
 }

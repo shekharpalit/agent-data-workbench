@@ -8,7 +8,6 @@ import { initialSearch, graphLayout } from "../src/state";
 import { ClustersView } from "../src/views/Clusters";
 import GraphView from "../src/views/Graph";
 import { SearchView } from "../src/views/Search";
-import { clusterLayout } from "../src/components/graphs/cluster-layout";
 
 vi.mock("../src/components/graphs/NetworkCanvas", () => ({
   NetworkCanvas: ({
@@ -85,16 +84,9 @@ describe("trace exploration", () => {
       />,
     );
     // When
-    await user.click(await screen.findByRole("button", { name: "scan-a" }));
+    await user.click(await screen.findByRole("button", { name: "1. schema" }));
     await user.click(
-      screen.getByRole("button", { name: "Open selected trace →" }),
-    );
-    await user.selectOptions(
-      screen.getByLabelText("Cluster to visualize"),
-      "second",
-    );
-    await user.click(
-      screen.getByRole("button", { name: "Inspect all 1 members →" }),
+      screen.getByRole("button", { name: "Inspect ungrouped traces →" }),
     );
     // Then
     expect({
@@ -108,8 +100,8 @@ describe("trace exploration", () => {
         threshold: 0.55,
         limit: null,
       },
-      navigation: [[{ view: "traces", id: "scan-a" }]],
-      members: [[["scan-c"]]],
+      navigation: [],
+      members: [[["scan-a", "scan-b"]], [["scan-c"]]],
     });
   });
 
@@ -162,42 +154,41 @@ describe("trace exploration", () => {
     });
   });
 
-  it("Given an imported trace with no findings, When opening its graph node, Then opens the original trace", async () => {
+  it("Given traces without recorded links, When opening lineage, Then shows an honest empty state without a meaningless network", async () => {
     // Given
     vi.spyOn(api, "graph").mockResolvedValue({
       nodes: [
-        {
-          id: "trace:scan-a",
-          kind: "trace",
-          label: "scans/run.jsonl",
-          trace_id: "scan-a",
-        },
+        { id: "trace:a", kind: "trace", label: "Source run", trace_id: "a" },
       ],
       edges: [],
       total_nodes: 1,
       shown_nodes: 1,
       truncated: false,
-      trace_id: "",
-      scope: "Imported evidence.",
+      trace_id: "a",
+      scope: "Saved relationships only.",
     });
     const navigate = vi.fn();
     const user = userEvent.setup();
-    renderQuery(<GraphView navigate={navigate} />);
+    renderQuery(
+      <GraphView
+        traceId="a"
+        query={initialSearch}
+        onMembers={vi.fn()}
+        navigate={navigate}
+      />,
+    );
     // When
     await user.click(
-      await screen.findByRole("button", { name: "scans/run.jsonl" }),
-    );
-    await user.click(
-      screen.getByRole("button", { name: "Open source artifact →" }),
-    );
-    await user.click(
-      screen.getByRole("button", { name: "Explore trace clusters →" }),
+      await screen.findByRole("button", { name: "Start an investigation →" }),
     );
     // Then
-    expect(navigate.mock.calls).toStrictEqual([
-      [{ view: "traces", id: "scan-a" }],
-      [{ view: "clusters" }],
-    ]);
+    expect({
+      network: screen.queryByRole("region", { name: "Evidence lineage graph" }),
+      navigation: navigate.mock.calls,
+    }).toStrictEqual({
+      network: null,
+      navigation: [[{ view: "investigations" }]],
+    });
   });
 
   it("Given raw traces, When arranging the graph, Then uses a readable grid without inventing edges", () => {
@@ -232,53 +223,6 @@ describe("trace exploration", () => {
         ][i],
       })),
       edges: [],
-    });
-  });
-
-  it("Given a lexical cluster, When mapping it, Then connects exactly its members", () => {
-    // Given
-    const group = {
-      id: "group",
-      count: 2,
-      trace_ids: ["a", "b"],
-      terms: ["schema"],
-      label: "schema",
-    };
-    // When
-    const actual = clusterLayout(group);
-    // Then
-    expect(actual).toStrictEqual({
-      nodes: [
-        {
-          id: "cluster:group",
-          data: { kind: "cluster", label: "2 traces · schema" },
-          position: { x: 140, y: 0 },
-        },
-        {
-          id: "trace:a",
-          data: { kind: "trace", label: "a", trace_id: "a" },
-          position: { x: 0, y: 180 },
-        },
-        {
-          id: "trace:b",
-          data: { kind: "trace", label: "b", trace_id: "b" },
-          position: { x: 280, y: 180 },
-        },
-      ],
-      edges: [
-        {
-          id: "cluster:group:trace:a",
-          source: "cluster:group",
-          target: "trace:a",
-          label: "member",
-        },
-        {
-          id: "cluster:group:trace:b",
-          source: "cluster:group",
-          target: "trace:b",
-          label: "member",
-        },
-      ],
     });
   });
 });

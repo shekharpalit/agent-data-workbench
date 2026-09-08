@@ -1,36 +1,36 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:d8bf72f55f2dbb1addf14a46c1216757279cb6a8d1cc1fde535d1e8c336dc840",
+  "pageVersion": "sha256:7f7240f6614fb04b0408491d32d34745715ad4b3042781a458055ff669b565e6",
   "claims": [
     {
       "id": "claim_823274351dbc48b9a25071ef1a7bf612",
       "statement": "Records-layout ingestion preserves record bodies and supplied IDs, generates UUIDv5 IDs when needed and streams JSONL records; both layouts feed all selected files into one rollback-capable import transaction.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/data/ingestion.py#L88-L138",
-          "version": "repo-lines-v1:sha256:5ea38fa8e67eec11444e7235980bda7235c1fa6cb45a1075d315ec541a8fe6fc:eyJzZWxlY3RlZExpbmVDb3VudCI6NTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyMTkxNGJhNGI3ZTgxM2M2NTk3NmI2OTM1M2FlYzdiM2U0ZmNmZTJkZjdjNDA4MjkzMjMzZDU0YjRhNzUzODIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhNDU5Mzg1MGJhZmMxMDBlYjkzNDU1ZDc0ZDNiMDYwNGNiZjgxOGQxOWZiN2YxNjg5ZGU5ZWUzYzlhYThjYmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhjYzRhN2QxY2M3OTZhYmEzZTQ2NzIzMzI3ZjUxN2U5ZjgxMTk4MmQyNTBmMDcwMjk4NmU0YjU3NjRhZDk1ODkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://src/agent_data_workbench/data/ingestion.py",
+          "version": "repo-file-v1:sha256:683680dac5e1937243b79bbdd98aced8ed6a90d633ddb48a61a1954449198276"
         },
         {
-          "resource": "repo://src/agent_data_workbench/data/normalization.py#L15-L32",
-          "version": "repo-lines-v1:sha256:567a61e9683e8fbab70e4296fd03f14355c46fb4305a137a2c76cd0fe89a8166:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJmY2RiMjFlYjA5MTc3ODg0NGY5OTEzMWEyNDhmODRkM2FmNTNlNzlkOTNlNDM4YThiMWE4YzBmMzcxNWE4OTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZiM2M2NjViMWZlNDg3ZmQ3NzdjOThmODAzNmNjN2EzYzRhMjE0ZGIwYzY1NzRmMDQwMGEzMjdiNjRkMjM5MjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjViNWE3NmVhZmRmMmQxZTVjZGRmMGQwYzcwZGM0ZDUwMGY1MjEwNGRlZmFiNTMyMTRlY2Q1OGM1YzI0MDg3OWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjljNDJiYzU4ZWY5YWYxMTI1MmVkODA0YTNmMjI2NDViZGE4MTczNWVmZTY3MmNmOGEyNTViM2Q2ZmI3MjMwYzIifQ"
+          "resource": "repo://src/agent_data_workbench/data/normalization.py",
+          "version": "repo-file-v1:sha256:84e8c760c39010fa1b369460a9d0abe969375854215f7952d9b4d72b49e01091"
         },
         {
-          "resource": "repo://src/agent_data_workbench/data/sources.py#L17-L35",
-          "version": "repo-lines-v1:sha256:6db5ddf18f61f23ce31c319599c2d14ae1292ba9f22095e60dd7bc3cce4ec09c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE1NjhiYzcxZWRmNTg4MGJmZjNlNzk4MTM2Yjk1NjhlZDVlZWMxZWYzMDE5MzlhNDM2YjlhYThjMWU4ZDdlYTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE1NDg0Y2M1ZTQ1OWVjODc3OTFjZDJlZTQ0MjRhNjRhYTFmYmU0ZmY5MDI5ZTQ2YWMxNDhjODFiYjYzZWRmNTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFkYzViODllODcyMjZlNTRkOTc0MWRhYjRkMDc3MmYwZWI4ZGE1NDM3MWJiYWFiMzZkMWQ0MzNhNjExNDI3YTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://src/agent_data_workbench/data/sources.py",
+          "version": "repo-file-v1:sha256:ae0a332b172a3133efa38df9e1aac5319a068a7b0a8ba55f1c120b9dd0e77aa4"
         },
         {
-          "resource": "repo://src/agent_data_workbench/data/store.py#L51-L94",
-          "version": "repo-lines-v1:sha256:03409434a1109769fd2612dbfe1075fc0757d34995247670a50f3443f1544320:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNkZjMxYzg0MjYxZjk5YWEzMTk0YWE4MWM2ODYwMGQ4M2NjMzRhOWFjNjUwMDVhNzMyMTNjMTZkMzBjNjI4YWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRiOTE4YmU2ODAyODM0NTNiOTNlYTUzYmI3NDk4N2ZkNTE4ZGQxZTc4YmM2NGNhODI4YWY3NTFhZGM5YmY5NGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU5MTlmMmFkNjc4ZTg5MTJlNmUwYTI3YWFkNTM0ZDc5NDA4Y2I5OTNmY2FmZDE4ZDY0ZGYxNGEyNWMxNGUwNDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgwMjg2NjhjZDFlM2M0ODNjMjc2OTJhYTRlMWQ0MDc2NWFkMzU2YzdlMGRiMjk3OWIxMWQ1NTE1NjU5MTFjYTEifQ"
+          "resource": "repo://src/agent_data_workbench/data/store.py",
+          "version": "repo-file-v1:sha256:3a63dc624b016d75ef76428a91b192676b4b713a8e69382be03da2a3863280c8"
         }
       ]
     },
     {
       "id": "claim_9e236c124b1548299f3b9c653166d688",
-      "statement": "Trace groups and strata are derived from configured pointers with trace-ID and unclassified fallbacks, and unchanged reimports do not update those stored labels.",
+      "statement": "Trace groups and strata come from configured pointers with trace-ID and unclassified fallbacks; a reimport with changed content or group/category metadata aborts the batch.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/data/store.py#L51-L94",
-          "version": "repo-lines-v1:sha256:03409434a1109769fd2612dbfe1075fc0757d34995247670a50f3443f1544320:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNkZjMxYzg0MjYxZjk5YWEzMTk0YWE4MWM2ODYwMGQ4M2NjMzRhOWFjNjUwMDVhNzMyMTNjMTZkMzBjNjI4YWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRiOTE4YmU2ODAyODM0NTNiOTNlYTUzYmI3NDk4N2ZkNTE4ZGQxZTc4YmM2NGNhODI4YWY3NTFhZGM5YmY5NGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU5MTlmMmFkNjc4ZTg5MTJlNmUwYTI3YWFkNTM0ZDc5NDA4Y2I5OTNmY2FmZDE4ZDY0ZGYxNGEyNWMxNGUwNDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgwMjg2NjhjZDFlM2M0ODNjMjc2OTJhYTRlMWQ0MDc2NWFkMzU2YzdlMGRiMjk3OWIxMWQ1NTE1NjU5MTFjYTEifQ"
+          "resource": "repo://src/agent_data_workbench/data/store.py#L51-L111",
+          "version": "repo-lines-v1:sha256:878611dceefddb487e9b9996263280d960dd135a30ba75e465e1b02054fcca67:eyJzZWxlY3RlZExpbmVDb3VudCI6NjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNkZjMxYzg0MjYxZjk5YWEzMTk0YWE4MWM2ODYwMGQ4M2NjMzRhOWFjNjUwMDVhNzMyMTNjMTZkMzBjNjI4YWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRiOTE4YmU2ODAyODM0NTNiOTNlYTUzYmI3NDk4N2ZkNTE4ZGQxZTc4YmM2NGNhODI4YWY3NTFhZGM5YmY5NGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU5MTlmMmFkNjc4ZTg5MTJlNmUwYTI3YWFkNTM0ZDc5NDA4Y2I5OTNmY2FmZDE4ZDY0ZGYxNGEyNWMxNGUwNDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgwMjg2NjhjZDFlM2M0ODNjMjc2OTJhYTRlMWQ0MDc2NWFkMzU2YzdlMGRiMjk3OWIxMWQ1NTE1NjU5MTFjYTEifQ"
         }
       ]
     },
@@ -98,19 +98,23 @@
     },
     {
       "id": "claim_a51ee9001acf44be8526fd6aef39f60e",
-      "statement": "Lineage includes imported traces before findings exist, labels them with source paths when present, adds only saved artifact relationships, and focuses downstream without pulling unrelated siblings into a trace graph.",
+      "statement": "Lineage data retains every imported trace, uses meaningful task/title/source labels, adds only saved relationships including Harbor trace-to-experiment links, and focuses downstream without unrelated sibling tasks.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/exploration/lineage.py#L11-L115",
-          "version": "repo-lines-v1:sha256:44e1d2072b0f4902ced5a123e54a3f40c715bbd3a694ee9c4ae3df00df73dab9:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA3LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI3MWNlY2ZhOTEwZTg5OTg1MTViM2I0MzBjYWJlZTU2MzZmNmMwZDVlNGE5M2VhMmE2MDkyMTcwNTNlMzA4ZmNmIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0ODkzZjQwZTM3ODFlYjg5NmM4MmQwNDZhMDgwNjdhMTFlMzVjZGYyZjFkZmFmMjZmZWE5MGI4ZGI2Njc2NDEzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlYWIzNTgzMWY5NjVkODNkMTA4NDg0ZDM5MGQwNTBhYWM1MDliYjBkOWZiNDQ0OWE1NDMwODQ1MWJmNjFjYjUzIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+          "resource": "repo://src/agent_data_workbench/exploration/dataset.py#L15-L23",
+          "version": "repo-lines-v1:sha256:f89bcd6e879d8b98c2e14a95d4abe8ecf5fd59d9e168553028c4789d2ca0ee88:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzJkYjMzMGEzZTZhMmYwNTJkMDhhN2VjODkxZDQ0MDUyZmM1ZjJhYjYxODk0YWZmMjA5MzY3YTY3YjFmNzYxNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMGMwNTVlYjJhNmFiZjcxOWE4ZDQ1MTliOGJjODYzZmJjZGU3ODljMGI3MWY1NmFiZTAxYTk1ZmY2YzVhZjM2NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjZiOWIzOWYzNTkyNmM0NmU3NTIyYmVhZjI5MjM5ZmQ2M2JlN2Y3MDI5YmE0ZGQ0Y2U2ZWVhN2E5ZWMzOGJlMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNWJhZWMzNWUwZWY3OTNkZmIyODY0NzE0NzBjODY3OTZjYjZmMDZmYTMwZmY4NzRkMTc5OWU4MzQwYjM4ZTk0YyJ9"
         },
         {
-          "resource": "repo://tests/test_explore.py#L262-L297",
-          "version": "repo-lines-v1:sha256:5f0944b65367ddb8d5285e11b3d1a783dd8a66118afb411646ae7ec21b80bb18:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNlMDkyNDIyMjk3NDM4OTI0YjMxM2IzZjZhMjUwNTRlZTY0YmYxYzQ3ZmJkYTBlMjYyNzFlNGZhMDdhNTc1NzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmYmQwMDkzMTRiYzI3MDg0MTY3MzRhMDJhZTVmZjM5YTFlNDhhMDUwYmU5MWY0M2IyZmFhOTIwMDJjNjJiZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjllODljNTA0NzE4Mzk5ZjFhODU3Y2MzZTdiMDEyOWY4M2QzMWU4OWI2Y2YwYTk0ODllNTI1OTcwMGY3NDU4NmQifQ"
+          "resource": "repo://src/agent_data_workbench/exploration/lineage.py",
+          "version": "repo-file-v1:sha256:0087f8a361e962c8d9600f1ff62f5e5e899d8384d2900403814e09dc3485d7a5"
         },
         {
-          "resource": "repo://tests/test_explore.py#L300-L409",
-          "version": "repo-lines-v1:sha256:fd75d4dac539871307e7977bb28ab52323017455bb82d2e650f20350cb6815cd:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEwLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIzMmE0NGRhOGIxZTgxOTNhOTM3ZTQ3OTAwZDU5ZDNjN2I1OWFlYWY1OWY2YWIyNzJjNWFmYThjNTE4MjllOWQ4IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0ODkzZjQwZTM3ODFlYjg5NmM4MmQwNDZhMDgwNjdhMTFlMzVjZGYyZjFkZmFmMjZmZWE5MGI4ZGI2Njc2NDEzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI0ZmJkMDA5MzE0YmMyNzA4NDE2NzM0YTAyYWU1ZmYzOWExZTQ4YTA1MGJlOTFmNDNiMmZhYTkyMDAyYzYyYmZjIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI1NjgwYjBmMjkyOGFjMGRiZjNkZDRhMzFkNWMxNmU5MTk4YTI5YTYwODZkMzljZmI1N2MyMGY2MGJlMzNhNjVkIn0"
+          "resource": "repo://tests/test_explore.py",
+          "version": "repo-file-v1:sha256:5ce02b80432eada5a89ac54d4ead912430bbb6d8f524e5816f97d2271b7bbcc1"
+        },
+        {
+          "resource": "repo://tests/test_harbor_comparison.py",
+          "version": "repo-file-v1:sha256:ef9b6c3d544c98c0e11a406274f9efbcd30b9bc40cdb98290574fa74648e1876"
         }
       ]
     },
@@ -119,16 +123,16 @@
       "statement": "Lexical cluster identities use deterministic UUIDv5 values from membership, graph edge identities use UUIDv5 values from their relationship, and graph node keys include the node kind.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/exploration/clustering/service.py#L16-L69",
-          "version": "repo-lines-v1:sha256:243a7b1d15bb121f62cd709962a5b37d294ff7e59a4bd1feb0d5482cd22a77ea:eyJzZWxlY3RlZExpbmVDb3VudCI6NTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZmMGQ0ODY5MjA4NmVhMDk3N2U0NTRjNmY4MDFmMDBkZjliZWMwOWQ0MzEwZTIxMmU1N2Y2ZTAxYjM5YTM3NzAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY1NGYwZGVmYWFhYzAzYmNiNmJmZjQ3YWExNjhiNzc2Zjg5YzNmMTIyN2MwYmYyODFhYWVjOTM2ZDYxNmE4MGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://src/agent_data_workbench/exploration/clustering/service.py",
+          "version": "repo-file-v1:sha256:0752206de8ced4d26a24a20825e0b4eea9e7293f9cf9cbce42f165b5807fbb61"
         },
         {
-          "resource": "repo://src/agent_data_workbench/exploration/lineage.py#L11-L115",
-          "version": "repo-lines-v1:sha256:44e1d2072b0f4902ced5a123e54a3f40c715bbd3a694ee9c4ae3df00df73dab9:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA3LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI3MWNlY2ZhOTEwZTg5OTg1MTViM2I0MzBjYWJlZTU2MzZmNmMwZDVlNGE5M2VhMmE2MDkyMTcwNTNlMzA4ZmNmIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0ODkzZjQwZTM3ODFlYjg5NmM4MmQwNDZhMDgwNjdhMTFlMzVjZGYyZjFkZmFmMjZmZWE5MGI4ZGI2Njc2NDEzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlYWIzNTgzMWY5NjVkODNkMTA4NDg0ZDM5MGQwNTBhYWM1MDliYjBkOWZiNDQ0OWE1NDMwODQ1MWJmNjFjYjUzIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+          "resource": "repo://src/agent_data_workbench/exploration/lineage.py",
+          "version": "repo-file-v1:sha256:0087f8a361e962c8d9600f1ff62f5e5e899d8384d2900403814e09dc3485d7a5"
         },
         {
-          "resource": "repo://src/agent_data_workbench/shared/identifiers.py#L24-L25",
-          "version": "repo-lines-v1:sha256:d0c6685181b7cb601d3bad75c08a9444dc8865eedbbd3abf04a284f24d101035:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTFkYjljYjExZWRhN2VhY2Q1ODg3NjA5MzY5MWNlZTNmMjE5N2IzZDYyYmYxZTA5ZDNkY2I1YTExZDMyNGJmNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTJmODg4ZTA3MzM0NjFhMDE3ZWVhZTE3ZWJlZjk1ZWU2NTQ1NzU3M2UyYWMxZjllMzJiYmI5YmZkMmQ4OTQyOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDg0N2IzODcxNjI4YzJiOTkyM2QwOGUwNzk4NzQ0ZTNlMjRhNjMxNjA5MTgyMDJhM2Q0MTlkMzk4NTVmZjI5ZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+          "resource": "repo://src/agent_data_workbench/shared/identifiers.py",
+          "version": "repo-file-v1:sha256:84c226e3810161043a58f6d7861ead48d75182bb2ce290bafbc127e52b52def0"
         }
       ]
     },
@@ -207,28 +211,6 @@
       ]
     },
     {
-      "id": "claim_a205c6c098d640a8ae5e1645d1db286c",
-      "statement": "The UI starts whole-record clustering automatically and renders a selectable membership map with individual-trace and whole-group navigation through a shared React Flow canvas.",
-      "evidence": [
-        {
-          "resource": "repo://ui/src/components/graphs/ClusterGraph.tsx",
-          "version": "repo-file-v1:sha256:6a3fa43d799d7a91af997a3d6d7cf6700dddbf2abccc9a7f1df60457d00e966d"
-        },
-        {
-          "resource": "repo://ui/src/components/graphs/NetworkCanvas.tsx",
-          "version": "repo-file-v1:sha256:68eccef96db273361de4c3809e4f585b01fabe7b229470ac971494c3f32ed199"
-        },
-        {
-          "resource": "repo://ui/src/components/graphs/cluster-layout.ts",
-          "version": "repo-file-v1:sha256:8c0d43076fb1580bc1fe80e025101912094ee7c76c5b7d998300852ff6e7478a"
-        },
-        {
-          "resource": "repo://ui/src/views/Clusters.tsx",
-          "version": "repo-file-v1:sha256:1853729d54faf88308d44bc31c8dff1c5502ad2b2794ccab58f08aae6008b991"
-        }
-      ]
-    },
-    {
       "id": "claim_b6098b555f2d42b1b9741ae9fb97f528",
       "statement": "The current lexical clustering implementation holds term counts and document vectors in memory and compares every pair of selected documents, so larger corpora increase memory and compute requirements despite uncapped default selection.",
       "evidence": [
@@ -251,16 +233,16 @@
       "statement": "The default graph includes all nodes and their saved edges, while an optional positive caller limit selects a disclosed subset across evidence layers.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/api/routers/artifacts.py#L39-L45",
-          "version": "repo-lines-v1:sha256:52800bae69c730c6fe9fda2831dd79b67b153363f55c5dc372125d0baa36c2e6:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODhiMTIzODQ2NDJlZmUzZTBhMjU3YTkxOGU0YWNiNWViN2M2ODJkZDIxMTljOTQ2NGE4YTI5MmQ0YzM5MWM1OCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTllZjI1NThlYjM0NjU2YWYyNjJjODljOGFhODMzNGMwNWMxNjVhMTQxYTM1ZmRiZjU2YTc0OGNiMDFlNDMxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGNjNGE3ZDFjYzc5NmFiYTNlNDY3MjMzMjdmNTE3ZTlmODExOTgyZDI1MGYwNzAyOTg2ZTRiNTc2NGFkOTU4OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+          "resource": "repo://src/agent_data_workbench/api/routers/artifacts.py",
+          "version": "repo-file-v1:sha256:0095ced3198ff77fe429da3c870b19515babfb51d4cd96729fef637cc3c8e173"
         },
         {
-          "resource": "repo://src/agent_data_workbench/exploration/lineage.py#L12-L118",
-          "version": "repo-lines-v1:sha256:44e1d2072b0f4902ced5a123e54a3f40c715bbd3a694ee9c4ae3df00df73dab9:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA3LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI3MWNlY2ZhOTEwZTg5OTg1MTViM2I0MzBjYWJlZTU2MzZmNmMwZDVlNGE5M2VhMmE2MDkyMTcwNTNlMzA4ZmNmIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0ODkzZjQwZTM3ODFlYjg5NmM4MmQwNDZhMDgwNjdhMTFlMzVjZGYyZjFkZmFmMjZmZWE5MGI4ZGI2Njc2NDEzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlYWIzNTgzMWY5NjVkODNkMTA4NDg0ZDM5MGQwNTBhYWM1MDliYjBkOWZiNDQ0OWE1NDMwODQ1MWJmNjFjYjUzIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+          "resource": "repo://src/agent_data_workbench/exploration/lineage.py",
+          "version": "repo-file-v1:sha256:0087f8a361e962c8d9600f1ff62f5e5e899d8384d2900403814e09dc3485d7a5"
         },
         {
-          "resource": "repo://tests/test_explore.py#L567-L597",
-          "version": "repo-lines-v1:sha256:c549df6dd0cebce77a2d746c2ee9d047272eab546fcb67626f123c372166b04b:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJmYjNlODMwNTdmYjlhODRhNTcwYjIyZjMyOGMzYTI0YzQwMGMwNWZlYWU3Y2EwZTA3MmFiM2IzZGJjZDk2YmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmYmQwMDkzMTRiYzI3MDg0MTY3MzRhMDJhZTVmZjM5YTFlNDhhMDUwYmU5MWY0M2IyZmFhOTIwMDJjNjJiZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://tests/test_explore.py",
+          "version": "repo-file-v1:sha256:5ce02b80432eada5a89ac54d4ead912430bbb6d8f524e5816f97d2271b7bbcc1"
         }
       ]
     },
@@ -269,26 +251,72 @@
       "statement": "Explorer distributions return every scalar category, search offsets have no total ceiling, and the input/request disclosure renders complete structured content.",
       "evidence": [
         {
-          "resource": "repo://src/agent_data_workbench/exploration/distributions.py#L12-L47",
-          "version": "repo-lines-v1:sha256:b309ccc51bfc911adde6f2ffdc6df63e5597ee3f180fb3893999b7eb6733d0ea:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjljOTZjNTZhNTg4ZjEyMzExMjI1ZmNiMTBkY2EzMzQwMzhjNjczYTM0ZjMxOWFkMmUwZDI1Yzg4YWIyZmUwNmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA0ZDZlYjgwMjMyNzVmNmQzYjUxY2Y1YmI0Y2ZhNjNmNzdiNTBlN2VlMWZlMmEzZmJhY2VhNGYzZTJlNTNiMWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://src/agent_data_workbench/exploration/distributions.py",
+          "version": "repo-file-v1:sha256:544000bd714e5a90580154ae4aecd035da3480126bd02d20e091718d989c95a0"
         },
         {
-          "resource": "repo://src/agent_data_workbench/exploration/schemas.py#L31-L45",
-          "version": "repo-lines-v1:sha256:7f2c4169730851d345f72d10280887455490cb5f390c77252a2522d522a9a734:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliMjMyNjcyZDRhZGVhOGUxNWJmZmUwN2MwNTMwMjE4NTBhOTgzZWQ4Nzc0ZDAwOGVlMTBjNmQzY2QxMTQ1ODMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEyYWIwOTBiY2QxNjIwZmE2MmVhZWUxNTdhNzRmY2E2MzVhYTI5ZTEyY2JmZmQ2MThiNTc5MmQ4N2JjMDNhM2YiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRiNTMwZWRlNGYzZTg4MmQ2ZTg1ZTllNmE3N2JiYTI5NTk5OTk3MWU2NTk5NGU0ZTA0MWJjMDAzYjE1NzhkMmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjlkN2I1NWQ1NmFiNGUzYzFlN2VhNjRkMTViZWEwNmU1Y2E1NzJiYTAyNTc3MDBjYjYyNzk0M2VjZjAwMTI5NWUifQ"
+          "resource": "repo://src/agent_data_workbench/exploration/schemas.py",
+          "version": "repo-file-v1:sha256:1ef7bd9077addea2cdcc6a5848a9e1c7a2f78bbe0a7f4511acb469f47b90b89b"
         },
         {
           "resource": "repo://ui/src/views/Search.tsx",
-          "version": "repo-file-v1:sha256:148181817a435e34b7b0cb1d2f294f10292dcb91dd96f424fabf7a11399dc8a7"
+          "version": "repo-file-v1:sha256:4decacdbd7fd993cff8e2dc78b0044ac19923495af19be721190fc5343accd18"
         },
         {
           "resource": "repo://ui/tests/exploration.test.tsx",
-          "version": "repo-file-v1:sha256:9ba35e8fdfc221126662d3ebe22a96164f03799d6fea4291bd117c591a439413"
+          "version": "repo-file-v1:sha256:d4f4fa55dcc132a62dbd70161705fc57fc6b718d3a9d1842a702bf045fc5bab6"
+        }
+      ]
+    },
+    {
+      "id": "claim_f3776c1bfeb84d0ba79351883bd7fe95",
+      "statement": "The UI renders lexical groups as recurring-group count bars with exact member navigation and an explicit singleton state, rather than implying evidence links between similar traces.",
+      "evidence": [
+        {
+          "resource": "repo://ui/src/components/graphs/ClusterGraph.tsx",
+          "version": "repo-file-v1:sha256:91a88674b566a554259c89c402201cd63b638612e849e24eb46f9b3bf212f0b4"
+        },
+        {
+          "resource": "repo://ui/src/views/Clusters.tsx",
+          "version": "repo-file-v1:sha256:8da388a245b3616df96648ca8f521264a7950152650e69ca129f1fec5ee63717"
+        }
+      ]
+    },
+    {
+      "id": "claim_60120e3db9084d8882b20745f29aa1d4",
+      "statement": "Dataset profiles summarize all matching local records independently of pagination, assigning outcomes only from selected explicit binary labels and showing exact source-group members.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/exploration/dataset.py",
+          "version": "repo-file-v1:sha256:fcbdb93ed359be2dc56bc89a5b829d7b9258a8db66ec45a36dcfbf4417d5ec90"
+        },
+        {
+          "resource": "repo://ui/src/views/Dataset.tsx",
+          "version": "repo-file-v1:sha256:b5da4a4f633d555b185bdb47592463eb049f699f81bf919261c8373643eb4a91"
+        }
+      ]
+    },
+    {
+      "id": "claim_08ab496fbcfb41faba76be6b94564b1c",
+      "statement": "The trace reader retains complete conversation events, tool calls and raw metadata for recognized schemas while full raw JSON remains available.",
+      "evidence": [
+        {
+          "resource": "repo://ui/src/components/traces/Conversation.tsx",
+          "version": "repo-file-v1:sha256:60ea3123186e54f232a1e7df2b49429d2a470dd58112b01f2c1131e2852a058d"
+        },
+        {
+          "resource": "repo://ui/src/components/traces/presentation.ts",
+          "version": "repo-file-v1:sha256:2e1d9f8881d830ef72482aad7dcc4eca4c2e7c389726e7e93206001a1005eca2"
+        },
+        {
+          "resource": "repo://ui/src/views/Search.tsx",
+          "version": "repo-file-v1:sha256:4decacdbd7fd993cff8e2dc78b0044ac19923495af19be721190fc5343accd18"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T02:57:07.074Z"
+    "at": "2026-09-08T04:50:29.215Z"
   }
 }

@@ -26,6 +26,8 @@ sources:
     resource: repo://src/agent_data_workbench/exploration/clustering/tokenization.py
   - id: openwiki-source-bfac175c50d42008ed9d78c8
     resource: repo://src/agent_data_workbench/exploration/clustering/vectors.py
+  - id: openwiki-source-498ca0018399fc2b28c0ee7e
+    resource: repo://src/agent_data_workbench/exploration/dataset.py
   - id: openwiki-source-1f1b2017c3c167f22bb29f26
     resource: repo://src/agent_data_workbench/exploration/distributions.py
   - id: openwiki-source-eab73f261f2dfa06a5a90e74
@@ -38,24 +40,28 @@ sources:
     resource: repo://src/agent_data_workbench/shared/identifiers.py
   - id: openwiki-source-66a8a10b0365fc2079585762
     resource: repo://tests/test_explore.py
+  - id: openwiki-source-b3100dfc31c7e979d4ee078f
+    resource: repo://tests/test_harbor_comparison.py
   - id: openwiki-source-7e7b3478097a461915e85751
     resource: repo://tests/test_ingestion_research.py
-  - id: openwiki-source-86285276086db085f9b5f586
-    resource: repo://ui/src/components/graphs/cluster-layout.ts
   - id: openwiki-source-74100799ff8e26159a68e317
     resource: repo://ui/src/components/graphs/ClusterGraph.tsx
-  - id: openwiki-source-da534aa7260001f2de3cd1d5
-    resource: repo://ui/src/components/graphs/NetworkCanvas.tsx
+  - id: openwiki-source-c6d4399e4032ee953ab85f39
+    resource: repo://ui/src/components/traces/Conversation.tsx
+  - id: openwiki-source-88e21c7fc4b0845c0f821ec9
+    resource: repo://ui/src/components/traces/presentation.ts
   - id: openwiki-source-13a35988ca651da931d9ecce
     resource: repo://ui/src/views/Clusters.tsx
+  - id: openwiki-source-5f365ba0fbb9be69c5df3dda
+    resource: repo://ui/src/views/Dataset.tsx
   - id: openwiki-source-e2b9808e897a9a7a52014721
     resource: repo://ui/src/views/Search.tsx
   - id: openwiki-source-596cdb28df7c16b7e6d5931b
     resource: repo://ui/tests/exploration.test.tsx
-generated: { by: "codex", at: "2026-09-08T02:47:35.721Z" }
+generated: { by: "codex", at: "2026-09-08T04:50:29.215Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T02:57:07.074Z
+    at: 2026-09-08T04:50:29.215Z
 ---
 
 # Import and explore traces
@@ -117,7 +123,7 @@ The Make equivalent is `SOURCE_ROOT=./traces`. Keep logical roots and filenames 
 
 ## Batch consistency and capacity
 
-All selected files feed one SQLAlchemy transaction in `traces.sqlite3`. A malformed later file or conflicting run ID rolls back new records from every file in the batch. Reimporting the same ID and data is idempotent. Output reports selected file count, layout, added/unchanged traces and total inventory.
+All selected files feed one SQLAlchemy transaction in `traces.sqlite3`. A malformed later file or conflicting run ID rolls back new records from every file in the batch. Reimporting the same ID, data and group/category mapping is idempotent. Changed content or metadata under an existing ID aborts the batch. Output reports selected file count, layout, added/unchanged traces and total inventory.
 
 There is no fixed file-count, event-count or corpus cap. Run mode reads files sequentially and materializes the current run's events in memory; inventory metadata also grows with the stored run count. Very large individual runs still need corresponding RAM. Docker ingestion additionally stages a host archive and extracted container files. Large-corpus throughput is not established by the synthetic tests. Prepare exports before ingestion when fields need redaction.
 
@@ -141,7 +147,11 @@ uv run agent-data-workbench ingest runs/my-agent ./traces.jsonl --layout records
   --group-pointer /session/id --stratum-pointer /agent/name
 ```
 
-Labels must be strings or integers. Missing or unsuitable group values fall back to the trace ID; strata fall back to `unclassified`. Groups later keep related tasks together in [experiment splits](experiments-and-training.md). Choose a group that captures the real dependence between records before importing them. Reimporting unchanged content does not relabel existing rows.
+Labels must be strings or integers. Missing or unsuitable group values fall back to the trace ID; strata fall back to `unclassified`. Groups later keep related tasks together in [experiment splits](experiments-and-training.md). Choose a group that captures the real dependence between records before importing them. Reimporting with different group/category metadata is rejected; it cannot silently relabel an existing trace. Reuse original pointers when adding more records from the same source.
+
+## Import from Hugging Face
+
+The **Import data** UI and `ingest-hf` CLI stream selected dataset rows into this same store. Source inspection pins a Hub revision and exposes the schema; each complete JSON-compatible row becomes one trace. Original fields remain unchanged, while `imports/` receipts retain source and selection provenance. Choose the source ID, same-task group and category mappings before importing. A maximum is optional and explicit; otherwise the selected split is read in full. See [Hugging Face datasets](../integrations/huggingface.md) for the OpenHands preset and error recovery.
 
 ## Use the SDK for custom sources
 
@@ -192,6 +202,12 @@ The [local workbench](../operations/local-workbench.md) provides typed field sea
 
 Search pages and distribution charts use the same matching-corpus function. Pagination changes the displayed records, not the population summarized by the distribution. Offsets have no total ceiling, so later records remain reachable. Input/request values expand as complete structured JSON rather than sliced strings. These scans are local operations; a bounded result page does not imply indexed query performance on an arbitrarily large corpus.
 
+## Read outcomes and attempts before inferring patterns
+
+**Data & evidence → Dataset overview** summarizes the complete matching local population. Only explicit true/1 or false/0 values at the selected outcome pointer count as pass/fail; missing or other values remain unknown. These are unverified source labels. Words in a message do not determine an outcome, and a selected import does not describe the entire upstream dataset.
+
+Same-task bars and searchable tables count real stored source groups, show repeated attempts and open their exact members. Display pagination does not cap the aggregate or discard later groups. Trace detail renders full ordered conversation events and tool calls for common schemas, including Harbor trajectories; its search includes long-message tails. Complete event metadata and raw JSON remain accessible.
+
 ## Explore lexical clusters
 
 Clustering uses TF-IDF cosine similarity and connected components over complete selected values. Opening Clusters automatically groups all matching traces. The default JSON pointer is empty, selecting the whole record, so event envelopes work without an `/input` field. Choose `/events` or another existing pointer to narrow the compared content. Selection follows stable trace-ID order and ignores the search page's sort, offset and page size while preserving its filters and membership selection.
@@ -204,13 +220,15 @@ Term weights and document vectors remain in memory, and the current implementati
 
 A cluster indicates lexical similarity. It does not establish a shared failure mode, causal mechanism, or semantic category. Transitive links can put two traces in the same component even when their direct similarity is below the threshold.
 
-The Cluster map selector displays one group's members at a time. Edges connect the group to its member traces; selecting a trace opens its original evidence, and Inspect all members opens the filtered explorer. Clearing a missing text pointer recovers whole-record grouping. Membership filtering accepts groups larger than a search page. The shared React Flow canvas supplies pan, zoom and fit controls.
+The cluster count bars show recurring groups and open their exact members in the filtered explorer. When every trace is a singleton, the view says there are no lexical neighbors at the selected threshold. It does not draw arbitrary membership hubs. Clearing a missing text pointer recovers whole-record grouping. Membership filtering accepts groups larger than a search page.
 
 To change this pipeline, start with `exploration/clustering/tokenization.py` for selected-value tokens, `vectors.py` for TF-IDF normalization, `components.py` for cosine links and transitive membership, and `service.py` for selection and the response. Typed request validation lives in `exploration/schemas.py`; search, distributions and lineage have their own modules.
 
 ## Follow recorded lineage
 
-The lineage graph starts with every imported trace, including runs with no findings or tasks. When a source path exists it labels the trace node; the original trace ID still controls navigation. The UI arranges raw trace nodes in a grid and lets developers open the original events immediately after import. Saved artifact references add trace-to-finding, trace-to-task, finding-to-task and task-to-experiment relationships. Focusing on a trace follows downstream edges; it does not add unrelated sibling tasks merely because they share an experiment. An imported but unlinked trace has a one-node focused graph.
+The lineage response contains every imported trace, including runs with no findings or tasks. Labels prefer an issue ID, task/title or source path where available; the original trace ID still controls navigation. Saved references add trace-to-finding, trace-to-task, finding-to-task and task-to-experiment relationships, and generated Harbor traces link to their recorded experiment. Focusing on a trace follows downstream edges without pulling unrelated sibling tasks into the graph.
+
+The Evidence lineage canvas shows only nodes with recorded relationships. Unlinked traces remain available in the explorer and full graph data, with a useful empty state when no links exist. Selecting a node exposes its actual relationship text and opens its source record. The UI therefore distinguishes the complete returned node population from the linked nodes displayed.
 
 The graph returns all nodes by default. An optional positive `limit` explicitly selects a smaller view, taking turns across evidence layers and reporting truncation; omit the limit to retrieve every node and saved edge. Task nodes link identities; experiment artifacts preserve the exact evaluated specification snapshots. Use the graph to navigate evidence, and the saved experiment to inspect what actually ran. Edges represent recorded relationships, not inferred causality. Edge IDs are deterministic UUIDv5 values; node keys include their kind and source or artifact identity so different kinds remain distinct.
 
@@ -220,6 +238,6 @@ Search uses resumable pages; clustering and graphs include every match by defaul
 
 ## Verification and next steps
 
-`tests/test_ingestion.py`, `test_ingest_cli.py` and `test_ingest_transport.py` cover multiple selections, identity, layouts, file boundaries and rollback. `test_ingestion_research.py` verifies two ordered run files in one complete-mode research snapshot. `tests/test_workbench_data.py` covers transactional ingestion, balanced sampling, and excluded groups. `tests/test_explore.py` covers combined filters, stable sorting, corpus-consistent distributions, late-event tokenization, 201 event traces beyond search-page bounds, explicit cluster limits, imported trace visibility and focused lineage. `tests/test_api.py` verifies default event-trace clustering and graph visibility without analysis; `ui/tests/exploration.test.tsx` covers automatic grouping, missing-field recovery, graph membership and trace navigation.
+`tests/test_ingestion.py`, `test_ingest_cli.py` and `test_ingest_transport.py` cover multiple selections, identity, layouts, file boundaries and rollback. `test_ingestion_research.py` verifies two ordered run files in one complete-mode research snapshot. `tests/test_workbench_data.py` covers transactional ingestion, balanced sampling, and excluded groups. `tests/test_explore.py` covers combined filters, stable sorting, corpus-consistent distributions, late-event tokenization, 201 event traces beyond search-page bounds, explicit cluster limits, imported trace visibility and focused lineage. `tests/test_api.py` verifies default event-trace clustering and graph visibility without analysis; `ui/tests/exploration.test.tsx` covers automatic grouping, missing-field recovery, recorded graph relationships and trace navigation.
 
 Next: [investigate the evidence](investigations.md) or [open the local workbench](../operations/local-workbench.md).

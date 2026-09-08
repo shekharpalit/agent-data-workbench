@@ -172,3 +172,16 @@ def harbor_run(project: Path, export_id: str, timeout: int | None = None):
     from agent_data_workbench.integrations.harbor import run_harbor_export
 
     emit(run_harbor_export(Project(project), export_id, timeout=timeout))
+
+
+@app.command("harbor-compare")
+@errors
+def harbor_compare(project: Path, task_id: str, config: Path):
+    """Run and import baseline/candidate trials using one reviewed Harbor task."""
+    from agent_data_workbench.integrations.harbor import HarborComparisonConfig, compare_harbor
+
+    emit(
+        compare_harbor(
+            Project(project), task_id, HarborComparisonConfig.model_validate(read_json(config))
+        )
+    )

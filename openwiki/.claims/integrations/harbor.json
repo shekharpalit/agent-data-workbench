@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:b1a5d15133f94e197e468aeb0ef8c8e4a913adff112077364c7f2c967b038835",
+  "claims": [
+    {
+      "id": "claim_39ff729a01a14e748784ba063dd326b2",
+      "statement": "Harbor export requires an accepted task and a supplied real template, freezes bundle hashes, separates visible input from task truth and checks the frozen export before execution.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/integrations/harbor/exporting.py",
+          "version": "repo-file-v1:sha256:45fc01151eaa86fe60c4d07d44beda6c4492683a403eeb47a40c3ea2a352fb56"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/integrations/harbor/runtime.py",
+          "version": "repo-file-v1:sha256:b36436ab1b6b00659f1cb83cbe5d7883a9e64f35455d8671b5854d14d757d83c"
+        }
+      ]
+    },
+    {
+      "id": "claim_741cb25602b44ebea5ad649124a2f945",
+      "statement": "Harbor comparisons run two targets against one frozen task with alternating repetition order, save incremental trials and summaries, and explicitly record exploratory scope without controlled model randomness.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/integrations/harbor/comparison.py",
+          "version": "repo-file-v1:sha256:796e44cd651bf6768a16a47ef731ab9aeca2f8c7c30d4a2459f0fe7c66163049"
+        }
+      ]
+    },
+    {
+      "id": "claim_e8e9f5dfca3745de9a0856eb822a474c",
+      "statement": "Harbor result interpretation distinguishes valid numeric verifier rewards from execution errors, preserves available raw trajectories and results, and imports generated traces linked to the experiment.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/exploration/lineage.py",
+          "version": "repo-file-v1:sha256:0087f8a361e962c8d9600f1ff62f5e5e899d8384d2900403814e09dc3485d7a5"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/integrations/harbor/results.py",
+          "version": "repo-file-v1:sha256:182f2c2c90359b014c0a86d0117cb2296e3b911a2ac6c4808d835d144cca9249"
+        }
+      ]
+    },
+    {
+      "id": "claim_2c69914adba345949a7e1aae6b519ffe",
+      "statement": "The accepted-task UI submits baseline/candidate configuration to a background comparison route and lets users inspect generated traces from experiment results.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/api/routers/workflow.py",
+          "version": "repo-file-v1:sha256:7d9d21ea407f6623dbafbb91a3c14d1ee6f48dcf1724df97894b64bdc106b2cc"
+        },
+        {
+          "resource": "repo://ui/src/views/Experiments.tsx",
+          "version": "repo-file-v1:sha256:1151cb7c4aa0a5e3f5f15cf99b2d060c15b5963f887e018913a6446f02786795"
+        },
+        {
+          "resource": "repo://ui/src/views/HarborComparison.tsx",
+          "version": "repo-file-v1:sha256:0ea8b8cca9b6dc18b11857c118380d2c7e9541a50a4830129061ffd639ffe95d"
+        }
+      ]
+    },
+    {
+      "id": "claim_93772cdf7d1b4c38aad193ca9e5342c9",
+      "statement": "Native Make setup installs Harbor separately, while runtime status checks the backend environment and the UI distinguishes host logins from container credentials.",
+      "evidence": [
+        {
+          "resource": "repo://Makefile",
+          "version": "repo-file-v1:sha256:2527e6d3d1c9132edaa6f59355a975fb07fde47d58e6b06312482a6634e7c8cb"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/workbench/capabilities.py",
+          "version": "repo-file-v1:sha256:a87b33561ac464532c8ad37bd60934b693edc9c5416f26a325fb164c579f0cf8"
+        },
+        {
+          "resource": "repo://ui/src/components/RuntimeStatus.tsx",
+          "version": "repo-file-v1:sha256:37b99cad83d78ff44178d43cb406ae5d980e9865a600507485b8eddca64122a0"
+        }
+      ]
+    },
+    {
+      "id": "claim_3e7459c746994459b477197fb86504be",
+      "statement": "Harbor invocation retains complete local stdout and stderr logs on success, failure or timeout.",
+      "evidence": [
+        {
+          "resource": "repo://src/agent_data_workbench/integrations/harbor/runtime.py",
+          "version": "repo-file-v1:sha256:b36436ab1b6b00659f1cb83cbe5d7883a9e64f35455d8671b5854d14d757d83c"
+        },
+        {
+          "resource": "repo://src/agent_data_workbench/shared/processes.py",
+          "version": "repo-file-v1:sha256:c2928edd0636ddfcacbcb4e5ac0c10f7a2062578728f1c683ed0e25d441397fd"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-08T04:50:29.215Z"
+  }
+}

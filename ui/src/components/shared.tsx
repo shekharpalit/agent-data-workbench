@@ -1,4 +1,10 @@
-import { useId, useState, type FormEvent, type ReactNode } from "react";
+import {
+  useId,
+  useState,
+  type FormEvent,
+  type ReactNode,
+  type CSSProperties,
+} from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import type { Backend, Json } from "../contracts";
 
@@ -154,10 +160,12 @@ export function Bars({
   values,
   total,
   onSelect,
+  colors,
 }: {
   values: { value: Json; count: number }[];
   total: number;
   onSelect?: (value: Json) => void;
+  colors?: Record<string, string>;
 }) {
   return (
     <div>
@@ -174,6 +182,9 @@ export function Bars({
             <span className="bar-label">{String(item.value)}</span>
           )}
           <progress
+            style={
+              { "--bar-color": colors?.[String(item.value)] } as CSSProperties
+            }
             value={item.count}
             max={total || 1}
             aria-label={`${String(item.value)}: ${item.count}`}

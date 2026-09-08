@@ -32,6 +32,10 @@ sources:
     resource: repo://src/agent_data_workbench/cli/workflow.py
   - id: openwiki-source-a69866c703779e64969315b7
     resource: repo://src/agent_data_workbench/data/ingestion.py
+  - id: openwiki-source-c773d92eb0c24f4c729a0408
+    resource: repo://src/agent_data_workbench/integrations/harbor/comparison.py
+  - id: openwiki-source-047935dc3e143c02a13e4031
+    resource: repo://src/agent_data_workbench/integrations/harbor/results.py
   - id: openwiki-source-2dbe8753da4267ce652f414e
     resource: repo://src/agent_data_workbench/research/workspace.py
   - id: openwiki-source-10d0a7c9280c304f0e5afe28
@@ -44,16 +48,22 @@ sources:
     resource: repo://tests/test_ingestion_research.py
   - id: openwiki-source-436f4179fe22abf615d2f7d0
     resource: repo://ui/package.json
+  - id: openwiki-source-5f365ba0fbb9be69c5df3dda
+    resource: repo://ui/src/views/Dataset.tsx
+  - id: openwiki-source-494791e4bac0ec4e13edede5
+    resource: repo://ui/src/views/HarborComparison.tsx
+  - id: openwiki-source-e4f18d5ce9c7fd05cc0d3b37
+    resource: repo://ui/src/views/Imports.tsx
   - id: openwiki-source-2d1b137901c9e38ec418fdad
     resource: repo://ui/src/views/ManualResearchEditor.tsx
   - id: openwiki-source-a6ff0ad9c45aedc12177eaec
     resource: repo://ui/src/views/ResearchControls.tsx
   - id: openwiki-source-a741d432f952c0dbfb4fb35d
     resource: repo://ui/vite.config.ts
-generated: { by: "codex", at: "2026-09-08T00:58:07.648Z" }
+generated: { by: "codex", at: "2026-09-08T04:50:29.215Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T03:02:55.250Z
+    at: 2026-09-08T04:50:29.215Z
 ---
 
 # Quickstart
@@ -85,17 +95,20 @@ Manual research works in the stock container. Native agent investigations additi
 
 ## Native setup and agent CLI authentication
 
-Use Python 3.14+, uv and a supported Node version such as Node 24.15+. The repository pins Python 3.14.7 and locks its dependencies. Build the TypeScript UI before installing the editable checkout:
+Use uv and a supported Node version such as Node 24.15+. The repository pins Python 3.14.7 and locks dependencies. From a checkout:
 
 ```sh
-git clone git@github.com:shekharpalit/agent-data-workbench.git
+git clone https://github.com/shekharpalit/agent-data-workbench.git
 cd agent-data-workbench
-npm ci --prefix ui
-npm --prefix ui run build
-uv sync --locked
+make init MODE=native
+make dev MODE=native
 ```
 
-The GitHub repository currently requires access because it is private. Frontend source lives in `ui/`; its generated `ui/dist/` output is ignored by Git. Installed wheels include those compiled assets and need no Node runtime. Source checkouts require the build step above, while Docker performs it automatically. See [development and verification](development/contributing.md) for rebuilding and packaging.
+Native initialization builds the TypeScript UI before installing the editable Python package, installs Harbor as a separate uv tool, and creates `runs/workbench`. Keep uv's tool executable directory on PATH. Native development runs the UI build watcher beside Uvicorn reload. Use `WORKBENCH_PROJECT=/path/to/project` consistently with both commands to select another project, and `PORT=9000` for another listener port.
+
+Research controls show the backend's installed Codex/Claude CLI and login status. Authenticate the selected CLI in that environment before starting an agent investigation. Native mode uses the host environment; Docker does not inherit host CLI logins. Harbor target credentials are configured separately inside its execution environment. Docker is needed for Harbor's Docker environments even when the workbench runs natively.
+
+Frontend source lives in `ui/`; its generated `ui/dist/` output is ignored by Git. Installed wheels include compiled assets and need no Node runtime. Docker builds them automatically. See [development and verification](development/contributing.md) for individual build and test commands.
 
 ## Bring your own agent data
 
@@ -116,6 +129,12 @@ The UI starts on `127.0.0.1:8765` with a per-session access token; add `--port 9
 Project format 0.3 uses UUIDs for internal artifacts and keeps external trace IDs unchanged. Older project formats are rejected without rewriting their files. Create a new project directory and reimport the original traces; prior derived artifacts remain in the old directory. Suite names are friendly labels, and execution uses the suite UUID returned at creation.
 
 Import the corpus needed for your question; native research makes the full snapshot available. Preserve source groups such as conversation IDs so related tasks stay together in later splits. Add reviewed policies and tool contracts before asking an analyzer to judge behavior that depends on them.
+
+## Try public traces and inspect what happened
+
+Open **Import data** and choose **Use SWE-rebench / OpenHands preset**, or enter another Hugging Face dataset and its schema mappings. Inspect the source revision and schema before importing. Enter an explicit first-N selection for a small initial test; leave Maximum rows blank when you intend to import the whole split. Original selected rows and messages remain complete. Import history shows source provenance, added/unchanged counts and failures.
+
+Open **Data & evidence** to see source-provided outcomes and actual same-task groups. Click a group to inspect its original attempts and full conversation. Clusters show shared language, while Evidence lineage shows only saved relationships. Neither view invents a failure cause from similar text. [Hugging Face datasets](integrations/huggingface.md) explains the full workflow.
 
 ## Research without a model
 
@@ -152,12 +171,14 @@ Product version 0.1.0 includes reviewed world specifications, reproducible envir
 
 Start with one important failure: capture its evidence, review the relevant domain rules, and author an audited task. Configure your real target and the environment observer; run a baseline/candidate pair on a reserved execution split. In the UI, use **Grader calibration** to label the actual attempts, **Behavioral coverage** to inspect missing cases, and **Improvements** to capture and decide on an exact source change. Human decisions retain evidence without applying or deploying code.
 
-[Eval engineering](workflows/eval-engineering.md) specifies the runtime protocols and CLI commands. Optional Harbor export uses your real environment/verifier template. The full loop is verified with synthetic local processes; a production performance claim still needs your real agent and fresh cases.
+[Eval engineering](workflows/eval-engineering.md) specifies the runtime protocols and CLI commands. With a real Harbor environment/verifier template, an accepted task offers **Run a Harbor comparison**. Configure two actual targets, run them on the same frozen task, then inspect paired results and generated traces in the UI. Missing rewards and execution errors remain invalid; the comparison is exploratory. See [Harbor comparisons](integrations/harbor.md) for setup and verifier requirements. The full loop is verified with synthetic local processes; a production performance claim still needs your real agent and fresh cases.
 
 ## Choose the next workflow
 
 | Goal | Read |
 | --- | --- |
+| Import a public or accessible Hugging Face dataset | [Hugging Face datasets](integrations/huggingface.md) |
+| Run actual agents in a supplied Harbor environment | [Harbor comparisons](integrations/harbor.md) |
 | Map exports, preserve IDs, or implement an importer | [Import and explore traces](workflows/traces.md) |
 | Research manually or with an agent and add project knowledge | [Investigations and reviewed knowledge](workflows/investigations.md) |
 | Turn findings or chat prefixes into reviewed evaluations | [Tasks and grader review](workflows/tasks-and-graders.md) |

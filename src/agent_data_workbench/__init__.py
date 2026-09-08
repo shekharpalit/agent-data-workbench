@@ -4,6 +4,7 @@ from agent_data_workbench.analysis.batch import analyze_traces, complete_run, pr
 from agent_data_workbench.analysis.contracts import Analysis
 from agent_data_workbench.data.contracts import Trace
 from agent_data_workbench.data.discovery import SourceFile, discover_files
+from agent_data_workbench.data.imports import import_dataset
 from agent_data_workbench.data.ingestion import FilesSource
 from agent_data_workbench.data.normalization import load_traces, normalize
 from agent_data_workbench.data.sources import JsonSource, TraceSource
@@ -43,10 +44,14 @@ from agent_data_workbench.execution.contracts import (
 from agent_data_workbench.execution.runners import ConfiguredRunner
 from agent_data_workbench.integrations.analyzers import Analyzer, CliAnalyzer
 from agent_data_workbench.integrations.harbor import (
+    HarborAgentConfig,
+    HarborComparisonConfig,
     HarborExportConfig,
+    compare_harbor,
     export_harbor,
     run_harbor_export,
 )
+from agent_data_workbench.integrations.huggingface import DatasetImport, HuggingFaceSource
 from agent_data_workbench.research import (
     NativeSession,
     ResearchWorkspace,
@@ -57,6 +62,12 @@ from agent_data_workbench.workspace.project import Project
 
 __version__ = "0.1.0"
 __all__ = [
+    "DatasetImport",
+    "HuggingFaceSource",
+    "import_dataset",
+    "HarborAgentConfig",
+    "HarborComparisonConfig",
+    "compare_harbor",
     "FilesSource",
     "SourceFile",
     "discover_files",

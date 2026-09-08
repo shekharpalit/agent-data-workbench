@@ -14,6 +14,10 @@ sources:
     resource: repo://src/agent_data_workbench/execution/artifacts.py
   - id: openwiki-source-36dca02d2c71dfa05627a7a1
     resource: repo://src/agent_data_workbench/execution/runners.py
+  - id: openwiki-source-c773d92eb0c24f4c729a0408
+    resource: repo://src/agent_data_workbench/integrations/harbor/comparison.py
+  - id: openwiki-source-047935dc3e143c02a13e4031
+    resource: repo://src/agent_data_workbench/integrations/harbor/results.py
   - id: openwiki-source-5817a5ac325238a8edd5763a
     resource: repo://src/agent_data_workbench/integrations/training.py
   - id: openwiki-source-c792213eed7e8f73d739e358
@@ -22,19 +26,29 @@ sources:
     resource: repo://src/agent_data_workbench/shared/commands.py
   - id: openwiki-source-af0e5443d83442c11181e6ce
     resource: repo://tests/test_workbench_execution.py
-generated: { by: "codex", at: "2026-09-08T02:47:35.721Z" }
+  - id: openwiki-source-3c84d2d1ce8be46519d0db31
+    resource: repo://ui/src/views/Experiments.tsx
+generated: { by: "codex", at: "2026-09-08T04:50:29.215Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T02:47:35.721Z
+    at: 2026-09-08T04:50:29.215Z
 ---
 
 # Experiments and training exports
 
-An experiment executes a baseline and candidate against a frozen suite. It records outputs, grader results, artifacts, latency, and available cost data. The result establishes observed behavior on those tasks. It does not establish production generalization or train a model.
+A suite experiment executes a baseline and candidate against a frozen suite. The optional Harbor flow compares two targets on one frozen accepted task and records an exploratory experiment. It records outputs, grader results, artifacts, latency, and available cost data. The result establishes observed behavior on those tasks. It does not establish production generalization or train a model.
 
 Start with [accepted, audited tasks](tasks-and-graders.md). Use [batch evaluation](batch-evaluation.md) when comparing output files that have already been produced.
 
 Suite freezing lives in `evaluation/suites.py`; execution orchestration, grouped statistics and report rendering live in `evaluation/experiments.py`, `evaluation/statistics.py` and `evaluation/reports.py`. Target adapters live in `execution/`. Curated training export is an integration in `integrations/training.py`.
+
+## Start with one Harbor task
+
+For an accepted task with a real environment/verifier template, open **Run a Harbor comparison** in the task UI. Enter baseline and candidate targets, model/options, repetitions and the verifier reward settings. The workbench runs Harbor, saves paired grades and imports available complete trajectories automatically. Open each trial in Experiments and follow its generated trace to inspect the actual messages and recorded experiment link.
+
+The equivalent command is `workflow harbor-compare PROJECT TASK_ID harbor-comparison.json`; [Harbor comparisons](../integrations/harbor.md) provides the full setup and configuration. One export freezes both targets' task and environment inputs; ordering alternates across repetitions. Missing rewards and execution exceptions remain invalid rather than becoming task failures.
+
+These experiments use `split: exploratory`, have no suite ID and make no claim that model randomness is controlled. A workbench task audit does not calibrate Harbor's supplied external verifier. Repeats of one task are one independent group. The training exporter accepts complete optimization experiments, so this exploratory Harbor flow is not an automatic training export pipeline. Use the suite workflow below for reserved split roles and reviewed training selection.
 
 ## Freeze a suite
 

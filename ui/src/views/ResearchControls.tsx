@@ -1,3 +1,4 @@
+import { RuntimeStatus } from "../components/RuntimeStatus";
 import { useState } from "react";
 import { api } from "../api";
 import type { Backend, Investigation } from "../contracts";
@@ -110,6 +111,9 @@ export function ResearchControls({
             ? "The selected CLI creates drafts for review."
             : "Your native coding agent can query the full snapshot, write analysis code, and save reports and charts. Your CLI account and model limits apply."}
       </p>
+      {!manual && (
+        <RuntimeStatus tools={[resume?.session?.backend || backend]} />
+      )}
       <ActionButton
         action={async () => {
           if (manual) {

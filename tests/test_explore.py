@@ -385,7 +385,7 @@ def test_graph_focus_follows_recorded_links_without_inventing_sibling_relationsh
             {
                 "source": f"finding:{uid('I1')}:{uid('F1')}",
                 "target": "task:c209c7a0-1bcf-5629-83bc-7e0b5f9b4fe1",
-                "label": "tests",
+                "label": "tested by",
             },
             {
                 "source": "task:c209c7a0-1bcf-5629-83bc-7e0b5f9b4fe1",
@@ -400,7 +400,7 @@ def test_graph_focus_follows_recorded_links_without_inventing_sibling_relationsh
             {
                 "source": "trace:r0",
                 "target": "task:c209c7a0-1bcf-5629-83bc-7e0b5f9b4fe1",
-                "label": "derived from",
+                "label": "informs",
             },
         ],
         "total": 4,
