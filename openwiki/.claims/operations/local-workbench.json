@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:9cfe556f0fe3fd3ced3bd9997841b48cfb39e598784cfa4c343e0a59b5865744",
+  "pageVersion": "sha256:6f995768040aaba72a4aa127b6b09a40e7ed6f141c80a09272748e5241a91faf",
   "claims": [
     {
       "id": "claim_25574e40cfb048b39464c4e95bba596d",
@@ -112,7 +112,7 @@
         },
         {
           "resource": "repo://ui/src/views/ResearchOutputs.tsx",
-          "version": "repo-file-v1:sha256:ab8141375c2b7ff4fb3662bd06140788063f411d5c7ead717c548b7cc795d228"
+          "version": "repo-file-v1:sha256:d4024d41103d19c220a960a6e5180e02eca3be270aef67178b31774b3b5c3fd5"
         }
       ]
     },
@@ -318,7 +318,7 @@
         },
         {
           "resource": "repo://ui/src/views/Investigations.tsx",
-          "version": "repo-file-v1:sha256:481743bdf92c08665a02b21dad5e80071615cd5794bfa481fd586c81a7be33f5"
+          "version": "repo-file-v1:sha256:f0a5f7465f8a0005eedd4338e686de75060cbe8a8def4615f63c93ff79f3187d"
         },
         {
           "resource": "repo://ui/src/views/ResearchControls.tsx",
@@ -332,11 +332,11 @@
       "evidence": [
         {
           "resource": "repo://ui/src/views/Investigations.tsx",
-          "version": "repo-file-v1:sha256:481743bdf92c08665a02b21dad5e80071615cd5794bfa481fd586c81a7be33f5"
+          "version": "repo-file-v1:sha256:f0a5f7465f8a0005eedd4338e686de75060cbe8a8def4615f63c93ff79f3187d"
         },
         {
           "resource": "repo://ui/src/views/ResearchOutputs.tsx",
-          "version": "repo-file-v1:sha256:ab8141375c2b7ff4fb3662bd06140788063f411d5c7ead717c548b7cc795d228"
+          "version": "repo-file-v1:sha256:d4024d41103d19c220a960a6e5180e02eca3be270aef67178b31774b3b5c3fd5"
         },
         {
           "resource": "repo://ui/src/views/ResearchSnapshot.tsx",
@@ -347,10 +347,24 @@
           "version": "repo-file-v1:sha256:02653d589d46d199b8e951dd9e5761e5a9a2d9cefd007d552592ee596b3d5272"
         }
       ]
+    },
+    {
+      "id": "claim_efd949954d86410caa58888fb8c27211",
+      "statement": "Published research shows its summary before charts and findings, groups non-chart artifact downloads in a disclosure, and exposes full generated case objects as evaluation blueprints requiring review before task execution.",
+      "evidence": [
+        {
+          "resource": "repo://ui/src/views/Investigations.tsx",
+          "version": "repo-file-v1:sha256:f0a5f7465f8a0005eedd4338e686de75060cbe8a8def4615f63c93ff79f3187d"
+        },
+        {
+          "resource": "repo://ui/src/views/ResearchOutputs.tsx",
+          "version": "repo-file-v1:sha256:d4024d41103d19c220a960a6e5180e02eca3be270aef67178b31774b3b5c3fd5"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T14:16:43.946Z"
+    "at": "2026-09-08T14:40:31.067Z"
   }
 }

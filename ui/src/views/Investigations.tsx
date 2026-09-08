@@ -172,12 +172,14 @@ export function InvestigationDetail({
             investigation to use native sessions.
           </p>
         ))}
+      {result && (
+        <Card title="Research findings">
+          <p>{result.analysis.summary}</p>
+        </Card>
+      )}
       <ResearchFiles item={item} />
       {result ? (
         <>
-          <Card title="Research findings">
-            <p>{result.analysis.summary}</p>
-          </Card>
           {result.analysis.findings.map((finding) => (
             <Card key={finding.id} title={finding.title}>
               <div className="pill-group">
@@ -236,6 +238,19 @@ export function InvestigationDetail({
               </Details>
             </Card>
           ))}
+          {!!result.analysis.cases.length && (
+            <Card title="Evaluation blueprints">
+              <p className="muted">
+                Proposed cases from this research. Review their environment,
+                inputs and verifier before creating or running tasks.
+              </p>
+              {result.analysis.cases.map((candidate) => (
+                <Details key={candidate.id} title={candidate.title}>
+                  <JsonView value={candidate} />
+                </Details>
+              ))}
+            </Card>
+          )}
           <Card title="Open questions and limits">
             {[...result.open_questions, ...result.analysis.limitations].map(
               (text, index) => (

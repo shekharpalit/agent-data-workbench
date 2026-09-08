@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:32b9faffa74c6f9e5b189e4f436195a7e7929d35700480a51a782a8e7fb62df6",
+  "pageVersion": "sha256:13efcf20968cb5172cd22fcd2a52b0ebfd27f67f04cd910af9f59399f53426f4",
   "claims": [
     {
       "id": "claim_399da148ea9d4659a1c1f01b3f13a8a8",
@@ -308,11 +308,11 @@
       "evidence": [
         {
           "resource": "repo://ui/src/views/Investigations.tsx",
-          "version": "repo-file-v1:sha256:481743bdf92c08665a02b21dad5e80071615cd5794bfa481fd586c81a7be33f5"
+          "version": "repo-file-v1:sha256:f0a5f7465f8a0005eedd4338e686de75060cbe8a8def4615f63c93ff79f3187d"
         },
         {
           "resource": "repo://ui/src/views/ResearchOutputs.tsx",
-          "version": "repo-file-v1:sha256:ab8141375c2b7ff4fb3662bd06140788063f411d5c7ead717c548b7cc795d228"
+          "version": "repo-file-v1:sha256:d4024d41103d19c220a960a6e5180e02eca3be270aef67178b31774b3b5c3fd5"
         },
         {
           "resource": "repo://ui/src/views/ResearchSnapshot.tsx",
@@ -323,10 +323,24 @@
           "version": "repo-file-v1:sha256:02653d589d46d199b8e951dd9e5761e5a9a2d9cefd007d552592ee596b3d5272"
         }
       ]
+    },
+    {
+      "id": "claim_1309021a6c344fe09baa9ea3b0b56840",
+      "statement": "Research results present the summary and inline charts before record inspection, retain all non-chart artifact downloads in a disclosure, and expose complete generated case blueprints without implying they are already runnable tasks.",
+      "evidence": [
+        {
+          "resource": "repo://ui/src/views/Investigations.tsx",
+          "version": "repo-file-v1:sha256:f0a5f7465f8a0005eedd4338e686de75060cbe8a8def4615f63c93ff79f3187d"
+        },
+        {
+          "resource": "repo://ui/src/views/ResearchOutputs.tsx",
+          "version": "repo-file-v1:sha256:d4024d41103d19c220a960a6e5180e02eca3be270aef67178b31774b3b5c3fd5"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.0",
-    "at": "2026-09-08T14:16:43.946Z"
+    "at": "2026-09-08T14:40:31.067Z"
   }
 }

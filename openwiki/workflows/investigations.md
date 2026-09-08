@@ -56,10 +56,10 @@ sources:
     resource: repo://ui/src/views/ResearchSnapshot.tsx
   - id: openwiki-source-6c2199ef844fc5690d6362d0
     resource: repo://ui/tests/research.test.tsx
-generated: { by: "codex", at: "2026-09-08T14:16:43.946Z" }
+generated: { by: "codex", at: "2026-09-08T14:40:31.067Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T14:16:43.946Z
+    at: 2026-09-08T14:40:31.067Z
 ---
 
 # Investigations and reviewed knowledge
@@ -98,7 +98,7 @@ Start the local workbench with `uv run agent-data-workbench ui runs/my-agent`, t
 
 Citation links inspect the original snapshot field. Saving a record outcome counts recorded processing, not proof that the observation is correct. Research mode can finish with unreviewed records; its displayed coverage makes that scope visible.
 
-Save drafts before leaving the view or refreshing the browser. Polling does not replace local edits. Snapshot status queries refresh when completed, failed or pending counts change, without discarding typed search filters. Available outputs and findings appear before the dataset editor; full recorded review methods remain expandable in the outcomes table. To collaborate with an agent, open **Bring in an agent**, choose the backend and start the session. A previous native session appears under **Continue with an agent**. Unsaved finding, note and chart forms stay mounted but hidden and disabled while that session is active, and return after pause. Manual API writes acquire the session lock so a stale browser tab cannot alter the active native investigation. SDK and MCP tools remain available to the agent that owns the session. Completed investigations retain their results and hide manual mutation controls.
+Save drafts before leaving the view or refreshing the browser. Polling does not replace local edits. Snapshot status queries refresh when completed, failed or pending counts change, without discarding typed search filters. The published summary appears before inline charts and findings. Non-chart reports, data and scripts are grouped under a counted download disclosure. **Evaluation blueprints** exposes complete generated cases, including their inputs, context, source references and assertions; these proposals require review and an executable environment before task execution. Results appear before the dataset editor; full recorded review methods remain expandable in the outcomes table. To collaborate with an agent, open **Bring in an agent**, choose the backend and start the session. A previous native session appears under **Continue with an agent**. Unsaved finding, note and chart forms stay mounted but hidden and disabled while that session is active, and return after pause. Manual API writes acquire the session lock so a stale browser tab cannot alter the active native investigation. SDK and MCP tools remain available to the agent that owns the session. Completed investigations retain their results and hide manual mutation controls.
 
 See [local workbench operations](../operations/local-workbench.md) for authentication and API behavior.
 

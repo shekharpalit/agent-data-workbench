@@ -86,10 +86,10 @@ sources:
     resource: repo://ui/tests/research.test.tsx
   - id: openwiki-source-826d1e88c728d7cfae868e97
     resource: repo://ui/tests/workflow.test.tsx
-generated: { by: "codex", at: "2026-09-08T14:16:43.946Z" }
+generated: { by: "codex", at: "2026-09-08T14:40:31.067Z" }
 verified:
   - by: openwiki/0.5.0
-    at: 2026-09-08T14:16:43.946Z
+    at: 2026-09-08T14:40:31.067Z
 ---
 
 # Run the local workbench
@@ -172,7 +172,7 @@ Research controls report the actual backend runtime, installed CLI and login sta
 
 Selecting **Use an agent** exposes a native backend and either adaptive `research` or per-record `complete` mode. Final evaluation inputs are included unless the developer selects their explicit exclusion. There is no maximum-call input. For Codex, choose **Reasoning effort** alongside the model, for example `gpt-5.6-sol` with `xhigh`. Leaving it at **Use CLI default** inherits native configuration. The explicit value is saved with the session and does not change the global CLI settings. Model support and account access are checked by the native CLI. A saved session resumes with its original backend, model and explicit effort settings; partial findings remain visible while work is unfinished. A live session exposes Pause, and a released session lock allows recovery after a process crash.
 
-Both research paths share the detail view, which shows the native model and explicit effort with successful, failed and pending record counts separately from SDK retrieval. The complete question is retained under **Research question**, so a long brief does not displace progress. History entries include creation time and an expandable full question. Published outputs and findings appear before the research dataset editor. Snapshot record statuses reload when completed, failed or pending counts change, while typed filters stay intact. The outcome table keeps each full review method in an expandable disclosure. It polls active progress, paginates record outcomes and journal entries, and displays each recorded analysis method. Registered chart JSON renders as bars; other files are downloads authenticated with the local bearer token and checked against their recorded digest. Generated HTML is downloaded as a file rather than embedded in the workbench.
+Both research paths share the detail view, which shows the native model and explicit effort with successful, failed and pending record counts separately from SDK retrieval. The complete question is retained under **Research question**, so a long brief does not displace progress. History entries include creation time and an expandable full question. The research summary appears first, followed by inline charts and findings before the research dataset editor. Reports, data and scripts remain available under a counted download disclosure. Generated cases appear as expandable **Evaluation blueprints** with their full input, required context, source lineage and assertions; they still require review before becoming runnable tasks. Snapshot record statuses reload when completed, failed or pending counts change, while typed filters stay intact. The outcome table keeps each full review method in an expandable disclosure. It polls active progress, paginates record outcomes and journal entries, and displays each recorded analysis method. Registered chart JSON renders as bars; other files are downloads authenticated with the local bearer token and checked against their recorded digest. Generated HTML is downloaded as a file rather than embedded in the workbench.
 
 Task audits in the UI are deterministic. A semantic rubric needs an explicitly configured judge through the [task CLI](../workflows/tasks-and-graders.md). Suite creation and training export use the [experiment CLI or SDK](../workflows/experiments-and-training.md). The Improvements view can launch paired comparisons from an existing suite and local runner configuration paths; it offers an explicit semantic judge when needed.
 
